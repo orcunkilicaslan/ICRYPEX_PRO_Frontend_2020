@@ -1,0 +1,13 @@
+.sitemodal{}
+
+.modal-open{
+  padding: 0 !important;
+  overflow: inherit !important;
+}
+
+.modal-backdrop{
+  @include background-linear(darken($site-clr-black, 1%), darken($site-clr-black, 10%), -45);
+  &.show{
+    opacity: 0.99;
+  }
+}

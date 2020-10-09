@@ -1,0 +1,44 @@
+.sitecontent{
+
+  &-desc{
+    color: $site-clr-text-dark-sec;
+
+    h1,h2,h3,h4,h5,h6{color: $site-clr-text-dark-pri;}
+    h1{@include responsive-font-size(2rem); line-height: 1.2;}
+    h2{@include responsive-font-size(1.8rem); line-height: 1.2;}
+    h3{@include responsive-font-size(1.6rem); line-height: 1.2;}
+    h4{font-size: 24px; line-height: 1.2;}
+    h5{font-size: 20px; line-height: 1.2;}
+    h6{font-size: 18px; line-height: 1.2;}
+    h1+p,h2+p,h3+p,h1+ul,h2+ul,h3+ul{margin-top: 10px;} h4+p,h5+p,h6+p,h4+ul,h5+ul,h6+ul{margin-top: 5px;}
+    p+h1,p+h2,p+h3,p+h4,ul+h1,ul+h2,ul+h3,ul+h4{margin-top: 30px;} p+h5,p+h6,ul+h5,ul+h6{margin-top: 15px;}
+
+    p+p,p+ul,p+ol,ul+p,ol+p{margin-top: 1rem;}
+    p, ul, ol{@include responsive-font-size(1rem); font-weight: normal;}
+    ul > li, ol > li{/*margin-bottom: 15px;*/}
+    ul > li:last-child, ol > li:last-child{margin-bottom: 0;}
+    p a, li a{color: $site-clr-cyan; font-weight: $var-custom-btn-font-weight;}
+
+    @include BootstrapMaxWidthResponsive(1k){
+      p+h1,p+h2,p+h3,p+h4,ul+h1,ul+h2,ul+h3,ul+h4{margin-top: 30px;} p+h5,p+h6,ul+h5,ul+h6{margin-top: 15px;}
+    }
+    @include BootstrapMaxWidthResponsive(hd){
+      p+h1,p+h2,p+h3,p+h4,ul+h1,ul+h2,ul+h3,ul+h4{margin-top: 20px;} p+h5,p+h6,ul+h5,ul+h6{margin-top: 10px;}
+    }
+    @include BootstrapMaxWidthResponsive(xl){
+      h1+p,h2+p,h3+p,h1+ul,h2+ul,h3+ul{margin-top: 5px;} h4+p,h5+p,h6+p,h4+ul,h5+ul,h6+ul{margin-top: 3px;}
+    }
+    @include BootstrapMaxWidthResponsive(lg){
+      h1+p,h2+p,h3+p,h1+ul,h2+ul,h3+ul{margin-top: 0;} h4+p,h5+p,h6+p,h4+ul,h5+ul,h6+ul{margin-top: 3px;}
+      p+h1,p+h2,p+h3,p+h4,ul+h1,ul+h2,ul+h3,ul+h4{margin-top: 15px;} p+h5,p+h6,ul+h5,ul+h6{margin-top: 10px;}
+      p+p,p+ul,p+ol,ul+p,ol+p{margin-top: 10px;}
+      p, ul, ol{line-height: 1.2;}
+    }
+
+    &.contentsoft{
+      color: $site-clr-white;
+
+      h1,h2,h3,h4,h5,h6{color: $site-clr-white;}
+    }
+  }
+}

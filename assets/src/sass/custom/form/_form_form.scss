@@ -1,0 +1,165 @@
+/* Form UI New */
+.siteformui{
+
+  form{}
+
+  .autofill{
+    &.disabled,
+    &:disabled,
+    &[readonly] {
+      color: $site-clr-text-dark-pri;
+      background-color: transparent;
+      border-color: $site-brdr-light-input;
+    }
+  }
+
+  @include placeholder{
+    //color: transparentize($site-clr-text-dark-pri, 0.50);
+    //opacity: 1;
+  }
+
+  @include webkit-autofill{
+    -webkit-box-shadow: 0 0 0 30px $site-clr-white inset !important;
+    -webkit-text-fill-color: $site-clr-text-dark-pri !important;
+    border-color: $site-brdr-light !important;
+  }
+
+  label{
+    color: $site-clr-text-dark-pri;
+    font-weight: $var-custom-font-weight-bold;
+  }
+
+  #{$formclassname}-group{
+    @include BootstrapMaxWidthResponsive(hd){
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  #{$formclassname}-control{
+    color: $site-clr-text-dark-sec;
+    background-clip: inherit;
+
+    &[rows]{min-height: 100px;}
+  }
+
+  select#{$formclassname}-control:not(.custom-select){
+    height: 40px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  select#{$formclassname}-control-sm:not(.custom-select){
+    height: 34px;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+  select#{$formclassname}-control-lg:not(.custom-select){
+    height: 46px;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  #{$formcustomclassname}{
+
+    &-select{
+      &:focus{}
+    }
+
+    &-control{
+      &-label{
+        font-weight: $var-custom-font-weight-normal;
+
+        &::before{}
+        &::before,
+        &::after{}
+      }
+
+      &-input{
+        &:checked{
+          ~ #{$formcustomclassname}-control-label{
+            &::after{}
+          }
+        }
+      }
+
+      &-group{
+        &-vertical{
+          #{$formcustomclassname}-control{}
+        }
+        &-horizontal{}
+      }
+    }
+
+    &-checkbox{
+      #{$formcustomclassname}-control-input{
+        &:checked{
+          ~ #{$formcustomclassname}-control-label{
+            &::after{}
+          }
+        }
+      }
+    }
+
+    &-radio{
+      #{$formcustomclassname}-control-input{
+        &:checked{
+          ~ #{$formcustomclassname}-control-label{
+            &::after{}
+          }
+        }
+      }
+    }
+
+  }
+
+  .recaptcha{
+    &-area{
+      @include flexbox-display-flex();
+      @include flexbox-align-items(center);
+    }
+
+    &-check{
+      position:relative;
+      width: 1.4rem;
+      height: 1.4rem;
+      overflow: hidden;
+      margin-right: 8px;
+      border: 1px solid $site-brdr-light-input;
+      @include border-radius(2px);
+
+      .g-recaptcha{
+        position:absolute;
+        top: -26px;
+        left: -36px;
+        @include scale(0.85);
+      }
+    }
+
+    label{
+      &::before,
+      &::after{display: none;}
+    }
+  }
+
+  /* Custom Start */
+  .form-group{
+    label{
+      margin-bottom: 0;
+      position: relative;
+      bottom: -5px;
+    }
+  }
+
+  input.form-control,
+  textarea.form-control,
+  select.custom-select{
+    background-color: transparent;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Custom End */
+
+}
+/* Form UI New */

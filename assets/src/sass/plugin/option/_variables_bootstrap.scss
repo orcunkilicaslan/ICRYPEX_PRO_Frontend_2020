@@ -1,0 +1,802 @@
+/* Bootstrap Custom Variables Settings */
+@import "variables_custom";
+/* Bootstrap Custom Variables Settings */
+
+/* Bootstrap Grid Columns Settings */
+$bootstrap-grid-columns:          12;
+$bootstrap-grid-gutter-width:     30px;
+$bootstrap-grid-row-columns:      6;
+$bootstrap-container-max-widths:(
+        xs: 480px,
+        sm: 580px,
+        md: 720px,
+        lg: 980px,
+        xl: 1200px,
+        hd: 1320px,
+        1k: 1480px
+);
+$bootstrap-grid-breakpoints:(
+        xz: 0,
+        xm: 400px,
+        xs: 520px,
+        sm: 620px,
+        md: 820px,
+        lg: 1060px,
+        xl: 1380px,
+        hd: 1620px,
+        1k: 1940px,
+        2k: 2580px
+);
+/* Bootstrap Grid Columns Settings */
+
+/* Bootstrap Colors Settings */
+$bootstrap-white:             $var-custom-clr-white;
+$bootstrap-gray-100:          $var-custom-clr-gray-100;
+$bootstrap-gray-200:          $var-custom-clr-gray-200;
+$bootstrap-gray-300:          $var-custom-clr-gray-300;
+$bootstrap-gray-400:          $var-custom-clr-gray-400;
+$bootstrap-gray-500:          $var-custom-clr-gray-500;
+$bootstrap-gray-600:          $var-custom-clr-gray-600;
+$bootstrap-gray-700:          $var-custom-clr-gray-700;
+$bootstrap-gray-800:          $var-custom-clr-gray-800;
+$bootstrap-gray-900:          $var-custom-clr-gray-900;
+$bootstrap-black:             $var-custom-clr-black;
+$bootstrap-blue:              $var-custom-clr-blue;
+$bootstrap-indigo:            $var-custom-clr-indigo;
+$bootstrap-purple:            $var-custom-clr-purple;
+$bootstrap-pink:              $var-custom-clr-pink;
+$bootstrap-red:               $var-custom-clr-red;
+$bootstrap-orange:            $var-custom-clr-orange;
+$bootstrap-yellow:            $var-custom-clr-yellow;
+$bootstrap-green:             $var-custom-clr-green;
+$bootstrap-teal:              $var-custom-clr-teal;
+$bootstrap-cyan:              $var-custom-clr-cyan;
+$bootstrap-primary:           $bootstrap-blue;
+$bootstrap-secondary:         $bootstrap-gray-600;
+$bootstrap-success:           $bootstrap-green;
+$bootstrap-info:              $bootstrap-cyan;
+$bootstrap-warning:           $bootstrap-yellow;
+$bootstrap-danger:            $bootstrap-red;
+$bootstrap-light:             $bootstrap-gray-100;
+$bootstrap-dark:              $bootstrap-gray-800;
+$bootstrap-body-bg:           $bootstrap-white;
+$bootstrap-body-color:        $bootstrap-gray-900;
+/* Bootstrap Colors Settings */
+
+/* Bootstrap General Settings */
+$bootstrap-spacer:                                          $var-custom-spacer;
+$bootstrap-enable-caret:                                    true;
+$bootstrap-enable-rounded:                                  true;
+$bootstrap-enable-shadows:                                  false;
+$bootstrap-enable-gradients:                                false;
+$bootstrap-enable-transitions:                              true;
+$bootstrap-enable-prefers-reduced-motion-media-query:       true;
+$bootstrap-enable-hover-media-query:                        false; // Deprecated, no longer affects any compiled CSS
+$bootstrap-enable-grid-classes:                             true;
+$bootstrap-enable-pointer-cursor-for-buttons:               true;
+$bootstrap-enable-print-styles:                             true;
+$bootstrap-enable-validation-icons:                         true;
+$bootstrap-enable-deprecation-messages:                     true;
+$bootstrap-theme-color-interval:                            8%; // Set a specific jump point for requesting color jumps
+$bootstrap-yiq-contrasted-threshold:                        150; // The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
+$bootstrap-yiq-text-dark:                                   $bootstrap-gray-900; // Customize the light and dark text colors for use in our YIQ color contrast function.
+$bootstrap-yiq-text-light:                                  $bootstrap-white; // Customize the light and dark text colors for use in our YIQ color contrast function.
+$bootstrap-escaped-characters:(
+                ("<","%3c"),
+                (">","%3e"),
+                ("#","%23"),
+                ("(","%28"),
+                (")","%29"),
+); // Characters which are escaped by the escape-svg function
+/* Bootstrap General Settings */
+
+/* Bootstrap RFS (Responsive Font Size) */
+$bootstrap-enable-responsive-font-sizes:                    false;
+$bootstrap-rfs-base-font-size:                              $var-custom-font-size-base;
+$bootstrap-rfs-font-size-unit:                              rem;
+$bootstrap-rfs-breakpoint:                                  map_get($bootstrap-grid-breakpoints, 1k);
+$bootstrap-rfs-breakpoint-unit:                             px;
+$bootstrap-rfs-two-dimensional:                             false;
+$bootstrap-rfs-factor:                                      10;
+$bootstrap-rfs-class:                                       false;
+$bootstrap-rfs-rem-value:                                   14;
+$bootstrap-rfs-safari-iframe-resize-bug-fix:                false;
+/* Bootstrap RFS (Responsive Font Size) */
+
+/* Bootstrap Common Padding and Border Radius Sizes Settings */
+$bootstrap-line-height-lg:              $var-custom-line-height-lg;
+$bootstrap-line-height-sm:              $var-custom-line-height-sm;
+$bootstrap-border-width:                $var-custom-border-width;
+$bootstrap-border-color:                $var-custom-border-color;
+$bootstrap-border-radius:               $var-custom-border-radius;
+$bootstrap-border-radius-lg:            $var-custom-border-radius-lg;
+$bootstrap-border-radius-sm:            $var-custom-border-radius-sm;
+$bootstrap-rounded-pill:                $var-custom-rounded-pill;
+$bootstrap-box-shadow-sm:               $var-custom-box-shadow-sm;
+$bootstrap-box-shadow:                  $var-custom-box-shadow;
+$bootstrap-box-shadow-lg:               $var-custom-box-shadow-lg;
+$bootstrap-component-active-color:      $bootstrap-white;
+$bootstrap-component-active-bg:         $bootstrap-primary;
+$bootstrap-caret-width:                 .3em;
+$bootstrap-caret-vertical-align:        $bootstrap-caret-width * .85;
+$bootstrap-caret-spacing:               $bootstrap-caret-width * .85;
+$bootstrap-transition-base:             all .2s ease-in-out;
+$bootstrap-transition-fade:             opacity .15s linear;
+$bootstrap-transition-collapse:         height .35s ease;
+/* Bootstrap Common Padding and Border Radius Sizes Settings */
+
+/* Bootstrap Typography Settings */
+$bootstrap-font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$bootstrap-font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$bootstrap-font-family-base:            $var-custom-font-family-base;
+$bootstrap-font-size-base:              $var-custom-font-size-base; // Assumes the browser default, typically `16px`
+$bootstrap-font-size-lg:                $var-custom-font-size-lg;
+$bootstrap-font-size-sm:                $var-custom-font-size-sm;
+$bootstrap-font-weight-lighter:         $var-custom-font-weight-lighter;
+$bootstrap-font-weight-light:           $var-custom-font-weight-light;
+$bootstrap-font-weight-normal:          $var-custom-font-weight-normal;
+$bootstrap-font-weight-bold:            $var-custom-font-weight-bold;
+$bootstrap-font-weight-bolder:          $var-custom-font-weight-bolder;
+$bootstrap-font-weight-base:            $bootstrap-font-weight-normal;
+$bootstrap-line-height-base:            $var-custom-line-height-base;
+$bootstrap-h1-font-size:                $var-custom-h1-font-size;
+$bootstrap-h2-font-size:                $var-custom-h2-font-size;
+$bootstrap-h3-font-size:                $var-custom-h3-font-size;
+$bootstrap-h4-font-size:                $var-custom-h4-font-size;
+$bootstrap-h5-font-size:                $var-custom-h5-font-size;
+$bootstrap-h6-font-size:                $var-custom-h6-font-size;
+$bootstrap-headings-margin-bottom:      $var-custom-headings-margin-bottom;
+$bootstrap-headings-font-family:        $var-custom-headings-font-family;
+$bootstrap-headings-font-weight:        $var-custom-headings-font-weight;
+$bootstrap-headings-line-height:        $var-custom-headings-line-height;
+$bootstrap-headings-color:              $var-custom-headings-color;
+$bootstrap-display1-size:               $var-custom-display1-size;
+$bootstrap-display2-size:               $var-custom-display2-size;
+$bootstrap-display3-size:               $var-custom-display3-size;
+$bootstrap-display4-size:               $var-custom-display4-size;
+$bootstrap-display1-weight:             $var-custom-display1-weight;
+$bootstrap-display2-weight:             $var-custom-display2-weight;
+$bootstrap-display3-weight:             $var-custom-display3-weight;
+$bootstrap-display4-weight:             $var-custom-display4-weight;
+$bootstrap-display-line-height:         $var-custom-display-line-height;
+$bootstrap-lead-font-size:              $var-custom-lead-font-size;
+$bootstrap-lead-font-weight:            $var-custom-lead-font-weight;
+$bootstrap-small-font-size:             $var-custom-small-font-size;
+$bootstrap-text-muted:                  $bootstrap-gray-600;
+$bootstrap-blockquote-small-color:      $bootstrap-gray-600;
+$bootstrap-blockquote-small-font-size:  $bootstrap-small-font-size;
+$bootstrap-blockquote-font-size:        $bootstrap-font-size-base * 1.25;
+$bootstrap-hr-border-color:             rgba($bootstrap-black, .1);
+$bootstrap-hr-border-width:             $bootstrap-border-width;
+$bootstrap-mark-padding:                .2em;
+$bootstrap-dt-font-weight:              $bootstrap-font-weight-bold;
+$bootstrap-kbd-box-shadow:              inset 0 -.1rem 0 rgba($bootstrap-black, .25);
+$bootstrap-nested-kbd-font-weight:      $bootstrap-font-weight-bold;
+$bootstrap-list-inline-padding:         .5rem;
+$bootstrap-mark-bg:                     #fcf8e3;
+$bootstrap-hr-margin-y:                 $bootstrap-spacer;
+$bootstrap-link-color:                  $var-custom-link-color;
+$bootstrap-link-decoration:             none;
+$bootstrap-link-hover-color:            darken($bootstrap-link-color, 15%);
+$bootstrap-link-hover-decoration:       none;
+$bootstrap-emphasized-link-hover-darken-percentage: 15%;
+$bootstrap-paragraph-margin-bottom:     1rem;
+/* Bootstrap Typography Settings */
+
+/* Bootstrap Table Settings */
+$bootstrap-table-cell-padding:          .75rem;
+$bootstrap-table-cell-padding-sm:       .3rem;
+$bootstrap-table-color:                 $bootstrap-body-color;
+$bootstrap-table-bg:                    null;
+$bootstrap-table-accent-bg:             rgba($bootstrap-black, .05);
+$bootstrap-table-hover-color:           $bootstrap-table-color;
+$bootstrap-table-hover-bg:              rgba($bootstrap-black, .075);
+$bootstrap-table-active-bg:             $bootstrap-table-hover-bg;
+$bootstrap-table-border-width:          $bootstrap-border-width;
+$bootstrap-table-border-color:          $var-custom-table-border-color;
+$bootstrap-table-head-bg:               $bootstrap-gray-200;
+$bootstrap-table-head-color:            $bootstrap-gray-700;
+$bootstrap-table-dark-color:            $bootstrap-white;
+$bootstrap-table-dark-bg:               $bootstrap-gray-800;
+$bootstrap-table-dark-accent-bg:        rgba($bootstrap-white, .05);
+$bootstrap-table-dark-hover-color:      $bootstrap-table-dark-color;
+$bootstrap-table-dark-hover-bg:         rgba($bootstrap-white, .075);
+$bootstrap-table-dark-border-color:     lighten($bootstrap-table-dark-bg, 7.5%);
+$bootstrap-table-striped-order:         odd;
+$bootstrap-table-caption-color:         $bootstrap-text-muted;
+$bootstrap-table-bg-level:              -9;
+$bootstrap-table-border-level:          -6;
+/* Bootstrap Table Settings */
+
+/* Bootstrap Button Settings */
+$bootstrap-input-btn-padding-y:         .375rem;
+$bootstrap-input-btn-padding-x:         .75rem;
+$bootstrap-input-btn-font-family:       $var-custom-input-btn-font-family;
+$bootstrap-input-btn-font-size:         $bootstrap-font-size-base;
+$bootstrap-input-btn-line-height:       $var-custom-input-btn-line-height;
+$bootstrap-input-btn-focus-width:       $var-custom-input-btn-focus-width;
+$bootstrap-input-btn-focus-color:       rgba($bootstrap-component-active-bg, .25);
+$bootstrap-input-btn-focus-box-shadow:  0 0 0 $bootstrap-input-btn-focus-width $bootstrap-input-btn-focus-color;
+$bootstrap-input-btn-padding-y-sm:      .25rem;
+$bootstrap-input-btn-padding-x-sm:      .5rem;
+$bootstrap-input-btn-font-size-sm:      $bootstrap-font-size-sm;
+$bootstrap-input-btn-line-height-sm:    $var-custom-input-btn-line-height-sm;
+$bootstrap-input-btn-padding-y-lg:      .5rem;
+$bootstrap-input-btn-padding-x-lg:      1rem;
+$bootstrap-input-btn-font-size-lg:      $bootstrap-font-size-lg;
+$bootstrap-input-btn-line-height-lg:    $var-custom-input-btn-line-height-lg;
+$bootstrap-input-btn-border-width:      $bootstrap-border-width;
+$bootstrap-btn-padding-y:               $bootstrap-input-btn-padding-y;
+$bootstrap-btn-padding-x:               $bootstrap-input-btn-padding-x;
+$bootstrap-btn-font-family:             $bootstrap-input-btn-font-family;
+$bootstrap-btn-font-size:               $bootstrap-input-btn-font-size;
+$bootstrap-btn-line-height:             $bootstrap-input-btn-line-height;
+$bootstrap-btn-white-space:             null; // Set to `nowrap` to prevent text wrapping
+$bootstrap-btn-padding-y-sm:            $bootstrap-input-btn-padding-y-sm;
+$bootstrap-btn-padding-x-sm:            $bootstrap-input-btn-padding-x-sm;
+$bootstrap-btn-font-size-sm:            $bootstrap-input-btn-font-size-sm;
+$bootstrap-btn-line-height-sm:          $bootstrap-input-btn-line-height-sm;
+$bootstrap-btn-padding-y-lg:            $bootstrap-input-btn-padding-y-lg;
+$bootstrap-btn-padding-x-lg:            $bootstrap-input-btn-padding-x-lg;
+$bootstrap-btn-font-size-lg:            $bootstrap-input-btn-font-size-lg;
+$bootstrap-btn-line-height-lg:          $bootstrap-input-btn-line-height-lg;
+$bootstrap-btn-border-width:            $bootstrap-input-btn-border-width;
+$bootstrap-btn-font-weight:             $var-custom-btn-font-weight;
+$bootstrap-btn-box-shadow:              inset 0 1px 0 rgba($bootstrap-white, .15), 0 1px 1px rgba($bootstrap-black, .075);
+$bootstrap-btn-focus-width:             $bootstrap-input-btn-focus-width;
+$bootstrap-btn-focus-box-shadow:        $bootstrap-input-btn-focus-box-shadow;
+$bootstrap-btn-disabled-opacity:        .65;
+$bootstrap-btn-active-box-shadow:       inset 0 3px 5px rgba($bootstrap-black, .125);
+$bootstrap-btn-link-disabled-color:     $bootstrap-gray-600;
+$bootstrap-btn-block-spacing-y:         .5rem;
+$bootstrap-btn-border-radius:           $bootstrap-border-radius;
+$bootstrap-btn-border-radius-lg:        $bootstrap-border-radius-lg;
+$bootstrap-btn-border-radius-sm:        $bootstrap-border-radius-sm;
+$bootstrap-btn-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+/* Bootstrap Button Settings */
+
+/* Bootstrap Form Settings */
+$bootstrap-label-margin-bottom:                   $var-custom-label-margin-bottom;
+$bootstrap-input-padding-y:                       $bootstrap-input-btn-padding-y;
+$bootstrap-input-padding-x:                       $bootstrap-input-btn-padding-x;
+$bootstrap-input-font-family:                     $bootstrap-input-btn-font-family;
+$bootstrap-input-font-size:                       $bootstrap-input-btn-font-size;
+$bootstrap-input-font-weight:                     $bootstrap-font-weight-base;
+$bootstrap-input-line-height:                     $bootstrap-input-btn-line-height;
+$bootstrap-input-padding-y-sm:                    $bootstrap-input-btn-padding-y-sm;
+$bootstrap-input-padding-x-sm:                    $bootstrap-input-btn-padding-x-sm;
+$bootstrap-input-font-size-sm:                    $bootstrap-input-btn-font-size-sm;
+$bootstrap-input-line-height-sm:                  $bootstrap-input-btn-line-height-sm;
+$bootstrap-input-padding-y-lg:                    $bootstrap-input-btn-padding-y-lg;
+$bootstrap-input-padding-x-lg:                    $bootstrap-input-btn-padding-x-lg;
+$bootstrap-input-font-size-lg:                    $bootstrap-input-btn-font-size-lg;
+$bootstrap-input-line-height-lg:                  $bootstrap-input-btn-line-height-lg;
+$bootstrap-input-bg:                              $var-custom-input-bg;
+$bootstrap-input-disabled-bg:                     $var-custom-input-disabled-bg;
+$bootstrap-input-color:                           $var-custom-input-color;
+$bootstrap-input-border-color:                    $var-custom-input-border-color;
+$bootstrap-input-border-width:                    $bootstrap-input-btn-border-width;
+$bootstrap-input-box-shadow:                      inset 0 1px 1px rgba($bootstrap-black, .075);
+$bootstrap-input-border-radius:                   $bootstrap-border-radius;
+$bootstrap-input-border-radius-lg:                $bootstrap-border-radius-lg;
+$bootstrap-input-border-radius-sm:                $bootstrap-border-radius-sm;
+$bootstrap-input-focus-bg:                        $bootstrap-input-bg;
+$bootstrap-input-focus-border-color:              lighten($bootstrap-component-active-bg, 25%);
+$bootstrap-input-focus-color:                     $bootstrap-input-color;
+$bootstrap-input-focus-width:                     $bootstrap-input-btn-focus-width;
+$bootstrap-input-focus-box-shadow:                $bootstrap-input-btn-focus-box-shadow;
+$bootstrap-input-placeholder-color:               $bootstrap-gray-600;
+$bootstrap-input-plaintext-color:                 $bootstrap-body-color;
+$bootstrap-input-height-border:                   $bootstrap-input-border-width * 2;
+//$bootstrap-input-height-inner:                    add($bootstrap-input-line-height * 1em, $bootstrap-input-padding-y * 2);
+//$bootstrap-input-height-inner-half:               add($bootstrap-input-line-height * .5em, $bootstrap-input-padding-y);
+//$bootstrap-input-height-inner-quarter:            add($bootstrap-input-line-height * .25em, $bootstrap-input-padding-y / 2);
+//$bootstrap-input-height:                          add($bootstrap-input-line-height * 1em, add($bootstrap-input-padding-y * 2, $bootstrap-input-height-border, false));
+//$bootstrap-input-height-sm:                       add($bootstrap-input-line-height-sm * 1em, add($bootstrap-input-padding-y-sm * 2, $bootstrap-input-height-border, false));
+//$bootstrap-input-height-lg:                       add($bootstrap-input-line-height-lg * 1em, add($bootstrap-input-padding-y-lg * 2, $bootstrap-input-height-border, false));
+$bootstrap-input-transition:                      border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+$bootstrap-form-text-margin-top:                  .25rem;
+$bootstrap-form-check-input-gutter:               1.25rem;
+$bootstrap-form-check-input-margin-y:             .3rem;
+$bootstrap-form-check-input-margin-x:             .25rem;
+$bootstrap-form-check-inline-margin-x:            .75rem;
+$bootstrap-form-check-inline-input-margin-x:      .3125rem;
+$bootstrap-form-grid-gutter-width:                10px;
+$bootstrap-form-group-margin-bottom:              1rem;
+$bootstrap-input-group-addon-color:               $bootstrap-input-color;
+$bootstrap-input-group-addon-bg:                  $bootstrap-gray-200;
+$bootstrap-input-group-addon-border-color:        $bootstrap-input-border-color;
+/* Bootstrap Form Settings */
+
+/* Bootstrap Custom Form Settings */
+$bootstrap-custom-forms-transition:                                 background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+$bootstrap-custom-control-gutter:                                   .5rem;
+$bootstrap-custom-control-spacer-x:                                 1rem;
+$bootstrap-custom-control-cursor:                                   null;
+$bootstrap-custom-control-indicator-size:                           1rem;
+$bootstrap-custom-control-indicator-bg:                             $bootstrap-input-bg;
+$bootstrap-custom-control-indicator-bg-size:                        50% 50%;
+$bootstrap-custom-control-indicator-box-shadow:                     $bootstrap-input-box-shadow;
+$bootstrap-custom-control-indicator-border-color:                   $bootstrap-gray-500;
+$bootstrap-custom-control-indicator-border-width:                   $bootstrap-input-border-width;
+$bootstrap-custom-control-label-color:                              null;
+$bootstrap-custom-control-indicator-disabled-bg:                    $bootstrap-input-disabled-bg;
+$bootstrap-custom-control-label-disabled-color:                     $bootstrap-gray-600;
+$bootstrap-custom-control-indicator-checked-color:                  $bootstrap-component-active-color;
+$bootstrap-custom-control-indicator-checked-bg:                     $bootstrap-component-active-bg;
+$bootstrap-custom-control-indicator-checked-disabled-bg:            rgba($bootstrap-primary, .5);
+$bootstrap-custom-control-indicator-checked-box-shadow:             none;
+$bootstrap-custom-control-indicator-checked-border-color:           $bootstrap-custom-control-indicator-checked-bg;
+$bootstrap-custom-control-indicator-focus-box-shadow:               $bootstrap-input-focus-box-shadow;
+$bootstrap-custom-control-indicator-focus-border-color:             $bootstrap-input-focus-border-color;
+$bootstrap-custom-control-indicator-active-color:                   $bootstrap-component-active-color;
+$bootstrap-custom-control-indicator-active-bg:                      lighten($bootstrap-component-active-bg, 35%);
+$bootstrap-custom-control-indicator-active-box-shadow:              none;
+$bootstrap-custom-control-indicator-active-border-color:            $bootstrap-custom-control-indicator-active-bg;
+$bootstrap-custom-checkbox-indicator-border-radius:                 $bootstrap-border-radius;
+$bootstrap-custom-checkbox-indicator-icon-checked:                  url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path fill='#{$bootstrap-custom-control-indicator-checked-color}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/></svg>");
+$bootstrap-custom-checkbox-indicator-indeterminate-bg:              $bootstrap-component-active-bg;
+$bootstrap-custom-checkbox-indicator-indeterminate-color:           $bootstrap-custom-control-indicator-checked-color;
+$bootstrap-custom-checkbox-indicator-icon-indeterminate:            url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'><path stroke='#{$bootstrap-custom-checkbox-indicator-indeterminate-color}' d='M0 2h4'/></svg>");
+$bootstrap-custom-checkbox-indicator-indeterminate-box-shadow:      none;
+$bootstrap-custom-checkbox-indicator-indeterminate-border-color:    $bootstrap-custom-checkbox-indicator-indeterminate-bg;
+$bootstrap-custom-radio-indicator-border-radius:                    50%;
+$bootstrap-custom-radio-indicator-icon-checked:                     url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'><circle r='3' fill='#{$bootstrap-custom-control-indicator-checked-color}'/></svg>");
+$bootstrap-custom-switch-width:                                     $bootstrap-custom-control-indicator-size * 1.75;
+$bootstrap-custom-switch-indicator-border-radius:                   $bootstrap-custom-control-indicator-size / 2;
+//$bootstrap-custom-switch-indicator-size:                            subtract($bootstrap-custom-control-indicator-size, $bootstrap-custom-control-indicator-border-width * 4);
+$bootstrap-custom-select-padding-y:                                 $bootstrap-input-padding-y;
+$bootstrap-custom-select-padding-x:                                 $bootstrap-input-padding-x;
+$bootstrap-custom-select-font-family:                               $bootstrap-input-font-family;
+$bootstrap-custom-select-font-size:                                 $bootstrap-input-font-size;
+//$bootstrap-custom-select-height:                                    $bootstrap-input-height;
+$bootstrap-custom-select-indicator-padding:                         1rem; // Extra padding to account for the presence of the background-image based indicator
+$bootstrap-custom-select-font-weight:                               $bootstrap-input-font-weight;
+$bootstrap-custom-select-line-height:                               $var-custom-custom-select-line-height;
+$bootstrap-custom-select-color:                                     $bootstrap-input-color;
+$bootstrap-custom-select-disabled-color:                            $bootstrap-gray-600;
+$bootstrap-custom-select-bg:                                        $bootstrap-input-bg;
+$bootstrap-custom-select-disabled-bg:                               $bootstrap-gray-200;
+$bootstrap-custom-select-bg-size:                                   8px 10px; // In pixels because image dimensions
+$bootstrap-custom-select-indicator-color:                           $bootstrap-gray-800;
+$bootstrap-custom-select-indicator:                                 url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'><path fill='#{$bootstrap-custom-select-indicator-color}' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
+//$bootstrap-custom-select-background:                                escape-svg($bootstrap-custom-select-indicator) no-repeat right $bootstrap-custom-select-padding-x center / $bootstrap-custom-select-bg-size; // Used so we can have multiple background elements (e.g., arrow and feedback icon)
+//$bootstrap-custom-select-feedback-icon-padding-right:               add(1em * .75, (2 * $bootstrap-custom-select-padding-y * .75) + $bootstrap-custom-select-padding-x + $bootstrap-custom-select-indicator-padding);
+$bootstrap-custom-select-feedback-icon-position:                    center right ($bootstrap-custom-select-padding-x + $bootstrap-custom-select-indicator-padding);
+//$bootstrap-custom-select-feedback-icon-size:                        $bootstrap-input-height-inner-half $bootstrap-input-height-inner-half;
+$bootstrap-custom-select-border-width:                              $bootstrap-input-border-width;
+$bootstrap-custom-select-border-color:                              $bootstrap-input-border-color;
+$bootstrap-custom-select-border-radius:                             $bootstrap-border-radius;
+$bootstrap-custom-select-box-shadow:                                inset 0 1px 2px rgba($bootstrap-black, .075);
+$bootstrap-custom-select-focus-border-color:                        $bootstrap-input-focus-border-color;
+$bootstrap-custom-select-focus-width:                               $bootstrap-input-focus-width;
+$bootstrap-custom-select-focus-box-shadow:                          0 0 0 $bootstrap-custom-select-focus-width $bootstrap-input-btn-focus-color;
+$bootstrap-custom-select-padding-y-sm:                              $bootstrap-input-padding-y-sm;
+$bootstrap-custom-select-padding-x-sm:                              $bootstrap-input-padding-x-sm;
+$bootstrap-custom-select-font-size-sm:                              $bootstrap-input-font-size-sm;
+//$bootstrap-custom-select-height-sm:                                 $bootstrap-input-height-sm;
+$bootstrap-custom-select-padding-y-lg:                              $bootstrap-input-padding-y-lg;
+$bootstrap-custom-select-padding-x-lg:                              $bootstrap-input-padding-x-lg;
+$bootstrap-custom-select-font-size-lg:                              $bootstrap-input-font-size-lg;
+//$bootstrap-custom-select-height-lg:                                 $bootstrap-input-height-lg;
+$bootstrap-custom-range-track-width:                                100%;
+$bootstrap-custom-range-track-height:                               .5rem;
+$bootstrap-custom-range-track-cursor:                               pointer;
+$bootstrap-custom-range-track-bg:                                   $bootstrap-gray-300;
+$bootstrap-custom-range-track-border-radius:                        1rem;
+$bootstrap-custom-range-track-box-shadow:                           inset 0 .25rem .25rem rgba($bootstrap-black, .1);
+$bootstrap-custom-range-thumb-width:                                1rem;
+$bootstrap-custom-range-thumb-height:                               $bootstrap-custom-range-thumb-width;
+$bootstrap-custom-range-thumb-bg:                                   $bootstrap-component-active-bg;
+$bootstrap-custom-range-thumb-border:                               0;
+$bootstrap-custom-range-thumb-border-radius:                        1rem;
+$bootstrap-custom-range-thumb-box-shadow:                           0 .1rem .25rem rgba($bootstrap-black, .1);
+$bootstrap-custom-range-thumb-focus-box-shadow:                     0 0 0 1px $bootstrap-body-bg, $bootstrap-input-focus-box-shadow;
+$bootstrap-custom-range-thumb-focus-box-shadow-width:               $bootstrap-input-focus-width; // For focus box shadow issue in IE/Edge
+$bootstrap-custom-range-thumb-active-bg:                            lighten($bootstrap-component-active-bg, 35%);
+$bootstrap-custom-range-thumb-disabled-bg:                          $bootstrap-gray-500;
+//$bootstrap-custom-file-height:                                      $bootstrap-input-height;
+//$bootstrap-custom-file-height-inner:                                $bootstrap-input-height-inner;
+$bootstrap-custom-file-focus-border-color:                          $bootstrap-input-focus-border-color;
+$bootstrap-custom-file-focus-box-shadow:                            $bootstrap-input-focus-box-shadow;
+$bootstrap-custom-file-disabled-bg:                                 $bootstrap-input-disabled-bg;
+$bootstrap-custom-file-padding-y:                                   $bootstrap-input-padding-y;
+$bootstrap-custom-file-padding-x:                                   $bootstrap-input-padding-x;
+$bootstrap-custom-file-line-height:                                 $bootstrap-input-line-height;
+$bootstrap-custom-file-font-family:                                 $bootstrap-input-font-family;
+$bootstrap-custom-file-font-weight:                                 $bootstrap-input-font-weight;
+$bootstrap-custom-file-color:                                       $bootstrap-input-color;
+$bootstrap-custom-file-bg:                                          $bootstrap-input-bg;
+$bootstrap-custom-file-border-width:                                $bootstrap-input-border-width;
+$bootstrap-custom-file-border-color:                                $bootstrap-input-border-color;
+$bootstrap-custom-file-border-radius:                               $bootstrap-input-border-radius;
+$bootstrap-custom-file-box-shadow:                                  $bootstrap-input-box-shadow;
+$bootstrap-custom-file-button-color:                                $bootstrap-custom-file-color;
+$bootstrap-custom-file-button-bg:                                   $bootstrap-input-group-addon-bg;
+$bootstrap-custom-file-text: (
+        en: "Browse",
+        tr: "Arama"
+);
+/* Bootstrap Custom Form Settings */
+
+/* Bootstrap Form Validation Settings */
+$bootstrap-form-feedback-margin-top:                      $bootstrap-form-text-margin-top;
+$bootstrap-form-feedback-font-size:                       $bootstrap-small-font-size;
+$bootstrap-form-feedback-valid-color:                     $bootstrap-success;
+$bootstrap-form-feedback-invalid-color:                   $bootstrap-danger;
+$bootstrap-form-feedback-icon-valid-color:                $bootstrap-form-feedback-valid-color;
+$bootstrap-form-feedback-icon-valid:                      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path fill='#{$bootstrap-form-feedback-icon-valid-color}' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/></svg>");
+$bootstrap-form-feedback-icon-invalid-color:              $bootstrap-form-feedback-invalid-color;
+$bootstrap-form-feedback-icon-invalid:                    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='#{$bootstrap-form-feedback-icon-invalid-color}' viewBox='0 0 12 12'><circle cx='6' cy='6' r='4.5'/><path stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/><circle cx='6' cy='8.2' r='.6' fill='#{$bootstrap-form-feedback-icon-invalid-color}' stroke='none'/></svg>");
+/* Bootstrap Form Validation Settings */
+
+/* Bootstrap Z-Index Settings */
+$bootstrap-zindex-dropdown:                   1000;
+$bootstrap-zindex-sticky:                     1020;
+$bootstrap-zindex-fixed:                      1030;
+$bootstrap-zindex-modal-backdrop:             1040;
+$bootstrap-zindex-modal:                      1050;
+$bootstrap-zindex-popover:                    1060;
+$bootstrap-zindex-tooltip:                    1070;
+/* Bootstrap Z-Index Settings */
+
+/* Bootstrap Nav Settings */
+$bootstrap-nav-link-padding-y:                      .5rem;
+$bootstrap-nav-link-padding-x:                      1rem;
+$bootstrap-nav-link-disabled-color:                 $bootstrap-gray-600;
+$bootstrap-nav-tabs-border-color:                   $bootstrap-gray-300;
+$bootstrap-nav-tabs-border-width:                   $bootstrap-border-width;
+$bootstrap-nav-tabs-border-radius:                  $bootstrap-border-radius;
+$bootstrap-nav-tabs-link-hover-border-color:        $bootstrap-gray-200 $bootstrap-gray-200 $bootstrap-nav-tabs-border-color;
+$bootstrap-nav-tabs-link-active-color:              $bootstrap-gray-700;
+$bootstrap-nav-tabs-link-active-bg:                 $bootstrap-body-bg;
+$bootstrap-nav-tabs-link-active-border-color:       $bootstrap-gray-300 $bootstrap-gray-300 $bootstrap-nav-tabs-link-active-bg;
+$bootstrap-nav-pills-border-radius:                 $bootstrap-border-radius;
+$bootstrap-nav-pills-link-active-color:             $bootstrap-component-active-color;
+$bootstrap-nav-pills-link-active-bg:                $bootstrap-component-active-bg;
+$bootstrap-nav-divider-color:                       $bootstrap-gray-200;
+$bootstrap-nav-divider-margin-y:                    $bootstrap-spacer / 2;
+/* Bootstrap Nav Settings */
+
+/* Bootstrap Navbar Settings */
+$bootstrap-navbar-padding-y:                        $bootstrap-spacer / 2;
+$bootstrap-navbar-padding-x:                        $bootstrap-spacer;
+$bootstrap-navbar-nav-link-padding-x:               .5rem;
+$bootstrap-navbar-brand-font-size:                  $bootstrap-font-size-lg;
+$bootstrap-nav-link-height:                         $bootstrap-font-size-base * $bootstrap-line-height-base + $bootstrap-nav-link-padding-y * 2;
+$bootstrap-navbar-brand-height:                     $bootstrap-navbar-brand-font-size * $bootstrap-line-height-base;
+$bootstrap-navbar-brand-padding-y:                  ($bootstrap-nav-link-height - $bootstrap-navbar-brand-height) / 2;
+$bootstrap-navbar-toggler-padding-y:                .25rem;
+$bootstrap-navbar-toggler-padding-x:                .75rem;
+$bootstrap-navbar-toggler-font-size:                $bootstrap-font-size-lg;
+$bootstrap-navbar-toggler-border-radius:            $bootstrap-btn-border-radius;
+$bootstrap-navbar-dark-color:                       rgba($bootstrap-white, .5);
+$bootstrap-navbar-dark-hover-color:                 rgba($bootstrap-white, .75);
+$bootstrap-navbar-dark-active-color:                $bootstrap-white;
+$bootstrap-navbar-dark-disabled-color:              rgba($bootstrap-white, .25);
+$bootstrap-navbar-dark-toggler-icon-bg:             url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><path stroke='#{$bootstrap-navbar-dark-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+$bootstrap-navbar-dark-toggler-border-color:        rgba($bootstrap-white, .1);
+$bootstrap-navbar-light-color:                      rgba($bootstrap-black, .5);
+$bootstrap-navbar-light-hover-color:                rgba($bootstrap-black, .7);
+$bootstrap-navbar-light-active-color:               rgba($bootstrap-black, .9);
+$bootstrap-navbar-light-disabled-color:             rgba($bootstrap-black, .3);
+$bootstrap-navbar-light-toggler-icon-bg:            url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><path stroke='#{$bootstrap-navbar-light-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+$bootstrap-navbar-light-toggler-border-color:       rgba($bootstrap-black, .1);
+$bootstrap-navbar-light-brand-color:                $bootstrap-navbar-light-active-color;
+$bootstrap-navbar-light-brand-hover-color:          $bootstrap-navbar-light-active-color;
+$bootstrap-navbar-dark-brand-color:                 $bootstrap-navbar-dark-active-color;
+$bootstrap-navbar-dark-brand-hover-color:           $bootstrap-navbar-dark-active-color;
+/* Bootstrap Navbar Settings */
+
+/* Bootstrap Dropdown Settings */
+$bootstrap-dropdown-min-width:                      10rem;
+$bootstrap-dropdown-padding-y:                      .5rem;
+$bootstrap-dropdown-spacer:                         .125rem;
+$bootstrap-dropdown-font-size:                      $bootstrap-font-size-base;
+$bootstrap-dropdown-color:                          $bootstrap-body-color;
+$bootstrap-dropdown-bg:                             $bootstrap-white;
+$bootstrap-dropdown-border-color:                   rgba($bootstrap-black, .15);
+$bootstrap-dropdown-border-radius:                  $bootstrap-border-radius;
+$bootstrap-dropdown-border-width:                   $bootstrap-border-width;
+//$bootstrap-dropdown-inner-border-radius:            subtract($bootstrap-dropdown-border-radius, $bootstrap-dropdown-border-width);
+$bootstrap-dropdown-divider-bg:                     $bootstrap-gray-200;
+$bootstrap-dropdown-divider-margin-y:               $bootstrap-nav-divider-margin-y;
+$bootstrap-dropdown-box-shadow:                     0 .5rem 1rem rgba($bootstrap-black, .175);
+$bootstrap-dropdown-link-color:                     $bootstrap-gray-900;
+$bootstrap-dropdown-link-hover-color:               darken($bootstrap-gray-900, 5%);
+$bootstrap-dropdown-link-hover-bg:                  $bootstrap-gray-100;
+$bootstrap-dropdown-link-active-color:              $bootstrap-component-active-color;
+$bootstrap-dropdown-link-active-bg:                 $bootstrap-component-active-bg;
+$bootstrap-dropdown-link-disabled-color:            $bootstrap-gray-600;
+$bootstrap-dropdown-item-padding-y:                 .25rem;
+$bootstrap-dropdown-item-padding-x:                 1.5rem;
+$bootstrap-dropdown-header-color:                   $bootstrap-gray-600;
+$bootstrap-dropdown-header-padding:                 $bootstrap-dropdown-padding-y $bootstrap-dropdown-item-padding-x;
+/* Bootstrap Dropdown Settings */
+
+/* Bootstrap Pagination Settings */
+$bootstrap-pagination-padding-y:                    .5rem;
+$bootstrap-pagination-padding-x:                    .75rem;
+$bootstrap-pagination-padding-y-sm:                 .25rem;
+$bootstrap-pagination-padding-x-sm:                 .5rem;
+$bootstrap-pagination-padding-y-lg:                 .75rem;
+$bootstrap-pagination-padding-x-lg:                 1.5rem;
+$bootstrap-pagination-line-height:                  1.25;
+$bootstrap-pagination-color:                        $bootstrap-link-color;
+$bootstrap-pagination-bg:                           $bootstrap-white;
+$bootstrap-pagination-border-width:                 $bootstrap-border-width;
+$bootstrap-pagination-border-color:                 $bootstrap-gray-300;
+$bootstrap-pagination-focus-box-shadow:             $bootstrap-input-btn-focus-box-shadow;
+$bootstrap-pagination-focus-outline:                0;
+$bootstrap-pagination-hover-color:                  $bootstrap-link-hover-color;
+$bootstrap-pagination-hover-bg:                     $bootstrap-gray-200;
+$bootstrap-pagination-hover-border-color:           $bootstrap-gray-300;
+$bootstrap-pagination-active-color:                 $bootstrap-component-active-color;
+$bootstrap-pagination-active-bg:                    $bootstrap-component-active-bg;
+$bootstrap-pagination-active-border-color:          $bootstrap-pagination-active-bg;
+$bootstrap-pagination-disabled-color:               $bootstrap-gray-600;
+$bootstrap-pagination-disabled-bg:                  $bootstrap-white;
+$bootstrap-pagination-disabled-border-color:        $bootstrap-gray-300;
+/* Bootstrap Pagination Settings */
+
+/* Bootstrap Jumbotron Settings */
+$bootstrap-jumbotron-padding:                       2rem;
+$bootstrap-jumbotron-color:                         null;
+$bootstrap-jumbotron-bg:                            $bootstrap-gray-200;
+/* Bootstrap Jumbotron Settings */
+
+/* Bootstrap Cards Settings */
+$bootstrap-card-spacer-y:                           .75rem;
+$bootstrap-card-spacer-x:                           1.25rem;
+$bootstrap-card-border-width:                       $bootstrap-border-width;
+$bootstrap-card-border-radius:                      $bootstrap-border-radius;
+$bootstrap-card-border-color:                       rgba($bootstrap-black, .125);
+//$bootstrap-card-inner-border-radius:                subtract($bootstrap-card-border-radius, $bootstrap-card-border-width);
+$bootstrap-card-cap-bg:                             rgba($bootstrap-black, .03);
+$bootstrap-card-cap-color:                          null;
+$bootstrap-card-height:                             null;
+$bootstrap-card-color:                              null;
+$bootstrap-card-bg:                                 $bootstrap-white;
+$bootstrap-card-img-overlay-padding:                1.25rem;
+$bootstrap-card-group-margin:                       $bootstrap-grid-gutter-width / 2;
+$bootstrap-card-deck-margin:                        $bootstrap-card-group-margin;
+$bootstrap-card-columns-count:                      3;
+$bootstrap-card-columns-gap:                        1.25rem;
+$bootstrap-card-columns-margin:                     $bootstrap-card-spacer-y;
+/* Bootstrap Cards Settings */
+
+/* Bootstrap Tooltips Settings */
+$bootstrap-tooltip-font-size:                       $bootstrap-font-size-sm;
+$bootstrap-tooltip-max-width:                       200px;
+$bootstrap-tooltip-color:                           $bootstrap-white;
+$bootstrap-tooltip-bg:                              $bootstrap-black;
+$bootstrap-tooltip-border-radius:                   $bootstrap-border-radius;
+$bootstrap-tooltip-opacity:                         .9;
+$bootstrap-tooltip-padding-y:                       .25rem;
+$bootstrap-tooltip-padding-x:                       .5rem;
+$bootstrap-tooltip-margin:                          0;
+$bootstrap-tooltip-arrow-width:                     .8rem;
+$bootstrap-tooltip-arrow-height:                    .4rem;
+$bootstrap-tooltip-arrow-color:                     $bootstrap-tooltip-bg;
+$bootstrap-form-feedback-tooltip-padding-y:         $bootstrap-tooltip-padding-y;
+$bootstrap-form-feedback-tooltip-padding-x:         $bootstrap-tooltip-padding-x;
+$bootstrap-form-feedback-tooltip-font-size:         $bootstrap-tooltip-font-size;
+$bootstrap-form-feedback-tooltip-line-height:       $bootstrap-line-height-base;
+$bootstrap-form-feedback-tooltip-opacity:           $bootstrap-tooltip-opacity;
+$bootstrap-form-feedback-tooltip-border-radius:     $bootstrap-tooltip-border-radius;
+/* Bootstrap Tooltips Settings */
+
+/* Bootstrap Popovers Settings */
+$bootstrap-popover-font-size:                       $bootstrap-font-size-sm;
+$bootstrap-popover-bg:                              $bootstrap-white;
+$bootstrap-popover-max-width:                       276px;
+$bootstrap-popover-border-width:                    $bootstrap-border-width;
+$bootstrap-popover-border-color:                    rgba($bootstrap-black, .2);
+$bootstrap-popover-border-radius:                   $bootstrap-border-radius-lg;
+//$bootstrap-popover-inner-border-radius:             subtract($bootstrap-popover-border-radius, $bootstrap-popover-border-width);
+$bootstrap-popover-box-shadow:                      0 .25rem .5rem rgba($bootstrap-black, .2);
+$bootstrap-popover-header-bg:                       darken($bootstrap-popover-bg, 3%);
+$bootstrap-popover-header-color:                    $bootstrap-headings-color;
+$bootstrap-popover-header-padding-y:                .5rem;
+$bootstrap-popover-header-padding-x:                .75rem;
+$bootstrap-popover-body-color:                      $bootstrap-body-color;
+$bootstrap-popover-body-padding-y:                  $bootstrap-popover-header-padding-y;
+$bootstrap-popover-body-padding-x:                  $bootstrap-popover-header-padding-x;
+$bootstrap-popover-arrow-width:                     1rem;
+$bootstrap-popover-arrow-height:                    .5rem;
+$bootstrap-popover-arrow-color:                     $bootstrap-popover-bg;
+$bootstrap-popover-arrow-outer-color:               fade-in($bootstrap-popover-border-color, .05);
+/* Bootstrap Popovers Settings */
+
+/* Bootstrap Toasts Settings */
+$bootstrap-toast-max-width:                         350px;
+$bootstrap-toast-padding-x:                         .75rem;
+$bootstrap-toast-padding-y:                         .25rem;
+$bootstrap-toast-font-size:                         .875rem;
+$bootstrap-toast-color:                             null;
+$bootstrap-toast-background-color:                  rgba($bootstrap-white, .85);
+$bootstrap-toast-border-width:                      1px;
+$bootstrap-toast-border-color:                      rgba(0, 0, 0, .1);
+$bootstrap-toast-border-radius:                     .25rem;
+$bootstrap-toast-box-shadow:                        0 .25rem .75rem rgba($bootstrap-black, .1);
+$bootstrap-toast-header-color:                      $bootstrap-gray-600;
+$bootstrap-toast-header-background-color:           rgba($bootstrap-white, .85);
+$bootstrap-toast-header-border-color:               rgba(0, 0, 0, .05);
+/* Bootstrap Toasts Settings */
+
+/* Bootstrap Badges Settings */
+$bootstrap-badge-font-size:                         75%;
+$bootstrap-badge-font-weight:                       $bootstrap-font-weight-bold;
+$bootstrap-badge-padding-y:                         .25em;
+$bootstrap-badge-padding-x:                         .4em;
+$bootstrap-badge-border-radius:                     $bootstrap-border-radius;
+$bootstrap-badge-transition:                        $bootstrap-btn-transition;
+$bootstrap-badge-focus-width:                       $bootstrap-input-btn-focus-width;
+$bootstrap-badge-pill-padding-x:                    .6em;
+$bootstrap-badge-pill-border-radius:                10rem;
+/* Bootstrap Badges Settings */
+
+/* Bootstrap Modals Settings */
+$bootstrap-modal-inner-padding:                     1rem;
+$bootstrap-modal-footer-margin-between:             .5rem;
+$bootstrap-modal-dialog-margin:                     .5rem;
+$bootstrap-modal-dialog-margin-y-sm-up:             1.75rem;
+$bootstrap-modal-title-line-height:                 $bootstrap-line-height-base;
+$bootstrap-modal-content-color:                     null;
+$bootstrap-modal-content-bg:                        $bootstrap-white;
+$bootstrap-modal-content-border-color:              rgba($bootstrap-black, .2);
+$bootstrap-modal-content-border-width:              $bootstrap-border-width;
+$bootstrap-modal-content-border-radius:             $bootstrap-border-radius-lg;
+//$bootstrap-modal-content-inner-border-radius:       subtract($bootstrap-modal-content-border-radius, $bootstrap-modal-content-border-width);
+$bootstrap-modal-content-box-shadow-xs:             0 .25rem .5rem rgba($bootstrap-black, .5);
+$bootstrap-modal-content-box-shadow-sm-up:          0 .5rem 1rem rgba($bootstrap-black, .5);
+$bootstrap-modal-backdrop-bg:                       $bootstrap-black;
+$bootstrap-modal-backdrop-opacity:                  .5;
+$bootstrap-modal-header-border-color:               $bootstrap-border-color;
+$bootstrap-modal-footer-border-color:               $bootstrap-modal-header-border-color;
+$bootstrap-modal-header-border-width:               $bootstrap-modal-content-border-width;
+$bootstrap-modal-footer-border-width:               $bootstrap-modal-header-border-width;
+$bootstrap-modal-header-padding-y:                  1rem;
+$bootstrap-modal-header-padding-x:                  1rem;
+$bootstrap-modal-header-padding:                    $bootstrap-modal-header-padding-y $bootstrap-modal-header-padding-x; // Keep this for backwards compatibility
+$bootstrap-modal-xl:                                1140px;
+$bootstrap-modal-lg:                                800px;
+$bootstrap-modal-md:                                500px;
+$bootstrap-modal-sm:                                300px;
+$bootstrap-modal-fade-transform:                    translate(0, -50px);
+$bootstrap-modal-show-transform:                    none;
+$bootstrap-modal-transition:                        transform .3s ease-out;
+$bootstrap-modal-scale-transform:                   scale(1.02);
+/* Bootstrap Modals Settings */
+
+/* Bootstrap Alerts Settings */
+$bootstrap-alert-padding-y:                         .75rem;
+$bootstrap-alert-padding-x:                         1.25rem;
+$bootstrap-alert-margin-bottom:                     1rem;
+$bootstrap-alert-border-radius:                     $bootstrap-border-radius;
+$bootstrap-alert-link-font-weight:                  $bootstrap-font-weight-bold;
+$bootstrap-alert-border-width:                      $bootstrap-border-width;
+$bootstrap-alert-bg-level:                          -10;
+$bootstrap-alert-border-level:                      -9;
+$bootstrap-alert-color-level:                       6;
+/* Bootstrap Alerts Settings */
+
+/* Bootstrap Progress Bars Settings */
+$bootstrap-progress-height:                         1rem;
+$bootstrap-progress-font-size:                      $bootstrap-font-size-base * .75;
+$bootstrap-progress-bg:                             $bootstrap-gray-200;
+$bootstrap-progress-border-radius:                  $bootstrap-border-radius;
+$bootstrap-progress-box-shadow:                     inset 0 .1rem .1rem rgba($bootstrap-black, .1);
+$bootstrap-progress-bar-color:                      $bootstrap-white;
+$bootstrap-progress-bar-bg:                         $bootstrap-primary;
+$bootstrap-progress-bar-animation-timing:           1s linear infinite;
+$bootstrap-progress-bar-transition:                 width .6s ease;
+/* Bootstrap Progress Bars Settings */
+
+/* Bootstrap List Group Settings */
+$bootstrap-list-group-color:                        null;
+$bootstrap-list-group-bg:                           $bootstrap-white;
+$bootstrap-list-group-border-color:                 rgba($bootstrap-black, .125);
+$bootstrap-list-group-border-width:                 $bootstrap-border-width;
+$bootstrap-list-group-border-radius:                $bootstrap-border-radius;
+$bootstrap-list-group-item-padding-y:               .75rem;
+$bootstrap-list-group-item-padding-x:               1.25rem;
+$bootstrap-list-group-hover-bg:                     $bootstrap-gray-100;
+$bootstrap-list-group-active-color:                 $bootstrap-component-active-color;
+$bootstrap-list-group-active-bg:                    $bootstrap-component-active-bg;
+$bootstrap-list-group-active-border-color:          $bootstrap-list-group-active-bg;
+$bootstrap-list-group-disabled-color:               $bootstrap-gray-600;
+$bootstrap-list-group-disabled-bg:                  $bootstrap-list-group-bg;
+$bootstrap-list-group-action-color:                 $bootstrap-gray-700;
+$bootstrap-list-group-action-hover-color:           $bootstrap-list-group-action-color;
+$bootstrap-list-group-action-active-color:          $bootstrap-body-color;
+$bootstrap-list-group-action-active-bg:             $bootstrap-gray-200;
+/* Bootstrap List Group Settings */
+
+/* Bootstrap Image Thumbnails Settings */
+$bootstrap-thumbnail-padding:                       .25rem;
+$bootstrap-thumbnail-bg:                            $bootstrap-body-bg;
+$bootstrap-thumbnail-border-width:                  $bootstrap-border-width;
+$bootstrap-thumbnail-border-color:                  $bootstrap-gray-300;
+$bootstrap-thumbnail-border-radius:                 $bootstrap-border-radius;
+$bootstrap-thumbnail-box-shadow:                    0 1px 2px rgba($bootstrap-black, .075);
+/* Bootstrap Image Thumbnails Settings */
+
+/* Bootstrap Figures Settings */
+$bootstrap-figure-caption-font-size:                90%;
+$bootstrap-figure-caption-color:                    $bootstrap-gray-600;
+/* Bootstrap Figures Settings */
+
+/* Bootstrap Breadcrumbs Settings */
+$bootstrap-breadcrumb-font-size:                    null;
+$bootstrap-breadcrumb-padding-y:                    .75rem;
+$bootstrap-breadcrumb-padding-x:                    1rem;
+$bootstrap-breadcrumb-item-padding:                 .5rem;
+$bootstrap-breadcrumb-margin-bottom:                1rem;
+$bootstrap-breadcrumb-bg:                           $bootstrap-gray-200;
+$bootstrap-breadcrumb-divider-color:                $bootstrap-gray-600;
+$bootstrap-breadcrumb-active-color:                 $bootstrap-gray-600;
+$bootstrap-breadcrumb-divider:                      quote("/");
+$bootstrap-breadcrumb-border-radius:                $bootstrap-border-radius;
+/* Bootstrap Breadcrumbs Settings */
+
+/* Bootstrap Carousel Settings */
+$bootstrap-carousel-control-color:                  $bootstrap-white;
+$bootstrap-carousel-control-width:                  15%;
+$bootstrap-carousel-control-opacity:                .5;
+$bootstrap-carousel-control-hover-opacity:          .9;
+$bootstrap-carousel-control-transition:             opacity .15s ease;
+$bootstrap-carousel-indicator-width:                30px;
+$bootstrap-carousel-indicator-height:               3px;
+$bootstrap-carousel-indicator-hit-area-height:      10px;
+$bootstrap-carousel-indicator-spacer:               3px;
+$bootstrap-carousel-indicator-active-bg:            $bootstrap-white;
+$bootstrap-carousel-indicator-transition:           opacity .6s ease;
+$bootstrap-carousel-caption-width:                  70%;
+$bootstrap-carousel-caption-color:                  $bootstrap-white;
+$bootstrap-carousel-control-icon-width:             20px;
+$bootstrap-carousel-control-prev-icon-bg:           url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' fill='#{$bootstrap-carousel-control-color}' width='8' height='8' viewBox='0 0 8 8'><path d='M5.25 0l-4 4 4 4 1.5-1.5L4.25 4l2.5-2.5L5.25 0z'/></svg>");
+$bootstrap-carousel-control-next-icon-bg:           url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' fill='#{$bootstrap-carousel-control-color}' width='8' height='8' viewBox='0 0 8 8'><path d='M2.75 0l-1.5 1.5L3.75 4l-2.5 2.5L2.75 8l4-4-4-4z'/></svg>");
+$bootstrap-carousel-transition-duration:            .6s;
+$bootstrap-carousel-transition:                     transform $bootstrap-carousel-transition-duration ease-in-out; // Define transform transition first if using multiple transitions (e.g., `transform 2s ease, opacity .5s ease-out`)
+/* Bootstrap Carousel Settings */
+
+/* Bootstrap Spinners Settings */
+$bootstrap-spinner-width:                           2rem;
+$bootstrap-spinner-height:                          $bootstrap-spinner-width;
+$bootstrap-spinner-border-width:                    .25em;
+$bootstrap-spinner-width-sm:                        1rem;
+$bootstrap-spinner-height-sm:                       $bootstrap-spinner-width-sm;
+$bootstrap-spinner-border-width-sm:                 .2em;
+/* Bootstrap Spinners Settings */
+
+/* Bootstrap Close Settings */
+$bootstrap-close-font-size:                         $bootstrap-font-size-base * 1.5;
+$bootstrap-close-font-weight:                       $bootstrap-font-weight-bold;
+$bootstrap-close-color:                             $bootstrap-black;
+$bootstrap-close-text-shadow:                       0 1px 0 $bootstrap-white;
+/* Bootstrap Close Settings */
+
+/* Bootstrap Code Settings */
+$bootstrap-code-font-size:                          87.5%;
+$bootstrap-code-color:                              $bootstrap-pink;
+$bootstrap-kbd-padding-y:                           .2rem;
+$bootstrap-kbd-padding-x:                           .4rem;
+$bootstrap-kbd-font-size:                           $bootstrap-code-font-size;
+$bootstrap-kbd-color:                               $bootstrap-white;
+$bootstrap-kbd-bg:                                  $bootstrap-gray-900;
+$bootstrap-pre-color:                               $bootstrap-gray-900;
+$bootstrap-pre-scrollable-max-height:               340px;
+/* Bootstrap Code Settings */
+
+/* Bootstrap Utilities Settings */
+$bootstrap-displays:                                none, inline, inline-block, block, table, table-row, table-cell, flex, inline-flex;
+$bootstrap-overflows:                               auto, hidden;
+$bootstrap-positions:                               static, relative, absolute, fixed, sticky;
+$bootstrap-user-selects:                            all, auto, none;
+/* Bootstrap Utilities Settings */
+
+/* Bootstrap Printing Settings */
+$bootstrap-print-page-size:                         a3;
+$bootstrap-print-body-min-width:                    map-get($bootstrap-grid-breakpoints, "lg");
+/* Bootstrap Printing Settings */

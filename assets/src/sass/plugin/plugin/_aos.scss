@@ -1,0 +1,10 @@
+// AOS
+@import '../../../../../node_modules/aos/dist/aos';
+
+// Mobile Disabled
+@include BootstrapMaxWidthResponsive(lg){
+  [data-aos]{
+    opacity: 1 !important;
+    @include translate3d(0,0,0);
+  }
+}

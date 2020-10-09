@@ -1,0 +1,1058 @@
+<!doctype html>
+<html lang="tr">
+<head>
+    <title>COMPONENT</title>
+    <meta charset="utf-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <meta name="viewport" content="width=1060">
+    <link rel="shortcut icon" href="../assets/img/icons/favicon.ico" type="image/x-icon" sizes="32x32" />
+    <link id="css-custom-app" rel="stylesheet" href="../assets/dist/css/custom-app.css">
+    <script id="script-jquery" src="../assets/cdn/jquery/jquery.3.5.1.min.js"></script>
+    <script id="script-popper" src="../assets/cdn/popper/popper.1.16.1.min.js"></script>
+    <script id="script-bootstrap" src="../assets/cdn/bootstrap/bootstrap.4.5.2.min.js"></script>
+</head>
+<body>
+
+<!-- Component Start -->
+<section class="sitecomponents sitecomponents-formui compbgsoft">
+
+    <!-- Form UI Soft Start -->
+    <div class="componentsbox-wrapper">
+        <div class="container">
+
+            <!-- Form Controls Default Start -->
+            <div class="componentsbox">
+                <div class="componentsbox-headtitle">
+                    <h3>FORM CONTROLS (DEFAULT)</h3>
+                </div>
+                <div class="componentsbox-content">
+                    <div class="componentsbox-subtitle"><h4>INPUTS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftInputDefault">DEFAULT INPUT</label>
+                                    <input id="exampleSoftInputDefault" class="form-control" type="text" placeholder="Default Input" value="" />
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftInputReadonly">READONLY DEFAULT INPUT</label>
+                                    <input id="exampleSoftInputReadonly" class="form-control" type="text" placeholder="Readonly Value" value="Readonly Value" readonly />
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label>DEFAULT INPUT [DIV]</label>
+                                    <div class="form-control">Default Input</div>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>INPUT GROUPS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftInputGroupDefault">DEFAULT INPUT GROUP</label>
+                                    <div class="input-group">
+                                        <input id="exampleSoftInputGroupDefault" class="form-control" type="text" placeholder="Default Input" value="" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">TEXT</span>
+                                        </div>
+                                    </div>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftInputGroupDefaultReadonly">READONLY DEFAULT INPUT GROUP</label>
+                                    <div class="input-group">
+                                        <input id="exampleSoftInputGroupDefaultReadonly" class="form-control" type="text" placeholder="Readonly Value" value="Readonly Value" readonly />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">TEXT</span>
+                                        </div>
+                                    </div>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label>DISABLED INPUT GROUP [DIV]</label>
+                                    <div class="input-group">
+                                        <div class="form-control">Disabled DIV</div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">TEXT</span>
+                                        </div>
+                                    </div>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>AUTOFILL</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftInputDefaultAutofill">DEFAULT INPUT</label>
+                                    <input id="exampleSoftInputDefaultAutofill" class="form-control autofill" type="text" placeholder="Default Input" value="" readonly="readonly" onfocus="this.removeAttribute('readonly')" required />
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>LABELLINE</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row siteformuilabel">
+                                <div class="form-group labelanimation col-lg">
+                                    <input id="exampleSoftInputLabelLineDefault" type="text" class="form-control autofill" pattern=".{0}|.{2,}" readonly="readonly" onfocus="this.removeAttribute('readonly')" required />
+                                    <span class="inputbottombar"></span>
+                                    <label for="exampleSoftInputLabelLineDefault">Label Input</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>LABELBOX</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row siteformuilabel siteformuilabelbox">
+                                <div class="form-group labelanimation col-lg">
+                                    <input id="exampleSoftInputLabelBoxDefault" type="text" class="form-control autofill" pattern=".{0}|.{2,}" readonly="readonly" onfocus="this.removeAttribute('readonly')" required />
+                                    <span class="inputbottombar"></span>
+                                    <label for="exampleSoftInputLabelBoxDefault">Label Input</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>SELECTS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftDefaultSelectDefault">DEFAULT SELECT</label>
+                                    <select id="exampleSoftDefaultSelectDefault" class="form-control">
+                                        <option selected>Lorem Ipsum Dolor</option>
+                                        <option value="1">Volutpat Est Velit</option>
+                                        <option value="2">Praesent Tristique Magna</option>
+                                        <option value="3">Rhoncus Est Pellentesque</option>
+                                    </select>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftDefaultSelectDefaultDisabled">DISABLED SELECT</label>
+                                    <select id="exampleSoftDefaultSelectDefaultDisabled" class="form-control" disabled>
+                                        <option selected>Lorem Ipsum Dolor</option>
+                                        <option value="1">Volutpat Est Velit</option>
+                                        <option value="2">Praesent Tristique Magna</option>
+                                        <option value="3">Rhoncus Est Pellentesque</option>
+                                    </select>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>CUSTOM SELECTS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftCustomSelectDefault">DEFAULT CUSTOM SELECT</label>
+                                    <select id="exampleSoftCustomSelectDefault" class="custom-select">
+                                        <option selected>Lorem Ipsum Dolor</option>
+                                        <option value="1">Volutpat Est Velit</option>
+                                        <option value="2">Praesent Tristique Magna</option>
+                                        <option value="3">Rhoncus Est Pellentesque</option>
+                                    </select>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftCustomSelectDefaultDisabled">DISABLED CUSTOM SELECT</label>
+                                    <select id="exampleSoftCustomSelectDefaultDisabled" class="custom-select" disabled>
+                                        <option selected>Lorem Ipsum Dolor</option>
+                                        <option value="1">Volutpat Est Velit</option>
+                                        <option value="2">Praesent Tristique Magna</option>
+                                        <option value="3">Rhoncus Est Pellentesque</option>
+                                    </select>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>TEXTAREAS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftTextareaDefault">DEFAULT TEXTAREA</label>
+                                    <textarea id="exampleSoftTextareaDefault" class="form-control" rows="3"></textarea>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftTextareaDefaultDisabled">READONLY DEFAULT TEXTAREA</label>
+                                    <textarea id="exampleSoftTextareaDefaultDisabled" class="form-control" rows="3" readonly></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Form Controls Default End -->
+
+            <!-- Form Controls Small Start -->
+            <div class="componentsbox">
+                <div class="componentsbox-headtitle">
+                    <h3>FORM CONTROLS (SMALL)</h3>
+                </div>
+                <div class="componentsbox-content">
+                    <div class="componentsbox-subtitle"><h4>INPUTS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftSmallInputDefault">DEFAULT INPUT</label>
+                                    <input id="exampleSoftSmallInputDefault" class="form-control form-control-sm" type="text" placeholder="Default Input" value="" />
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftSmallInputReadonly">READONLY DEFAULT INPUT</label>
+                                    <input id="exampleSoftSmallInputReadonly" class="form-control form-control-sm" type="text" placeholder="Readonly Value" value="Readonly Value" readonly />
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label>DEFAULT INPUT [DIV]</label>
+                                    <div class="form-control form-control-sm">Default Input</div>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>INPUT GROUPS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftSmallInputGroupDefault">DEFAULT INPUT GROUP</label>
+                                    <div class="input-group input-group-sm">
+                                        <input id="exampleSoftSmallInputGroupDefault" class="form-control form-control-sm" type="text" placeholder="Default Input" value="" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">TEXT</span>
+                                        </div>
+                                    </div>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftSmallInputGroupDefaultReadonly">READONLY DEFAULT INPUT GROUP</label>
+                                    <div class="input-group input-group-sm">
+                                        <input id="exampleSoftSmallInputGroupDefaultReadonly" class="form-control form-control-sm" type="text" placeholder="Readonly Value" value="Readonly Value" readonly />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">TEXT</span>
+                                        </div>
+                                    </div>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label>DISABLED INPUT GROUP [DIV]</label>
+                                    <div class="input-group input-group-sm">
+                                        <div class="form-control form-control-sm">Disabled DIV</div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">TEXT</span>
+                                        </div>
+                                    </div>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>AUTOFILL</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftSmallInputDefaultAutofill">DEFAULT INPUT</label>
+                                    <input id="exampleSoftSmallInputDefaultAutofill" class="form-control form-control-sm autofill" type="text" placeholder="Default Input" value="" readonly="readonly" onfocus="this.removeAttribute('readonly')" required />
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>LABELLINE</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row siteformuilabel">
+                                <div class="form-group labelanimation col-lg">
+                                    <input id="exampleSoftSmallInputLabelLineDefault" type="text" class="form-control form-control-sm autofill" pattern=".{0}|.{2,}" readonly="readonly" onfocus="this.removeAttribute('readonly')" required />
+                                    <span class="inputbottombar"></span>
+                                    <label for="exampleSoftSmallInputLabelLineDefault">Label Input</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>LABELBOX</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row siteformuilabel siteformuilabelbox">
+                                <div class="form-group labelanimation col-lg">
+                                    <input id="exampleSoftSmallInputLabelBoxDefault" type="text" class="form-control form-control-sm autofill" pattern=".{0}|.{2,}" readonly="readonly" onfocus="this.removeAttribute('readonly')" required />
+                                    <span class="inputbottombar"></span>
+                                    <label for="exampleSoftSmallInputLabelBoxDefault">Label Input</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>SELECTS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftSmallDefaultSelectDefault">DEFAULT SELECT</label>
+                                    <select id="exampleSoftSmallDefaultSelectDefault" class="form-control form-control-sm">
+                                        <option selected>Lorem Ipsum Dolor</option>
+                                        <option value="1">Volutpat Est Velit</option>
+                                        <option value="2">Praesent Tristique Magna</option>
+                                        <option value="3">Rhoncus Est Pellentesque</option>
+                                    </select>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftSmallDefaultSelectDefaultDisabled">DISABLED SELECT</label>
+                                    <select id="exampleSoftSmallDefaultSelectDefaultDisabled" class="form-control form-control-sm" disabled>
+                                        <option selected>Lorem Ipsum Dolor</option>
+                                        <option value="1">Volutpat Est Velit</option>
+                                        <option value="2">Praesent Tristique Magna</option>
+                                        <option value="3">Rhoncus Est Pellentesque</option>
+                                    </select>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>CUSTOM SELECTS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftSmallCustomSelectDefault">DEFAULT CUSTOM SELECT</label>
+                                    <select id="exampleSoftSmallCustomSelectDefault" class="custom-select custom-select-sm">
+                                        <option selected>Lorem Ipsum Dolor</option>
+                                        <option value="1">Volutpat Est Velit</option>
+                                        <option value="2">Praesent Tristique Magna</option>
+                                        <option value="3">Rhoncus Est Pellentesque</option>
+                                    </select>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftSmallCustomSelectDefaultDisabled">DISABLED CUSTOM SELECT</label>
+                                    <select id="exampleSoftSmallCustomSelectDefaultDisabled" class="custom-select custom-select-sm" disabled>
+                                        <option selected>Lorem Ipsum Dolor</option>
+                                        <option value="1">Volutpat Est Velit</option>
+                                        <option value="2">Praesent Tristique Magna</option>
+                                        <option value="3">Rhoncus Est Pellentesque</option>
+                                    </select>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>TEXTAREAS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftSmallTextareaDefault">DEFAULT TEXTAREA</label>
+                                    <textarea id="exampleSoftSmallTextareaDefault" class="form-control form-control-sm" rows="3"></textarea>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftSmallTextareaDefaultDisabled">READONLY DEFAULT TEXTAREA</label>
+                                    <textarea id="exampleSoftSmallTextareaDefaultDisabled" class="form-control form-control-sm" rows="3" readonly></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Form Controls Small End -->
+
+            <!-- Form Controls Large Start -->
+            <div class="componentsbox">
+                <div class="componentsbox-headtitle">
+                    <h3>FORM CONTROLS (LARGE)</h3>
+                </div>
+                <div class="componentsbox-content">
+                    <div class="componentsbox-subtitle"><h4>INPUTS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftLargeInputDefault">DEFAULT INPUT</label>
+                                    <input id="exampleSoftLargeInputDefault" class="form-control form-control-lg" type="text" placeholder="Default Input" value="" />
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftLargeInputReadonly">READONLY DEFAULT INPUT</label>
+                                    <input id="exampleSoftLargeInputReadonly" class="form-control form-control-lg" type="text" placeholder="Readonly Value" value="Readonly Value" readonly />
+                                    <small class="form-texexampleLarget text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label>DEFAULT INPUT [DIV]</label>
+                                    <div class="form-control form-control-lg">Default Input</div>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>INPUT GROUPS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftLargeInputGroupDefault">DEFAULT INPUT GROUP</label>
+                                    <div class="input-group input-group-lg">
+                                        <input id="exampleSoftLargeInputGroupDefault" class="form-control form-control-lg" type="text" placeholder="Default Input" value="" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">TEXT</span>
+                                        </div>
+                                    </div>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftLargeInputGroupDefaultReadonly">READONLY DEFAULT INPUT GROUP</label>
+                                    <div class="input-group input-group-lg">
+                                        <input id="exampleSoftLargeInputGroupDefaultReadonly" class="form-control form-control-lg" type="text" placeholder="Readonly Value" value="Readonly Value" readonly />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">TEXT</span>
+                                        </div>
+                                    </div>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label>DISABLED INPUT GROUP [DIV]</label>
+                                    <div class="input-group input-group-lg">
+                                        <div class="form-control form-control-lg">Disabled DIV</div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">TEXT</span>
+                                        </div>
+                                    </div>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>AUTOFILL</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftLargeInputDefaultAutofill">DEFAULT INPUT</label>
+                                    <input id="exampleSoftLargeInputDefaultAutofill" class="form-control form-control-lg autofill" type="text" placeholder="Default Input" value="" readonly="readonly" onfocus="this.removeAttribute('readonly')" required />
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>LABELLINE</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row siteformuilabel">
+                                <div class="form-group labelanimation col-lg">
+                                    <input id="exampleSoftLargeInputLabelLineDefault" type="text" class="form-control form-control-lg autofill" pattern=".{0}|.{2,}" readonly="readonly" onfocus="this.removeAttribute('readonly')" required />
+                                    <span class="inputbottombar"></span>
+                                    <label for="exampleSoftLargeInputLabelLineDefault">Label Input</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>LABELBOX</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row siteformuilabel siteformuilabelbox">
+                                <div class="form-group labelanimation col-lg">
+                                    <input id="exampleSoftLargeInputLabelBoxDefault" type="text" class="form-control form-control-lg autofill" pattern=".{0}|.{2,}" readonly="readonly" onfocus="this.removeAttribute('readonly')" required />
+                                    <span class="inputbottombar"></span>
+                                    <label for="exampleSoftLargeInputLabelBoxDefault">Label Input</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>SELECTS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftLargeDefaultSelectDefault">DEFAULT SELECT</label>
+                                    <select id="exampleSoftLargeDefaultSelectDefault" class="form-control form-control-lg">
+                                        <option selected>Lorem Ipsum Dolor</option>
+                                        <option value="1">Volutpat Est Velit</option>
+                                        <option value="2">Praesent Tristique Magna</option>
+                                        <option value="3">Rhoncus Est Pellentesque</option>
+                                    </select>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftLargeDefaultSelectDefaultDisabled">DISABLED SELECT</label>
+                                    <select id="exampleSoftLargeDefaultSelectDefaultDisabled" class="form-control form-control-lg" disabled>
+                                        <option selected>Lorem Ipsum Dolor</option>
+                                        <option value="1">Volutpat Est Velit</option>
+                                        <option value="2">Praesent Tristique Magna</option>
+                                        <option value="3">Rhoncus Est Pellentesque</option>
+                                    </select>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>CUSTOM SELECTS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftLargeCustomSelectDefault">DEFAULT CUSTOM SELECT</label>
+                                    <select id="exampleSoftLargeCustomSelectDefault" class="custom-select custom-select-lg">
+                                        <option selected>Lorem Ipsum Dolor</option>
+                                        <option value="1">Volutpat Est Velit</option>
+                                        <option value="2">Praesent Tristique Magna</option>
+                                        <option value="3">Rhoncus Est Pellentesque</option>
+                                    </select>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftLargeCustomSelectDefaultDisabled">DISABLED CUSTOM SELECT</label>
+                                    <select id="exampleSoftLargeCustomSelectDefaultDisabled" class="custom-select custom-select-lg" disabled>
+                                        <option selected>Lorem Ipsum Dolor</option>
+                                        <option value="1">Volutpat Est Velit</option>
+                                        <option value="2">Praesent Tristique Magna</option>
+                                        <option value="3">Rhoncus Est Pellentesque</option>
+                                    </select>
+                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>TEXTAREAS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftLargeTextareaDefault">DEFAULT TEXTAREA</label>
+                                    <textarea id="exampleSoftLargeTextareaDefault" class="form-control form-control-lg" rows="3"></textarea>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftLargeTextareaDefaultDisabled">READONLY DEFAULT TEXTAREA</label>
+                                    <textarea id="exampleSoftLargeTextareaDefaultDisabled" class="form-control form-control-lg" rows="3" readonly></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Form Controls Large End -->
+
+            <!-- Form UI Start -->
+            <div class="componentsbox">
+                <div class="componentsbox-headtitle">
+                    <h3>FORM UI</h3>
+                </div>
+                <div class="componentsbox-content">
+                    <div class="componentsbox-subtitle"><h4>DEFAULT CHECKBOXES AND RADIOS (STACKED)</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <div class="form-check">
+                                        <input id="exampleSoftCheckboxStackedDefault" class="form-check-input" type="checkbox" value="" />
+                                        <label for="exampleSoftCheckboxStackedDefault" class="form-check-label">Default Checkbox</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input id="exampleSoftCheckboxStackedDefaultDisabled" class="form-check-input" type="checkbox" value="" disabled />
+                                        <label for="exampleSoftCheckboxStackedDefaultDisabled" class="form-check-label">Disabled Checkbox</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <div class="form-check">
+                                        <input id="exampleSoftRadiosStackedDefault" class="form-check-input" type="radio" name="exampleSoftStackedRadios" value="option1" checked />
+                                        <label for="exampleSoftRadiosStackedDefault" class="form-check-label">Default Radio</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input id="exampleSoftRadiosStackedSecDefault" class="form-check-input" type="radio" name="exampleSoftStackedRadios" value="option2" />
+                                        <label for="exampleSoftRadiosStackedSecDefault" class="form-check-label">Second Default Radio</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input id="exampleSoftRadiosStackedDefaultDisabled" class="form-check-input" type="radio" name="exampleSoftStackedRadios" value="option3" disabled />
+                                        <label for="exampleSoftRadiosStackedDefaultDisabled" class="form-check-label">Disabled Radio</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>DEFAULT CHECKBOXES AND RADIOS (INLINE)</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <div class="form-check form-check-inline">
+                                        <input id="exampleSoftCheckboxInlineDefault" class="form-check-input" type="checkbox" value="" />
+                                        <label for="exampleSoftCheckboxInlineDefault" class="form-check-label">Default Checkbox</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input id="exampleSoftCheckboxInlineDefaultDisabled" class="form-check-input" type="checkbox" value="" disabled />
+                                        <label for="exampleSoftCheckboxInlineDefaultDisabled" class="form-check-label">Disabled Checkbox</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <div class="form-check form-check-inline">
+                                        <input id="exampleSoftRadiosInlineDefault" class="form-check-input" type="radio" name="exampleSoftInlineRadios" value="option1" checked />
+                                        <label for="exampleSoftRadiosInlineDefault" class="form-check-label">Default Radio</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input id="exampleSoftRadiosInlineSecDefault" class="form-check-input" type="radio" name="exampleSoftInlineRadios" value="option2" />
+                                        <label for="exampleSoftRadiosInlineSecDefault" class="form-check-label">Second Default Radio</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input id="exampleSoftRadiosInlineDefaultDisabled" class="form-check-input" type="radio" name="exampleSoftInlineRadios" value="option3" disabled />
+                                        <label for="exampleSoftRadiosInlineDefaultDisabled" class="form-check-label">Disabled Radio</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>CUSTOM CHECKBOXES AND RADIOS (STACKED)</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <div class="custom-control custom-checkbox">
+                                        <input id="exampleSoftCheckboxStackedCustom" class="custom-control-input" type="checkbox" value="" />
+                                        <label for="exampleSoftCheckboxStackedCustom" class="custom-control-label">Custom Checkbox</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input id="exampleSoftCheckboxStackedCustomDisabled" class="custom-control-input" type="checkbox" value="" disabled />
+                                        <label for="exampleSoftCheckboxStackedCustomDisabled" class="custom-control-label">Disabled Checkbox</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <div class="custom-control custom-radio">
+                                        <input id="exampleSoftRadiosStackedCustom" class="custom-control-input" type="radio" name="exampleSoftStackedRadios" value="option1" checked />
+                                        <label for="exampleSoftRadiosStackedCustom" class="custom-control-label">Custom Radio</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="exampleSoftRadiosStackedSecCustom" class="custom-control-input" type="radio" name="exampleSoftStackedRadios" value="option2" />
+                                        <label for="exampleSoftRadiosStackedSecCustom" class="custom-control-label">Second Custom Radio</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="exampleSoftRadiosStackedCustomDisabled" class="custom-control-input" type="radio" name="exampleSoftStackedRadios" value="option3" disabled />
+                                        <label for="exampleSoftRadiosStackedCustomDisabled" class="custom-control-label">Disabled Radio</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>CUSTOM CHECKBOXES AND RADIOS (INLINE)</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input id="exampleSoftCheckboxInlineCustom" class="custom-control-input" type="checkbox" value="" />
+                                        <label for="exampleSoftCheckboxInlineCustom" class="custom-control-label">Custom Checkbox</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input id="exampleSoftCheckboxInlineCustomDisabled" class="custom-control-input" type="checkbox" value="" disabled />
+                                        <label for="exampleSoftCheckboxInlineCustomDisabled" class="custom-control-label">Disabled Checkbox</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input id="exampleSoftRadiosInlineCustom" class="custom-control-input" type="radio" name="exampleSoftInlineRadios" value="option1" checked />
+                                        <label for="exampleSoftRadiosInlineCustom" class="custom-control-label">Custom Radio</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input id="exampleSoftRadiosInlineSecCustom" class="custom-control-input" type="radio" name="exampleSoftInlineRadios" value="option2" />
+                                        <label for="exampleSoftRadiosInlineSecCustom" class="custom-control-label">Second Custom Radio</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input id="exampleSoftRadiosInlineCustomDisabled" class="custom-control-input" type="radio" name="exampleSoftInlineRadios" value="option3" disabled />
+                                        <label for="exampleSoftRadiosInlineCustomDisabled" class="custom-control-label">Disabled Radio</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>CUSTOM SWITCHES</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <div class="custom-control custom-switch">
+                                        <input id="exampleSoftSwitchStackedCustom" class="custom-control-input" type="checkbox" value="" />
+                                        <label for="exampleSoftSwitchStackedCustom" class="custom-control-label">Toggle this switch element</label>
+                                    </div>
+                                    <div class="custom-control custom-switch">
+                                        <input id="exampleSoftSwitchStackedCustomDisabled" class="custom-control-input" type="checkbox" value="" disabled />
+                                        <label for="exampleSoftSwitchStackedCustomDisabled" class="custom-control-label">Disabled switch element</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>CUSTOM FILE BROWSER</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <div class="custom-file">
+                                        <input id="exampleSoftFileBrowserStackedCustom" class="custom-file-input" type="file" value="" />
+                                        <label for="exampleSoftFileBrowserStackedCustom" class="custom-file-label" data-browse="Dosya Seçin">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>DEFAULT RANGE INPUT</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftControlRangeDefault">Example Default Range Input</label>
+                                    <input id="exampleSoftControlRangeDefault" class="form-control-range" type="range" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>CUSTOM RANGE INPUT</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="exampleSoftControlRangeCustom">Example Custom Range Input</label>
+                                    <input id="exampleSoftControlRangeCustom" class="custom-range" type="range" min="0" max="5" step="0.5" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Form UI End -->
+
+            <!-- Form Layout Start -->
+            <div class="componentsbox">
+                <div class="componentsbox-headtitle">
+                    <h3>FORM LAYOUT</h3>
+                </div>
+                <div class="componentsbox-content">
+                    <div class="componentsbox-subtitle"><h4>INLINE FORMS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-auto">
+                                    <input type="text" readonly class="form-control-plaintext" value="email@example.com" />
+                                </div>
+                                <div class="form-group col-auto">
+                                    <input type="text" class="form-control" value="Password" placeholder="Password" />
+                                </div>
+                                <div class="form-group col-auto">
+                                    <button type="submit" class="btn btn-primary">BUTTON</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Form Layout End -->
+
+            <!-- Form Bootstrap Validation Start -->
+            <div class="componentsbox">
+                <div class="componentsbox-headtitle">
+                    <h3>FORM BOOTSTRAP VALIDATION</h3>
+                </div>
+                <div class="componentsbox-content">
+                    <div class="componentsbox-subtitle"><h4>CUSTOM STYLES</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui needs-validation" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="validationCustom01">First name</label>
+                                    <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
+                                    <div class="valid-feedback">Valid!</div>
+                                    <div class="invalid-feedback">Invalid!</div>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="validationCustom02">Last name</label>
+                                    <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
+                                    <div class="valid-feedback">Valid!</div>
+                                    <div class="invalid-feedback">Invalid!</div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="validationCustom03">City</label>
+                                    <input type="text" class="form-control" id="validationCustom03" required>
+                                    <div class="valid-feedback">Valid!</div>
+                                    <div class="invalid-feedback">Invalid!</div>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="validationCustom04">State</label>
+                                    <select class="custom-select" id="validationCustom04" required>
+                                        <option selected disabled value="">Choose...</option>
+                                        <option>...</option>
+                                    </select>
+                                    <div class="valid-feedback">Valid!</div>
+                                    <div class="invalid-feedback">Invalid!</div>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="validationCustom05">Zip</label>
+                                    <input type="text" class="form-control" id="validationCustom05" required>
+                                    <div class="valid-feedback">Valid!</div>
+                                    <div class="invalid-feedback">Invalid!</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                    <label class="form-check-label" for="invalidCheck">Agree to terms and conditions</label>
+                                    <div class="valid-feedback">Valid!</div>
+                                    <div class="invalid-feedback">Invalid!</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        </form>
+                        <script>
+                            (function() {
+                                'use strict';
+                                window.addEventListener('load', function() {
+                                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                    var forms = document.getElementsByClassName('needs-validation');
+                                    // Loop over them and prevent submission
+                                    var validation = Array.prototype.filter.call(forms, function(form) {
+                                        form.addEventListener('submit', function(event) {
+                                            if (form.checkValidity() === false) {
+                                                event.preventDefault();
+                                                event.stopPropagation();
+                                            }
+                                            form.classList.add('was-validated');
+                                        }, false);
+                                    });
+                                }, false);
+                            })();
+                        </script>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>BROWSER DEFAULT</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off">
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="validationDefault01">First name</label>
+                                    <input type="text" class="form-control" id="validationDefault01" value="Mark" required>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="validationDefault02">Last name</label>
+                                    <input type="text" class="form-control" id="validationDefault02" value="Otto" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="validationDefault03">City</label>
+                                    <input type="text" class="form-control" id="validationDefault03" required>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="validationDefault04">State</label>
+                                    <select class="custom-select" id="validationDefault04" required>
+                                        <option selected disabled value="">Choose...</option>
+                                        <option>...</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="validationDefault05">Zip</label>
+                                    <input type="text" class="form-control" id="validationDefault05" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                                    <label class="form-check-label" for="invalidCheck2">Agree to terms and conditions</label>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>SERVER SIDE</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui" autocomplete="off">
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="validationServer01">First name</label>
+                                    <input type="text" class="form-control is-valid" id="validationServer01" value="Mark" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="validationServer02">Last name</label>
+                                    <input type="text" class="form-control is-valid" id="validationServer02" value="Otto" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="validationServer03">City</label>
+                                    <input type="text" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
+                                    <div id="validationServer03Feedback" class="invalid-feedback">Please provide a valid city.</div>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="validationServer04">State</label>
+                                    <select class="custom-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+                                        <option selected disabled value="">Choose...</option>
+                                        <option>...</option>
+                                    </select>
+                                    <div id="validationServer04Feedback" class="invalid-feedback">Please select a valid state.</div>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="validationServer05">Zip</label>
+                                    <input type="text" class="form-control is-invalid" id="validationServer05" aria-describedby="validationServer05Feedback" required>
+                                    <div id="validationServer05Feedback" class="invalid-feedback">Please provide a valid zip.</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
+                                    <label class="form-check-label" for="invalidCheck3">Agree to terms and conditions</label>
+                                    <div  id="invalidCheck3Feedback" class="invalid-feedback">You must agree before submitting.</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>SUPPORTED ELEMENTS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui was-validated" autocomplete="off">
+                            <div class="form-group">
+                                <label for="validationTextarea">Textarea</label>
+                                <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Required example textarea" required></textarea>
+                                <div class="invalid-feedback">Please enter a message in the textarea.</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
+                                    <label class="custom-control-label" for="customControlValidation1">Check this custom checkbox</label>
+                                    <div class="invalid-feedback">Example invalid feedback text</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
+                                    <label class="custom-control-label" for="customControlValidation2">Toggle this custom radio</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
+                                    <label class="custom-control-label" for="customControlValidation3">Or toggle this other custom radio</label>
+                                    <div class="invalid-feedback">More example invalid feedback text</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select class="custom-select" required>
+                                    <option value="">Choose...</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                <div class="invalid-feedback">Example invalid custom select feedback</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group is-invalid">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="validatedInputGroupPrepend">@</span>
+                                    </div>
+                                    <input type="text" class="form-control is-invalid" aria-describedby="validatedInputGroupPrepend" required>
+                                </div>
+                                <div class="invalid-feedback">Example invalid input group feedback</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group is-invalid">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="validatedInputGroupSelect">Options</label>
+                                    </div>
+                                    <select class="custom-select" id="validatedInputGroupSelect" required>
+                                        <option value="">Choose...</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                                <div class="invalid-feedback">Example invalid input group feedback</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group is-invalid">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="validatedInputGroupCustomFile" required>
+                                        <label class="custom-file-label" for="validatedInputGroupCustomFile">Choose file...</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button">Button</button>
+                                    </div>
+                                </div>
+                                <div class="invalid-feedback">Example invalid input group feedback</div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="componentsbox-subtitle"><h4>TOOLTIPS</h4></div>
+                    <div class="componentsbox-subcontent">
+                        <form class="siteformui needs-validation" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="validationTooltip01">First name</label>
+                                    <input type="text" class="form-control" id="validationTooltip01" value="Mark" required>
+                                    <div class="valid-tooltip">Looks good!</div>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="validationTooltip02">Last name</label>
+                                    <input type="text" class="form-control" id="validationTooltip02" value="Otto" required>
+                                    <div class="valid-tooltip">Looks good!</div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-lg">
+                                    <label for="validationTooltip03">City</label>
+                                    <input type="text" class="form-control" id="validationTooltip03" required>
+                                    <div class="invalid-tooltip">Please provide a valid city.</div>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="validationTooltip04">State</label>
+                                    <select class="custom-select" id="validationTooltip04" required>
+                                        <option selected disabled value="">Choose...</option>
+                                        <option>...</option>
+                                    </select>
+                                    <div class="invalid-tooltip">Please select a valid state.</div>
+                                </div>
+                                <div class="form-group col-lg">
+                                    <label for="validationTooltip05">Zip</label>
+                                    <input type="text" class="form-control" id="validationTooltip05" required>
+                                    <div class="invalid-tooltip">Please provide a valid zip.</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Form Bootstrap Validation End -->
+
+        </div>
+    </div>
+    <!-- Form UI Soft End -->
+
+</section>
+<!-- Component End -->
+
+<!-- Component Start -->
+<section class="sitecomponents sitecomponents-formui compbgdark">
+
+</section>
+<!-- Component End -->
+
+<!-- JavaScript Start -->
+<script id="script-custom-app" src="../assets/dist/js/custom-app.js"></script>
+<!-- JavaScript End -->
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+
+/* Components Variables Settings */
+$componentlayout-clr-white:                     $site-clr-white;
+
+$componentlayout-softbg-text-clr:               $site-clr-text-dark-pri;
+$componentlayout-softbg-bg-clr:                 $site-clr-white;
+$componentlayout-softbg-border-clr:             $site-brdr-light;
+
+$componentlayout-darkbg-text-clr:               $site-clr-text-soft-pri;
+$componentlayout-darkbg-bg-clr:                 $site-clr-black;
+$componentlayout-darkbg-border-clr:             $site-brdr-dark;
+/* Components Variables Settings */
+
+
+.sitecomponents{
+  padding: 70px 0;
+
+  &.compbgsoft{
+    background-color: $componentlayout-softbg-bg-clr;
+
+    .componentsbox{
+      &-headtitle h3{
+        color: $componentlayout-softbg-text-clr;
+      }
+      &-content{
+        background-color: transparentize($componentlayout-softbg-border-clr, 0.95);
+        border-color: $componentlayout-softbg-border-clr;
+      }
+      &-subtitle{
+        background-color: transparentize($componentlayout-softbg-border-clr, 0.75);
+        border-color: $componentlayout-softbg-border-clr;
+
+        h4{
+          color: $componentlayout-softbg-text-clr;
+        }
+      }
+      &-subcontent{background-color: $componentlayout-softbg-bg-clr; border-color: $componentlayout-softbg-border-clr;}
+    }
+
+  }
+  &.compbgdark{
+    background-color: $componentlayout-darkbg-bg-clr;
+
+    .componentsbox{
+      &-headtitle h3{
+        color: $componentlayout-darkbg-text-clr;
+      }
+      &-content{
+        background-color: transparentize($componentlayout-darkbg-border-clr, 0.95);
+        border-color: $componentlayout-darkbg-border-clr;
+      }
+      &-subtitle{
+        background-color: transparentize($componentlayout-darkbg-border-clr, 0.75);
+        border-color: $componentlayout-darkbg-border-clr;
+
+        h4{
+          color: $componentlayout-darkbg-text-clr;
+        }
+      }
+      &-subcontent{
+        background-color: $componentlayout-darkbg-bg-clr;
+        border-color: $componentlayout-darkbg-border-clr;
+      }
+    }
+  }
+
+  .componentsbox{
+
+    &-wrapper{
+      .componentsbox:last-child{
+        .componentsbox-content{margin-bottom: 0;}
+      }
+    }
+
+    &-headtitle{
+      h3{
+        font-size: 1.6rem;
+      }
+    }
+
+    &-content{
+      background-color: transparent;
+      border: 1px solid transparent;
+      padding: 15px;
+      margin-bottom: 40px;
+    }
+
+    &-subtitle{
+      background-color: transparent;
+      padding: 10px 20px;
+      margin-top: 15px;
+      border: 1px solid transparent;
+      border-bottom-width: 0;
+
+      &:first-child{margin-top: 0;}
+
+      h4{
+        font-size: 1.2rem;
+        margin: 0;
+      }
+    }
+
+    &-subcontent{
+      background-color: transparent;
+      padding: 20px;
+      border: 1px solid transparent;
+      border-top-width: 0;
+    }
+
+  }
+
+  &-formui{}
+
+  &-buttons{}
+
+  &-alerts{}
+}
