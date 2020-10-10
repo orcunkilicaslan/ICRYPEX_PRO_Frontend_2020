@@ -2,8 +2,7 @@
 $site-custom-font-family: ();
 $site-custom-font-family: map-merge(
                 (
-                        "default":              $site-font-family-default,
-                        //"cocogothicheavy":      $site-font-family-cocogothic-heavy
+                        "default":              $site-font-family-default
                 ),
                 $site-custom-font-family
 );

@@ -4,7 +4,7 @@
 
 /* Bootstrap Grid Columns Settings */
 $bootstrap-grid-columns:          12;
-$bootstrap-grid-gutter-width:     30px;
+$bootstrap-grid-gutter-width:     20px;
 $bootstrap-grid-row-columns:      6;
 $bootstrap-container-max-widths:(
         xs: 480px,
@@ -52,15 +52,15 @@ $bootstrap-green:             $var-custom-clr-green;
 $bootstrap-teal:              $var-custom-clr-teal;
 $bootstrap-cyan:              $var-custom-clr-cyan;
 $bootstrap-primary:           $bootstrap-blue;
-$bootstrap-secondary:         $bootstrap-gray-600;
+$bootstrap-secondary:         $var-custom-clr-secondary;
 $bootstrap-success:           $bootstrap-green;
 $bootstrap-info:              $bootstrap-cyan;
-$bootstrap-warning:           $bootstrap-yellow;
+$bootstrap-warning:           $bootstrap-orange;
 $bootstrap-danger:            $bootstrap-red;
 $bootstrap-light:             $bootstrap-gray-100;
 $bootstrap-dark:              $bootstrap-gray-800;
-$bootstrap-body-bg:           $bootstrap-white;
-$bootstrap-body-color:        $bootstrap-gray-900;
+$bootstrap-body-bg:           $var-custom-body-bg;
+$bootstrap-body-color:        $var-custom-body-color;
 /* Bootstrap Colors Settings */
 
 /* Bootstrap General Settings */
@@ -209,19 +209,19 @@ $bootstrap-table-border-level:          -6;
 /* Bootstrap Table Settings */
 
 /* Bootstrap Button Settings */
-$bootstrap-input-btn-padding-y:         .375rem;
-$bootstrap-input-btn-padding-x:         .75rem;
+$bootstrap-input-btn-padding-y:         0.375rem;
+$bootstrap-input-btn-padding-x:         0.75rem;
 $bootstrap-input-btn-font-family:       $var-custom-input-btn-font-family;
 $bootstrap-input-btn-font-size:         $bootstrap-font-size-base;
 $bootstrap-input-btn-line-height:       $var-custom-input-btn-line-height;
 $bootstrap-input-btn-focus-width:       $var-custom-input-btn-focus-width;
 $bootstrap-input-btn-focus-color:       rgba($bootstrap-component-active-bg, .25);
 $bootstrap-input-btn-focus-box-shadow:  0 0 0 $bootstrap-input-btn-focus-width $bootstrap-input-btn-focus-color;
-$bootstrap-input-btn-padding-y-sm:      .25rem;
-$bootstrap-input-btn-padding-x-sm:      .5rem;
+$bootstrap-input-btn-padding-y-sm:      0.19rem;
+$bootstrap-input-btn-padding-x-sm:      0.6rem;
 $bootstrap-input-btn-font-size-sm:      $bootstrap-font-size-sm;
 $bootstrap-input-btn-line-height-sm:    $var-custom-input-btn-line-height-sm;
-$bootstrap-input-btn-padding-y-lg:      .5rem;
+$bootstrap-input-btn-padding-y-lg:      0.5rem;
 $bootstrap-input-btn-padding-x-lg:      1rem;
 $bootstrap-input-btn-font-size-lg:      $bootstrap-font-size-lg;
 $bootstrap-input-btn-line-height-lg:    $var-custom-input-btn-line-height-lg;
