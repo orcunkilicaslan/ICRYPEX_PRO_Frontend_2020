@@ -1,6 +1,50 @@
 /* Components Variables Settings */
-$headlogo-clr-black:              $site-clr-text-dark-pri;
+$headbgclr:                       $site-clr-darkblue;
 $headlogo-clr-red:                $site-clr-red;
 /* Components Variables Settings */
 
-.header{}
+.header{
+  background-color: $headbgclr;
+  padding: 10px 0;
+  //min-height: 44px;
+
+  &-left{
+    @include flexbox-display-flex();
+    @include flexbox-align-items(center);
+
+    .headlogo{
+      background-image: url(#{$path-img-url}/header/header_pro_logo.svg);
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: left center;
+      width: 150px;
+      height: 24px;
+      margin-right: 15px;
+      display: inline-block;
+      text-indent: -9999px;
+    }
+
+    .btn{
+      min-width: 105px;
+      margin-right: 5px;
+
+      &:last-child{margin-right: 0;}
+    }
+
+  }
+
+  &-center{}
+
+  &-right{
+    @include flexbox-display-flex();
+    @include flexbox-align-items(center);
+
+    .btn{
+      min-width: 105px;
+      margin-right: 5px;
+
+      &:last-child{margin-right: 0;}
+    }
+  }
+
+}

@@ -13,7 +13,7 @@ $var-custom-clr-gray-600:                         $global-clr-gray-600;
 $var-custom-clr-gray-700:                         $global-clr-gray-700;
 $var-custom-clr-gray-800:                         $global-clr-gray-800;
 $var-custom-clr-gray-900:                         $global-clr-gray-900;
-$var-custom-clr-black:                            $global-clr-black;
+$var-custom-clr-black:                            $site-clr-darkblack;
 $var-custom-clr-blue:                             $global-clr-blue;
 $var-custom-clr-indigo:                           $global-clr-indigo;
 $var-custom-clr-purple:                           $global-clr-purple;
@@ -24,9 +24,10 @@ $var-custom-clr-yellow:                           $global-clr-yellow;
 $var-custom-clr-green:                            $global-clr-green;
 $var-custom-clr-teal:                             $global-clr-teal;
 $var-custom-clr-cyan:                             $global-clr-cyan;
-$var-custom-body-bg:                              $var-custom-clr-white;
-$var-custom-body-color:                           $var-custom-clr-gray-900;
-$var-custom-link-color:                           $global-link-color;
+$var-custom-clr-secondary:                        $global-clr-secondary;
+$var-custom-body-bg:                              $var-custom-clr-black;
+$var-custom-body-color:                           $site-clr-text-soft-sec;
+$var-custom-link-color:                           $global-clr-white;
 /* Site Custom Color Variables Settings */
 
 /* Site Custom Common Padding and Border Radius Sizes Settings */
@@ -37,7 +38,7 @@ $var-custom-border-width:                         1px;
 $var-custom-border-color:                         $var-custom-clr-gray-300;
 $var-custom-border-radius:                        0rem;
 $var-custom-border-radius-lg:                     0rem;
-$var-custom-border-radius-sm:                     0rem;
+$var-custom-border-radius-sm:                     0.188rem;
 $var-custom-rounded-pill:                         50rem;
 $var-custom-box-shadow-sm:                        0 .125rem .25rem rgba($var-custom-clr-black, .075);
 $var-custom-box-shadow:                           0 .5rem 1rem rgba($var-custom-clr-black, .15);
@@ -46,9 +47,9 @@ $var-custom-box-shadow-lg:                        0 1rem 3rem rgba($var-custom-c
 
 /* Site Custom Typography Settings */
 $var-custom-font-family-base:                     $site-font-family-default;
-$var-custom-font-size-base:                       1rem; // Assumes the browser default, typically `16px`
+$var-custom-font-size-base:                       1rem; // Assumes the browser default, typically `16px` // https://nekocalc.com/px-to-rem-converter
 $var-custom-font-size-lg:                         $var-custom-font-size-base * 1.1;
-$var-custom-font-size-sm:                         $var-custom-font-size-base * .9;
+$var-custom-font-size-sm:                         $var-custom-font-size-base * 0.813;
 $var-custom-h1-font-size:                         $var-custom-font-size-base * 2.5;
 $var-custom-h2-font-size:                         $var-custom-font-size-base * 2;
 $var-custom-h3-font-size:                         $var-custom-font-size-base * 1.75;
@@ -83,7 +84,7 @@ $var-custom-small-font-size:                      80%;
 /* Site Custom Button Settings */
 $var-custom-input-btn-font-family:                $site-font-family-default;
 $var-custom-input-btn-line-height:                1.65;
-$var-custom-input-btn-line-height-sm:             1.67;
+$var-custom-input-btn-line-height-sm:             1.5;
 $var-custom-input-btn-line-height-lg:             1.59;
 $var-custom-input-btn-focus-width:                0rem;
 $var-custom-btn-font-weight:                      $var-custom-font-weight-bold;

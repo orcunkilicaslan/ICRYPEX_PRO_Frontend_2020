@@ -1,22 +1,21 @@
 /* Site General Color Settings */
 $site-clr-white:                #FFFFFF;
 $site-clr-black:                #000000;
-$site-clr-blue:                 #5598EA;
+$site-clr-blue:                 #388CFF;
 $site-clr-cyan:                 #17A2B8;
-$site-clr-green:                #72B34D;
-$site-clr-red:                  #DE0000;
-$site-clr-orange:               #FF9300;
+$site-clr-green:                #15B583;
+$site-clr-red:                  #FF4052;
+$site-clr-orange:               #D66F49;
 $site-clr-yellow:               #FFD83A;
 $site-clr-grylight:             #F1F6FE;
 /* Site General Color Settings */
 
 /* Site Main Settings */
-$site-font-family-cocogothic-heavy:     'CocoGothicHeavy';
 $site-font-family-default:              'Barlow Semi Condensed', sans-serif;
 $site-clr-text-dark-pri:                #333E63;
 $site-clr-text-dark-sec:                #5C6582;
-$site-clr-text-soft-pri:                #505050;
-$site-clr-text-soft-sec:                #303f56;
+$site-clr-text-soft-pri:                #FFFFFF;
+$site-clr-text-soft-sec:                #687CA2;
 /* Site Main Color Settings */
 
 /* Site Border Color Settings */
@@ -25,7 +24,7 @@ $site-brdr-light-focus:                 darken($site-brdr-light, 15%);
 $site-brdr-light-opacity:               #F2F5F9;
 $site-brdr-light-input:                 $site-brdr-light;
 $site-brdr-light-input-focus:           $site-brdr-light-focus;
-$site-brdr-dark:                        #e0e5ec;
+$site-brdr-dark:                        #2A3553;
 $site-brdr-dark-focus:                  darken($site-brdr-dark, 15%);
 $site-brdr-dark-opacity:                #F2F5F9;
 $site-brdr-dark-input:                  $site-brdr-dark;
@@ -33,6 +32,8 @@ $site-brdr-dark-input-focus:            $site-brdr-dark-focus;
 /* Site Border Color Settings */
 
 /* Site Section Background Color */
+$site-clr-darkblack:                    #0A0C14;
+$site-clr-darkblue:                     #182239;
 /* Site Section Background Color */
 
 /* Site Main Path Settings */
@@ -64,6 +65,7 @@ $global-clr-gray-700:           #495057;
 $global-clr-gray-800:           #343a40;
 $global-clr-gray-900:           #212529;
 $global-clr-black:              $site-clr-black;
+$global-clr-secondary:          $site-clr-darkblue;
 $global-clr-blue:               #007bff;
 $global-clr-indigo:             #6610f2;
 $global-clr-purple:             #6f42c1;
@@ -75,10 +77,10 @@ $global-clr-green:              $site-clr-green;
 $global-clr-teal:               #20c997;
 $global-clr-cyan:               #17a2b8;
 $global-btn-primary:            $global-clr-blue;
-$global-btn-secondary:          $global-clr-gray-600;
+$global-btn-secondary:          $global-clr-secondary;
 $global-btn-success:            $global-clr-green;
 $global-btn-info:               $site-clr-cyan;
-$global-btn-warning:            $global-clr-yellow;
+$global-btn-warning:            $global-clr-orange;
 $global-btn-danger:             $global-clr-red;
 $global-btn-light:              $global-clr-gray-100;
 $global-btn-dark:               $global-clr-gray-800;
