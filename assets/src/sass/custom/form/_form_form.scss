@@ -1,4 +1,4 @@
-/* Form UI New */
+/* Form UI Soft */
 .siteformui{
 
   form{}
@@ -139,27 +139,41 @@
       &::after{display: none;}
     }
   }
+}
+/* Form UI Soft */
 
-  /* Custom Start */
-  .form-group{
-    label{
-      margin-bottom: 0;
-      position: relative;
-      bottom: -5px;
+/* Form UI Dark */
+
+
+
+.siteformui.formdark{
+
+  #{$forminputclassname}-group{
+
+    &-text{
+      color: $site-clr-white;
+      background-color: $site-clr-darkblue-800;
+      border-color: $site-brdr-dark;
+    }
+
+  }
+
+  #{$formclassname}-control{
+    color: $site-clr-text-soft-sec;
+    background-color: $site-clr-darkblue-900;
+    border-color: $site-brdr-dark;
+  }
+
+  #{$formcustomclassname}-control-label{
+    &::before{
+      background-color: $site-clr-darkblue-900;
+      border-color: $site-brdr-dark;
     }
   }
 
-  input.form-control,
-  textarea.form-control,
-  select.custom-select{
-    background-color: transparent;
-    border-top-width: 0;
-    border-left-width: 0;
-    border-right-width: 0;
-    padding-left: 0;
-    padding-right: 0;
+  #{$formcustomclassname}-switch #{$formcustomclassname}-control-input:checked ~ #{$formcustomclassname}-control-label::after{
+    background-color: $site-clr-green;
   }
-  /* Custom End */
 
 }
-/* Form UI New */
+/* Form UI Dark */
