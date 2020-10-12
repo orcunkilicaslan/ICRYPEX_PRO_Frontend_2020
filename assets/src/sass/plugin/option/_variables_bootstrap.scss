@@ -4,7 +4,7 @@
 
 /* Bootstrap Grid Columns Settings */
 $bootstrap-grid-columns:          12;
-$bootstrap-grid-gutter-width:     20px;
+$bootstrap-grid-gutter-width:     5px;
 $bootstrap-grid-row-columns:      6;
 $bootstrap-container-max-widths:(
         xs: 480px,
@@ -70,7 +70,7 @@ $bootstrap-enable-rounded:                                  true;
 $bootstrap-enable-shadows:                                  false;
 $bootstrap-enable-gradients:                                false;
 $bootstrap-enable-transitions:                              true;
-$bootstrap-enable-prefers-reduced-motion-media-query:       true;
+$bootstrap-enable-prefers-reduced-motion-media-query:       false;
 $bootstrap-enable-hover-media-query:                        false; // Deprecated, no longer affects any compiled CSS
 $bootstrap-enable-grid-classes:                             true;
 $bootstrap-enable-pointer-cursor-for-buttons:               true;

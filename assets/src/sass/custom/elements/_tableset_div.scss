@@ -1,0 +1,70 @@
+
+.sitetablediv{
+  font-size: 0.75rem;
+  line-height: 1;
+
+  .tbl{
+
+    &-tr{
+      @include flexbox-display-flex();
+      @include flexbox-align-items(center);
+      justify-content: space-between;
+      @include border-radius($var-custom-border-radius);
+      @include transition-multiple(color 0.15s ease-in-out, background-color 0.15s ease-in-out);
+    }
+
+    &-th,
+    &-td{
+      padding-left: 4px;
+      padding-right: 4px;
+      @include transition-multiple(color 0.15s ease-in-out, background-color 0.15s ease-in-out);
+    }
+
+    &-th.fxd,
+    &-td.fxd{
+      @include flexbox-flex-basis(0);
+      @include flexbox-flex-grow(1);
+      max-width: 100%;
+    }
+
+    &-th.aut,
+    &-td.aut{
+      @include flexbox-flex(0 0 auto);
+      width: auto;
+      max-width: 100%;
+    }
+
+    &-th{
+      color: $site-clr-white;
+      padding-top: 7px;
+      padding-bottom: 10px;
+    }
+
+    &-td{
+      color: $site-clr-text-soft-sec;
+      padding-top: 3px;
+      padding-bottom: 5px;
+    }
+
+    &-striped{
+      .tbl-tr:nth-child(odd){
+        background-color: $site-clr-darkblue-600;
+      }
+    }
+
+    &-thead{}
+
+    &-tbody{
+      .tbl-tr:hover{
+        background-color: $site-clr-darkblue-800;
+        cursor: pointer;
+
+        .tbl-td{
+          color: $site-clr-white;
+        }
+      }
+    }
+
+  }
+
+}

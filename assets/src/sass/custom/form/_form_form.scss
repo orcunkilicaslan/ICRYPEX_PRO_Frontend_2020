@@ -1,3 +1,4 @@
+
 /* Form UI Soft */
 .siteformui{
 
@@ -143,16 +144,13 @@
 /* Form UI Soft */
 
 /* Form UI Dark */
-
-
-
 .siteformui.formdark{
 
   #{$forminputclassname}-group{
 
     &-text{
       color: $site-clr-white;
-      background-color: $site-clr-darkblue-800;
+      background-color: $site-clr-darkblue-600;
       border-color: $site-brdr-dark;
     }
 
@@ -160,13 +158,13 @@
 
   #{$formclassname}-control{
     color: $site-clr-text-soft-sec;
-    background-color: $site-clr-darkblue-900;
+    background-color: $site-clr-darkblue-700;
     border-color: $site-brdr-dark;
   }
 
   #{$formcustomclassname}-control-label{
     &::before{
-      background-color: $site-clr-darkblue-900;
+      background-color: $site-clr-darkblue-700;
       border-color: $site-brdr-dark;
     }
   }

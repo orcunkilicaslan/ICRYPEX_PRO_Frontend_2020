@@ -1,0 +1,95 @@
+
+.marketdata{
+
+  .tab-content{
+    padding: 5px 0;
+  }
+
+  &-filter{
+    padding: 5px 10px;
+
+    @include placeholder{
+      color: $site-clr-text-soft-sec;
+    }
+
+    .btn-secondary,
+    .form-control{
+      font-size: 0.75rem;
+    }
+
+    .btn-secondary{
+      color: $site-clr-text-soft-sec;
+
+      &:hover,
+      &:focus,
+      &:not(:disabled):not(.disabled):active,
+      &:not(:disabled):not(.disabled).active{
+        color: $site-clr-white;
+
+        .filterfavico path{fill: $site-clr-white;}
+      }
+    }
+
+    .filterfavico{
+      position: relative;
+      top: -2px;
+
+      path{
+        fill: $site-clr-text-soft-sec;
+      }
+    }
+
+    .col-auto{
+      width: 80px;
+    }
+  }
+
+  &-table{
+    padding: 5px 10px;
+
+    .sitetablediv{
+
+      .tbl-thead .tbl-th{padding-top: 0;}
+
+      .fav[class*="tbl"]{width: 15px; text-align: center; padding-right: 0;}
+      .sym[class*="tbl"]{text-align: left;}
+      .buy[class*="tbl"],
+      .sll[class*="tbl"],
+      .vol[class*="tbl"],
+      .chg[class*="tbl"]{text-align: right;}
+      .per[class*="tbl"]{width: 15px; text-align: center;}
+
+
+      .tablefavico{
+        display: block;
+
+        svg{
+          position: relative;
+          top: -1px;
+
+          path{
+            fill: $site-clr-text-soft-sec;
+          }
+        }
+
+        &.faved svg path{fill: $site-clr-blue;}
+      }
+
+      .mdper{
+        width: 7px;
+        position: relative;
+        top: -1px;
+
+        .perline{opacity: 0; fill: $site-clr-text-soft-sec;}
+        .perup{opacity: 0; fill: $site-clr-green;}
+        .perdown{opacity: 0; fill: $site-clr-red;}
+        &-line .perline{opacity: 1;}
+        &-up .perup{opacity: 1;}
+        &-down .perdown{opacity: 1;}
+      }
+    }
+  }
+
+  &-tabsymbol{}
+
+}

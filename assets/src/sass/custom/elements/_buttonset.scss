@@ -8,5 +8,13 @@
 
   &-secondary{
     border-color: $site-brdr-dark;
+
+    &:hover,
+    &:focus,
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active{
+      background-color: $site-brdr-dark;
+      border-color: $site-brdr-dark;
+    }
   }
 }
