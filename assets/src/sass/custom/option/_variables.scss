@@ -15,7 +15,7 @@ $site-font-family-default:              'Barlow Semi Condensed', sans-serif;
 $site-clr-text-dark-pri:                #333E63;
 $site-clr-text-dark-sec:                #5C6582;
 $site-clr-text-soft-pri:                #FFFFFF;
-$site-clr-text-soft-sec:                #687CA2;
+$site-clr-text-soft-sec:                #92A4C5;
 /* Site Main Color Settings */
 
 /* Site Border Color Settings */
@@ -24,7 +24,7 @@ $site-brdr-light-focus:                 darken($site-brdr-light, 15%);
 $site-brdr-light-opacity:               #F2F5F9;
 $site-brdr-light-input:                 $site-brdr-light;
 $site-brdr-light-input-focus:           $site-brdr-light-focus;
-$site-brdr-dark:                        #2A3553;
+$site-brdr-dark:                        #3B486B;
 $site-brdr-dark-focus:                  darken($site-brdr-dark, 15%);
 $site-brdr-dark-opacity:                #F2F5F9;
 $site-brdr-dark-input:                  $site-brdr-dark;
@@ -33,7 +33,8 @@ $site-brdr-dark-input-focus:            $site-brdr-dark-focus;
 
 /* Site Section Background Color */
 $site-clr-darkblack:                    #0A0C14;
-$site-clr-darkblue:                     #182239;
+$site-clr-darkblue-900:                 #182239;
+$site-clr-darkblue-800:                 #202C46;
 /* Site Section Background Color */
 
 /* Site Main Path Settings */
@@ -65,7 +66,7 @@ $global-clr-gray-700:           #495057;
 $global-clr-gray-800:           #343a40;
 $global-clr-gray-900:           #212529;
 $global-clr-black:              $site-clr-black;
-$global-clr-secondary:          $site-clr-darkblue;
+$global-clr-secondary:          $site-clr-darkblue-900;
 $global-clr-blue:               #007bff;
 $global-clr-indigo:             #6610f2;
 $global-clr-purple:             #6f42c1;
