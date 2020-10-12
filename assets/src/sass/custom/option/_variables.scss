@@ -10,13 +10,12 @@ $site-clr-yellow:               #FFD83A;
 $site-clr-grylight:             #F1F6FE;
 /* Site General Color Settings */
 
-/* Site Main Settings */
-$site-font-family-default:              'Barlow Semi Condensed', sans-serif;
-$site-clr-text-dark-pri:                #333E63;
-$site-clr-text-dark-sec:                #5C6582;
-$site-clr-text-soft-pri:                #FFFFFF;
-$site-clr-text-soft-sec:                #92A4C5;
-/* Site Main Color Settings */
+/* Site Section Background Color */
+$site-clr-darkblue-900:                 #0A0C14;
+$site-clr-darkblue-800:                 #131B31;
+$site-clr-darkblue-700:                 #182239;
+$site-clr-darkblue-600:                 #202C46;
+/* Site Section Background Color */
 
 /* Site Border Color Settings */
 $site-brdr-light:                       #e0e5ec;
@@ -31,11 +30,13 @@ $site-brdr-dark-input:                  $site-brdr-dark;
 $site-brdr-dark-input-focus:            $site-brdr-dark-focus;
 /* Site Border Color Settings */
 
-/* Site Section Background Color */
-$site-clr-darkblack:                    #0A0C14;
-$site-clr-darkblue-900:                 #182239;
-$site-clr-darkblue-800:                 #202C46;
-/* Site Section Background Color */
+/* Site Main Settings */
+$site-font-family-default:              'Barlow Semi Condensed', sans-serif;
+$site-clr-text-dark-pri:                #333E63;
+$site-clr-text-dark-sec:                #5C6582;
+$site-clr-text-soft-pri:                #FFFFFF;
+$site-clr-text-soft-sec:                #92A4C5;
+/* Site Main Color Settings */
 
 /* Site Main Path Settings */
 $path-assets-url:         "../../";
@@ -66,7 +67,7 @@ $global-clr-gray-700:           #495057;
 $global-clr-gray-800:           #343a40;
 $global-clr-gray-900:           #212529;
 $global-clr-black:              $site-clr-black;
-$global-clr-secondary:          $site-clr-darkblue-900;
+$global-clr-secondary:          $site-clr-darkblue-700;
 $global-clr-blue:               #007bff;
 $global-clr-indigo:             #6610f2;
 $global-clr-purple:             #6f42c1;

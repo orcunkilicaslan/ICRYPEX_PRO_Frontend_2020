@@ -1,73 +1,67 @@
+/* Tabs UI Soft */
 .sitetabs{
+
+  &.nav{
+    border-bottom-width: 0;
+  }
 
   .nav{
 
-    &-center{
-      @include flexbox-justify-content(center);
-    }
-
-    &-space-between{
-      @include flexbox-justify-content(space-between);
-
-      .nav-item{
-        @include flexbox-flex-basis(0);
-        @include flexbox-flex-grow(1);
-        max-width: 100%;
-      }
-    }
-
-    &-tabs{
-      background-color: $site-clr-grylight;
-      padding: 6px;
-      margin-bottom: 20px;
-      overflow: hidden;
-      border-bottom: none;
-      @include border-radius(100px);
-
-      > li{
-        margin: 0 5px;
-
-        &:first-child{margin-left: 0;}
-        &:last-child{margin-right: 0;}
-      }
-    }
-
     &-item{
-      text-align: center;
+      font-size: 0.75rem;
+
+      &:first-child .nav-link{border-left-width: 0;}
+      &:last-child .nav-link{border-right-width: 0;}
+
+      &.show{
+        .nav-link{}
+      }
     }
 
     &-link{
-      color: $site-clr-text-dark-sec;
-      background-color: $site-clr-grylight;
-      @include responsive-font-size(1rem);
-      font-weight: 500;
-      padding: 20px 5px;
-      line-height: 1;
-      border: none;
-      @include border-radius(100px);
-      @include transition-multiple(background-color 0.15s ease-in-out, border-color 0.1s ease-in-out, color 0.15s ease-in-out);
+      border-top-width: 0 !important;
 
-      @include BootstrapMaxWidthResponsive(1k){
-        font-size: 16px;
-      }
-      @include BootstrapMaxWidthResponsive(hd){
-        font-size: 15px;
-        padding: 18px 5px;
-      }
-      @include BootstrapMaxWidthResponsive(xl){
-        padding: 15px 5px;
-      }
-
-      &:hover{
-        color: $site-clr-text-dark-pri;
-        background-color: transparentize($site-clr-white, 0.75);
-      }
-
-      &.active{
-        color: $site-clr-red;
-        background-color: $site-clr-white;
-      }
+      &.active{}
     }
+
+  }
+
+  &.tab-content{
+    background-color: $site-clr-white;
+    @include border-radii(0,0,$var-custom-border-radius,$var-custom-border-radius);
   }
 
 }
+/* Tabs UI Soft */
+
+/* Tabs UI Dark */
+.sitetabs.tabsdark{
+
+  .nav{
+
+    &-item{
+      &.show{
+        .nav-link{}
+      }
+    }
+
+    &-link{
+      color: #687CA2;
+      background-color: #131B31;
+      border-color: #0A0C14;
+
+      &.active{
+        color: white;
+        background-color: #182239;
+        border-color: transparent transparent #182239;
+      }
+    }
+
+  }
+
+  &.tab-content{
+    background-color: $site-clr-darkblue-700;
+  }
+
+}
+/* Tabs UI Dark */

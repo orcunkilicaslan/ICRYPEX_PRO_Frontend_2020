@@ -20,9 +20,13 @@
 
             <!-- Head Left -->
             <div class="header-left col-auto">
-                <a class="headlogo" href="Home_Page.html" title="ICRYPEX PRO" rel="bookmark">ICRYPEX PRO</a>
-                <a class="btn btn-sm btn-secondary" href="#" title="Kolay AL-Sat" rel="bookmark">Kolay AL-Sat</a>
-                <a class="btn btn-sm btn-primary" href="#" title="PRO Görünüm" rel="bookmark">PRO Görünüm</a>
+                <div class="header-left-logo">
+                    <a class="headlogo" href="Home_Page.html" title="ICRYPEX PRO" rel="bookmark">ICRYPEX PRO</a>
+                </div>
+                <div class="header-left-btn">
+                    <a class="btn btn-sm btn-secondary" href="#" title="Kolay AL-Sat" rel="bookmark">Kolay AL-Sat</a>
+                    <a class="btn btn-sm btn-primary" href="#" title="PRO Görünüm" rel="bookmark">PRO Görünüm</a>
+                </div>
             </div>
             <!-- Head Left -->
 
@@ -58,14 +62,16 @@
 
             <!-- Head Right -->
             <div class="header-right col-auto">
-                <div class="siteformui formdark">
+                <div class="header-right-theme siteformui formdark">
                     <div class="custom-control custom-switch">
                         <input id="headThemeColor" class="custom-control-input" type="checkbox" checked>
                         <label for="headThemeColor" class="custom-control-label"></label>
                     </div>
                 </div>
-                <a class="btn btn-sm btn-secondary" href="#" title="Üye Girişi" rel="bookmark">Üye Girişi</a>
-                <a class="btn btn-sm btn-success" href="#" title="Kayıt Ol" rel="bookmark">Kayıt Ol</a>
+                <div class="header-right-btn">
+                    <a class="btn btn-sm btn-secondary" href="#" title="Üye Girişi" rel="bookmark">Üye Girişi</a>
+                    <a class="btn btn-sm btn-success" href="#" title="Kayıt Ol" rel="bookmark">Kayıt Ol</a>
+                </div>
             </div>
             <!-- Head Right -->
 
@@ -73,6 +79,494 @@
     </div>
 </header>
 <!-- Header End -->
+
+<!-- Main Start -->
+<main class="main main-section">
+    <div class="container-fluid">
+        <div class="row row">
+
+            <!-- Main Left Slide Start -->
+            <div class="main-leftside col-auto">
+                <div class="marketdata">
+
+                    <!-- Tabs List -->
+                    <ul class="sitetabs tabsdark nav nav-tabs nav-justified" role="tablist">
+                        <li class="nav-item"><a class="nav-link active" href="#md_symbol" data-toggle="tab" role="tab" aria-selected="true">Sembol</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#md_detail" data-toggle="tab" role="tab" aria-selected="false">Detay</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#md_last" data-toggle="tab" role="tab" aria-selected="false">Son İşlemler</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#md_chart" data-toggle="tab" role="tab" aria-selected="false">Grafik</a></li>
+                    </ul>
+                    <!-- Tabs List -->
+
+                    <!-- Tabs Cont -->
+                    <div class="sitetabs tabsdark tab-content">
+
+                        <!-- Symbol -->
+                        <div id="md_symbol" class="marketdata-tabsymbol tab-pane fade show active" role="tabpanel">
+                            <!-- Filter -->
+                            <div class="marketdata-filter siteformui formdark row">
+                                <div class="btn-group btn-group-sm col" role="group">
+                                    <a class="btn btn-sm btn-secondary" href="#" title="Favorilerim" rel="bookmark"><svg class="filterfavico" xmlns="http://www.w3.org/2000/svg" width="12.045" height="11.384" viewBox="0 0 12.045 11.384"><path d="M22.4,26.394a.489.489,0,0,0,.506-.47.5.5,0,0,0,0-.072l-.41-3.473,2.4-2.576a.482.482,0,0,0-.028-.686A.494.494,0,0,0,24.63,19l-3.467-.689L19.43,15.259a.493.493,0,0,0-.668-.186.488.488,0,0,0-.189.186l-1.733,3.049L13.374,19a.484.484,0,0,0-.265.805l2.4,2.576-.41,3.473a.487.487,0,0,0,.43.539.5.5,0,0,0,.263-.041L19,24.889l3.213,1.461A.5.5,0,0,0,22.4,26.394Z" transform="translate(-12.979 -15.011)" /></svg></a>
+                                    <a class="btn btn-sm btn-secondary" href="#" title="TRY" rel="bookmark">TRY</a>
+                                    <a class="btn btn-sm btn-secondary" href="#" title="USD" rel="bookmark">USD</a>
+                                    <a class="btn btn-sm btn-secondary" href="#" title="USDT" rel="bookmark">USDT</a>
+                                    <a class="btn btn-sm btn-secondary active" href="#" title="Tümü" rel="bookmark">Tümü</a>
+                                </div>
+                                <div class="btn-group btn-group-sm col-auto" role="group">
+                                    <input class="form-control form-control-sm" type="text" placeholder="Arama" value="" />
+                                </div>
+                            </div>
+                            <!-- Filter -->
+                            <!-- Table -->
+                            <div class="marketdata-table">
+                                <div class="sitetablediv tabledark">
+                                    <div class="tbl-thead">
+                                        <div class="tbl-tr">
+                                            <div class="tbl-th aut fav"></div>
+                                            <div class="tbl-th fxd sym">Sembol</div>
+                                            <div class="tbl-th fxd buy">Alış</div>
+                                            <div class="tbl-th fxd sll">Satış</div>
+                                            <div class="tbl-th fxd vol">Hacim</div>
+                                            <div class="tbl-th fxd chg">Değişim</div>
+                                            <div class="tbl-th aut per"></div>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tbody tbl-striped">
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">BTC/TRY</div>
+                                            <div class="tbl-td fxd buy">3.63500</div>
+                                            <div class="tbl-td fxd sll">2.45300</div>
+                                            <div class="tbl-td fxd vol">10.23M</div>
+                                            <div class="tbl-td fxd chg">-2.22%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">BTC/USD</div>
+                                            <div class="tbl-td fxd buy">5.88721</div>
+                                            <div class="tbl-td fxd sll">1.095200</div>
+                                            <div class="tbl-td fxd vol">14.02M</div>
+                                            <div class="tbl-td fxd chg">+1.38%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">BTC/USDT</div>
+                                            <div class="tbl-td fxd buy">4.99102</div>
+                                            <div class="tbl-td fxd sll">4.05740</div>
+                                            <div class="tbl-td fxd vol">24.80M</div>
+                                            <div class="tbl-td fxd chg">+2.24%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">ETH/TRY</div>
+                                            <div class="tbl-td fxd buy">1.88932</div>
+                                            <div class="tbl-td fxd sll">3.94618</div>
+                                            <div class="tbl-td fxd vol">12.39M</div>
+                                            <div class="tbl-td fxd chg">+3.57%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">ETH/USD</div>
+                                            <div class="tbl-td fxd buy">5.99274</div>
+                                            <div class="tbl-td fxd sll">79.92020</div>
+                                            <div class="tbl-td fxd vol">2.460M</div>
+                                            <div class="tbl-td fxd chg">-1.56%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico faved" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">ETH/USDT</div>
+                                            <div class="tbl-td fxd buy">5.88192</div>
+                                            <div class="tbl-td fxd sll">14.88003</div>
+                                            <div class="tbl-td fxd vol">19.02M</div>
+                                            <div class="tbl-td fxd chg">+5.56%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-line" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">BTC/TRY</div>
+                                            <div class="tbl-td fxd buy">3.63500</div>
+                                            <div class="tbl-td fxd sll">2.45300</div>
+                                            <div class="tbl-td fxd vol">10.23M</div>
+                                            <div class="tbl-td fxd chg">-2.22%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">BTC/USD</div>
+                                            <div class="tbl-td fxd buy">5.88721</div>
+                                            <div class="tbl-td fxd sll">1.095200</div>
+                                            <div class="tbl-td fxd vol">14.02M</div>
+                                            <div class="tbl-td fxd chg">+1.38%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">BTC/USDT</div>
+                                            <div class="tbl-td fxd buy">4.99102</div>
+                                            <div class="tbl-td fxd sll">4.05740</div>
+                                            <div class="tbl-td fxd vol">24.80M</div>
+                                            <div class="tbl-td fxd chg">+2.24%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">ETH/TRY</div>
+                                            <div class="tbl-td fxd buy">1.88932</div>
+                                            <div class="tbl-td fxd sll">3.94618</div>
+                                            <div class="tbl-td fxd vol">12.39M</div>
+                                            <div class="tbl-td fxd chg">+3.57%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico faved" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">ETH/USD</div>
+                                            <div class="tbl-td fxd buy">5.99274</div>
+                                            <div class="tbl-td fxd sll">79.92020</div>
+                                            <div class="tbl-td fxd vol">2.460M</div>
+                                            <div class="tbl-td fxd chg">-1.56%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico faved" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">ETH/USDT</div>
+                                            <div class="tbl-td fxd buy">5.88192</div>
+                                            <div class="tbl-td fxd sll">14.88003</div>
+                                            <div class="tbl-td fxd vol">19.02M</div>
+                                            <div class="tbl-td fxd chg">+5.56%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-line" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">BTC/TRY</div>
+                                            <div class="tbl-td fxd buy">3.63500</div>
+                                            <div class="tbl-td fxd sll">2.45300</div>
+                                            <div class="tbl-td fxd vol">10.23M</div>
+                                            <div class="tbl-td fxd chg">-2.22%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">BTC/USD</div>
+                                            <div class="tbl-td fxd buy">5.88721</div>
+                                            <div class="tbl-td fxd sll">1.095200</div>
+                                            <div class="tbl-td fxd vol">14.02M</div>
+                                            <div class="tbl-td fxd chg">+1.38%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">BTC/USDT</div>
+                                            <div class="tbl-td fxd buy">4.99102</div>
+                                            <div class="tbl-td fxd sll">4.05740</div>
+                                            <div class="tbl-td fxd vol">24.80M</div>
+                                            <div class="tbl-td fxd chg">+2.24%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">ETH/TRY</div>
+                                            <div class="tbl-td fxd buy">1.88932</div>
+                                            <div class="tbl-td fxd sll">3.94618</div>
+                                            <div class="tbl-td fxd vol">12.39M</div>
+                                            <div class="tbl-td fxd chg">+3.57%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico faved" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">ETH/USD</div>
+                                            <div class="tbl-td fxd buy">5.99274</div>
+                                            <div class="tbl-td fxd sll">79.92020</div>
+                                            <div class="tbl-td fxd vol">2.460M</div>
+                                            <div class="tbl-td fxd chg">-1.56%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">ETH/USDT</div>
+                                            <div class="tbl-td fxd buy">5.88192</div>
+                                            <div class="tbl-td fxd sll">14.88003</div>
+                                            <div class="tbl-td fxd vol">19.02M</div>
+                                            <div class="tbl-td fxd chg">+5.56%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-line" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">BTC/TRY</div>
+                                            <div class="tbl-td fxd buy">3.63500</div>
+                                            <div class="tbl-td fxd sll">2.45300</div>
+                                            <div class="tbl-td fxd vol">10.23M</div>
+                                            <div class="tbl-td fxd chg">-2.22%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico faved" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">BTC/USD</div>
+                                            <div class="tbl-td fxd buy">5.88721</div>
+                                            <div class="tbl-td fxd sll">1.095200</div>
+                                            <div class="tbl-td fxd vol">14.02M</div>
+                                            <div class="tbl-td fxd chg">+1.38%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">BTC/USDT</div>
+                                            <div class="tbl-td fxd buy">4.99102</div>
+                                            <div class="tbl-td fxd sll">4.05740</div>
+                                            <div class="tbl-td fxd vol">24.80M</div>
+                                            <div class="tbl-td fxd chg">+2.24%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">ETH/TRY</div>
+                                            <div class="tbl-td fxd buy">1.88932</div>
+                                            <div class="tbl-td fxd sll">3.94618</div>
+                                            <div class="tbl-td fxd vol">12.39M</div>
+                                            <div class="tbl-td fxd chg">+3.57%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico faved" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">ETH/USD</div>
+                                            <div class="tbl-td fxd buy">5.99274</div>
+                                            <div class="tbl-td fxd sll">79.92020</div>
+                                            <div class="tbl-td fxd vol">2.460M</div>
+                                            <div class="tbl-td fxd chg">-1.56%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="tbl-tr">
+                                            <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
+                                            <div class="tbl-td fxd sym">ETH/USDT</div>
+                                            <div class="tbl-td fxd buy">5.88192</div>
+                                            <div class="tbl-td fxd sll">14.88003</div>
+                                            <div class="tbl-td fxd vol">19.02M</div>
+                                            <div class="tbl-td fxd chg">+5.56%</div>
+                                            <div class="tbl-td aut per">
+                                                <svg class="mdper mdper-line" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                    <g transform="translate(-20 -130)">
+                                                        <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                        <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                        <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Table -->
+                        </div>
+                        <!-- Symbol -->
+
+                        <div id="md_detail" class="tab-pane fade" role="tabpanel">Detay</div>
+                        <div id="md_last" class="tab-pane fade" role="tabpanel">Son İşlemler</div>
+                        <div id="md_chart" class="tab-pane fade" role="tabpanel">Grafik</div>
+                    </div>
+                    <!-- Tabs Cont -->
+
+                </div>
+            </div>
+            <!-- Main Left Slide End -->
+
+            <!-- Main Right Cont Start -->
+            <div class="main-rightcont col">
+                <div class="sitebggreen">Cont</div>
+            </div>
+            <!-- Main Right Cont End -->
+
+        </div>
+    </div>
+</main>
+<!-- Main End -->
 
 <!-- JavaScript Start -->
 <script id="script-custom-app" src="../assets/dist/js/custom-app.js"></script>
