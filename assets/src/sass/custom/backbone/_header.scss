@@ -81,6 +81,8 @@ $headlogo-clr-red:                $site-clr-red;
         padding: 0.22rem 0.6rem;
         display: block;
         vertical-align: middle;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         overflow: hidden;
 
         &.sliding-now{
