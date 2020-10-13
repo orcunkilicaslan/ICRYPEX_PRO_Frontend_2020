@@ -47,9 +47,9 @@ $var-custom-box-shadow-lg:                        0 1rem 3rem rgba($var-custom-c
 
 /* Site Custom Typography Settings */
 $var-custom-font-family-base:                     $site-font-family-default;
-$var-custom-font-size-base:                       1rem; // Assumes the browser default, typically `16px` // https://nekocalc.com/px-to-rem-converter
+$var-custom-font-size-base:                       0.75rem; // Assumes the browser default, typically `16px` // https://nekocalc.com/px-to-rem-converter
 $var-custom-font-size-lg:                         $var-custom-font-size-base * 1.1;
-$var-custom-font-size-sm:                         $var-custom-font-size-base * 0.813;
+$var-custom-font-size-sm:                         0.8125rem;
 $var-custom-h1-font-size:                         $var-custom-font-size-base * 2.5;
 $var-custom-h2-font-size:                         $var-custom-font-size-base * 2;
 $var-custom-h3-font-size:                         $var-custom-font-size-base * 1.75;
