@@ -230,7 +230,7 @@
 
       #{$formclassname}-control{
         border-color: $site-brdr-light !important;
-        padding-left: 0.75rem;
+        padding-left: $var-custom-font-size-base;
         padding-bottom: 0;
         padding-top: 12px;
 

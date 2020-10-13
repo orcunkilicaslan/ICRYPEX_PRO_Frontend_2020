@@ -1,122 +1,160 @@
 
-.marketdata{
-
-  .tab-content{
-    padding: 5px 0;
-  }
-
-  &-filter{
-    padding: 5px 10px;
+/* Extend Class */
+%extmdpericon{
+  .mdper{
+    width: 7px;
     position: relative;
+    top: -1px;
 
-    @include placeholder{
-      color: $site-clr-text-soft-sec;
+    .perline{opacity: 0; fill: $site-clr-text-soft-sec;}
+    .perup{opacity: 0; fill: $site-clr-green;}
+    .perdown{opacity: 0; fill: $site-clr-red;}
+    &-line .perline{opacity: 1;}
+    &-up .perup{opacity: 1;}
+    &-down .perdown{opacity: 1;}
+  }
+}
+/* Extend Class */
+
+.marketdata{
+  background-color: $site-clr-darkblue-700;
+  height: 100%;
+  @include border-radius($var-custom-border-radius);
+
+  .tab-content{padding: 5px 0;}
+
+  .sitetablediv{
+    .tbl-thead .tbl-th,
+    .tbl-tbody .tbl-td{
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
-
-    .btn-secondary,
-    .form-control{
-      font-size: 0.75rem;
-    }
-
-    .btn-secondary{
-      color: $site-clr-text-soft-sec;
-
-      &:hover,
-      &:focus,
-      &:not(:disabled):not(.disabled):active,
-      &:not(:disabled):not(.disabled).active{
-        color: $site-clr-white;
-
-        .filterfavico path{fill: $site-clr-white;}
-      }
-    }
-
-    .filterfavico{
-      position: relative;
-      top: -2px;
-
-      path{
-        fill: $site-clr-text-soft-sec;
-      }
-    }
-
-    .mdsearchinput{
-      width: 80px;
-      padding-right: 20px;
-      position: absolute;
-      right: 3px;
-      z-index: 1;
-      @include transition-multiple(width 0.7s cubic-bezier(.77,0,.175,1), color 0.7s cubic-bezier(.77,0,.175,1), border-color 0.7s cubic-bezier(.77,0,.175,1));
-
-      &:focus{width: 375px; color: $site-clr-white !important; border-color: transparentize($site-clr-blue, 0.25);}
-      &:focus ~ .mdsearchicon svg path{fill: $site-clr-blue;}
-    }
-
-    .mdsearchicon{
-      width: 20px;
-      height: 100%;
-      text-align: center;
-      position: absolute;
-      right: 3px;
-      z-index: 1;
-      cursor: pointer;
-
-      svg path{
-        fill: $site-clr-text-soft-sec;
-        @include transition-multiple(fill 0.7s cubic-bezier(.77,0,.175,1));
-      }
-    }
-
-    .btn-group.col{padding-right: 83px;}
-    .btn-group.col-auto{}
   }
 
-  &-table{
-    padding: 5px 10px;
+  .scrollbartbl-tb{height: 450px;}
 
-    .sitetablediv{
+  &-tabsymbol{
+    &-filter{
+      padding: 5px 10px;
+      position: relative;
 
-      .tbl-thead .tbl-th{padding-top: 0;}
+      @include placeholder{
+        color: $site-clr-text-soft-sec;
+      }
 
-      .fav[class*="tbl"]{width: 15px; text-align: center; padding-right: 0;}
-      .sym[class*="tbl"]{text-align: left;}
-      .buy[class*="tbl"],
-      .sll[class*="tbl"],
-      .vol[class*="tbl"],
-      .chg[class*="tbl"]{text-align: right;}
-      .per[class*="tbl"]{width: 15px; text-align: center;}
+      .btn-secondary,
+      .form-control{
+        font-size: $var-custom-font-size-base;
+      }
 
+      .btn-secondary{
+        color: $site-clr-text-soft-sec;
 
-      .tablefavico{
-        display: block;
+        &:hover,
+        &:focus,
+        &:not(:disabled):not(.disabled):active,
+        &:not(:disabled):not(.disabled).active{
+          color: $site-clr-white;
+
+          .filterfavico path{fill: $site-clr-white;}
+        }
+      }
+
+      .filterfavico{
+        position: relative;
+        top: -2px;
+
+        path{
+          fill: $site-clr-text-soft-sec;
+        }
+      }
+
+      .mdsearchinput{
+        width: 80px;
+        padding-right: 20px;
+        position: absolute;
+        right: 3px;
+        z-index: 1;
+        @include transition-multiple(width 0.7s cubic-bezier(.77,0,.175,1), color 0.7s cubic-bezier(.77,0,.175,1), border-color 0.7s cubic-bezier(.77,0,.175,1));
+
+        &:focus{width: 375px; color: $site-clr-white !important; border-color: transparentize($site-clr-blue, 0.25);}
+        &:focus ~ .mdsearchicon svg path{fill: $site-clr-blue;}
+      }
+
+      .mdsearchicon{
+        width: 20px;
+        height: 100%;
+        text-align: center;
+        position: absolute;
+        right: 3px;
+        z-index: 1;
+        cursor: pointer;
 
         svg{
           position: relative;
-          top: -1px;
+          top: 3px;
 
           path{
             fill: $site-clr-text-soft-sec;
+            @include transition-multiple(fill 0.7s cubic-bezier(.77,0,.175,1));
           }
         }
-
-        &.faved svg path{fill: $site-clr-blue;}
       }
 
-      .mdper{
-        width: 7px;
-        position: relative;
-        top: -1px;
+      .btn-group.col{}
+      .btn-group.col-auto{padding-right: 83px;}
+    }
 
-        .perline{opacity: 0; fill: $site-clr-text-soft-sec;}
-        .perup{opacity: 0; fill: $site-clr-green;}
-        .perdown{opacity: 0; fill: $site-clr-red;}
-        &-line .perline{opacity: 1;}
-        &-up .perup{opacity: 1;}
-        &-down .perdown{opacity: 1;}
+    &-table{
+      padding: 5px 10px;
+
+      .sitetablediv{
+
+        .tbl-thead .tbl-th{padding-top: 0;}
+        .tbl-tbody .tbl-tr{cursor: pointer;}
+        .fav[class*="tbl"]{width: 15px; text-align: center; padding-right: 0;}
+        .sym[class*="tbl"]{text-align: left;}
+        .buy[class*="tbl"],
+        .sll[class*="tbl"],
+        .vol[class*="tbl"],
+        .chg[class*="tbl"]{text-align: right;}
+        .per[class*="tbl"]{width: 15px; text-align: center;}
+
+        .tablefavico{
+          display: block;
+
+          svg{
+            position: relative;
+            top: -1px;
+
+            path{
+              fill: $site-clr-text-soft-sec;
+            }
+          }
+
+          &.faved svg path{fill: $site-clr-blue;}
+        }
+
+        @extend %extmdpericon;
       }
     }
   }
 
-  &-tabsymbol{}
+  &-tabdetail{
+    &-table{
+      padding: 10px;
+
+      .sitetablediv{
+
+        .tbl-thead .tbl-th{padding-top: 0;}
+        .txt[class*="tbl"]{text-align: left;}
+        .chg[class*="tbl"]{text-align: right;}
+        .per[class*="tbl"]{width: 15px; text-align: center;}
+
+        @extend %extmdpericon;
+      }
+    }
+  }
 
 }
