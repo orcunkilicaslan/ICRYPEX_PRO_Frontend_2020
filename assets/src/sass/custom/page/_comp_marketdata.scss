@@ -21,18 +21,22 @@
   height: 100%;
   @include border-radius($var-custom-border-radius);
 
-  .tab-content{padding: 5px 0;}
+  .tab-content{
+    padding: 5px 0;
 
-  .sitetablediv{
-    .tbl-thead .tbl-th,
-    .tbl-tbody .tbl-td{
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
+    .mdtabheadtitle{
+      color: $site-clr-white;
+      font-size: $var-custom-font-size-base;
+      padding: 10px 10px 0;
     }
   }
 
-  .scrollbartbl-tb{height: 450px;}
+  .sitetablediv{
+    .tbl-thead .tbl-th{padding-top: 0;}
+    .tbl-thead .tbl-th,
+    .tbl-tbody .tbl-td{white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+    .scrollbartbl-tb{height: 480px;}
+  }
 
   &-tabsymbol{
     &-filter{
@@ -110,8 +114,6 @@
       padding: 5px 10px;
 
       .sitetablediv{
-
-        .tbl-thead .tbl-th{padding-top: 0;}
         .tbl-tbody .tbl-tr{cursor: pointer;}
         .fav[class*="tbl"]{width: 15px; text-align: center; padding-right: 0;}
         .sym[class*="tbl"]{text-align: left;}
@@ -120,22 +122,17 @@
         .vol[class*="tbl"],
         .chg[class*="tbl"]{text-align: right;}
         .per[class*="tbl"]{width: 15px; text-align: center;}
+        .scrollbartbl-tb{height: 450px;}
 
         .tablefavico{
           display: block;
-
           svg{
             position: relative;
             top: -1px;
-
-            path{
-              fill: $site-clr-text-soft-sec;
-            }
+            path{fill: $site-clr-text-soft-sec;}
           }
-
           &.faved svg path{fill: $site-clr-blue;}
         }
-
         @extend %extmdpericon;
       }
     }
@@ -146,14 +143,32 @@
       padding: 10px;
 
       .sitetablediv{
-
-        .tbl-thead .tbl-th{padding-top: 0;}
         .txt[class*="tbl"]{text-align: left;}
         .chg[class*="tbl"]{text-align: right;}
         .per[class*="tbl"]{width: 15px; text-align: center;}
-
         @extend %extmdpericon;
       }
+    }
+  }
+
+  &-tablast{
+    &-table{
+      padding: 10px;
+
+      .sitetablediv{
+        .time[class*="tbl"]{text-align: left;}
+        .amnt[class*="tbl"],
+        .pric[class*="tbl"]{text-align: right;}
+      }
+    }
+  }
+
+  &-tabchart{
+
+    &-chart{
+      padding: 10px;
+      height: 485px;
+      overflow: hidden;
     }
   }
 

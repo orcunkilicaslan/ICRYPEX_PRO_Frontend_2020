@@ -72,8 +72,10 @@
 
 .scrollbartbl{
   &-th{
-    .tbl-thead{
-      padding-right: 10px;
+    &[class*="active-y"]{
+      .tbl-thead{
+        padding-right: 10px;
+      }
     }
   }
 
@@ -82,8 +84,10 @@
     position: relative;
     overflow: hidden;
 
-    .tbl-tbody{
-      padding-right: 10px;
+    &.ps.ps--active-y{
+      .tbl-tbody{
+        padding-right: 10px;
+      }
     }
   }
 }

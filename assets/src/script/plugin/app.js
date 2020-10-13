@@ -1,20 +1,18 @@
-/* Tooltip */
-$(function(){
-    $('[data-toggle="tooltip"]').tooltip()
-});
-/* Tooltip */
+/* Market Data Tab Perfect Scrollbar */
+const MdTabSymScrllHead = document.querySelector('.marketdata-tabsymbol-table .scrollbartbl-th');
+const MdTabSymScrllBody = document.querySelector('.marketdata-tabsymbol-table .scrollbartbl-tb');
+const MdTabDtlScrllHead = document.querySelector('.marketdata-tabdetail-table .scrollbartbl-th');
+const MdTabDtlScrllBody = document.querySelector('.marketdata-tabdetail-table .scrollbartbl-tb');
+const MdTabLstScrllHead = document.querySelector('.marketdata-tablast-table .scrollbartbl-th');
+const MdTabLstScrllBody = document.querySelector('.marketdata-tablast-table .scrollbartbl-tb');
 
-/* Popovers */
-$(function () {
-    $('[data-toggle="popover"]').popover()
-});
-/* Popovers */
+const psMtTabSym = new PerfectScrollbar(MdTabSymScrllBody, {wheelSpeed: 0.25, wheelPropagation: true, minScrollbarLength: 10, suppressScrollX: true}); psMtTabSym.update();
+const psMtTabDtl = new PerfectScrollbar(MdTabDtlScrllBody, {wheelSpeed: 0.25, wheelPropagation: true, minScrollbarLength: 10, suppressScrollX: true}); psMtTabDtl.update();
+const psMtTabLst = new PerfectScrollbar(MdTabLstScrllBody, {wheelSpeed: 0.25, wheelPropagation: true, minScrollbarLength: 10, suppressScrollX: true}); psMtTabLst.update();
 
-/* Perfect Scrollbar */
-const ps = new PerfectScrollbar('.JSPerfectScrollbar', {
-    wheelSpeed: 0.25,
-    wheelPropagation: true,
-    minScrollbarLength: 10,
-    suppressScrollX: true
+document.addEventListener("DOMContentLoaded",()=>{
+    if (MdTabSymScrllBody.querySelectorAll('.ps--active-y')){MdTabSymScrllHead.classList.add('active-y');}
+    if (MdTabDtlScrllBody.querySelectorAll('.ps--active-y')){MdTabDtlScrllHead.classList.add('active-y');}
+    if (MdTabLstScrllBody.querySelectorAll('.ps--active-y')){MdTabLstScrllHead.classList.add('active-y');}
 });
-/* Perfect Scrollbar */
+/* Market Data Tab Perfect Scrollbar */
