@@ -16,3 +16,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     if (MdTabLstScrllBody.querySelectorAll('.ps--active-y')){MdTabLstScrllHead.classList.add('active-y');}
 });
 /* Market Data Tab Perfect Scrollbar */
+
+/* Bootstrap 5 Tooltip */
+//let tooltipElement = document.getElementById('tooltip');
+//let tooltip = new bootstrap.Tooltip(tooltipElement);
+/* Bootstrap 5 Tooltip */

@@ -48,7 +48,7 @@ $var-custom-box-shadow-lg:                        0 1rem 3rem rgba($var-custom-c
 /* Site Custom Typography Settings */
 $var-custom-font-family-base:                     $site-font-family-default;
 $var-custom-font-size-base:                       0.75rem; // Assumes the browser default, typically `16px` // https://nekocalc.com/px-to-rem-converter
-$var-custom-font-size-lg:                         $var-custom-font-size-base * 1.1;
+$var-custom-font-size-lg:                         1.125rem;
 $var-custom-font-size-sm:                         0.8125rem;
 $var-custom-h1-font-size:                         $var-custom-font-size-base * 2.5;
 $var-custom-h2-font-size:                         $var-custom-font-size-base * 2;
@@ -85,7 +85,7 @@ $var-custom-small-font-size:                      80%;
 $var-custom-input-btn-font-family:                $site-font-family-default;
 $var-custom-input-btn-line-height:                1.65;
 $var-custom-input-btn-line-height-sm:             1.5;
-$var-custom-input-btn-line-height-lg:             1.59;
+$var-custom-input-btn-line-height-lg:             1.25;
 $var-custom-input-btn-focus-width:                0rem;
 $var-custom-btn-font-weight:                      $var-custom-font-weight-bold;
 /* Site Custom Button Settings */

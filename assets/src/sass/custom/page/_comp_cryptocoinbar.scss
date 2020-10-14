@@ -1,0 +1,5 @@
+
+.cryptocoinbar{
+  background-color: $site-clr-darkblue-700;
+  @include border-radius($var-custom-border-radius);
+}
