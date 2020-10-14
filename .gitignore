@@ -4,10 +4,3 @@ package-lock.json
 
 assets/dist/css/custom-app.css.map
 assets/dist/js/custom-app.js.map
-
-assets/vendor/perfect-scrollbar/css/
-assets/vendor/perfect-scrollbar/src/
-assets/vendor/perfect-scrollbar/types/
-assets/vendor/perfect-scrollbar/CHANGELOG.md
-assets/vendor/perfect-scrollbar/package.json
-assets/vendor/perfect-scrollbar/README.md

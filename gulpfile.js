@@ -57,6 +57,8 @@ gulp.task('sass-custom', () => {
 
 gulp.task('script-custom', () => {
     return gulp.src([
+        folder_src_main + 'script/plugin/**/bootstrap_native.js',
+        folder_src_main + 'script/plugin/**/perfect_scrollbar.js',
         folder_src_main + 'script/plugin/**/app.js',
         folder_src_main + 'script/custom/**/app.js'
     ])
