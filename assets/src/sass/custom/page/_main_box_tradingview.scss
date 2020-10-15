@@ -1,0 +1,32 @@
+
+.mainbox-tradingviewbig{
+  border: 1px solid $site-clr-darkblue-700;
+
+  .tradingviewbig{
+    height: 100%;
+
+    .tradingview-widget-container{
+      height: 100%;
+      @include border-radius($var-custom-border-radius);
+      overflow: hidden;
+
+      > div{
+        height: 100%;
+
+        div[id*="wrapper"]{
+          height: calc(100% + 2px) !important;
+          width: calc(100% + 2px) !important;
+          @include translate(-1px, -1px);
+
+          > div{
+            height: 100% !important;
+            width: 100% !important;
+          }
+        }
+      }
+    }
+
+  }
+
+}
+

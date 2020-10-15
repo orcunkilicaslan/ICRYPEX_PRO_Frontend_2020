@@ -1,4 +1,8 @@
 
+html{height: 100%;}
 body{
+  @include flexbox-display-flex();
+  @include flexbox-flex-flow(column);
   min-width: 1200px;
+  height: 100%;
 }

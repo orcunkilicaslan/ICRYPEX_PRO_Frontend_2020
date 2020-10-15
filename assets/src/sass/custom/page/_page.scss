@@ -9,8 +9,10 @@
 
 // Main
 @import "main";
-
-// Comp List
-@import "comp_marketdata";
-@import "comp_cryptocoinbar";
-@import "comp_tradingview";
+@import "main_box";
+@import "main_box_marketdata";
+@import "main_box_cryptocoinbar";
+@import "main_box_tradingview";
+@import "main_box_orderbook";
+@import "main_box_buysellaction";
+@import "main_box_openorders";

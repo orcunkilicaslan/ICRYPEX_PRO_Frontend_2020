@@ -1,0 +1,162 @@
+
+.mainbox-marketdata{
+
+  .marketdata{
+    height: 100%;
+
+    &-tabs{}
+
+    &-tabcontent{
+      padding: 5px 0;
+
+      .mdtabheadtitle{
+        color: $site-clr-white;
+        font-size: $var-custom-font-size-base;
+        padding: 10px 10px 0;
+      }
+    }
+
+    .sitetablediv{
+      .tbl-thead .tbl-th{padding-top: 0;}
+      .tbl-thead .tbl-th,
+      .tbl-tbody .tbl-td{white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+      .scrollbartbl-tb{height: 280px;}
+    }
+
+    &-tabsymbol{
+      &-filter{
+        padding: 5px 10px;
+        position: relative;
+
+        @include placeholder{
+          color: $site-clr-text-soft-sec;
+        }
+
+        .btn-secondary,
+        .form-control{
+          font-size: $var-custom-font-size-base;
+        }
+
+        .btn-secondary{
+          color: $site-clr-text-soft-sec;
+
+          &:hover,
+          &:focus,
+          &:not(:disabled):not(.disabled):active,
+          &:not(:disabled):not(.disabled).active{
+            color: $site-clr-white;
+
+            .filterfavico path{fill: $site-clr-white;}
+          }
+        }
+
+        .filterfavico{
+          position: relative;
+          top: -2px;
+
+          path{
+            fill: $site-clr-text-soft-sec;
+          }
+        }
+
+        .mdsearchinput{
+          width: 80px;
+          padding-right: 20px;
+          position: absolute;
+          right: 3px;
+          z-index: 1;
+          @include transition-multiple(width 0.7s cubic-bezier(.77,0,.175,1), color 0.7s cubic-bezier(.77,0,.175,1), border-color 0.7s cubic-bezier(.77,0,.175,1));
+
+          &:focus{width: 375px; color: $site-clr-white !important; border-color: transparentize($site-clr-blue, 0.25);}
+          &:focus ~ .mdsearchicon svg path{fill: $site-clr-blue;}
+        }
+
+        .mdsearchicon{
+          width: 20px;
+          height: 100%;
+          text-align: center;
+          position: absolute;
+          right: 3px;
+          z-index: 1;
+          cursor: pointer;
+
+          svg{
+            position: relative;
+            top: 3px;
+
+            path{
+              fill: $site-clr-text-soft-sec;
+              @include transition-multiple(fill 0.7s cubic-bezier(.77,0,.175,1));
+            }
+          }
+        }
+
+        .btn-group.col{}
+        .btn-group.col-auto{padding-right: 83px;}
+      }
+
+      &-table{
+        padding: 5px 10px;
+
+        .sitetablediv{
+          .tbl-tbody .tbl-tr{cursor: pointer;}
+          .fav[class*="tbl"]{width: 15px; text-align: center; padding-right: 0;}
+          .sym[class*="tbl"]{text-align: left;}
+          .buy[class*="tbl"],
+          .sll[class*="tbl"],
+          .vol[class*="tbl"],
+          .chg[class*="tbl"]{text-align: right;}
+          .per[class*="tbl"]{width: 15px; text-align: center;}
+          //.scrollbartbl-tb{height: 450px;}
+
+          .tablefavico{
+            display: block;
+            svg{
+              position: relative;
+              top: -1px;
+              path{fill: $site-clr-text-soft-sec;}
+            }
+            &.faved svg path{fill: $site-clr-blue;}
+          }
+          @extend %extmdpericon;
+        }
+      }
+    }
+
+    &-tabdetail{
+      &-table{
+        padding: 10px;
+
+        .sitetablediv{
+          .txt[class*="tbl"]{text-align: left;}
+          .chg[class*="tbl"]{text-align: right;}
+          .per[class*="tbl"]{width: 15px; text-align: center;}
+          @extend %extmdpericon;
+        }
+      }
+    }
+
+    &-tablast{
+      &-table{
+        padding: 10px;
+
+        .sitetablediv{
+          .time[class*="tbl"]{text-align: left;}
+          .amnt[class*="tbl"],
+          .pric[class*="tbl"]{text-align: right;}
+        }
+      }
+    }
+
+    &-tabchart{
+
+      &-chart{
+        padding: 10px;
+        height: 485px;
+        overflow: hidden;
+      }
+    }
+
+  }
+
+}

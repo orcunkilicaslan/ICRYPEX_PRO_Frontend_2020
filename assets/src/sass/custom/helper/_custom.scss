@@ -16,17 +16,3 @@
 }
 
 */
-
-html{height: 100%;}
-body{
-  @include flexbox-display-flex();
-  @include flexbox-flex-flow(column);
-  height: 100%;
-}
-main{
-  @include flexbox-display-flex();
-  @include flexbox-flex(1);
-}
-header, footer{width: 100%;}
-aside{}
-section{@include flexbox-flex(1);}
