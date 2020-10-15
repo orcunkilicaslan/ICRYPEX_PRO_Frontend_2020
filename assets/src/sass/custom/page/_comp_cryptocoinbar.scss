@@ -1,0 +1,78 @@
+
+.cryptocoinbar{
+  background-color: $site-clr-darkblue-700;
+  @include border-radius($var-custom-border-radius);
+
+  .siteformui.formdark{
+    .input-group{
+      &-prepend {
+        .selectedcur {
+          @extend %extinputgrouptitle01;
+        }
+      }
+      &-append{
+        .alarmbtn{
+          background-color: transparent;
+          padding: 5px 6px 5px 0;
+          border-left-width: 0;
+        }
+      }
+    }
+  }
+
+  .cryptostatsbar{
+    @include flexbox-display-flex();
+    @include flexbox-align-items(center);
+    @include flexbox-flex(1 1 auto);
+    width: 1%;
+    min-width: 0;
+    padding: 0 $bootstrap-input-btn-padding-x-lg;
+    border-top: 1px solid $site-brdr-dark;
+    border-bottom: 1px solid $site-brdr-dark;
+    position: relative;
+
+    &-biger{
+      font-size: $var-custom-font-size-lg;
+      line-height: $var-custom-input-btn-line-height-lg;
+      padding: $bootstrap-input-btn-padding-y-lg $bootstrap-input-btn-padding-x-lg;
+
+      &:first-child{padding-left: 0;}
+
+      @extend %extmdpericon;
+    }
+
+    &-stats{
+
+      .bigstatslist{
+        @include flexbox-display-flex();
+        font-size: $var-custom-font-size-base;
+        line-height: 1.1;
+
+        li{
+          @include flexbox-flex(0 0 auto);
+          width: auto;
+          max-width: 100%;
+          padding: calc(#{$bootstrap-input-btn-padding-y-lg} - 2px) $bootstrap-input-btn-padding-x-lg;
+
+          &:first-child{padding-left: 0;}
+          &:last-child{padding-right: 0;}
+        }
+
+        h6, p{
+          font-size: $var-custom-font-size-base;
+          font-weight: $var-custom-font-weight-normal;
+          margin: 0;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        p{
+          color: $site-clr-white;
+        }
+
+      }
+    }
+  }
+
+}

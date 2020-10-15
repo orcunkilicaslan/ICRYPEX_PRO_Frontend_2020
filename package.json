@@ -12,6 +12,7 @@
     "@babel/preset-env": "^7.11.0",
     "animate.css": "^3.7.2",
     "bootstrap": "^4.5.2",
+    "bootstrap.native": "^3.0.13",
     "browser-sync": "^2.26.12",
     "browserslist": "^4.14.0",
     "caniuse-lite": "^1.0.30001117",
@@ -29,13 +30,12 @@
     "gulp-util": "^3.0.8",
     "jquery": "^3.5.1",
     "jsdom": "^16.4.0",
+    "owl.carousel": "^2.3.4",
+    "perfect-scrollbar": "^1.5.0",
     "popper.js": "^1.16.1",
-    "webpack-stream": "^5.2.1",
-    "owl.carousel": "^2.3.4"
+    "webpack-stream": "^5.2.1"
   },
-  "dependencies": {
-    "perfect-scrollbar": "^1.5.0"
-  },
+  "dependencies": {},
   "browserslist": [
     "Explorer >= 10",
     "last 3 versions"
