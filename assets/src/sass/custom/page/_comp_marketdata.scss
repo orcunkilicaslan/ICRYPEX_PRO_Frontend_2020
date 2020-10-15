@@ -1,21 +1,4 @@
 
-/* Extend Class */
-%extmdpericon{
-  .mdper{
-    width: 7px;
-    position: relative;
-    top: -1px;
-
-    .perline{opacity: 0; fill: $site-clr-text-soft-sec;}
-    .perup{opacity: 0; fill: $site-clr-green;}
-    .perdown{opacity: 0; fill: $site-clr-red;}
-    &-line .perline{opacity: 1;}
-    &-up .perup{opacity: 1;}
-    &-down .perdown{opacity: 1;}
-  }
-}
-/* Extend Class */
-
 .marketdata{
   background-color: $site-clr-darkblue-700;
   height: 100%;
@@ -35,7 +18,7 @@
     .tbl-thead .tbl-th{padding-top: 0;}
     .tbl-thead .tbl-th,
     .tbl-tbody .tbl-td{white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
-    .scrollbartbl-tb{height: 480px;}
+    .scrollbartbl-tb{height: 280px;}
   }
 
   &-tabsymbol{
@@ -122,7 +105,7 @@
         .vol[class*="tbl"],
         .chg[class*="tbl"]{text-align: right;}
         .per[class*="tbl"]{width: 15px; text-align: center;}
-        .scrollbartbl-tb{height: 450px;}
+        //.scrollbartbl-tb{height: 450px;}
 
         .tablefavico{
           display: block;

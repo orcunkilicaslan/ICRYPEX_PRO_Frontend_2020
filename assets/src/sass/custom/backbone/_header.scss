@@ -49,11 +49,16 @@ $headlogo-clr-red:                $site-clr-red;
 
   &-center{
     .siteformui.formdark{
+      padding-left: 1px;
+
       #{$formclassname}-control{
         border-right-width: 0;
       }
       #{$forminputclassname}-group{
         &-text{
+          &.newslefttxt{
+            @extend %extinputgrouptitle01;
+          }
           &.newsallbtn{
             background-color: $site-clr-darkblue-700 !important;
             border-left-width: 0;

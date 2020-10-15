@@ -1,12 +1,35 @@
+/*
+
 @include BootstrapMinWidthResponsive(lg){
   body{
     @include flexbox-display-flex();
     @include flexbox-flex-direction(column);
     min-height: 100vh;
 
+    header,
     main,
-    section{
+    section,
+    footer{
       @include flexbox-flex(1);
     }
   }
 }
+
+*/
+
+html{
+  height: 100%;
+}
+body{
+  @include flexbox-display-flex();
+  @include flexbox-flex-flow(column);
+  height: 100%;
+}
+main{
+  @include flexbox-display-flex();
+  @include flexbox-flex(1);
+}
+header,
+footer{width: 100%;}
+section{@include flexbox-flex(1);}
+aside{}
