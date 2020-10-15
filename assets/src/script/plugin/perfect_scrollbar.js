@@ -1,7 +1,7 @@
 /* Market Data Tab Perfect Scrollbar */
 import PerfectScrollbar from 'perfect-scrollbar';
 
-const MdDivTblHeight    = (document.querySelector('.marketdata').clientHeight - 24) - document.querySelector('.marketdata .sitetabs').clientHeight;
+const MdDivTblHeight    = (document.querySelector('.marketdata').clientHeight - 24) - document.querySelector('.marketdata .marketdata-tabs').clientHeight;
 
 const MdTabSymArea      = document.querySelector('.marketdata-tabsymbol');
 const MdTabSymScrllHead = document.querySelector('.marketdata-tabsymbol-table .scrollbartbl-th');
