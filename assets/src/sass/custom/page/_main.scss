@@ -11,6 +11,15 @@
     width: 400px;
   }
 
-  &-rightcont{}
+  &-rightcont{
+    @include flexbox-display-flex();
+    @include flexbox-flex-flow(column);
+    height: 100%;
+
+    .cryptocoinbar{
+      margin-bottom: 5px;
+    }
+
+  }
 
 }

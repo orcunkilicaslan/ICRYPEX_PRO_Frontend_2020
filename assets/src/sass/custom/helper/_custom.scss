@@ -17,9 +17,7 @@
 
 */
 
-html{
-  height: 100%;
-}
+html{height: 100%;}
 body{
   @include flexbox-display-flex();
   @include flexbox-flex-flow(column);
@@ -29,7 +27,6 @@ main{
   @include flexbox-display-flex();
   @include flexbox-flex(1);
 }
-header,
-footer{width: 100%;}
-section{@include flexbox-flex(1);}
+header, footer{width: 100%;}
 aside{}
+section{@include flexbox-flex(1);}
