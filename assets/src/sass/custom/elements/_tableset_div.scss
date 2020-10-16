@@ -1,6 +1,6 @@
 
 .sitetablediv{
-  font-size: $var-custom-font-size-base;
+  @include responsive-font-size($var-custom-font-size-base);
   line-height: 1;
 
   .tbl{
