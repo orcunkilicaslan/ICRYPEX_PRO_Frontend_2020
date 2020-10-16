@@ -3,6 +3,6 @@ html{height: 100%;}
 body{
   @include flexbox-display-flex();
   @include flexbox-flex-flow(column);
-  min-width: 1200px;
+  min-width: 1360px;
   height: 100%;
 }

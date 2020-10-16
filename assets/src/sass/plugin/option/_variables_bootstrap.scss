@@ -91,10 +91,10 @@ $bootstrap-escaped-characters:(
 /* Bootstrap General Settings */
 
 /* Bootstrap RFS (Responsive Font Size) */
-$bootstrap-enable-responsive-font-sizes:                    false;
+$bootstrap-enable-responsive-font-sizes:                    true;
 $bootstrap-rfs-base-font-size:                              $var-custom-font-size-base;
 $bootstrap-rfs-font-size-unit:                              rem;
-$bootstrap-rfs-breakpoint:                                  map_get($bootstrap-grid-breakpoints, 1k);
+$bootstrap-rfs-breakpoint:                                  map_get($bootstrap-grid-breakpoints, hd);
 $bootstrap-rfs-breakpoint-unit:                             px;
 $bootstrap-rfs-two-dimensional:                             false;
 $bootstrap-rfs-factor:                                      10;

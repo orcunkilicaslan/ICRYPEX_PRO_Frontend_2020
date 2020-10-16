@@ -11,7 +11,7 @@
 
       .mdtabheadtitle{
         color: $site-clr-white;
-        font-size: $var-custom-font-size-base;
+        @include responsive-font-size($var-custom-font-size-base);
         padding: 10px 10px 0;
       }
     }
@@ -34,7 +34,7 @@
 
         .btn-secondary,
         .form-control{
-          font-size: $var-custom-font-size-base;
+          @include responsive-font-size($var-custom-font-size-base);
         }
 
         .btn-secondary{
@@ -118,7 +118,7 @@
             }
             &.faved svg path{fill: $site-clr-blue;}
           }
-          @extend %extmdpericon;
+          @extend %extcurrperupdownlineicon;
         }
       }
     }
@@ -131,7 +131,7 @@
           .txt[class*="tbl"]{text-align: left;}
           .chg[class*="tbl"]{text-align: right;}
           .per[class*="tbl"]{width: 15px; text-align: center;}
-          @extend %extmdpericon;
+          @extend %extcurrperupdownlineicon;
         }
       }
     }

@@ -4,28 +4,18 @@ $headlogo-clr-red:                $site-clr-red;
 /* Components Variables Settings */
 
 /* Extend Class */
-%extheadbtns{
-  @include flexbox-display-flex();
-  @include flexbox-align-items(center);
 
-  .btn{
-    min-width: 105px;
-    margin-right: 5px;
-
-    &:last-child{margin-right: 0;}
-  }
-}
 /* Extend Class */
 
 .header{
   background-color: $headbgclr;
-  padding: 10px 0 8px;
+  padding: 10px 5px 8px;
 
   &-left{
     @include flexbox-display-flex();
     @include flexbox-align-items(center);
     @include flexbox-justify-content(space-between);
-    width: 400px;
+    @include headerleftandbodyleftsidewidth(3px);
 
     &-logo{
       margin: 0 5px;
@@ -39,17 +29,23 @@ $headlogo-clr-red:                $site-clr-red;
         height: 24px;
         display: inline-block;
         text-indent: -9999px;
+
+        @include BootstrapMaxWidthResponsive(hd){
+          width: 145px;
+        }
+        @include BootstrapMaxWidthResponsive(xl){
+          width: 140px;
+        }
       }
     }
 
     &-btn{
-      @extend %extheadbtns;
+      @extend %extheadertopbtns;
     }
   }
 
   &-center{
     .siteformui.formdark{
-      padding-left: 1px;
 
       #{$formclassname}-control{
         border-right-width: 0;
@@ -57,7 +53,7 @@ $headlogo-clr-red:                $site-clr-red;
       #{$forminputclassname}-group{
         &-text{
           &.newslefttxt{
-            @extend %extinputgrouptitle01;
+            @extend %extheaderandstatsinputgrouptitle01;
           }
           &.newsallbtn{
             background-color: $site-clr-darkblue-700 !important;
@@ -112,11 +108,11 @@ $headlogo-clr-red:                $site-clr-red;
     @include flexbox-align-items(center);
 
     &-theme{
-      padding: 0 10px;
+      padding: 0 7px 0 10px;
     }
 
     &-btn{
-      @extend %extheadbtns;
+      @extend %extheadertopbtns;
     }
   }
 
