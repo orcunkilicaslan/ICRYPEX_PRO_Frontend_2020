@@ -15,6 +15,7 @@ $site-clr-darkblue-900:                 #0A0C14;
 $site-clr-darkblue-800:                 #131B31;
 $site-clr-darkblue-700:                 #182239;
 $site-clr-darkblue-600:                 #202C46;
+$site-clr-darkblue-500:                 #2A3553;
 /* Site Section Background Color */
 
 /* Site Border Color Settings */
@@ -23,7 +24,7 @@ $site-brdr-light-focus:                 darken($site-brdr-light, 15%);
 $site-brdr-light-opacity:               #F2F5F9;
 $site-brdr-light-input:                 $site-brdr-light;
 $site-brdr-light-input-focus:           $site-brdr-light-focus;
-$site-brdr-dark:                        #3B486B;
+$site-brdr-dark:                        $site-clr-darkblue-500;
 $site-brdr-dark-focus:                  darken($site-brdr-dark, 15%);
 $site-brdr-dark-opacity:                #F2F5F9;
 $site-brdr-dark-input:                  $site-brdr-dark;
