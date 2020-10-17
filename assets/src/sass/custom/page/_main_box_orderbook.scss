@@ -3,7 +3,7 @@
   height: 100%;
 
   .orderbook{
-    padding: 7.5px 10px;
+    padding: 10px;
 
     &-head{
       @include flexbox-display-flex();
@@ -67,14 +67,23 @@
         position: relative;
 
         &.chartbuy{
-          div[class*="ordertable"]{padding-right: 10px;}
+          div[class*="rectangle"]{
+            .ct-series-a .ct-bar, .ct-series-a .ct-series-a .ct-point, .ct-series-a .ct-slice-donut{stroke: $site-clr-green;}
+            svg{@include rotate(180);}
+          }
+          div[class*="ordertable"],
+          div[class*="rectangle"]{padding-right: 10px;}
           .sitetablediv .tbl-tbody .pric[class*="tbl"]{color: $site-clr-green;}
           .sitetablediv .tbl-tbody .tbl-tr::before{background-color: $site-clr-green; left: -5px;}
           .sitetablediv .tbl-tbody .tbl-tr.orderactive::before{opacity: 1;}
         }
 
         &.chartsell{
-          div[class*="ordertable"]{padding-left: 10px;}
+          div[class*="rectangle"]{
+            .ct-series-a .ct-bar, .ct-series-a .ct-series-a .ct-point, .ct-series-a .ct-slice-donut{stroke: $site-clr-red;}
+          }
+          div[class*="ordertable"],
+          div[class*="rectangle"]{padding-left: 10px;}
           .sitetablediv .tbl-tbody .pric[class*="tbl"]{color: $site-clr-red;}
           .sitetablediv .tbl-tbody .tbl-tr::before{background-color: $site-clr-red; right: -5px;}
           .sitetablediv .tbl-tbody .tbl-tr.orderactive::before{opacity: 1;}
@@ -96,10 +105,26 @@
     }
 
     &-chartarea{
+      position: relative;
 
-      &-rectangle{}
+      &-rectangle{
+        margin-top: 22px;
+        position: absolute;
+        opacity: 0.1;
+
+        svg{
+          width: 100% !important;
+          height: 192px !important;
+        }
+        .ct-bar{
+          fill: none;
+          stroke-width: 15px;
+          shape-rendering: crispedges;
+        }
+      }
 
       &-ordertable{
+        position: relative;
 
         .sitetablediv{
 
