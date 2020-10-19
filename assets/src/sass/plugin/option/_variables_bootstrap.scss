@@ -380,7 +380,7 @@ $bootstrap-custom-select-padding-x-lg:                              $bootstrap-i
 $bootstrap-custom-select-font-size-lg:                              $bootstrap-input-font-size-lg;
 //$bootstrap-custom-select-height-lg:                                 $bootstrap-input-height-lg;
 $bootstrap-custom-range-track-width:                                100%;
-$bootstrap-custom-range-track-height:                               .5rem;
+$bootstrap-custom-range-track-height:                               .25rem;
 $bootstrap-custom-range-track-cursor:                               pointer;
 $bootstrap-custom-range-track-bg:                                   $bootstrap-gray-300;
 $bootstrap-custom-range-track-border-radius:                        1rem;
@@ -566,11 +566,11 @@ $bootstrap-card-columns-margin:                     $bootstrap-card-spacer-y;
 /* Bootstrap Cards Settings */
 
 /* Bootstrap Tooltips Settings */
-$bootstrap-tooltip-font-size:                       $bootstrap-font-size-sm;
-$bootstrap-tooltip-max-width:                       200px;
-$bootstrap-tooltip-color:                           $bootstrap-white;
-$bootstrap-tooltip-bg:                              $bootstrap-black;
-$bootstrap-tooltip-border-radius:                   $bootstrap-border-radius;
+$bootstrap-tooltip-font-size:                       $var-custom-tooltip-popover-font-size;
+$bootstrap-tooltip-max-width:                       $var-custom-tooltip-max-width;
+$bootstrap-tooltip-color:                           $var-custom-tooltip-color;
+$bootstrap-tooltip-bg:                              $var-custom-tooltip-popover-bg;
+$bootstrap-tooltip-border-radius:                   $var-custom-tooltip-popover-border-radius;
 $bootstrap-tooltip-opacity:                         .9;
 $bootstrap-tooltip-padding-y:                       .25rem;
 $bootstrap-tooltip-padding-x:                       .5rem;
@@ -587,12 +587,12 @@ $bootstrap-form-feedback-tooltip-border-radius:     $bootstrap-tooltip-border-ra
 /* Bootstrap Tooltips Settings */
 
 /* Bootstrap Popovers Settings */
-$bootstrap-popover-font-size:                       $bootstrap-font-size-sm;
-$bootstrap-popover-bg:                              $bootstrap-white;
-$bootstrap-popover-max-width:                       276px;
-$bootstrap-popover-border-width:                    $bootstrap-border-width;
-$bootstrap-popover-border-color:                    rgba($bootstrap-black, .2);
-$bootstrap-popover-border-radius:                   $bootstrap-border-radius-lg;
+$bootstrap-popover-font-size:                       $var-custom-tooltip-popover-font-size;
+$bootstrap-popover-bg:                              $var-custom-tooltip-popover-bg;
+$bootstrap-popover-max-width:                       $var-custom-popover-max-width;
+$bootstrap-popover-border-width:                    $var-custom-popover-border-width;
+$bootstrap-popover-border-color:                    $var-custom-tooltip-popover-border-color;
+$bootstrap-popover-border-radius:                   $var-custom-tooltip-popover-border-radius;
 //$bootstrap-popover-inner-border-radius:             subtract($bootstrap-popover-border-radius, $bootstrap-popover-border-width);
 $bootstrap-popover-box-shadow:                      0 .25rem .5rem rgba($bootstrap-black, .2);
 $bootstrap-popover-header-bg:                       darken($bootstrap-popover-bg, 3%);
