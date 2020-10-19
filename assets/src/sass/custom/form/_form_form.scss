@@ -194,10 +194,10 @@
       color: $site-clr-white;
       @include responsive-font-size($var-custom-font-size-base);
       font-weight: $var-custom-font-weight-bold;
-      padding: 2px 8px 4px;
+      padding: 1px 8px 2px;
       opacity: 0;
       position: absolute;
-      top: -30px;
+      top: calc(-#{$bootstrap-custom-range-thumb-width} * 2);
       left: 50%;
       @include translateX(-50%);
       @include border-radius($var-custom-border-radius-sm);
