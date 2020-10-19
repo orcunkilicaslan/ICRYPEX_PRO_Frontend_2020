@@ -21,26 +21,31 @@
 })();
 /* Header News Ticker End */
 
-/* Buy-Sell Action Range Start */
-const allRanges = document.querySelectorAll(".buysellaction-form .rangewrp");
+/* Progress Range Start */
+const allRanges = document.querySelectorAll(".rangeprogress");
 allRanges.forEach(wrap => {
-    const range = wrap.querySelector(".buysellaction-form .rangewrp .custom-range");
-    const bubble = wrap.querySelector(".buysellaction-form .rangewrp .range-bubble");
+    const range     = wrap.querySelector(".rangeprogress .rangeprogress-range");
+    const bubble    = wrap.querySelector(".rangeprogress .rangeprogress-bubble");
+    const circle    = wrap.querySelector(".rangeprogress .rangeprogress-circle");
+    const progress  = wrap.querySelector(".rangeprogress .rangeprogress-progress .progress-bar");
 
     range.addEventListener("input", () => {
-        setBubble(range, bubble);
+        setBubble(range, bubble, circle, progress);
     });
-    setBubble(range, bubble);
+    setBubble(range, bubble, circle, progress);
 });
 
-function setBubble(range, bubble) {
+function setBubble(range, bubble, circle, progress) {
     const val = range.value;
     const min = range.min ? range.min : 0;
     const max = range.max ? range.max : 100;
     const newVal = Number(((val - min) * 100) / (max - min));
-    bubble.innerHTML = val;
 
-    // Sorta magic numbers based on size of the native UI thumb
+    bubble.innerHTML = val;
     bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+
+    progress.style.width = newVal + "%";
+
+    circle.setAttribute('data-val', newVal);
 }
-/* Buy-Sell Action Range End */
+/* Progress Range End */
