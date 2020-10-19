@@ -194,10 +194,10 @@
       color: $site-clr-white;
       @include responsive-font-size($var-custom-font-size-base);
       font-weight: $var-custom-font-weight-bold;
-      padding: 2px 8px 4px;
+      padding: 1px 8px 2px;
       opacity: 0;
       position: absolute;
-      top: -30px;
+      top: calc(-#{$bootstrap-custom-range-thumb-width} * 2);
       left: 50%;
       @include translateX(-50%);
       @include border-radius($var-custom-border-radius-sm);
@@ -243,6 +243,18 @@
         background-color: $site-clr-darkblue-500;
         @include border-radius($bootstrap-custom-range-thumb-border-radius);
       }
+    }
+
+    // Firefox Fixed
+    ::-moz-range-track {
+      background: transparent;
+      border: 0;
+    }
+
+    // Firefox Fixed
+    input::-moz-focus-inner,
+    input::-moz-focus-outer{
+      border: 0;
     }
 
   }
