@@ -141,6 +141,14 @@
 
       .formfieldset{
 
+        .form-group{
+          .aligncenter{
+            @include flexbox-align-items(center);
+
+            .col-auto{padding-right: 10px;}
+          }
+        }
+
         .input-group{
 
           &-prepend{
@@ -167,41 +175,35 @@
             text-align: right;
             border-right-width: 0;
           }
-
         }
 
-        .rangewrp{
-          position: relative;
+        .rangeprogress{
+          margin-top: 2px;
 
-          .range-bubble{
-            background: $site-clr-blue;
-            color: $site-clr-white;
-            @include responsive-font-size($var-custom-font-size-base);
-            font-weight: $var-custom-font-weight-bold;
-            padding: 2px 8px 4px;
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            @include translateX(-50%);
-            @include border-radius($var-custom-border-radius-sm);
-
-            &::after {
-              content: "";
-              background-color: $site-clr-blue;
-              width: 6px;
-              height: 6px;
-              position: absolute;
-              bottom: -3px;
-              left: 50%;
-              @include transform-multiple(translateX(-50%) rotate(45deg));
+          .rangeprogress-circle{
+            &[data-val*="0"]{
+              span:nth-child(1){background-color: $site-clr-blue;}
+            }
+            &[data-val*="33"]{
+              span:nth-child(1), span:nth-child(2){background-color: $site-clr-blue;}
+            }
+            &[data-val*="66"]{
+              span:nth-child(1), span:nth-child(2), span:nth-child(3){background-color: $site-clr-blue;}
+            }
+            &[data-val*="100"]{
+              span{background-color: $site-clr-blue;}
             }
           }
         }
 
+
       }
 
+      .formbttm{
+        .btn{
+          width: 100%;
+        }
+      }
     }
-
   }
-
 }
