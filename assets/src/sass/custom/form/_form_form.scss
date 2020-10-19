@@ -245,6 +245,18 @@
       }
     }
 
+    // Firefox Fixed
+    ::-moz-range-track {
+      background: transparent;
+      border: 0;
+    }
+
+    // Firefox Fixed
+    input::-moz-focus-inner,
+    input::-moz-focus-outer{
+      border: 0;
+    }
+
   }
 
 }
