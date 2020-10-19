@@ -2,6 +2,206 @@
 .mainbox-buysellaction{
   height: 100%;
 
-  .buysellaction{}
+  .buysellaction{
+    padding: 10px;
+
+    &-head{
+      @include flexbox-display-flex();
+      @include flexbox-flex-wrap(wrap);
+      @include flexbox-align-items(center);
+      line-height: 1.2;
+
+      &-col{
+        @include flexbox-flex-basis(0);
+        @include flexbox-flex-grow(1);
+        max-width: 100%;
+
+        &.tabarea{}
+
+        &.cominfo{
+          @include flexbox-display-flex();
+          @include flexbox-align-items(center);
+          @include flexbox-justify-content(flex-end);
+        }
+
+        h6{
+          color: #B1C4E8;
+          margin: 0 5px 0 10px;
+        }
+
+        h6, p{
+          @include responsive-font-size($var-custom-font-size-base);
+        }
+      }
+
+      .infoiconbox{
+        width: 18px;
+        margin-left: 5px;
+        cursor: pointer;
+
+        &-icon{
+          fill: #687ca2;
+          @include transition-multiple(all 0.15s ease-in-out);
+        }
+
+        &-circle{
+          stroke: #2a3553;
+          fill: transparent;
+          @include transition-multiple(all 0.15s ease-in-out);
+        }
+
+        &:hover{
+
+          .infoiconbox-icon{
+            fill: $site-clr-white;
+          }
+
+          .infoiconbox-circle{
+            stroke: #2a3553;
+            fill: #2a3553;
+          }
+        }
+      }
+    }
+
+    &-tabs{}
+
+    &-tabcontent{
+      padding: 10px 0 0;
+      margin-top: 7.5px;
+      border-top: 1px solid $site-brdr-dark;
+    }
+
+    &-tabmarket{}
+
+    &-tablimit{}
+
+    &-tabstoplimit{}
+
+    &-formarea{
+      @include flexbox-display-flex();
+      @include flexbox-flex-wrap(wrap);
+
+      &-col{
+        @include flexbox-flex-basis(0);
+        @include flexbox-flex-grow(1);
+        max-width: 100%;
+        position: relative;
+
+        &.buycol{
+          padding-right: 10px;
+        }
+        &.sellcol{
+          padding-left: 10px;
+        }
+
+        &::before{
+          content: "";
+          background-color: $site-brdr-dark;
+          width: 1px;
+          height: 100%;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+
+        &:last-child::before{display: none;}
+      }
+
+    }
+
+    &-form{
+
+      .formhead{
+        @include flexbox-display-flex();
+        @include flexbox-align-items(center);
+        @include flexbox-justify-content(space-between);
+        padding-bottom: 10px;
+
+        h4{
+          color: $site-clr-white;
+          margin: 0;
+        }
+
+        h4, p{
+          @include responsive-font-size($var-custom-font-size-base);
+        }
+
+        &-curr{
+          @include flexbox-display-flex();
+          @include flexbox-align-items(center);
+          @include flexbox-justify-content(flex-end);
+
+          svg{
+            width: 14px;
+            margin-right: 10px;
+          }
+        }
+      }
+
+      .formfieldset{
+
+        .input-group{
+
+          &-prepend{
+            > *{
+              color: $site-clr-text-soft-sec;
+              background-color: transparent;
+              border-right-width: 0;
+            }
+
+            + .form-control{
+              border-left-width: 0;
+            }
+          }
+
+          &-append{
+            > *{
+              color: $site-clr-text-soft-sec;
+              border-left-width: 0;
+              padding-left: 0;
+            }
+          }
+
+          .form-control{
+            text-align: right;
+            border-right-width: 0;
+          }
+
+        }
+
+        .rangewrp{
+          position: relative;
+
+          .range-bubble{
+            background: $site-clr-blue;
+            color: $site-clr-white;
+            @include responsive-font-size($var-custom-font-size-base);
+            font-weight: $var-custom-font-weight-bold;
+            padding: 2px 8px 4px;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            @include translateX(-50%);
+            @include border-radius($var-custom-border-radius-sm);
+
+            &::after {
+              content: "";
+              background-color: $site-clr-blue;
+              width: 6px;
+              height: 6px;
+              position: absolute;
+              bottom: -3px;
+              left: 50%;
+              @include transform-multiple(translateX(-50%) rotate(45deg));
+            }
+          }
+        }
+
+      }
+
+    }
+
+  }
 
 }

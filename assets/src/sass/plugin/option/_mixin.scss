@@ -232,30 +232,12 @@
 }
 
 @mixin border-radii($topleft, $topright, $bottomright, $bottomleft) {
-  border-top-left-radius: $topleft;
-  border-top-right-radius: $topright;
-  border-bottom-right-radius: $bottomright;
-  border-bottom-left-radius: $bottomleft;
-  -o-border-top-left-radius: $topleft;
-  -o-border-top-right-radius: $topright;
-  -o-border-bottom-right-radius: $bottomright;
-  -o-border-bottom-left-radius: $bottomleft;
-  -ms-border-top-left-radius: $topleft;
-  -ms-border-top-right-radius: $topright;
-  -ms-border-bottom-right-radius: $bottomright;
-  -ms-border-bottom-left-radius: $bottomleft;
-  -moz-border-radius-topleft: $topleft;
-  -moz-border-radius-topright: $topright;
-  -moz-border-radius-bottomright: $bottomright;
-  -moz-border-radius-bottomleft: $bottomleft;
-  -webkit-border-top-left-radius: $topleft;
-  -webkit-border-top-right-radius: $topright;
-  -webkit-border-bottom-right-radius: $bottomright;
-  -webkit-border-bottom-left-radius: $bottomleft;
-  -khtml-border-top-left-radius: $topleft;
-  -khtml-border-top-right-radius: $topright;
-  -khtml-border-bottom-right-radius: $bottomright;
-  -khtml-border-bottom-left-radius: $bottomleft;
+  border-radius: $topleft $topright $bottomright $bottomleft;
+  -o-border-radius: $topleft $topright $bottomright $bottomleft;
+  -ms-border-radius: $topleft $topright $bottomright $bottomleft;
+  -moz-border-radius: $topleft $topright $bottomright $bottomleft;
+  -webkit-border-radius: $topleft $topright $bottomright $bottomleft;
+  -khtml-border-radius: $topleft $topright $bottomright $bottomleft;
 }
 
 @mixin box-shadow($box-shadow) {

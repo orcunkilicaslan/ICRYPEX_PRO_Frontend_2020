@@ -5,9 +5,9 @@
     border-bottom-width: 0;
   }
 
-  .nav{
+  &.nav-tabs{
 
-    &-item{
+    .nav-item{
       @include responsive-font-size($var-custom-font-size-base);
 
       &:first-child .nav-link{border-left-width: 0;}
@@ -18,13 +18,24 @@
       }
     }
 
-    &-link{
+    .nav-link{
       border-top-width: 0 !important;
       white-space: nowrap;
 
       &.active{}
     }
+  }
 
+  &.nav-pills{
+    .nav-item{
+      @include responsive-font-size($var-custom-font-size-base);
+    }
+
+    .nav-link{
+      white-space: nowrap;
+
+      &.active{}
+    }
   }
 
   &.tab-content{
@@ -38,26 +49,70 @@
 /* Tabs UI Dark */
 .sitetabs.tabsdark{
 
-  .nav{
+  &.nav-tabs{
 
-    &-item{
+    .nav-item{
       &.show{
         .nav-link{}
       }
     }
 
-    &-link{
-      color: #687CA2;
-      background-color: #131B31;
-      border-color: #0A0C14;
+    .nav-link{
+      color: $site-clr-text-soft-sec;
+      background-color: $site-clr-darkblue-800;
+      border-color: $site-clr-darkblue-900;
 
       &.active{
-        color: white;
-        background-color: #182239;
-        border-color: transparent transparent #182239;
+        color: $site-clr-white;
+        background-color: $site-clr-darkblue-700;
+        border-color: transparent transparent $site-clr-darkblue-700;
       }
     }
+  }
 
+  &.nav-pills{
+
+    .nav-item{
+
+      &.show{
+        .nav-link{}
+      }
+
+      .nav-link{
+        color: $site-clr-text-soft-sec;
+        margin-left: -1px;
+        @include border-radius(0);
+      }
+
+      &:first-child{
+
+        .nav-link{
+          margin-left: 0;
+          @include border-radii($var-custom-border-radius-sm,0,0,$var-custom-border-radius-sm);
+        }
+
+      }
+
+      &:last-child{
+        .nav-link{
+          @include border-radii(0,$var-custom-border-radius-sm,$var-custom-border-radius-sm,0);
+        }
+      }
+
+
+    }
+
+    .nav-link{
+      color: $site-clr-text-soft-sec;
+      border: 1px solid $site-clr-darkblue-500;
+
+
+
+      &.active{
+        color: $site-clr-white;
+        background-color: $site-clr-darkblue-500;
+      }
+    }
   }
 
   &.tab-content{}

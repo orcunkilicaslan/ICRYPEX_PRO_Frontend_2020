@@ -49,7 +49,7 @@ $var-custom-box-shadow-lg:                        0 1rem 3rem rgba($var-custom-c
 $var-custom-font-family-base:                     $site-font-family-default;
 $var-custom-font-size-base:                       0.75rem; // Assumes the browser default, typically `16px` // https://nekocalc.com/px-to-rem-converter
 $var-custom-font-size-lg:                         1.125rem;
-$var-custom-font-size-sm:                         0.8125rem;
+$var-custom-font-size-sm:                         0.75rem;
 $var-custom-h1-font-size:                         $var-custom-font-size-base * 2.5;
 $var-custom-h2-font-size:                         $var-custom-font-size-base * 2;
 $var-custom-h3-font-size:                         $var-custom-font-size-base * 1.75;
@@ -91,13 +91,24 @@ $var-custom-btn-font-weight:                      $var-custom-font-weight-bold;
 /* Site Custom Button Settings */
 
 /* Site Custom Form Settings */
-$var-custom-label-margin-bottom:                   .1rem;
-$var-custom-input-bg:                              $var-custom-clr-white;
-$var-custom-input-disabled-bg:                     $var-custom-clr-gray-200;
-$var-custom-input-color:                           $var-custom-clr-gray-700;
-$var-custom-input-border-color:                    $var-custom-clr-gray-400;
-$var-custom-custom-select-line-height:             $var-custom-line-height-base;
+$var-custom-label-margin-bottom:                  .1rem;
+$var-custom-input-bg:                             $var-custom-clr-white;
+$var-custom-input-disabled-bg:                    $var-custom-clr-gray-200;
+$var-custom-input-color:                          $var-custom-clr-gray-700;
+$var-custom-input-border-color:                   $var-custom-clr-gray-400;
+$var-custom-custom-select-line-height:            $var-custom-line-height-base;
 /* Site Custom Form Settings */
+
+/* Site Custom Tooltip and Popover Settings */
+$var-custom-tooltip-popover-font-size:            $var-custom-font-size-sm;
+$var-custom-tooltip-popover-bg:                   $site-clr-darkblue-800;
+$var-custom-tooltip-popover-border-color:         $site-brdr-dark;
+$var-custom-tooltip-popover-border-radius:        $var-custom-border-radius-sm;
+$var-custom-popover-max-width:                    440px;
+$var-custom-popover-border-width:                 $var-custom-border-width;
+$var-custom-tooltip-max-width:                    300px;
+$var-custom-tooltip-color:                        $var-custom-clr-white;
+/*   Site Custom Tooltip and Popover Settings */
 
 /* Site Table Settings */
 $var-custom-table-border-color:                    $global-table-border-color;

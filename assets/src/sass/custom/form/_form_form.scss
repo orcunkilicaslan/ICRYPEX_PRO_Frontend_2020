@@ -173,5 +173,11 @@
     background-color: $site-clr-green;
   }
 
+  #{$formcustomclassname}-select{
+    color: $site-clr-text-soft-sec;
+    background-color: $site-clr-darkblue-700;
+    border-color: $site-brdr-dark;
+  }
+
 }
 /* Form UI Dark */

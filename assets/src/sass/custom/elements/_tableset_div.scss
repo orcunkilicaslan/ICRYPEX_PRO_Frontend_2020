@@ -46,6 +46,12 @@
       padding-bottom: 5px;
     }
 
+    &-brdrbtm{
+      .tbl-tr{
+        border-top: 1px solid $site-brdr-dark;
+      }
+    }
+
     &-striped{
       .tbl-tr:nth-child(odd){
         background-color: $site-clr-darkblue-600;
