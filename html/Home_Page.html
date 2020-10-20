@@ -1910,7 +1910,74 @@
                 <div class="col">
                     <div class="mainbox mainbox-openorders">
                         <div class="openorders">
-                            Open Orders
+
+                            <!-- Tabs List -->
+                            <ul class="openorders-tabs sitetabs tabsdark nav nav-tabs nav-justified" role="tablist">
+                                <li class="nav-item"><a class="nav-link active" href="#oo_openorders" data-toggle="tab" role="tab" aria-selected="true">Açık Emirler</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#oo_history" data-toggle="tab" role="tab" aria-selected="false">İşlem Geçmişi</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#oo_assets" data-toggle="tab" role="tab" aria-selected="false">Varlıklar</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#oo_dandw" data-toggle="tab" role="tab" aria-selected="false">Yatır-Çek</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#oo_activities" data-toggle="tab" role="tab" aria-selected="false">Hesap Hareketleri</a></li>
+                            </ul>
+                            <!-- Tabs List -->
+
+                            <!-- Tabs Cont -->
+                            <div class="openorders-tabcontent sitetabs tabsdark tab-content">
+
+                                <!-- Open Orders -->
+                                <div id="oo_openorders" class="openorders-taborders tab-pane fade show active" role="tabpanel">
+                                    <!-- Filter -->
+                                    <div class="openorders-taborders-filter siteformui formdark row">
+                                        <div class="col-auto">
+                                            <select class="custom-select custom-select-sm">
+                                                <option value="1">Çift</option>
+                                                <option value="2">...</option>
+                                                <option value="3">...</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-auto">
+                                            <select class="custom-select custom-select-sm">
+                                                <option selected disabled>İşlem Tipi</option>
+                                                <option value="2">Stop Limit</option>
+                                                <option value="3">Market</option>
+                                                <option value="4">Limit</option>
+                                            </select>
+                                        </div>
+                                        <div class="btn-group btn-group-sm col" role="group">
+                                            <a class="btn btn-sm btn-secondary" href="#" title="1G" rel="bookmark">1G</a>
+                                            <a class="btn btn-sm btn-secondary" href="#" title="1H" rel="bookmark">1H</a>
+                                            <a class="btn btn-sm btn-secondary active" href="#" title="1A" rel="bookmark">1A</a>
+                                            <a class="btn btn-sm btn-secondary" href="#" title="3A" rel="bookmark">3A</a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <input type="text" class="form-control form-control-sm" value="" placeholder="Başlangıç - Bitiş Tarihi" />
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="custom-control custom-checkbox">
+                                                <input id="checkboxHideOtherPairs" class="custom-control-input" type="checkbox" value="" checked />
+                                                <label for="checkboxHideOtherPairs" class="custom-control-label">Diğer Çiftleri Gizle</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Filter -->
+                                </div>
+                                <!-- Open Orders -->
+                                <!-- Transaction History -->
+                                <div id="oo_history" class="openorders-tabhistory tab-pane fade" role="tabpanel">İşlem Geçmişi</div>
+                                <!-- Transaction History -->
+                                <!-- Assets -->
+                                <div id="oo_assets" class="openorders-tabassets tab-pane fade" role="tabpanel">Varlıklar</div>
+                                <!-- Assets -->
+                                <!-- Deposit/Withdrawal -->
+                                <div id="oo_dandw" class="openorders-tabdandw tab-pane fade" role="tabpanel">Yatır-Çek</div>
+                                <!-- Deposit/Withdrawal -->
+                                <!-- Account Activities -->
+                                <div id="oo_activities" class="openorders-tabactivities tab-pane fade" role="tabpanel">Hesap Hareketleri</div>
+                                <!-- Account Activities -->
+
+                            </div>
+                            <!-- Tabs Cont -->
+
                         </div>
                     </div>
                 </div>
