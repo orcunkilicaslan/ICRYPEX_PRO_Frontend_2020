@@ -1,7 +1,56 @@
 
 .mainbox-openorders{
 
-  .openorders{}
+  .openorders{
+    @include flexbox-display-flex();
+    @include flexbox-flex-flow(column);
+    height: 100%;
+
+    &-tabs{}
+
+    &-tabcontent{
+      @include flexbox-flex(1);
+      padding: 5px 0;
+    }
+
+    &-taborders{
+
+      &-filter{
+        @include flexbox-align-items(center);
+        padding: 5px 10px;
+        position: relative;
+
+        @include placeholder{
+          color: $site-clr-text-soft-sec;
+        }
+
+        .btn-secondary{
+          color: $site-clr-text-soft-sec;
+
+          &:hover,
+          &:focus,
+          &:not(:disabled):not(.disabled):active,
+          &:not(:disabled):not(.disabled).active{
+            color: $site-clr-white;
+          }
+        }
+
+        .custom-checkbox{
+          margin-left: 5px;
+        }
+      }
+
+    }
+
+    &-tabhistory{}
+
+    &-tabassets{}
+
+    &-tabdandw{}
+
+    &-tabactivities{}
+
+  }
 
 }
 
