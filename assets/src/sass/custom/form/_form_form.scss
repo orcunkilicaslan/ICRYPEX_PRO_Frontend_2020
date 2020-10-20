@@ -285,6 +285,62 @@
     border-color: $site-brdr-dark;
   }
 
+  #{$formcustomclassname}{
+
+    &-select{
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5LjQxNCIgaGVpZ2h0PSI1LjIwNyIgdmlld0JveD0iMCAwIDkuNDE0IDUuMjA3Ij4NCiAgPHBhdGggaWQ9IkFycm93IiBkPSJNOCwwLDQsNCwwLDAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAuNzA3IDAuNzA3KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNjg3Y2EyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLXdpZHRoPSIxIi8+DQo8L3N2Zz4NCg==");
+      background-size: 10px;
+
+      &:focus{}
+    }
+
+    &-control{
+      &-label{
+        font-weight: $var-custom-font-weight-normal;
+
+        &::before{}
+        &::before,
+        &::after{}
+      }
+
+      &-input{
+        &:checked{
+          ~ #{$formcustomclassname}-control-label{
+            &::after{}
+          }
+        }
+      }
+
+      &-group{
+        &-vertical{
+          #{$formcustomclassname}-control{}
+        }
+        &-horizontal{}
+      }
+    }
+
+    &-checkbox{
+      #{$formcustomclassname}-control-input{
+        &:checked{
+          ~ #{$formcustomclassname}-control-label{
+            &::after{}
+          }
+        }
+      }
+    }
+
+    &-radio{
+      #{$formcustomclassname}-control-input{
+        &:checked{
+          ~ #{$formcustomclassname}-control-label{
+            &::after{}
+          }
+        }
+      }
+    }
+
+  }
+
   #{$formcustomclassname}-control-label{
     &::before{
       background-color: $site-clr-darkblue-700;
