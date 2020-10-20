@@ -1,8 +1,10 @@
 
 .mainbox-buysellaction{
-  height: 100%;
 
   .buysellaction{
+    @include flexbox-display-flex();
+    @include flexbox-flex-flow(column);
+    height: 100%;
     padding: 10px;
 
     &-head{
@@ -67,9 +69,13 @@
     &-tabs{}
 
     &-tabcontent{
-      padding: 10px 0 0;
-      margin-top: 7.5px;
+      @include flexbox-flex(1);
+      padding: 7px 0 0;
+      margin-top: 7px;
       border-top: 1px solid $site-brdr-dark;
+      @include border-radius(0);
+
+      > div[class*="tab"]{height: 100%;}
     }
 
     &-tabmarket{}
@@ -81,6 +87,7 @@
     &-formarea{
       @include flexbox-display-flex();
       @include flexbox-flex-wrap(wrap);
+      height: 100%;
 
       &-col{
         @include flexbox-flex-basis(0);
@@ -111,12 +118,16 @@
     }
 
     &-form{
+      @include flexbox-display-flex();
+      @include flexbox-flex-flow(column);
+      @include flexbox-justify-content(space-between);
+      height: 100%;
 
       .formhead{
         @include flexbox-display-flex();
         @include flexbox-align-items(center);
         @include flexbox-justify-content(space-between);
-        padding-bottom: 10px;
+        padding-bottom: 5px;
 
         h4{
           color: $site-clr-white;
@@ -140,17 +151,14 @@
       }
 
       .formfieldset{
+        @include flexbox-flex(1);
+        @include flexbox-display-flex();
+        @include flexbox-flex-flow(column);
+        @include flexbox-justify-content(space-around);
+        height: 100%;
 
         .form-group{
-          .aligncenter{
-            @include flexbox-align-items(center);
-
-            .col-auto{padding-right: 10px;}
-          }
-
-          &.range{
-            margin-top: 1.25rem;
-          }
+          margin-bottom: 0.25rem;
         }
 
         .input-group{
@@ -180,6 +188,17 @@
             border-right-width: 0;
           }
         }
+      }
+
+      .formrange{
+        margin: 0.25rem 0;
+
+        .aligncenter{
+          @include flexbox-align-items(center);
+          margin: 0.25rem 0;
+
+          .col-auto{padding-right: 10px;}
+        }
 
         .rangeprogress{
           margin-top: 2px;
@@ -199,8 +218,6 @@
             }
           }
         }
-
-
       }
 
       .formbttm{
