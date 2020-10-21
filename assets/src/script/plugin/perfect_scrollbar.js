@@ -1,5 +1,6 @@
-/* Market Data Tab Perfect Scrollbar */
 import PerfectScrollbar from 'perfect-scrollbar';
+
+/* Market Data Tab Perfect Scrollbar */
 
 const MdDivTblHeight    = (document.querySelector('.marketdata').clientHeight - 24) - document.querySelector('.marketdata .marketdata-tabs').clientHeight;
 
@@ -13,9 +14,10 @@ const MdTabLstArea      = document.querySelector('.marketdata-tablast');
 const MdTabLstScrllHead = document.querySelector('.marketdata-tablast-table .scrollbartbl-th');
 const MdTabLstScrllBody = document.querySelector('.marketdata-tablast-table .scrollbartbl-tb');
 
-const psMtTabSym = new PerfectScrollbar(MdTabSymScrllBody, {wheelSpeed: 0.25, wheelPropagation: true, minScrollbarLength: 10, suppressScrollX: true});
-const psMtTabDtl = new PerfectScrollbar(MdTabDtlScrllBody, {wheelSpeed: 0.25, wheelPropagation: true, minScrollbarLength: 10, suppressScrollX: true});
-const psMtTabLst = new PerfectScrollbar(MdTabLstScrllBody, {wheelSpeed: 0.25, wheelPropagation: true, minScrollbarLength: 10, suppressScrollX: true});
+const psMtTabSym        = new PerfectScrollbar(MdTabSymScrllBody, {wheelSpeed: 0.25, wheelPropagation: true, minScrollbarLength: 10, suppressScrollX: true});
+const psMtTabDtl        = new PerfectScrollbar(MdTabDtlScrllBody, {wheelSpeed: 0.25, wheelPropagation: true, minScrollbarLength: 10, suppressScrollX: true});
+const psMtTabLst        = new PerfectScrollbar(MdTabLstScrllBody, {wheelSpeed: 0.25, wheelPropagation: true, minScrollbarLength: 10, suppressScrollX: true});
+
 
 document.addEventListener('DOMContentLoaded',()=>{
     if (MdTabSymScrllBody.querySelectorAll('.ps--active-y')){MdTabSymScrllHead.classList.add('active-y');}
@@ -45,3 +47,17 @@ window.addEventListener("resize", ()=>{
 
 }, true);
 /* Market Data Tab Perfect Scrollbar */
+
+/* Open Orders Tab Perfect Scrollbar */
+const OoTabOoArea      = document.querySelector('.openorders-taborders');
+const OoTabOoScrllHead = document.querySelector('.openorders-taborders-table .scrollbartbl-th');
+const OoTabOoScrllBody = document.querySelector('.openorders-taborders-table .scrollbartbl-tb');
+
+const psOoTabLst        = new PerfectScrollbar(OoTabOoScrllBody, {wheelSpeed: 0.25, wheelPropagation: true, minScrollbarLength: 10, suppressScrollX: true}); psOoTabLst.update();
+
+document.addEventListener('DOMContentLoaded',()=>{
+    if (OoTabOoScrllBody.querySelectorAll('.ps--active-y')){MdTabSymScrllHead.classList.add('active-y');}
+
+    psOoTabLst.update();
+});
+/* Open Orders Tab Perfect Scrollbar */
