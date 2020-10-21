@@ -11,13 +11,15 @@
     &-tabcontent{
       @include flexbox-flex(1);
       padding: 5px 0;
-    }
 
-    &-taborders{
+      > div[class*="tab"]{
+        margin: 0 10px;
+        overflow: hidden;
+      }
 
-      &-filter{
+      .table-topfilterbar{
         @include flexbox-align-items(center);
-        padding: 5px 10px;
+        padding: 5px 0;
         position: relative;
 
         @include placeholder{
@@ -38,16 +40,26 @@
         .custom-checkbox{
           margin-left: 5px;
         }
+
+        + div[class*="table"] .sitetablediv .scrollbar-tbl-tb{
+          height: 160px;
+        }
       }
 
+      .sitetablediv{
+        .tbl-thead .tbl-tr{border-top: 1px solid $site-brdr-dark; border-bottom: 1px solid $site-brdr-dark; margin-bottom: 7px;}
+        .tbl-thead .tbl-th{color: $site-clr-text-soft-sec; padding-top: 5px; padding-bottom: 7px;}
+        .tbl-tbody .tbl-td{white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+      }
+    }
+
+    &-taborders{
+
       &-table{
-        padding: 5px 10px;
+        padding: 5px 0;
 
         .sitetablediv{
-          .scrollbartbl-tb{height: 165px;}
-          .tbl-thead .tbl-tr{border-top: 1px solid $site-brdr-dark; border-bottom: 1px solid $site-brdr-dark; margin-bottom: 7px;}
-          .tbl-thead .tbl-th{color: $site-clr-text-soft-sec; padding-top: 5px; padding-bottom: 7px;}
-          .tbl-tbody .tbl-td{white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+
           .symb[class*="tbl"]{width: 60px;}
           .date[class*="tbl"]{width: 105px;}
           .type[class*="tbl"]{}
@@ -65,9 +77,58 @@
 
     }
 
-    &-tabhistory{}
+    &-tabhistory{
 
-    &-tabassets{}
+      &-table{
+        padding: 5px 0;
+
+        .scrollbar-horizontal{}
+
+        .sitetablediv{
+          min-width: 920px;
+          padding-bottom: 10px;
+
+          .brws[class*="tbl"]{
+            width: 22px;
+            text-align: center;
+
+            > a{margin: 0 2px;}
+          }
+          .nmbr[class*="tbl"]{width: 60px;}
+          .date[class*="tbl"]{width: 90px;}
+          .symb[class*="tbl"]{width: 60px;}
+          .type[class*="tbl"]{width: 100px;}
+          .avrg[class*="tbl"]{}
+          .pric[class*="tbl"]{}
+          .hppn[class*="tbl"]{}
+          .amnt[class*="tbl"]{}
+          .totl[class*="tbl"]{}
+          .comm[class*="tbl"]{width: 60px;}
+          .stts[class*="tbl"]{width: 60px;}
+
+        }
+      }
+
+    }
+
+    &-tabassets{
+
+      .demoscroolbar-out{
+        position: relative;
+        width: 520px;
+        height: 100%;
+        overflow: auto;
+        margin: 30px;
+      }
+
+      .demoscroolbar-in{
+        position: relative;
+        width: 920px;
+        height: 100px;
+        overflow: auto;
+      }
+
+    }
 
     &-tabdandw{}
 

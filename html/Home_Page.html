@@ -120,9 +120,9 @@
                                     </div>
                                     <!-- Filter -->
                                     <!-- Table -->
-                                    <div class="marketdata-tabsymbol-table">
-                                        <div class="sitetablediv tabledark scrollbartable">
-                                            <div class="scrollbartbl-th">
+                                    <div class="marketdata-tabsymbol-table scrollbar">
+                                        <div class="sitetablediv tabledark scrollbar-tbl">
+                                            <div class="scrollbar-tbl-th">
                                                 <div class="tbl-thead">
                                                     <div class="tbl-tr">
                                                         <div class="tbl-th aut fav"></div>
@@ -135,7 +135,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="scrollbartbl-tb">
+                                            <div class="scrollbar-tbl-tb">
                                                 <div class="tbl-tbody tbl-striped tbl-hovered">
                                                     <div class="tbl-tr">
                                                         <div class="tbl-td aut fav"><a class="tablefavico" href="javascript:void(0)" title="Favorime Ekle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.451" viewBox="0 0 10 9.451"><path id="Star" d="M20.8,24.461a.406.406,0,0,0,.42-.39.416.416,0,0,0,0-.059l-.34-2.884,1.99-2.139a.4.4,0,0,0-.023-.57.41.41,0,0,0-.2-.1l-2.879-.572-1.438-2.532a.409.409,0,0,0-.554-.155.4.4,0,0,0-.157.155l-1.438,2.532-2.879.572a.4.4,0,0,0-.22.669l1.99,2.139-.34,2.884a.4.4,0,0,0,.357.447.411.411,0,0,0,.218-.034l2.667-1.213,2.667,1.213A.412.412,0,0,0,20.8,24.461Z" transform="translate(-12.979 -15.011)" /></svg></a></div>
@@ -692,93 +692,89 @@
                                 <div id="md_detail" class="marketdata-tabdetail tab-pane fade" role="tabpanel">
                                     <!-- Table -->
                                     <div class="marketdata-tabdetail-table">
-                                        <div class="sitetablediv tabledark scrollbartable">
-                                            <div class="scrollbartbl-th">
-                                                <div class="tbl-thead">
-                                                    <div class="tbl-tr">
-                                                        <div class="tbl-th fxd">BTC/TRY - Bitcoin  / Türk Lirası</div>
-                                                    </div>
+                                        <div class="sitetablediv tabledark">
+                                            <div class="tbl-thead">
+                                                <div class="tbl-tr">
+                                                    <div class="tbl-th fxd">BTC/TRY - Bitcoin  / Türk Lirası</div>
                                                 </div>
                                             </div>
-                                            <div class="scrollbartbl-tb">
-                                                <div class="tbl-tbody tbl-striped">
-                                                    <div class="tbl-tr">
-                                                        <div class="tbl-td fxd txt">Bid</div>
-                                                        <div class="tbl-td fxd chg"><span class="sitecolorgreen">-2.22%</span></div>
-                                                        <div class="tbl-td aut per">
-                                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
-                                                                <g transform="translate(-20 -130)">
-                                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
-                                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
-                                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
-                                                                </g>
-                                                            </svg>
-                                                        </div>
+                                            <div class="tbl-tbody tbl-striped">
+                                                <div class="tbl-tr">
+                                                    <div class="tbl-td fxd txt">Bid</div>
+                                                    <div class="tbl-td fxd chg"><span class="sitecolorgreen">-2.22%</span></div>
+                                                    <div class="tbl-td aut per">
+                                                        <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                            <g transform="translate(-20 -130)">
+                                                                <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                                <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                                <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                            </g>
+                                                        </svg>
                                                     </div>
-                                                    <div class="tbl-tr">
-                                                        <div class="tbl-td fxd txt">Bid High</div>
-                                                        <div class="tbl-td fxd chg"><span class="sitecolorred">+1.38%</span></div>
-                                                        <div class="tbl-td aut per">
-                                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
-                                                                <g transform="translate(-20 -130)">
-                                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
-                                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
-                                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
-                                                                </g>
-                                                            </svg>
-                                                        </div>
+                                                </div>
+                                                <div class="tbl-tr">
+                                                    <div class="tbl-td fxd txt">Bid High</div>
+                                                    <div class="tbl-td fxd chg"><span class="sitecolorred">+1.38%</span></div>
+                                                    <div class="tbl-td aut per">
+                                                        <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                            <g transform="translate(-20 -130)">
+                                                                <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                                <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                                <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                            </g>
+                                                        </svg>
                                                     </div>
-                                                    <div class="tbl-tr">
-                                                        <div class="tbl-td fxd txt">Bid Low</div>
-                                                        <div class="tbl-td fxd chg"><span class="sitecolorred">+2.24%</span></div>
-                                                        <div class="tbl-td aut per">
-                                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
-                                                                <g transform="translate(-20 -130)">
-                                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
-                                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
-                                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
-                                                                </g>
-                                                            </svg>
-                                                        </div>
+                                                </div>
+                                                <div class="tbl-tr">
+                                                    <div class="tbl-td fxd txt">Bid Low</div>
+                                                    <div class="tbl-td fxd chg"><span class="sitecolorred">+2.24%</span></div>
+                                                    <div class="tbl-td aut per">
+                                                        <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                            <g transform="translate(-20 -130)">
+                                                                <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                                <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                                <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                            </g>
+                                                        </svg>
                                                     </div>
-                                                    <div class="tbl-tr">
-                                                        <div class="tbl-td fxd txt">Ask</div>
-                                                        <div class="tbl-td fxd chg"><span class="sitecolorgreen">+3.57%</span></div>
-                                                        <div class="tbl-td aut per">
-                                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
-                                                                <g transform="translate(-20 -130)">
-                                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
-                                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
-                                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
-                                                                </g>
-                                                            </svg>
-                                                        </div>
+                                                </div>
+                                                <div class="tbl-tr">
+                                                    <div class="tbl-td fxd txt">Ask</div>
+                                                    <div class="tbl-td fxd chg"><span class="sitecolorgreen">+3.57%</span></div>
+                                                    <div class="tbl-td aut per">
+                                                        <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                            <g transform="translate(-20 -130)">
+                                                                <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                                <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                                <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                            </g>
+                                                        </svg>
                                                     </div>
-                                                    <div class="tbl-tr">
-                                                        <div class="tbl-td fxd txt">Ask High</div>
-                                                        <div class="tbl-td fxd chg"><span class="sitecolorred">-1.56%</span></div>
-                                                        <div class="tbl-td aut per">
-                                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
-                                                                <g transform="translate(-20 -130)">
-                                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
-                                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
-                                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
-                                                                </g>
-                                                            </svg>
-                                                        </div>
+                                                </div>
+                                                <div class="tbl-tr">
+                                                    <div class="tbl-td fxd txt">Ask High</div>
+                                                    <div class="tbl-td fxd chg"><span class="sitecolorred">-1.56%</span></div>
+                                                    <div class="tbl-td aut per">
+                                                        <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                            <g transform="translate(-20 -130)">
+                                                                <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                                <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                                <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                            </g>
+                                                        </svg>
                                                     </div>
-                                                    <div class="tbl-tr">
-                                                        <div class="tbl-td fxd txt">Ask Low</div>
-                                                        <div class="tbl-td fxd chg"><span class="sitecolorred">-1.56%</span></div>
-                                                        <div class="tbl-td aut per">
-                                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
-                                                                <g transform="translate(-20 -130)">
-                                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
-                                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
-                                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
-                                                                </g>
-                                                            </svg>
-                                                        </div>
+                                                </div>
+                                                <div class="tbl-tr">
+                                                    <div class="tbl-td fxd txt">Ask Low</div>
+                                                    <div class="tbl-td fxd chg"><span class="sitecolorred">-1.56%</span></div>
+                                                    <div class="tbl-td aut per">
+                                                        <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                            <g transform="translate(-20 -130)">
+                                                                <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                                <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                                <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                            </g>
+                                                        </svg>
                                                     </div>
                                                 </div>
                                             </div>
@@ -790,9 +786,9 @@
                                 <!-- Last -->
                                 <div id="md_last" class="marketdata-tablast tab-pane fade" role="tabpanel">
                                     <!-- Table -->
-                                    <div class="marketdata-tablast-table">
-                                        <div class="sitetablediv tabledark scrollbartable">
-                                            <div class="scrollbartbl-th">
+                                    <div class="marketdata-tablast-table scrollbar">
+                                        <div class="sitetablediv tabledark scrollbar-tbl">
+                                            <div class="scrollbar-tbl-th">
                                                 <div class="tbl-thead">
                                                     <div class="tbl-tr">
                                                         <div class="tbl-th fxd time">Zaman</div>
@@ -801,7 +797,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="scrollbartbl-tb">
+                                            <div class="scrollbar-tbl-tb">
                                                 <div class="tbl-tbody tbl-striped tbl-hovered">
                                                     <div class="tbl-tr">
                                                         <div class="tbl-td fxd time">09:04:24</div>
@@ -1190,7 +1186,7 @@
             <div class="row">
 
                 <!-- Order Book -->
-                <div class="col">
+                <div class="col-4">
                     <div class="mainbox mainbox-orderbook">
                         <div class="orderbook">
                             <div class="orderbook-head">
@@ -1384,7 +1380,7 @@
                 <!-- Order Book -->
 
                 <!-- Buy/Sell Action -->
-                <div class="col">
+                <div class="col-4">
                     <div class="mainbox mainbox-buysellaction">
                         <div class="buysellaction">
                             <div class="buysellaction-head">
@@ -1907,7 +1903,7 @@
                 <!-- Buy/Sell Action -->
 
                 <!-- Open Orders -->
-                <div class="col">
+                <div class="col-4">
                     <div class="mainbox mainbox-openorders">
                         <div class="openorders">
 
@@ -1927,7 +1923,7 @@
                                 <!-- Open Orders -->
                                 <div id="oo_openorders" class="openorders-taborders tab-pane fade show active" role="tabpanel">
                                     <!-- Filter -->
-                                    <div class="openorders-taborders-filter siteformui formdark row">
+                                    <div class="table-topfilterbar siteformui formdark row">
                                         <div class="col-auto">
                                             <select class="custom-select custom-select-sm">
                                                 <option value="1">Çift</option>
@@ -1938,9 +1934,9 @@
                                         <div class="col-auto">
                                             <select class="custom-select custom-select-sm">
                                                 <option selected disabled>İşlem Tipi</option>
-                                                <option value="2">Stop Limit</option>
-                                                <option value="3">Market</option>
-                                                <option value="4">Limit</option>
+                                                <option value="1">Stop Limit</option>
+                                                <option value="2">Market</option>
+                                                <option value="3">Limit</option>
                                             </select>
                                         </div>
                                         <div class="btn-group btn-group-sm col" role="group">
@@ -1954,16 +1950,16 @@
                                         </div>
                                         <div class="col-auto">
                                             <div class="custom-control custom-checkbox">
-                                                <input id="checkboxHideOtherPairs" class="custom-control-input" type="checkbox" value="" checked />
-                                                <label for="checkboxHideOtherPairs" class="custom-control-label">Diğer Çiftleri Gizle</label>
+                                                <input id="ordersHideOtherPairs" class="custom-control-input" type="checkbox" value="" checked />
+                                                <label for="ordersHideOtherPairs" class="custom-control-label">Diğer Çiftleri Gizle</label>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- Filter -->
                                     <!-- Table -->
-                                    <div class="openorders-taborders-table">
-                                        <div class="sitetablediv tabledark scrollbartable">
-                                            <div class="scrollbartbl-th">
+                                    <div class="openorders-taborders-table scrollbar">
+                                        <div class="sitetablediv tabledark scrollbar-tbl">
+                                            <div class="scrollbar-tbl-th">
                                                 <div class="tbl-thead">
                                                     <div class="tbl-tr">
                                                         <div class="tbl-th aut symb">Çift</div>
@@ -1976,7 +1972,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="scrollbartbl-tb">
+                                            <div class="scrollbar-tbl-tb">
                                                 <div class="tbl-tbody tbl-striped tbl-hovered">
                                                     <div class="tbl-tr">
                                                         <div class="tbl-td aut symb">BTC/TRY</div>
@@ -2238,7 +2234,303 @@
                                 </div>
                                 <!-- Open Orders -->
                                 <!-- Transaction History -->
-                                <div id="oo_history" class="openorders-tabhistory tab-pane fade" role="tabpanel">İşlem Geçmişi</div>
+                                <div id="oo_history" class="openorders-tabhistory tab-pane fade" role="tabpanel">
+                                    <!-- Filter -->
+                                    <div class="table-topfilterbar siteformui formdark row">
+                                        <div class="col">
+                                            <select class="custom-select custom-select-sm">
+                                                <option value="1">Çift</option>
+                                                <option value="2">...</option>
+                                                <option value="3">...</option>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <select class="custom-select custom-select-sm">
+                                                <option selected disabled>İşlem Tipi</option>
+                                                <option value="1">Stop Limit</option>
+                                                <option value="2">Market</option>
+                                                <option value="3">Limit</option>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <select class="custom-select custom-select-sm">
+                                                <option selected disabled>Durum</option>
+                                                <option value="1">Gerçekleşti</option>
+                                                <option value="2">Beklemede</option>
+                                            </select>
+                                        </div>
+                                        <div class="btn-group btn-group-sm col" role="group">
+                                            <a class="btn btn-sm btn-secondary" href="#" title="1G" rel="bookmark">1G</a>
+                                            <a class="btn btn-sm btn-secondary" href="#" title="1H" rel="bookmark">1H</a>
+                                            <a class="btn btn-sm btn-secondary active" href="#" title="1A" rel="bookmark">1A</a>
+                                            <a class="btn btn-sm btn-secondary" href="#" title="3A" rel="bookmark">3A</a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <input type="text" class="form-control form-control-sm" value="" placeholder="Başlangıç - Bitiş Tarihi" />
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="custom-control custom-checkbox">
+                                                <input id="historyHideOtherPairs" class="custom-control-input" type="checkbox" value="" checked />
+                                                <label for="historyHideOtherPairs" class="custom-control-label">Diğer Çiftleri Gizle</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Filter -->
+                                    <!-- Table -->
+                                    <div class="openorders-tabhistory-table scrollbar">
+                                        <div class="scrollbar-horizontal">
+                                            <div class="sitetablediv tabledark scrollbar-tbl">
+                                                <div class="scrollbar-tbl-th">
+                                                    <div class="tbl-thead">
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-th aut brws"></div>
+                                                            <div class="tbl-th aut nmbr">İşlem No</div>
+                                                            <div class="tbl-th aut date">Tarih</div>
+                                                            <div class="tbl-th aut symb">Çift</div>
+                                                            <div class="tbl-th aut type">İşlem Tipi</div>
+                                                            <div class="tbl-th fxd avrg">Ortalama</div>
+                                                            <div class="tbl-th fxd pric">Fiyat</div>
+                                                            <div class="tbl-th fxd hppn">Gerçekleşen</div>
+                                                            <div class="tbl-th fxd amnt">Miktar</div>
+                                                            <div class="tbl-th fxd totl">Toplam</div>
+                                                            <div class="tbl-th aut comm">Komisyon</div>
+                                                            <div class="tbl-th aut stts">Durum</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="scrollbar-tbl-tb">
+                                                    <div class="tbl-tbody tbl-striped tbl-hovered">
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-td aut brws">
+                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                            </div>
+                                                            <div class="tbl-td aut nmbr">MR-99999</div>
+                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                            <div class="tbl-td aut symb">BTC/TRY</div>
+                                                            <div class="tbl-td aut type">Stop Limit - <span class="sitecolorgreen">Alış</span></div>
+                                                            <div class="tbl-td fxd avrg">22,430 TRY</div>
+                                                            <div class="tbl-td fxd pric">22,430 TRY</div>
+                                                            <div class="tbl-td fxd hppn">1,43004833 BTC</div>
+                                                            <div class="tbl-td fxd amnt">1,43004833 BTC</div>
+                                                            <div class="tbl-td fxd totl">50.98588353 TRY</div>
+                                                            <div class="tbl-td aut comm">10.98 TRY</div>
+                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                        </div>
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-td aut brws">
+                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                            </div>
+                                                            <div class="tbl-td aut nmbr">MR-99999</div>
+                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                            <div class="tbl-td aut symb">BTC/ETH</div>
+                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorgreen">Alış</span></div>
+                                                            <div class="tbl-td fxd avrg">35,120 TRY</div>
+                                                            <div class="tbl-td fxd pric">35,120 TRY</div>
+                                                            <div class="tbl-td fxd hppn">1,47050968 BTC</div>
+                                                            <div class="tbl-td fxd amnt">1,47050968 BTC</div>
+                                                            <div class="tbl-td fxd totl">43,99958890 TRY</div>
+                                                            <div class="tbl-td aut comm">9.99 TRY</div>
+                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                        </div>
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-td aut brws">
+                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                            </div>
+                                                            <div class="tbl-td aut nmbr">MR-99999</div>
+                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                            <div class="tbl-td aut symb">BTC/EOS</div>
+                                                            <div class="tbl-td aut type">Stop Limit - <span class="sitecolorred">Satış</span></div>
+                                                            <div class="tbl-td fxd avrg">3.469 TRY</div>
+                                                            <div class="tbl-td fxd pric">3.469 TRY</div>
+                                                            <div class="tbl-td fxd hppn">1,28947736 BTC</div>
+                                                            <div class="tbl-td fxd amnt">1,28947736 BTC</div>
+                                                            <div class="tbl-td fxd totl">23,74630933 TRY</div>
+                                                            <div class="tbl-td aut comm">3,74 TRY</div>
+                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                        </div>
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-td aut brws">
+                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                            </div>
+                                                            <div class="tbl-td aut nmbr">MR-99999</div>
+                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                            <div class="tbl-td aut symb">BTC/XRP</div>
+                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorred">Satış</span></div>
+                                                            <div class="tbl-td fxd avrg">41,956 TRY</div>
+                                                            <div class="tbl-td fxd pric">41,956 TRY</div>
+                                                            <div class="tbl-td fxd hppn">1,29846500 BTC</div>
+                                                            <div class="tbl-td fxd amnt">1,29846500 BTC</div>
+                                                            <div class="tbl-td fxd totl">65,84947640 TRY</div>
+                                                            <div class="tbl-td aut comm">5,84 TRY</div>
+                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                        </div>
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-td aut brws">
+                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                            </div>
+                                                            <div class="tbl-td aut nmbr">MR-99999</div>
+                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                            <div class="tbl-td aut symb">BTC/XRP</div>
+                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorgreen">Alış</span></div>
+                                                            <div class="tbl-td fxd avrg">1.029 TRY</div>
+                                                            <div class="tbl-td fxd pric">1.029 TRY</div>
+                                                            <div class="tbl-td fxd hppn">1,75893923 BTC</div>
+                                                            <div class="tbl-td fxd amnt">1,75893923 BTC</div>
+                                                            <div class="tbl-td fxd totl">76,74638908 TRY</div>
+                                                            <div class="tbl-td aut comm">7,74 TRY</div>
+                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                        </div>
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-td aut brws">
+                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                            </div>
+                                                            <div class="tbl-td aut nmbr">MR-99999</div>
+                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                            <div class="tbl-td aut symb">BTC/USD</div>
+                                                            <div class="tbl-td aut type">Stop Limit - <span class="sitecolorgreen">Alış</span></div>
+                                                            <div class="tbl-td fxd avrg">2.039 TRY</div>
+                                                            <div class="tbl-td fxd pric">2.039 TRY</div>
+                                                            <div class="tbl-td fxd hppn">1,77460337 BTC</div>
+                                                            <div class="tbl-td fxd amnt">1,77460337 BTC</div>
+                                                            <div class="tbl-td fxd totl">98,63528889 TRY</div>
+                                                            <div class="tbl-td aut comm">8,63 TRY</div>
+                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                        </div>
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-td aut brws">
+                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                            </div>
+                                                            <div class="tbl-td aut nmbr">MR-99999</div>
+                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                            <div class="tbl-td aut symb">BTC/MPAY</div>
+                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorred">Satış</span></div>
+                                                            <div class="tbl-td fxd avrg">36,154 TRY</div>
+                                                            <div class="tbl-td fxd pric">36,154 TRY</div>
+                                                            <div class="tbl-td fxd hppn">1,2885930 BTC</div>
+                                                            <div class="tbl-td fxd amnt">1,2885930 BTC</div>
+                                                            <div class="tbl-td fxd totl">34,66540304 TRY</div>
+                                                            <div class="tbl-td aut comm">34,66 TRY</div>
+                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                        </div>
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-td aut brws">
+                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                            </div>
+                                                            <div class="tbl-td aut nmbr">MR-99999</div>
+                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                            <div class="tbl-td aut symb">BTC/TRY</div>
+                                                            <div class="tbl-td aut type">Stop Limit - <span class="sitecolorgreen">Alış</span></div>
+                                                            <div class="tbl-td fxd avrg">22,430 TRY</div>
+                                                            <div class="tbl-td fxd pric">22,430 TRY</div>
+                                                            <div class="tbl-td fxd hppn">1,43004833 BTC</div>
+                                                            <div class="tbl-td fxd amnt">1,43004833 BTC</div>
+                                                            <div class="tbl-td fxd totl">50.98588353 TRY</div>
+                                                            <div class="tbl-td aut comm">10.98 TRY</div>
+                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                        </div>
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-td aut brws">
+                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                            </div>
+                                                            <div class="tbl-td aut nmbr">MR-99999</div>
+                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                            <div class="tbl-td aut symb">BTC/ETH</div>
+                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorgreen">Alış</span></div>
+                                                            <div class="tbl-td fxd avrg">35,120 TRY</div>
+                                                            <div class="tbl-td fxd pric">35,120 TRY</div>
+                                                            <div class="tbl-td fxd hppn">1,47050968 BTC</div>
+                                                            <div class="tbl-td fxd amnt">1,47050968 BTC</div>
+                                                            <div class="tbl-td fxd totl">43,99958890 TRY</div>
+                                                            <div class="tbl-td aut comm">9.99 TRY</div>
+                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                        </div>
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-td aut brws">
+                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                            </div>
+                                                            <div class="tbl-td aut nmbr">MR-99999</div>
+                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                            <div class="tbl-td aut symb">BTC/EOS</div>
+                                                            <div class="tbl-td aut type">Stop Limit - <span class="sitecolorred">Satış</span></div>
+                                                            <div class="tbl-td fxd avrg">3.469 TRY</div>
+                                                            <div class="tbl-td fxd pric">3.469 TRY</div>
+                                                            <div class="tbl-td fxd hppn">1,28947736 BTC</div>
+                                                            <div class="tbl-td fxd amnt">1,28947736 BTC</div>
+                                                            <div class="tbl-td fxd totl">23,74630933 TRY</div>
+                                                            <div class="tbl-td aut comm">3,74 TRY</div>
+                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                        </div>
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-td aut brws">
+                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                            </div>
+                                                            <div class="tbl-td aut nmbr">MR-99999</div>
+                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                            <div class="tbl-td aut symb">BTC/XRP</div>
+                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorred">Satış</span></div>
+                                                            <div class="tbl-td fxd avrg">41,956 TRY</div>
+                                                            <div class="tbl-td fxd pric">41,956 TRY</div>
+                                                            <div class="tbl-td fxd hppn">1,29846500 BTC</div>
+                                                            <div class="tbl-td fxd amnt">1,29846500 BTC</div>
+                                                            <div class="tbl-td fxd totl">65,84947640 TRY</div>
+                                                            <div class="tbl-td aut comm">5,84 TRY</div>
+                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                        </div>
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-td aut brws">
+                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                            </div>
+                                                            <div class="tbl-td aut nmbr">MR-99999</div>
+                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                            <div class="tbl-td aut symb">BTC/XRP</div>
+                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorgreen">Alış</span></div>
+                                                            <div class="tbl-td fxd avrg">1.029 TRY</div>
+                                                            <div class="tbl-td fxd pric">1.029 TRY</div>
+                                                            <div class="tbl-td fxd hppn">1,75893923 BTC</div>
+                                                            <div class="tbl-td fxd amnt">1,75893923 BTC</div>
+                                                            <div class="tbl-td fxd totl">76,74638908 TRY</div>
+                                                            <div class="tbl-td aut comm">7,74 TRY</div>
+                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                        </div>
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-td aut brws">
+                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                            </div>
+                                                            <div class="tbl-td aut nmbr">MR-99999</div>
+                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                            <div class="tbl-td aut symb">BTC/USD</div>
+                                                            <div class="tbl-td aut type">Stop Limit - <span class="sitecolorgreen">Alış</span></div>
+                                                            <div class="tbl-td fxd avrg">2.039 TRY</div>
+                                                            <div class="tbl-td fxd pric">2.039 TRY</div>
+                                                            <div class="tbl-td fxd hppn">1,77460337 BTC</div>
+                                                            <div class="tbl-td fxd amnt">1,77460337 BTC</div>
+                                                            <div class="tbl-td fxd totl">98,63528889 TRY</div>
+                                                            <div class="tbl-td aut comm">8,63 TRY</div>
+                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                        </div>
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-td aut brws">
+                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                            </div>
+                                                            <div class="tbl-td aut nmbr">MR-99999</div>
+                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                            <div class="tbl-td aut symb">BTC/MPAY</div>
+                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorred">Satış</span></div>
+                                                            <div class="tbl-td fxd avrg">36,154 TRY</div>
+                                                            <div class="tbl-td fxd pric">36,154 TRY</div>
+                                                            <div class="tbl-td fxd hppn">1,2885930 BTC</div>
+                                                            <div class="tbl-td fxd amnt">1,2885930 BTC</div>
+                                                            <div class="tbl-td fxd totl">34,66540304 TRY</div>
+                                                            <div class="tbl-td aut comm">34,66 TRY</div>
+                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Table -->
+                                </div>
                                 <!-- Transaction History -->
                                 <!-- Assets -->
                                 <div id="oo_assets" class="openorders-tabassets tab-pane fade" role="tabpanel">Varlıklar</div>
