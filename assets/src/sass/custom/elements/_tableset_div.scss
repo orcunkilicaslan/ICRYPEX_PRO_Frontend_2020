@@ -60,10 +60,10 @@
 
     &-hovered{
       .tbl-tr:hover{
-        background-color: $site-clr-darkblue-800;
+        background-color: transparentize($site-clr-darkblue-100, 0.60);
 
         .tbl-td{
-          color: $site-clr-white;
+          color: lighten($site-clr-text-soft-sec, 20%);
         }
       }
     }

@@ -40,6 +40,29 @@
         }
       }
 
+      &-table{
+        padding: 5px 10px;
+
+        .sitetablediv{
+          .scrollbartbl-tb{height: 170px;}
+          .tbl-thead .tbl-tr{border-top: 1px solid $site-brdr-dark; border-bottom: 1px solid $site-brdr-dark; margin-bottom: 7px;}
+          .tbl-thead .tbl-th{color: $site-clr-text-soft-sec; padding-top: 5px; padding-bottom: 7px;}
+          .tbl-tbody .tbl-td{white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+          .symb[class*="tbl"]{width: 55px;}
+          .date[class*="tbl"]{width: 105px;}
+          .type[class*="tbl"]{}
+          .pric[class*="tbl"]{}
+          .amnt[class*="tbl"]{}
+          .hppn[class*="tbl"]{}
+          .bttn[class*="tbl"]{
+            width: 50px;
+            text-align: center;
+
+            > a{margin: 0 2px;}
+          }
+        }
+      }
+
     }
 
     &-tabhistory{}

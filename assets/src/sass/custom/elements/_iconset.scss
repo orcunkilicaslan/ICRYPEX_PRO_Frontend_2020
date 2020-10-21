@@ -5,7 +5,7 @@
 // Global Mixin
 @import "../../plugin/option/mixin";
 
-.icons{
+.icon{
 
   &-svg{
     background-repeat: no-repeat;
@@ -27,21 +27,19 @@
     }
   }
 
-  &-sprite{
+  &-sprt{
     background-repeat: no-repeat;
     display: inline-block;
     position: relative;
 
-    &.sprite-24-socialmedia{
-      background-image: url(#{$path-img-url-icons}/icons_spite_24_socialmedia.svg);
+    &.sprt14smiconclrd{
+      background-image: url(#{$path-img-url-icons}/icons_spite_14_smalliconcolored.svg);
       background-position: 0 0;
-      width: 24px;
-      height: 24px;
+      width: 14px;
+      height: 14px;
 
-      &.icons-facebook{background-position: calc(-24px*0) 0;}
-      &.icons-twitter{background-position: calc(-24px*1) 0;}
-      &.icons-linkedin{background-position: calc(-24px*2) 0;}
-      &.icons-instagram{background-position: calc(-24px*3) 0;}
+      &.sm-edit{background-position: calc(-14px*0) 0;}
+      &.sm-delete{background-position: calc(-14px*1) 0;}
     }
   }
 }
