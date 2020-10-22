@@ -1909,8 +1909,8 @@
 
                             <!-- Tabs List -->
                             <ul class="openorders-tabs sitetabs tabsdark nav nav-tabs nav-justified" role="tablist">
-                                <li class="nav-item"><a class="nav-link active" href="#oo_openorders" data-toggle="tab" role="tab" aria-selected="true">Açık Emirler</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#oo_history" data-toggle="tab" role="tab" aria-selected="false">İşlem Geçmişi</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#oo_openorders" data-toggle="tab" role="tab" aria-selected="false">Açık Emirler</a></li>
+                                <li class="nav-item"><a class="nav-link active" href="#oo_history" data-toggle="tab" role="tab" aria-selected="true">İşlem Geçmişi</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#oo_assets" data-toggle="tab" role="tab" aria-selected="false">Varlıklar</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#oo_dandw" data-toggle="tab" role="tab" aria-selected="false">Yatır-Çek</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#oo_activities" data-toggle="tab" role="tab" aria-selected="false">Hesap Hareketleri</a></li>
@@ -1921,7 +1921,7 @@
                             <div class="openorders-tabcontent sitetabs tabsdark tab-content">
 
                                 <!-- Open Orders -->
-                                <div id="oo_openorders" class="openorders-taborders tab-pane fade show active" role="tabpanel">
+                                <div id="oo_openorders" class="openorders-taborders tab-pane fade" role="tabpanel">
                                     <!-- Filter -->
                                     <div class="table-topfilterbar siteformui formdark row">
                                         <div class="col-auto">
@@ -2234,7 +2234,7 @@
                                 </div>
                                 <!-- Open Orders -->
                                 <!-- Transaction History -->
-                                <div id="oo_history" class="openorders-tabhistory tab-pane fade" role="tabpanel">
+                                <div id="oo_history" class="openorders-tabhistory tab-pane fade show active" role="tabpanel">
                                     <!-- Filter -->
                                     <div class="table-topfilterbar siteformui formdark row">
                                         <div class="col">
@@ -2300,229 +2300,753 @@
                                                 </div>
                                                 <div class="scrollbar-tbl-tb">
                                                     <div class="tbl-tbody tbl-striped tbl-hovered">
-                                                        <div class="tbl-tr">
-                                                            <div class="tbl-td aut brws">
-                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                        <div class="hsttblbrwswrp">
+                                                            <div class="hsttblbrwstr tbl-tr">
+                                                                <div class="tbl-td aut brws">
+                                                                    <a href="javascript:void(0);" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                                </div>
+                                                                <div class="tbl-td aut nmbr">MR-99999</div>
+                                                                <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                <div class="tbl-td aut symb">BTC/TRY</div>
+                                                                <div class="tbl-td aut type">Stop Limit - <span class="sitecolorgreen">Alış</span></div>
+                                                                <div class="tbl-td fxd avrg">22,430 TRY</div>
+                                                                <div class="tbl-td fxd pric">22,430 TRY</div>
+                                                                <div class="tbl-td fxd hppn">1,43004833 BTC</div>
+                                                                <div class="tbl-td fxd amnt">1,43004833 BTC</div>
+                                                                <div class="tbl-td fxd totl">50.98588353 TRY</div>
+                                                                <div class="tbl-td aut comm">10.98 TRY</div>
+                                                                <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
-                                                            <div class="tbl-td aut nmbr">MR-99999</div>
-                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
-                                                            <div class="tbl-td aut symb">BTC/TRY</div>
-                                                            <div class="tbl-td aut type">Stop Limit - <span class="sitecolorgreen">Alış</span></div>
-                                                            <div class="tbl-td fxd avrg">22,430 TRY</div>
-                                                            <div class="tbl-td fxd pric">22,430 TRY</div>
-                                                            <div class="tbl-td fxd hppn">1,43004833 BTC</div>
-                                                            <div class="tbl-td fxd amnt">1,43004833 BTC</div>
-                                                            <div class="tbl-td fxd totl">50.98588353 TRY</div>
-                                                            <div class="tbl-td aut comm">10.98 TRY</div>
-                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                            <div class="hsttblbrwstbl">
+                                                                <div class="sitetablediv tabledark">
+                                                                    <div class="tbl-thead">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-th aut date">Tarih</div>
+                                                                            <div class="tbl-th fxd hppr">Gerçekleşen Fiyat</div>
+                                                                            <div class="tbl-th fxd hppn">Gerçekleşen</div>
+                                                                            <div class="tbl-th aut comm">Komisyon</div>
+                                                                            <div class="tbl-th fxd totl">Toplam</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="tbl-tbody tbl-striped tbl-hovered">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,650 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,763282734 BTC</div>
+                                                                            <div class="tbl-td aut comm">45 TRY</div>
+                                                                            <div class="tbl-td fxd totl">24,564 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,746 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635378827 BTC</div>
+                                                                            <div class="tbl-td aut comm">1 TRY</div>
+                                                                            <div class="tbl-td fxd totl">657 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">24,643 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635290377 BTC</div>
+                                                                            <div class="tbl-td aut comm">0 TRY</div>
+                                                                            <div class="tbl-td fxd totl">65 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">34,676 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">1,645379887 BTC</div>
+                                                                            <div class="tbl-td aut comm">21 TRY</div>
+                                                                            <div class="tbl-td fxd totl">1,568 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">45,877 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,36526787 BTC</div>
+                                                                            <div class="tbl-td aut comm">3 TRY</div>
+                                                                            <div class="tbl-td fxd totl">0,768 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="tbl-tr">
-                                                            <div class="tbl-td aut brws">
-                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                        <div class="hsttblbrwswrp">
+                                                            <div class="hsttblbrwstr tbl-tr">
+                                                                <div class="tbl-td aut brws">
+                                                                    <a href="javascript:void(0);" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                                </div>
+                                                                <div class="tbl-td aut nmbr">MR-99999</div>
+                                                                <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                <div class="tbl-td aut symb">BTC/ETH</div>
+                                                                <div class="tbl-td aut type">Market Limit - <span class="sitecolorgreen">Alış</span></div>
+                                                                <div class="tbl-td fxd avrg">35,120 TRY</div>
+                                                                <div class="tbl-td fxd pric">35,120 TRY</div>
+                                                                <div class="tbl-td fxd hppn">1,47050968 BTC</div>
+                                                                <div class="tbl-td fxd amnt">1,47050968 BTC</div>
+                                                                <div class="tbl-td fxd totl">43,99958890 TRY</div>
+                                                                <div class="tbl-td aut comm">9.99 TRY</div>
+                                                                <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
-                                                            <div class="tbl-td aut nmbr">MR-99999</div>
-                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
-                                                            <div class="tbl-td aut symb">BTC/ETH</div>
-                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorgreen">Alış</span></div>
-                                                            <div class="tbl-td fxd avrg">35,120 TRY</div>
-                                                            <div class="tbl-td fxd pric">35,120 TRY</div>
-                                                            <div class="tbl-td fxd hppn">1,47050968 BTC</div>
-                                                            <div class="tbl-td fxd amnt">1,47050968 BTC</div>
-                                                            <div class="tbl-td fxd totl">43,99958890 TRY</div>
-                                                            <div class="tbl-td aut comm">9.99 TRY</div>
-                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                            <div class="hsttblbrwstbl">
+                                                                <div class="sitetablediv tabledark">
+                                                                    <div class="tbl-thead">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-th aut date">Tarih</div>
+                                                                            <div class="tbl-th fxd hppr">Gerçekleşen Fiyat</div>
+                                                                            <div class="tbl-th fxd hppn">Gerçekleşen</div>
+                                                                            <div class="tbl-th aut comm">Komisyon</div>
+                                                                            <div class="tbl-th fxd totl">Toplam</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="tbl-tbody tbl-striped tbl-hovered">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,650 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,763282734 BTC</div>
+                                                                            <div class="tbl-td aut comm">45 TRY</div>
+                                                                            <div class="tbl-td fxd totl">24,564 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,746 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635378827 BTC</div>
+                                                                            <div class="tbl-td aut comm">1 TRY</div>
+                                                                            <div class="tbl-td fxd totl">657 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">24,643 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635290377 BTC</div>
+                                                                            <div class="tbl-td aut comm">0 TRY</div>
+                                                                            <div class="tbl-td fxd totl">65 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">34,676 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">1,645379887 BTC</div>
+                                                                            <div class="tbl-td aut comm">21 TRY</div>
+                                                                            <div class="tbl-td fxd totl">1,568 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">45,877 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,36526787 BTC</div>
+                                                                            <div class="tbl-td aut comm">3 TRY</div>
+                                                                            <div class="tbl-td fxd totl">0,768 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="tbl-tr">
-                                                            <div class="tbl-td aut brws">
-                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                        <div class="hsttblbrwswrp">
+                                                            <div class="hsttblbrwstr tbl-tr">
+                                                                <div class="tbl-td aut brws">
+                                                                    <a href="javascript:void(0);" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                                </div>
+                                                                <div class="tbl-td aut nmbr">MR-99999</div>
+                                                                <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                <div class="tbl-td aut symb">BTC/EOS</div>
+                                                                <div class="tbl-td aut type">Stop Limit - <span class="sitecolorred">Satış</span></div>
+                                                                <div class="tbl-td fxd avrg">3.469 TRY</div>
+                                                                <div class="tbl-td fxd pric">3.469 TRY</div>
+                                                                <div class="tbl-td fxd hppn">1,28947736 BTC</div>
+                                                                <div class="tbl-td fxd amnt">1,28947736 BTC</div>
+                                                                <div class="tbl-td fxd totl">23,74630933 TRY</div>
+                                                                <div class="tbl-td aut comm">3,74 TRY</div>
+                                                                <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
-                                                            <div class="tbl-td aut nmbr">MR-99999</div>
-                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
-                                                            <div class="tbl-td aut symb">BTC/EOS</div>
-                                                            <div class="tbl-td aut type">Stop Limit - <span class="sitecolorred">Satış</span></div>
-                                                            <div class="tbl-td fxd avrg">3.469 TRY</div>
-                                                            <div class="tbl-td fxd pric">3.469 TRY</div>
-                                                            <div class="tbl-td fxd hppn">1,28947736 BTC</div>
-                                                            <div class="tbl-td fxd amnt">1,28947736 BTC</div>
-                                                            <div class="tbl-td fxd totl">23,74630933 TRY</div>
-                                                            <div class="tbl-td aut comm">3,74 TRY</div>
-                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                            <div class="hsttblbrwstbl">
+                                                                <div class="sitetablediv tabledark">
+                                                                    <div class="tbl-thead">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-th aut date">Tarih</div>
+                                                                            <div class="tbl-th fxd hppr">Gerçekleşen Fiyat</div>
+                                                                            <div class="tbl-th fxd hppn">Gerçekleşen</div>
+                                                                            <div class="tbl-th aut comm">Komisyon</div>
+                                                                            <div class="tbl-th fxd totl">Toplam</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="tbl-tbody tbl-striped tbl-hovered">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,650 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,763282734 BTC</div>
+                                                                            <div class="tbl-td aut comm">45 TRY</div>
+                                                                            <div class="tbl-td fxd totl">24,564 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,746 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635378827 BTC</div>
+                                                                            <div class="tbl-td aut comm">1 TRY</div>
+                                                                            <div class="tbl-td fxd totl">657 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">24,643 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635290377 BTC</div>
+                                                                            <div class="tbl-td aut comm">0 TRY</div>
+                                                                            <div class="tbl-td fxd totl">65 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">34,676 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">1,645379887 BTC</div>
+                                                                            <div class="tbl-td aut comm">21 TRY</div>
+                                                                            <div class="tbl-td fxd totl">1,568 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">45,877 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,36526787 BTC</div>
+                                                                            <div class="tbl-td aut comm">3 TRY</div>
+                                                                            <div class="tbl-td fxd totl">0,768 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="tbl-tr">
-                                                            <div class="tbl-td aut brws">
-                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                        <div class="hsttblbrwswrp">
+                                                            <div class="hsttblbrwstr tbl-tr">
+                                                                <div class="tbl-td aut brws">
+                                                                    <a href="javascript:void(0);" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                                </div>
+                                                                <div class="tbl-td aut nmbr">MR-99999</div>
+                                                                <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                <div class="tbl-td aut symb">BTC/XRP</div>
+                                                                <div class="tbl-td aut type">Market Limit - <span class="sitecolorred">Satış</span></div>
+                                                                <div class="tbl-td fxd avrg">41,956 TRY</div>
+                                                                <div class="tbl-td fxd pric">41,956 TRY</div>
+                                                                <div class="tbl-td fxd hppn">1,29846500 BTC</div>
+                                                                <div class="tbl-td fxd amnt">1,29846500 BTC</div>
+                                                                <div class="tbl-td fxd totl">65,84947640 TRY</div>
+                                                                <div class="tbl-td aut comm">5,84 TRY</div>
+                                                                <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
-                                                            <div class="tbl-td aut nmbr">MR-99999</div>
-                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
-                                                            <div class="tbl-td aut symb">BTC/XRP</div>
-                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorred">Satış</span></div>
-                                                            <div class="tbl-td fxd avrg">41,956 TRY</div>
-                                                            <div class="tbl-td fxd pric">41,956 TRY</div>
-                                                            <div class="tbl-td fxd hppn">1,29846500 BTC</div>
-                                                            <div class="tbl-td fxd amnt">1,29846500 BTC</div>
-                                                            <div class="tbl-td fxd totl">65,84947640 TRY</div>
-                                                            <div class="tbl-td aut comm">5,84 TRY</div>
-                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                            <div class="hsttblbrwstbl">
+                                                                <div class="sitetablediv tabledark">
+                                                                    <div class="tbl-thead">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-th aut date">Tarih</div>
+                                                                            <div class="tbl-th fxd hppr">Gerçekleşen Fiyat</div>
+                                                                            <div class="tbl-th fxd hppn">Gerçekleşen</div>
+                                                                            <div class="tbl-th aut comm">Komisyon</div>
+                                                                            <div class="tbl-th fxd totl">Toplam</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="tbl-tbody tbl-striped tbl-hovered">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,650 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,763282734 BTC</div>
+                                                                            <div class="tbl-td aut comm">45 TRY</div>
+                                                                            <div class="tbl-td fxd totl">24,564 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,746 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635378827 BTC</div>
+                                                                            <div class="tbl-td aut comm">1 TRY</div>
+                                                                            <div class="tbl-td fxd totl">657 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">24,643 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635290377 BTC</div>
+                                                                            <div class="tbl-td aut comm">0 TRY</div>
+                                                                            <div class="tbl-td fxd totl">65 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">34,676 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">1,645379887 BTC</div>
+                                                                            <div class="tbl-td aut comm">21 TRY</div>
+                                                                            <div class="tbl-td fxd totl">1,568 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">45,877 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,36526787 BTC</div>
+                                                                            <div class="tbl-td aut comm">3 TRY</div>
+                                                                            <div class="tbl-td fxd totl">0,768 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="tbl-tr">
-                                                            <div class="tbl-td aut brws">
-                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                        <div class="hsttblbrwswrp">
+                                                            <div class="hsttblbrwstr tbl-tr">
+                                                                <div class="tbl-td aut brws">
+                                                                    <a href="javascript:void(0);" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                                </div>
+                                                                <div class="tbl-td aut nmbr">MR-99999</div>
+                                                                <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                <div class="tbl-td aut symb">BTC/XRP</div>
+                                                                <div class="tbl-td aut type">Market Limit - <span class="sitecolorgreen">Alış</span></div>
+                                                                <div class="tbl-td fxd avrg">1.029 TRY</div>
+                                                                <div class="tbl-td fxd pric">1.029 TRY</div>
+                                                                <div class="tbl-td fxd hppn">1,75893923 BTC</div>
+                                                                <div class="tbl-td fxd amnt">1,75893923 BTC</div>
+                                                                <div class="tbl-td fxd totl">76,74638908 TRY</div>
+                                                                <div class="tbl-td aut comm">7,74 TRY</div>
+                                                                <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
-                                                            <div class="tbl-td aut nmbr">MR-99999</div>
-                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
-                                                            <div class="tbl-td aut symb">BTC/XRP</div>
-                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorgreen">Alış</span></div>
-                                                            <div class="tbl-td fxd avrg">1.029 TRY</div>
-                                                            <div class="tbl-td fxd pric">1.029 TRY</div>
-                                                            <div class="tbl-td fxd hppn">1,75893923 BTC</div>
-                                                            <div class="tbl-td fxd amnt">1,75893923 BTC</div>
-                                                            <div class="tbl-td fxd totl">76,74638908 TRY</div>
-                                                            <div class="tbl-td aut comm">7,74 TRY</div>
-                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                            <div class="hsttblbrwstbl">
+                                                                <div class="sitetablediv tabledark">
+                                                                    <div class="tbl-thead">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-th aut date">Tarih</div>
+                                                                            <div class="tbl-th fxd hppr">Gerçekleşen Fiyat</div>
+                                                                            <div class="tbl-th fxd hppn">Gerçekleşen</div>
+                                                                            <div class="tbl-th aut comm">Komisyon</div>
+                                                                            <div class="tbl-th fxd totl">Toplam</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="tbl-tbody tbl-striped tbl-hovered">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,650 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,763282734 BTC</div>
+                                                                            <div class="tbl-td aut comm">45 TRY</div>
+                                                                            <div class="tbl-td fxd totl">24,564 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,746 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635378827 BTC</div>
+                                                                            <div class="tbl-td aut comm">1 TRY</div>
+                                                                            <div class="tbl-td fxd totl">657 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">24,643 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635290377 BTC</div>
+                                                                            <div class="tbl-td aut comm">0 TRY</div>
+                                                                            <div class="tbl-td fxd totl">65 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">34,676 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">1,645379887 BTC</div>
+                                                                            <div class="tbl-td aut comm">21 TRY</div>
+                                                                            <div class="tbl-td fxd totl">1,568 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">45,877 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,36526787 BTC</div>
+                                                                            <div class="tbl-td aut comm">3 TRY</div>
+                                                                            <div class="tbl-td fxd totl">0,768 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="tbl-tr">
-                                                            <div class="tbl-td aut brws">
-                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                        <div class="hsttblbrwswrp">
+                                                            <div class="hsttblbrwstr tbl-tr">
+                                                                <div class="tbl-td aut brws">
+                                                                    <a href="javascript:void(0);" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                                </div>
+                                                                <div class="tbl-td aut nmbr">MR-99999</div>
+                                                                <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                <div class="tbl-td aut symb">BTC/USD</div>
+                                                                <div class="tbl-td aut type">Stop Limit - <span class="sitecolorgreen">Alış</span></div>
+                                                                <div class="tbl-td fxd avrg">2.039 TRY</div>
+                                                                <div class="tbl-td fxd pric">2.039 TRY</div>
+                                                                <div class="tbl-td fxd hppn">1,77460337 BTC</div>
+                                                                <div class="tbl-td fxd amnt">1,77460337 BTC</div>
+                                                                <div class="tbl-td fxd totl">98,63528889 TRY</div>
+                                                                <div class="tbl-td aut comm">8,63 TRY</div>
+                                                                <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
-                                                            <div class="tbl-td aut nmbr">MR-99999</div>
-                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
-                                                            <div class="tbl-td aut symb">BTC/USD</div>
-                                                            <div class="tbl-td aut type">Stop Limit - <span class="sitecolorgreen">Alış</span></div>
-                                                            <div class="tbl-td fxd avrg">2.039 TRY</div>
-                                                            <div class="tbl-td fxd pric">2.039 TRY</div>
-                                                            <div class="tbl-td fxd hppn">1,77460337 BTC</div>
-                                                            <div class="tbl-td fxd amnt">1,77460337 BTC</div>
-                                                            <div class="tbl-td fxd totl">98,63528889 TRY</div>
-                                                            <div class="tbl-td aut comm">8,63 TRY</div>
-                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                            <div class="hsttblbrwstbl">
+                                                                <div class="sitetablediv tabledark">
+                                                                    <div class="tbl-thead">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-th aut date">Tarih</div>
+                                                                            <div class="tbl-th fxd hppr">Gerçekleşen Fiyat</div>
+                                                                            <div class="tbl-th fxd hppn">Gerçekleşen</div>
+                                                                            <div class="tbl-th aut comm">Komisyon</div>
+                                                                            <div class="tbl-th fxd totl">Toplam</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="tbl-tbody tbl-striped tbl-hovered">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,650 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,763282734 BTC</div>
+                                                                            <div class="tbl-td aut comm">45 TRY</div>
+                                                                            <div class="tbl-td fxd totl">24,564 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,746 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635378827 BTC</div>
+                                                                            <div class="tbl-td aut comm">1 TRY</div>
+                                                                            <div class="tbl-td fxd totl">657 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">24,643 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635290377 BTC</div>
+                                                                            <div class="tbl-td aut comm">0 TRY</div>
+                                                                            <div class="tbl-td fxd totl">65 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">34,676 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">1,645379887 BTC</div>
+                                                                            <div class="tbl-td aut comm">21 TRY</div>
+                                                                            <div class="tbl-td fxd totl">1,568 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">45,877 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,36526787 BTC</div>
+                                                                            <div class="tbl-td aut comm">3 TRY</div>
+                                                                            <div class="tbl-td fxd totl">0,768 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="tbl-tr">
-                                                            <div class="tbl-td aut brws">
-                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                        <div class="hsttblbrwswrp">
+                                                            <div class="hsttblbrwstr tbl-tr">
+                                                                <div class="tbl-td aut brws">
+                                                                    <a href="javascript:void(0);" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                                </div>
+                                                                <div class="tbl-td aut nmbr">MR-99999</div>
+                                                                <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                <div class="tbl-td aut symb">BTC/MPAY</div>
+                                                                <div class="tbl-td aut type">Market Limit - <span class="sitecolorred">Satış</span></div>
+                                                                <div class="tbl-td fxd avrg">36,154 TRY</div>
+                                                                <div class="tbl-td fxd pric">36,154 TRY</div>
+                                                                <div class="tbl-td fxd hppn">1,2885930 BTC</div>
+                                                                <div class="tbl-td fxd amnt">1,2885930 BTC</div>
+                                                                <div class="tbl-td fxd totl">34,66540304 TRY</div>
+                                                                <div class="tbl-td aut comm">34,66 TRY</div>
+                                                                <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
-                                                            <div class="tbl-td aut nmbr">MR-99999</div>
-                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
-                                                            <div class="tbl-td aut symb">BTC/MPAY</div>
-                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorred">Satış</span></div>
-                                                            <div class="tbl-td fxd avrg">36,154 TRY</div>
-                                                            <div class="tbl-td fxd pric">36,154 TRY</div>
-                                                            <div class="tbl-td fxd hppn">1,2885930 BTC</div>
-                                                            <div class="tbl-td fxd amnt">1,2885930 BTC</div>
-                                                            <div class="tbl-td fxd totl">34,66540304 TRY</div>
-                                                            <div class="tbl-td aut comm">34,66 TRY</div>
-                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                            <div class="hsttblbrwstbl">
+                                                                <div class="sitetablediv tabledark">
+                                                                    <div class="tbl-thead">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-th aut date">Tarih</div>
+                                                                            <div class="tbl-th fxd hppr">Gerçekleşen Fiyat</div>
+                                                                            <div class="tbl-th fxd hppn">Gerçekleşen</div>
+                                                                            <div class="tbl-th aut comm">Komisyon</div>
+                                                                            <div class="tbl-th fxd totl">Toplam</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="tbl-tbody tbl-striped tbl-hovered">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,650 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,763282734 BTC</div>
+                                                                            <div class="tbl-td aut comm">45 TRY</div>
+                                                                            <div class="tbl-td fxd totl">24,564 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,746 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635378827 BTC</div>
+                                                                            <div class="tbl-td aut comm">1 TRY</div>
+                                                                            <div class="tbl-td fxd totl">657 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">24,643 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635290377 BTC</div>
+                                                                            <div class="tbl-td aut comm">0 TRY</div>
+                                                                            <div class="tbl-td fxd totl">65 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">34,676 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">1,645379887 BTC</div>
+                                                                            <div class="tbl-td aut comm">21 TRY</div>
+                                                                            <div class="tbl-td fxd totl">1,568 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">45,877 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,36526787 BTC</div>
+                                                                            <div class="tbl-td aut comm">3 TRY</div>
+                                                                            <div class="tbl-td fxd totl">0,768 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="tbl-tr">
-                                                            <div class="tbl-td aut brws">
-                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                        <div class="hsttblbrwswrp">
+                                                            <div class="hsttblbrwstr tbl-tr">
+                                                                <div class="tbl-td aut brws">
+                                                                    <a href="javascript:void(0);" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                                </div>
+                                                                <div class="tbl-td aut nmbr">MR-99999</div>
+                                                                <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                <div class="tbl-td aut symb">BTC/TRY</div>
+                                                                <div class="tbl-td aut type">Stop Limit - <span class="sitecolorgreen">Alış</span></div>
+                                                                <div class="tbl-td fxd avrg">22,430 TRY</div>
+                                                                <div class="tbl-td fxd pric">22,430 TRY</div>
+                                                                <div class="tbl-td fxd hppn">1,43004833 BTC</div>
+                                                                <div class="tbl-td fxd amnt">1,43004833 BTC</div>
+                                                                <div class="tbl-td fxd totl">50.98588353 TRY</div>
+                                                                <div class="tbl-td aut comm">10.98 TRY</div>
+                                                                <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
-                                                            <div class="tbl-td aut nmbr">MR-99999</div>
-                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
-                                                            <div class="tbl-td aut symb">BTC/TRY</div>
-                                                            <div class="tbl-td aut type">Stop Limit - <span class="sitecolorgreen">Alış</span></div>
-                                                            <div class="tbl-td fxd avrg">22,430 TRY</div>
-                                                            <div class="tbl-td fxd pric">22,430 TRY</div>
-                                                            <div class="tbl-td fxd hppn">1,43004833 BTC</div>
-                                                            <div class="tbl-td fxd amnt">1,43004833 BTC</div>
-                                                            <div class="tbl-td fxd totl">50.98588353 TRY</div>
-                                                            <div class="tbl-td aut comm">10.98 TRY</div>
-                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                            <div class="hsttblbrwstbl">
+                                                                <div class="sitetablediv tabledark">
+                                                                    <div class="tbl-thead">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-th aut date">Tarih</div>
+                                                                            <div class="tbl-th fxd hppr">Gerçekleşen Fiyat</div>
+                                                                            <div class="tbl-th fxd hppn">Gerçekleşen</div>
+                                                                            <div class="tbl-th aut comm">Komisyon</div>
+                                                                            <div class="tbl-th fxd totl">Toplam</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="tbl-tbody tbl-striped tbl-hovered">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,650 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,763282734 BTC</div>
+                                                                            <div class="tbl-td aut comm">45 TRY</div>
+                                                                            <div class="tbl-td fxd totl">24,564 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,746 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635378827 BTC</div>
+                                                                            <div class="tbl-td aut comm">1 TRY</div>
+                                                                            <div class="tbl-td fxd totl">657 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">24,643 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635290377 BTC</div>
+                                                                            <div class="tbl-td aut comm">0 TRY</div>
+                                                                            <div class="tbl-td fxd totl">65 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">34,676 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">1,645379887 BTC</div>
+                                                                            <div class="tbl-td aut comm">21 TRY</div>
+                                                                            <div class="tbl-td fxd totl">1,568 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">45,877 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,36526787 BTC</div>
+                                                                            <div class="tbl-td aut comm">3 TRY</div>
+                                                                            <div class="tbl-td fxd totl">0,768 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="tbl-tr">
-                                                            <div class="tbl-td aut brws">
-                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                        <div class="hsttblbrwswrp">
+                                                            <div class="hsttblbrwstr tbl-tr">
+                                                                <div class="tbl-td aut brws">
+                                                                    <a href="javascript:void(0);" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                                </div>
+                                                                <div class="tbl-td aut nmbr">MR-99999</div>
+                                                                <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                <div class="tbl-td aut symb">BTC/ETH</div>
+                                                                <div class="tbl-td aut type">Market Limit - <span class="sitecolorgreen">Alış</span></div>
+                                                                <div class="tbl-td fxd avrg">35,120 TRY</div>
+                                                                <div class="tbl-td fxd pric">35,120 TRY</div>
+                                                                <div class="tbl-td fxd hppn">1,47050968 BTC</div>
+                                                                <div class="tbl-td fxd amnt">1,47050968 BTC</div>
+                                                                <div class="tbl-td fxd totl">43,99958890 TRY</div>
+                                                                <div class="tbl-td aut comm">9.99 TRY</div>
+                                                                <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
-                                                            <div class="tbl-td aut nmbr">MR-99999</div>
-                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
-                                                            <div class="tbl-td aut symb">BTC/ETH</div>
-                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorgreen">Alış</span></div>
-                                                            <div class="tbl-td fxd avrg">35,120 TRY</div>
-                                                            <div class="tbl-td fxd pric">35,120 TRY</div>
-                                                            <div class="tbl-td fxd hppn">1,47050968 BTC</div>
-                                                            <div class="tbl-td fxd amnt">1,47050968 BTC</div>
-                                                            <div class="tbl-td fxd totl">43,99958890 TRY</div>
-                                                            <div class="tbl-td aut comm">9.99 TRY</div>
-                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                            <div class="hsttblbrwstbl">
+                                                                <div class="sitetablediv tabledark">
+                                                                    <div class="tbl-thead">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-th aut date">Tarih</div>
+                                                                            <div class="tbl-th fxd hppr">Gerçekleşen Fiyat</div>
+                                                                            <div class="tbl-th fxd hppn">Gerçekleşen</div>
+                                                                            <div class="tbl-th aut comm">Komisyon</div>
+                                                                            <div class="tbl-th fxd totl">Toplam</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="tbl-tbody tbl-striped tbl-hovered">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,650 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,763282734 BTC</div>
+                                                                            <div class="tbl-td aut comm">45 TRY</div>
+                                                                            <div class="tbl-td fxd totl">24,564 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,746 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635378827 BTC</div>
+                                                                            <div class="tbl-td aut comm">1 TRY</div>
+                                                                            <div class="tbl-td fxd totl">657 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">24,643 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635290377 BTC</div>
+                                                                            <div class="tbl-td aut comm">0 TRY</div>
+                                                                            <div class="tbl-td fxd totl">65 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">34,676 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">1,645379887 BTC</div>
+                                                                            <div class="tbl-td aut comm">21 TRY</div>
+                                                                            <div class="tbl-td fxd totl">1,568 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">45,877 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,36526787 BTC</div>
+                                                                            <div class="tbl-td aut comm">3 TRY</div>
+                                                                            <div class="tbl-td fxd totl">0,768 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="tbl-tr">
-                                                            <div class="tbl-td aut brws">
-                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                        <div class="hsttblbrwswrp">
+                                                            <div class="hsttblbrwstr tbl-tr">
+                                                                <div class="tbl-td aut brws">
+                                                                    <a href="javascript:void(0);" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                                </div>
+                                                                <div class="tbl-td aut nmbr">MR-99999</div>
+                                                                <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                <div class="tbl-td aut symb">BTC/EOS</div>
+                                                                <div class="tbl-td aut type">Stop Limit - <span class="sitecolorred">Satış</span></div>
+                                                                <div class="tbl-td fxd avrg">3.469 TRY</div>
+                                                                <div class="tbl-td fxd pric">3.469 TRY</div>
+                                                                <div class="tbl-td fxd hppn">1,28947736 BTC</div>
+                                                                <div class="tbl-td fxd amnt">1,28947736 BTC</div>
+                                                                <div class="tbl-td fxd totl">23,74630933 TRY</div>
+                                                                <div class="tbl-td aut comm">3,74 TRY</div>
+                                                                <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
-                                                            <div class="tbl-td aut nmbr">MR-99999</div>
-                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
-                                                            <div class="tbl-td aut symb">BTC/EOS</div>
-                                                            <div class="tbl-td aut type">Stop Limit - <span class="sitecolorred">Satış</span></div>
-                                                            <div class="tbl-td fxd avrg">3.469 TRY</div>
-                                                            <div class="tbl-td fxd pric">3.469 TRY</div>
-                                                            <div class="tbl-td fxd hppn">1,28947736 BTC</div>
-                                                            <div class="tbl-td fxd amnt">1,28947736 BTC</div>
-                                                            <div class="tbl-td fxd totl">23,74630933 TRY</div>
-                                                            <div class="tbl-td aut comm">3,74 TRY</div>
-                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
+                                                            <div class="hsttblbrwstbl">
+                                                                <div class="sitetablediv tabledark">
+                                                                    <div class="tbl-thead">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-th aut date">Tarih</div>
+                                                                            <div class="tbl-th fxd hppr">Gerçekleşen Fiyat</div>
+                                                                            <div class="tbl-th fxd hppn">Gerçekleşen</div>
+                                                                            <div class="tbl-th aut comm">Komisyon</div>
+                                                                            <div class="tbl-th fxd totl">Toplam</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="tbl-tbody tbl-striped tbl-hovered">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,650 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,763282734 BTC</div>
+                                                                            <div class="tbl-td aut comm">45 TRY</div>
+                                                                            <div class="tbl-td fxd totl">24,564 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,746 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635378827 BTC</div>
+                                                                            <div class="tbl-td aut comm">1 TRY</div>
+                                                                            <div class="tbl-td fxd totl">657 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">24,643 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635290377 BTC</div>
+                                                                            <div class="tbl-td aut comm">0 TRY</div>
+                                                                            <div class="tbl-td fxd totl">65 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">34,676 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">1,645379887 BTC</div>
+                                                                            <div class="tbl-td aut comm">21 TRY</div>
+                                                                            <div class="tbl-td fxd totl">1,568 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">45,877 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,36526787 BTC</div>
+                                                                            <div class="tbl-td aut comm">3 TRY</div>
+                                                                            <div class="tbl-td fxd totl">0,768 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="tbl-tr">
-                                                            <div class="tbl-td aut brws">
-                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                        <div class="hsttblbrwswrp">
+                                                            <div class="hsttblbrwstr tbl-tr">
+                                                                <div class="tbl-td aut brws">
+                                                                    <a href="javascript:void(0);" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                                </div>
+                                                                <div class="tbl-td aut nmbr">MR-99999</div>
+                                                                <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                <div class="tbl-td aut symb">BTC/XRP</div>
+                                                                <div class="tbl-td aut type">Market Limit - <span class="sitecolorred">Satış</span></div>
+                                                                <div class="tbl-td fxd avrg">41,956 TRY</div>
+                                                                <div class="tbl-td fxd pric">41,956 TRY</div>
+                                                                <div class="tbl-td fxd hppn">1,29846500 BTC</div>
+                                                                <div class="tbl-td fxd amnt">1,29846500 BTC</div>
+                                                                <div class="tbl-td fxd totl">65,84947640 TRY</div>
+                                                                <div class="tbl-td aut comm">5,84 TRY</div>
+                                                                <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
-                                                            <div class="tbl-td aut nmbr">MR-99999</div>
-                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
-                                                            <div class="tbl-td aut symb">BTC/XRP</div>
-                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorred">Satış</span></div>
-                                                            <div class="tbl-td fxd avrg">41,956 TRY</div>
-                                                            <div class="tbl-td fxd pric">41,956 TRY</div>
-                                                            <div class="tbl-td fxd hppn">1,29846500 BTC</div>
-                                                            <div class="tbl-td fxd amnt">1,29846500 BTC</div>
-                                                            <div class="tbl-td fxd totl">65,84947640 TRY</div>
-                                                            <div class="tbl-td aut comm">5,84 TRY</div>
-                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
-                                                        </div>
-                                                        <div class="tbl-tr">
-                                                            <div class="tbl-td aut brws">
-                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
+                                                            <div class="hsttblbrwstbl">
+                                                                <div class="sitetablediv tabledark">
+                                                                    <div class="tbl-thead">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-th aut date">Tarih</div>
+                                                                            <div class="tbl-th fxd hppr">Gerçekleşen Fiyat</div>
+                                                                            <div class="tbl-th fxd hppn">Gerçekleşen</div>
+                                                                            <div class="tbl-th aut comm">Komisyon</div>
+                                                                            <div class="tbl-th fxd totl">Toplam</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="tbl-tbody tbl-striped tbl-hovered">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,650 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,763282734 BTC</div>
+                                                                            <div class="tbl-td aut comm">45 TRY</div>
+                                                                            <div class="tbl-td fxd totl">24,564 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">33,746 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635378827 BTC</div>
+                                                                            <div class="tbl-td aut comm">1 TRY</div>
+                                                                            <div class="tbl-td fxd totl">657 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">24,643 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,635290377 BTC</div>
+                                                                            <div class="tbl-td aut comm">0 TRY</div>
+                                                                            <div class="tbl-td fxd totl">65 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">34,676 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">1,645379887 BTC</div>
+                                                                            <div class="tbl-td aut comm">21 TRY</div>
+                                                                            <div class="tbl-td fxd totl">1,568 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
+                                                                            <div class="tbl-td fxd hppr">45,877 TRY</div>
+                                                                            <div class="tbl-td fxd hppn">0,36526787 BTC</div>
+                                                                            <div class="tbl-td aut comm">3 TRY</div>
+                                                                            <div class="tbl-td fxd totl">0,768 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="tbl-td aut nmbr">MR-99999</div>
-                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
-                                                            <div class="tbl-td aut symb">BTC/XRP</div>
-                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorgreen">Alış</span></div>
-                                                            <div class="tbl-td fxd avrg">1.029 TRY</div>
-                                                            <div class="tbl-td fxd pric">1.029 TRY</div>
-                                                            <div class="tbl-td fxd hppn">1,75893923 BTC</div>
-                                                            <div class="tbl-td fxd amnt">1,75893923 BTC</div>
-                                                            <div class="tbl-td fxd totl">76,74638908 TRY</div>
-                                                            <div class="tbl-td aut comm">7,74 TRY</div>
-                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
-                                                        </div>
-                                                        <div class="tbl-tr">
-                                                            <div class="tbl-td aut brws">
-                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
-                                                            </div>
-                                                            <div class="tbl-td aut nmbr">MR-99999</div>
-                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
-                                                            <div class="tbl-td aut symb">BTC/USD</div>
-                                                            <div class="tbl-td aut type">Stop Limit - <span class="sitecolorgreen">Alış</span></div>
-                                                            <div class="tbl-td fxd avrg">2.039 TRY</div>
-                                                            <div class="tbl-td fxd pric">2.039 TRY</div>
-                                                            <div class="tbl-td fxd hppn">1,77460337 BTC</div>
-                                                            <div class="tbl-td fxd amnt">1,77460337 BTC</div>
-                                                            <div class="tbl-td fxd totl">98,63528889 TRY</div>
-                                                            <div class="tbl-td aut comm">8,63 TRY</div>
-                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
-                                                        </div>
-                                                        <div class="tbl-tr">
-                                                            <div class="tbl-td aut brws">
-                                                                <a href="#" title="İşlemi İnceleyin"><i class="icon-sprt sprt14smiconclrd sm-browse"></i></a>
-                                                            </div>
-                                                            <div class="tbl-td aut nmbr">MR-99999</div>
-                                                            <div class="tbl-td aut date">21.02.2020 18:23</div>
-                                                            <div class="tbl-td aut symb">BTC/MPAY</div>
-                                                            <div class="tbl-td aut type">Market Limit - <span class="sitecolorred">Satış</span></div>
-                                                            <div class="tbl-td fxd avrg">36,154 TRY</div>
-                                                            <div class="tbl-td fxd pric">36,154 TRY</div>
-                                                            <div class="tbl-td fxd hppn">1,2885930 BTC</div>
-                                                            <div class="tbl-td fxd amnt">1,2885930 BTC</div>
-                                                            <div class="tbl-td fxd totl">34,66540304 TRY</div>
-                                                            <div class="tbl-td aut comm">34,66 TRY</div>
-                                                            <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                         </div>
                                                     </div>
                                                 </div>
