@@ -1,5 +1,5 @@
 
-/* Detect Browser */
+/* Detect Browser - https://www.npmjs.com/package/detect-browser */
 const {detect} = require('detect-browser');
 const browser = detect();
 

@@ -1,9 +1,7 @@
-/* https://www.npmjs.com/package/bootstrap.native */
-/* https://thednp.github.io/bootstrap.native */
-
+/* Bootstrap Native - https://www.npmjs.com/package/bootstrap.native - https://thednp.github.io/bootstrap.native */
 import Alert from './../../../../node_modules/bootstrap.native/src/components/alert-native.js'
 import Button from './../../../../node_modules/bootstrap.native/src/components/button-native.js'
-import Carousel from './../../../../node_modules/bootstrap.native/src/components/carousel-native.js'
+//import Carousel from './../../../../node_modules/bootstrap.native/src/components/carousel-native.js'
 import Collapse from './../../../../node_modules/bootstrap.native/src/components/collapse-native.js'
 import Dropdown from './../../../../node_modules/bootstrap.native/src/components/dropdown-native.js'
 import Modal from './../../../../node_modules/bootstrap.native/src/components/modal-native.js'
@@ -22,7 +20,7 @@ import {version as Version} from './../../../../node_modules/bootstrap.native/pa
 export default {
   Alert,
   Button,
-  Carousel,
+//  Carousel,
   Collapse,
   Dropdown,
   Modal,
@@ -37,3 +35,5 @@ export default {
   componentsInit,
   Version
 }
+
+/* Bootstrap Native */

@@ -27,7 +27,7 @@
         }
 
         h6{
-          color: #B1C4E8;
+          color: lighten($site-clr-text-soft-sec, 10%);
           margin: 0 5px 0 10px;
         }
 
@@ -143,8 +143,7 @@
           @include flexbox-align-items(center);
           @include flexbox-justify-content(flex-end);
 
-          svg{
-            width: 14px;
+          i[class*="icon"]{
             margin-right: 10px;
           }
         }

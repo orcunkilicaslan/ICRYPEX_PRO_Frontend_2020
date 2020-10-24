@@ -1,7 +1,7 @@
-import PerfectScrollbar from 'perfect-scrollbar';
-import Chartist from "chartist";
 
 /* Open Orders Tab Perfect Scrollbar */
+import PerfectScrollbar from 'perfect-scrollbar';
+
 const OoTabOorArea      = document.querySelector('.openorders-taborders');
 const OoTabOorScrllHead = document.querySelector('.openorders-taborders-table .scrollbar-tbl-th');
 const OoTabOorScrllBody = document.querySelector('.openorders-taborders-table .scrollbar-tbl-tb');
@@ -13,7 +13,6 @@ const OoTabHstScrllBody = document.querySelector('.openorders-tabhistory-table .
 const psOoTabOOr        = new PerfectScrollbar(OoTabOorScrllBody, {wheelSpeed: 0.50, wheelPropagation: true, minScrollbarLength: 10, suppressScrollX: true});
 const psOoTabHTb        = new PerfectScrollbar(OoTabHstScrllTble, {wheelSpeed: 0.50, wheelPropagation: true, minScrollbarLength: 10, suppressScrollY: true});
 const psOoTabHst        = new PerfectScrollbar(OoTabHstScrllBody, {wheelSpeed: 0.50, wheelPropagation: true, minScrollbarLength: 10, suppressScrollX: true});
-/* Open Orders Tab Perfect Scrollbar */
 
 
 document.addEventListener('DOMContentLoaded',()=>{
@@ -47,17 +46,27 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     }
 });
+/* Open Orders Tab Perfect Scrollbar */
 
 
 
-/* Open Orders Tab Chartist */
-new Chartist.Pie('.openorders-tabassets .ct-chart', {
-    series: [20, 10, 30, 40]
-}, {
-    donut: true,
-    donutWidth: 10,
-    donutSolid: true,
-    startAngle: 270,
-    showLabel: true
-});
-/* Open Orders Tab Chartist */
+/* Open Orders Assets Chartist */
+import Chartist from "chartist";
+
+const OoTabArea = document.querySelector('.openorders .openorders-tabs');
+OoTabArea.addEventListener('show.bs.tab', function(){
+
+    const ooAssetsDonutChart = new Chartist.Pie('.ooassetarea-chartarea .tabsasset-donutchart .asssetdonutchrt', {
+        labels: ['TRY','USD','BTC','LTC','ETH','XRP','BAT','LINK','XLM','AVAX','TRYB','MPAY'],
+        series: [5,15,30,10,6,7,4,1,3,5,6,8]
+    }, {
+        donut: true,
+        donutWidth: 8,
+        donutSolid: true,
+        startAngle: 0,
+        showLabel: false,
+        labelPosition: 'outside'
+    });
+
+}, true);
+/* Open Orders Assets Chartist */

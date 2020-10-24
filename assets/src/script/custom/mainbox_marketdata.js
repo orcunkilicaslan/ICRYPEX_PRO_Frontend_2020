@@ -1,7 +1,8 @@
-import PerfectScrollbar from 'perfect-scrollbar';
-/* import Tab from 'bootstrap.native/dist/components/tab-native.esm.js' */
 
 /* Market Data Tab Perfect Scrollbar */
+
+import PerfectScrollbar from 'perfect-scrollbar';
+
 const MdDivTblHeight    = (document.querySelector('.marketdata').clientHeight - 24) - document.querySelector('.marketdata .marketdata-tabs').clientHeight;
 
 const MdTabSymArea      = document.querySelector('.marketdata-tabsymbol');
@@ -13,16 +14,6 @@ const MdTabLstScrllBody = document.querySelector('.marketdata-tablast-table .scr
 
 const psMtTabSym        = new PerfectScrollbar(MdTabSymScrllBody, {wheelSpeed: 0.50, wheelPropagation: true, minScrollbarLength: 10, suppressScrollX: true});
 const psMtTabLst        = new PerfectScrollbar(MdTabLstScrllBody, {wheelSpeed: 0.50, wheelPropagation: true, minScrollbarLength: 10, suppressScrollX: true});
-/* Market Data Tab Perfect Scrollbar */
-
-
-const MdTabArea = document.querySelector('.marketdata .marketdata-tabs');
-MdTabArea.addEventListener('show.bs.tab', function(){
-
-    psMtTabSym.update();
-    psMtTabLst.update();
-
-}, true);
 
 
 document.addEventListener('DOMContentLoaded',()=>{
@@ -48,3 +39,4 @@ window.addEventListener("resize", ()=>{
     psMtTabLst.update();
 
 }, true);
+/* Market Data Tab Perfect Scrollbar */

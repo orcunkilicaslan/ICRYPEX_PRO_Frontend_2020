@@ -240,13 +240,13 @@
   -khtml-border-radius: $topleft $topright $bottomright $bottomleft;
 }
 
-@mixin box-shadow($box-shadow) {
-  box-shadow: $box-shadow;
-  -o-box-shadow: $box-shadow;
-  -ms-box-shadow: $box-shadow;
-  -moz-box-shadow: $box-shadow;
-  -webkit-box-shadow: $box-shadow;
-  -khtml-box-shadow: $box-shadow;
+@mixin box-shadow($box-shadow-pri, $box-shadow-sec: null) {
+  box-shadow: $box-shadow-pri, $box-shadow-sec;
+  -o-box-shadow: $box-shadow-pri, $box-shadow-sec;
+  -ms-box-shadow: $box-shadow-pri, $box-shadow-sec;
+  -moz-box-shadow: $box-shadow-pri, $box-shadow-sec;
+  -webkit-box-shadow: $box-shadow-pri, $box-shadow-sec;
+  -khtml-box-shadow: $box-shadow-pri, $box-shadow-sec;
 }
 /* Border End */
 
@@ -342,7 +342,7 @@
   -khtml-backdrop-filter: $backdrop-filter-multi;
 }
 
-@mixin svg-filter($brightness: 100%, $invert: 0%, $hue: 0, $contrast: 100%, $grayscale: 0%, $opacity: 100%,) {
+@mixin svg-filter($brightness: 100%, $invert: 0%, $hue: 0, $contrast: 100%, $grayscale: 0%, $opacity: 100%) {
   filter: brightness($brightness) invert($invert) hue-rotate(#{$hue}deg) contrast($contrast) grayscale($grayscale) opacity($opacity);
   -webkit-filter: brightness($brightness) invert($invert) hue-rotate(#{$hue}deg) contrast($contrast) grayscale($grayscale) opacity($opacity);
   -ms-filter: brightness($brightness) invert($invert) hue-rotate(#{$hue}deg) contrast($contrast) grayscale($grayscale) opacity($opacity);

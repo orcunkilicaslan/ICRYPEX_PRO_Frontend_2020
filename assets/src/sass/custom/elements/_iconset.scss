@@ -27,20 +27,28 @@
     }
   }
 
-  &-sprt{
+  &-sprtsmiconclrd{
+    background-image: url(#{$path-img-url-icons}/icons_spite_smalliconcolored.svg);
     background-repeat: no-repeat;
+    background-position: 0 0;
     display: inline-block;
     position: relative;
 
-    &.sprt14smiconclrd{
-      background-image: url(#{$path-img-url-icons}/icons_spite_14_smalliconcolored.svg);
-      background-position: 0 0;
+
+    &.icon14{
       width: 14px;
       height: 14px;
 
       &.sm-edit{background-position: calc(-14px*0) 0;}
       &.sm-delete{background-position: calc(-14px*1) 0;}
       &.sm-browse{background-position: calc(-14px*2) 0;}
+    }
+
+    &.icon16{
+      width: 16px;
+      height: 16px;
+
+      &.sm-wallet{background-position: calc(-16px*0) -14px;}
     }
   }
 }

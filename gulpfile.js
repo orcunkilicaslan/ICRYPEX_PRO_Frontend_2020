@@ -57,14 +57,15 @@ gulp.task('sass-custom', () => {
 
 gulp.task('script-custom', () => {
     return gulp.src([
-        folder_src_main + 'script/plugin/**/detect-browser.js',
         folder_src_main + 'script/plugin/**/bootstrap_native.js',
+        folder_src_main + 'script/plugin/**/detect-browser.js',
         folder_src_main + 'script/plugin/**/perfect_scrollbar.js',
         folder_src_main + 'script/plugin/**/chartist.js',
         folder_src_main + 'script/plugin/**/app.js',
-        folder_src_main + 'script/custom/**/app.js',
         folder_src_main + 'script/custom/**/mainbox_marketdata.js',
-        folder_src_main + 'script/custom/**/mainbox_openorders.js'
+        folder_src_main + 'script/custom/**/mainbox_orderbook.js',
+        folder_src_main + 'script/custom/**/mainbox_openorders.js',
+        folder_src_main + 'script/custom/**/app.js'
     ])
         .pipe(plumber())
         .pipe(webpack({
@@ -101,8 +102,8 @@ gulp.task('vendor', () => {
 gulp.task('serve', () => {
     return browserSync.init({
         server: {
-            baseDir: [ './' ],
-            index: "index.html",
+            baseDir: [ './html' ],
+            index: "Home_Page.html",
             https: false,
             port: 3000
         },
@@ -156,6 +157,6 @@ gulp.task('custom', gulp.series('sass-custom', 'script-custom'));
 gulp.task('build', gulp.series('clear', 'vendor', 'custom'));
 gulp.task('devel', gulp.series('custom', gulp.parallel('watch')));
 
-gulp.task('start', gulp.series('build', 'devel', gulp.parallel('serve', 'watch')));
-gulp.task('default', gulp.series('build', 'devel'));
+gulp.task('start', gulp.series('build', 'vendor', 'devel', gulp.parallel('serve', 'watch')));
+gulp.task('default', gulp.series('build', 'vendor', 'devel'));
 /* GULP END */
