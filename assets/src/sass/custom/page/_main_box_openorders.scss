@@ -15,6 +15,7 @@
       > div[class*="tab"]{
         margin: 0 10px;
         overflow: hidden;
+        height: 100%;
       }
 
       .table-topfilterbar{
@@ -149,22 +150,14 @@
     }
 
     &-tabassets{
-
-      .demoscroolbar-out{
-        position: relative;
-        width: 520px;
+      .chartdonut{
         height: 100%;
-        overflow: auto;
-        margin: 30px;
-      }
 
-      .demoscroolbar-in{
-        position: relative;
-        width: 920px;
-        height: 100px;
-        overflow: auto;
+        .assetbig{
+          width: 120px;
+          height: 120px;
+        }
       }
-
     }
 
     &-tabdandw{}

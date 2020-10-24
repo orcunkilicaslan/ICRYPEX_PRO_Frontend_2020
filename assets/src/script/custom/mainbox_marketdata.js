@@ -1,5 +1,5 @@
 import PerfectScrollbar from 'perfect-scrollbar';
-import Tab from 'bootstrap.native/dist/components/tab-native.esm.js'
+/* import Tab from 'bootstrap.native/dist/components/tab-native.esm.js' */
 
 /* Market Data Tab Perfect Scrollbar */
 const MdDivTblHeight    = (document.querySelector('.marketdata').clientHeight - 24) - document.querySelector('.marketdata .marketdata-tabs').clientHeight;

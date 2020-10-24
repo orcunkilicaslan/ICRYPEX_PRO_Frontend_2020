@@ -1,4 +1,5 @@
 import PerfectScrollbar from 'perfect-scrollbar';
+import Chartist from "chartist";
 
 /* Open Orders Tab Perfect Scrollbar */
 const OoTabOorArea      = document.querySelector('.openorders-taborders');
@@ -46,3 +47,17 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     }
 });
+
+
+
+/* Open Orders Tab Chartist */
+new Chartist.Pie('.openorders-tabassets .ct-chart', {
+    series: [20, 10, 30, 40]
+}, {
+    donut: true,
+    donutWidth: 10,
+    donutSolid: true,
+    startAngle: 270,
+    showLabel: true
+});
+/* Open Orders Tab Chartist */
