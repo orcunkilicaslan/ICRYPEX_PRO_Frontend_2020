@@ -67,8 +67,8 @@
 
         &.chartbuy{
           div[class*="rectangle"]{
-            .ct-series-a .ct-bar, .ct-series-a .ct-series-a .ct-point, .ct-series-a .ct-slice-donut{stroke: $site-clr-green;}
-            svg{@include rotate(180);}
+            .orderbookchart .ct-series-a .ct-bar{stroke: $site-clr-green;}
+            .orderbookchart svg{@include rotate(180);}
           }
           div[class*="ordertable"],
           div[class*="rectangle"]{padding-right: 10px;}
@@ -79,7 +79,7 @@
 
         &.chartsell{
           div[class*="rectangle"]{
-            .ct-series-a .ct-bar, .ct-series-a .ct-series-a .ct-point, .ct-series-a .ct-slice-donut{stroke: $site-clr-red;}
+            .orderbookchart .ct-series-a .ct-bar{stroke: $site-clr-red;}
           }
           div[class*="ordertable"],
           div[class*="rectangle"]{padding-left: 10px;}
@@ -107,19 +107,24 @@
       position: relative;
 
       &-rectangle{
-        margin-top: 22px;
+        width: 100%;
+        height: 100%;
+        padding-top: 21px;
         position: absolute;
+        top: 0;
         opacity: 0.1;
 
-        svg{
-          width: 100% !important;
-          height: 192px !important;
+        .orderbookchart{
+          width: 100%;
+          height: 100%;
+
+          .ct-bar{
+            fill: none;
+            stroke-width: 15px;
+            shape-rendering: crispedges;
+          }
         }
-        .ct-bar{
-          fill: none;
-          stroke-width: 15px;
-          shape-rendering: crispedges;
-        }
+
       }
 
       &-ordertable{

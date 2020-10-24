@@ -21,7 +21,7 @@
 })();
 /* Header News Ticker End */
 
-/* Progress Range Start */
+/* Progress Range Start - https://css-tricks.com/value-bubbles-for-range-inputs */
 const allRanges = document.querySelectorAll(".rangeprogress");
 allRanges.forEach(wrap => {
     const range     = wrap.querySelector(".rangeprogress .rangeprogress-range");
