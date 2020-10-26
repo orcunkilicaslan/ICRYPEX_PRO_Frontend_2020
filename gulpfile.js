@@ -15,6 +15,7 @@ const   gulp                        = require('gulp'),
 
         cfgprod                     = {production: !!util.env.production, sourceMaps: !util.env.production},
 
+        folder_html_main            = './html/',
         folder_assets_main          = './assets/',
         folder_src_main             = folder_assets_main + 'src/',
         folder_dist_main            = folder_assets_main + 'dist/',
@@ -102,7 +103,7 @@ gulp.task('vendor', () => {
 gulp.task('serve', () => {
     return browserSync.init({
         server: {
-            baseDir: [ './html' ],
+            baseDir: [ './' ],
             index: "Home_Page.html",
             https: false,
             port: 3000
@@ -139,6 +140,7 @@ gulp.task('watch', () => {
     });
 
     const watch = [
+        folder_html_main + '**/*.html',
         folder_src_main + 'sass/**/*.scss',
         folder_src_main + 'sass/**/*.sass',
         folder_src_main + 'sass/**/*.css',
