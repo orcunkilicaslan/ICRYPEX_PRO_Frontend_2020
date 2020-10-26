@@ -3030,9 +3030,9 @@
                                 <div id="oo_assets" class="openorders-tabassets tab-pane fade" role="tabpanel">
                                     <div class="tabcont tabcont-head">
                                         <div class="tabcont-head-col assetssubtabcol">
-                                            <ul class="tabcont-head-nav-pills sitetabs tabsdark nav nav-pills nav-justified">
-                                                <li class="nav-item"><a class="nav-link active" href="#oo_assets_ds">Yatır</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="#oo_assets_wd">Çek</a></li>
+                                            <ul class="tabcont-head-nav-pills sitetabs tabsdark nav nav-pills nav-justified" role="tabpanel">
+                                                <li class="nav-item"><a class="nav-link active" href="#assets_assets" data-toggle="tab" role="tab" aria-selected="true">Varlıklar</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="#assets_address" data-toggle="tab" role="tab" aria-selected="false">Adresler</a></li>
                                             </ul>
                                         </div>
                                         <div class="tabcont-head-col assetsinfotxtcol">
@@ -3041,68 +3041,75 @@
                                             <p>1.350.750,00 TRY / 44.815,00 BTC</p>
                                         </div>
                                     </div>
-                                    <div class="assettabcont assettabcont-chartarea">
-                                        <div class="assettabcont-donutchart">
-                                            <div class="asssetdonutchrt ct-chart"></div>
-                                            <div class="asssetdonutinfo">
-                                                <div class="asssetdonutinfo-box">
-                                                    <h6>Toplam</h6>
-                                                    <p class="sitecolorwhite">1.350.750,00 TRY</p>
-                                                    <p>0.0028200 BTC</p>
+                                    <div class="openorders-tabassets-tabcontent sitetabs tabsdark tab-content">
+                                        <div id="assets_assets" class="openorders-tabassets-tabassets tab-pane fade show active" role="tabpanel">
+                                            <div class="assettabcont assettabcont-chartarea">
+                                                <div class="assettabcont-donutchart">
+                                                    <div class="asssetdonutchrt ct-chart"></div>
+                                                    <div class="asssetdonutinfo">
+                                                        <div class="asssetdonutinfo-box">
+                                                            <h6>Toplam</h6>
+                                                            <p class="sitecolorwhite">1.350.750,00 TRY</p>
+                                                            <p>0.0028200 BTC</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="assettabcont-list">
+                                                    <ul class="asssetalllist">
+                                                        <li class="asssetcurr-try">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>TRY</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-usd">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>USD</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-btc">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>BTC</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-ltc">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>LTC</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-eth">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>ETH</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-xrp">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>XRP</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-bat">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>BAT</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-link">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>LINK</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-xlm">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>XLM</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-avax">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>AVAX</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-tryb">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>TRYB</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-mpay">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>MPAY</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="assettabcont-list">
-                                            <ul class="asssetalllist">
-                                                <li class="asssetcurr-try">
-                                                    <div class="circle"><i></i></div>
-                                                    <div class="info"><h6>TRY</h6><p>0.00000000</p></div>
-                                                </li>
-                                                <li class="asssetcurr-usd">
-                                                    <div class="circle"><i></i></div>
-                                                    <div class="info"><h6>USD</h6><p>0.00000000</p></div>
-                                                </li>
-                                                <li class="asssetcurr-btc">
-                                                    <div class="circle"><i></i></div>
-                                                    <div class="info"><h6>BTC</h6><p>0.00000000</p></div>
-                                                </li>
-                                                <li class="asssetcurr-ltc">
-                                                    <div class="circle"><i></i></div>
-                                                    <div class="info"><h6>LTC</h6><p>0.00000000</p></div>
-                                                </li>
-                                                <li class="asssetcurr-eth">
-                                                    <div class="circle"><i></i></div>
-                                                    <div class="info"><h6>ETH</h6><p>0.00000000</p></div>
-                                                </li>
-                                                <li class="asssetcurr-xrp">
-                                                    <div class="circle"><i></i></div>
-                                                    <div class="info"><h6>XRP</h6><p>0.00000000</p></div>
-                                                </li>
-                                                <li class="asssetcurr-bat">
-                                                    <div class="circle"><i></i></div>
-                                                    <div class="info"><h6>BAT</h6><p>0.00000000</p></div>
-                                                </li>
-                                                <li class="asssetcurr-link">
-                                                    <div class="circle"><i></i></div>
-                                                    <div class="info"><h6>LINK</h6><p>0.00000000</p></div>
-                                                </li>
-                                                <li class="asssetcurr-xlm">
-                                                    <div class="circle"><i></i></div>
-                                                    <div class="info"><h6>XLM</h6><p>0.00000000</p></div>
-                                                </li>
-                                                <li class="asssetcurr-avax">
-                                                    <div class="circle"><i></i></div>
-                                                    <div class="info"><h6>AVAX</h6><p>0.00000000</p></div>
-                                                </li>
-                                                <li class="asssetcurr-tryb">
-                                                    <div class="circle"><i></i></div>
-                                                    <div class="info"><h6>TRYB</h6><p>0.00000000</p></div>
-                                                </li>
-                                                <li class="asssetcurr-mpay">
-                                                    <div class="circle"><i></i></div>
-                                                    <div class="info"><h6>MPAY</h6><p>0.00000000</p></div>
-                                                </li>
-                                            </ul>
+                                        <div id="assets_address" class="openorders-tabassets-tabaddress tab-pane fade" role="tabpanel">
+                                            Adresler
                                         </div>
                                     </div>
                                 </div>
@@ -3123,8 +3130,50 @@
                                         </div>
                                     </div>
                                     <div class="openorders-tabdandw-tabcontent sitetabs tabsdark tab-content">
-                                        <div id="oo_dandw_ds" class="openorders-taborders tab-pane fade show active" role="tabpanel">Yatır</div>
-                                        <div id="oo_dandw_wd" class="openorders-taborders tab-pane fade" role="tabpanel">Çek</div>
+                                        <div id="oo_dandw_ds" class="openorders-tabdandw-tabdeposit tab-pane fade show active" role="tabpanel">
+                                            <div class="dandwtabcontwrp">
+                                                <div class="dandwtabcontwrp-side siteformui formdark">
+                                                    <ul class="dandwtabcontwrp-side-nav-pills sitetabs tabsdark nav nav-pills pillsver" role="tablist">
+                                                        <li class="nav-item"><a class="nav-link active" href="#deposit_bank" data-toggle="tab" role="tab" aria-selected="true">Banka</a></li>
+                                                        <li class="nav-item"><a class="nav-link" href="#deposit_papara" data-toggle="tab" role="tab" aria-selected="false">Papara</a></li>
+                                                        <li class="nav-item"><a class="nav-link" href="#deposit_crypto" data-toggle="tab" role="tab" aria-selected="false">Kripto</a></li>
+                                                    </ul>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input id="depositTabIhaveRead" class="custom-control-input" type="checkbox" value="" checked="">
+                                                        <label for="depositTabIhaveRead" class="custom-control-label"><a href="#">Kural ve Şartları okudum onaylıyorum.</a></label>
+                                                    </div>
+                                                </div>
+                                                <div class="dandwtabcontwrp-cont">
+                                                    <div class="dandwtabcontwrp-tabcontent sitetabs tabsdark tab-content">
+                                                        <div id="deposit_bank" class="dandwtabcontwrp-tabbank tab-pane fade show active" role="tabpanel">Banka Yatır</div>
+                                                        <div id="deposit_papara" class="dandwtabcontwrp-tabbank tab-pane fade" role="tabpanel">Papara Yatır</div>
+                                                        <div id="deposit_crypto" class="dandwtabcontwrp-tabbank tab-pane fade" role="tabpanel">Kripto Yatır</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="oo_dandw_wd" class="openorders-tabdandw-tabwithdraw tab-pane fade" role="tabpanel">
+                                            <div class="dandwtabcontwrp">
+                                                <div class="dandwtabcontwrp-side siteformui formdark">
+                                                    <ul class="dandwtabcontwrp-side-nav-pills sitetabs tabsdark nav nav-pills pillsver" role="tablist">
+                                                        <li class="nav-item"><a class="nav-link active" href="#withdraw_bank" data-toggle="tab" role="tab" aria-selected="true">Banka</a></li>
+                                                        <li class="nav-item"><a class="nav-link" href="#withdraw_papara" data-toggle="tab" role="tab" aria-selected="false">Papara</a></li>
+                                                        <li class="nav-item"><a class="nav-link" href="#withdraw_crypto" data-toggle="tab" role="tab" aria-selected="false">Kripto</a></li>
+                                                    </ul>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input id="withdrawTabIhaveRead" class="custom-control-input" type="checkbox" value="" checked="">
+                                                        <label for="withdrawTabIhaveRead" class="custom-control-label"><a href="#">Kural ve Şartları okudum onaylıyorum.</a></label>
+                                                    </div>
+                                                </div>
+                                                <div class="dandwtabcontwrp-cont">
+                                                    <div class="dandwtabcontwrp-tabcontent sitetabs tabsdark tab-content">
+                                                        <div id="withdraw_bank" class="dandwtabcontwrp-tabbank tab-pane fade show active" role="tabpanel">Banka Çek</div>
+                                                        <div id="withdraw_papara" class="dandwtabcontwrp-tabbank tab-pane fade" role="tabpanel">Papara Çek</div>
+                                                        <div id="withdraw_crypto" class="dandwtabcontwrp-tabbank tab-pane fade" role="tabpanel">Kripto Çek</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- Deposit/Withdrawal -->

@@ -74,39 +74,58 @@
 
     .nav-item{
 
-      &.show{
-        .nav-link{}
-      }
-
       .nav-link{
         color: $site-clr-text-soft-sec;
-        margin-left: -1px;
-        @include border-radius(0);
       }
-
-      &:first-child{
-
-        .nav-link{
-          margin-left: 0;
-          @include border-radii($var-custom-border-radius-sm,0,0,$var-custom-border-radius-sm);
-        }
-
-      }
-
-      &:last-child{
-        .nav-link{
-          @include border-radii(0,$var-custom-border-radius-sm,$var-custom-border-radius-sm,0);
-        }
-      }
-
 
     }
+
+    &.nav-justified{
+
+      .nav-item{
+
+        &.show{
+          .nav-link{}
+        }
+
+        .nav-link{
+          margin-left: -1px;
+          @include border-radius(0);
+        }
+
+        &:first-child{
+          .nav-link{
+            margin-left: 0;
+            @include border-radii($var-custom-border-radius-sm,0,0,$var-custom-border-radius-sm);
+          }
+        }
+
+        &:last-child{
+          .nav-link{
+            @include border-radii(0,$var-custom-border-radius-sm,$var-custom-border-radius-sm,0);
+          }
+        }
+      }
+    }
+
+    &.pillsver{
+      @include flexbox-flex-direction(column);
+
+      .nav-item{
+        padding: 2.5px 0;
+
+        &:first-child{padding-top: 0;}
+        &:last-child{padding-bottom: 0;}
+
+        .nav-link{text-align: center;}
+      }
+
+    }
+
 
     .nav-link{
       color: $site-clr-text-soft-sec;
       border: 1px solid $site-clr-darkblue-500;
-
-
 
       &.active{
         color: $site-clr-white;
