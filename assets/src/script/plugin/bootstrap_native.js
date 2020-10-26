@@ -1,4 +1,5 @@
 /* Bootstrap Native - https://www.npmjs.com/package/bootstrap.native - https://thednp.github.io/bootstrap.native */
+
 import Alert from './../../../../node_modules/bootstrap.native/src/components/alert-native.js'
 import Button from './../../../../node_modules/bootstrap.native/src/components/button-native.js'
 //import Carousel from './../../../../node_modules/bootstrap.native/src/components/carousel-native.js'
@@ -35,5 +36,3 @@ export default {
   componentsInit,
   Version
 }
-
-/* Bootstrap Native */
