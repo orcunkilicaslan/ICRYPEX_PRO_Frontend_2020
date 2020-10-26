@@ -16,81 +16,94 @@
         margin: 0 10px;
         overflow: hidden;
         height: 100%;
-      }
 
-      .tabcont-filterbar{
-        @include flexbox-align-items(center);
-        padding: 5px 0;
-        position: relative;
-
-        @include placeholder{
-          color: $site-clr-text-soft-sec;
-        }
-
-        .btn-secondary{
-          color: $site-clr-text-soft-sec;
-
-          &:hover,
-          &:focus,
-          &:not(:disabled):not(.disabled):active,
-          &:not(:disabled):not(.disabled).active{
-            color: $site-clr-white;
-          }
-        }
-
-        .custom-checkbox{
-          margin-left: 5px;
-        }
-
-        + div[class*="table"] .sitetablediv .scrollbar-tbl-tb{
-          height: 160px;
+        &.active{
+          @include flexbox-display-flex();
+          @include flexbox-flex-flow(column);
         }
       }
 
-      .tabcont-head{
-        @include flexbox-display-flex();
-        @include flexbox-flex-wrap(wrap);
-        @include flexbox-align-items(center);
-        @include flexbox-justify-content(space-between);
-        line-height: 1.2;
-        padding: 5px 0;
+      .tabcont{
 
-        &-col{
-          @include flexbox-flex(0 0 auto);
-          width: auto;
-          max-width: 100%;
+        &-head{
+          @include flexbox-display-flex();
+          @include flexbox-flex-wrap(wrap);
+          @include flexbox-align-items(center);
+          @include flexbox-justify-content(space-between);
+          line-height: 1.2;
+          padding: 5px 0;
 
-          &.assetssubtabcol{
-            width: 200px;
-          }
+          &-col{
+            @include flexbox-flex(0 0 auto);
+            width: auto;
+            max-width: 100%;
 
-          &.assetsinfotxtcol{
-            @include flexbox-display-flex();
-            @include flexbox-align-items(center);
-            @include flexbox-justify-content(flex-end);
+            &.assetssubtabcol{
+              width: 200px;
+            }
 
-            i[class*="icon"]{
-              margin-right: 5px;
+            &.assetsinfotxtcol{
+              @include flexbox-display-flex();
+              @include flexbox-align-items(center);
+              @include flexbox-justify-content(flex-end);
+
+              i[class*="icon"]{
+                margin-right: 5px;
+              }
+            }
+
+            h6{
+              color: lighten($site-clr-text-soft-sec, 10%);
+              margin: 0 5px;
+            }
+
+            h6, p{
+              @include responsive-font-size($var-custom-font-size-base);
             }
           }
 
-          h6{
-            color: lighten($site-clr-text-soft-sec, 10%);
-            margin: 0 5px;
-          }
+          &-nav-pills{}
 
-          h6, p{
-            @include responsive-font-size($var-custom-font-size-base);
+          + div{
+            padding: 10px 0;
+            margin-top: 5px;
+            border-top: 1px solid $site-brdr-dark;
           }
         }
 
-        &-nav-pills{}
+        &-filterbar{
+          @include flexbox-align-items(center);
+          padding: 5px 0;
+          position: relative;
+
+          @include placeholder{
+            color: $site-clr-text-soft-sec;
+          }
+
+          .btn-secondary{
+            color: $site-clr-text-soft-sec;
+
+            &:hover,
+            &:focus,
+            &:not(:disabled):not(.disabled):active,
+            &:not(:disabled):not(.disabled).active{
+              color: $site-clr-white;
+            }
+          }
+
+          .custom-checkbox{
+            margin-left: 5px;
+          }
+
+          + div[class*="table"] .sitetablediv .scrollbar-tbl-tb{
+            height: 160px;
+          }
+        }
 
         + div{
-          padding: 10px 0;
-          margin-top: 5px;
-          border-top: 1px solid $site-brdr-dark;
+          @include flexbox-flex(1);
         }
+
       }
 
       .sitetablediv.scrollbar-tbl{
@@ -197,17 +210,11 @@
 
     &-tabassets{
 
-      &.active{
-        @include flexbox-display-flex();
-        @include flexbox-flex-flow(column);
-      }
-
       .assettabcont{
 
         &-chartarea{
           @include flexbox-display-flex();
           @include flexbox-align-items(center);
-          @include flexbox-flex(1);
           //padding: 10px 0;
           //margin-top: 5px;
           //border-top: 1px solid $site-brdr-dark;
