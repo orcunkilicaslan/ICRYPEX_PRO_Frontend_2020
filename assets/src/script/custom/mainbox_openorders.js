@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 document.querySelector('.openorders .openorders-tabs').addEventListener('show.bs.tab', function(e){
 
     // Asset Tab Donut Chart
-    const ooAssetsDonutChart = new Chartist.Pie('.ooassetarea-chartarea .tabsasset-donutchart .asssetdonutchrt', {
+    const ooAssetsDonutChart = new Chartist.Pie('.assettabcont-chartarea .assettabcont-donutchart .asssetdonutchrt', {
         labels: ['TRY','USD','BTC','LTC','ETH','XRP','BAT','LINK','XLM','AVAX','TRYB','MPAY'],
         series: [5,15,30,10,6,7,4,1,3,5,6,8]
     },{

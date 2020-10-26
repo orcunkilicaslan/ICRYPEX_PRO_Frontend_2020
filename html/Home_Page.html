@@ -1879,9 +1879,9 @@
 
                             <!-- Tabs List -->
                             <ul class="openorders-tabs sitetabs tabsdark nav nav-tabs nav-justified" role="tablist">
-                                <li class="nav-item"><a class="nav-link active" href="#oo_orders" data-toggle="tab" role="tab" aria-selected="true">Açık Emirler</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#oo_orders" data-toggle="tab" role="tab" aria-selected="false">Açık Emirler</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#oo_history" data-toggle="tab" role="tab" aria-selected="false">İşlem Geçmişi</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#oo_assets" data-toggle="tab" role="tab" aria-selected="false">Varlıklar</a></li>
+                                <li class="nav-item"><a class="nav-link active" href="#oo_assets" data-toggle="tab" role="tab" aria-selected="true">Varlıklar</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#oo_dandw" data-toggle="tab" role="tab" aria-selected="false">Yatır-Çek</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#oo_activities" data-toggle="tab" role="tab" aria-selected="false">Hesap Hareketleri</a></li>
                             </ul>
@@ -1891,9 +1891,9 @@
                             <div class="openorders-tabcontent sitetabs tabsdark tab-content">
 
                                 <!-- Open Orders -->
-                                <div id="oo_orders" class="openorders-taborders tab-pane fade show active" role="tabpanel">
+                                <div id="oo_orders" class="openorders-taborders tab-pane fade" role="tabpanel">
                                     <!-- Filter -->
-                                    <div class="table-topfilterbar siteformui formdark row">
+                                    <div class="tabcont-filterbar siteformui formdark row">
                                         <div class="col-auto">
                                             <select class="custom-select custom-select-sm">
                                                 <option value="1">Çift</option>
@@ -2206,7 +2206,7 @@
                                 <!-- Transaction History -->
                                 <div id="oo_history" class="openorders-tabhistory tab-pane fade" role="tabpanel">
                                     <!-- Filter -->
-                                    <div class="table-topfilterbar siteformui formdark row">
+                                    <div class="tabcont-filterbar siteformui formdark row">
                                         <div class="col">
                                             <select class="custom-select custom-select-sm">
                                                 <option value="1">Çift</option>
@@ -3027,84 +3027,82 @@
                                 </div>
                                 <!-- Transaction History -->
                                 <!-- Assets -->
-                                <div id="oo_assets" class="openorders-tabassets tab-pane fade" role="tabpanel">
-                                    <div class="ooassetarea">
-                                        <div class="ooassetarea-head">
-                                            <div class="ooassetarea-head-col tabarea">
-                                                <ul class="ooassetarea-head-tabs sitetabs tabsdark nav nav-pills nav-justified">
-                                                    <li class="nav-item"><a class="nav-link active" href="#oo_assets_ds">Yatır</a></li>
-                                                    <li class="nav-item"><a class="nav-link" href="#oo_assets_wd">Çek</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="ooassetarea-head-col assetsinfo">
-                                                <i class="icon-sprtsmiconclrd icon16 sm-wallet"></i>
-                                                <h6>Yaklaşık Olarak</h6>
-                                                <p>1.350.750,00 TRY / 44.815,00 BTC</p>
-                                            </div>
+                                <div id="oo_assets" class="openorders-tabassets tab-pane fade show active" role="tabpanel">
+                                    <div class="tabcont-head">
+                                        <div class="tabcont-head-col assetssubtabcol">
+                                            <ul class="tabcont-head-nav-pills sitetabs tabsdark nav nav-pills nav-justified">
+                                                <li class="nav-item"><a class="nav-link active" href="#oo_assets_ds">Yatır</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="#oo_assets_wd">Çek</a></li>
+                                            </ul>
                                         </div>
-                                        <div class="ooassetarea-chartarea">
-                                            <div class="tabsasset tabsasset-donutchart">
-                                                <div class="asssetdonutchrt ct-chart"></div>
-                                                <div class="asssetdonutinfo">
-                                                    <div class="asssetdonutinfo-box">
-                                                        <h6>Toplam</h6>
-                                                        <p class="sitecolorwhite">1.350.750,00 TRY</p>
-                                                        <p>0.0028200 BTC</p>
-                                                    </div>
+                                        <div class="tabcont-head-col assetsinfotxtcol">
+                                            <i class="icon-sprtsmiconclrd icon16 sm-wallet"></i>
+                                            <h6>Yaklaşık Olarak</h6>
+                                            <p>1.350.750,00 TRY / 44.815,00 BTC</p>
+                                        </div>
+                                    </div>
+                                    <div class="assettabcont assettabcont-chartarea">
+                                        <div class="assettabcont-donutchart">
+                                            <div class="asssetdonutchrt ct-chart"></div>
+                                            <div class="asssetdonutinfo">
+                                                <div class="asssetdonutinfo-box">
+                                                    <h6>Toplam</h6>
+                                                    <p class="sitecolorwhite">1.350.750,00 TRY</p>
+                                                    <p>0.0028200 BTC</p>
                                                 </div>
                                             </div>
-                                            <div class="tabsasset tabsasset-list">
-                                                <ul class="asssetalllist">
-                                                    <li class="asssetcurr-try">
-                                                        <div class="circle"><i></i></div>
-                                                        <div class="info"><h6>TRY</h6><p>0.00000000</p></div>
-                                                    </li>
-                                                    <li class="asssetcurr-usd">
-                                                        <div class="circle"><i></i></div>
-                                                        <div class="info"><h6>USD</h6><p>0.00000000</p></div>
-                                                    </li>
-                                                    <li class="asssetcurr-btc">
-                                                        <div class="circle"><i></i></div>
-                                                        <div class="info"><h6>BTC</h6><p>0.00000000</p></div>
-                                                    </li>
-                                                    <li class="asssetcurr-ltc">
-                                                        <div class="circle"><i></i></div>
-                                                        <div class="info"><h6>LTC</h6><p>0.00000000</p></div>
-                                                    </li>
-                                                    <li class="asssetcurr-eth">
-                                                        <div class="circle"><i></i></div>
-                                                        <div class="info"><h6>ETH</h6><p>0.00000000</p></div>
-                                                    </li>
-                                                    <li class="asssetcurr-xrp">
-                                                        <div class="circle"><i></i></div>
-                                                        <div class="info"><h6>XRP</h6><p>0.00000000</p></div>
-                                                    </li>
-                                                    <li class="asssetcurr-bat">
-                                                        <div class="circle"><i></i></div>
-                                                        <div class="info"><h6>BAT</h6><p>0.00000000</p></div>
-                                                    </li>
-                                                    <li class="asssetcurr-link">
-                                                        <div class="circle"><i></i></div>
-                                                        <div class="info"><h6>LINK</h6><p>0.00000000</p></div>
-                                                    </li>
-                                                    <li class="asssetcurr-xlm">
-                                                        <div class="circle"><i></i></div>
-                                                        <div class="info"><h6>XLM</h6><p>0.00000000</p></div>
-                                                    </li>
-                                                    <li class="asssetcurr-avax">
-                                                        <div class="circle"><i></i></div>
-                                                        <div class="info"><h6>AVAX</h6><p>0.00000000</p></div>
-                                                    </li>
-                                                    <li class="asssetcurr-tryb">
-                                                        <div class="circle"><i></i></div>
-                                                        <div class="info"><h6>TRYB</h6><p>0.00000000</p></div>
-                                                    </li>
-                                                    <li class="asssetcurr-mpay">
-                                                        <div class="circle"><i></i></div>
-                                                        <div class="info"><h6>MPAY</h6><p>0.00000000</p></div>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                        </div>
+                                        <div class="assettabcont-list">
+                                            <ul class="asssetalllist">
+                                                <li class="asssetcurr-try">
+                                                    <div class="circle"><i></i></div>
+                                                    <div class="info"><h6>TRY</h6><p>0.00000000</p></div>
+                                                </li>
+                                                <li class="asssetcurr-usd">
+                                                    <div class="circle"><i></i></div>
+                                                    <div class="info"><h6>USD</h6><p>0.00000000</p></div>
+                                                </li>
+                                                <li class="asssetcurr-btc">
+                                                    <div class="circle"><i></i></div>
+                                                    <div class="info"><h6>BTC</h6><p>0.00000000</p></div>
+                                                </li>
+                                                <li class="asssetcurr-ltc">
+                                                    <div class="circle"><i></i></div>
+                                                    <div class="info"><h6>LTC</h6><p>0.00000000</p></div>
+                                                </li>
+                                                <li class="asssetcurr-eth">
+                                                    <div class="circle"><i></i></div>
+                                                    <div class="info"><h6>ETH</h6><p>0.00000000</p></div>
+                                                </li>
+                                                <li class="asssetcurr-xrp">
+                                                    <div class="circle"><i></i></div>
+                                                    <div class="info"><h6>XRP</h6><p>0.00000000</p></div>
+                                                </li>
+                                                <li class="asssetcurr-bat">
+                                                    <div class="circle"><i></i></div>
+                                                    <div class="info"><h6>BAT</h6><p>0.00000000</p></div>
+                                                </li>
+                                                <li class="asssetcurr-link">
+                                                    <div class="circle"><i></i></div>
+                                                    <div class="info"><h6>LINK</h6><p>0.00000000</p></div>
+                                                </li>
+                                                <li class="asssetcurr-xlm">
+                                                    <div class="circle"><i></i></div>
+                                                    <div class="info"><h6>XLM</h6><p>0.00000000</p></div>
+                                                </li>
+                                                <li class="asssetcurr-avax">
+                                                    <div class="circle"><i></i></div>
+                                                    <div class="info"><h6>AVAX</h6><p>0.00000000</p></div>
+                                                </li>
+                                                <li class="asssetcurr-tryb">
+                                                    <div class="circle"><i></i></div>
+                                                    <div class="info"><h6>TRYB</h6><p>0.00000000</p></div>
+                                                </li>
+                                                <li class="asssetcurr-mpay">
+                                                    <div class="circle"><i></i></div>
+                                                    <div class="info"><h6>MPAY</h6><p>0.00000000</p></div>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
