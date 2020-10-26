@@ -8,8 +8,8 @@
     &-tr{
       @include flexbox-display-flex();
       @include flexbox-align-items(center);
-      justify-content: space-between;
-      @include border-radius($var-custom-border-radius);
+      @include flexbox-justify-content(space-between);
+      //@include border-radius($var-custom-border-radius);
       @include transition-multiple(color 0.15s ease-in-out, background-color 0.15s ease-in-out);
     }
 
@@ -72,7 +72,13 @@
 
     &-thead{}
 
-    &-tbody{}
+    &-tbody{
+
+      > div[class$="tr"]{
+        @include border-radius($var-custom-border-radius);
+      }
+
+    }
 
   }
 
