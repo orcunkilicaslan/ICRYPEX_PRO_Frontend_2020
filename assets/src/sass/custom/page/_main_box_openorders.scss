@@ -444,9 +444,84 @@
             padding-left: 10px;
           }
 
+          &-tabcontent{
+            height: 100%;
+          }
 
+          &-tabbank{
+            height: 100%;
 
-          &-tabcontent{}
+            &.active{
+              @include flexbox-display-flex();
+              @include flexbox-flex-flow(column);
+            }
+
+            &-tabs{
+              padding-bottom: 10px;
+
+              .banklogostablink{
+                margin: 0 5px;
+
+                &:first-child{margin-left: 0;}
+                &:last-child{margin-right: 0;}
+
+                &.active .banksprttablogos{
+                  background-position-y: 0;
+                }
+              }
+
+            }
+
+            &-tabcontent{
+              @include flexbox-flex(1);
+            }
+
+            &-tabbank{
+
+              &-form{
+
+                .input-group{
+
+                  &-prepend{
+                    > *{
+                      color: $site-clr-text-soft-sec;
+                      background-color: transparent;
+                      border-right-width: 0;
+                    }
+
+                    + .form-control{
+                      border-left-width: 0;
+                    }
+                  }
+
+                  &-append{
+                    > *{
+                      color: $site-clr-text-soft-sec;
+                      border-left-width: 0;
+                      background-color: $site-clr-darkblue-500;
+                    }
+
+                    .sm-copybtn{
+                      position: relative;
+                      top: 2px;
+                    }
+                  }
+
+                  .form-control{
+                    text-align: right;
+                    border-right-width: 0;
+                  }
+                }
+
+              }
+
+            }
+
+            &-infobank{
+              @extend %extcontullistdotted;
+            }
+
+          }
 
         }
 
@@ -455,6 +530,37 @@
       &-tabdeposit{}
 
       &-tabwithdraw{}
+
+      .banksprttablogos{
+        background-image: url(#{$path-img-url-icons}/icons_spite_banklogos.svg);
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        display: inline-block;
+        position: relative;
+        height: 20px;
+        @include transition-multiple(background-position 0.3s ease-in-out);
+
+
+        &.logoakbank{
+          width: 76px;
+          background-position: 0 -20px;
+        }
+
+        &.logoziraat{
+          width: 94px;
+          background-position: -76px -20px;
+        }
+
+        &.logoodeabank{
+          width: 76px;
+          background-position: -170px -20px;
+        }
+
+        &.logovakifbank{
+          width: 90px;
+          background-position: -246px -20px;
+        }
+      }
 
     }
 
