@@ -39,3 +39,23 @@
     &-down .perdown{opacity: 1;}
   }
 }
+
+%extcontullistdotted{
+  ul{
+    li{
+      position: relative;
+      padding-left: 10px;
+
+      &::before{
+        content: "";
+        background-color: $site-clr-text-soft-sec;
+        width: 4px;
+        height: 4px;
+        position: absolute;
+        left: 0;
+        top: 7px;
+        @include border-radius(50%);
+      }
+    }
+  }
+}
