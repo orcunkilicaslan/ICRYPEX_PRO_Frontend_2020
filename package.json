@@ -35,7 +35,8 @@
     "popper.js": "^1.16.1",
     "webpack-stream": "^5.2.1",
     "chartist": "^0.11.4",
-    "detect-browser": "^5.2.0"
+    "detect-browser": "^5.2.0",
+    "select": "^1.1.2"
   },
   "dependencies": {},
   "browserslist": [

@@ -1,9 +1,6 @@
 
 /* Detect Browser - https://www.npmjs.com/package/detect-browser */
 
-import PerfectScrollbar from "perfect-scrollbar";
-
-
 /* Variables */
 const {detect}      = require('detect-browser');
 const browser       = detect();
@@ -24,6 +21,22 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     if (browser.name === "chrome") {
         //console.log("Bu tarayıcı chrome");
+    }
+
+
+    // handle the case where we don't detect the browser
+    switch (browser && browser.name) {
+        case 'chrome':
+        case 'firefox':
+            //console.log('supported');
+            break;
+
+        case 'edge':
+            //console.log('kinda ok');
+            break;
+
+        default:
+            //console.log('not supported');
     }
 
 
