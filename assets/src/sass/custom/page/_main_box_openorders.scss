@@ -355,7 +355,9 @@
 
         &-tabs{}
 
-        &-tabcontent{}
+        &-tabcontent{
+          @include flexbox-flex(1);
+        }
 
         &-table{
           padding: 5px 0;
@@ -363,10 +365,10 @@
           .sitetablediv{
 
             .ico[class*="tbl"]{
-              width: 60px;
+              width: 52px;
               text-align: center;
 
-              > a{margin: 4px 3px 0;}
+              > a{margin: 2px 2px 0;}
             }
             .add[class*="tbl"]{}
             .ass[class*="tbl"]{width: 100px;}
@@ -381,6 +383,8 @@
                 padding: 0;
               }
             }
+
+            .tbl-td{padding-bottom: 4px;}
 
             &.scrollbar-tbl > .scrollbar-tbl-th .tbl-thead{border-top-width: 0;}
             &.scrollbar-tbl > .scrollbar-tbl-tb .tbl-tbody{height: 120px;}
