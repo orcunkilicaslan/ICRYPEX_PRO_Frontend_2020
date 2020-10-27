@@ -62,6 +62,7 @@ gulp.task('script-custom', () => {
         folder_src_main + 'script/plugin/**/detect-browser.js',
         folder_src_main + 'script/plugin/**/perfect_scrollbar.js',
         folder_src_main + 'script/plugin/**/chartist.js',
+        folder_src_main + 'script/plugin/**/select.js',
         folder_src_main + 'script/plugin/**/app.js',
         folder_src_main + 'script/custom/**/mainbox_marketdata.js',
         folder_src_main + 'script/custom/**/mainbox_orderbook.js',
