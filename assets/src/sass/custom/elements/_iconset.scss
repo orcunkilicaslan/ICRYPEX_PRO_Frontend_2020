@@ -49,6 +49,8 @@
       height: 16px;
 
       &.sm-wallet{background-position: calc(-16px*0) -14px;}
+      &.sm-qrcode{background-position: calc(-16px*1) -14px;}
+      &.sm-copybtn{background-position: calc(-16px*2) -14px;}
     }
   }
 }

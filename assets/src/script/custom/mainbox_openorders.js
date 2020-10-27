@@ -14,6 +14,10 @@ const ooTabHstScrllBody     = document.querySelector('.openorders-tabhistory-tab
 const ooTabHstTblBrwsWrp    = document.querySelectorAll('.openorders-tabhistory-table .scrollbar-tbl-tb .hsttblbrwswrp');
 const ooTabHstTblBrwsBtn    = document.querySelectorAll('.openorders-tabhistory-table .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstr');
 const ooTabHstTblBrwsDiv    = document.querySelectorAll('.openorders-tabhistory-table .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstbl');
+
+const ooTabAssAdrTabBtcCont         = document.querySelector('.openorders-tabassets-tabbtc');
+const ooTabAssAdrTabBtcScrllHead    = document.querySelector('.openorders-tabassets-tabbtc .openorders-tabassets-tabaddress-table .scrollbar-tbl-th');
+const ooTabAssAdrTabBtcScrllBody    = document.querySelector('.openorders-tabassets-tabbtc .openorders-tabassets-tabaddress-table .scrollbar-tbl-tb');
 /* Variables */
 
 
@@ -71,6 +75,18 @@ document.addEventListener('DOMContentLoaded',()=>{
             };
 
         });
+    }
+
+
+    // Assets Address BTC Perfect Scrollbar
+    const psOoTabAssAdrBtc = new PerfectScrollbar(ooTabAssAdrTabBtcScrllBody, {
+        wheelSpeed: 0.50,
+        wheelPropagation: true,
+        minScrollbarLength: 10,
+        suppressScrollX: true
+    });
+    if (ooTabAssAdrTabBtcScrllBody.querySelectorAll('.ps--active-y')){
+        ooTabAssAdrTabBtcScrllHead.classList.add('active-y');
     }
 
 

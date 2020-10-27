@@ -351,7 +351,43 @@
         }
       }
 
-      &-tabaddress{}
+      &-tabaddress{
+
+        &-tabs{}
+
+        &-tabcontent{}
+
+        &-table{
+          padding: 5px 0;
+
+          .sitetablediv{
+
+            .ico[class*="tbl"]{
+              width: 60px;
+              text-align: center;
+
+              > a{margin: 4px 3px 0;}
+            }
+            .add[class*="tbl"]{}
+            .ass[class*="tbl"]{width: 100px;}
+            .crt[class*="tbl"]{width: 95px;}
+            .btn[class*="tbl"]{
+              width: 145px;
+              text-align: center;
+
+              > a{
+                width: 60px;
+                margin: 0 2px;
+                padding: 0;
+              }
+            }
+
+            &.scrollbar-tbl > .scrollbar-tbl-th .tbl-thead{border-top-width: 0;}
+            &.scrollbar-tbl > .scrollbar-tbl-tb .tbl-tbody{height: 120px;}
+          }
+        }
+
+      }
 
     }
 
