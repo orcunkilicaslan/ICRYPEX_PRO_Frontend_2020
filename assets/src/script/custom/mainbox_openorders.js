@@ -4,20 +4,20 @@ import Chartist from "chartist";
 
 
 /* Variables */
-const OoTabOorTabCont       = document.querySelector('.openorders-taborders');
-const ooTabOorScrllHead     = document.querySelector('.openorders-taborders-table .scrollbar-tbl-th');
-const ooTabOorScrllBody     = document.querySelector('.openorders-taborders-table .scrollbar-tbl-tb');
-const ooTabHstTabCont       = document.querySelector('.openorders-tabhistory');
-const ooTabHstScrllTble     = document.querySelector('.openorders-tabhistory-table .scrollbar-horizontal');
-const ooTabHstScrllHead     = document.querySelector('.openorders-tabhistory-table .scrollbar-tbl-th');
-const ooTabHstScrllBody     = document.querySelector('.openorders-tabhistory-table .scrollbar-tbl-tb');
-const ooTabHstTblBrwsWrp    = document.querySelectorAll('.openorders-tabhistory-table .scrollbar-tbl-tb .hsttblbrwswrp');
-const ooTabHstTblBrwsBtn    = document.querySelectorAll('.openorders-tabhistory-table .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstr');
-const ooTabHstTblBrwsDiv    = document.querySelectorAll('.openorders-tabhistory-table .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstbl');
+const OoTabOorTabCont       = document.querySelector('.openorders .openorders-taborders');
+const ooTabOorScrllHead     = document.querySelector('.openorders .openorders-taborders .ooopenorderstable .scrollbar-tbl-th');
+const ooTabOorScrllBody     = document.querySelector('.openorders .openorders-taborders .ooopenorderstable .scrollbar-tbl-tb');
+const ooTabHstTabCont       = document.querySelector('.openorders .openorders-tabhistory');
+const ooTabHstScrllTble     = document.querySelector('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-horizontal');
+const ooTabHstScrllHead     = document.querySelector('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-th');
+const ooTabHstScrllBody     = document.querySelector('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb');
+const ooTabHstTblBrwsWrp    = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp');
+const ooTabHstTblBrwsBtn    = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstr');
+const ooTabHstTblBrwsDiv    = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstbl');
 
-const ooTabAssAdrTabBtcCont         = document.querySelector('.openorders-tabassets-tabbtc');
-const ooTabAssAdrTabBtcScrllHead    = document.querySelector('.openorders-tabassets-tabbtc .openorders-tabassets-tabaddress-table .scrollbar-tbl-th');
-const ooTabAssAdrTabBtcScrllBody    = document.querySelector('.openorders-tabassets-tabbtc .openorders-tabassets-tabaddress-table .scrollbar-tbl-tb');
+const ooTabAssAdrTabBtcCont         = document.querySelector('.openorders .openorders-tabassets .assetsaddress .assetsaddress-tabbtc');
+const ooTabAssAdrTabBtcScrllHead    = document.querySelector('.openorders .openorders-tabassets .assetsaddress .assetsaddress-tabbtc .asaddresstable .scrollbar-tbl-th');
+const ooTabAssAdrTabBtcScrllBody    = document.querySelector('.openorders .openorders-tabassets .assetsaddress .assetsaddress-tabbtc .asaddresstable .scrollbar-tbl-tb');
 /* Variables */
 
 
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 document.querySelector('.openorders .openorders-tabs').addEventListener('show.bs.tab', function(e){
 
     // Asset Tab Donut Chart
-    const ooAssetsDonutChart = new Chartist.Pie('.assettabcont-chartarea .assettabcont-donutchart .asssetdonutchrt', {
+    const ooAssetsDonutChart = new Chartist.Pie('.assets .assetchartarea .assetchartarea-donut .asssetdonutchrt', {
         labels: ['TRY','USD','BTC','LTC','ETH','XRP','BAT','LINK','XLM','AVAX','TRYB','MPAY'],
         series: [5,15,30,10,6,7,4,1,3,5,6,8]
     },{

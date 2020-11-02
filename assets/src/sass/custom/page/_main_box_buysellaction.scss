@@ -75,7 +75,9 @@
       border-top: 1px solid $site-brdr-dark;
       @include border-radius(0);
 
-      > div[class*="tab"]{height: 100%;}
+      > div[class*="tab"]{
+        margin: 0;
+      }
     }
 
     &-tabmarket{}

@@ -153,9 +153,6 @@
           .tbl-thead .tbl-th,
           .tbl-tbody .tbl-td{
             text-align: center;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
 
             &:first-child{text-align: left;}
             &:last-child{text-align: right;}

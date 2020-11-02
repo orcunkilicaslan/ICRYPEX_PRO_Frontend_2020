@@ -4,12 +4,12 @@ import PerfectScrollbar from 'perfect-scrollbar';
 
 /* Variables */
 const mdDivTblHeight        = (document.querySelector('.marketdata').clientHeight - 24) - document.querySelector('.marketdata .marketdata-tabs').clientHeight;
-const mdTabSymTabCont       = document.querySelector('.marketdata-tabsymbol');
-const mdTabSymScrllHead     = document.querySelector('.marketdata-tabsymbol-table .scrollbar-tbl-th');
-const mdTabSymScrllBody     = document.querySelector('.marketdata-tabsymbol-table .scrollbar-tbl-tb');
-const mdTabLstTabCont       = document.querySelector('.marketdata-tablast');
-const mdTabLstScrllHead     = document.querySelector('.marketdata-tablast-table .scrollbar-tbl-th');
-const mdTabLstScrllBody     = document.querySelector('.marketdata-tablast-table .scrollbar-tbl-tb');
+const mdTabSymTabCont       = document.querySelector('.marketdata .marketdata-tabsymbol');
+const mdTabSymScrllHead     = document.querySelector('.marketdata .marketdata-tabsymbol .mdsymboltable .scrollbar-tbl-th');
+const mdTabSymScrllBody     = document.querySelector('.marketdata .marketdata-tabsymbol .mdsymboltable .scrollbar-tbl-tb');
+const mdTabLstTabCont       = document.querySelector('.marketdata .marketdata-tablast');
+const mdTabLstScrllHead     = document.querySelector('.marketdata .marketdata-tablast .mdlasttable .scrollbar-tbl-th');
+const mdTabLstScrllBody     = document.querySelector('.marketdata .marketdata-tablast .mdlasttable .scrollbar-tbl-tb');
 /* Variables */
 
 
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     if (mdTabLstScrllBody.querySelectorAll('.ps--active-y')){
         mdTabLstScrllHead.classList.add('active-y');
     }
-    mdTabLstScrllBody.style.height = (mdDivTblHeight - mdTabLstScrllHead.clientHeight - 36) + "px";
+    mdTabLstScrllBody.style.height = (mdDivTblHeight - mdTabLstScrllHead.clientHeight - 20) + "px";
 
 
 });
