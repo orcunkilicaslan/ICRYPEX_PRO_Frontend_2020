@@ -1,4 +1,5 @@
 
+/* Table UI Soft */
 .sitetablediv{
   @include responsive-font-size($var-custom-font-size-base);
   line-height: 1;
@@ -17,6 +18,9 @@
     &-td{
       padding-left: 4px;
       padding-right: 4px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
       @include transition-multiple(color 0.15s ease-in-out, background-color 0.15s ease-in-out);
     }
 
@@ -83,6 +87,11 @@
   }
 
 }
+/* Table UI Soft */
+
+/* Table UI Dark */
+body.themedark{}
+/* Table UI Dark */
 
 .scrollbar{
 

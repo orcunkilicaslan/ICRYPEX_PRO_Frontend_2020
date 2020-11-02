@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="../assets/img/icons/favicon.ico" type="image/x-icon" sizes="32x32" />
     <link id="css-custom-app" rel="stylesheet" href="../assets/dist/css/custom-app.css">
 </head>
-<body>
+<body class="themedark">
 
 <!-- Header Start -->
 <header class="header">
@@ -29,7 +29,7 @@
 
             <!-- Head Center -->
             <div class="header-center col">
-                <div class="siteformui formdark">
+                <div class="siteformui">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend">
                             <span class="input-group-text newslefttxt">Haber & Analiz</span>
@@ -59,7 +59,7 @@
 
             <!-- Head Right -->
             <div class="header-right col-auto">
-                <div class="header-right-theme siteformui formdark">
+                <div class="header-right-theme siteformui">
                     <div class="custom-control custom-switch">
                         <input id="headThemeColor" class="custom-control-input" type="checkbox" checked>
                         <label for="headThemeColor" class="custom-control-label"></label>
@@ -91,7 +91,7 @@
                         <div class="marketdata">
 
                             <!-- Tabs List -->
-                            <ul class="marketdata-tabs sitetabs tabsdark nav nav-tabs nav-justified" role="tablist">
+                            <ul class="marketdata-tabs sitetabs nav nav-tabs nav-justified" role="tablist">
                                 <li class="nav-item"><a class="nav-link active" href="#md_symbol" data-toggle="tab" role="tab" aria-selected="true">Sembol</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#md_detail" data-toggle="tab" role="tab" aria-selected="false">Detay</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#md_last" data-toggle="tab" role="tab" aria-selected="false">Son İşlemler</a></li>
@@ -100,12 +100,12 @@
                             <!-- Tabs List -->
 
                             <!-- Tabs Cont -->
-                            <div class="marketdata-tabcontent sitetabs tabsdark tab-content">
+                            <div class="marketdata-tabcontent sitetabs tab-content">
 
                                 <!-- Symbol -->
                                 <div id="md_symbol" class="marketdata-tabsymbol tab-pane fade show active" role="tabpanel">
                                     <!-- Filter -->
-                                    <div class="marketdata-tabsymbol-filter siteformui formdark row">
+                                    <div class="tabcont tabcont-filterbar siteformui row">
                                         <div class="btn-group btn-group-sm col" role="group">
                                             <a class="btn btn-sm btn-secondary" href="#" title="Favorilerim" rel="bookmark"><svg class="filterfavico" xmlns="http://www.w3.org/2000/svg" width="12.045" height="11.384" viewBox="0 0 12.045 11.384"><path d="M22.4,26.394a.489.489,0,0,0,.506-.47.5.5,0,0,0,0-.072l-.41-3.473,2.4-2.576a.482.482,0,0,0-.028-.686A.494.494,0,0,0,24.63,19l-3.467-.689L19.43,15.259a.493.493,0,0,0-.668-.186.488.488,0,0,0-.189.186l-1.733,3.049L13.374,19a.484.484,0,0,0-.265.805l2.4,2.576-.41,3.473a.487.487,0,0,0,.43.539.5.5,0,0,0,.263-.041L19,24.889l3.213,1.461A.5.5,0,0,0,22.4,26.394Z" transform="translate(-12.979 -15.011)" /></svg></a>
                                             <a class="btn btn-sm btn-secondary" href="#" title="TRY" rel="bookmark">TRY</a>
@@ -120,8 +120,8 @@
                                     </div>
                                     <!-- Filter -->
                                     <!-- Table -->
-                                    <div class="marketdata-tabsymbol-table scrollbar">
-                                        <div class="sitetablediv tabledark scrollbar-tbl">
+                                    <div class="mdsymboltable scrollbar">
+                                        <div class="sitetablediv scrollbar-tbl">
                                             <div class="scrollbar-tbl-th">
                                                 <div class="tbl-thead">
                                                     <div class="tbl-tr">
@@ -690,14 +690,14 @@
                                 <!-- Symbol -->
                                 <!-- Detail -->
                                 <div id="md_detail" class="marketdata-tabdetail tab-pane fade" role="tabpanel">
+                                    <!-- Title -->
+                                    <div class="tabcont tabcont-head">
+                                        <p>BTC/TRY - Bitcoin  / Türk Lirası</p>
+                                    </div>
+                                    <!-- Title -->
                                     <!-- Table -->
-                                    <div class="marketdata-tabdetail-table">
-                                        <div class="sitetablediv tabledark">
-                                            <div class="tbl-thead">
-                                                <div class="tbl-tr">
-                                                    <div class="tbl-th fxd">BTC/TRY - Bitcoin  / Türk Lirası</div>
-                                                </div>
-                                            </div>
+                                    <div class="mddetailtable">
+                                        <div class="sitetablediv">
                                             <div class="tbl-tbody tbl-striped">
                                                 <div class="tbl-tr">
                                                     <div class="tbl-td fxd txt">Bid</div>
@@ -786,8 +786,8 @@
                                 <!-- Last -->
                                 <div id="md_last" class="marketdata-tablast tab-pane fade" role="tabpanel">
                                     <!-- Table -->
-                                    <div class="marketdata-tablast-table scrollbar">
-                                        <div class="sitetablediv tabledark scrollbar-tbl">
+                                    <div class="mdlasttable scrollbar">
+                                        <div class="sitetablediv scrollbar-tbl">
                                             <div class="scrollbar-tbl-th">
                                                 <div class="tbl-thead">
                                                     <div class="tbl-tr">
@@ -1034,10 +1034,12 @@
                                 <!-- Chart -->
                                 <div id="md_chart" class="marketdata-tabchart tab-pane fade" role="tabpanel">
                                     <!-- Title -->
-                                    <div class="mdtabheadtitle">BTC/TRY - Bitcoin  / Türk Lirası</div>
+                                    <div class="tabcont tabcont-head">
+                                        <p>BTC/TRY - Bitcoin  / Türk Lirası</p>
+                                    </div>
                                     <!-- Title -->
                                     <!-- Chart -->
-                                    <div class="marketdata-tabchart-chart">
+                                    <div class="mdchartarea">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="385.337" height="653.646" viewBox="0 0 385.337 653.646">
                                             <g transform="translate(-14.664 -159.001)">
                                                 <path d="M-1970.844,14V10.9a1,1,0,0,1-.207-.159l-3.535-3.535a1,1,0,0,1,0-1.414l3.535-3.536a1,1,0,0,1,.207-.159V-1h59V14Z" transform="translate(2311.844 505)" fill="#098cdf"/>
@@ -1069,71 +1071,69 @@
 
                     <!-- Cryptocoin Bar -->
                     <div class="mainbox mainbox-cryptocoinbar">
-                        <div class="cryptocoinbar">
-                            <div class="siteformui formdark">
-                                <div class="input-group input-group-lg">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text selectedcur">BTC/TRY</span>
+                        <div class="cryptocoinbar siteformui">
+                            <div class="input-group input-group-lg">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text selectedcur">BTC/TRY</span>
+                                </div>
+                                <div class="cryptostatsbar">
+                                    <div class="cryptostatsbar-biger">
+                                        <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                            <g transform="translate(-20 -130)">
+                                                <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                            </g>
+                                        </svg>
+                                        <span class="sitecolorgreen">9198.00</span>
                                     </div>
-                                    <div class="cryptostatsbar">
-                                        <div class="cryptostatsbar-biger">
-                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
-                                                <g transform="translate(-20 -130)">
-                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
-                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
-                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
-                                                </g>
-                                            </svg>
-                                            <span class="sitecolorgreen">9198.00</span>
-                                        </div>
-                                        <div class="cryptostatsbar-stats">
-                                            <ul class="bigstatslist">
-                                                <li>
-                                                    <h6>Son Fiyat</h6>
-                                                    <p>43,199 TRY</p>
-                                                </li>
-                                                <li>
-                                                    <h6>En İyi Alış</h6>
-                                                    <p>21,149 TRY</p>
-                                                </li>
-                                                <li>
-                                                    <h6>En İyi Satış</h6>
-                                                    <p>12,345 TRY</p>
-                                                </li>
-                                                <li>
-                                                    <h6>24s Değişim</h6>
-                                                    <p>10,539 TRY</p>
-                                                </li>
-                                                <li>
-                                                    <h6>24s En Yüksek</h6>
-                                                    <p>24,247 TRY</p>
-                                                </li>
-                                                <li>
-                                                    <h6>24s En Düşük</h6>
-                                                    <p>7,357 TRY</p>
-                                                </li>
-                                                <li>
-                                                    <h6>24s Ortalama</h6>
-                                                    <p>32,643 TRY</p>
-                                                </li>
-                                                <li>
-                                                    <h6>BTC Hacim</h6>
-                                                    <p>32,643 TRY</p>
-                                                </li>
-                                                <li>
-                                                    <h6>Kazılacak BTC</h6>
-                                                    <p>1,474,00 BTC</p>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                    <div class="cryptostatsbar-stats">
+                                        <ul class="bigstatslist">
+                                            <li>
+                                                <h6>Son Fiyat</h6>
+                                                <p>43,199 TRY</p>
+                                            </li>
+                                            <li>
+                                                <h6>En İyi Alış</h6>
+                                                <p>21,149 TRY</p>
+                                            </li>
+                                            <li>
+                                                <h6>En İyi Satış</h6>
+                                                <p>12,345 TRY</p>
+                                            </li>
+                                            <li>
+                                                <h6>24s Değişim</h6>
+                                                <p>10,539 TRY</p>
+                                            </li>
+                                            <li>
+                                                <h6>24s En Yüksek</h6>
+                                                <p>24,247 TRY</p>
+                                            </li>
+                                            <li>
+                                                <h6>24s En Düşük</h6>
+                                                <p>7,357 TRY</p>
+                                            </li>
+                                            <li>
+                                                <h6>24s Ortalama</h6>
+                                                <p>32,643 TRY</p>
+                                            </li>
+                                            <li>
+                                                <h6>BTC Hacim</h6>
+                                                <p>32,643 TRY</p>
+                                            </li>
+                                            <li>
+                                                <h6>Kazılacak BTC</h6>
+                                                <p>1,474,00 BTC</p>
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <div class="input-group-append">
-                                <span class="input-group-text alarmbtn">
-                                    <a class="iconbtn iconbtn-warning btn btn-sm" href="#" title="Alarm Kur">
-                                        <div class="iconbtn-svg"><svg xmlns="http://www.w3.org/2000/svg" width="15.939" height="17.308" viewBox="0 0 15.939 17.308"><path d="M582.149,10189.4h-2.906a1.691,1.691,0,0,1-1.744-1.632v-.292a2.355,2.355,0,0,1,.772-1.739l.228-.212a2.641,2.641,0,0,0,.841-1.714l.256-3.153a4.7,4.7,0,0,1,4.294-4.267v-.581a.583.583,0,0,1,1.164,0v.581a4.709,4.709,0,0,1,4.294,4.279l.256,3.141a2.645,2.645,0,0,0,.844,1.714l.225.212a2.355,2.355,0,0,1,.772,1.739v.292a1.69,1.69,0,0,1-1.742,1.632H586.8a2.33,2.33,0,0,1-4.65,0Zm2.325,1.087a1.125,1.125,0,0,0,1.161-1.087H583.31A1.128,1.128,0,0,0,584.474,10190.491Zm-3.714-9.786-.279,3.188a3.7,3.7,0,0,1-1.164,2.4l-.225.212a1.337,1.337,0,0,0-.432.975v.292a.564.564,0,0,0,.583.545H589.7a.564.564,0,0,0,.581-.545v-.292a1.336,1.336,0,0,0-.453-1.008l-.228-.212a3.685,3.685,0,0,1-1.161-2.4l-.256-3.154a3.605,3.605,0,0,0-3.507-3.276c-.071,0-.141-.006-.212-.006A3.621,3.621,0,0,0,580.76,10180.705Zm9.968-.493a5.959,5.959,0,0,0-1.279-2.742.6.6,0,0,1,.928-.768,7.163,7.163,0,0,1,1.535,3.3.605.605,0,0,1-.466.709h-.118A.608.608,0,0,1,590.728,10180.212Zm-13.229.5a.6.6,0,0,1-.489-.7,7.153,7.153,0,0,1,1.54-3.312.606.606,0,0,1,.931.775,5.981,5.981,0,0,0-1.276,2.734.606.606,0,0,1-.591.5Z" transform="translate(-576.499 -10174.771)" fill="#fff" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/></svg></div>
-                                        <div class="iconbtn-txt"><span>Alarm Kur</span></div>
-                                    </a>
-                                </span>
+                                </div>
+                                <div class="input-group-append">
+                                    <div class="input-group-text alarmbtn">
+                                        <a class="iconbtn iconbtn-warning btn btn-sm" href="#" title="Alarm Kur">
+                                            <div class="iconbtn-svg"><svg xmlns="http://www.w3.org/2000/svg" width="15.939" height="17.308" viewBox="0 0 15.939 17.308"><path d="M582.149,10189.4h-2.906a1.691,1.691,0,0,1-1.744-1.632v-.292a2.355,2.355,0,0,1,.772-1.739l.228-.212a2.641,2.641,0,0,0,.841-1.714l.256-3.153a4.7,4.7,0,0,1,4.294-4.267v-.581a.583.583,0,0,1,1.164,0v.581a4.709,4.709,0,0,1,4.294,4.279l.256,3.141a2.645,2.645,0,0,0,.844,1.714l.225.212a2.355,2.355,0,0,1,.772,1.739v.292a1.69,1.69,0,0,1-1.742,1.632H586.8a2.33,2.33,0,0,1-4.65,0Zm2.325,1.087a1.125,1.125,0,0,0,1.161-1.087H583.31A1.128,1.128,0,0,0,584.474,10190.491Zm-3.714-9.786-.279,3.188a3.7,3.7,0,0,1-1.164,2.4l-.225.212a1.337,1.337,0,0,0-.432.975v.292a.564.564,0,0,0,.583.545H589.7a.564.564,0,0,0,.581-.545v-.292a1.336,1.336,0,0,0-.453-1.008l-.228-.212a3.685,3.685,0,0,1-1.161-2.4l-.256-3.154a3.605,3.605,0,0,0-3.507-3.276c-.071,0-.141-.006-.212-.006A3.621,3.621,0,0,0,580.76,10180.705Zm9.968-.493a5.959,5.959,0,0,0-1.279-2.742.6.6,0,0,1,.928-.768,7.163,7.163,0,0,1,1.535,3.3.605.605,0,0,1-.466.709h-.118A.608.608,0,0,1,590.728,10180.212Zm-13.229.5a.6.6,0,0,1-.489-.7,7.153,7.153,0,0,1,1.54-3.312.606.606,0,0,1,.931.775,5.981,5.981,0,0,0-1.276,2.734.606.606,0,0,1-.591.5Z" transform="translate(-576.499 -10174.771)" fill="#fff" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/></svg></div>
+                                            <div class="iconbtn-txt"><span>Alarm Kur</span></div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -1219,7 +1219,7 @@
                                             <div class="orderbookchart orderbookchartbuy ct-chart"></div>
                                         </div>
                                         <div class="orderbook-chartarea-ordertable">
-                                            <div class="sitetablediv tabledark">
+                                            <div class="sitetablediv">
                                                 <div class="tbl-thead">
                                                     <div class="tbl-tr">
                                                         <div class="tbl-th fxd totl">Toplam</div>
@@ -1299,7 +1299,7 @@
                                             <div class="orderbookchart orderbookchartsell ct-chart"></div>
                                         </div>
                                         <div class="orderbook-chartarea-ordertable">
-                                            <div class="sitetablediv tabledark">
+                                            <div class="sitetablediv">
                                                 <div class="tbl-thead">
                                                     <div class="tbl-tr">
                                                         <div class="tbl-th fxd pric">Fiyat</div>
@@ -1385,7 +1385,7 @@
                         <div class="buysellaction">
                             <div class="buysellaction-head">
                                 <div class="buysellaction-head-col tabarea">
-                                    <ul class="buysellaction-tabs sitetabs tabsdark nav nav-pills nav-justified" role="tablist">
+                                    <ul class="buysellaction-tabs sitetabs nav nav-pills nav-justified" role="tablist">
                                         <li class="nav-item"><a class="nav-link active" href="#bs_market" data-toggle="tab" role="tab" aria-selected="true">Market</a></li>
                                         <li class="nav-item"><a class="nav-link" href="#bs_limit" data-toggle="tab" role="tab" aria-selected="false">Limit</a></li>
                                         <li class="nav-item"><a class="nav-link" href="#bs_stoplimit" data-toggle="tab" role="tab" aria-selected="false">Stop Limit</a></li>
@@ -1397,7 +1397,7 @@
                                     <svg class="infoiconbox" xmlns="http://www.w3.org/2000/svg" width="16.749" height="16.749" viewBox="0 0 16.749 16.749" data-toggle="popover" data-trigger="focus" tabindex="0" data-container="body" data-html="true" data-placement="bottom" data-content="
                                     <div class='tooltipbox'>
                                         <div class='tooltipbox-head'><div class='tooltipbox-head-col'>VIP UCRET</div><div class='tooltipbox-head-col'>DESTEK 0850 255 1079</div></div>
-                                        <div class='tooltipbox-body'><div class='sitetablediv tabledark commissiontable'><div class='tbl-thead'><div class='tbl-tr'><div class='tbl-th aut txt'>TRY Hacim /<br />30 Gün</div><div class='tbl-th fxd mkr'>Piyasa Yapıcı Emirler<br/>[MAKER]</div><div class='tbl-th aut spc'></div><div class='tbl-th fxd tkr'>Piyasa Alıcı Emirler<br/>[TAKER]</div></div></div><div class='tbl-tbody tbl-brdrbtm'><div class='tbl-tr'><div class='tbl-td aut txt'>100.000</div><div class='tbl-td fxd mkr'>0.0025</div><div class='tbl-td aut spc'></div><div class='tbl-td fxd tkr'>0.0035</div></div><div class='tbl-tr'><div class='tbl-td aut txt'>1.000.000</div><div class='tbl-td fxd mkr'>0.0015</div><div class='tbl-td aut spc'></div><div class='tbl-td fxd tkr'>0.0030</div></div><div class='tbl-tr'><div class='tbl-td aut txt'>5.000.000</div><div class='tbl-td fxd mkr'>0.0010</div><div class='tbl-td aut spc'></div><div class='tbl-td fxd tkr'>0.0025</div></div></div></div>
+                                        <div class='tooltipbox-body'><div class='sitetablediv commissiontable'><div class='tbl-thead'><div class='tbl-tr'><div class='tbl-th aut txt'>TRY Hacim /<br />30 Gün</div><div class='tbl-th fxd mkr'>Piyasa Yapıcı Emirler<br/>[MAKER]</div><div class='tbl-th aut spc'></div><div class='tbl-th fxd tkr'>Piyasa Alıcı Emirler<br/>[TAKER]</div></div></div><div class='tbl-tbody tbl-brdrbtm'><div class='tbl-tr'><div class='tbl-td aut txt'>100.000</div><div class='tbl-td fxd mkr'>0.0025</div><div class='tbl-td aut spc'></div><div class='tbl-td fxd tkr'>0.0035</div></div><div class='tbl-tr'><div class='tbl-td aut txt'>1.000.000</div><div class='tbl-td fxd mkr'>0.0015</div><div class='tbl-td aut spc'></div><div class='tbl-td fxd tkr'>0.0030</div></div><div class='tbl-tr'><div class='tbl-td aut txt'>5.000.000</div><div class='tbl-td fxd mkr'>0.0010</div><div class='tbl-td aut spc'></div><div class='tbl-td fxd tkr'>0.0025</div></div></div></div>
                                         </div>
                                     </div>
                                     ">
@@ -1409,11 +1409,11 @@
 
                                 </div>
                             </div>
-                            <div class="buysellaction-tabcontent sitetabs tabsdark tab-content">
+                            <div class="buysellaction-tabcontent sitetabs tab-content">
                                 <div id="bs_market" class="buysellaction-tabmarket tab-pane fade show active" role="tabpanel">
                                     <div class="buysellaction-formarea">
                                         <div class="buysellaction-formarea-col buycol">
-                                            <form class="buysellaction-form siteformui formdark" autocomplete="off" novalidate>
+                                            <form class="buysellaction-form siteformui" autocomplete="off" novalidate>
                                                 <div class="formhead">
                                                     <h4 class="formhead-title">BTC AL</h4>
                                                     <div class="formhead-curr">
@@ -1483,7 +1483,7 @@
                                             </form>
                                         </div>
                                         <div class="buysellaction-formarea-col sellcol">
-                                            <form class="buysellaction-form siteformui formdark" autocomplete="off" novalidate>
+                                            <form class="buysellaction-form siteformui" autocomplete="off" novalidate>
                                                 <div class="formhead">
                                                     <h4 class="formhead-title">BTC SAT</h4>
                                                     <div class="formhead-curr">
@@ -1557,7 +1557,7 @@
                                 <div id="bs_limit" class="buysellaction-tablimit tab-pane fade" role="tabpanel">
                                     <div class="buysellaction-formarea">
                                         <div class="buysellaction-formarea-col buycol">
-                                            <form class="buysellaction-form siteformui formdark" autocomplete="off" novalidate>
+                                            <form class="buysellaction-form siteformui" autocomplete="off" novalidate>
                                                 <div class="formhead">
                                                     <h4 class="formhead-title">BTC AL</h4>
                                                     <div class="formhead-curr">
@@ -1627,7 +1627,7 @@
                                             </form>
                                         </div>
                                         <div class="buysellaction-formarea-col sellcol">
-                                            <form class="buysellaction-form siteformui formdark" autocomplete="off" novalidate>
+                                            <form class="buysellaction-form siteformui" autocomplete="off" novalidate>
                                                 <div class="formhead">
                                                     <h4 class="formhead-title">BTC SAT</h4>
                                                     <div class="formhead-curr">
@@ -1701,7 +1701,7 @@
                                 <div id="bs_stoplimit" class="buysellaction-tabstoplimit tab-pane fade" role="tabpanel">
                                     <div class="buysellaction-formarea">
                                         <div class="buysellaction-formarea-col buycol">
-                                            <form class="buysellaction-form siteformui formdark" autocomplete="off" novalidate>
+                                            <form class="buysellaction-form siteformui" autocomplete="off" novalidate>
                                                 <div class="formhead">
                                                     <h4 class="formhead-title">BTC AL</h4>
                                                     <div class="formhead-curr">
@@ -1783,7 +1783,7 @@
                                             </form>
                                         </div>
                                         <div class="buysellaction-formarea-col sellcol">
-                                            <form class="buysellaction-form siteformui formdark" autocomplete="off" novalidate>
+                                            <form class="buysellaction-form siteformui" autocomplete="off" novalidate>
                                                 <div class="formhead">
                                                     <h4 class="formhead-title">BTC SAT</h4>
                                                     <div class="formhead-curr">
@@ -1878,22 +1878,22 @@
                         <div class="openorders">
 
                             <!-- Tabs List -->
-                            <ul class="openorders-tabs sitetabs tabsdark nav nav-tabs nav-justified" role="tablist">
-                                <li class="nav-item"><a class="nav-link active" href="#oo_orders" data-toggle="tab" role="tab" aria-selected="true">Açık Emirler</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#oo_history" data-toggle="tab" role="tab" aria-selected="false">İşlem Geçmişi</a></li>
+                            <ul class="openorders-tabs sitetabs nav nav-tabs nav-justified" role="tablist">
+                                <li class="nav-item"><a class="nav-link active" href="#oo_oorders" data-toggle="tab" role="tab" aria-selected="true">Açık Emirler</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#oo_thistory" data-toggle="tab" role="tab" aria-selected="false">İşlem Geçmişi</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#oo_assets" data-toggle="tab" role="tab" aria-selected="false">Varlıklar</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#oo_dandw" data-toggle="tab" role="tab" aria-selected="false">Yatır-Çek</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#oo_activities" data-toggle="tab" role="tab" aria-selected="false">Hesap Hareketleri</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#oo_depoandwith" data-toggle="tab" role="tab" aria-selected="false">Yatır-Çek</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#oo_aactivities" data-toggle="tab" role="tab" aria-selected="false">Hesap Hareketleri</a></li>
                             </ul>
                             <!-- Tabs List -->
 
                             <!-- Tabs Cont -->
-                            <div class="openorders-tabcontent sitetabs tabsdark tab-content">
+                            <div class="openorders-tabcontent sitetabs tab-content">
 
                                 <!-- Open Orders -->
-                                <div id="oo_orders" class="openorders-taborders tab-pane fade show active" role="tabpanel">
+                                <div id="oo_oorders" class="openorders-taborders tab-pane fade fade show active" role="tabpanel">
                                     <!-- Filter -->
-                                    <div class="tabcont tabcont-filterbar siteformui formdark row">
+                                    <div class="tabcont tabcont-filterbar siteformui row">
                                         <div class="col-auto">
                                             <select class="custom-select custom-select-sm">
                                                 <option value="1">Çift</option>
@@ -1927,8 +1927,8 @@
                                     </div>
                                     <!-- Filter -->
                                     <!-- Table -->
-                                    <div class="openorders-taborders-table scrollbar">
-                                        <div class="sitetablediv tabledark scrollbar-tbl">
+                                    <div class="ooopenorderstable scrollbar">
+                                        <div class="sitetablediv scrollbar-tbl">
                                             <div class="scrollbar-tbl-th">
                                                 <div class="tbl-thead">
                                                     <div class="tbl-tr">
@@ -2204,9 +2204,9 @@
                                 </div>
                                 <!-- Open Orders -->
                                 <!-- Transaction History -->
-                                <div id="oo_history" class="openorders-tabhistory tab-pane fade" role="tabpanel">
+                                <div id="oo_thistory" class="openorders-tabhistory tab-pane fade" role="tabpanel">
                                     <!-- Filter -->
-                                    <div class="tabcont tabcont-filterbar siteformui formdark row">
+                                    <div class="tabcont tabcont-filterbar siteformui row">
                                         <div class="col">
                                             <select class="custom-select custom-select-sm">
                                                 <option value="1">Çift</option>
@@ -2247,9 +2247,9 @@
                                     </div>
                                     <!-- Filter -->
                                     <!-- Table -->
-                                    <div class="openorders-tabhistory-table scrollbar">
+                                    <div class="ootransactionhistorytable scrollbar">
                                         <div class="scrollbar-horizontal">
-                                            <div class="sitetablediv tabledark scrollbar-tbl">
+                                            <div class="sitetablediv scrollbar-tbl">
                                                 <div class="scrollbar-tbl-th">
                                                     <div class="tbl-thead">
                                                         <div class="tbl-tr">
@@ -2288,7 +2288,7 @@
                                                                 <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
                                                             <div class="hsttblbrwstbl">
-                                                                <div class="sitetablediv tabledark">
+                                                                <div class="sitetablediv">
                                                                     <div class="tbl-thead">
                                                                         <div class="tbl-tr">
                                                                             <div class="tbl-th aut date">Tarih</div>
@@ -2356,7 +2356,7 @@
                                                                 <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
                                                             <div class="hsttblbrwstbl">
-                                                                <div class="sitetablediv tabledark">
+                                                                <div class="sitetablediv">
                                                                     <div class="tbl-thead">
                                                                         <div class="tbl-tr">
                                                                             <div class="tbl-th aut date">Tarih</div>
@@ -2424,7 +2424,7 @@
                                                                 <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
                                                             <div class="hsttblbrwstbl">
-                                                                <div class="sitetablediv tabledark">
+                                                                <div class="sitetablediv">
                                                                     <div class="tbl-thead">
                                                                         <div class="tbl-tr">
                                                                             <div class="tbl-th aut date">Tarih</div>
@@ -2492,7 +2492,7 @@
                                                                 <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
                                                             <div class="hsttblbrwstbl">
-                                                                <div class="sitetablediv tabledark">
+                                                                <div class="sitetablediv">
                                                                     <div class="tbl-thead">
                                                                         <div class="tbl-tr">
                                                                             <div class="tbl-th aut date">Tarih</div>
@@ -2560,7 +2560,7 @@
                                                                 <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
                                                             <div class="hsttblbrwstbl">
-                                                                <div class="sitetablediv tabledark">
+                                                                <div class="sitetablediv">
                                                                     <div class="tbl-thead">
                                                                         <div class="tbl-tr">
                                                                             <div class="tbl-th aut date">Tarih</div>
@@ -2628,7 +2628,7 @@
                                                                 <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
                                                             <div class="hsttblbrwstbl">
-                                                                <div class="sitetablediv tabledark">
+                                                                <div class="sitetablediv">
                                                                     <div class="tbl-thead">
                                                                         <div class="tbl-tr">
                                                                             <div class="tbl-th aut date">Tarih</div>
@@ -2696,7 +2696,7 @@
                                                                 <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
                                                             <div class="hsttblbrwstbl">
-                                                                <div class="sitetablediv tabledark">
+                                                                <div class="sitetablediv">
                                                                     <div class="tbl-thead">
                                                                         <div class="tbl-tr">
                                                                             <div class="tbl-th aut date">Tarih</div>
@@ -2764,7 +2764,7 @@
                                                                 <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
                                                             <div class="hsttblbrwstbl">
-                                                                <div class="sitetablediv tabledark">
+                                                                <div class="sitetablediv">
                                                                     <div class="tbl-thead">
                                                                         <div class="tbl-tr">
                                                                             <div class="tbl-th aut date">Tarih</div>
@@ -2832,7 +2832,7 @@
                                                                 <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
                                                             <div class="hsttblbrwstbl">
-                                                                <div class="sitetablediv tabledark">
+                                                                <div class="sitetablediv">
                                                                     <div class="tbl-thead">
                                                                         <div class="tbl-tr">
                                                                             <div class="tbl-th aut date">Tarih</div>
@@ -2900,7 +2900,7 @@
                                                                 <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
                                                             <div class="hsttblbrwstbl">
-                                                                <div class="sitetablediv tabledark">
+                                                                <div class="sitetablediv">
                                                                     <div class="tbl-thead">
                                                                         <div class="tbl-tr">
                                                                             <div class="tbl-th aut date">Tarih</div>
@@ -2968,7 +2968,7 @@
                                                                 <div class="tbl-td aut stts"><span class="sitecolorgreen">Onaylandı</span></div>
                                                             </div>
                                                             <div class="hsttblbrwstbl">
-                                                                <div class="sitetablediv tabledark">
+                                                                <div class="sitetablediv">
                                                                     <div class="tbl-thead">
                                                                         <div class="tbl-tr">
                                                                             <div class="tbl-th aut date">Tarih</div>
@@ -3028,538 +3028,556 @@
                                 <!-- Transaction History -->
                                 <!-- Assets -->
                                 <div id="oo_assets" class="openorders-tabassets tab-pane fade" role="tabpanel">
+                                    <!-- Head -->
                                     <div class="tabcont tabcont-head">
-                                        <div class="tabcont-head-col assetssubtabcol">
-                                            <ul class="tabcont-head-nav-pills sitetabs tabsdark nav nav-pills nav-justified" role="tabpanel">
+                                        <div class="tabcont-head-col">
+                                            <ul class="tabcont-head-navpills assets-tabs sitetabs nav nav-pills nav-justified" role="tabpanel">
                                                 <li class="nav-item"><a class="nav-link active" href="#assets_assets" data-toggle="tab" role="tab" aria-selected="true">Varlıklar</a></li>
                                                 <li class="nav-item"><a class="nav-link" href="#assets_address" data-toggle="tab" role="tab" aria-selected="false">Adresler</a></li>
                                             </ul>
                                         </div>
-                                        <div class="tabcont-head-col assetsinfotxtcol">
+                                        <div class="tabcont-head-col">
                                             <i class="icon-sprtsmiconclrd icon16 sm-wallet"></i>
                                             <h6>Yaklaşık Olarak</h6>
                                             <p>1.350.750,00 TRY / 44.815,00 BTC</p>
                                         </div>
                                     </div>
-                                    <div class="openorders-tabassets-tabcontent sitetabs tabsdark tab-content">
-                                        <div id="assets_assets" class="openorders-tabassets-tabassets tab-pane fade show active" role="tabpanel">
-                                            <div class="assettabcont assettabcont-chartarea">
-                                                <div class="assettabcont-donutchart">
-                                                    <div class="asssetdonutchrt ct-chart"></div>
-                                                    <div class="asssetdonutinfo">
-                                                        <div class="asssetdonutinfo-box">
-                                                            <h6>Toplam</h6>
-                                                            <p class="sitecolorwhite">1.350.750,00 TRY</p>
-                                                            <p>0.0028200 BTC</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="assettabcont-list">
-                                                    <ul class="asssetalllist">
-                                                        <li class="asssetcurr-try">
-                                                            <div class="circle"><i></i></div>
-                                                            <div class="info"><h6>TRY</h6><p>0.00000000</p></div>
-                                                        </li>
-                                                        <li class="asssetcurr-usd">
-                                                            <div class="circle"><i></i></div>
-                                                            <div class="info"><h6>USD</h6><p>0.00000000</p></div>
-                                                        </li>
-                                                        <li class="asssetcurr-btc">
-                                                            <div class="circle"><i></i></div>
-                                                            <div class="info"><h6>BTC</h6><p>0.00000000</p></div>
-                                                        </li>
-                                                        <li class="asssetcurr-ltc">
-                                                            <div class="circle"><i></i></div>
-                                                            <div class="info"><h6>LTC</h6><p>0.00000000</p></div>
-                                                        </li>
-                                                        <li class="asssetcurr-eth">
-                                                            <div class="circle"><i></i></div>
-                                                            <div class="info"><h6>ETH</h6><p>0.00000000</p></div>
-                                                        </li>
-                                                        <li class="asssetcurr-xrp">
-                                                            <div class="circle"><i></i></div>
-                                                            <div class="info"><h6>XRP</h6><p>0.00000000</p></div>
-                                                        </li>
-                                                        <li class="asssetcurr-bat">
-                                                            <div class="circle"><i></i></div>
-                                                            <div class="info"><h6>BAT</h6><p>0.00000000</p></div>
-                                                        </li>
-                                                        <li class="asssetcurr-link">
-                                                            <div class="circle"><i></i></div>
-                                                            <div class="info"><h6>LINK</h6><p>0.00000000</p></div>
-                                                        </li>
-                                                        <li class="asssetcurr-xlm">
-                                                            <div class="circle"><i></i></div>
-                                                            <div class="info"><h6>XLM</h6><p>0.00000000</p></div>
-                                                        </li>
-                                                        <li class="asssetcurr-avax">
-                                                            <div class="circle"><i></i></div>
-                                                            <div class="info"><h6>AVAX</h6><p>0.00000000</p></div>
-                                                        </li>
-                                                        <li class="asssetcurr-tryb">
-                                                            <div class="circle"><i></i></div>
-                                                            <div class="info"><h6>TRYB</h6><p>0.00000000</p></div>
-                                                        </li>
-                                                        <li class="asssetcurr-mpay">
-                                                            <div class="circle"><i></i></div>
-                                                            <div class="info"><h6>MPAY</h6><p>0.00000000</p></div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="assets_address" class="openorders-tabassets-tabaddress tab-pane fade" role="tabpanel">
-                                            <div class="openorders-tabassets-tabaddress-tabs sitetabs tabsdark btn-group btn-group-sm nav" role="tablist">
-                                                <a class="btn btn-sm btn-secondary active" href="#assaddress_btc" data-toggle="tab" role="tab" aria-selected="true">BTC</a>
-                                                <a class="btn btn-sm btn-secondary" href="#assaddress_ltc" data-toggle="tab" role="tab" aria-selected="false">LTC</a>
-                                                <a class="btn btn-sm btn-secondary" href="#assaddress_eth" data-toggle="tab" role="tab" aria-selected="false">ETH</a>
-                                                <a class="btn btn-sm btn-secondary" href="#assaddress_xrp" data-toggle="tab" role="tab" aria-selected="false">XRP</a>
-                                                <a class="btn btn-sm btn-secondary" href="#assaddress_mpay" data-toggle="tab" role="tab" aria-selected="false">MPAY</a>
-                                                <a class="btn btn-sm btn-secondary" href="#assaddress_bat" data-toggle="tab" role="tab" aria-selected="false">BAT</a>
-                                                <a class="btn btn-sm btn-secondary" href="#assaddress_xlm" data-toggle="tab" role="tab" aria-selected="false">XLM</a>
-                                                <a class="btn btn-sm btn-secondary" href="#assaddress_tryb" data-toggle="tab" role="tab" aria-selected="false">TRYB</a>
-                                            </div>
-                                            <div class="openorders-tabassets-tabaddress-tabcontent sitetabs tabsdark tab-content">
-                                                <div id="assaddress_btc" class="openorders-tabassets-tabbtc tab-pane fade show active" role="tabpanel">
-                                                    <div class="openorders-tabassets-tabaddress-table scrollbar">
-                                                        <div class="sitetablediv tabledark scrollbar-tbl">
-                                                            <div class="scrollbar-tbl-th">
-                                                                <div class="tbl-thead">
-                                                                    <div class="tbl-tr">
-                                                                        <div class="tbl-th aut ico"></div>
-                                                                        <div class="tbl-th fxd add">Adres</div>
-                                                                        <div class="tbl-th aut ass">Varlık</div>
-                                                                        <div class="tbl-th aut crt">Oluşturulma</div>
-                                                                        <div class="tbl-th aut btn"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="scrollbar-tbl-tb">
-                                                                <div class="tbl-tbody tbl-striped tbl-hovered">
-                                                                    <div class="tbl-tr">
-                                                                        <div class="tbl-td aut ico">
-                                                                            <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
-                                                                            <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
-                                                                        </div>
-                                                                        <div class="tbl-td fxd add">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
-                                                                        <div class="tbl-td aut ass">0.02003240 BTC</div>
-                                                                        <div class="tbl-td aut crt">03/06/2020 12:51</div>
-                                                                        <div class="tbl-td aut btn">
-                                                                            <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
-                                                                            <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="tbl-tr">
-                                                                        <div class="tbl-td aut ico">
-                                                                            <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
-                                                                            <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
-                                                                        </div>
-                                                                        <div class="tbl-td fxd add">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
-                                                                        <div class="tbl-td aut ass">0.02003240 ETH</div>
-                                                                        <div class="tbl-td aut crt">03/06/2020 12:51</div>
-                                                                        <div class="tbl-td aut btn">
-                                                                            <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
-                                                                            <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="tbl-tr">
-                                                                        <div class="tbl-td aut ico">
-                                                                            <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
-                                                                            <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
-                                                                        </div>
-                                                                        <div class="tbl-td fxd add">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
-                                                                        <div class="tbl-td aut ass">0.02003240 BTC</div>
-                                                                        <div class="tbl-td aut crt">03/06/2020 12:51</div>
-                                                                        <div class="tbl-td aut btn">
-                                                                            <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
-                                                                            <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="tbl-tr">
-                                                                        <div class="tbl-td aut ico">
-                                                                            <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
-                                                                            <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
-                                                                        </div>
-                                                                        <div class="tbl-td fxd add">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
-                                                                        <div class="tbl-td aut ass">0.02003240 ETH</div>
-                                                                        <div class="tbl-td aut crt">03/06/2020 12:51</div>
-                                                                        <div class="tbl-td aut btn">
-                                                                            <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
-                                                                            <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="tbl-tr">
-                                                                        <div class="tbl-td aut ico">
-                                                                            <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
-                                                                            <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
-                                                                        </div>
-                                                                        <div class="tbl-td fxd add">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
-                                                                        <div class="tbl-td aut ass">0.02003240 BTC</div>
-                                                                        <div class="tbl-td aut crt">03/06/2020 12:51</div>
-                                                                        <div class="tbl-td aut btn">
-                                                                            <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
-                                                                            <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="tbl-tr">
-                                                                        <div class="tbl-td aut ico">
-                                                                            <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
-                                                                            <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
-                                                                        </div>
-                                                                        <div class="tbl-td fxd add">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
-                                                                        <div class="tbl-td aut ass">0.02003240 ETH</div>
-                                                                        <div class="tbl-td aut crt">03/06/2020 12:51</div>
-                                                                        <div class="tbl-td aut btn">
-                                                                            <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
-                                                                            <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="tbl-tr">
-                                                                        <div class="tbl-td aut ico">
-                                                                            <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
-                                                                            <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
-                                                                        </div>
-                                                                        <div class="tbl-td fxd add">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
-                                                                        <div class="tbl-td aut ass">0.02003240 BTC</div>
-                                                                        <div class="tbl-td aut crt">03/06/2020 12:51</div>
-                                                                        <div class="tbl-td aut btn">
-                                                                            <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
-                                                                            <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="tbl-tr">
-                                                                        <div class="tbl-td aut ico">
-                                                                            <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
-                                                                            <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
-                                                                        </div>
-                                                                        <div class="tbl-td fxd add">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
-                                                                        <div class="tbl-td aut ass">0.02003240 ETH</div>
-                                                                        <div class="tbl-td aut crt">03/06/2020 12:51</div>
-                                                                        <div class="tbl-td aut btn">
-                                                                            <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
-                                                                            <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="tbl-tr">
-                                                                        <div class="tbl-td aut ico">
-                                                                            <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
-                                                                            <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
-                                                                        </div>
-                                                                        <div class="tbl-td fxd add">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
-                                                                        <div class="tbl-td aut ass">0.02003240 BTC</div>
-                                                                        <div class="tbl-td aut crt">03/06/2020 12:51</div>
-                                                                        <div class="tbl-td aut btn">
-                                                                            <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
-                                                                            <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="tbl-tr">
-                                                                        <div class="tbl-td aut ico">
-                                                                            <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
-                                                                            <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
-                                                                        </div>
-                                                                        <div class="tbl-td fxd add">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
-                                                                        <div class="tbl-td aut ass">0.02003240 ETH</div>
-                                                                        <div class="tbl-td aut crt">03/06/2020 12:51</div>
-                                                                        <div class="tbl-td aut btn">
-                                                                            <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
-                                                                            <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                    <!-- Head -->
+                                    <!-- Assets Tabs -->
+                                    <div class="assets">
+                                        <div class="assets-tabcontent sitetabs">
+                                            <!-- Assets -->
+                                            <div id="assets_assets" class="assets-tabassets tab-pane fade show active" role="tabpanel">
+                                                <div class="assetchartarea">
+                                                    <div class="assetchartarea-donut">
+                                                        <div class="asssetdonutchrt ct-chart"></div>
+                                                        <div class="asssetdonutinfo">
+                                                            <div class="asssetdonutinfo-box">
+                                                                <h6>Toplam</h6>
+                                                                <p>1.350.750,00 TRY</p>
+                                                                <p>0.0028200 BTC</p>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div id="assaddress_ltc" class="openorders-tabassets-tabltc tab-pane fade" role="tabpanel">
-                                                    <div>LTC</div>
-                                                </div>
-                                                <div id="assaddress_eth" class="openorders-tabassets-tabeth tab-pane fade" role="tabpanel">
-                                                    <div>ETH</div>
-                                                </div>
-                                                <div id="assaddress_xrp" class="openorders-tabassets-tabxrp tab-pane fade" role="tabpanel">
-                                                    <div>XRP</div>
-                                                </div>
-                                                <div id="assaddress_mpay" class="openorders-tabassets-tabmpay tab-pane fade" role="tabpanel">
-                                                    <div>MPAY</div>
-                                                </div>
-                                                <div id="assaddress_bat" class="openorders-tabassets-tabbat tab-pane fade" role="tabpanel">
-                                                    <div>BAT</div>
-                                                </div>
-                                                <div id="assaddress_xlm" class="openorders-tabassets-tabxlm tab-pane fade" role="tabpanel">
-                                                    <div>XLM</div>
-                                                </div>
-                                                <div id="assaddress_tryb" class="openorders-tabassets-tabtryb tab-pane fade" role="tabpanel">
-                                                    <div>TRYB</div>
+                                                    <div class="assetchartarea-list">
+                                                        <ul class="asssetalllist">
+                                                            <li class="asssetcurr-try">
+                                                                <div class="circle"><i></i></div>
+                                                                <div class="info"><h6>TRY</h6><p>0.00000000</p></div>
+                                                            </li>
+                                                            <li class="asssetcurr-usd">
+                                                                <div class="circle"><i></i></div>
+                                                                <div class="info"><h6>USD</h6><p>0.00000000</p></div>
+                                                            </li>
+                                                            <li class="asssetcurr-btc">
+                                                                <div class="circle"><i></i></div>
+                                                                <div class="info"><h6>BTC</h6><p>0.00000000</p></div>
+                                                            </li>
+                                                            <li class="asssetcurr-ltc">
+                                                                <div class="circle"><i></i></div>
+                                                                <div class="info"><h6>LTC</h6><p>0.00000000</p></div>
+                                                            </li>
+                                                            <li class="asssetcurr-eth">
+                                                                <div class="circle"><i></i></div>
+                                                                <div class="info"><h6>ETH</h6><p>0.00000000</p></div>
+                                                            </li>
+                                                            <li class="asssetcurr-xrp">
+                                                                <div class="circle"><i></i></div>
+                                                                <div class="info"><h6>XRP</h6><p>0.00000000</p></div>
+                                                            </li>
+                                                            <li class="asssetcurr-bat">
+                                                                <div class="circle"><i></i></div>
+                                                                <div class="info"><h6>BAT</h6><p>0.00000000</p></div>
+                                                            </li>
+                                                            <li class="asssetcurr-link">
+                                                                <div class="circle"><i></i></div>
+                                                                <div class="info"><h6>LINK</h6><p>0.00000000</p></div>
+                                                            </li>
+                                                            <li class="asssetcurr-xlm">
+                                                                <div class="circle"><i></i></div>
+                                                                <div class="info"><h6>XLM</h6><p>0.00000000</p></div>
+                                                            </li>
+                                                            <li class="asssetcurr-avax">
+                                                                <div class="circle"><i></i></div>
+                                                                <div class="info"><h6>AVAX</h6><p>0.00000000</p></div>
+                                                            </li>
+                                                            <li class="asssetcurr-tryb">
+                                                                <div class="circle"><i></i></div>
+                                                                <div class="info"><h6>TRYB</h6><p>0.00000000</p></div>
+                                                            </li>
+                                                            <li class="asssetcurr-mpay">
+                                                                <div class="circle"><i></i></div>
+                                                                <div class="info"><h6>MPAY</h6><p>0.00000000</p></div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <!-- Assets -->
+                                            <!-- Address -->
+                                            <div id="assets_address" class="assets-tabaddress tab-pane fade" role="tabpanel">
+                                                <div class="assetsaddress">
+                                                    <div class="assetsaddress-tabs sitetabs nav btn-group btn-group-sm" role="tablist">
+                                                        <a class="btn btn-sm btn-secondary active" href="#assaddress_btc" data-toggle="tab" role="tab" aria-selected="true">BTC</a>
+                                                        <a class="btn btn-sm btn-secondary" href="#assaddress_ltc" data-toggle="tab" role="tab" aria-selected="false">LTC</a>
+                                                        <a class="btn btn-sm btn-secondary" href="#assaddress_eth" data-toggle="tab" role="tab" aria-selected="false">ETH</a>
+                                                        <a class="btn btn-sm btn-secondary" href="#assaddress_xrp" data-toggle="tab" role="tab" aria-selected="false">XRP</a>
+                                                        <a class="btn btn-sm btn-secondary" href="#assaddress_mpay" data-toggle="tab" role="tab" aria-selected="false">MPAY</a>
+                                                        <a class="btn btn-sm btn-secondary" href="#assaddress_bat" data-toggle="tab" role="tab" aria-selected="false">BAT</a>
+                                                        <a class="btn btn-sm btn-secondary" href="#assaddress_xlm" data-toggle="tab" role="tab" aria-selected="false">XLM</a>
+                                                        <a class="btn btn-sm btn-secondary" href="#assaddress_tryb" data-toggle="tab" role="tab" aria-selected="false">TRYB</a>
+                                                    </div>
+                                                    <div class="assetsaddress-tabcontent sitetabs">
+                                                        <div id="assaddress_btc" class="assetsaddress-tabbtc tab-pane fade show active" role="tabpanel">
+                                                            <div class="asaddresstable scrollbar">
+                                                                <div class="sitetablediv scrollbar-tbl">
+                                                                    <div class="scrollbar-tbl-th">
+                                                                        <div class="tbl-thead">
+                                                                            <div class="tbl-tr">
+                                                                                <div class="tbl-th aut ico"></div>
+                                                                                <div class="tbl-th fxd add">Adres</div>
+                                                                                <div class="tbl-th aut ass">Varlık</div>
+                                                                                <div class="tbl-th aut crt">Oluşturulma</div>
+                                                                                <div class="tbl-th aut btn"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="scrollbar-tbl-tb">
+                                                                        <div class="tbl-tbody tbl-striped tbl-hovered">
+                                                                            <div class="tbl-tr">
+                                                                                <div class="tbl-td aut ico">
+                                                                                    <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                                    <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                </div>
+                                                                                <div class="tbl-td fxd add">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
+                                                                                <div class="tbl-td aut ass">0.02003240 BTC</div>
+                                                                                <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                <div class="tbl-td aut btn">
+                                                                                    <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                    <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="tbl-tr">
+                                                                                <div class="tbl-td aut ico">
+                                                                                    <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                                    <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                </div>
+                                                                                <div class="tbl-td fxd add">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
+                                                                                <div class="tbl-td aut ass">0.02003240 ETH</div>
+                                                                                <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                <div class="tbl-td aut btn">
+                                                                                    <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                    <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="tbl-tr">
+                                                                                <div class="tbl-td aut ico">
+                                                                                    <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                                    <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                </div>
+                                                                                <div class="tbl-td fxd add">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
+                                                                                <div class="tbl-td aut ass">0.02003240 BTC</div>
+                                                                                <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                <div class="tbl-td aut btn">
+                                                                                    <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                    <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="tbl-tr">
+                                                                                <div class="tbl-td aut ico">
+                                                                                    <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                                    <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                </div>
+                                                                                <div class="tbl-td fxd add">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
+                                                                                <div class="tbl-td aut ass">0.02003240 ETH</div>
+                                                                                <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                <div class="tbl-td aut btn">
+                                                                                    <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                    <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="tbl-tr">
+                                                                                <div class="tbl-td aut ico">
+                                                                                    <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                                    <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                </div>
+                                                                                <div class="tbl-td fxd add">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
+                                                                                <div class="tbl-td aut ass">0.02003240 BTC</div>
+                                                                                <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                <div class="tbl-td aut btn">
+                                                                                    <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                    <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="tbl-tr">
+                                                                                <div class="tbl-td aut ico">
+                                                                                    <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                                    <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                </div>
+                                                                                <div class="tbl-td fxd add">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
+                                                                                <div class="tbl-td aut ass">0.02003240 ETH</div>
+                                                                                <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                <div class="tbl-td aut btn">
+                                                                                    <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                    <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="tbl-tr">
+                                                                                <div class="tbl-td aut ico">
+                                                                                    <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                                    <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                </div>
+                                                                                <div class="tbl-td fxd add">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
+                                                                                <div class="tbl-td aut ass">0.02003240 BTC</div>
+                                                                                <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                <div class="tbl-td aut btn">
+                                                                                    <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                    <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="tbl-tr">
+                                                                                <div class="tbl-td aut ico">
+                                                                                    <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                                    <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                </div>
+                                                                                <div class="tbl-td fxd add">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
+                                                                                <div class="tbl-td aut ass">0.02003240 ETH</div>
+                                                                                <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                <div class="tbl-td aut btn">
+                                                                                    <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                    <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="tbl-tr">
+                                                                                <div class="tbl-td aut ico">
+                                                                                    <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                                    <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                </div>
+                                                                                <div class="tbl-td fxd add">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
+                                                                                <div class="tbl-td aut ass">0.02003240 BTC</div>
+                                                                                <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                <div class="tbl-td aut btn">
+                                                                                    <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                    <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="tbl-tr">
+                                                                                <div class="tbl-td aut ico">
+                                                                                    <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                                    <a href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                </div>
+                                                                                <div class="tbl-td fxd add">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
+                                                                                <div class="tbl-td aut ass">0.02003240 ETH</div>
+                                                                                <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                <div class="tbl-td aut btn">
+                                                                                    <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                    <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="assaddress_ltc" class="assetsaddress-tabltc tab-pane fade" role="tabpanel">
+                                                            <div>LTC</div>
+                                                        </div>
+                                                        <div id="assaddress_eth" class="assetsaddress-tabeth tab-pane fade" role="tabpanel">
+                                                            <div>ETH</div>
+                                                        </div>
+                                                        <div id="assaddress_xrp" class="assetsaddress-tabxrp tab-pane fade" role="tabpanel">
+                                                            <div>XRP</div>
+                                                        </div>
+                                                        <div id="assaddress_mpay" class="assetsaddress-tabmpay tab-pane fade" role="tabpanel">
+                                                            <div>MPAY</div>
+                                                        </div>
+                                                        <div id="assaddress_bat" class="assetsaddress-tabbat tab-pane fade" role="tabpanel">
+                                                            <div>BAT</div>
+                                                        </div>
+                                                        <div id="assaddress_xlm" class="assetsaddress-tabxlm tab-pane fade" role="tabpanel">
+                                                            <div>XLM</div>
+                                                        </div>
+                                                        <div id="assaddress_tryb" class="assetsaddress-tabtryb tab-pane fade" role="tabpanel">
+                                                            <div>TRYB</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Address -->
                                         </div>
                                     </div>
+                                    <!-- Assets Tabs -->
                                 </div>
                                 <!-- Assets -->
                                 <!-- Deposit/Withdrawal -->
-                                <div id="oo_dandw" class="openorders-tabdandw tab-pane fade" role="tabpanel">
+                                <div id="oo_depoandwith" class="openorders-tabdandw tab-pane" role="tabpanel">
+                                    <!-- Head -->
                                     <div class="tabcont tabcont-head">
-                                        <div class="tabcont-head-col assetssubtabcol">
-                                            <ul class="tabcont-head-nav-pills sitetabs tabsdark nav nav-pills nav-justified" role="tablist">
-                                                <li class="nav-item"><a class="nav-link active" href="#oo_dandw_ds" data-toggle="tab" role="tab" aria-selected="true">Yatır</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="#oo_dandw_wd" data-toggle="tab" role="tab" aria-selected="false">Çek</a></li>
+                                        <div class="tabcont-head-col">
+                                            <ul class="tabcont-head-navpills depositandwithdraw-tabs sitetabs nav nav-pills nav-justified" role="tablist">
+                                                <li class="nav-item"><a class="nav-link active" href="#dandw_deposit" data-toggle="tab" role="tab" aria-selected="true">Yatır</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="#dandw_withdrawal" data-toggle="tab" role="tab" aria-selected="false">Çek</a></li>
                                             </ul>
                                         </div>
-                                        <div class="tabcont-head-col assetsinfotxtcol">
+                                        <div class="tabcont-head-col">
                                             <i class="icon-sprtsmiconclrd icon16 sm-wallet"></i>
                                             <h6>Yaklaşık Olarak</h6>
                                             <p>1.350.750,00 TRY / 44.815,00 BTC</p>
                                         </div>
                                     </div>
-                                    <div class="openorders-tabdandw-tabcontent sitetabs tabsdark tab-content">
-                                        <div id="oo_dandw_ds" class="openorders-tabdandw-tabdeposit tab-pane fade show active" role="tabpanel">
-                                            <div class="dandwtabcontwrp">
-                                                <div class="dandwtabcontwrp-side siteformui formdark">
-                                                    <ul class="dandwtabcontwrp-side-nav-pills sitetabs tabsdark nav nav-pills pillsver" role="tablist">
-                                                        <li class="nav-item"><a class="nav-link active" href="#deposit_bank" data-toggle="tab" role="tab" aria-selected="true">Banka</a></li>
-                                                        <li class="nav-item"><a class="nav-link" href="#deposit_papara" data-toggle="tab" role="tab" aria-selected="false">Papara</a></li>
-                                                        <li class="nav-item"><a class="nav-link" href="#deposit_crypto" data-toggle="tab" role="tab" aria-selected="false">Kripto</a></li>
-                                                    </ul>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input id="depositTabIhaveRead" class="custom-control-input" type="checkbox" value="" checked="">
-                                                        <label for="depositTabIhaveRead" class="custom-control-label"><a href="#">Kural ve Şartları okudum onaylıyorum.</a></label>
+                                    <!-- Head -->
+                                    <!-- Deposit And Withdrawal Tabs -->
+                                    <div class="depositandwithdraw">
+                                        <div class="depositandwithdraw-tabcontent sitetabs tab-content">
+                                            <div id="dandw_deposit" class="depositandwithdraw-tabdeposit tab-pane fade show active" role="tabpanel">
+                                                <div class="dandwtab-wrapper">
+                                                    <div class="dandwtab-side siteformui">
+                                                        <ul class="dandwtab-side-navpills sitetabs nav nav-pills pillsver" role="tablist">
+                                                            <li class="nav-item"><a class="nav-link active" href="#deposit_bank" data-toggle="tab" role="tab" aria-selected="true">Banka</a></li>
+                                                            <li class="nav-item"><a class="nav-link" href="#deposit_papara" data-toggle="tab" role="tab" aria-selected="false">Papara</a></li>
+                                                            <li class="nav-item"><a class="nav-link" href="#deposit_crypto" data-toggle="tab" role="tab" aria-selected="false">Kripto</a></li>
+                                                        </ul>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input id="depositTabIhaveRead" class="custom-control-input" type="checkbox" value="" checked="">
+                                                            <label for="depositTabIhaveRead" class="custom-control-label"><a href="#">Kural ve Şartları okudum onaylıyorum.</a></label>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="dandwtabcontwrp-cont">
-                                                    <div class="dandwtabcontwrp-tabcontent sitetabs tabsdark tab-content">
-                                                        <div id="deposit_bank" class="dandwtabcontwrp-tabbank tab-pane fade show active" role="tabpanel">
-                                                            <div class="dandwtabcontwrp-tabbank-tabs sitetabs tabsdark nav" role="tablist">
-                                                                <a class="banklogostablink active" href="#dandwtabbank_akbank" data-toggle="tab" role="tab" aria-selected="true"><i class="banksprttablogos logoakbank"></i></a>
-                                                                <a class="banklogostablink" href="#dandwtabbank_ziraat" data-toggle="tab" role="tab" aria-selected="false"><i class="banksprttablogos logoziraat"></i></a>
-                                                                <a class="banklogostablink" href="#dandwtabbank_odea" data-toggle="tab" role="tab" aria-selected="false"><i class="banksprttablogos logoodeabank"></i></a>
-                                                                <a class="banklogostablink" href="#dandwtabbank_vakif" data-toggle="tab" role="tab" aria-selected="false"><i class="banksprttablogos logovakifbank"></i></a>
-                                                            </div>
-                                                            <div class="dandwtabcontwrp-tabbank-tabcontent sitetabs tabsdark tab-content">
-                                                                <div id="dandwtabbank_akbank" class="dandwtabcontwrp-tabbank-tabbank tab-pane fade show active" role="tabpanel">
-                                                                    <form class="dandwtabcontwrp-tabbank-tabbank-form siteformui formdark" autocomplete="off" novalidate>
-                                                                        <div class="form-row">
-                                                                            <div class="form-group col-auto">
-                                                                                <select class="custom-select">
-                                                                                    <option value="TRY">TRY</option>
-                                                                                    <option value="USD">USD</option>
-                                                                                    <option value="EUR">EUR</option>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="form-group input-group col">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text">IBAN</span>
+                                                    <div class="dandwtab-cont">
+                                                        <div class="dandwtab-tabcontent sitetabs tab-content">
+                                                            <div id="deposit_bank" class="dandwtab-tabbank tab-pane fade show active" role="tabpanel">
+                                                                <div class="dandwtab-tabbank-tabs sitetabs nav" role="tablist">
+                                                                    <a class="banklogostablink active" href="#dandwtabbank_akbank" data-toggle="tab" role="tab" aria-selected="true"><i class="banksprttablogos logoakbank"></i></a>
+                                                                    <a class="banklogostablink" href="#dandwtabbank_ziraat" data-toggle="tab" role="tab" aria-selected="false"><i class="banksprttablogos logoziraat"></i></a>
+                                                                    <a class="banklogostablink" href="#dandwtabbank_odea" data-toggle="tab" role="tab" aria-selected="false"><i class="banksprttablogos logoodeabank"></i></a>
+                                                                    <a class="banklogostablink" href="#dandwtabbank_vakif" data-toggle="tab" role="tab" aria-selected="false"><i class="banksprttablogos logovakifbank"></i></a>
+                                                                </div>
+                                                                <div class="dandwtab-tabbank-tabcontent sitetabs">
+                                                                    <div id="dandwtabbank_akbank" class="dandwtab-tabbank-tabbank tab-pane fade show active" role="tabpanel">
+                                                                        <form class="dandwtab-tabbank-tabbank-form siteformui" autocomplete="off" novalidate>
+                                                                            <div class="form-row">
+                                                                                <div class="form-group col-auto">
+                                                                                    <select class="custom-select">
+                                                                                        <option value="TRY">TRY</option>
+                                                                                        <option value="USD">USD</option>
+                                                                                        <option value="EUR">EUR</option>
+                                                                                    </select>
                                                                                 </div>
-                                                                                <input type="text" class="form-control text-right" value="TR140004600420888000174052" readonly />
+                                                                                <div class="form-group input-group col">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <span class="input-group-text">IBAN</span>
+                                                                                    </div>
+                                                                                    <input type="text" class="form-control text-right" value="TR140004600420888000174052" readonly />
+                                                                                    <div class="input-group-append">
+                                                                                        <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group input-group">
+                                                                                <div class="input-group-prepend">
+                                                                                    <span class="input-group-text">Hesap Sahibi</span>
+                                                                                </div>
+                                                                                <input type="text" class="form-control text-right" value="Icrpex Bilişim A.Ş." readonly />
                                                                                 <div class="input-group-append">
                                                                                     <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="form-group input-group">
-                                                                            <div class="input-group-prepend">
-                                                                                <span class="input-group-text">Hesap Sahibi</span>
-                                                                            </div>
-                                                                            <input type="text" class="form-control text-right" value="Icrpex Bilişim A.Ş." readonly />
-                                                                            <div class="input-group-append">
-                                                                                <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                                <div id="dandwtabbank_ziraat" class="dandwtabcontwrp-tabbank-tabbank tab-pane fade" role="tabpanel">
-                                                                    <form class="dandwtabcontwrp-tabbank-tabbank-form siteformui formdark" autocomplete="off" novalidate>
-                                                                        <div class="form-row">
-                                                                            <div class="form-group col-auto">
-                                                                                <select class="custom-select">
-                                                                                    <option value="TRY">TRY</option>
-                                                                                    <option value="USD">USD</option>
-                                                                                    <option value="EUR">EUR</option>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="form-group input-group col">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text">IBAN</span>
+                                                                        </form>
+                                                                    </div>
+                                                                    <div id="dandwtabbank_ziraat" class="dandwtab-tabbank-tabbank tab-pane fade" role="tabpanel">
+                                                                        <form class="dandwtab-tabbank-tabbank-form siteformui" autocomplete="off" novalidate>
+                                                                            <div class="form-row">
+                                                                                <div class="form-group col-auto">
+                                                                                    <select class="custom-select">
+                                                                                        <option value="TRY">TRY</option>
+                                                                                        <option value="USD">USD</option>
+                                                                                        <option value="EUR">EUR</option>
+                                                                                    </select>
                                                                                 </div>
-                                                                                <input type="text" class="form-control text-right" value="TR140004600420888000174052" readonly />
+                                                                                <div class="form-group input-group col">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <span class="input-group-text">IBAN</span>
+                                                                                    </div>
+                                                                                    <input type="text" class="form-control text-right" value="TR140004600420888000174052" readonly />
+                                                                                    <div class="input-group-append">
+                                                                                        <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group input-group">
+                                                                                <div class="input-group-prepend">
+                                                                                    <span class="input-group-text">Hesap Sahibi</span>
+                                                                                </div>
+                                                                                <input type="text" class="form-control text-right" value="Icrpex Bilişim A.Ş." readonly />
                                                                                 <div class="input-group-append">
                                                                                     <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="form-group input-group">
-                                                                            <div class="input-group-prepend">
-                                                                                <span class="input-group-text">Hesap Sahibi</span>
-                                                                            </div>
-                                                                            <input type="text" class="form-control text-right" value="Icrpex Bilişim A.Ş." readonly />
-                                                                            <div class="input-group-append">
-                                                                                <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                                <div id="dandwtabbank_odea" class="dandwtabcontwrp-tabbank-tabbank tab-pane fade" role="tabpanel">
-                                                                    <form class="dandwtabcontwrp-tabbank-tabbank-form siteformui formdark" autocomplete="off" novalidate>
-                                                                        <div class="form-row">
-                                                                            <div class="form-group col-auto">
-                                                                                <select class="custom-select">
-                                                                                    <option value="TRY">TRY</option>
-                                                                                    <option value="USD">USD</option>
-                                                                                    <option value="EUR">EUR</option>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="form-group input-group col">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text">IBAN</span>
+                                                                        </form>
+                                                                    </div>
+                                                                    <div id="dandwtabbank_odea" class="dandwtab-tabbank-tabbank tab-pane fade" role="tabpanel">
+                                                                        <form class="dandwtab-tabbank-tabbank-form siteformui" autocomplete="off" novalidate>
+                                                                            <div class="form-row">
+                                                                                <div class="form-group col-auto">
+                                                                                    <select class="custom-select">
+                                                                                        <option value="TRY">TRY</option>
+                                                                                        <option value="USD">USD</option>
+                                                                                        <option value="EUR">EUR</option>
+                                                                                    </select>
                                                                                 </div>
-                                                                                <input type="text" class="form-control text-right" value="TR140004600420888000174052" readonly />
+                                                                                <div class="form-group input-group col">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <span class="input-group-text">IBAN</span>
+                                                                                    </div>
+                                                                                    <input type="text" class="form-control text-right" value="TR140004600420888000174052" readonly />
+                                                                                    <div class="input-group-append">
+                                                                                        <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group input-group">
+                                                                                <div class="input-group-prepend">
+                                                                                    <span class="input-group-text">Hesap Sahibi</span>
+                                                                                </div>
+                                                                                <input type="text" class="form-control text-right" value="Icrpex Bilişim A.Ş." readonly />
                                                                                 <div class="input-group-append">
                                                                                     <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="form-group input-group">
-                                                                            <div class="input-group-prepend">
-                                                                                <span class="input-group-text">Hesap Sahibi</span>
-                                                                            </div>
-                                                                            <input type="text" class="form-control text-right" value="Icrpex Bilişim A.Ş." readonly />
-                                                                            <div class="input-group-append">
-                                                                                <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                                <div id="dandwtabbank_vakif" class="dandwtabcontwrp-tabbank-tabbank tab-pane fade" role="tabpanel">
-                                                                    <form class="dandwtabcontwrp-tabbank-tabbank-form siteformui formdark" autocomplete="off" novalidate>
-                                                                        <div class="form-row">
-                                                                            <div class="form-group col-auto">
-                                                                                <select class="custom-select">
-                                                                                    <option value="TRY">TRY</option>
-                                                                                    <option value="USD">USD</option>
-                                                                                    <option value="EUR">EUR</option>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="form-group input-group col">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text">IBAN</span>
+                                                                        </form>
+                                                                    </div>
+                                                                    <div id="dandwtabbank_vakif" class="dandwtab-tabbank-tabbank tab-pane fade" role="tabpanel">
+                                                                        <form class="dandwtab-tabbank-tabbank-form siteformui" autocomplete="off" novalidate>
+                                                                            <div class="form-row">
+                                                                                <div class="form-group col-auto">
+                                                                                    <select class="custom-select">
+                                                                                        <option value="TRY">TRY</option>
+                                                                                        <option value="USD">USD</option>
+                                                                                        <option value="EUR">EUR</option>
+                                                                                    </select>
                                                                                 </div>
-                                                                                <input type="text" class="form-control text-right" value="TR140004600420888000174052" readonly />
+                                                                                <div class="form-group input-group col">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <span class="input-group-text">IBAN</span>
+                                                                                    </div>
+                                                                                    <input type="text" class="form-control text-right" value="TR140004600420888000174052" readonly />
+                                                                                    <div class="input-group-append">
+                                                                                        <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group input-group">
+                                                                                <div class="input-group-prepend">
+                                                                                    <span class="input-group-text">Hesap Sahibi</span>
+                                                                                </div>
+                                                                                <input type="text" class="form-control text-right" value="Icrpex Bilişim A.Ş." readonly />
                                                                                 <div class="input-group-append">
                                                                                     <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="dandwtab-tabbank-infobank">
+                                                                    <ul>
+                                                                        <li>Yalnızca sistemimize kayıt olduğunuz isim, soyisim ve T.C. Kimlik  Numarası’na ait banka hesaplarından gelen tutarlar kabul edilmektedir.</li>
+                                                                        <li>Yatırmak istediğiniz miktarı bankanız üzerinden yukardaki Icrypex hesabına Havale/EFT yapabilirsiniz.</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div id="deposit_papara" class="dandwtab-tabpapara tab-pane fade" role="tabpanel">
+                                                                <form class="dandwtab-tabpapara-form siteformui" autocomplete="off" novalidate>
+                                                                    <div class="formfieldset">
                                                                         <div class="form-group input-group">
                                                                             <div class="input-group-prepend">
-                                                                                <span class="input-group-text">Hesap Sahibi</span>
+                                                                                <span class="input-group-text">Fiyat</span>
                                                                             </div>
-                                                                            <input type="text" class="form-control text-right" value="Icrpex Bilişim A.Ş." readonly />
+                                                                            <input type="text" class="form-control" value="12000.00">
                                                                             <div class="input-group-append">
-                                                                                <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                <span class="input-group-text">TRY</span>
                                                                             </div>
                                                                         </div>
-                                                                    </form>
-                                                                </div>
+                                                                        <div class="form-row form-group">
+                                                                            <div class="col">Papara komisyonu  (%2 + KDV)</div>
+                                                                            <div class="col-auto">15.00 TRY</div>
+                                                                        </div>
+                                                                        <div class="form-row form-group">
+                                                                            <div class="col">Hesaba Geçecek Miktar</div>
+                                                                            <div class="col-auto">999,999.00 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="formbttm">
+                                                                        <button type="button" class="btn btn-secondary active">PAPARA İLE YATIR</button>
+                                                                    </div>
+                                                                </form>
                                                             </div>
-                                                            <div class="dandwtabcontwrp-tabbank-infobank">
-                                                                <ul>
-                                                                    <li>Yalnızca sistemimize kayıt olduğunuz isim, soyisim ve T.C. Kimlik  Numarası’na ait banka hesaplarından gelen tutarlar kabul edilmektedir.</li>
-                                                                    <li>Yatırmak istediğiniz miktarı bankanız üzerinden yukardaki Icrypex hesabına Havale/EFT yapabilirsiniz.</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div id="deposit_papara" class="dandwtabcontwrp-tabpapara tab-pane fade" role="tabpanel">
-                                                            <form class="dandwtabcontwrp-tabpapara-form siteformui formdark" autocomplete="off" novalidate>
-                                                                <div class="formfieldset">
-                                                                    <div class="form-group input-group">
-                                                                        <div class="input-group-prepend">
-                                                                            <span class="input-group-text">Fiyat</span>
+                                                            <div id="deposit_crypto" class="dandwtab-tabcrypto tab-pane fade" role="tabpanel">
+                                                                <div class="dandwtab-tabcrypto-form siteformui">
+                                                                    <div class="form-row">
+                                                                        <div class="form-group col-auto">
+                                                                            <select class="custom-select">
+                                                                                <option value="BTC">BTC</option>
+                                                                                <option value="ETH">ETH</option>
+                                                                                <option value="LTC">LTC</option>
+                                                                            </select>
                                                                         </div>
-                                                                        <input type="text" class="form-control" value="12000.00">
-                                                                        <div class="input-group-append">
-                                                                            <span class="input-group-text">TRY</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-row form-group">
-                                                                        <div class="col">Papara komisyonu  (%2 + KDV)</div>
-                                                                        <div class="col-auto">15.00 TRY</div>
-                                                                    </div>
-                                                                    <div class="form-row form-group">
-                                                                        <div class="col">Hesaba Geçecek Miktar</div>
-                                                                        <div class="col-auto">999,999.00 TRY</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="formbttm">
-                                                                    <button type="button" class="btn btn-secondary active">PAPARA İLE YATIR</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                        <div id="deposit_crypto" class="dandwtabcontwrp-tabcrypto tab-pane fade" role="tabpanel">
-                                                            <div class="dandwtabcontwrp-tabcrypto-form siteformui formdark">
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-auto">
-                                                                        <select class="custom-select">
-                                                                            <option value="BTC">BTC</option>
-                                                                            <option value="ETH">ETH</option>
-                                                                            <option value="LTC">LTC</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="form-group input-group col">
-                                                                        <input type="text" class="form-control text-right" value="0x4A356640831fF69F10fCd55Be27588c51d34384c" readonly />
-                                                                        <div class="input-group-append">
-                                                                            <a class="btn btn-secondary" href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
-                                                                        </div>
-                                                                        <div class="input-group-append">
-                                                                            <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                        <div class="form-group input-group col">
+                                                                            <input type="text" class="form-control text-right" value="0x4A356640831fF69F10fCd55Be27588c51d34384c" readonly />
+                                                                            <div class="input-group-append">
+                                                                                <a class="btn btn-secondary" href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                            </div>
+                                                                            <div class="input-group-append">
+                                                                                <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="dandwtabcontwrp-tabcrypto-infocrypto">
-                                                                <ul>
-                                                                    <li>Kopyaladığınız adresin yapıştırdığınız alanda doğruluğunu mutlaka kontrol ediniz.</li>
-                                                                    <li>Yatırılabilen en az tutar 0.0001 BTC’dir. 0.0001 BTC altındaki yatırma işlemleri iade edilmeyecektir.</li>
-                                                                    <li>Gönderdiğiniz tutar otomatik olarak hesabınıza geçecektir.</li>
-                                                                </ul>
+                                                                <div class="dandwtab-tabcrypto-infocrypto">
+                                                                    <ul>
+                                                                        <li>Kopyaladığınız adresin yapıştırdığınız alanda doğruluğunu mutlaka kontrol ediniz.</li>
+                                                                        <li>Yatırılabilen en az tutar 0.0001 BTC’dir. 0.0001 BTC altındaki yatırma işlemleri iade edilmeyecektir.</li>
+                                                                        <li>Gönderdiğiniz tutar otomatik olarak hesabınıza geçecektir.</li>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div id="oo_dandw_wd" class="openorders-tabdandw-tabwithdraw tab-pane fade" role="tabpanel">
-                                            <div class="dandwtabcontwrp">
-                                                <div class="dandwtabcontwrp-side siteformui formdark">
-                                                    <ul class="dandwtabcontwrp-side-nav-pills sitetabs tabsdark nav nav-pills pillsver" role="tablist">
-                                                        <li class="nav-item"><a class="nav-link active" href="#withdraw_bank" data-toggle="tab" role="tab" aria-selected="true">Banka</a></li>
-                                                        <li class="nav-item"><a class="nav-link" href="#withdraw_papara" data-toggle="tab" role="tab" aria-selected="false">Papara</a></li>
-                                                        <li class="nav-item"><a class="nav-link" href="#withdraw_crypto" data-toggle="tab" role="tab" aria-selected="false">Kripto</a></li>
-                                                    </ul>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input id="withdrawTabIhaveRead" class="custom-control-input" type="checkbox" value="" checked="">
-                                                        <label for="withdrawTabIhaveRead" class="custom-control-label"><a href="#">Kural ve Şartları okudum onaylıyorum.</a></label>
+                                            <div id="dandw_withdrawal" class="depositandwithdraw-tabwithdraw tab-pane fade" role="tabpanel">
+                                                <div class="dandwtab-wrapper">
+                                                    <div class="dandwtab-side siteformui">
+                                                        <ul class="dandwtab-side-navpills sitetabs nav nav-pills pillsver" role="tablist">
+                                                            <li class="nav-item"><a class="nav-link active" href="#withdraw_bank" data-toggle="tab" role="tab" aria-selected="true">Banka</a></li>
+                                                            <li class="nav-item"><a class="nav-link" href="#withdraw_papara" data-toggle="tab" role="tab" aria-selected="false">Papara</a></li>
+                                                            <li class="nav-item"><a class="nav-link" href="#withdraw_crypto" data-toggle="tab" role="tab" aria-selected="false">Kripto</a></li>
+                                                        </ul>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input id="withdrawTabIhaveRead" class="custom-control-input" type="checkbox" value="" checked="">
+                                                            <label for="withdrawTabIhaveRead" class="custom-control-label"><a href="#">Kural ve Şartları okudum onaylıyorum.</a></label>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="dandwtabcontwrp-cont">
-                                                    <div class="dandwtabcontwrp-tabcontent sitetabs tabsdark tab-content">
-                                                        <div id="withdraw_bank" class="dandwtabcontwrp-tabbank tab-pane fade show active" role="tabpanel">
-                                                            <div>Banka Çek</div>
-                                                        </div>
-                                                        <div id="withdraw_papara" class="dandwtabcontwrp-tabbank tab-pane fade" role="tabpanel">
-                                                            <div>Papara Çek</div>
-                                                        </div>
-                                                        <div id="withdraw_crypto" class="dandwtabcontwrp-tabbank tab-pane fade" role="tabpanel">
-                                                            <div>Kripto Çek</div>
+                                                    <div class="dandwtab-cont">
+                                                        <div class="dandwtab-tabcontent sitetabs tab-content">
+                                                            <div id="withdraw_bank" class="dandwtab-tabbank tab-pane fade show active" role="tabpanel">
+                                                                <div>Banka Çek</div>
+                                                            </div>
+                                                            <div id="withdraw_papara" class="dandwtab-tabbank tab-pane fade" role="tabpanel">
+                                                                <div>Papara Çek</div>
+                                                            </div>
+                                                            <div id="withdraw_crypto" class="dandwtab-tabbank tab-pane fade" role="tabpanel">
+                                                                <div>Kripto Çek</div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Deposit And Withdrawal Tabs -->
                                 </div>
                                 <!-- Deposit/Withdrawal -->
                                 <!-- Account Activities -->
-                                <div id="oo_activities" class="openorders-tabactivities tab-pane fade" role="tabpanel">
+                                <div id="oo_aactivities" class="openorders-tabactivities tab-pane fade" role="tabpanel">
                                     <div>Hesap Hareketleri</div>
                                 </div>
                                 <!-- Account Activities -->

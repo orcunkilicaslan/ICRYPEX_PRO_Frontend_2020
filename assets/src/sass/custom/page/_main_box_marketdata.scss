@@ -2,24 +2,24 @@
 .mainbox-marketdata{
 
   .marketdata{
+    @include flexbox-display-flex();
+    @include flexbox-flex-flow(column);
     height: 100%;
 
     &-tabs{}
 
     &-tabcontent{
-      padding: 5px 0;
+      @include flexbox-flex(1);
 
-      .mdtabheadtitle{
+      .tabcont-head{
         color: $site-clr-white;
-        @include responsive-font-size($var-custom-font-size-base);
-        padding: 10px 10px 0;
+        padding-bottom: 10px;
       }
+
     }
 
     .sitetablediv{
       .tbl-thead .tbl-th{padding-top: 0;}
-      .tbl-thead .tbl-th,
-      .tbl-tbody .tbl-td{white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
       .scrollbar-tbl-tb{
         height: 280px;
 
@@ -28,31 +28,9 @@
     }
 
     &-tabsymbol{
-      &-filter{
-        padding: 5px 10px;
-        position: relative;
 
-        @include placeholder{
-          color: $site-clr-text-soft-sec;
-        }
-
-        .btn-secondary,
-        .form-control{
-          @include responsive-font-size($var-custom-font-size-base);
-        }
-
-        .btn-secondary{
-          color: $site-clr-text-soft-sec;
-
-          &:hover,
-          &:focus,
-          &:not(:disabled):not(.disabled):active,
-          &:not(:disabled):not(.disabled).active{
-            color: $site-clr-white;
-
-            .filterfavico path{fill: $site-clr-white;}
-          }
-        }
+      .tabcont-filterbar{
+        @include flexbox-align-items(inherit);
 
         .filterfavico{
           position: relative;
@@ -60,6 +38,15 @@
 
           path{
             fill: $site-clr-text-soft-sec;
+          }
+        }
+
+        .btn-secondary{
+          &:hover,
+          &:focus,
+          &:not(:disabled):not(.disabled):active,
+          &:not(:disabled):not(.disabled).active{
+            .filterfavico path{fill: $site-clr-white;}
           }
         }
 
@@ -97,10 +84,11 @@
 
         .btn-group.col{}
         .btn-group.col-auto{padding-right: 83px;}
+
       }
 
-      &-table{
-        padding: 5px 10px;
+      .mdsymboltable{
+        padding: 5px 0;
 
         .sitetablediv{
           .tbl-tbody .tbl-tr{cursor: pointer;}
@@ -128,9 +116,8 @@
     }
 
     &-tabdetail{
-      &-table{
-        padding: 10px;
 
+      .mddetailtable{
         .sitetablediv{
           .txt[class*="tbl"]{text-align: left;}
           .chg[class*="tbl"]{text-align: right;}
@@ -141,8 +128,8 @@
     }
 
     &-tablast{
-      &-table{
-        padding: 10px;
+      .mdlasttable{
+        padding: 5px 0;
 
         .sitetablediv{
           .time[class*="tbl"]{text-align: left;}
@@ -154,9 +141,8 @@
 
     &-tabchart{
 
-      &-chart{
-        padding: 10px;
-        height: 485px;
+      .mdchartarea{
+        max-height: 500px;
         overflow: hidden;
       }
     }

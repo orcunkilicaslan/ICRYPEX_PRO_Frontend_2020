@@ -10,60 +10,10 @@
 
     &-tabcontent{
       @include flexbox-flex(1);
-      padding: 5px 0;
-
-      > div[class*="tab"]{
-        margin: 0 10px;
-        overflow: hidden;
-        height: 100%;
-
-        &.active{
-          @include flexbox-display-flex();
-          @include flexbox-flex-flow(column);
-        }
-      }
 
       .tabcont{
 
         &-head{
-          @include flexbox-display-flex();
-          @include flexbox-flex-wrap(wrap);
-          @include flexbox-align-items(center);
-          @include flexbox-justify-content(space-between);
-          line-height: 1.2;
-          padding: 5px 0;
-
-          &-col{
-            @include flexbox-flex(0 0 auto);
-            width: auto;
-            max-width: 100%;
-
-            &.assetssubtabcol{
-              width: 200px;
-            }
-
-            &.assetsinfotxtcol{
-              @include flexbox-display-flex();
-              @include flexbox-align-items(center);
-              @include flexbox-justify-content(flex-end);
-
-              i[class*="icon"]{
-                margin-right: 5px;
-              }
-            }
-
-            h6{
-              color: lighten($site-clr-text-soft-sec, 10%);
-              margin: 0 5px;
-            }
-
-            h6, p{
-              @include responsive-font-size($var-custom-font-size-base);
-            }
-          }
-
-          &-nav-pills{}
-
           + div{
             padding: 10px 0;
             margin-top: 5px;
@@ -72,44 +22,15 @@
         }
 
         &-filterbar{
-          @include flexbox-align-items(center);
-          padding: 5px 0;
-          position: relative;
-
-          @include placeholder{
-            color: $site-clr-text-soft-sec;
-          }
-
-          .btn-secondary{
-            color: $site-clr-text-soft-sec;
-
-            &:hover,
-            &:focus,
-            &:not(:disabled):not(.disabled):active,
-            &:not(:disabled):not(.disabled).active{
-              color: $site-clr-white;
-            }
-          }
-
-          .custom-checkbox{
-            margin-left: 5px;
-          }
-
           + div[class*="table"] .sitetablediv .scrollbar-tbl-tb{
             height: 160px;
           }
         }
-
-        + div{
-          @include flexbox-flex(1);
-        }
-
       }
 
       .sitetablediv.scrollbar-tbl{
         > .scrollbar-tbl-th .tbl-thead{border-top: 1px solid $site-brdr-dark; border-bottom: 1px solid $site-brdr-dark; margin-bottom: 7px;}
         > .scrollbar-tbl-th .tbl-thead .tbl-th{color: $site-clr-text-soft-sec; padding-top: 5px; padding-bottom: 7px;}
-        .tbl-tbody .tbl-td{white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
       }
     }
 

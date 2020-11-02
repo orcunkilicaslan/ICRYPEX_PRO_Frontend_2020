@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 
     // Order Book BuySide Horizontal Bars Chartist
-    const obRectangleBarChartBuy = new Chartist.Bar('.orderbook-chartarea-rectangle .orderbookchartbuy', {
+    const obRectangleBarChartBuy = new Chartist.Bar('.orderbook .orderbook-chartarea-rectangle .orderbookchartbuy', {
         series: [[1,2,3,4,5,7,9,11,12,13,15,18]]
     },{
         reverseData: false,
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 
     // Order Book SellSide Horizontal Bars Chartist
-    const obRectangleBarChartSell = new Chartist.Bar('.orderbook-chartarea-rectangle .orderbookchartsell', {
+    const obRectangleBarChartSell = new Chartist.Bar('.orderbook .orderbook-chartarea-rectangle .orderbookchartsell', {
         series: [[1,2,3,4,5,7,9,11,12,13,15,18]]
     },{
         reverseData: true,
