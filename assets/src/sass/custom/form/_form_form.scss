@@ -112,6 +112,68 @@
 
   }
 
+  #{$forminputclassname}-group{
+
+    &-text{
+      background-color: transparent;
+    }
+
+    select,
+    input#{$formclassname}-control{
+      padding-top: 0.3rem;
+    }
+
+    input#{$formclassname}-control{
+      border-left-width: 0;
+      border-right-width: 0;
+      text-align: right;
+      padding-left: $input-padding-y;
+      padding-right: $input-padding-y;
+    }
+
+    &-prepend{
+      #{$forminputclassname}-group-text{
+        border-right-width: 0;
+      }
+    }
+
+    &-append{
+
+      #{$forminputclassname}-group-text,
+      select{
+        padding-left: 0;
+        border-left-width: 0;
+      }
+
+      .btn{
+        @include flexbox-display-flex();
+        @include flexbox-align-items(center);
+        border-width: 0;
+        position: relative;
+
+        &::before{
+          content: "";
+          background-color: $site-clr-text-dark-sec;
+          width: 1px;
+          height: 50%;
+          opacity: 0.5;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          @include translateY(-50%);
+        }
+
+        &:first-child::before{
+          display: none;
+        }
+
+        > i[class*="icon"]{
+          margin: auto;
+        }
+      }
+    }
+  }
+
   .recaptcha{
     &-area{
       @include flexbox-display-flex();
@@ -270,16 +332,6 @@ body.themedark{
       color: $site-clr-text-soft-sec;
     }
 
-    #{$forminputclassname}-group{
-
-      &-text{
-        color: $site-clr-white;
-        background-color: $site-clr-darkblue-600;
-        border-color: $site-brdr-dark;
-      }
-
-    }
-
     #{$formclassname}-control{
       color: $site-clr-text-soft-sec;
       background-color: $site-clr-darkblue-700;
@@ -357,6 +409,24 @@ body.themedark{
       color: $site-clr-text-soft-sec;
       background-color: $site-clr-darkblue-700;
       border-color: $site-brdr-dark;
+    }
+
+    #{$forminputclassname}-group{
+
+      &-text{
+        color: $site-clr-text-soft-sec;
+        //background-color: $site-clr-darkblue-600;
+        border-color: $site-brdr-dark;
+      }
+
+      &-append{
+        .btn{
+          &::before{
+            background-color: $site-clr-text-soft-sec;
+          }
+        }
+      }
+
     }
 
   }
