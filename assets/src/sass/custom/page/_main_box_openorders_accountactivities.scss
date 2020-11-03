@@ -3,7 +3,29 @@
 
   .openorders-tabactivities{
 
-  }
+    .activities{
+      @include flexbox-display-flex();
+      @include flexbox-flex-flow(column);
+      @include flexbox-flex(1);
+      height: 100%;
 
+      &-tabs{}
+
+      &-tabcontent{
+        height: 100%;
+
+        > div[class*="tab"]{
+          display: none;
+          height: 100%;
+          margin: 0;
+
+          &.active{
+            display: block;
+          }
+        }
+      }
+
+    }
+  }
 }
 
