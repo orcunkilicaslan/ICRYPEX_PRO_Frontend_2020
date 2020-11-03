@@ -7,6 +7,12 @@ body{
   height: 100%;
 }
 
+.textoverflowellipsis{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .tooltipbox{
 
   &-head{

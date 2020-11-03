@@ -15,8 +15,8 @@
   }
 
   @include placeholder{
-    //color: transparentize($site-clr-text-dark-pri, 0.50);
-    //opacity: 1;
+    color: transparentize($site-clr-text-dark-pri, 0.50);
+    opacity: 1;
   }
 
   @include webkit-autofill{
@@ -110,6 +110,89 @@
       }
     }
 
+  }
+
+  #{$forminputclassname}-group{
+
+    &-text{
+      background-color: transparent;
+    }
+
+    select,
+    input#{$formclassname}-control{
+      padding-top: 0.3rem;
+    }
+
+    select,
+    #{$formclassname}-control{
+      &:focus{
+        border-right-color: transparent;
+      }
+
+      @include transition-multiple(border-right-color 0s ease-in-out);
+    }
+
+    input#{$formclassname}-control{
+      padding-right: $input-padding-y;
+    }
+
+    &-prepend{
+      #{$forminputclassname}-group-text{
+        border-right-width: 0;
+      }
+
+      + select,
+      + #{$formclassname}-control{
+        text-align: right;
+        border-left-width: 0;
+      }
+
+      + input#{$formclassname}-control{
+        padding-left: $input-padding-y;
+      }
+    }
+
+    &-append{
+      position: relative;
+
+      #{$forminputclassname}-group-text,
+      select{
+        padding-left: 0;
+        border-left-width: 0;
+      }
+
+      select,
+      #{$formclassname}-control{
+        border-right-width: 1px;
+      }
+
+      .btn{
+        @include flexbox-display-flex();
+        @include flexbox-align-items(center);
+        border-width: 0;
+        position: relative;
+
+        &::before{
+          content: "";
+          background-color: $site-clr-text-dark-sec;
+          width: 1px;
+          height: 50%;
+          opacity: 0.5;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          @include translateY(-50%);
+        }
+
+        &:first-child::before{
+          display: none;
+        }
+
+        > i[class*="icon"]{
+          margin: auto;
+        }
+      }
+    }
   }
 
   .recaptcha{
@@ -263,21 +346,22 @@
 /* Form UI Soft */
 
 /* Form UI Dark */
-body.themedark{
+body#{$themedarkclassname}{
   .siteformui{
+
+    @include placeholder{
+      color: transparentize($site-clr-text-soft-sec, 0.50);
+      opacity: 1;
+    }
+
+    @include webkit-autofill{
+      -webkit-box-shadow: 0 0 0 30px $site-clr-darkblue-700 inset !important;
+      -webkit-text-fill-color: $site-clr-text-soft-sec !important;
+      border-color: $site-brdr-dark !important;
+    }
 
     label{
       color: $site-clr-text-soft-sec;
-    }
-
-    #{$forminputclassname}-group{
-
-      &-text{
-        color: $site-clr-white;
-        background-color: $site-clr-darkblue-600;
-        border-color: $site-brdr-dark;
-      }
-
     }
 
     #{$formclassname}-control{
@@ -357,6 +441,24 @@ body.themedark{
       color: $site-clr-text-soft-sec;
       background-color: $site-clr-darkblue-700;
       border-color: $site-brdr-dark;
+    }
+
+    #{$forminputclassname}-group{
+
+      &-text{
+        color: $site-clr-text-soft-sec;
+        background-color: $site-clr-darkblue-700;
+        border-color: $site-brdr-dark;
+      }
+
+      &-append{
+        .btn{
+          &::before{
+            background-color: $site-clr-text-soft-sec;
+          }
+        }
+      }
+
     }
 
   }

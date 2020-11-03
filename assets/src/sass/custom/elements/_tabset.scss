@@ -137,7 +137,7 @@
 /* Tabs UI Soft */
 
 /* Tabs UI Dark */
-body.themedark{
+body#{$themedarkclassname}{
   .sitetabs{
 
     &.nav-tabs{

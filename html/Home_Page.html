@@ -1891,7 +1891,7 @@
                             <div class="openorders-tabcontent sitetabs tab-content">
 
                                 <!-- Open Orders -->
-                                <div id="oo_oorders" class="openorders-taborders tab-pane fade fade show active" role="tabpanel">
+                                <div id="oo_oorders" class="openorders-taborders tab-pane fade show active" role="tabpanel">
                                     <!-- Filter -->
                                     <div class="tabcont tabcont-filterbar siteformui row">
                                         <div class="col-auto">
@@ -3310,7 +3310,7 @@
                                 </div>
                                 <!-- Assets -->
                                 <!-- Deposit/Withdrawal -->
-                                <div id="oo_depoandwith" class="openorders-tabdandw tab-pane" role="tabpanel">
+                                <div id="oo_depoandwith" class="openorders-tabdandw tab-pane fade" role="tabpanel">
                                     <!-- Head -->
                                     <div class="tabcont tabcont-head">
                                         <div class="tabcont-head-col">
@@ -3329,6 +3329,7 @@
                                     <!-- Deposit And Withdrawal Tabs -->
                                     <div class="depositandwithdraw">
                                         <div class="depositandwithdraw-tabcontent sitetabs tab-content">
+                                            <!-- Deposit -->
                                             <div id="dandw_deposit" class="depositandwithdraw-tabdeposit tab-pane fade show active" role="tabpanel">
                                                 <div class="dandwtab-wrapper">
                                                     <div class="dandwtab-side siteformui">
@@ -3348,12 +3349,12 @@
                                                                 <div class="dandwtab-tabbank-tabs sitetabs nav" role="tablist">
                                                                     <a class="banklogostablink active" href="#dandwtabbank_akbank" data-toggle="tab" role="tab" aria-selected="true"><i class="banksprttablogos logoakbank"></i></a>
                                                                     <a class="banklogostablink" href="#dandwtabbank_ziraat" data-toggle="tab" role="tab" aria-selected="false"><i class="banksprttablogos logoziraat"></i></a>
-                                                                    <a class="banklogostablink" href="#dandwtabbank_odea" data-toggle="tab" role="tab" aria-selected="false"><i class="banksprttablogos logoodeabank"></i></a>
-                                                                    <a class="banklogostablink" href="#dandwtabbank_vakif" data-toggle="tab" role="tab" aria-selected="false"><i class="banksprttablogos logovakifbank"></i></a>
+                                                                    <a class="banklogostablink" href="#dandwtabbank_odeabank" data-toggle="tab" role="tab" aria-selected="false"><i class="banksprttablogos logoodeabank"></i></a>
+                                                                    <a class="banklogostablink" href="#dandwtabbank_vakifbank" data-toggle="tab" role="tab" aria-selected="false"><i class="banksprttablogos logovakifbank"></i></a>
                                                                 </div>
                                                                 <div class="dandwtab-tabbank-tabcontent sitetabs">
-                                                                    <div id="dandwtabbank_akbank" class="dandwtab-tabbank-tabbank tab-pane fade show active" role="tabpanel">
-                                                                        <form class="dandwtab-tabbank-tabbank-form siteformui" autocomplete="off" novalidate>
+                                                                    <div id="dandwtabbank_akbank" class="tab-pane fade show active" role="tabpanel">
+                                                                        <form class="dandwtab-tabbank-form siteformui" autocomplete="off" novalidate>
                                                                             <div class="form-row">
                                                                                 <div class="form-group col-auto">
                                                                                     <select class="custom-select">
@@ -3366,9 +3367,9 @@
                                                                                     <div class="input-group-prepend">
                                                                                         <span class="input-group-text">IBAN</span>
                                                                                     </div>
-                                                                                    <input type="text" class="form-control text-right" value="TR140004600420888000174052" readonly />
+                                                                                    <div class="form-control">TR140004600420888000174052</div>
                                                                                     <div class="input-group-append">
-                                                                                        <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                        <a class="btn btn-secondary active" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -3376,15 +3377,15 @@
                                                                                 <div class="input-group-prepend">
                                                                                     <span class="input-group-text">Hesap Sahibi</span>
                                                                                 </div>
-                                                                                <input type="text" class="form-control text-right" value="Icrpex Bilişim A.Ş." readonly />
+                                                                                <div class="form-control textoverflowellipsis">Icrpex Bilişim A.Ş.</div>
                                                                                 <div class="input-group-append">
-                                                                                    <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                    <a class="btn btn-secondary active" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
                                                                                 </div>
                                                                             </div>
                                                                         </form>
                                                                     </div>
-                                                                    <div id="dandwtabbank_ziraat" class="dandwtab-tabbank-tabbank tab-pane fade" role="tabpanel">
-                                                                        <form class="dandwtab-tabbank-tabbank-form siteformui" autocomplete="off" novalidate>
+                                                                    <div id="dandwtabbank_ziraat" class="tab-pane fade" role="tabpanel">
+                                                                        <form class="dandwtab-tabbank-form siteformui" autocomplete="off" novalidate>
                                                                             <div class="form-row">
                                                                                 <div class="form-group col-auto">
                                                                                     <select class="custom-select">
@@ -3397,9 +3398,9 @@
                                                                                     <div class="input-group-prepend">
                                                                                         <span class="input-group-text">IBAN</span>
                                                                                     </div>
-                                                                                    <input type="text" class="form-control text-right" value="TR140004600420888000174052" readonly />
+                                                                                    <div class="form-control">TR140004600420888000174052</div>
                                                                                     <div class="input-group-append">
-                                                                                        <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                        <a class="btn btn-secondary active" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -3407,15 +3408,15 @@
                                                                                 <div class="input-group-prepend">
                                                                                     <span class="input-group-text">Hesap Sahibi</span>
                                                                                 </div>
-                                                                                <input type="text" class="form-control text-right" value="Icrpex Bilişim A.Ş." readonly />
+                                                                                <div class="form-control textoverflowellipsis">Icrpex Bilişim A.Ş.</div>
                                                                                 <div class="input-group-append">
-                                                                                    <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                    <a class="btn btn-secondary active" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
                                                                                 </div>
                                                                             </div>
                                                                         </form>
                                                                     </div>
-                                                                    <div id="dandwtabbank_odea" class="dandwtab-tabbank-tabbank tab-pane fade" role="tabpanel">
-                                                                        <form class="dandwtab-tabbank-tabbank-form siteformui" autocomplete="off" novalidate>
+                                                                    <div id="dandwtabbank_odeabank" class="tab-pane fade" role="tabpanel">
+                                                                        <form class="dandwtab-tabbank-form siteformui" autocomplete="off" novalidate>
                                                                             <div class="form-row">
                                                                                 <div class="form-group col-auto">
                                                                                     <select class="custom-select">
@@ -3428,9 +3429,9 @@
                                                                                     <div class="input-group-prepend">
                                                                                         <span class="input-group-text">IBAN</span>
                                                                                     </div>
-                                                                                    <input type="text" class="form-control text-right" value="TR140004600420888000174052" readonly />
+                                                                                    <div class="form-control">TR140004600420888000174052</div>
                                                                                     <div class="input-group-append">
-                                                                                        <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                        <a class="btn btn-secondary active" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -3438,15 +3439,15 @@
                                                                                 <div class="input-group-prepend">
                                                                                     <span class="input-group-text">Hesap Sahibi</span>
                                                                                 </div>
-                                                                                <input type="text" class="form-control text-right" value="Icrpex Bilişim A.Ş." readonly />
+                                                                                <div class="form-control textoverflowellipsis">Icrpex Bilişim A.Ş.</div>
                                                                                 <div class="input-group-append">
-                                                                                    <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                    <a class="btn btn-secondary active" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
                                                                                 </div>
                                                                             </div>
                                                                         </form>
                                                                     </div>
-                                                                    <div id="dandwtabbank_vakif" class="dandwtab-tabbank-tabbank tab-pane fade" role="tabpanel">
-                                                                        <form class="dandwtab-tabbank-tabbank-form siteformui" autocomplete="off" novalidate>
+                                                                    <div id="dandwtabbank_vakifbank" class="tab-pane fade" role="tabpanel">
+                                                                        <form class="dandwtab-tabbank-form siteformui" autocomplete="off" novalidate>
                                                                             <div class="form-row">
                                                                                 <div class="form-group col-auto">
                                                                                     <select class="custom-select">
@@ -3459,9 +3460,9 @@
                                                                                     <div class="input-group-prepend">
                                                                                         <span class="input-group-text">IBAN</span>
                                                                                     </div>
-                                                                                    <input type="text" class="form-control text-right" value="TR140004600420888000174052" readonly />
+                                                                                    <div class="form-control">TR140004600420888000174052</div>
                                                                                     <div class="input-group-append">
-                                                                                        <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                        <a class="btn btn-secondary active" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -3469,15 +3470,15 @@
                                                                                 <div class="input-group-prepend">
                                                                                     <span class="input-group-text">Hesap Sahibi</span>
                                                                                 </div>
-                                                                                <input type="text" class="form-control text-right" value="Icrpex Bilişim A.Ş." readonly />
+                                                                                <div class="form-control textoverflowellipsis">Icrpex Bilişim A.Ş.</div>
                                                                                 <div class="input-group-append">
-                                                                                    <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                    <a class="btn btn-secondary active" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
                                                                                 </div>
                                                                             </div>
                                                                         </form>
                                                                     </div>
                                                                 </div>
-                                                                <div class="dandwtab-tabbank-infobank">
+                                                                <div class="depositandwithdraw-bttminfolist">
                                                                     <ul>
                                                                         <li>Yalnızca sistemimize kayıt olduğunuz isim, soyisim ve T.C. Kimlik  Numarası’na ait banka hesaplarından gelen tutarlar kabul edilmektedir.</li>
                                                                         <li>Yatırmak istediğiniz miktarı bankanız üzerinden yukardaki Icrypex hesabına Havale/EFT yapabilirsiniz.</li>
@@ -3521,17 +3522,16 @@
                                                                             </select>
                                                                         </div>
                                                                         <div class="form-group input-group col">
-                                                                            <input type="text" class="form-control text-right" value="0x4A356640831fF69F10fCd55Be27588c51d34384c" readonly />
+                                                                            <div class="form-control text-right textoverflowellipsis">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
                                                                             <div class="input-group-append">
-                                                                                <a class="btn btn-secondary" href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
-                                                                            </div>
-                                                                            <div class="input-group-append">
-                                                                                <a class="btn btn-secondary" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                                <a class="btn btn-secondary active" href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                                <a class="btn btn-secondary active" href="#" title="Kopyala"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                    <p class="sitecolorred">Bu adrese sadece BTC gönderin. Farklı bir coin göndermek yatırdıklarınızın kaybolmasına neden olur.</p>
                                                                 </div>
-                                                                <div class="dandwtab-tabcrypto-infocrypto">
+                                                                <div class="depositandwithdraw-bttminfolist">
                                                                     <ul>
                                                                         <li>Kopyaladığınız adresin yapıştırdığınız alanda doğruluğunu mutlaka kontrol ediniz.</li>
                                                                         <li>Yatırılabilen en az tutar 0.0001 BTC’dir. 0.0001 BTC altındaki yatırma işlemleri iade edilmeyecektir.</li>
@@ -3543,6 +3543,8 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- Deposit -->
+                                            <!-- Withdrawal -->
                                             <div id="dandw_withdrawal" class="depositandwithdraw-tabwithdraw tab-pane fade" role="tabpanel">
                                                 <div class="dandwtab-wrapper">
                                                     <div class="dandwtab-side siteformui">
@@ -3559,18 +3561,123 @@
                                                     <div class="dandwtab-cont">
                                                         <div class="dandwtab-tabcontent sitetabs tab-content">
                                                             <div id="withdraw_bank" class="dandwtab-tabbank tab-pane fade show active" role="tabpanel">
-                                                                <div>Banka Çek</div>
+                                                                <form class="dandwtab-tabbank-form siteformui" autocomplete="off" novalidate>
+                                                                    <div class="formfieldset">
+                                                                        <div class="form-group input-group">
+                                                                            <select class="custom-select">
+                                                                                <option disabled>Hesap Seçiniz</option>
+                                                                                <option value="01">Akbank</option>
+                                                                                <option value="02">Garanti</option>
+                                                                                <option value="03">Finansbank</option>
+                                                                            </select>
+                                                                            <div class="input-group-append">
+                                                                                <a class="btn btn-secondary active" href="#" title="Hesap Ekle"><i class="icon-sprtsmiconclrd icon16 sm-addbtn"></i></a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group input-group">
+                                                                            <input type="text" class="form-control" placeholder="Çekmek İstenilen Miktar" />
+                                                                            <div type="text" class="form-control totalbalance text-right"><small>Bakiye</small>999,999.00 TRY</div>
+                                                                            <div class="input-group-append">
+                                                                                <a class="btn btn-secondary active" href="#" title="Hepsini Çek"><i class="icon-sprtsmiconclrd icon16 sm-transfer"></i></a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-row form-group">
+                                                                            <div class="col">İşlem Ücreti</div>
+                                                                            <div class="col-auto">15.00 TRY</div>
+                                                                        </div>
+                                                                        <div class="form-row form-group">
+                                                                            <div class="col">Hesaba Geçecek Miktar</div>
+                                                                            <div class="col-auto">999,999.00 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="formbttm">
+                                                                        <button type="button" class="btn btn-secondary active">ÇEKME İSTEĞİ GÖNDER</button>
+                                                                    </div>
+                                                                </form>
                                                             </div>
-                                                            <div id="withdraw_papara" class="dandwtab-tabbank tab-pane fade" role="tabpanel">
-                                                                <div>Papara Çek</div>
+                                                            <div id="withdraw_papara" class="dandwtab-tabpapara tab-pane fade" role="tabpanel">
+                                                                <form class="dandwtab-tabpapara-form siteformui" autocomplete="off" novalidate>
+                                                                    <div class="formfieldset">
+                                                                        <div class="form-group input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text">Papara No</span>
+                                                                            </div>
+                                                                            <div class="form-control">1773547589</div>
+                                                                        </div>
+                                                                        <div class="form-group input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text">Çekmek İstediğiniz Miktar</span>
+                                                                            </div>
+                                                                            <input type="text" class="form-control" value="12000.00">
+                                                                            <div class="input-group-append">
+                                                                                <span class="input-group-text">TRY</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-row form-group">
+                                                                            <div class="col">Papara komisyonu  (%2 + KDV)</div>
+                                                                            <div class="col-auto">15.00 TRY</div>
+                                                                        </div>
+                                                                        <div class="form-row form-group">
+                                                                            <div class="col">Hesaba Geçecek Miktar</div>
+                                                                            <div class="col-auto">999,999.00 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="formbttm">
+                                                                        <button type="button" class="btn btn-secondary active">PAPARA İLE ÇEK</button>
+                                                                    </div>
+                                                                </form>
                                                             </div>
-                                                            <div id="withdraw_crypto" class="dandwtab-tabbank tab-pane fade" role="tabpanel">
-                                                                <div>Kripto Çek</div>
+                                                            <div id="withdraw_crypto" class="dandwtab-tabcrypto tab-pane fade" role="tabpanel">
+                                                                <form class="dandwtab-tabcrypto-form siteformui" autocomplete="off" novalidate>
+                                                                    <div class="formfieldset">
+                                                                        <div class="form-row">
+                                                                            <div class="form-group col-auto">
+                                                                                <select class="custom-select">
+                                                                                    <option value="BTC">BTC</option>
+                                                                                    <option value="ETH">ETH</option>
+                                                                                    <option value="LTC">LTC</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group input-group col">
+                                                                                <div class="input-group-prepend">
+                                                                                    <span class="input-group-text">Miktar</span>
+                                                                                </div>
+                                                                                <input type="text" class="form-control" value="0.000000001">
+                                                                                <div class="input-group-append">
+                                                                                    <span class="input-group-text">BTC</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group input-group">
+                                                                            <select class="custom-select">
+                                                                                <option disabled>Adres Seçiniz</option>
+                                                                                <option value="01">0x4A356640831fF69F10fCd55Be27588c51d34384c</option>
+                                                                                <option value="02">0x4A356640831fF69F10fCd55Be27588c51d34384c</option>
+                                                                                <option value="03">0x4A356640831fF69F10fCd55Be27588c51d34384c</option>
+                                                                            </select>
+                                                                            <div class="input-group-append">
+                                                                                <a class="btn btn-secondary active" href="#" title="Adres Ekle"><i class="icon-sprtsmiconclrd icon16 sm-addbtn"></i></a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-row form-group">
+                                                                            <div class="col">Transfer Ücreti</div>
+                                                                            <div class="col-auto">15.00 TRY</div>
+                                                                        </div>
+                                                                        <div class="form-row form-group">
+                                                                            <div class="col">Hesaba Geçecek Miktar</div>
+                                                                            <div class="col-auto">999,999.00 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="formbttm">
+                                                                        <button type="button" class="btn btn-secondary active">ONAY E-POSTA GÖNDER</button>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- Withdrawal -->
                                         </div>
                                     </div>
                                     <!-- Deposit And Withdrawal Tabs -->
