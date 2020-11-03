@@ -51,19 +51,32 @@ $headlogo-clr-red:                $site-clr-red;
         border-right-width: 0;
       }
       #{$forminputclassname}-group{
-        &-text{
-          &.newslefttxt{
-            @extend %extheaderandstatsinputgrouptitle01;
+
+        &-prepend{
+          .input-group-text{
+            color: $site-clr-white;
+            background-color: $site-clr-darkblue-600;
+            border-right-width: 2px;
+
+            &.newslefttxt{
+              @extend %extheaderandstatsinputgrouptitle01;
+            }
           }
-          &.newsallbtn{
-            background-color: $site-clr-darkblue-700 !important;
-            border-left-width: 0;
+        }
 
-            svg{
-              margin-left: 3px;
+        &-append{
+          .input-group-text{
+            color: $site-clr-white;
 
-              path{
-                stroke: $site-clr-blue;
+            &.newsallbtn{
+              svg{
+                margin-left: 5px;
+                position: relative;
+                top: 1px;
+
+                path{
+                  stroke: $site-clr-blue;
+                }
               }
             }
           }
@@ -79,7 +92,7 @@ $headlogo-clr-red:                $site-clr-red;
       &-item{
         color: $site-clr-text-soft-sec;
         //height: 26px;
-        padding: 0.22rem 0.6rem;
+        padding: 0.2rem 0.6rem;
         display: block;
         vertical-align: middle;
         white-space: nowrap;

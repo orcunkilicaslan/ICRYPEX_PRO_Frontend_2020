@@ -161,34 +161,6 @@
         .form-group{
           margin-bottom: 0.25rem;
         }
-
-        .input-group{
-
-          &-prepend{
-            > *{
-              color: $site-clr-text-soft-sec;
-              background-color: transparent;
-              border-right-width: 0;
-            }
-
-            + .form-control{
-              border-left-width: 0;
-            }
-          }
-
-          &-append{
-            > *{
-              color: $site-clr-text-soft-sec;
-              border-left-width: 0;
-              padding-left: 0;
-            }
-          }
-
-          .form-control{
-            text-align: right;
-            border-right-width: 0;
-          }
-        }
       }
 
       .formrange{

@@ -112,46 +112,7 @@
 
           &-tabbank{
 
-            &-form{
-
-              .input-group{
-
-                &-prepend{
-                  > *{
-                    color: $site-clr-text-soft-sec;
-                    background-color: transparent;
-                    border-right-width: 0;
-                  }
-
-                  + .form-control{
-                    border-left-width: 0;
-                  }
-                }
-
-                &-append{
-                  > *{
-                    color: $site-clr-text-soft-sec;
-                    border-left-width: 0;
-                    background-color: $site-clr-darkblue-500;
-                  }
-
-                  > .btn{
-                    border-width: 0;
-                  }
-
-                  .sm-copybtn{
-                    position: relative;
-                    top: 2px;
-                  }
-                }
-
-                .form-control{
-                  text-align: right;
-                  border-right-width: 0;
-                }
-              }
-
-            }
+            &-form{}
 
           }
 
@@ -176,37 +137,6 @@
 
             .formfieldset{
               @include flexbox-flex(1);
-
-              .input-group{
-
-                &-prepend{
-                  > *{
-                    color: $site-clr-text-soft-sec;
-                    background-color: transparent;
-                    border-right-width: 0;
-                  }
-
-                  + .form-control{
-                    border-left-width: 0;
-                  }
-                }
-
-                &-append{
-                  > *{
-                    color: $site-clr-text-soft-sec;
-                    border-left-width: 0;
-                    padding-left: 0;
-                    background-color: transparent;
-                  }
-                }
-
-                .form-control{
-                  text-align: right;
-                  border-right-width: 0;
-                  padding-top: 5px;
-                  padding-right: 5px;
-                }
-              }
             }
 
             .formbttm{
@@ -228,44 +158,6 @@
 
           &-form{
             @include flexbox-flex(1);
-
-            .input-group{
-
-              &-prepend{
-                > *{
-                  color: $site-clr-text-soft-sec;
-                  background-color: transparent;
-                  border-right-width: 0;
-                }
-
-                + .form-control{
-                  border-left-width: 0;
-                }
-              }
-
-              &-append{
-                > *{
-                  color: $site-clr-text-soft-sec;
-                  border-left-width: 0;
-                  background-color: $site-clr-darkblue-500;
-                }
-
-                > .btn{
-                  border-width: 0;
-                }
-
-                .sm-copybtn{
-                  position: relative;
-                  top: 2px;
-                }
-              }
-
-              .form-control{
-                text-align: right;
-                border-right-width: 0;
-              }
-            }
-
           }
 
           &-infocrypto{

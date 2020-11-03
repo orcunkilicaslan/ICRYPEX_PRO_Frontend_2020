@@ -3,18 +3,24 @@
 
   .cryptocoinbar{
 
-    .siteformui{
+    &.siteformui{
       .input-group{
         &-prepend {
-          .selectedcur {
-            @extend %extheaderandstatsinputgrouptitle01;
+          .input-group-text{
+            color: $site-clr-white;
+            background-color: $site-clr-darkblue-600;
+            border-right-width: 1px;
+
+            &.selectedcur {
+              @extend %extheaderandstatsinputgrouptitle01;
+            }
           }
         }
         &-append{
-          .alarmbtn{
-            background-color: transparent;
-            padding: 5px 6px 5px 0;
-            border-left-width: 0;
+          .input-group-text{
+            &.alarmbtn{
+              padding: 5px 6px 5px 0;
+            }
           }
         }
       }
