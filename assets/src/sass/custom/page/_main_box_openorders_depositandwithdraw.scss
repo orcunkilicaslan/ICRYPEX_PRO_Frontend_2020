@@ -24,6 +24,10 @@
 
       &-tabwithdraw{}
 
+      &-bttminfolist{
+        @extend %extcontullistdotted;
+      }
+
       .dandwtab{
 
         &-wrapper{
@@ -73,12 +77,6 @@
         }
 
         &-tabbank{
-          height: 100%;
-
-          &.active{
-            @include flexbox-display-flex();
-            @include flexbox-flex-flow(column);
-          }
 
           &-tabs{
             padding-bottom: 5px;
@@ -110,25 +108,36 @@
             }
           }
 
-          &-tabbank{
+          &-form{
+            @include flexbox-display-flex();
+            @include flexbox-flex-flow(column);
+            height: 100%;
 
-            &-form{}
+            .formfieldset{
+              @include flexbox-flex(1);
 
+              .form-control{
+                &.totalbalance{
+                  @include flexbox-flex(0 0 auto);
+                  width: auto;
+                  line-height: 1;
+                  padding-top: 0.3rem;
+                  border-left-width: 0;
+
+                  small{display: block;}
+                }
+              }
+            }
+
+            .formbttm{
+              .btn{
+                width: 100%;
+              }
+            }
           }
-
-          &-infobank{
-            @extend %extcontullistdotted;
-          }
-
         }
 
         &-tabpapara{
-          height: 100%;
-
-          &.active{
-            @include flexbox-display-flex();
-            @include flexbox-flex-flow(column);
-          }
 
           &-form{
             @include flexbox-display-flex();
@@ -149,21 +158,22 @@
         }
 
         &-tabcrypto{
-          height: 100%;
-
-          &.active{
-            @include flexbox-display-flex();
-            @include flexbox-flex-flow(column);
-          }
 
           &-form{
-            @include flexbox-flex(1);
-          }
+            @include flexbox-display-flex();
+            @include flexbox-flex-flow(column);
+            height: 100%;
 
-          &-infocrypto{
-            @extend %extcontullistdotted;
-          }
+            .formfieldset{
+              @include flexbox-flex(1);
+            }
 
+            .formbttm{
+              .btn{
+                width: 100%;
+              }
+            }
+          }
         }
 
       }

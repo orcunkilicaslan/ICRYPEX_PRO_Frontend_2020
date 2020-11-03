@@ -15,8 +15,8 @@
   }
 
   @include placeholder{
-    //color: transparentize($site-clr-text-dark-pri, 0.50);
-    //opacity: 1;
+    color: transparentize($site-clr-text-dark-pri, 0.50);
+    opacity: 1;
   }
 
   @include webkit-autofill{
@@ -123,10 +123,16 @@
       padding-top: 0.3rem;
     }
 
+    select,
+    #{$formclassname}-control{
+      &:focus{
+        border-right-color: transparent;
+      }
+
+      @include transition-multiple(border-right-color 0s ease-in-out);
+    }
+
     input#{$formclassname}-control{
-      border-right-width: 0;
-      text-align: right;
-      padding-left: $input-padding-y;
       padding-right: $input-padding-y;
     }
 
@@ -135,17 +141,29 @@
         border-right-width: 0;
       }
 
+      + select,
       + #{$formclassname}-control{
+        text-align: right;
         border-left-width: 0;
+      }
+
+      + input#{$formclassname}-control{
+        padding-left: $input-padding-y;
       }
     }
 
     &-append{
+      position: relative;
 
       #{$forminputclassname}-group-text,
       select{
         padding-left: 0;
         border-left-width: 0;
+      }
+
+      select,
+      #{$formclassname}-control{
+        border-right-width: 1px;
       }
 
       .btn{
@@ -331,6 +349,17 @@
 body#{$themedarkclassname}{
   .siteformui{
 
+    @include placeholder{
+      color: transparentize($site-clr-text-soft-sec, 0.50);
+      opacity: 1;
+    }
+
+    @include webkit-autofill{
+      -webkit-box-shadow: 0 0 0 30px $site-clr-darkblue-700 inset !important;
+      -webkit-text-fill-color: $site-clr-text-soft-sec !important;
+      border-color: $site-brdr-dark !important;
+    }
+
     label{
       color: $site-clr-text-soft-sec;
     }
@@ -418,7 +447,7 @@ body#{$themedarkclassname}{
 
       &-text{
         color: $site-clr-text-soft-sec;
-        //background-color: $site-clr-darkblue-600;
+        background-color: $site-clr-darkblue-700;
         border-color: $site-brdr-dark;
       }
 
