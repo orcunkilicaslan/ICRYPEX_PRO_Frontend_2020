@@ -4,16 +4,21 @@ import Chartist from "chartist";
 
 
 /* Variables */
-const OoTabOorTabCont       = document.querySelector('.openorders .openorders-taborders');
-const ooTabOorScrllHead     = document.querySelector('.openorders .openorders-taborders .ooopenorderstable .scrollbar-tbl-th');
-const ooTabOorScrllBody     = document.querySelector('.openorders .openorders-taborders .ooopenorderstable .scrollbar-tbl-tb');
-const ooTabHstTabCont       = document.querySelector('.openorders .openorders-tabhistory');
-const ooTabHstScrllTble     = document.querySelector('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-horizontal');
-const ooTabHstScrllHead     = document.querySelector('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-th');
-const ooTabHstScrllBody     = document.querySelector('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb');
-const ooTabHstTblBrwsWrp    = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp');
-const ooTabHstTblBrwsBtn    = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstr');
-const ooTabHstTblBrwsDiv    = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstbl');
+const OoTabOorTabCont           = document.querySelector('.openorders .openorders-taborders');
+const ooTabOorScrllHead         = document.querySelector('.openorders .openorders-taborders .ooopenorderstable .scrollbar-tbl-th');
+const ooTabOorScrllBody         = document.querySelector('.openorders .openorders-taborders .ooopenorderstable .scrollbar-tbl-tb');
+const ooTabHstTabCont           = document.querySelector('.openorders .openorders-tabhistory');
+const ooTabHstScrllTble         = document.querySelector('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-horizontal');
+const ooTabHstScrllHead         = document.querySelector('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-th');
+const ooTabHstScrllBody         = document.querySelector('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb');
+const ooTabHstTblBrwsWrp        = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp');
+const ooTabHstTblBrwsBtn        = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstr');
+const ooTabHstTblBrwsDiv        = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstbl');
+const ooTabActTabCont           = document.querySelector('.openorders .openorders-tabactivities');
+const ooTabActPendScrllHead     = document.querySelector('.openorders .openorders-tabactivities .activitiespendingtable .scrollbar-tbl-th');
+const ooTabActPendScrllBody     = document.querySelector('.openorders .openorders-tabactivities .activitiespendingtable .scrollbar-tbl-tb');
+const ooTabActHistScrllHead     = document.querySelector('.openorders .openorders-tabactivities .activitieshistorytable .scrollbar-tbl-th');
+const ooTabActHistScrllBody     = document.querySelector('.openorders .openorders-tabactivities .activitieshistorytable .scrollbar-tbl-tb');
 
 const ooTabAssAdrTabBtcCont         = document.querySelector('.openorders .openorders-tabassets .assetsaddress .assetsaddress-tabbtc');
 const ooTabAssAdrTabBtcScrllHead    = document.querySelector('.openorders .openorders-tabassets .assetsaddress .assetsaddress-tabbtc .asaddresstable .scrollbar-tbl-th');
@@ -78,6 +83,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
 
 
+
     // Assets Address BTC Perfect Scrollbar
     const psOoTabAssAdrBtc = new PerfectScrollbar(ooTabAssAdrTabBtcScrllBody, {
         wheelSpeed: 0.50,
@@ -87,6 +93,32 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
     if (ooTabAssAdrTabBtcScrllBody.querySelectorAll('.ps--active-y')){
         ooTabAssAdrTabBtcScrllHead.classList.add('active-y');
+    }
+
+
+
+    // Account Activities Pending Perfect Scrollbar
+    const psOoTabActPendTblPend = new PerfectScrollbar(ooTabActPendScrllBody, {
+        wheelSpeed: 0.50,
+        wheelPropagation: true,
+        minScrollbarLength: 10,
+        suppressScrollX: true
+    });
+    if (ooTabActPendScrllBody.querySelectorAll('.ps--active-y')){
+        ooTabActPendScrllHead.classList.add('active-y');
+    }
+
+
+
+    // Account Activities Pending Perfect Scrollbar
+    const psOoTabActHistTblPend = new PerfectScrollbar(ooTabActHistScrllBody, {
+        wheelSpeed: 0.50,
+        wheelPropagation: true,
+        minScrollbarLength: 10,
+        suppressScrollX: true
+    });
+    if (ooTabActHistScrllBody.querySelectorAll('.ps--active-y')){
+        ooTabActHistScrllHead.classList.add('active-y');
     }
 
 

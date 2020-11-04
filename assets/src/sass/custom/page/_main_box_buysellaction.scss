@@ -47,7 +47,7 @@
         }
 
         &-circle{
-          stroke: #2a3553;
+          stroke: $site-clr-darkblue-500;
           fill: transparent;
           @include transition-multiple(all 0.15s ease-in-out);
         }
@@ -59,8 +59,8 @@
           }
 
           .infoiconbox-circle{
-            stroke: #2a3553;
-            fill: #2a3553;
+            stroke: $site-clr-darkblue-500;
+            fill: $site-clr-darkblue-500;
           }
         }
       }
