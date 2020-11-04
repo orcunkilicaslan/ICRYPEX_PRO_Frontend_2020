@@ -55,8 +55,8 @@
     &-chartbox{
       @include flexbox-display-flex();
       @include flexbox-flex-wrap(wrap);
-      padding-top: 15px;
-      margin-top: 7.5px;
+      padding-top: 12px;
+      margin-top: 10px;
       border-top: 1px solid $site-brdr-dark;
 
       &-col{
@@ -133,7 +133,7 @@
         .sitetablediv{
 
           .tbl-thead .tbl-th{color: $site-clr-text-soft-sec; padding-top: 0;}
-          .tbl-tbody .tbl-td{padding-top: 1px; padding-bottom: 3px;}
+          .tbl-tbody .tbl-td{padding-top: 2px; padding-bottom: 2px;}
           .tbl-tbody .tbl-tr{
             position: relative;
 
