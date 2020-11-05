@@ -14,9 +14,11 @@ $site-clr-grylight:             #F1F6FE;
 $site-clr-darkblue-900:                 #0A0C14;
 $site-clr-darkblue-800:                 #131B31;
 $site-clr-darkblue-700:                 #182239;
-$site-clr-darkblue-600:                 #202C46;
-$site-clr-darkblue-500:                 #2A3553;
-$site-clr-darkblue-400:                 #404D71;
+$site-clr-darkblue-600:                 #1C263F;
+$site-clr-darkblue-500:                 #202C46;
+$site-clr-darkblue-400:                 #2A3553;
+$site-clr-darkblue-300:                 #404D71;
+$site-clr-darkblue-200:                 #687CA2;
 $site-clr-darkblue-100:                 #3A70EA;
 /* Site Section Background Color */
 
@@ -42,9 +44,9 @@ $site-brdr-light-focus:                 darken($site-brdr-light, 15%);
 $site-brdr-light-opacity:               #F2F5F9;
 $site-brdr-light-input:                 $site-brdr-light;
 $site-brdr-light-input-focus:           $site-brdr-light-focus;
-$site-brdr-dark:                        $site-clr-darkblue-500;
+$site-brdr-dark:                        $site-clr-darkblue-400;
 $site-brdr-dark-focus:                  darken($site-brdr-dark, 15%);
-$site-brdr-dark-opacity:                #F2F5F9;
+$site-brdr-dark-opacity:                lighten($site-brdr-dark, 15%);
 $site-brdr-dark-input:                  $site-brdr-dark;
 $site-brdr-dark-input-focus:            $site-brdr-dark-focus;
 /* Site Border Color Settings */
@@ -53,7 +55,7 @@ $site-brdr-dark-input-focus:            $site-brdr-dark-focus;
 $site-font-family-default:              'Barlow Semi Condensed', sans-serif;
 $site-clr-text-dark-pri:                #333E63;
 $site-clr-text-dark-sec:                #5C6582;
-$site-clr-text-soft-pri:                #FFFFFF;
+$site-clr-text-soft-pri:                #B1C4E8;
 $site-clr-text-soft-sec:                #92A4C5;
 /* Site Main Color Settings */
 

@@ -240,7 +240,7 @@
       &::-webkit-slider-thumb,
       &::-moz-range-thumb,
       &::-ms-thumb{
-        //background-color: $site-clr-darkblue-500;
+        //background-color: $site-clr-darkblue-400;
         background-color: transparent;
         @include transition-multiple(background 0.15s ease-in-out);
 
@@ -252,7 +252,7 @@
 
       &::-webkit-slider-thumb{
         background-image: none;
-        background-color: $site-clr-darkblue-700;
+        background-color: $site-clr-darkblue-600;
         border: 2px solid $site-clr-blue;
         @include transition-multiple(background 0.15s ease-in-out);
 
@@ -262,7 +262,7 @@
       }
 
       &::-webkit-slider-runnable-track{
-        //background-color: $site-clr-darkblue-500;
+        //background-color: $site-clr-darkblue-400;
         background-color: transparent;
       }
 
@@ -298,7 +298,7 @@
     }
 
     &-progress{
-      background-color: $site-clr-darkblue-500;
+      background-color: $site-clr-darkblue-400;
       width: 100%;
       height: $bootstrap-custom-range-track-height;
       position: absolute;
@@ -323,7 +323,7 @@
         width: $bootstrap-custom-range-thumb-width;
         height: $bootstrap-custom-range-thumb-height;
         max-width: 100%;
-        background-color: $site-clr-darkblue-500;
+        background-color: $site-clr-darkblue-400;
         @include border-radius($bootstrap-custom-range-thumb-border-radius);
       }
     }
@@ -355,7 +355,7 @@ body#{$themedarkclassname}{
     }
 
     @include webkit-autofill{
-      -webkit-box-shadow: 0 0 0 30px $site-clr-darkblue-700 inset !important;
+      -webkit-box-shadow: 0 0 0 30px $site-clr-darkblue-600 inset !important;
       -webkit-text-fill-color: $site-clr-text-soft-sec !important;
       border-color: $site-brdr-dark !important;
     }
@@ -365,8 +365,8 @@ body#{$themedarkclassname}{
     }
 
     #{$formclassname}-control{
-      color: $site-clr-text-soft-sec;
-      background-color: $site-clr-darkblue-700;
+      color: $site-clr-text-soft-pri;
+      background-color: $site-clr-darkblue-600;
       border-color: $site-brdr-dark;
     }
 
@@ -392,6 +392,13 @@ body#{$themedarkclassname}{
           &:checked{
             ~ #{$formcustomclassname}-control-label{
               &::after{}
+            }
+          }
+          &:focus:not(:checked){
+            ~ #{$formcustomclassname}-control-label{
+              &::before{
+                border-color: $site-brdr-dark;
+              }
             }
           }
         }
@@ -426,9 +433,10 @@ body#{$themedarkclassname}{
 
     }
 
+
     #{$formcustomclassname}-control-label{
       &::before{
-        background-color: $site-clr-darkblue-700;
+        background-color: $site-clr-darkblue-600;
         border-color: $site-brdr-dark;
       }
     }
@@ -439,7 +447,7 @@ body#{$themedarkclassname}{
 
     #{$formcustomclassname}-select{
       color: $site-clr-text-soft-sec;
-      background-color: $site-clr-darkblue-700;
+      background-color: $site-clr-darkblue-600;
       border-color: $site-brdr-dark;
     }
 
@@ -447,7 +455,7 @@ body#{$themedarkclassname}{
 
       &-text{
         color: $site-clr-text-soft-sec;
-        background-color: $site-clr-darkblue-700;
+        background-color: $site-clr-darkblue-600;
         border-color: $site-brdr-dark;
       }
 
