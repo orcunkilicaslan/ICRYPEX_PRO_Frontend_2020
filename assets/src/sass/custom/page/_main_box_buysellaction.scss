@@ -27,7 +27,7 @@
         }
 
         h6{
-          color: lighten($site-clr-text-soft-sec, 10%);
+          color: $site-clr-text-soft-pri;
           margin: 0 5px 0 10px;
         }
 
@@ -42,12 +42,12 @@
         cursor: pointer;
 
         &-icon{
-          fill: #687ca2;
+          fill: $site-clr-darkblue-200;
           @include transition-multiple(all 0.15s ease-in-out);
         }
 
         &-circle{
-          stroke: $site-clr-darkblue-500;
+          stroke: $site-clr-darkblue-400;
           fill: transparent;
           @include transition-multiple(all 0.15s ease-in-out);
         }
@@ -59,8 +59,8 @@
           }
 
           .infoiconbox-circle{
-            stroke: $site-clr-darkblue-500;
-            fill: $site-clr-darkblue-500;
+            stroke: $site-clr-darkblue-400;
+            fill: $site-clr-darkblue-400;
           }
         }
       }

@@ -22,6 +22,14 @@
         }
 
         &-filterbar{
+
+          &.siteformui{
+            select,
+            .form-control{
+              background-color: transparent;
+            }
+          }
+
           + div[class*="table"] .sitetablediv .scrollbar-tbl-tb{
             height: 160px;
           }

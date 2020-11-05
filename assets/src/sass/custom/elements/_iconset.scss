@@ -28,7 +28,7 @@
   }
 
   &-sprtsmiconclrd{
-    background-image: url(#{$path-img-url-icons}/icons_spite_smalliconcolored.svg);
+    background-image: url(#{$path-img-url-icons}/icons_spite_darksmalliconcolored.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     display: inline-block;
@@ -54,6 +54,14 @@
       &.sm-transfer{background-position: calc(-16px*3) -14px;}
       &.sm-addbtn{background-position: calc(-16px*4) -14px;}
     }
+
+    &.icon20{
+      width: 20px;
+      height: 20px;
+
+      &.sm-support{background-position: calc(-20px*0) -30px;}
+      &.sm-notif{background-position: calc(-20px*1) -30px;}
+    }
   }
 }
 
@@ -62,9 +70,8 @@
   &dropdown{
     background-color: transparent;
     padding: 0;
-    width: 24px;
-    height: 24px;
-    border: 1px solid $site-brdr-light-input;
+    width: 12px;
+    height: 12px;
     position: relative;
 
     &::after{
@@ -74,11 +81,11 @@
     &::before{
       content: "";
       position:absolute;
-      width: 9px;
-      height: 9px;
+      width: 7px;
+      height: 7px;
       padding: 0;
-      border-top: 2px solid $site-clr-red;
-      border-right: 2px solid $site-clr-red;
+      border-top: 2px solid $site-clr-darkblue-200;
+      border-right: 2px solid $site-clr-darkblue-200;
     }
 
     &.updirection{
@@ -90,7 +97,7 @@
     }
     &.downdirection{
       &::before{
-        top: calc(50% - 6px);
+        top: calc(50% - 5px);
         left: calc(50% - 4px);
         @include rotate(135);
       }

@@ -34,8 +34,8 @@ $iconbtn-transition:    0.3s cubic-bezier(.77,0,.175,1);
   @include flexbox-display-flex();
   @include flexbox-align-items(center);
   @include border-radius($var-custom-border-radius-sm);
-  background-color: $site-clr-darkblue-600;
-  height: calc(100% - 1px);
+  background-color: $site-clr-darkblue-500;
+  height: calc(100% - 2px);
   padding: 0;
   border-width: 0;
   overflow: hidden;
@@ -50,6 +50,7 @@ $iconbtn-transition:    0.3s cubic-bezier(.77,0,.175,1);
     left: 0;
     top: 0;
     @include transition-multiple(width $iconbtn-transition);
+    display: block !important;
   }
 
   &:hover::before{

@@ -216,11 +216,11 @@ body#{$themedarkclassname}{
 
       .nav-link{
         color: $site-clr-text-soft-sec;
-        border: 1px solid $site-clr-darkblue-500;
+        border: 1px solid $site-clr-darkblue-400;
 
         &.active{
           color: $site-clr-white;
-          background-color: $site-clr-darkblue-500;
+          background-color: $site-clr-darkblue-400;
         }
       }
     }
