@@ -10,18 +10,6 @@ $site-clr-yellow:               #FF8C00;
 $site-clr-grylight:             #F1F6FE;
 /* Site General Color Settings */
 
-/* Site Section Background Color */
-$site-clr-darkblue-900:                 #0A0C14;
-$site-clr-darkblue-800:                 #131B31;
-$site-clr-darkblue-700:                 #182239;
-$site-clr-darkblue-600:                 #1C263F;
-$site-clr-darkblue-500:                 #202C46;
-$site-clr-darkblue-400:                 #2A3553;
-$site-clr-darkblue-300:                 #404D71;
-$site-clr-darkblue-200:                 #687CA2;
-$site-clr-darkblue-100:                 #3A70EA;
-/* Site Section Background Color */
-
 /* Site Currency Color Settings */
 $site-clr-curr-try:                     #FFFFFF;
 $site-clr-curr-usd:                     #2DD976;
@@ -38,25 +26,39 @@ $site-clr-curr-tryb:                    #002EAC;
 $site-clr-curr-usdt:                    #2DD976;
 /* Site Currency Color Settings */
 
+/* Site Dark Theme Settings */
+$site-clr-darkblue-900:                 #0A0C14;
+$site-clr-darkblue-800:                 #131B31;
+$site-clr-darkblue-700:                 #182239;
+$site-clr-darkblue-600:                 #1C263F;
+$site-clr-darkblue-500:                 #202C46;
+$site-clr-darkblue-400:                 #2A3553;
+$site-clr-darkblue-300:                 #404D71;
+$site-clr-darkblue-200:                 #687CA2;
+$site-clr-darkblue-100:                 #3A70EA;
+
+$site-clr-text-soft-pri:                #B1C4E8;
+$site-clr-text-soft-sec:                #92A4C5;
+
+$site-brdr-dark:                        $site-clr-darkblue-400;
+$site-brdr-dark-focus:                  lighten($site-brdr-dark, 10%);
+$site-brdr-dark-opacity:                lighten($site-brdr-dark, 15%);
+$site-brdr-dark-input:                  $site-brdr-dark;
+$site-brdr-dark-input-focus:            $site-brdr-dark-focus;
+/* Site Dark Theme Settings */
+
 /* Site Border Color Settings */
 $site-brdr-light:                       #e0e5ec;
 $site-brdr-light-focus:                 darken($site-brdr-light, 15%);
 $site-brdr-light-opacity:               #F2F5F9;
 $site-brdr-light-input:                 $site-brdr-light;
 $site-brdr-light-input-focus:           $site-brdr-light-focus;
-$site-brdr-dark:                        $site-clr-darkblue-400;
-$site-brdr-dark-focus:                  darken($site-brdr-dark, 15%);
-$site-brdr-dark-opacity:                lighten($site-brdr-dark, 15%);
-$site-brdr-dark-input:                  $site-brdr-dark;
-$site-brdr-dark-input-focus:            $site-brdr-dark-focus;
 /* Site Border Color Settings */
 
 /* Site Main Settings */
 $site-font-family-default:              'Barlow Semi Condensed', sans-serif;
 $site-clr-text-dark-pri:                #333E63;
 $site-clr-text-dark-sec:                #5C6582;
-$site-clr-text-soft-pri:                #B1C4E8;
-$site-clr-text-soft-sec:                #92A4C5;
 /* Site Main Color Settings */
 
 /* Site Main Path Settings */
@@ -69,13 +71,8 @@ $path-img-url-icons:      "../../img/icons";
 /* Site Main Class Settings */
 $themedarkclassname:      ".themedark";
 $themelightclassname:     ".themelight";
-$footerclassname:         ".footer";
 $headerclassname:         ".header";
 $footerclassname:         ".footer";
-$formclassname:           ".form";
-$forminputclassname:      ".input";
-$formcustomclassname:     ".custom";
-$btnclassname:            ".btn";
 /* Site Main Class Settings */
 
 
