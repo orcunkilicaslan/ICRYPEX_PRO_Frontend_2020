@@ -637,21 +637,21 @@ $bootstrap-badge-pill-border-radius:                10rem;
 /* Bootstrap Badges Settings */
 
 /* Bootstrap Modals Settings */
-$bootstrap-modal-inner-padding:                     1rem;
+$bootstrap-modal-inner-padding:                     $var-custom-modal-inner-padding;
 $bootstrap-modal-footer-margin-between:             .5rem;
 $bootstrap-modal-dialog-margin:                     .5rem;
 $bootstrap-modal-dialog-margin-y-sm-up:             1.75rem;
 $bootstrap-modal-title-line-height:                 $bootstrap-line-height-base;
 $bootstrap-modal-content-color:                     null;
-$bootstrap-modal-content-bg:                        $bootstrap-white;
-$bootstrap-modal-content-border-color:              rgba($bootstrap-black, .2);
-$bootstrap-modal-content-border-width:              $bootstrap-border-width;
+$bootstrap-modal-content-bg:                        $var-custom-modal-content-bg;
+$bootstrap-modal-content-border-color:              $var-custom-modal-content-border-color;
+$bootstrap-modal-content-border-width:              $var-custom-modal-content-border-width;
 $bootstrap-modal-content-border-radius:             $bootstrap-border-radius-lg;
 //$bootstrap-modal-content-inner-border-radius:       subtract($bootstrap-modal-content-border-radius, $bootstrap-modal-content-border-width);
 $bootstrap-modal-content-box-shadow-xs:             0 .25rem .5rem rgba($bootstrap-black, .5);
 $bootstrap-modal-content-box-shadow-sm-up:          0 .5rem 1rem rgba($bootstrap-black, .5);
-$bootstrap-modal-backdrop-bg:                       $bootstrap-black;
-$bootstrap-modal-backdrop-opacity:                  .5;
+$bootstrap-modal-backdrop-bg:                       $var-custom-modal-backdrop-bg;
+$bootstrap-modal-backdrop-opacity:                  $var-custom-modal-backdrop-opacity;
 $bootstrap-modal-header-border-color:               $bootstrap-border-color;
 $bootstrap-modal-footer-border-color:               $bootstrap-modal-header-border-color;
 $bootstrap-modal-header-border-width:               $bootstrap-modal-content-border-width;

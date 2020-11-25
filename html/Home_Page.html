@@ -1976,7 +1976,7 @@
                                                         <div class="tbl-td fxd hppn">1,43004833 BTC</div>
                                                         <div class="tbl-td aut bttn">
                                                             <a href="#" title="Düzenle"><i class="icon-sprtsmiconclrd icon14 sm-edit"></i></a>
-                                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                                            <a href="#" title="İptal Et" data-toggle="modal" data-target="#ooModalDeleteOrder"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
                                                         </div>
                                                     </div>
                                                     <div class="tbl-tr">
@@ -2224,6 +2224,24 @@
                                         </div>
                                     </div>
                                     <!-- Table -->
+                                    <!-- Modal Delete Order -->
+                                    <div class="modal fade" id="ooModalDeleteOrder" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content text-center">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <div class="modal-body">
+                                                    <i class="icon-sprtbgiconclrd icon50gray bg-delete"></i>
+                                                    <h4>Emri Silme Onayı</h4>
+                                                    <p>Emri silmek istediğinize emin misiniz?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary active" data-dismiss="modal">İPTAL ET</button>
+                                                    <button type="button" class="btn btn-primary">SİL</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal Delete Order -->
                                 </div>
                                 <!-- Open Orders -->
                                 <!-- Transaction History -->
