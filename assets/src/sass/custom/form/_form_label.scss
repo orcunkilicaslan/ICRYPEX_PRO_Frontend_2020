@@ -6,7 +6,7 @@
     position: relative;
   }
 
-  #{$formcustomclassname}-select{
+  .custom-select{
     background-color: transparent;
     color: $site-clr-text-dark-pri !important;
   }
@@ -30,7 +30,7 @@
       .msginput{right: 10px;}
     }
 
-    #{$forminputclassname}-group{
+    .input-group{
       @include flexbox-flex-direction(column);
 
       &-append{
@@ -76,7 +76,7 @@
       bottom: 0;
     }
 
-    #{$formclassname}-control{
+    .form-control{
       background-color: transparent !important;
       border-top-color: transparent !important;
       border-left-color: transparent !important;
@@ -128,7 +128,7 @@
       }
     }
 
-    textarea#{$formclassname}-control[readonly="readonly"]{
+    textarea.form-control[readonly="readonly"]{
       padding-left: 15px;
       padding-right: 15px;
       border-top-color: $site-brdr-light !important;
@@ -161,12 +161,12 @@
     &::after{right:50%;}
   }
 
-  #{$formcustomclassname}-control-input{
+  .custom-control-input{
     &:valid{
-      ~ #{$formcustomclassname}-control-label::before{border-color: $site-clr-green;}
+      ~ .custom-control-label::before{border-color: $site-clr-green;}
     }
     &:invalid{
-      ~ #{$formcustomclassname}-control-label::before{border-color: $site-clr-red;}
+      ~ .custom-control-label::before{border-color: $site-clr-red;}
     }
   }
 
@@ -182,7 +182,7 @@
   // Dark Bg
   &.formuidarkbg{
 
-    #{$formclassname}-control{
+    .form-control{
       border-bottom-color: $site-brdr-dark !important;
 
       &:focus ~ label,
@@ -195,12 +195,12 @@
       &:valid ~ label{color: lighten($site-clr-green, 15%);}
     }
 
-    #{$formcustomclassname}-control-input{
+    .custom-control-input{
       &:valid{
-        ~ #{$formcustomclassname}-control-label::before{border-color: lighten($site-clr-green, 15%);}
+        ~ .custom-control-label::before{border-color: lighten($site-clr-green, 15%);}
       }
       &:invalid{
-        ~ #{$formcustomclassname}-control-label::before{border-color: lighten($site-clr-red, 25%);}
+        ~ .custom-control-label::before{border-color: lighten($site-clr-red, 25%);}
       }
     }
 
@@ -228,7 +228,7 @@
         }
       }
 
-      #{$formclassname}-control{
+      .form-control{
         border-color: $site-brdr-light !important;
         padding-left: $var-custom-font-size-base;
         padding-bottom: 0;

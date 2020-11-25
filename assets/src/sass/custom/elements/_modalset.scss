@@ -1,13 +1,58 @@
 .sitemodal{}
 
-.modal-open{
-  padding: 0 !important;
-  overflow: inherit !important;
-}
 
-.modal-backdrop{
-  @include background-linear(darken($site-clr-black, 1%), darken($site-clr-black, 10%), -45);
-  &.show{
-    opacity: 0.99;
+.modal{
+
+  &-content{
+
+    > .close{
+      color: $site-clr-white;
+      background-color: $site-clr-blue;
+      width: 22px;
+      height: 22px;
+      display: block;
+      font-size: 1.5rem;
+      font-weight: $var-custom-font-weight-normal;
+      padding: 0;
+      margin: 0;
+      opacity: 1;
+      text-shadow: none;
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      @include translateX(-50%);
+      @include border-radius(50%);
+
+      span{
+        position: relative;
+        top: -2px;
+      }
+    }
   }
+
+  &-header{}
+
+  &-body{
+    margin-top: 11px;
+
+    i[class*="icon"]{
+      margin-bottom: 1rem;
+    }
+
+    h1,h2,h3,h4,h5,h6{
+      color: $site-clr-white;
+      font-weight: $var-custom-font-weight-normal;
+      margin: 0;
+    }
+  }
+
+  &-footer{
+    @include flexbox-justify-content(center);
+    padding-top: 0;
+
+    .btn{
+      min-width: 100px;
+    }
+  }
+
 }

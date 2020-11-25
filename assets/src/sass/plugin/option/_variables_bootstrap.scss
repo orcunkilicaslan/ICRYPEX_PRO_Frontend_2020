@@ -162,7 +162,7 @@ $bootstrap-display-line-height:         $var-custom-display-line-height;
 $bootstrap-lead-font-size:              $var-custom-lead-font-size;
 $bootstrap-lead-font-weight:            $var-custom-lead-font-weight;
 $bootstrap-small-font-size:             $var-custom-small-font-size;
-$bootstrap-text-muted:                  $bootstrap-gray-600;
+$bootstrap-text-muted:                  $var-custom-text-muted;
 $bootstrap-blockquote-small-color:      $bootstrap-gray-600;
 $bootstrap-blockquote-small-font-size:  $bootstrap-small-font-size;
 $bootstrap-blockquote-font-size:        $bootstrap-font-size-base * 1.25;
@@ -281,11 +281,11 @@ $bootstrap-input-border-radius:                   $bootstrap-border-radius;
 $bootstrap-input-border-radius-lg:                $bootstrap-border-radius-lg;
 $bootstrap-input-border-radius-sm:                $bootstrap-border-radius-sm;
 $bootstrap-input-focus-bg:                        $bootstrap-input-bg;
-$bootstrap-input-focus-border-color:              lighten($bootstrap-component-active-bg, 25%);
+$bootstrap-input-focus-border-color:              $var-custom-input-focus-border-color;
 $bootstrap-input-focus-color:                     $bootstrap-input-color;
 $bootstrap-input-focus-width:                     $bootstrap-input-btn-focus-width;
 $bootstrap-input-focus-box-shadow:                $bootstrap-input-btn-focus-box-shadow;
-$bootstrap-input-placeholder-color:               $bootstrap-gray-600;
+$bootstrap-input-placeholder-color:               $var-custom-input-color;
 $bootstrap-input-plaintext-color:                 $bootstrap-body-color;
 $bootstrap-input-height-border:                   $bootstrap-input-border-width * 2;
 //$bootstrap-input-height-inner:                    add($bootstrap-input-line-height * 1em, $bootstrap-input-padding-y * 2);
@@ -304,7 +304,7 @@ $bootstrap-form-check-inline-input-margin-x:      .3125rem;
 $bootstrap-form-grid-gutter-width:                10px;
 $bootstrap-form-group-margin-bottom:              0.5rem;
 $bootstrap-input-group-addon-color:               $bootstrap-input-color;
-$bootstrap-input-group-addon-bg:                  $bootstrap-gray-200;
+$bootstrap-input-group-addon-bg:                  $var-custom-input-bg;
 $bootstrap-input-group-addon-border-color:        $bootstrap-input-border-color;
 /* Bootstrap Form Settings */
 
@@ -317,7 +317,7 @@ $bootstrap-custom-control-indicator-size:                           1rem;
 $bootstrap-custom-control-indicator-bg:                             $bootstrap-input-bg;
 $bootstrap-custom-control-indicator-bg-size:                        50% 50%;
 $bootstrap-custom-control-indicator-box-shadow:                     $bootstrap-input-box-shadow;
-$bootstrap-custom-control-indicator-border-color:                   $bootstrap-gray-500;
+$bootstrap-custom-control-indicator-border-color:                   $var-custom-input-border-color;
 $bootstrap-custom-control-indicator-border-width:                   $bootstrap-input-border-width;
 $bootstrap-custom-control-label-color:                              null;
 $bootstrap-custom-control-indicator-disabled-bg:                    $bootstrap-input-disabled-bg;
@@ -326,7 +326,7 @@ $bootstrap-custom-control-indicator-checked-color:                  $bootstrap-c
 $bootstrap-custom-control-indicator-checked-bg:                     $bootstrap-component-active-bg;
 $bootstrap-custom-control-indicator-checked-disabled-bg:            rgba($bootstrap-primary, .5);
 $bootstrap-custom-control-indicator-checked-box-shadow:             none;
-$bootstrap-custom-control-indicator-checked-border-color:           $bootstrap-custom-control-indicator-checked-bg;
+$bootstrap-custom-control-indicator-checked-border-color:           $var-custom-input-focus-border-color;
 $bootstrap-custom-control-indicator-focus-box-shadow:               $bootstrap-input-focus-box-shadow;
 $bootstrap-custom-control-indicator-focus-border-color:             $bootstrap-input-focus-border-color;
 $bootstrap-custom-control-indicator-active-color:                   $bootstrap-component-active-color;
@@ -354,11 +354,11 @@ $bootstrap-custom-select-indicator-padding:                         1rem; // Ext
 $bootstrap-custom-select-font-weight:                               $bootstrap-input-font-weight;
 $bootstrap-custom-select-line-height:                               $var-custom-custom-select-line-height;
 $bootstrap-custom-select-color:                                     $bootstrap-input-color;
-$bootstrap-custom-select-disabled-color:                            $bootstrap-gray-600;
+$bootstrap-custom-select-disabled-color:                            $bootstrap-input-color;
 $bootstrap-custom-select-bg:                                        $bootstrap-input-bg;
-$bootstrap-custom-select-disabled-bg:                               $bootstrap-gray-200;
+$bootstrap-custom-select-disabled-bg:                               $bootstrap-input-disabled-bg;
 $bootstrap-custom-select-bg-size:                                   8px 10px; // In pixels because image dimensions
-$bootstrap-custom-select-indicator-color:                           $bootstrap-gray-800;
+$bootstrap-custom-select-indicator-color:                           $bootstrap-input-color;
 $bootstrap-custom-select-indicator:                                 url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'><path fill='#{$bootstrap-custom-select-indicator-color}' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
 //$bootstrap-custom-select-background:                                escape-svg($bootstrap-custom-select-indicator) no-repeat right $bootstrap-custom-select-padding-x center / $bootstrap-custom-select-bg-size; // Used so we can have multiple background elements (e.g., arrow and feedback icon)
 //$bootstrap-custom-select-feedback-icon-padding-right:               add(1em * .75, (2 * $bootstrap-custom-select-padding-y * .75) + $bootstrap-custom-select-padding-x + $bootstrap-custom-select-indicator-padding);
@@ -637,21 +637,21 @@ $bootstrap-badge-pill-border-radius:                10rem;
 /* Bootstrap Badges Settings */
 
 /* Bootstrap Modals Settings */
-$bootstrap-modal-inner-padding:                     1rem;
+$bootstrap-modal-inner-padding:                     $var-custom-modal-inner-padding;
 $bootstrap-modal-footer-margin-between:             .5rem;
 $bootstrap-modal-dialog-margin:                     .5rem;
 $bootstrap-modal-dialog-margin-y-sm-up:             1.75rem;
 $bootstrap-modal-title-line-height:                 $bootstrap-line-height-base;
 $bootstrap-modal-content-color:                     null;
-$bootstrap-modal-content-bg:                        $bootstrap-white;
-$bootstrap-modal-content-border-color:              rgba($bootstrap-black, .2);
-$bootstrap-modal-content-border-width:              $bootstrap-border-width;
+$bootstrap-modal-content-bg:                        $var-custom-modal-content-bg;
+$bootstrap-modal-content-border-color:              $var-custom-modal-content-border-color;
+$bootstrap-modal-content-border-width:              $var-custom-modal-content-border-width;
 $bootstrap-modal-content-border-radius:             $bootstrap-border-radius-lg;
 //$bootstrap-modal-content-inner-border-radius:       subtract($bootstrap-modal-content-border-radius, $bootstrap-modal-content-border-width);
 $bootstrap-modal-content-box-shadow-xs:             0 .25rem .5rem rgba($bootstrap-black, .5);
 $bootstrap-modal-content-box-shadow-sm-up:          0 .5rem 1rem rgba($bootstrap-black, .5);
-$bootstrap-modal-backdrop-bg:                       $bootstrap-black;
-$bootstrap-modal-backdrop-opacity:                  .5;
+$bootstrap-modal-backdrop-bg:                       $var-custom-modal-backdrop-bg;
+$bootstrap-modal-backdrop-opacity:                  $var-custom-modal-backdrop-opacity;
 $bootstrap-modal-header-border-color:               $bootstrap-border-color;
 $bootstrap-modal-footer-border-color:               $bootstrap-modal-header-border-color;
 $bootstrap-modal-header-border-width:               $bootstrap-modal-content-border-width;

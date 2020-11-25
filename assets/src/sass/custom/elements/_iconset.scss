@@ -63,6 +63,32 @@
       &.sm-notif{background-position: calc(-20px*1) -30px;}
     }
   }
+
+  &-sprtbgiconclrd{
+    background-image: url(#{$path-img-url-icons}/icons_spite_darkbigiconcolored.svg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    display: inline-block;
+    position: relative;
+
+
+    &.icon50gray{
+      width: 50px;
+      height: 50px;
+
+      &.bg-check{background-position: calc(-50px*0) 0;}
+      &.bg-close{background-position: calc(-50px*1) 0;}
+      &.bg-delete{background-position: calc(-50px*2) 0;}
+    }
+
+    &.icon50clrd{
+      width: 50px;
+      height: 50px;
+
+      &.bg-check{background-position: calc(-50px*0) -50px;}
+      &.bg-close{background-position: calc(-50px*1) -50px;}
+    }
+  }
 }
 
 .siteicons{

@@ -79,6 +79,7 @@ $var-custom-display-line-height:                  $var-custom-headings-line-heig
 $var-custom-lead-font-size:                       $var-custom-font-size-base * 1.25;
 $var-custom-lead-font-weight:                     300;
 $var-custom-small-font-size:                      80%;
+$var-custom-text-muted:                           $site-clr-text-soft-sec;
 /* Site Custom Typography Settings */
 
 /* Site Custom Button Settings */
@@ -92,10 +93,11 @@ $var-custom-btn-font-weight:                      $var-custom-font-weight-bold;
 
 /* Site Custom Form Settings */
 $var-custom-label-margin-bottom:                  .1rem;
-$var-custom-input-bg:                             $var-custom-clr-white;
-$var-custom-input-disabled-bg:                    $var-custom-clr-gray-200;
-$var-custom-input-color:                          $var-custom-clr-gray-700;
-$var-custom-input-border-color:                   $var-custom-clr-gray-400;
+$var-custom-input-bg:                             $site-clr-darkblue-600;
+$var-custom-input-disabled-bg:                    $site-brdr-dark;
+$var-custom-input-color:                          $site-clr-text-soft-sec;
+$var-custom-input-border-color:                   $site-brdr-dark;
+$var-custom-input-focus-border-color:             $site-brdr-dark-focus;
 $var-custom-custom-select-line-height:            $var-custom-line-height-base;
 /* Site Custom Form Settings */
 
@@ -111,5 +113,14 @@ $var-custom-tooltip-color:                        $var-custom-clr-white;
 /*   Site Custom Tooltip and Popover Settings */
 
 /* Site Table Settings */
-$var-custom-table-border-color:                    $global-table-border-color;
+$var-custom-table-border-color:                   $global-table-border-color;
 /* Site Table Settings */
+
+/* Site Modal Settings */
+$var-custom-modal-backdrop-bg:                    $site-clr-darkblue-900;
+$var-custom-modal-backdrop-opacity:               0.9;
+$var-custom-modal-content-bg:                     $site-clr-darkblue-700;
+$var-custom-modal-content-border-color:           transparent;
+$var-custom-modal-content-border-width:           0px; //$bootstrap-border-width;
+$var-custom-modal-inner-padding:                  1.5rem;
+/* Site Modal Settings */

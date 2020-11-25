@@ -47,10 +47,10 @@ $headlogo-clr-red:                $site-clr-red;
   &-center{
     .siteformui{
 
-      #{$formclassname}-control{
+      .form-control{
         border-right-width: 0;
       }
-      #{$forminputclassname}-group{
+      .input-group{
 
         &-prepend{
           .input-group-text{
@@ -128,6 +128,10 @@ $headlogo-clr-red:                $site-clr-red;
 
       .custom-switch .custom-control-label::after{
         background-color: $site-clr-green;
+      }
+
+      .custom-switch .custom-control-input:checked ~ .custom-control-label::before{
+        background-color: transparent;
       }
 
       .switchthemebg{
