@@ -33,10 +33,10 @@
   &-header{}
 
   &-body{
-    margin-top: 11px;
+    margin-top: $var-custom-modal-inner-padding;
 
     i[class*="icon"]{
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
 
     h1,h2,h3,h4,h5,h6{
@@ -53,6 +53,16 @@
     .btn{
       min-width: 100px;
     }
+  }
+
+  &-sm{
+
+    .modal-body{
+      i[class*="icon"]{
+        margin-bottom: 0.25rem;
+      }
+    }
+
   }
 
 }
