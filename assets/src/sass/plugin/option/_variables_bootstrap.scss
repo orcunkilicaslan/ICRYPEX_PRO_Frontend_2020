@@ -654,19 +654,19 @@ $bootstrap-modal-backdrop-bg:                       $var-custom-modal-backdrop-b
 $bootstrap-modal-backdrop-opacity:                  $var-custom-modal-backdrop-opacity;
 $bootstrap-modal-header-border-color:               $bootstrap-border-color;
 $bootstrap-modal-footer-border-color:               $bootstrap-modal-header-border-color;
-$bootstrap-modal-header-border-width:               $bootstrap-modal-content-border-width;
-$bootstrap-modal-footer-border-width:               $bootstrap-modal-header-border-width;
-$bootstrap-modal-header-padding-y:                  1rem;
-$bootstrap-modal-header-padding-x:                  1rem;
+$bootstrap-modal-header-border-width:               $var-custom-modal-header-border-width;
+$bootstrap-modal-footer-border-width:               $var-custom-modal-footer-border-width;
+$bootstrap-modal-header-padding-y:                  $var-custom-modal-header-padding-y;
+$bootstrap-modal-header-padding-x:                  $var-custom-modal-header-padding-x;
 $bootstrap-modal-header-padding:                    $bootstrap-modal-header-padding-y $bootstrap-modal-header-padding-x; // Keep this for backwards compatibility
-$bootstrap-modal-xl:                                1140px;
-$bootstrap-modal-lg:                                800px;
-$bootstrap-modal-md:                                500px;
-$bootstrap-modal-sm:                                300px;
-$bootstrap-modal-fade-transform:                    translate(0, -50px);
-$bootstrap-modal-show-transform:                    none;
-$bootstrap-modal-transition:                        transform .3s ease-out;
-$bootstrap-modal-scale-transform:                   scale(1.02);
+$bootstrap-modal-xl:                                $var-custom-modal-xl;
+$bootstrap-modal-lg:                                $var-custom-modal-lg;
+$bootstrap-modal-md:                                $var-custom-modal-md;
+$bootstrap-modal-sm:                                $var-custom-modal-sm;
+$bootstrap-modal-fade-transform:                    $var-custom-modal-fade-transform;
+$bootstrap-modal-show-transform:                    $var-custom-modal-show-transform;
+$bootstrap-modal-transition:                        $var-custom-modal-transition;
+$bootstrap-modal-scale-transform:                   $var-custom-modal-scale-transform;
 /* Bootstrap Modals Settings */
 
 /* Bootstrap Alerts Settings */

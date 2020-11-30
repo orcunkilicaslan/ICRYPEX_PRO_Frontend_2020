@@ -9,7 +9,9 @@ $headlogo-clr-red:                $site-clr-red;
 
 .header{
   background-color: $headbgclr;
-  padding: 10px 5px 8px;
+  padding: 10px 5px 9px;
+  position: relative;
+  z-index: $zindex-modal-backdrop + 10;
 
   &-left{
     @include flexbox-display-flex();

@@ -146,7 +146,3 @@ document.querySelector('.openorders .openorders-tabs').addEventListener('show.bs
 
 }, true);
 /* Bootstrap Tab Open Orders */
-
-/* Modal */
-//var myNewModalOpenOrdersDelete = new Modal('#ooModalDeleteOrder', { backdrop: true }).show();
-/* Modal */

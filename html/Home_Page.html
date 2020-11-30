@@ -42,7 +42,7 @@
                             <a class="newstickerbars-item" href="#" title="" rel="bookmark" target="_blank">Murat Alaçayır: 05 - Eylül Veya Ekimde Piyasalar Normale Dönebilir</a>
                         </div>
                         <div class="input-group-append">
-                            <a class="input-group-text newsallbtn" href="#" title="Tümü" rel="bookmark" target="_blank">
+                            <a class="input-group-text newsallbtn" href="#" title="Tümü" data-toggle="modal" data-target="#modalHeadNewsAll">
                                 <span>Tümü</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="8.207" height="9.414" viewBox="0 0 8.207 9.414">
                                     <g transform="translate(0.707 0.707)">
@@ -71,17 +71,17 @@
                 </div>
                 <div class="header-right-notsignedin d-none">
                     <div class="header-right-notsignedin-btn">
-                        <a class="btn btn-sm btn-secondary" href="#" title="Üye Girişi" rel="bookmark">Üye Girişi</a>
-                        <a class="btn btn-sm btn-success" href="#" title="Kayıt Ol" rel="bookmark">Kayıt Ol</a>
+                        <a class="btn btn-sm btn-secondary" href="#" title="Üye Girişi" data-toggle="modal" data-target="#modalHeadSignIn">Üye Girişi</a>
+                        <a class="btn btn-sm btn-success" href="#" title="Kayıt Ol" data-toggle="modal" data-target="#modalHeadSignUp">Kayıt Ol</a>
                     </div>
                 </div>
                 <div class="header-right-signedin">
                     <div class="header-right-signedin-icns">
                         <a class="headsignedinicon support" href="#" title="Destek" rel="bookmark"><i class="icon-sprtsmiconclrd icon20 sm-support"></i></a>
-                        <a class="headsignedinicon notif" href="#" title="4 Yeni Bildiriminiz Var" rel="bookmark" data-toggle="tooltip" data-placement="bottom"><i class="icon-sprtsmiconclrd icon20 sm-notif"></i><span class="badge badge-pill badge-danger">4</span></a>
+                        <a class="headsignedinicon notif" href="#" data-toggle="modal" data-target="#modalHeadNotifications"><span title="4 Yeni Bildiriminiz Var" data-toggle="tooltip" data-placement="bottom"><i class="icon-sprtsmiconclrd icon20 sm-notif"></i><span class="badge badge-pill badge-danger">4</span></span></a>
                     </div>
                     <div class="header-right-signedin-user">
-                        <a class="useraccountarea" href="#" title="Hesabım" rel="bookmark">
+                        <a class="useraccountarea" href="#" title="Hesabım" data-toggle="modal" data-target="#modalHeadUserMenu">
                             <img class="useraccountarea-avatar rounded-pill" src="https://www.icrypex.com/assets/img/global/svg/Unknown_Profile_Avatar_Icon.svg" alt="" />
                             <h3 class="useraccountarea-name">Murat ALAÇAYIR</h3>
                             <i class="siteiconsdropdown downdirection"></i>
@@ -1153,7 +1153,7 @@
                                 </div>
                                 <div class="input-group-append">
                                     <div class="input-group-text alarmbtn">
-                                        <a class="iconbtn iconbtn-warning btn-sm" href="#" title="Alarm Kur">
+                                        <a class="iconbtn iconbtn-warning btn-sm" href="#" title="Alarm Kur" data-toggle="modal" data-target="#modalSetAlarm">
                                             <div class="iconbtn-svg"><svg xmlns="http://www.w3.org/2000/svg" width="15.939" height="17.308" viewBox="0 0 15.939 17.308"><path d="M582.149,10189.4h-2.906a1.691,1.691,0,0,1-1.744-1.632v-.292a2.355,2.355,0,0,1,.772-1.739l.228-.212a2.641,2.641,0,0,0,.841-1.714l.256-3.153a4.7,4.7,0,0,1,4.294-4.267v-.581a.583.583,0,0,1,1.164,0v.581a4.709,4.709,0,0,1,4.294,4.279l.256,3.141a2.645,2.645,0,0,0,.844,1.714l.225.212a2.355,2.355,0,0,1,.772,1.739v.292a1.69,1.69,0,0,1-1.742,1.632H586.8a2.33,2.33,0,0,1-4.65,0Zm2.325,1.087a1.125,1.125,0,0,0,1.161-1.087H583.31A1.128,1.128,0,0,0,584.474,10190.491Zm-3.714-9.786-.279,3.188a3.7,3.7,0,0,1-1.164,2.4l-.225.212a1.337,1.337,0,0,0-.432.975v.292a.564.564,0,0,0,.583.545H589.7a.564.564,0,0,0,.581-.545v-.292a1.336,1.336,0,0,0-.453-1.008l-.228-.212a3.685,3.685,0,0,1-1.161-2.4l-.256-3.154a3.605,3.605,0,0,0-3.507-3.276c-.071,0-.141-.006-.212-.006A3.621,3.621,0,0,0,580.76,10180.705Zm9.968-.493a5.959,5.959,0,0,0-1.279-2.742.6.6,0,0,1,.928-.768,7.163,7.163,0,0,1,1.535,3.3.605.605,0,0,1-.466.709h-.118A.608.608,0,0,1,590.728,10180.212Zm-13.229.5a.6.6,0,0,1-.489-.7,7.153,7.153,0,0,1,1.54-3.312.606.606,0,0,1,.931.775,5.981,5.981,0,0,0-1.276,2.734.606.606,0,0,1-.591.5Z" transform="translate(-576.499 -10174.771)" fill="#fff" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/></svg></div>
                                             <div class="iconbtn-txt"><span>Alarm Kur</span></div>
                                         </a>
@@ -1508,7 +1508,9 @@
                                             <div class="modal fade" id="buysellModalConfirm" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
                                                 <div class="modal-dialog modal-sm modal-dialog-centered">
                                                     <div class="modal-content text-center">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <div class="modal-close">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        </div>
                                                         <div class="modal-body">
                                                             <h4>İşlem Onayı</h4>
                                                             <div class="sitetablediv mt-2">
@@ -2271,17 +2273,19 @@
                                     <!-- Table -->
                                     <!-- Modal Delete Order -->
                                     <div class="modal fade" id="ooModalDeleteOrder" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-dialog modal-sm modal-dialog-centered">
                                             <div class="modal-content text-center">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <div class="modal-close">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                </div>
                                                 <div class="modal-body">
                                                     <i class="icon-sprtbgiconclrd icon50gray bg-delete"></i>
                                                     <h4>Emri Silme Onayı</h4>
                                                     <p>Emri silmek istediğinize emin misiniz?</p>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary active" data-dismiss="modal">İPTAL ET</button>
-                                                    <button type="button" class="btn btn-primary">SİL</button>
+                                                <div class="modal-footer row">
+                                                    <button type="button" class="btn btn-secondary active col" data-dismiss="modal">İPTAL ET</button>
+                                                    <button type="button" class="btn btn-primary col">SİL</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -3684,7 +3688,9 @@
                                                                 <div class="modal fade" id="dandwModalAddBank" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered">
                                                                         <div class="modal-content text-center">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                            <div class="modal-close">
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                            </div>
                                                                             <form class="siteformui" autocomplete="off" novalidate>
                                                                                 <div class="modal-body">
                                                                                     <h4>Yeni Banka Hesabı Ekle</h4>
@@ -3797,7 +3803,9 @@
                                                                 <div class="modal fade" id="dandwModalCryptoAddress" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered">
                                                                         <div class="modal-content text-center">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                            <div class="modal-close">
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                            </div>
                                                                             <form class="siteformui" autocomplete="off" novalidate>
                                                                                 <div class="modal-body">
                                                                                     <h4>Yeni Kripto Adresi Ekle</h4>
@@ -4213,6 +4221,102 @@
 
 </main>
 <!-- Main End -->
+
+<!-- Modal Head News and Analysis -->
+<div class="modal modal-rightside fade" id="modalHeadNewsAll" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">HABER & ANALİZ</h4>
+            </div>
+            <div class="modal-body">
+                <p>Haber ve Analiz İçerik</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Head News and Analysis -->
+
+<!-- Modal Head Sign In -->
+<div class="modal modal-rightside fade" id="modalHeadSignIn" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">ÜYE GİRİŞİ</h4>
+            </div>
+            <div class="modal-body">
+                <p>Üye Girişi İçerik</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Head Sign In -->
+
+<!-- Modal Head Sign Up -->
+<div class="modal modal-rightside fade" id="modalHeadSignUp" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">KAYIT OL</h4>
+            </div>
+            <div class="modal-body">
+                <p>Kayıt Ol İçerik</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Head Sign Up -->
+
+<!-- Modal Head User Menu -->
+<div class="modal modal-rightside fade" id="modalHeadUserMenu" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Murat Alaçayır</h4>
+            </div>
+            <div class="modal-body">
+                <p>User İçerik</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Head User Menu -->
+
+<!-- Modal Head Notifications -->
+<div class="modal modal-rightside fade" id="modalHeadNotifications" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">BİLDİRİMLER</h4>
+            </div>
+            <div class="modal-body">
+                <p>Bildirimler İçerik</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Head Notifications -->
+
+<!-- Modal Set Alarm -->
+<div class="modal modal-rightside fade" id="modalSetAlarm" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">ALARM KUR</h4>
+            </div>
+            <div class="modal-body">
+                <p>Alarm Kur İçerik</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Set Alarm -->
 
 <!-- JavaScript Start -->
 <script id="script-custom-app" src="../assets/dist/js/custom-app.js"></script>
