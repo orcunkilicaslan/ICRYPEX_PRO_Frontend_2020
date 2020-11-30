@@ -35,7 +35,7 @@ $var-custom-spacer:                               1rem;
 $var-custom-line-height-lg:                       1.5;
 $var-custom-line-height-sm:                       1.5;
 $var-custom-border-width:                         1px;
-$var-custom-border-color:                         $var-custom-clr-gray-300;
+$var-custom-border-color:                         $site-brdr-dark;
 $var-custom-border-radius:                        0.188rem;
 $var-custom-border-radius-lg:                     0.188rem;
 $var-custom-border-radius-sm:                     0.188rem;
@@ -94,9 +94,9 @@ $var-custom-btn-font-weight:                      $var-custom-font-weight-bold;
 /* Site Custom Form Settings */
 $var-custom-label-margin-bottom:                  .1rem;
 $var-custom-input-bg:                             $site-clr-darkblue-600;
-$var-custom-input-disabled-bg:                    $site-brdr-dark;
+$var-custom-input-disabled-bg:                    $var-custom-border-color;
 $var-custom-input-color:                          $site-clr-text-soft-sec;
-$var-custom-input-border-color:                   $site-brdr-dark;
+$var-custom-input-border-color:                   $var-custom-border-color;
 $var-custom-input-focus-border-color:             $site-brdr-dark-focus;
 $var-custom-custom-select-line-height:            $var-custom-line-height-base;
 /* Site Custom Form Settings */
@@ -104,7 +104,7 @@ $var-custom-custom-select-line-height:            $var-custom-line-height-base;
 /* Site Custom Tooltip and Popover Settings */
 $var-custom-tooltip-popover-font-size:            $var-custom-font-size-sm;
 $var-custom-tooltip-popover-bg:                   $site-clr-darkblue-800;
-$var-custom-tooltip-popover-border-color:         $site-brdr-dark;
+$var-custom-tooltip-popover-border-color:         $var-custom-border-color;
 $var-custom-tooltip-popover-border-radius:        $var-custom-border-radius-sm;
 $var-custom-popover-max-width:                    440px;
 $var-custom-popover-border-width:                 $var-custom-border-width;
@@ -117,10 +117,24 @@ $var-custom-table-border-color:                   $global-table-border-color;
 /* Site Table Settings */
 
 /* Site Modal Settings */
-$var-custom-modal-backdrop-bg:                    $site-clr-darkblue-900;
-$var-custom-modal-backdrop-opacity:               0.9;
+$var-custom-modal-backdrop-bg:                    #070D1C;
+$var-custom-modal-backdrop-opacity:               0.7;
 $var-custom-modal-content-bg:                     $site-clr-darkblue-700;
 $var-custom-modal-content-border-color:           transparent;
 $var-custom-modal-content-border-width:           0px; //$bootstrap-border-width;
 $var-custom-modal-inner-padding:                  0.75rem;
+
+$var-custom-modal-header-border-width:            1px;
+$var-custom-modal-footer-border-width:            0;
+$var-custom-modal-header-padding-y:               0.72rem;
+$var-custom-modal-header-padding-x:               2.25rem;
+
+$var-custom-modal-xl:                             1140px;
+$var-custom-modal-lg:                             860px;
+$var-custom-modal-md:                             540px;
+$var-custom-modal-sm:                             320px;
+$var-custom-modal-fade-transform:                 translate(0, -1vh);
+$var-custom-modal-show-transform:                 none !important;
+$var-custom-modal-transition:                     transform .3s ease-out;
+$var-custom-modal-scale-transform:                scale(1.02);
 /* Site Modal Settings */
