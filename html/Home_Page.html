@@ -1478,7 +1478,7 @@
                                                         <div class="col">
                                                             <div class="rangeprogress">
                                                                 <div class="rangeprogress-progress progress">
-                                                                    <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                    <div class="progress-bar" role="progressbar" style="width: 33.3333%" aria-valuemin="0" aria-valuemax="100"></div>
                                                                 </div>
                                                                 <div class="rangeprogress-circle" data-val="">
                                                                     <span></span>
@@ -1487,7 +1487,7 @@
                                                                     <span></span>
                                                                 </div>
                                                                 <output class="rangeprogress-bubble"></output>
-                                                                <input class="rangeprogress-range custom-range" type="range" min="25" max="100" step="25" />
+                                                                <input class="rangeprogress-range custom-range" type="range" value="50" min="25" max="100" step="25" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -4310,8 +4310,703 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">ALARM KUR</h4>
             </div>
-            <div class="modal-body">
-                <p>Alarm Kur İçerik</p>
+            <div class="modal-body comp comp-setalarm">
+                <div class="comp-setalarm-data">
+                    <div class="databigger">
+                        <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                            <g transform="translate(-20 -130)">
+                                <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)"></path>
+                                <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)"></path>
+                                <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)"></path>
+                            </g>
+                        </svg>
+                        <span class="sitecolorgreen">999,999.99</span>
+                    </div>
+                    <div class="datasmall">
+                        <span>633.59</span>
+                        <span class="sitecolorgreen">+%5.76</span>
+                    </div>
+                </div>
+                <div class="comp-setalarm-form">
+                    <form class="siteformui" autocomplete="off" novalidate>
+                        <div class="setalarmspinner">
+                            <div class="form-group input-group JSInputSpinner">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn btn-secondary active JSInputSpinnerMin">-</button>
+                                </div>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Fiyat</span>
+                                </div>
+                                <input id="datacurr" type="number" class="form-control text-right" value="0" min="0" max="999999999" step="10" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">TRY</span>
+                                </div>
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary active JSInputSpinnerMax">+</button>
+                                </div>
+                            </div>
+                            <script>
+                                var iSpinner = document.querySelectorAll(".JSInputSpinner");
+                                for (var index = 0; index < iSpinner.length; index ++) {
+                                    var spinnerIndex = iSpinner[index].querySelector("input"),
+                                        spinnerId = spinnerIndex.getAttribute("id"),
+                                        spinnerMin = spinnerIndex.getAttribute("min"),
+                                        spinnerMax = spinnerIndex.getAttribute("max"),
+                                        spinnerStep = spinnerIndex.getAttribute("step");
+                                    document.querySelector(".JSInputSpinnerMin").setAttribute(
+                                        "onclick",
+                                        "iSpinnerBtn('" + spinnerId + "', -" + spinnerStep + ", " + spinnerMin + ")"
+                                    );
+                                    document.querySelector(".JSInputSpinnerMax").setAttribute(
+                                        "onclick",
+                                        "iSpinnerBtn('" + spinnerId + "', " + spinnerStep + ", " + spinnerMax + ")"
+                                    );
+                                }
+
+                                function iSpinnerBtn(id, s, m) {
+                                    var el = document.getElementById(id);
+                                    if (s > 0) {
+                                        if (parseInt(el.value) < m) {
+                                            el.value = parseInt(el.value) + s;
+                                        }
+                                    } else {
+                                        if (parseInt(el.value) > m) {
+                                            el.value = parseInt(el.value) + s;
+                                        }
+                                    }
+                                }
+                            </script>
+                        </div>
+                        <div class="setalarmrange">
+                            <div class="rangeprogress">
+                                <div class="rangeprogress-progress progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 33.3333%" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="rangeprogress-circle" data-val="">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div class="rangeprogress-perc">
+                                    <span class="sitecolorred">-%100</span>
+                                    <span class="sitecolorgreen">+%100</span>
+                                </div>
+                                <output class="rangeprogress-bubble"></output>
+                                <input class="rangeprogress-range custom-range" type="range" value="50" min="25" max="100" step="25" />
+                            </div>
+                        </div>
+                        <div class="setalarmbtn">
+                            <button type="button" class="btn btn-warning w-100">ALARM OLUŞTUR</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="comp-setalarm-table">
+                    <div class="headsmtitle">
+                        <div class="headsmtitle-col">
+                            <h6>BTC / TRY ALARMLARI</h6>
+                        </div>
+                        <div class="headsmtitle-col">
+                            <div class="custom-control custom-checkbox">
+                                <input id="setalarmsHideOtherPairs" class="custom-control-input" type="checkbox" value="" checked="">
+                                <label for="setalarmsHideOtherPairs" class="custom-control-label">Diğer Çiftleri Gizle</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setalarmtable scrollbar">
+                        <div class="sitetablediv scrollbar-tbl">
+                            <div class="scrollbar-tbl-th">
+                                <div class="tbl-thead">
+                                    <div class="tbl-tr">
+                                        <div class="tbl-th aut symb">Çift</div>
+                                        <div class="tbl-th fxd amnt">Miktar</div>
+                                        <div class="tbl-th aut adlt">Tümünü Sil</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scrollbar-tbl-tb">
+                                <div class="tbl-tbody tbl-striped tbl-hovered">
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">BTC/LINK</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.20493654</span>
+                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">ETH/EOS</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.00020498</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">LTC/XRP</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.10252914</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">EOS/LTC</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.02775202</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">BAB/XRP</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.02062184</span>
+                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">XRP/USD</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.00761735</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">BTC/LINK</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.20493654</span>
+                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">ETH/EOS</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.00020498</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">LTC/XRP</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.10252914</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">EOS/LTC</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.02775202</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">BAB/XRP</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.02062184</span>
+                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">XRP/USD</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.00761735</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">BTC/LINK</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.20493654</span>
+                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">ETH/EOS</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.00020498</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">LTC/XRP</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.10252914</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">EOS/LTC</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.02775202</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">BAB/XRP</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.02062184</span>
+                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">XRP/USD</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.00761735</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">BTC/LINK</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.20493654</span>
+                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">ETH/EOS</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.00020498</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">LTC/XRP</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.10252914</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">EOS/LTC</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.02775202</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">BAB/XRP</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.02062184</span>
+                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">XRP/USD</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.00761735</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">BTC/LINK</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.20493654</span>
+                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">ETH/EOS</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.00020498</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">LTC/XRP</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.10252914</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">EOS/LTC</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.02775202</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">BAB/XRP</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.02062184</span>
+                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">XRP/USD</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.00761735</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">BTC/LINK</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.20493654</span>
+                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">ETH/EOS</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.00020498</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">LTC/XRP</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.10252914</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">EOS/LTC</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.02775202</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">BAB/XRP</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.02062184</span>
+                                            <svg class="mdper mdper-down" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-tr">
+                                        <div class="tbl-td aut symb">XRP/USD</div>
+                                        <div class="tbl-td fxd amnt">
+                                            <span>0.00761735</span>
+                                            <svg class="mdper mdper-up" xmlns="http://www.w3.org/2000/svg" width="8.001" height="10" viewBox="0 0 8.001 10">
+                                                <g transform="translate(-20 -130)">
+                                                    <path class="perline" d="M7.368,1.25H.632A.629.629,0,0,1,0,.625.629.629,0,0,1,.632,0H7.368A.629.629,0,0,1,8,.625.629.629,0,0,1,7.368,1.25Z" transform="translate(20 134.35)" />
+                                                    <path class="perup" d="M4.328,7.684V1.44L6.654,3.8a.613.613,0,0,0,.877,0,.639.639,0,0,0,0-.892L4.152-.522a.372.372,0,0,0-.22-.135.739.739,0,0,0-.438,0,.367.367,0,0,0-.22.135L-.106,2.914a.639.639,0,0,0,0,.892.614.614,0,0,0,.878,0L3.1,1.44V7.684a.616.616,0,1,0,1.233,0Z" transform="translate(20.287 131.19)" />
+                                                    <path class="perdown" d="M3.385.626V6.87L1.059,4.506A.613.613,0,0,0,.192,4.5l-.01.01a.638.638,0,0,0,0,.893L3.56,8.832a.37.37,0,0,0,.22.135.743.743,0,0,0,.438,0,.37.37,0,0,0,.22-.135L7.818,5.4a.638.638,0,0,0,0-.893A.614.614,0,0,0,6.95,4.5l-.01.01L4.613,6.87V.626a.617.617,0,0,0-1.233,0Z" transform="translate(20 130.49)" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="tbl-td aut adlt">
+                                            <a href="#" title="İptal Et"><i class="icon-sprtsmiconclrd icon14 sm-delete"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

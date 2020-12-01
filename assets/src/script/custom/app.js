@@ -49,3 +49,7 @@ function setBubble(range, bubble, circle, progress) {
     circle.setAttribute('data-val', newVal);
 }
 /* Progress Range End */
+
+/* Input Spinner Start */
+
+/* Input Spinner End */

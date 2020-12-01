@@ -1,0 +1,98 @@
+
+.comp{
+
+  &-setalarm{
+
+    &-data{
+
+      .databigger{
+        @include flexbox-display-flex();
+        @include flexbox-justify-content(center);
+        @include responsive-font-size($var-custom-font-size-lg * 1.33);
+        line-height: $var-custom-input-btn-line-height-lg;
+        //padding: $bootstrap-input-btn-padding-y-lg $bootstrap-input-btn-padding-x-lg;
+        padding-right: 15px;
+
+        @extend %extcurrperupdownlineicon;
+
+        .mdper{
+          display: block;
+          margin-right: 5px;
+          top: 1px;
+          @include scale(1.5);
+        }
+      }
+
+      .datasmall{
+        color: $site-clr-white;
+        @include responsive-font-size($var-custom-font-size-base * 1.2);
+        margin-top: 2px;
+      }
+
+    }
+
+    &-form{
+      margin-top: 10px;
+
+      .setalarmspinner{}
+
+      .setalarmrange{
+        margin-top: 35px;
+
+        .rangeprogress{
+
+          .rangeprogress-bubble{
+            background-color: $site-clr-red;
+            opacity: 1;
+
+            &::after{
+              background-color: $site-clr-red;
+            }
+          }
+
+          .rangeprogress-circle{
+            &[data-val*="0"]{
+              span:nth-child(1){background-color: $site-clr-blue;}
+            }
+            &[data-val*="33"]{
+              span:nth-child(1), span:nth-child(2){background-color: $site-clr-blue;}
+            }
+            &[data-val*="66"]{
+              span:nth-child(1), span:nth-child(2), span:nth-child(3){background-color: $site-clr-blue;}
+            }
+            &[data-val*="100"]{
+              span{background-color: $site-clr-blue;}
+            }
+          }
+        }
+      }
+
+      .setalarmbtn{
+        margin-top: 20px;
+      }
+    }
+
+    &-table{
+      margin-top: 15px;
+
+      .headsmtitle{
+        border-bottom: 1px solid $site-brdr-dark;
+      }
+
+      .setalarmtable{
+        .sitetablediv{
+
+          .scrollbar-tbl-th .tbl-thead .tbl-th{color: $site-clr-text-soft-sec;}
+          .scrollbar-tbl-tb{height: 500px;}
+          .symb[class*="tbl"]{width: 80px; text-align: left;}
+          .amnt[class*="tbl"]{text-align: right;}
+          .adlt[class*="tbl"]{width: 80px; text-align: right;}
+
+          @extend %extcurrperupdownlineicon;
+        }
+      }
+    }
+
+  }
+
+}

@@ -48,6 +48,7 @@ $var-custom-box-shadow-lg:                        0 1rem 3rem rgba($var-custom-c
 /* Site Custom Typography Settings */
 $var-custom-font-family-base:                     $site-font-family-default;
 $var-custom-font-size-base:                       0.75rem; // Assumes the browser default, typically `16px` // https://nekocalc.com/px-to-rem-converter
+$var-custom-font-size-xl:                         1.5rem;
 $var-custom-font-size-lg:                         1.125rem;
 $var-custom-font-size-sm:                         0.75rem;
 $var-custom-h1-font-size:                         $var-custom-font-size-base * 2.5;
