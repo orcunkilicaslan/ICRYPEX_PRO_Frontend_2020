@@ -159,10 +159,14 @@
       .form-control{
         border-right-width: 1px;
       }
+    }
 
+    &-prepend,
+    &-append{
       .btn{
         @include flexbox-display-flex();
         @include flexbox-align-items(center);
+        @include flexbox-justify-content(center);
         border-width: 0;
         position: relative;
 
@@ -301,6 +305,15 @@
       .progress-bar{
         @include transition-multiple(none);
       }
+    }
+
+    &-perc{
+      @include flexbox-display-flex();
+      @include flexbox-align-items(center);
+      @include flexbox-justify-content(space-between);
+      width: 100%;
+      position: absolute;
+      top: calc(-#{$bootstrap-custom-range-thumb-width} * 1.75);
     }
 
     &-circle{

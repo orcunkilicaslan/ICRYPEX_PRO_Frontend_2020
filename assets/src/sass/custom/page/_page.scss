@@ -4,9 +4,6 @@
 // Custom
 @import "custom";
 
-// Component
-@import "component";
-
 // Main
 @import "main";
 @import "main_box";
@@ -21,3 +18,7 @@
 @import "main_box_openorders_assets";
 @import "main_box_openorders_depositandwithdraw";
 @import "main_box_openorders_accountactivities";
+
+// Component
+@import "comp";
+@import "comp_setalarm";
