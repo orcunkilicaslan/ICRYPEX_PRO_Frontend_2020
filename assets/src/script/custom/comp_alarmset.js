@@ -6,11 +6,11 @@ const compAlarmSetScrllHead     = document.querySelector('.comp-setalarm .comp-s
 const compAlarmSetScrllBody     = document.querySelector('.comp-setalarm .comp-setalarm-table .setalarmtable .scrollbar-tbl-tb');
 
 
-/* Document Load Market Data Start */
+/* Document Load Alarm Set Start */
 document.addEventListener('DOMContentLoaded',()=>{
 
 
-    // Market Data Symbol Perfect Scrollbar
+    // Alarm Set Perfect Scrollbar
     const psCompSetAlarmTbl = new PerfectScrollbar(compAlarmSetScrllBody, {
         wheelSpeed: 0.50,
         wheelPropagation: true,
@@ -23,4 +23,4 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 
 });
-/* Document Load Market Data End */
+/* Document Load Alarm Set End */
