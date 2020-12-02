@@ -67,6 +67,7 @@ gulp.task('script-custom', () => {
         folder_src_main + 'script/custom/**/mainbox_marketdata.js',
         folder_src_main + 'script/custom/**/mainbox_orderbook.js',
         folder_src_main + 'script/custom/**/mainbox_openorders.js',
+        folder_src_main + 'script/custom/**/comp_notifications.js',
         folder_src_main + 'script/custom/**/comp_alarmset.js',
         folder_src_main + 'script/custom/**/comp_modals.js',
         folder_src_main + 'script/custom/**/app.js'
