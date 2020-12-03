@@ -217,6 +217,9 @@
     }
 
     label{
+      font-weight: $var-custom-font-weight-normal;
+      margin: 0;
+
       &::before,
       &::after{display: none;}
     }
@@ -419,6 +422,8 @@ body#{$themedarkclassname}{
       }
 
       &-checkbox{
+        margin-bottom: $form-group-margin-bottom;
+
         .custom-control-input{
           &:checked{
             ~ .custom-control-label{

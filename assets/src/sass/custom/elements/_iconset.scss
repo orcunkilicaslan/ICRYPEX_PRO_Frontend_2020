@@ -42,6 +42,7 @@
       &.sm-edit{background-position: calc(-14px*0) 0;}
       &.sm-delete{background-position: calc(-14px*1) 0;}
       &.sm-browse{background-position: calc(-14px*2) 0;}
+      &.sm-showhide{background-position: calc(-14px*3) 0;}
     }
 
     &.icon16{
@@ -79,6 +80,8 @@
       &.bg-check{background-position: calc(-50px*0) 0;}
       &.bg-close{background-position: calc(-50px*1) 0;}
       &.bg-delete{background-position: calc(-50px*2) 0;}
+      &.bg-user{background-position: calc(-50px*3) 0;}
+      &.bg-newuser{background-position: calc(-50px*4) 0;}
     }
 
     &.icon50clrd{

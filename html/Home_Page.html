@@ -82,7 +82,10 @@
                     </div>
                     <div class="header-right-signedin-user">
                         <a class="useraccountarea" href="#" title="Hesabım" data-toggle="modal" data-target="#modalHeadUserMenu">
-                            <img class="useraccountarea-avatar rounded-pill" src="https://www.icrypex.com/assets/img/global/svg/Unknown_Profile_Avatar_Icon.svg" alt="" />
+                            <div class="useraccountarea-avatar rounded-pill">
+                                <i class="icon-sprtbgiconclrd icon50gray bg-user"></i>
+                                <img src="../assets/upload/Unknown_Profile_Avatar_Icon.svg" alt="" />
+                            </div>
                             <h3 class="useraccountarea-name">Murat ALAÇAYIR</h3>
                             <i class="siteiconsdropdown downdirection"></i>
                         </a>
@@ -1511,7 +1514,7 @@
                                                         <div class="modal-close">
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div class="modal-body modal-confirm">
                                                             <h4>İşlem Onayı</h4>
                                                             <div class="sitetablediv mt-2">
                                                                 <div class="tbl-tbody tbl-striped">
@@ -1538,7 +1541,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="modal-body d-none">
+                                                        <div class="modal-body modal-confirm d-none">
                                                             <i class="icon-sprtbgiconclrd icon50gray bg-check"></i>
                                                             <h4>İşlem Onayı</h4>
                                                             <p>İşleminiz Başarıyla Gerçekleştirildi.</p>
@@ -2278,7 +2281,7 @@
                                                 <div class="modal-close">
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                 </div>
-                                                <div class="modal-body">
+                                                <div class="modal-body modal-confirm">
                                                     <i class="icon-sprtbgiconclrd icon50gray bg-delete"></i>
                                                     <h4>Emri Silme Onayı</h4>
                                                     <p>Emri silmek istediğinize emin misiniz?</p>
@@ -3687,13 +3690,13 @@
                                                                 <!-- Modal Add Bank -->
                                                                 <div class="modal fade" id="dandwModalAddBank" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered">
-                                                                        <div class="modal-content text-center">
+                                                                        <div class="modal-content">
                                                                             <div class="modal-close">
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                                             </div>
                                                                             <form class="siteformui" autocomplete="off" novalidate>
                                                                                 <div class="modal-body">
-                                                                                    <h4>Yeni Banka Hesabı Ekle</h4>
+                                                                                    <h4 class="text-center">Yeni Banka Hesabı Ekle</h4>
                                                                                     <div class="labelfocustop mt-3">
                                                                                         <div class="form-group">
                                                                                             <input type="text" class="form-control" pattern=".{0}|.{1,}" required />
@@ -3704,7 +3707,7 @@
                                                                                             <label>IBAN</label>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="form-group mt-3">
+                                                                                    <div class="form-group mt-3 text-center">
                                                                                         <div class="custom-control custom-radio custom-control-inline">
                                                                                             <input id="ooAddBankCurrTRY" class="custom-control-input" type="radio" name="ooAddBankCurrRadios" value="TRY" checked />
                                                                                             <label for="ooAddBankCurrTRY" class="custom-control-label">Türk Lirası - TRY</label>
@@ -3802,13 +3805,13 @@
                                                                 <!-- Modal Add CryptoAddress -->
                                                                 <div class="modal fade" id="dandwModalCryptoAddress" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered">
-                                                                        <div class="modal-content text-center">
+                                                                        <div class="modal-content">
                                                                             <div class="modal-close">
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                                             </div>
                                                                             <form class="siteformui" autocomplete="off" novalidate>
                                                                                 <div class="modal-body">
-                                                                                    <h4>Yeni Kripto Adresi Ekle</h4>
+                                                                                    <h4 class="text-center">Yeni Kripto Adresi Ekle</h4>
                                                                                     <div class="labelfocustop mt-3">
                                                                                         <div class="form-group">
                                                                                             <input type="text" class="form-control" pattern=".{0}|.{1,}" required />
@@ -4241,13 +4244,56 @@
 <!-- Modal Head Sign In -->
 <div class="modal modal-rightside fade" id="modalHeadSignIn" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-sm">
-        <div class="modal-content text-center">
+        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">ÜYE GİRİŞİ</h4>
             </div>
-            <div class="modal-body">
-                <p>Üye Girişi İçerik</p>
+            <div class="modal-body comp comp-sign">
+                <div class="comp-sign-icon">
+                    <i class="icon-sprtbgiconclrd icon50gray bg-newuser"></i>
+                </div>
+                <div class="comp-sign-form">
+                    <form class="siteformui" autocomplete="off" novalidate="">
+                        <div class="labelfocustop">
+                            <div class="form-group">
+                                <input type="text" class="form-control" pattern=".{0}|.{1,}" required="" />
+                                <label>E-Posta</label>
+                            </div>
+                            <div class="form-group">
+                                <input id="signinpassword" type="password" class="form-control" pattern=".{0}|.{1,}" required="" />
+                                <label>Şifre</label>
+                                <button class="showhidepass" type="button" data-toggle="showhidepassword" data-target="#signinpassword"><i class="icon-sprtsmiconclrd icon14 sm-showhide"></i></button>
+                            </div>
+                        </div>
+                        <div class="recaptcha">
+                            <div class="recaptcha-area">
+                                <div class="recaptcha-check">
+                                    <div class="g-recaptcha" data-theme="dark" data-sitekey="6LewOKAUAAAAAMDO2yohWeyDcjFAHfcuEqK2mIp4"></div>
+                                </div>
+                                <label>Ben robot değilim</label>
+                            </div>
+                            <div>
+                                <a class="text-muted" href="#">Şifremi Unuttum</a>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary active w-100">DOĞRULAMA KODU GÖNDER</button>
+                    </form>
+                </div>
+                <div class="comp-sign-form d-none">
+                    <div class="headsmtitle mb-1">
+                        <h6 class="text-center w-100">Doğrulama Kodunu Giriniz</h6>
+                    </div>
+                    <form class="siteformui" autocomplete="off" novalidate="">
+                        <div class="labelfocustop">
+                            <div class="form-group">
+                                <input type="text" class="form-control text-center" pattern=".{0}|.{1,}" required="" />
+                                <label class="text-center">Doğrulama Kodu</label>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success mt-2 w-100">GİRİŞ YAP</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -4257,13 +4303,66 @@
 <!-- Modal Head Sign Up -->
 <div class="modal modal-rightside fade" id="modalHeadSignUp" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-sm">
-        <div class="modal-content text-center">
+        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">KAYIT OL</h4>
             </div>
-            <div class="modal-body">
-                <p>Kayıt Ol İçerik</p>
+            <div class="modal-body comp comp-sign">
+                <div class="comp-sign-icon">
+                    <i class="icon-sprtbgiconclrd icon50gray bg-newuser"></i>
+                </div>
+                <div class="comp-sign-form">
+                    <form class="siteformui" autocomplete="off" novalidate="">
+                        <div class="labelfocustop">
+                            <div class="form-group">
+                                <input type="text" class="form-control" pattern=".{0}|.{1,}" required="" />
+                                <label>Adınız</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" pattern=".{0}|.{1,}" required="" />
+                                <label>Soyadınız</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" pattern=".{0}|.{1,}" required="" />
+                                <label>Telefon</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" pattern=".{0}|.{1,}" required="" />
+                                <label>E-Posta</label>
+                            </div>
+                            <div class="form-group">
+                                <input id="signuppassword" type="password" class="form-control" pattern=".{0}|.{1,}" required="" />
+                                <label>Şifre</label>
+                                <button class="showhidepass" type="button" data-toggle="showhidepassword" data-target="#signuppassword"><i class="icon-sprtsmiconclrd icon14 sm-showhide"></i></button>
+                            </div>
+                            <div class="form-group">
+                                <input id="signuprepassword" type="password" class="form-control" pattern=".{0}|.{1,}" required="" />
+                                <label>Şifre Doğrulama</label>
+                                <button class="showhidepass" type="button" data-toggle="showhidepassword" data-target="#signuprepassword"><i class="icon-sprtsmiconclrd icon14 sm-showhide"></i></button>
+                            </div>
+                        </div>
+                        <div class="recaptcha">
+                            <div class="recaptcha-area">
+                                <div class="recaptcha-check">
+                                    <div class="g-recaptcha" data-theme="dark" data-sitekey="6LewOKAUAAAAAMDO2yohWeyDcjFAHfcuEqK2mIp4"></div>
+                                </div>
+                                <label>Ben robot değilim</label>
+                            </div>
+                        </div>
+                        <div class="checkboxarea">
+                            <div class="custom-control custom-checkbox">
+                                <input id="termsOfUseCheck" class="custom-control-input" type="checkbox" value="">
+                                <label for="termsOfUseCheck" class="custom-control-label">18 Yaşında olduğumu beyan ederim, <a href="#" title="" rel="bookmark" target="_blank"><u>Ön Bilgilendirme Metni</u></a> ve <a href="#" title="" rel="bookmark" target="_blank"><u>Kullanım Sözleşmesini</u></a> okudum ve onaylıyorum.</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input id="announcementsCheck" class="custom-control-input" type="checkbox" value="">
+                                <label for="announcementsCheck" class="custom-control-label">Ticari reklam ve duyurulardan haber almak istiyorum.</label>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success w-100">KAYIT OL</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -5245,6 +5344,7 @@
 <!-- Modal Set Alarm -->
 
 <!-- JavaScript Start -->
+<script id="script-recaptcha" src="https://www.google.com/recaptcha/api.js" async=""></script>
 <script id="script-custom-app" src="../assets/dist/js/custom-app.js"></script>
 <!-- JavaScript End -->
 

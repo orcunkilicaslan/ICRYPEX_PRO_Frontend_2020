@@ -216,9 +216,23 @@ $headlogo-clr-red:                $site-clr-red;
           position: relative;
 
           &-avatar{
+            background-color: $site-clr-darkblue-500;
             width: 24px;
             height: 24px;
-            margin-right: 10px;
+            margin-right: 7px;
+            overflow: hidden;
+            position: relative;
+
+            > i.icon-sprtbgiconclrd{
+              @include transform-multiple(scale(0.55) translate(-24px, -24px));
+            }
+
+            > img{
+              background-color: $site-clr-darkblue-500;
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
           }
 
           &-name{
