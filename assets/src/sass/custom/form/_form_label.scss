@@ -38,7 +38,8 @@
         &:focus ~ label,
         &:focus-within ~ label,
         &:valid ~ label{
-          top: -8px;
+          color: $site-clr-white;
+          top: -9px;
           z-index: 0;
         }
 
