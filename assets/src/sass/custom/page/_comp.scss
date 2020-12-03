@@ -15,12 +15,12 @@
       @include flexbox-flex(0 0 auto);
       width: auto;
       max-width: 100%;
+    }
 
-      h6{color: $site-clr-white;}
+    h6{color: $site-clr-white;}
 
-      h6, p{
-        @include responsive-font-size($var-custom-font-size-base);
-      }
+    h6, p{
+      @include responsive-font-size($var-custom-font-size-base);
     }
   }
 

@@ -71,17 +71,6 @@
 
   &-body{
     @include responsive-font-size($var-custom-font-size-base);
-
-    i.icon-sprtbgiconclrd{
-      margin-bottom: 0.5rem;
-    }
-
-    h1,h2,h3,h4,h5,h6{
-      color: $site-clr-white;
-      @include responsive-font-size($var-custom-font-size-base);
-      font-weight: $var-custom-font-weight-normal;
-      margin: 0;
-    }
   }
 
   &-footer{
@@ -93,11 +82,27 @@
     }
   }
 
+  &-confirm{
+
+    i.icon-sprtbgiconclrd{
+      margin: 0 auto 0.5rem;
+      display: block;
+    }
+
+    h1,h2,h3,h4,h5,h6{
+      color: $site-clr-white;
+      @include responsive-font-size($var-custom-font-size-base);
+      font-weight: $var-custom-font-weight-normal;
+      margin: 0;
+    }
+
+  }
+
   &-sm{
 
-    .modal-body{
+    .modal-confirm{
       i.icon-sprtbgiconclrd{
-        margin-bottom: 0.25rem;
+        //margin-bottom: 0.25rem;
       }
     }
 
