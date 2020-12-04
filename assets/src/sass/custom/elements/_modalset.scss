@@ -66,6 +66,7 @@
       color: $site-clr-white;
       @include responsive-font-size($var-custom-font-size-base);
       font-weight: $var-custom-font-weight-bold;
+      text-transform: uppercase;
     }
   }
 
