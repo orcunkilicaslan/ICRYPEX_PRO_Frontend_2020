@@ -4687,7 +4687,7 @@
             </div>
             <div class="modal-body modalcomp modalcomp-sign">
                 <div class="modalcomp-sign-icon">
-                    <i class="icon-sprtbgiconclrd icon50gray bg-newuser"></i>
+                    <i class="icon-sprtbgiconclrd icon50gray bg-user"></i>
                 </div>
                 <div class="modalcomp-sign-form">
                     <form class="siteformui" autocomplete="off" novalidate="">
@@ -4710,10 +4710,10 @@
                                 <label>Ben robot değilim</label>
                             </div>
                             <div>
-                                <a class="text-muted" href="#">Şifremi Unuttum</a>
+                                <a class="text-muted" href="#" data-toggle="modal" data-target="#modalHeadForgotPass">Şifremi Unuttum</a>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-secondary active w-100">DOĞRULAMA KODU GÖNDER</button>
+                        <button type="button" class="btn btn-secondary active w-100" data-toggle="modal" data-target="#modalHeadSignInVerifCode">DOĞRULAMA KODU GÖNDER</button>
                     </form>
                 </div>
                 <div class="modalcomp-sign-form d-none">
@@ -4735,6 +4735,70 @@
     </div>
 </div>
 <!-- Modal Head Sign In -->
+
+<!-- Modal Head Sign In Verification Code -->
+<div class="modal modal-rightside fade" id="modalHeadSignInVerifCode" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">DOĞRULAMA KODU</h4>
+            </div>
+            <div class="modal-body modalcomp modalcomp-sign">
+                <div class="modalcomp-sign-icon">
+                    <i class="icon-sprtbgiconclrd icon50gray bg-user"></i>
+                </div>
+                <div class="modalcomp-sign-form">
+                    <div class="headsmtitle mb-1">
+                        <h6 class="text-center w-100">Doğrulama Kodunu Giriniz</h6>
+                    </div>
+                    <form class="siteformui" autocomplete="off" novalidate="">
+                        <div class="labelfocustop">
+                            <div class="form-group">
+                                <input type="text" class="form-control text-center" pattern=".{0}|.{1,}" required="" />
+                                <label class="text-center">Doğrulama Kodu</label>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success mt-2 w-100">GİRİŞ YAP</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Head Sign In Verification Code -->
+
+<!-- Modal Head Forgot Password -->
+<div class="modal modal-rightside fade" id="modalHeadForgotPass" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">ŞİFREMİ UNUTTUM?</h4>
+            </div>
+            <div class="modal-body modalcomp modalcomp-sign">
+                <div class="modalcomp-sign-icon">
+                    <i class="icon-sprtbgiconclrd icon50gray bg-user"></i>
+                </div>
+                <div class="modalcomp-sign-form">
+                    <div class="headsmtitle mb-1">
+                        <h6 class="text-center w-100">Üye Bilgilerininizi Girin</h6>
+                    </div>
+                    <form class="siteformui" autocomplete="off" novalidate="">
+                        <div class="labelfocustop">
+                            <div class="form-group">
+                                <input type="text" class="form-control" pattern=".{0}|.{1,}" required="" />
+                                <label>E-Posta</label>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success active w-100">ŞİFREMİ SIFIRLA</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Head Forgot Password -->
 
 <!-- Modal Head Sign Up -->
 <div class="modal modal-rightside fade" id="modalHeadSignUp" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
@@ -4814,11 +4878,29 @@
                 <h4 class="modal-title">Murat ALAÇAYIR</h4>
             </div>
             <div class="modal-body modalcomp modalcomp-usermenu">
-                <div class="modalcomp-usermenu-notif">
-                    <a href="#">7 Adet bildiriminiz var.</a>
+                <a class="modalcomp-usermenu-notif btn btn-secondary w-100" href="#" data-toggle="modal" data-target="#modalHeadNotifications">7 Adet bildiriminiz var.</a>
+                <div class="modalcomp-usermenu-area">
+                    <h6 class="modalcomp-usermenu-title">Hesabım</h6>
+                    <ul class="modalcomp-usermenu-list">
+                        <li><a href="#" title="Profil" rel="bookmark">Profil</a></li>
+                        <li><a href="#" title="Hesap Onayı & Limit" rel="bookmark">Hesap Onayı & Limit</a></li>
+                        <li><a href="#" title="Varlıklar" rel="bookmark">Varlıklar</a></li>
+                        <li><a href="#" title="Komisyon Oranları" rel="bookmark">Komisyon Oranları</a></li>
+                        <li><a href="#" title="Bildirimler" rel="bookmark">Bildirimler</a></li>
+                        <li><a href="#" title="Hesap Hareketleri" rel="bookmark">Hesap Hareketleri</a></li>
+                        <li><a href="#" title="İşlem Geçmişi" rel="bookmark">İşlem Geçmişi</a></li>
+                        <li><a href="#" title="Bildirim Seçenekleri" rel="bookmark">Bildirim Seçenekleri</a></li>
+                        <li><a href="#" title="Banka Hesap Bilgileri" rel="bookmark">Banka Hesap Bilgileri</a></li>
+                    </ul>
+                    <h6 class="modalcomp-usermenu-title">Güvenlik</h6>
+                    <ul class="modalcomp-usermenu-list">
+                        <li><a href="#" title="Giriş & Oturum Güvenliği" rel="bookmark">Giriş & Oturum Güvenliği</a></li>
+                        <li><a href="#" title="2FA Aktivasyon" rel="bookmark">2FA Aktivasyon</a></li>
+                        <li><a href="#" title="Özel Anahtar Oluştur" rel="bookmark">Özel Anahtar Oluştur</a></li>
+                        <li><a href="#" title="Hareket Geçmişi" rel="bookmark">Hareket Geçmişi</a></li>
+                    </ul>
                 </div>
-                <div class="modalcomp-usermenu-list"></div>
-                <div class="modalcomp-usermenu-signout"></div>
+                <a class="modalcomp-usermenu-signout btn btn-danger w-100" href="#">ÇIKIŞ YAP</a>
             </div>
         </div>
     </div>
