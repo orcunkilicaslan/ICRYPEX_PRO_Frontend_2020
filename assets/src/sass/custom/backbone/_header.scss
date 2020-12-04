@@ -3,15 +3,11 @@ $headbgclr:                       $site-clr-darkblue-700;
 $headlogo-clr-red:                $site-clr-red;
 /* Components Variables Settings */
 
-/* Extend Class */
-
-/* Extend Class */
-
 .header{
   background-color: $headbgclr;
   padding: 10px 5px 9px;
   position: relative;
-  z-index: $zindex-modal-backdrop + 10;
+  z-index: $zindex-modal-backdrop + 1;
 
   &-left{
     @include flexbox-display-flex();

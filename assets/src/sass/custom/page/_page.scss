@@ -19,8 +19,9 @@
 @import "main_box_openorders_depositandwithdraw";
 @import "main_box_openorders_accountactivities";
 
-// Component
-@import "comp";
-@import "comp_sign";
-@import "comp_notifications";
-@import "comp_setalarm";
+// Modal Component
+@import "modal_comp";
+@import "modal_comp_sign";
+@import "modal_comp_newsandanalysis";
+@import "modal_comp_notifications";
+@import "modal_comp_setalarm";
