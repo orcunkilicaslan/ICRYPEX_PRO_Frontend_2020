@@ -1,0 +1,66 @@
+
+.modalcomp{
+
+  &-usermenu{
+    @include flexbox-display-flex();
+    @include flexbox-flex-flow(column);
+    height: 100%;
+
+    &-notif{
+      text-align: left;
+      padding-left: $btn-padding-x*2.2;
+      position: relative;
+
+      &::before{
+        content: "";
+        background-color: $site-clr-red;
+        width: 6px;
+        height: 6px;
+        position: absolute;
+        left: $btn-padding-x;
+        top: 50%;
+        @include translateY(-50%);
+        @include border-radius(50px);
+      }
+    }
+
+    &-area{
+      @include flexbox-flex(1);
+      padding: $modal-inner-padding * 1.5 0;
+    }
+
+    &-title{
+      color: $site-clr-white;
+      @include responsive-font-size($var-custom-font-size-base * 1.1);
+      font-weight: $var-custom-font-weight-normal;
+      padding-bottom: $modal-inner-padding / 2;
+      margin-bottom: $modal-inner-padding / 4;
+      border-bottom: 1px solid $site-brdr-dark;
+    }
+
+    &-list{
+      @include responsive-font-size($var-custom-font-size-base);
+
+      li{
+        padding: $modal-inner-padding/3 0;
+
+        a{
+          color: $site-clr-text-soft-sec;
+          @include transition-multiple(color 0.3s ease-in-out);
+
+          &:hover{
+            color: $site-clr-blue;
+          }
+        }
+      }
+
+      + h6{
+        margin-top: $modal-inner-padding * 1.5;
+      }
+    }
+
+    &-signout{}
+
+  }
+
+}
