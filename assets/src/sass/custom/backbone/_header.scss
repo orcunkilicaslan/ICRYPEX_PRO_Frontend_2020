@@ -166,6 +166,8 @@ $headlogo-clr-red:                $site-clr-red;
       &-btn{
         @extend %extheadertopbtns;
       }
+
+      + .header-right-signedin{padding-left: 15px;}
     }
 
     &-signedin{
