@@ -86,7 +86,17 @@
           .scrollbar-tbl-tb{height: 500px;}
           .symb[class*="tbl"]{width: 80px; text-align: left;}
           .amnt[class*="tbl"]{text-align: right;}
-          .adlt[class*="tbl"]{width: 80px; text-align: right;}
+          .adlt[class*="tbl"]{
+            width: 80px;
+            text-align: right;
+
+            > a, button{
+              background-color: transparent;
+              padding: 0;
+              //margin: 0 2px;
+              margin: 0;
+            }
+          }
 
           @extend %extcurrperupdownlineicon;
         }
