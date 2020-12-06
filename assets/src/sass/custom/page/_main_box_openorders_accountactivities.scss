@@ -94,7 +94,16 @@
             .bank[class*="tbl"]{width: 80px;}
             .amnt[class*="tbl"]{}
             .stts[class*="tbl"]{width: 80px;}
-            .bttn[class*="tbl"]{width: 22px;}
+            .bttn[class*="tbl"]{
+              width: 22px;
+              text-align: right;
+
+              > a, button{
+                background-color: transparent;
+                padding: 0;
+                margin: 0 2px;
+              }
+            }
           }
         }
 

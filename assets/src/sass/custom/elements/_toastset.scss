@@ -1,0 +1,16 @@
+.toast{
+
+  &-success{}
+
+  &-sideright{
+    position: absolute;
+    bottom: 0;
+    right: $grid-gutter-width * 2;
+
+
+    &:not(:last-child){
+      margin-bottom: $grid-gutter-width * 2;
+    }
+  }
+
+}
