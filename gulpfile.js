@@ -71,6 +71,7 @@ gulp.task('script-custom', () => {
         folder_src_main + 'script/custom/**/modal_notifications.js',
         folder_src_main + 'script/custom/**/modal_alarmset.js',
         folder_src_main + 'script/custom/**/modal_modals.js',
+        folder_src_main + 'script/custom/**/alert_toasts.js',
         folder_src_main + 'script/custom/**/app.js'
     ])
         .pipe(plumber())

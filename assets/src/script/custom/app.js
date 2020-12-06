@@ -72,3 +72,45 @@ document.querySelectorAll('[data-toggle="showhidepassword"]').forEach(function (
     });
 });
 /* Show/Hide Password */
+
+/*  Copy Text to Clipboard Start */
+import Toast from "bootstrap.native/dist/components/toast-native";
+
+var toastCopyToClip = new Toast('#toastCopyToClipboard');
+
+document.querySelectorAll('[data-toggle="copytoclipboard"]').forEach(function (el) {
+    el.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        var target = el.dataset.target;
+        var element = document.querySelector(target);
+        var text = element.innerHTML;
+
+        if (window.clipboardData && window.clipboardData.setData) {
+            return clipboardData.setData("Text", text);
+
+        } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+            var textarea = document.createElement("textarea");
+            textarea.textContent = text;
+            textarea.style.position = "fixed";
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            toastCopyToClip.show();
+
+            //console.log("Kopyalandı: " + text);
+            document.querySelector('[data-toggle="copytocliptoasttext"]').innerHTML = text;
+
+            try {
+                return document.execCommand("copy");
+            } catch (ex) {
+                console.warn("Panoya kopyalanamadı.", ex);
+                return false;
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
+
+    });
+});
+/*  Copy Text to Clipboard End */
