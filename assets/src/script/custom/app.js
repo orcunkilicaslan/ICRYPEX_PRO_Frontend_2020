@@ -98,7 +98,8 @@ document.querySelectorAll('[data-toggle="copytoclipboard"]').forEach(function (e
 
             toastCopyToClip.show();
 
-            console.log("Kopyalandı: " + text);
+            //console.log("Kopyalandı: " + text);
+            document.querySelector('[data-toggle="copytocliptoasttext"]').innerHTML = text;
 
             try {
                 return document.execCommand("copy");

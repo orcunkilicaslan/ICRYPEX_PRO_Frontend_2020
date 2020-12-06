@@ -609,19 +609,19 @@ $bootstrap-popover-arrow-outer-color:               fade-in($bootstrap-popover-b
 /* Bootstrap Popovers Settings */
 
 /* Bootstrap Toasts Settings */
-$bootstrap-toast-max-width:                         350px;
-$bootstrap-toast-padding-x:                         .75rem;
-$bootstrap-toast-padding-y:                         .25rem;
-$bootstrap-toast-font-size:                         .875rem;
-$bootstrap-toast-color:                             null;
-$bootstrap-toast-background-color:                  rgba($bootstrap-white, .85);
-$bootstrap-toast-border-width:                      1px;
-$bootstrap-toast-border-color:                      rgba(0, 0, 0, .1);
-$bootstrap-toast-border-radius:                     .25rem;
-$bootstrap-toast-box-shadow:                        0 .25rem .75rem rgba($bootstrap-black, .1);
-$bootstrap-toast-header-color:                      $bootstrap-gray-600;
-$bootstrap-toast-header-background-color:           rgba($bootstrap-white, .85);
-$bootstrap-toast-header-border-color:               rgba(0, 0, 0, .05);
+$bootstrap-toast-max-width:                         $var-custom-toast-max-width;
+$bootstrap-toast-padding-x:                         $var-custom-toast-padding-x;
+$bootstrap-toast-padding-y:                         $var-custom-toast-padding-y;
+$bootstrap-toast-font-size:                         $var-custom-toast-font-size;
+$bootstrap-toast-color:                             $var-custom-toast-color;
+$bootstrap-toast-background-color:                  $var-custom-toast-background-color;
+$bootstrap-toast-border-width:                      $var-custom-toast-border-width;
+$bootstrap-toast-border-color:                      $var-custom-toast-border-color;
+$bootstrap-toast-border-radius:                     $var-custom-toast-border-radius;
+$bootstrap-toast-box-shadow:                        $var-custom-toast-box-shadow;
+$bootstrap-toast-header-color:                      $var-custom-toast-header-color;
+$bootstrap-toast-header-background-color:           $var-custom-toast-header-background-color;
+$bootstrap-toast-header-border-color:               $var-custom-toast-header-border-color;
 /* Bootstrap Toasts Settings */
 
 /* Bootstrap Badges Settings */

@@ -111,7 +111,34 @@ $var-custom-popover-max-width:                    440px;
 $var-custom-popover-border-width:                 $var-custom-border-width;
 $var-custom-tooltip-max-width:                    300px;
 $var-custom-tooltip-color:                        $var-custom-clr-white;
+/* Site Custom Tooltip and Popover Settings */
+
+/* Site Custom Tooltip and Popover Settings */
+$var-custom-tooltip-popover-font-size:            $var-custom-font-size-sm;
+$var-custom-tooltip-popover-bg:                   $site-clr-darkblue-800;
+$var-custom-tooltip-popover-border-color:         $var-custom-border-color;
+$var-custom-tooltip-popover-border-radius:        $var-custom-border-radius-sm;
+$var-custom-popover-max-width:                    440px;
+$var-custom-popover-border-width:                 $var-custom-border-width;
+$var-custom-tooltip-max-width:                    300px;
+$var-custom-tooltip-color:                        $var-custom-clr-white;
 /*   Site Custom Tooltip and Popover Settings */
+
+/* Site Custom Toasts Settings */
+$var-custom-toast-max-width:                      400px;
+$var-custom-toast-padding-x:                      0.75rem;
+$var-custom-toast-padding-y:                      0.54rem;
+$var-custom-toast-font-size:                      $var-custom-font-size-base;
+$var-custom-toast-color:                          $site-clr-text-soft-pri;
+$var-custom-toast-background-color:               $site-clr-darkblue-400;
+$var-custom-toast-border-width:                   1px;
+$var-custom-toast-border-color:                   $var-custom-clr-blue;
+$var-custom-toast-border-radius:                  $var-custom-border-radius-sm;
+$var-custom-toast-box-shadow:                     none;
+$var-custom-toast-header-color:                   $var-custom-clr-white;
+$var-custom-toast-header-background-color:        $var-custom-clr-blue;
+$var-custom-toast-header-border-color:            rgba(0, 0, 0, .05);
+/* Site Custom Toasts Settings */
 
 /* Site Table Settings */
 $var-custom-table-border-color:                   $global-table-border-color;
