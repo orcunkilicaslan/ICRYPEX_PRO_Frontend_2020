@@ -1,10 +1,12 @@
 // Extend Class
 @import "extend";
 
+
 // Custom
 @import "custom";
 
-// Main
+
+// Main Box
 @import "main";
 @import "main_box";
 @import "main_box_marketdata";
@@ -18,6 +20,12 @@
 @import "main_box_openorders_assets";
 @import "main_box_openorders_depositandwithdraw";
 @import "main_box_openorders_accountactivities";
+
+
+// Main Cont
+@import "main_cont";
+@import "main_cont_easybuysell";
+
 
 // Modal Component
 @import "modal_comp";
