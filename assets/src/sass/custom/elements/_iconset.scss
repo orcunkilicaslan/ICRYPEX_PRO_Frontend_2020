@@ -62,6 +62,12 @@
 
       &.sm-support{background-position: calc(-20px*0) -30px;}
       &.sm-notif{background-position: calc(-20px*1) -30px;}
+      &.sm-pagefullscreen{
+        background-position: calc(-20px*2) -30px;
+
+        &.hide{background-position: calc(-20px*2) -30px;}
+        &.show{background-position: calc(-20px*3) -30px;}
+      }
     }
   }
 
