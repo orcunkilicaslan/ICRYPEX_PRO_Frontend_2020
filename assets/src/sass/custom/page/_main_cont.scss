@@ -1,0 +1,36 @@
+
+.maincont{
+  background-color: $site-clr-darkblue-700;
+  @include border-radius($var-custom-border-radius);
+
+  .modal{
+    z-index: $zindex-modal + 10;
+  }
+
+  &-box{
+    @include flexbox-display-flex();
+    @include flexbox-flex-flow(column);
+    height: 100%;
+
+    &-title{
+      background-color: $site-clr-darkblue-500;
+      border-bottom: 1px solid $site-brdr-dark;
+      text-align: center;
+      padding: 10px 15px;
+      @include border-radii($var-custom-border-radius-sm,$var-custom-border-radius-sm,0,0);
+
+      h1,h2,h3,h4,h5,h6{
+        color: $site-clr-white;
+        @include responsive-font-size($var-custom-font-size-base);
+        font-weight: $var-custom-font-weight-normal;
+        margin: 0;
+      }
+    }
+
+    &-cont{
+      @include flexbox-flex(1);
+    }
+  }
+
+}
+
