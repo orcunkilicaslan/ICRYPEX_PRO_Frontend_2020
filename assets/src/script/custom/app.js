@@ -54,7 +54,7 @@ function setBubble(range, bubble, circle, progress) {
 
 /* Input Spinner End */
 
-/* Show/Hide Password */
+/* Show/Hide Password Start */
 document.querySelectorAll('[data-toggle="showhidepassword"]').forEach(function (el) {
     el.addEventListener("click", function (e) {
         e.preventDefault();
@@ -71,9 +71,9 @@ document.querySelectorAll('[data-toggle="showhidepassword"]').forEach(function (
         if (el.dataset.classActive) el.classList.toggle(el.dataset.classActive);
     });
 });
-/* Show/Hide Password */
+/* Show/Hide Password End */
 
-/*  Copy Text to Clipboard Start */
+/* Copy Text to Clipboard Start */
 import Toast from "bootstrap.native/dist/components/toast-native";
 
 var toastCopyToClip = new Toast('#toastCopyToClipboard');
@@ -113,4 +113,72 @@ document.querySelectorAll('[data-toggle="copytoclipboard"]').forEach(function (e
 
     });
 });
-/*  Copy Text to Clipboard End */
+/* Copy Text to Clipboard End */
+
+/* Window Full Screen Show */
+document.querySelector('[data-toggle="fullscreenbtn"]').addEventListener("click", function (e) {
+    e.preventDefault();
+
+    var target = e.target;
+
+    if(IsFullScreenCurrently()) {
+        GoOutFullscreen();
+        target.classList.replace("show", "hide");
+    }
+    else {
+        GoInFullscreen(document.querySelector("body"));
+        target.classList.replace("hide", "show");
+    }
+
+});
+
+document.addEventListener('fullscreenchange', function() {
+
+    var iconShowHideIcon = document.querySelector(".header .sm-pagefullscreen");
+
+    if(IsFullScreenCurrently()) {
+        iconShowHideIcon.classList.replace("hide", "show");
+        //console.log('Full Screen Mode Enabled');
+    }
+    else {
+        iconShowHideIcon.classList.replace("show", "hide");
+        //console.log('Full Screen Mode Disabled');
+    }
+});
+
+function GoInFullscreen(element) {
+
+    if(element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if(element.mozRequestFullScreen){
+        element.mozRequestFullScreen();
+    } else if(element.webkitRequestFullscreen){
+        element.webkitRequestFullscreen();
+    } else if(element.msRequestFullscreen){
+        element.msRequestFullscreen();
+    }
+}
+
+function GoOutFullscreen() {
+
+    if(document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if(document.mozCancelFullScreen){
+        document.mozCancelFullScreen();
+    } else if(document.webkitExitFullscreen){
+        document.webkitExitFullscreen();
+    } else if(document.msExitFullscreen){
+        document.msExitFullscreen();
+    }
+}
+
+function IsFullScreenCurrently() {
+    var full_screen_element = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement || null;
+
+    if(full_screen_element === null) {
+        return false;
+    } else {
+        return true;
+    }
+}
+/* Window Full Screen End */

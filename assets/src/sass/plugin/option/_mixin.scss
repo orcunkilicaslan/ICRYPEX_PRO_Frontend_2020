@@ -582,3 +582,14 @@
   }
 }
 /* Animation and Keyframes End */
+
+/* Window Full Screen Start */
+@mixin windowfsfullscreen {
+  &:fullscreen             {@content}
+  &:-webkit-full-screen    {@content}
+}
+
+@mixin windowfsbackdrop {
+  &::backdrop              {@content}
+}
+/* Window Full Screen End */

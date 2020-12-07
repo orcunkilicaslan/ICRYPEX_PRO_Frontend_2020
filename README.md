@@ -2,6 +2,7 @@
 
 #### Web Public Area Frontend List
  - [Home_Page](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Home_Page.html)
+ - [Kolay_Al_Step_01](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Al_Step_01.html)
    
 
 # NodeJS Kurulumu

@@ -5,6 +5,7 @@
   height: 100%;
 
   &-h100{
+
     > .container-fluid{
       height: 100%;
 
@@ -12,8 +13,12 @@
     }
   }
 
+  &-cryptocoinbar{
+    padding: $grid-gutter-width $grid-gutter-width/2 0;
+  }
+
   &-body{
-    padding: 5px 2.5px;
+    padding: $grid-gutter-width $grid-gutter-width/2;
     height: 100%;
 
     &-leftside{
@@ -27,7 +32,7 @@
       @include flexbox-flex-flow(column);
       height: 100%;
 
-      .mainbox-cryptocoinbar{margin-bottom: 5px;}
+      .mainbox-cryptocoinbar{margin-bottom: $grid-gutter-width;}
       .mainbox-tradingviewbig{@include flexbox-flex(1);}
 
     }
@@ -37,7 +42,7 @@
     @include flexbox-display-flex();
     @include flexbox-flex-flow(column);
     //height: 100%;
-    padding: 0 2.5px 5px;
+    padding: 0 $grid-gutter-width/2 $grid-gutter-width;
 
     .mainbox{
       //height: 100%;

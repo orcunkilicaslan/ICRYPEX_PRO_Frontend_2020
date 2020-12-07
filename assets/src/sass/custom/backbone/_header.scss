@@ -120,44 +120,69 @@ $headlogo-clr-red:                $site-clr-red;
     @include flexbox-display-flex();
     @include flexbox-align-items(center);
 
-    &-theme{
-      padding: 0 10px;
-      position: relative;
+    &-sett{
+      @include flexbox-display-flex();
+      @include flexbox-align-items(center);
 
-      .custom-switch .custom-control-label::after{
-        background-color: $site-clr-green;
+      &-theme{
+        padding: 0 10px;
+        position: relative;
+
+        .custom-switch .custom-control-label::after{
+          background-color: $site-clr-green;
+        }
+
+        .custom-switch .custom-control-input:checked ~ .custom-control-label::before{
+          background-color: transparent;
+        }
+
+        .switchthemebg{
+          @include flexbox-display-flex();
+          @include flexbox-align-items(center);
+          @include flexbox-justify-content(space-between);
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: 0;
+
+          svg{
+            width: 15px;
+            height: 28px;
+            position: relative;
+          }
+
+          .lightsidesvg{
+            left: -7px;
+          }
+
+          .darksidesvg{
+            right: 0;
+          }
+        }
       }
 
-      .custom-switch .custom-control-input:checked ~ .custom-control-label::before{
-        background-color: transparent;
-      }
-
-      .switchthemebg{
+      &-icns{
         @include flexbox-display-flex();
         @include flexbox-align-items(center);
-        @include flexbox-justify-content(space-between);
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 0;
+        padding: 0 10px 0 0;
 
-        svg{
-          width: 15px;
-          height: 28px;
+        > *{
+          margin-right: 10px;
+
+          &:last-child{margin-right: 0;}
+        }
+
+        .headsetticon{
+          @include flexbox-display-flex();
+          @include flexbox-align-items(center);
           position: relative;
-        }
-
-        .lightsidesvg{
-          left: -7px;
-        }
-
-        .darksidesvg{
-          right: 0;
         }
       }
     }
+
+
 
     &-notsignedin{
       @include flexbox-display-flex();
@@ -168,6 +193,8 @@ $headlogo-clr-red:                $site-clr-red;
       }
 
       + .header-right-signedin{padding-left: 12px;}
+
+      &.d-none + .header-right-signedin{padding-left: 0;}
     }
 
     &-signedin{
@@ -267,15 +294,17 @@ body#{$themedarkclassname}{
 
   .header{
     &-right{
-      &-theme{
+      &-sett{
+        &-theme{
 
-        .switchthemebg{
-          .lightsidesvg path{
-            fill: $site-brdr-dark-opacity;
-          }
+          .switchthemebg{
+            .lightsidesvg path{
+              fill: $site-brdr-dark-opacity;
+            }
 
-          .darksidesvg path{
-            fill: $site-clr-green;
+            .darksidesvg path{
+              fill: $site-clr-green;
+            }
           }
         }
       }

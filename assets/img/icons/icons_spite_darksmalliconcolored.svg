@@ -1,7 +1,33 @@
 <svg id="icons_spite_darksmalliconcolored" xmlns="http://www.w3.org/2000/svg" width="80" height="50" viewBox="0 0 80 50">
   <g id="_20" data-name="20" transform="translate(0 29)">
-    <g id="Notification" transform="translate(20)">
+    <g id="NotFullScreen" transform="translate(60)">
       <rect id="icon_bg" width="20" height="20" transform="translate(0 1)" fill="#fff" opacity="0"/>
+      <g id="Full_screen_icon" transform="translate(-0.375 0.375)">
+        <g id="Ellipse_1" data-name="Ellipse 1" transform="translate(6.375 6.625)" fill="none" stroke="#d6596d" stroke-width="1.5">
+          <circle cx="4.07" cy="4.07" r="4.07" stroke="none"/>
+          <circle cx="4.07" cy="4.07" r="3.32" fill="none"/>
+        </g>
+        <path id="Path_9500" data-name="Path 9500" d="M7.209,6.365l-2.8-2.8H6.791a.6.6,0,0,0,0-1.193H2.972a.6.6,0,0,0-.6.6V6.791a.6.6,0,0,0,1.193,0V4.413l2.8,2.8a.6.6,0,0,0,.84-.848Z" transform="translate(9.438 9.438) rotate(180)" fill="#92a4c5"/>
+        <path id="Path_9501" data-name="Path 9501" d="M6.791,20.194H4.413l2.8-2.8a.583.583,0,0,0,.163-.42.6.6,0,0,0-1.012-.418l-2.8,2.8V16.972a.6.6,0,0,0-1.193,0v3.819a.6.6,0,0,0,.37.551.607.607,0,0,0,.227.046H6.791a.6.6,0,1,0,0-1.193Z" transform="translate(9.438 35.655) rotate(180)" fill="#92a4c5"/>
+        <path id="Path_9502" data-name="Path 9502" d="M21.388,16.972a.6.6,0,0,0-1.194,0V19.35l-2.8-2.8a.6.6,0,0,0-.838.847l2.8,2.8H16.972a.6.6,0,1,0,0,1.193h3.819a.6.6,0,0,0,.6-.6Z" transform="translate(35.655 35.655) rotate(180)" fill="#92a4c5"/>
+        <path id="Path_9503" data-name="Path 9503" d="M21.388,2.972a.6.6,0,0,0-.6-.6H16.972a.6.6,0,1,0,0,1.193H19.35l-2.8,2.8a.6.6,0,0,0-.015.83l.015.014a.608.608,0,0,0,.841,0l2.8-2.8V6.791a.6.6,0,0,0,1.193,0Z" transform="translate(35.655 9.438) rotate(180)" fill="#92a4c5"/>
+      </g>
+    </g>
+    <g id="ShowFullScreen" transform="translate(40)">
+      <rect id="icon_bg-2" data-name="icon_bg" width="20" height="20" transform="translate(0 1)" fill="#fff" opacity="0"/>
+      <g id="Full_screen_icon-2" data-name="Full_screen_icon" transform="translate(-0.375 0.375)">
+        <g id="Ellipse_1-2" data-name="Ellipse 1" transform="translate(6.375 6.625)" fill="none" stroke="#d6596d" stroke-width="1.5">
+          <circle cx="4.07" cy="4.07" r="4.07" stroke="none"/>
+          <circle cx="4.07" cy="4.07" r="3.32" fill="none"/>
+        </g>
+        <path id="Path_9500-2" data-name="Path 9500" d="M7.209,6.365l-2.8-2.8H6.791a.6.6,0,0,0,0-1.193H2.972a.6.6,0,0,0-.6.6V6.791a.6.6,0,0,0,1.193,0V4.413l2.8,2.8a.6.6,0,0,0,.84-.848Z" transform="translate(-0.325 -0.325)" fill="#92a4c5"/>
+        <path id="Path_9501-2" data-name="Path 9501" d="M6.791,20.194H4.413l2.8-2.8a.583.583,0,0,0,.163-.42.6.6,0,0,0-1.012-.418l-2.8,2.8V16.972a.6.6,0,0,0-1.193,0v3.819a.6.6,0,0,0,.37.551.607.607,0,0,0,.227.046H6.791a.6.6,0,1,0,0-1.193Z" transform="translate(-0.325 -2.108)" fill="#92a4c5"/>
+        <path id="Path_9502-2" data-name="Path 9502" d="M21.388,16.972a.6.6,0,0,0-1.194,0V19.35l-2.8-2.8a.6.6,0,0,0-.838.847l2.8,2.8H16.972a.6.6,0,1,0,0,1.193h3.819a.6.6,0,0,0,.6-.6Z" transform="translate(-2.108 -2.108)" fill="#92a4c5"/>
+        <path id="Path_9503-2" data-name="Path 9503" d="M21.388,2.972a.6.6,0,0,0-.6-.6H16.972a.6.6,0,1,0,0,1.193H19.35l-2.8,2.8a.6.6,0,0,0-.015.83l.015.014a.608.608,0,0,0,.841,0l2.8-2.8V6.791a.6.6,0,0,0,1.193,0Z" transform="translate(-2.108 -0.325)" fill="#92a4c5"/>
+      </g>
+    </g>
+    <g id="Notification" transform="translate(20)">
+      <rect id="icon_bg-3" data-name="icon_bg" width="20" height="20" transform="translate(0 1)" fill="#fff" opacity="0"/>
       <g id="Notification-2" data-name="Notification" transform="translate(-0.175 3.305)">
         <path id="Path_9493" data-name="Path 9493" d="M15.667,8.033v6.228a1.406,1.406,0,0,1-1.406,1.406H2.073A1.406,1.406,0,0,1,.667,14.261h0V2.073A1.406,1.406,0,0,1,2.073.667h5.9" transform="translate(2.008 0.028)" fill="none" stroke="#92a4c5" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.2"/>
         <line id="Line_43" data-name="Line 43" x2="8.391" transform="translate(5.993 12.195)" fill="none" stroke="#92a4c5" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.2"/>
@@ -11,7 +37,7 @@
       </g>
     </g>
     <g id="Support">
-      <rect id="icon_bg-2" data-name="icon_bg" width="20" height="20" transform="translate(0 1)" fill="#fff" opacity="0"/>
+      <rect id="icon_bg-4" data-name="icon_bg" width="20" height="20" transform="translate(0 1)" fill="#fff" opacity="0"/>
       <g id="Support-2" data-name="Support" transform="translate(-31.67 -3.184)">
         <g id="Pink">
           <path id="Path_9570" data-name="Path 9570" d="M45.092,10.236l1.808,2.3.708-.574,2.5-2.544L48.035,7.558Z" transform="translate(-1.537 -0.301)" fill="#eb4252"/>
@@ -35,44 +61,44 @@
   </g>
   <g id="_16" data-name="16" transform="translate(0 14)">
     <g id="Add" transform="translate(64)">
-      <rect id="icon_bg-3" data-name="icon_bg" width="16" height="16" fill="#fff" opacity="0"/>
+      <rect id="icon_bg-5" data-name="icon_bg" width="16" height="16" fill="#fff" opacity="0"/>
       <path id="Add-2" data-name="Add" d="M-128.866-58.519A7,7,0,0,1-135.5-65.48l0-.02a7.008,7.008,0,0,1,7-7l.02,0a7,7,0,0,1,6.961,6.633c.007.122.019.242.019.365s-.012.27-.02.4a7,7,0,0,1-6.575,6.575c-.134.008-.268.02-.4.02S-128.743-58.512-128.866-58.519Zm-5.69-6.981a6.063,6.063,0,0,0,6.055,6.056,6.063,6.063,0,0,0,6.056-6.056,6.063,6.063,0,0,0-6.056-6.055A6.062,6.062,0,0,0-134.556-65.5Zm5.584,3.653v-3.181h-3.181a.472.472,0,0,1-.472-.472.472.472,0,0,1,.472-.472h3.181v-3.181a.472.472,0,0,1,.472-.472.472.472,0,0,1,.472.472v3.181h3.181a.472.472,0,0,1,.472.472.472.472,0,0,1-.472.472h-3.181v3.181a.472.472,0,0,1-.472.472A.472.472,0,0,1-128.972-61.847Z" transform="translate(136.5 73.5)" fill="#92a4c5" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
     </g>
     <g id="Transfer" transform="translate(48)">
-      <rect id="icon_bg-4" data-name="icon_bg" width="16" height="16" fill="#fff" opacity="0"/>
+      <rect id="icon_bg-6" data-name="icon_bg" width="16" height="16" fill="#fff" opacity="0"/>
       <path id="Transfer-2" data-name="Transfer" d="M-182.6-72a.466.466,0,0,1-.466-.467V-73.4a.466.466,0,0,1,.466-.466.467.467,0,0,1,.467.466v.467h7.466V-79.74l-2.526-2.526h-4.94v1.4a.468.468,0,0,1-.467.467.467.467,0,0,1-.466-.467v-1.867a.466.466,0,0,1,.466-.466h5.6a.47.47,0,0,1,.33.136l2.8,2.8a.472.472,0,0,1,.136.33v7.466A.467.467,0,0,1-174.2-72Zm1.149-2.363-2.413-2.413a.467.467,0,0,1,0-.66l2.414-2.415a.471.471,0,0,1,.33-.136.468.468,0,0,1,.329.136.467.467,0,0,1,0,.66l-1.6,1.6h3.935a.466.466,0,0,1,.466.467.466.466,0,0,1-.466.466h-3.968l1.632,1.633a.467.467,0,0,1,0,.66.465.465,0,0,1-.33.136A.465.465,0,0,1-181.451-74.363Zm9.584-.9v-7H-174.2a.467.467,0,0,1-.466-.467v-2.335h-4.2a.466.466,0,0,1-.466-.466.467.467,0,0,1,.466-.467h4.666a.471.471,0,0,1,.331.137l2.8,2.8a.47.47,0,0,1,.136.33v7.466a.466.466,0,0,1-.466.467A.467.467,0,0,1-171.867-75.267Zm-1.867-7.931h1.209l-1.209-1.209Z" transform="translate(185.4 87)" fill="#92a4c5" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
     </g>
     <g id="Copy" transform="translate(32)">
-      <rect id="icon_bg-5" data-name="icon_bg" width="16" height="16" fill="#fff" opacity="0"/>
+      <rect id="icon_bg-7" data-name="icon_bg" width="16" height="16" fill="#fff" opacity="0"/>
       <path id="Copy-2" data-name="Copy" d="M-135.1-58.5a.467.467,0,0,1-.467-.467V-59.9a.467.467,0,0,1,.467-.466.466.466,0,0,1,.466.466v.467h7.467V-66.24l-2.527-2.526h-4.94v1.4a.467.467,0,0,1-.466.467.468.468,0,0,1-.467-.467v-1.867a.467.467,0,0,1,.467-.466h5.6a.47.47,0,0,1,.33.136l2.8,2.8a.469.469,0,0,1,.137.33v7.466a.467.467,0,0,1-.467.467Zm1.4-2.363a.466.466,0,0,1,0-.66l1.6-1.6h-3.935a.468.468,0,0,1-.467-.467.468.468,0,0,1,.467-.467h3.968l-1.632-1.632a.466.466,0,0,1,0-.66.466.466,0,0,1,.66,0l2.412,2.412a.466.466,0,0,1,0,.66l-2.413,2.415a.469.469,0,0,1-.33.137A.466.466,0,0,1-133.7-60.863Zm9.331-.9v-7H-126.7a.467.467,0,0,1-.466-.467v-2.336h-4.2a.466.466,0,0,1-.466-.466.467.467,0,0,1,.466-.467h4.666a.467.467,0,0,1,.33.137l2.8,2.8a.467.467,0,0,1,.137.33v7.466a.467.467,0,0,1-.467.467A.466.466,0,0,1-124.367-61.767Zm-1.867-7.931h1.209l-1.209-1.209Z" transform="translate(137.9 73.5)" fill="#92a4c5" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
     </g>
     <g id="QR" transform="translate(16)">
-      <rect id="icon_bg-6" data-name="icon_bg" width="16" height="16" fill="#fff" opacity="0"/>
+      <rect id="icon_bg-8" data-name="icon_bg" width="16" height="16" fill="#fff" opacity="0"/>
       <path id="Qr-2" d="M29.732,29V27.731H31V29Zm-2.549,0V27.731h1.268V29Zm-2.525,0V22.657h1.2V23.9h1.27V22.655H28.46v1.269h1.271V22.655H31v3.8H29.782V25.19H28.514v1.267H27.193V25.188H25.924V29ZM17,29V22.657h6.343V29Zm1.267-1.281h3.806V23.926H18.267Zm.647-.636v-2.51h2.51v2.51Zm5.744-5.742V15H31v6.343Zm1.267-1.269h3.807v-3.8H25.925ZM17,21.341V15h6.343v6.343Zm1.267-1.269h3.806v-3.8H18.267Zm8.305-.649V16.915h2.51v2.508Zm-7.658,0V16.915h2.51v2.508Z" transform="translate(-16 -14)" fill="#92a4c5"/>
     </g>
     <g id="Wallet">
-      <rect id="icon_bg-7" data-name="icon_bg" width="16" height="16" fill="#fff" opacity="0"/>
+      <rect id="icon_bg-9" data-name="icon_bg" width="16" height="16" fill="#fff" opacity="0"/>
       <path id="Wallet-2" data-name="Wallet" d="M-134.723-60h-.006A1.276,1.276,0,0,1-136-61.286v-9.435a1.3,1.3,0,0,1,.374-.907,1.285,1.285,0,0,1,.9-.374h10.273a1.285,1.285,0,0,1,.9.374,1.267,1.267,0,0,1,.373.894v.2a1.3,1.3,0,0,1,.794.37,1.279,1.279,0,0,1,.371.908v1.392a.564.564,0,0,1,.388.567l0,4.022a.573.573,0,0,1-.4.57s0,.008,0,.012v1.4a1.3,1.3,0,0,1-.374.907,1.265,1.265,0,0,1-.9.375Zm-.418-11.133a.6.6,0,0,0-.173.42v9.437a.59.59,0,0,0,.589.59h11.433a.589.589,0,0,0,.418-.175.6.6,0,0,0,.174-.418v-1.4h-3.766A1.968,1.968,0,0,1-128.2-64.06a3.355,3.355,0,0,1,.01-2.471,1.944,1.944,0,0,1,1.69-1.347l3.8,0v-1.375a.592.592,0,0,0-.174-.42.582.582,0,0,0-.417-.173h-10.966a.346.346,0,0,1-.328-.327.346.346,0,0,1,.328-.364h10.388v-.191a.558.558,0,0,0-.172-.407.584.584,0,0,0-.418-.173h-10.269A.585.585,0,0,0-135.14-71.137Zm7.657,4.854a2.665,2.665,0,0,0-.009,1.975,1.226,1.226,0,0,0,1.061.876l4.06,0,0-3.7h-4.09A1.207,1.207,0,0,0-127.483-66.283Zm1.1,1a.936.936,0,0,1,.936-.936.936.936,0,0,1,.936.935h0a.936.936,0,0,1-.936.936A.936.936,0,0,1-126.387-65.283Zm.616,0a.32.32,0,0,0,.32.32h.01a.316.316,0,0,0,.311-.32.32.32,0,0,0-.32-.319A.32.32,0,0,0-125.771-65.284Z" transform="translate(136.997 74.003)" fill="#92a4c5" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
     </g>
   </g>
   <g id="_14" data-name="14">
     <g id="ShowHide" transform="translate(42)">
-      <rect id="icon_bg-8" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
+      <rect id="icon_bg-10" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
       <g id="eye_hidden" transform="translate(-267 -7)">
         <path id="Path" d="M28.964,12.46A2.544,2.544,0,1,0,31.508,15,2.544,2.544,0,0,0,28.964,12.46Z" transform="translate(245.24 -0.769)" fill="none" stroke="#92a4c5" stroke-miterlimit="10" stroke-width="1" fill-rule="evenodd"/>
         <path id="Path-2" data-name="Path" d="M6.744.5A6.652,6.652,0,0,0,.54,4.734a6.663,6.663,0,0,0,12.41,0A6.648,6.648,0,0,0,6.744.5Z" transform="translate(267.46 9.5)" fill="none" stroke="#92a4c5" stroke-miterlimit="10" stroke-width="1" fill-rule="evenodd"/>
       </g>
     </g>
     <g id="Detail" transform="translate(28)">
-      <rect id="icon_bg-9" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
+      <rect id="icon_bg-11" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
       <path id="Detail-2" data-name="Detail" d="M-126.315-60.739l-1.489-1.493a2.527,2.527,0,0,1-1.287.363A2.686,2.686,0,0,1-131.72-64.6a2.686,2.686,0,0,1,2.629-2.733,2.686,2.686,0,0,1,2.63,2.733,2.782,2.782,0,0,1-.6,1.723l1.417,1.422a.515.515,0,0,1,.012.707.473.473,0,0,1-.346.151A.474.474,0,0,1-126.315-60.739Zm-4.443-3.863a1.7,1.7,0,0,0,1.668,1.734,1.609,1.609,0,0,0,.994-.35v0l.006,0a1.749,1.749,0,0,0,.667-1.379,1.7,1.7,0,0,0-1.669-1.733A1.7,1.7,0,0,0-130.759-64.6Zm-5.26,3.674a.491.491,0,0,1-.481-.5V-71a.49.49,0,0,1,.481-.5h9.21a.49.49,0,0,1,.481.5v3.191a.49.49,0,0,1-.481.5.49.49,0,0,1-.481-.5V-70.5h-8.248v8.573h3.815a.491.491,0,0,1,.481.5.491.491,0,0,1-.481.5Zm1.843-1.912a.491.491,0,0,1-.481-.5.491.491,0,0,1,.481-.5h1.228a.49.49,0,0,1,.48.5.49.49,0,0,1-.48.5Zm0-1.917a.491.491,0,0,1-.481-.5.491.491,0,0,1,.481-.5h1.228a.49.49,0,0,1,.48.5.49.49,0,0,1-.48.5Zm0-1.915a.491.491,0,0,1-.481-.5.491.491,0,0,1,.481-.5h1.842a.491.491,0,0,1,.48.5.491.491,0,0,1-.48.5Zm0-1.915a.49.49,0,0,1-.481-.5.491.491,0,0,1,.481-.5h5.525a.491.491,0,0,1,.481.5.49.49,0,0,1-.481.5Z" transform="translate(138.5 73.9)" fill="#92a4c5" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
     </g>
     <g id="Delete" transform="translate(14)">
-      <rect id="icon_bg-10" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
+      <rect id="icon_bg-12" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
       <path id="Delete-2" data-name="Delete" d="M1.977,12a.522.522,0,0,1-.5-.538V2.489H.5A.521.521,0,0,1,0,1.952a.522.522,0,0,1,.5-.538H3.887V.538A.522.522,0,0,1,4.391,0H7.61a.522.522,0,0,1,.5.538v.876H11.5a.522.522,0,0,1,.5.538.521.521,0,0,1-.5.537h-.972v8.973a.521.521,0,0,1-.5.538Zm.5-1.075H9.517V2.489H2.481ZM4.9,1.414h2.21V1.076H4.9ZM7.54,8.831l-1.53-1.5-1.53,1.5a.549.549,0,1,1-.769-.785L5.225,6.565,3.71,5.081a.55.55,0,0,1,.77-.787l1.531,1.5,1.53-1.5a.551.551,0,0,1,.77.787L6.8,6.563,8.311,8.046a.55.55,0,1,1-.77.785Z" transform="translate(1 1)" fill="#e84a55" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
     </g>
     <g id="Edit">
-      <rect id="icon_bg-11" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
+      <rect id="icon_bg-13" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
       <path id="Edit-2" data-name="Edit" d="M.5,12a.5.5,0,0,1-.5-.492V1.991A.5.5,0,0,1,.5,1.5H5.786a.492.492,0,1,1,0,.983H1.006v8.535H9.733V7.158a.5.5,0,0,1,1.005,0v4.351a.5.5,0,0,1-.5.492ZM2.149,9.6V7.327L9.52.215a.636.636,0,0,1,.953,0L11.78,1.521a.641.641,0,0,1,.008.959L4.385,9.6Zm1-1.852V8.6h.832L8.9,3.87l-.85-.848ZM8.771,2.327l.851.85L10.844,2l-.851-.851Z" transform="translate(1 1)" fill="#388cff" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
     </g>
   </g>
