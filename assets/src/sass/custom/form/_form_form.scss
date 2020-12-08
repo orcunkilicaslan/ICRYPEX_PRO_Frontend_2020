@@ -37,6 +37,27 @@
     &[rows]{min-height: 100px;}
   }
 
+  .formflexlabel{
+    @include flexbox-display-flex();
+    @include flexbox-flex-wrap(wrap);
+    @include flexbox-align-items(center);
+    @include flexbox-justify-content(space-between);
+    margin-bottom: $label-margin-bottom;
+
+    label{margin-bottom: 0;}
+
+    > *{
+      @include flexbox-display-flex();
+      @include flexbox-flex-wrap(wrap);
+      //@include flexbox-align-items(center);
+      @include flexbox-justify-content(space-between);
+      @include flexbox-flex(0 0 auto);
+      width: auto;
+      max-width: 100%;
+    }
+  }
+
+  /*
   select.form-control:not(.custom-select){
     height: 40px;
     padding-left: 0.5rem;
@@ -52,6 +73,7 @@
     padding-left: 0.75rem;
     padding-right: 0.75rem;
   }
+  */
 
   .custom{
 

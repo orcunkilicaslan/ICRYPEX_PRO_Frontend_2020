@@ -148,7 +148,7 @@ body#{$themedarkclassname}{
       }
 
       .nav-link{
-        color: $site-clr-text-soft-sec;
+        color: $site-clr-text-soft-pri;
         background-color: $site-clr-darkblue-800;
         border-color: $site-clr-darkblue-900;
 
@@ -165,7 +165,7 @@ body#{$themedarkclassname}{
       .nav-item{
 
         .nav-link{
-          color: $site-clr-text-soft-sec;
+          color: $site-clr-text-soft-pri;
         }
 
       }
@@ -214,7 +214,7 @@ body#{$themedarkclassname}{
 
 
       .nav-link{
-        color: $site-clr-text-soft-sec;
+        color: $site-clr-text-soft-pri;
         border: 1px solid $site-clr-darkblue-400;
 
         &.active{
