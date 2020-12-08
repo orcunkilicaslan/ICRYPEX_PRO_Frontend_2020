@@ -38,6 +38,11 @@
 
       &-inputs{
 
+        .form-group.col-auto{
+          @include flexbox-display-flex();
+          @include flexbox-align-items(flex-end);
+        }
+
         .formflexlabel{
           margin-bottom: $form-group-margin-bottom*0.75;
 
@@ -55,6 +60,17 @@
 
               path{fill: $site-clr-text-soft-sec;}
             }
+          }
+        }
+
+        .inputchangeicon{
+          background-color: $site-clr-darkblue-400;
+          padding: 6px;
+          margin: 4px 6px;
+          @include border-radius(50%);
+
+          > i[class*="change"]{
+            display: block;
           }
         }
       }
