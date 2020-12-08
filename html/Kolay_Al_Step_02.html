@@ -1205,7 +1205,7 @@
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="col-auto">
-                                                            <select class="custom-select">
+                                                            <select class="custom-select" disabled>
                                                                 <option value="TRY" selected="">TRY</option>
                                                                 <option value="USD">USD</option>
                                                             </select>
@@ -1214,7 +1214,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Miktar</span>
                                                             </div>
-                                                            <input type="text" class="form-control" value="9,950,000.00" />
+                                                            <input type="text" class="form-control" value="9,950,000.00" readonly />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1232,7 +1232,7 @@
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="col-auto">
-                                                            <select class="custom-select">
+                                                            <select class="custom-select" disabled>
                                                                 <option value="BTC" selected="">BTC</option>
                                                                 <option value="ETH">ETH</option>
                                                             </select>
@@ -1241,17 +1241,51 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Miktar</span>
                                                             </div>
-                                                            <input type="text" class="form-control" value="12000.00" />
+                                                            <input type="text" class="form-control" value="12000.00" readonly />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="easybuysell-form-btns">
-                                                <button class="btn btn-success w-50 d-none" type="button">BTC AL</button>
-                                                <a class="btn btn-success w-50" href="Kolay_Al_Step_02.html">BTC AL</a>
+                                                <button class="btn btn-success w-50" type="button" disabled>BTC AL</button>
                                             </div>
                                         </form>
                                         <!-- Form -->
+                                        <!-- Transaction Confirmation -->
+                                        <div class="easybuysell-confirm">
+                                            <div class="easybuysell-confirm-title">
+                                                <h4>İŞLEM ONAYI</h4>
+                                            </div>
+                                            <div class="easybuysell-confirm-table">
+                                                <div class="sitetablediv">
+                                                    <div class="tbl-thead">
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-th aut type">İşlem Tipi</div>
+                                                            <div class="tbl-th aut symb">Çift</div>
+                                                            <div class="tbl-th fxd amtc">Miktar <span>TRY</span></div>
+                                                            <div class="tbl-th fxd amts">Miktar <span>BTC</span></div>
+                                                            <div class="tbl-th aut comm">Komisyon</div>
+                                                            <div class="tbl-th fxd totl">Toplam Tutar</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tbl-tbody tbl-striped">
+                                                        <div class="tbl-tr">
+                                                            <div class="tbl-td aut type">Stop Limit - <span class="sitecolorgreen">Alış</span></div>
+                                                            <div class="tbl-td aut symb">BTC/TRY</div>
+                                                            <div class="tbl-td fxd amtc">999,999.99 TRY</div>
+                                                            <div class="tbl-td fxd amts">1.48000000 BTC</div>
+                                                            <div class="tbl-td aut comm">999.99 TRY</div>
+                                                            <div class="tbl-td fxd totl">449.887546 TRY</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="easybuysell-confirm-btns">
+                                                <button class="btn btn-secondary active" type="button">İPTAL ET</button>
+                                                <a class="btn btn-success" href="Kolay_Al_Step_03.html">İŞLEMİ ONAYLA</a>
+                                            </div>
+                                        </div>
+                                        <!-- Transaction Confirmation -->
                                     </div>
                                 </div>
                             </div>

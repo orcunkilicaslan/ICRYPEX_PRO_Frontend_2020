@@ -17,6 +17,15 @@
       border-color: $site-brdr-dark;
     }
   }
+
+  &.disabled,
+  &:disabled,
+  &[disabled]{
+    color: $site-clr-text-soft-pri;
+    background-color: $site-brdr-dark;
+    border-color: $site-brdr-dark;
+    opacity: 1;
+  }
 }
 
 .show{

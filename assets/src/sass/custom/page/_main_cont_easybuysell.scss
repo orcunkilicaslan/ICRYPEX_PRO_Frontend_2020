@@ -6,7 +6,7 @@
   .easybuysell{
 
     &-tabs{
-      margin-bottom: $form-group-margin-bottom*1.5;
+      margin-bottom: $grid-gutter-width*4;
 
       .nav{
 
@@ -38,39 +38,55 @@
 
       &-inputs{
 
-        .form-group.col-auto{
-          @include flexbox-display-flex();
-          @include flexbox-align-items(flex-end);
-        }
+        .form-group{
 
-        .formflexlabel{
-          margin-bottom: $form-group-margin-bottom*0.75;
+          .formflexlabel{
+            margin-bottom: $form-group-margin-bottom*0.75;
 
-          label{
-            color: $site-clr-white;
-          }
+            label{
+              color: $site-clr-white;
+            }
 
-          .labelassets{}
+            .labelassets{}
 
-          .labelprice{
+            .labelprice{
 
-            svg.tildesm{
-              position: relative;
-              top: -1px;
+              svg.tildesm{
+                position: relative;
+                top: -1px;
 
-              path{fill: $site-clr-text-soft-sec;}
+                path{fill: $site-clr-text-soft-sec;}
+              }
             }
           }
-        }
 
-        .inputchangeicon{
-          background-color: $site-clr-darkblue-400;
-          padding: 6px;
-          margin: 4px 6px;
-          @include border-radius(50%);
+          &.col-auto{
+            @include flexbox-display-flex();
+            @include flexbox-align-items(flex-end);
 
-          > i[class*="change"]{
-            display: block;
+            .inputchangeicon{
+              background-color: $site-clr-darkblue-400;
+              padding: 6px;
+              margin: 4px 6px;
+              @include border-radius(50%);
+
+              > i[class*="change"]{
+                display: block;
+              }
+            }
+          }
+
+          .form-control:disabled,
+          .form-control[readonly]{
+            color: $site-clr-text-soft-sec;
+            background-color: $input-bg;
+
+            &:focus{
+              border-color: $input-border-color;
+            }
+          }
+          .custom-select:disabled{
+            background-color: $bootstrap-custom-select-bg;
           }
         }
       }
@@ -80,6 +96,56 @@
         @include flexbox-justify-content(center);
         margin-top: $form-group-margin-bottom;
         text-align: center;
+      }
+    }
+
+    &-confirm{
+      margin-top: $grid-gutter-width*4;
+
+      &-title{
+        text-align: center;
+        padding: $grid-gutter-width 0;
+        margin-bottom: $grid-gutter-width;
+        border-top: 1px solid $site-brdr-dark;
+        border-bottom: 1px solid $site-brdr-dark;
+
+        h1,h2,h3,h4,h5,h6{
+          color: $site-clr-white;
+          @include responsive-font-size($var-custom-font-size-base);
+          font-weight: $var-custom-font-weight-normal;
+          margin: 0;
+        }
+      }
+
+      &-table{
+        border-bottom: 1px solid $site-brdr-dark;
+        padding-bottom: $grid-gutter-width*2;
+
+        .sitetablediv{
+          .type[class*="tbl"]{width: 120px; text-align: left;}
+          .symb[class*="tbl"]{width: 80px; text-align: left;}
+          .comm[class*="tbl"]{width: 80px; text-align: left;}
+          .amtc[class*="tbl"],
+          .amts[class*="tbl"]{text-align: left;}
+          .totl[class*="tbl"]{text-align: right;}
+        }
+      }
+
+      &-btns{
+        @include flexbox-display-flex();
+        @include flexbox-flex-wrap(wrap);
+        @include flexbox-justify-content(space-between);
+        margin-top: $grid-gutter-width*4;
+
+        > *{
+          @include flexbox-flex-basis(0);
+          @include flexbox-flex-grow(1);
+          max-width: 100%;
+          margin: 0 $grid-gutter-width*2;
+
+          &:first-child{margin-left: 0;}
+          &:last-child{margin-right: 0;}
+        }
       }
     }
 

@@ -33,7 +33,7 @@
       @include flexbox-flex-flow(column);
       @include flexbox-align-items(center);
       height: 100%;
-      padding: $grid-gutter-width*3;
+      padding: $grid-gutter-width*4;
     }
   }
 
@@ -58,7 +58,7 @@
     }
 
     &-cont{
-      padding: $grid-gutter-width*3;
+      padding: $grid-gutter-width*4;
     }
 
   }
