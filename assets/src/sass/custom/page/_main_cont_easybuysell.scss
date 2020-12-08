@@ -3,5 +3,71 @@
   max-width: 660px;
   margin-top: 5%;
 
+  .easybuysell{
+
+    &-tabs{
+      margin-bottom: $form-group-margin-bottom*1.5;
+
+      .nav{
+
+        &-link{
+          padding: $nav-link-padding-y*1.38 $nav-link-padding-x*1.38;
+
+          &.active{
+            position: relative;
+          }
+        }
+
+        &-buy.active{
+          color: lighten($site-clr-green, 10%) !important;
+          background-color: transparentize($site-clr-green, 0.85) !important;
+          border-color: $site-clr-green !important;
+        }
+
+        &-sell.active{
+          color: lighten($site-clr-red, 10%) !important;
+          background-color: transparentize($site-clr-red, 0.85) !important;
+          border-color: $site-clr-red !important;
+        }
+      }
+    }
+
+    &-cont{}
+
+    &-form{
+
+      &-inputs{
+
+        .formflexlabel{
+          margin-bottom: $form-group-margin-bottom*0.75;
+
+          label{
+            color: $site-clr-white;
+          }
+
+          .labelassets{}
+
+          .labelprice{
+
+            svg.tildesm{
+              position: relative;
+              top: -1px;
+
+              path{fill: $site-clr-text-soft-sec;}
+            }
+          }
+        }
+      }
+
+      &-btns{
+        @include flexbox-display-flex();
+        @include flexbox-justify-content(center);
+        margin-top: $form-group-margin-bottom;
+        text-align: center;
+      }
+    }
+
+  }
+
 }
 
