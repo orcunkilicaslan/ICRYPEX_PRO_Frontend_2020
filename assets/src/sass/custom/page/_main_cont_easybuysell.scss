@@ -147,6 +147,10 @@
           &:last-child{margin-right: 0;}
         }
       }
+
+      &-result{
+        margin-top: $grid-gutter-width*4;
+      }
     }
 
   }
