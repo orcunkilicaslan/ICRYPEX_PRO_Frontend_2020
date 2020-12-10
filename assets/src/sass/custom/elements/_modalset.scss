@@ -138,4 +138,27 @@
 
   &-open{}
 
+  &-maincont{
+
+    > div[class*="modal"]{
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .modal-content{
+      background-color: transparent;
+      border: none;
+    }
+
+    .modal-body,
+    .modal-footer{
+      padding: 0;
+    }
+
+    .modal-footer{
+      padding-top: $modal-inner-padding;
+    }
+
+  }
+
 }
