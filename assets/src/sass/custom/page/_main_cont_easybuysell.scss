@@ -109,12 +109,23 @@
         border-top: 1px solid $site-brdr-dark;
         border-bottom: 1px solid $site-brdr-dark;
 
-        h1,h2,h3,h4,h5,h6{
+        h3,h4,h5{
+          @include flexbox-display-flex();
+          @include flexbox-justify-content(center);
+          @include flexbox-align-items(center);
           color: $site-clr-white;
           @include responsive-font-size($var-custom-font-size-base);
           font-weight: $var-custom-font-weight-normal;
           margin: 0;
+
+          > i[class*="icon"]{
+            margin: 0 3px;
+          }
+
+          + p{margin-top: 3px;}
         }
+
+        p{margin-bottom: 2px;}
       }
 
       &-table{
@@ -150,6 +161,24 @@
 
       &-result{
         margin-top: $grid-gutter-width*4;
+      }
+
+      &.resultsuccess{
+
+        .easybuysell-confirm-title{
+          h3,h4,h5{
+            color: $site-clr-green;
+          }
+        }
+
+        .easybuysell-confirm-table{
+          padding-bottom: 0;
+          border-bottom: none;
+        }
+
+        .easybuysell-confirm-btns{
+          display: none !important;
+        }
       }
     }
 
