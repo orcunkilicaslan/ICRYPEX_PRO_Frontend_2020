@@ -179,7 +179,7 @@
       }
 
       .banksprttablogos{
-        background-image: url(#{$path-img-url-icons}/icons_spite_banklogos.svg);
+        background-image: url(#{$path-img-url-icons}/icons_spite_banklogos.svg#{$cache-busting});
         background-repeat: no-repeat;
         background-position: 0 0;
         display: inline-block;

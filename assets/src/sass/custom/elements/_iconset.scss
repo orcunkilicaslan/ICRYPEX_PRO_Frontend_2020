@@ -27,8 +27,12 @@
     }
   }
 
+
+
   &-sprtsmiconclrd{
-    background-image: url(#{$path-img-url-icons}/icons_spite_darksmalliconcolored.svg);
+    background-image: url(#{$path-img-url-icons}/icons_spite_darksmalliconcolored.svg#{$cache-busting});
+
+
     background-repeat: no-repeat;
     background-position: 0 0;
     display: inline-block;
@@ -76,7 +80,7 @@
   }
 
   &-sprtbgiconclrd{
-    background-image: url(#{$path-img-url-icons}/icons_spite_darkbigiconcolored.svg);
+    background-image: url(#{$path-img-url-icons}/icons_spite_darkbigiconcolored.svg#{$cache-busting});
     background-repeat: no-repeat;
     background-position: 0 0;
     display: inline-block;

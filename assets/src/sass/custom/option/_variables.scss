@@ -62,6 +62,7 @@ $site-clr-text-dark-sec:                #5C6582;
 /* Site Main Color Settings */
 
 /* Site Main Path Settings */
+$cache-busting:           #{'?v='}(unique_id());
 $path-assets-url:         "../../";
 $path-fonts-url:          "../../fonts";
 $path-img-url:            "../../img";

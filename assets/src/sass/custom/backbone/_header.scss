@@ -19,7 +19,7 @@ $headlogo-clr-red:                $site-clr-red;
       margin: 0 5px;
 
       .headlogo{
-        background-image: url(#{$path-img-url}/header/header_pro_logo.svg);
+        background-image: url(#{$path-img-url}/header/header_pro_logo.svg#{$cache-busting});
         background-repeat: no-repeat;
         background-size: contain;
         background-position: left center;
