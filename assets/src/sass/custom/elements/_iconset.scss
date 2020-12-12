@@ -31,13 +31,10 @@
 
   &-sprtsmiconclrd{
     background-image: url(#{$path-img-url-icons}/icons_spite_darksmalliconcolored.svg#{$cache-busting});
-
-
     background-repeat: no-repeat;
     background-position: 0 0;
     display: inline-block;
     position: relative;
-
 
     &.icon14{
       width: 14px;
