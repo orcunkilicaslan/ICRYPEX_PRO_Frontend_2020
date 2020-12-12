@@ -10,6 +10,7 @@
  - [Kolay_Sat_Step_02](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Sat_Step_02.html)
  - [Kolay_Sat_Step_03](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Sat_Step_03.html)
  - [Kolay_Sat_Step_04](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Sat_Step_04.html)
+ - [Account_Profile](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Account_Profile.html)
    
 
 # NodeJS Kurulumu

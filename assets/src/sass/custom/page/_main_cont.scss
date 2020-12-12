@@ -8,7 +8,7 @@
   }
 
   .urllink{
-    color: $site-clr-blue;
+    color: lighten($site-clr-blue, 5%);
     @include transition-multiple(color 0.15s ease-in-out);
 
     &:hover{
@@ -25,15 +25,22 @@
       background-color: $site-clr-darkblue-500;
       border-bottom: 1px solid $site-brdr-dark;
       text-align: center;
-      padding: $grid-gutter-width*2 $grid-gutter-width*3;
+      padding: $grid-gutter-width/2 !important;
       @include border-radii($var-custom-border-radius-sm,$var-custom-border-radius-sm,0,0);
 
       h1,h2,h3,h4,h5,h6{
         color: $site-clr-white;
         @include responsive-font-size($var-custom-font-size-base);
         font-weight: $var-custom-font-weight-normal;
+        padding: $nav-link-padding-y $nav-link-padding-x;
         margin: 0;
       }
+    }
+
+    &-subtitle{
+      border-bottom: 1px solid $site-brdr-dark;
+      text-align: center;
+      padding: $grid-gutter-width/2 !important;
     }
 
     &-cont{
@@ -43,6 +50,52 @@
       @include flexbox-align-items(center);
       height: 100%;
       padding: $grid-gutter-width*4;
+    }
+
+    .prnavmenulist{
+
+      .nav{
+        @include flexbox-justify-content(center);
+        position: relative;
+
+        &-item{
+          position: relative;
+
+          &::before{
+            content: "";
+            background-color: $site-clr-darkblue-200;
+            width: 6px;
+            height: 6px;
+            position: absolute;
+            left: -3px;
+            top: calc(50% + 1px);
+            @include translateY(-50%);
+            @include border-radius(50%);
+          }
+
+          &:first-child::before{display: none;}
+        }
+
+        &-link{
+          color: $site-clr-text-soft-pri;
+          @include transition-multiple(color 0.15s ease-in-out);
+
+          &:hover,
+          &.active{
+            color: lighten($site-clr-blue, 5%);
+          }
+        }
+
+        &[role="tablist"]{
+
+          .nav-link{
+            &:hover,
+            &.active{
+              color: $site-clr-white;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -55,19 +108,20 @@
     &-title{
       background-color: $site-clr-darkblue-500;
       border-bottom: 1px solid $site-brdr-dark;
-      padding: $grid-gutter-width*2 $grid-gutter-width*3;
+      padding: $grid-gutter-width/2;
       @include border-radii($var-custom-border-radius-sm,$var-custom-border-radius-sm,0,0);
 
       h1,h2,h3,h4,h5,h6{
         color: $site-clr-white;
         @include responsive-font-size($var-custom-font-size-base);
         font-weight: $var-custom-font-weight-normal;
+        padding: $nav-link-padding-y $nav-link-padding-x;
         margin: 0;
       }
     }
 
     &-cont{
-      padding: $grid-gutter-width*4;
+      padding: $nav-link-padding-x;
     }
 
   }

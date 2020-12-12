@@ -117,7 +117,7 @@
     }
 
     &-detail{
-      color: $site-clr-blue;
+      color: lighten($site-clr-blue, 5%);
     }
 
     &-topdesc{
