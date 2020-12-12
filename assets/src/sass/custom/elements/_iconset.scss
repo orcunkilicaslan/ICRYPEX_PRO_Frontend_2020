@@ -27,13 +27,14 @@
     }
   }
 
+
+
   &-sprtsmiconclrd{
-    background-image: url(#{$path-img-url-icons}/icons_spite_darksmalliconcolored.svg);
+    background-image: url(#{$path-img-url-icons}/icons_spite_darksmalliconcolored.svg#{$cache-busting});
     background-repeat: no-repeat;
     background-position: 0 0;
     display: inline-block;
     position: relative;
-
 
     &.icon14{
       width: 14px;
@@ -55,7 +56,9 @@
       &.sm-transfer{background-position: calc(-16px*3) -14px;}
       &.sm-addbtn{background-position: calc(-16px*4) -14px;}
       &.sm-change{background-position: calc(-16px*5) -14px;}
-      &.sm-check{background-position: calc(-16px*6) -14px;}
+      &.sm-bell{background-position: calc(-16px*6) -14px;}
+      &.sm-info{background-position: calc(-16px*7) -14px;}
+      &.sm-check{background-position: calc(-16px*8) -14px;}
     }
 
     &.icon20{
@@ -74,7 +77,7 @@
   }
 
   &-sprtbgiconclrd{
-    background-image: url(#{$path-img-url-icons}/icons_spite_darkbigiconcolored.svg);
+    background-image: url(#{$path-img-url-icons}/icons_spite_darkbigiconcolored.svg#{$cache-busting});
     background-repeat: no-repeat;
     background-position: 0 0;
     display: inline-block;

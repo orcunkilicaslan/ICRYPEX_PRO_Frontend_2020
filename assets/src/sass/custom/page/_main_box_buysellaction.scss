@@ -37,31 +37,13 @@
       }
 
       .infoiconbox{
-        width: 18px;
         margin-left: 5px;
         cursor: pointer;
-
-        &-icon{
-          fill: $site-clr-darkblue-200;
-          @include transition-multiple(all 0.15s ease-in-out);
-        }
-
-        &-circle{
-          stroke: $site-clr-darkblue-400;
-          fill: transparent;
-          @include transition-multiple(all 0.15s ease-in-out);
-        }
+        @include scale(1.1);
+        @include transition-multiple(all 0.15s ease-in-out);
 
         &:hover{
-
-          .infoiconbox-icon{
-            fill: $site-clr-white;
-          }
-
-          .infoiconbox-circle{
-            stroke: $site-clr-darkblue-400;
-            fill: $site-clr-darkblue-400;
-          }
+          @include svg-filter(100%, 0, 300, 300%);
         }
       }
     }

@@ -349,6 +349,10 @@
   -o-filter: brightness($brightness) invert($invert) hue-rotate(#{$hue}deg) contrast($contrast) grayscale($grayscale) opacity($opacity);
   -moz-filter: brightness($brightness) invert($invert) hue-rotate(#{$hue}deg) contrast($contrast) grayscale($grayscale) opacity($opacity);
 }
+
+@mixin background-cache-bust($path, $filename, $extension) {
+  background-image: #{'url('}$path#{'/'}$filename#{'.'}$extension#{'?v='}+unique_id()#{')'};
+}
 /* Background End */
 
 /* Transition Start */

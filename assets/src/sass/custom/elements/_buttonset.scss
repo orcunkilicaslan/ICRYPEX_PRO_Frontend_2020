@@ -83,6 +83,11 @@ $iconbtn-transition:    0.3s cubic-bezier(.77,0,.175,1);
     margin-right: -1px;
     position: relative;
     @include transition-multiple(background-color $iconbtn-transition);
+
+    > i[class*="icon"]{
+      @include svg-filter(0%, 1, 0, 100%);
+      @include scale(1.2);
+    }
   }
 
   &-txt{
