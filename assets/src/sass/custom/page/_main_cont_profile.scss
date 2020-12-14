@@ -3,6 +3,57 @@
   max-width: 660px;
   margin-top: 2%;
 
+  .accprofile{
 
+    .siteformui{
+
+      .form-row{
+        margin-right: -5px;
+        margin-left: -5px;
+
+        > .col,
+        > [class*="col-"]{
+          padding-right: 5px;
+          padding-left: 5px;
+        }
+      }
+
+      .labelfocustop{
+
+        > .form-group{
+          margin-top: $form-group-margin-bottom * 2;
+        }
+      }
+    }
+
+    &-info{
+
+      &-avatar{
+
+        .dropzone{
+          width: 135px;
+          height: 135px;
+          min-height: auto;
+        }
+      }
+
+      &-form{}
+    }
+
+    &-conf{
+      padding-top: 1rem;
+
+      .col-auto{
+        min-width: 120px;
+      }
+    }
+
+    &-addr{
+      padding-top: 0.75rem;
+      margin-top: 0.75rem;
+      border-top: 1px solid $site-brdr-dark;
+    }
+
+  }
 }
 
