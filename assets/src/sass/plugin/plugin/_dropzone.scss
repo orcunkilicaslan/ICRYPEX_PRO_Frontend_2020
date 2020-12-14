@@ -1,2 +1,86 @@
 // Dropzone
 @import '../../../../../node_modules/dropzone/dist/dropzone';
+
+.dropzone{
+  background-color: $bootstrap-input-bg;
+  padding: $input-padding-y;
+  border: $input-border-width dashed $global-clr-blue;
+  @include border-radius($input-border-radius);
+
+  .dz{
+
+    &-message{
+      @include flexbox-display-flex();
+      @include flexbox-flex-flow(column);
+      @include flexbox-align-items(center);
+      @include flexbox-justify-content(center);
+      height: 100%;
+      margin: 0;
+
+      &-icon,
+      &-btxt,
+      &-stxt{
+        display: block;
+        text-align: center;
+      }
+
+      &-icon{
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNiIgaGVpZ2h0PSIzNCIgdmlld0JveD0iMCAwIDI2IDM0Ij4NCiAgPGcgaWQ9Ikljb25fRHJhZ19Ecm9wIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjUgMC41KSI+DQogICAgPHBhdGggaWQ9IlBhdGgiIGQ9Ik0yMy41LDMuNUg4LjVjLTEuNDgzLDAtMiwuNTE3LTIsMnYyOWMwLDEuNDgzLjUxNywyLDIsMmgyMGMxLjQ4MywwLDMtLjUxNywzLTJ2LTIyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTYuNSAtMy41KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNjg3Y2EyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iMSIvPg0KICAgIDxwYXRoIGlkPSJQYXRoLTIiIGRhdGEtbmFtZT0iUGF0aCIgZD0iTTE4LjgsMy40djcuNjU3QTEuMzMsMS4zMywwLDAsMCwyMC4xMTEsMTIuNEgyNi44IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMS44IC0zLjQpIiBmaWxsPSJub25lIiBzdHJva2U9IiM2ODdjYTIiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLXdpZHRoPSIxIi8+DQogICAgPHBhdGggaWQ9IlBhdGgtMyIgZGF0YS1uYW1lPSJQYXRoIiBkPSJNMTIuNiwxMC44Mjd2OC41MWMwLC41MjUuNDI0LjQyLjUzLjQybDIuMTIxLS45NDYsMS4zNzksMy4wNDdhLjY3MS42NzEsMCwwLDAsLjk1NS4zMTVsLjYzNi0uMzE1YS42MzcuNjM3LDAsMCwwLC40MjQtLjk0NmwtMS4zNzktMy4wNDcsMi4xMjEtLjk0NmMuMTA2LS4xMDUuMjEyLS4yMS4yMTItLjMxNSwwLS4yMSwwLS4zMTUtLjEwNi0uNDJMMTMuMTMsMTAuNDA3Yy0uMTA2LS4xMDUtLjMxOC0uMjEtLjQyNC0uMTA1UzEyLjYsMTAuNTEyLDEyLjYsMTAuODI3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMuNTk5IDAuNzQxKSIgZmlsbD0iIzY4N2NhMiIvPg0KICA8L2c+DQo8L3N2Zz4NCg==");
+        background-repeat: no-repeat;
+        background-position: center center;
+        display: inline-block;
+        position: relative;
+        width: 30px;
+        height: 35px;
+        margin-bottom: 5px;
+      }
+
+      &-btxt{}
+
+      &-stxt{}
+    }
+
+    &-preview{
+      @include flexbox-display-flex();
+      @include flexbox-flex-flow(column);
+      @include flexbox-align-items(center);
+      @include flexbox-justify-content(center);
+      height: 100%;
+      min-height: auto;
+      margin: 0;
+
+      .dz-image{
+        @include flexbox-display-flex();
+        @include flexbox-flex-flow(column);
+        @include flexbox-align-items(center);
+        @include flexbox-justify-content(center);
+        width: 100%;
+        height: 100%;
+        @include border-radius($input-border-radius);
+
+        > img{@include border-radius($input-border-radius);}
+      }
+
+      .dz-details{
+        @include flexbox-display-flex();
+        @include flexbox-flex-flow(column);
+        @include flexbox-align-items(center);
+        @include flexbox-justify-content(space-between);
+        height: 100%;
+        padding: $input-padding-y;
+      }
+
+      &.dz-image-preview{
+        background-color: $bootstrap-input-disabled-bg;
+        @include border-radius($input-border-radius);
+      }
+
+      &.dz-file-preview{
+        .dz-image{
+          background: $bootstrap-input-disabled-bg;
+          @include border-radius($input-border-radius);
+        }
+      }
+    }
+  }
+}

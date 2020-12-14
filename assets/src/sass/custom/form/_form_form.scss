@@ -215,6 +215,17 @@
     }
   }
 
+  fieldset{
+    legend{
+      font-size: $var-custom-font-size-base;
+      margin-bottom: $form-group-margin-bottom;
+
+      + .labelfocustop{
+        margin-top: $form-group-margin-bottom/2;
+      }
+    }
+  }
+
   .recaptcha{
     &-area{
       @include flexbox-display-flex();
@@ -371,7 +382,6 @@
     input::-moz-focus-outer{
       border: 0;
     }
-
   }
 
 }
