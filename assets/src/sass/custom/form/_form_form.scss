@@ -218,7 +218,7 @@
   fieldset{
     legend{
       font-size: $var-custom-font-size-base;
-      margin-bottom: $form-group-margin-bottom;
+      margin-bottom: $form-group-margin-bottom*1.5;
 
       + .labelfocustop{
         margin-top: $form-group-margin-bottom/2;
