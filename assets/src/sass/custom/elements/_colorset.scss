@@ -9,7 +9,9 @@ $site-default-colors: map-merge(
                         "green":            $site-clr-green,
                         "red":              $site-clr-red,
                         "orange":           $site-clr-orange,
-                        "yellow":           $site-clr-yellow
+                        "yellow":           $site-clr-yellow,
+                        "textpri":          $site-clr-text-soft-pri,
+                        "textsec":          $site-clr-text-soft-sec
                 ),
                 $site-default-colors
 );

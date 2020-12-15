@@ -134,6 +134,9 @@
     @include border-radius($var-custom-border-radius);
 
     &-title{
+      @include flexbox-display-flex();
+      @include flexbox-flex-wrap(wrap);
+      @include flexbox-justify-content(space-between);
       background-color: $site-clr-darkblue-500;
       border-bottom: 1px solid $site-brdr-dark;
       padding: $grid-gutter-width/2;
@@ -141,10 +144,21 @@
 
       h1,h2,h3,h4,h5,h6{
         color: $site-clr-white;
+        margin: 0;
+      }
+
+      > *{
         @include responsive-font-size($var-custom-font-size-base);
         font-weight: $var-custom-font-weight-normal;
         padding: $nav-link-padding-y $nav-link-padding-x;
-        margin: 0;
+      }
+
+      > div{
+        color: $site-clr-text-soft-sec;
+
+        i[class*="icon"]{
+          vertical-align: middle;
+        }
       }
     }
 
