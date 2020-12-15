@@ -217,7 +217,7 @@
 
   fieldset{
     legend{
-      font-size: $var-custom-font-size-base;
+      @include responsive-font-size($var-custom-font-size-base);
       margin-bottom: $form-group-margin-bottom*1.5;
 
       + .labelfocustop{
@@ -412,6 +412,15 @@ body#{$themedarkclassname}{
       //border-color: $site-brdr-dark;
     }
 
+    .form-control,
+    .custom-select{
+      &.disabled:focus,
+      &:disabled:focus,
+      &[readonly]:focus{
+        border-color: $input-disabled-bg;
+      }
+    }
+
     .custom{
 
       &-select{
@@ -510,9 +519,7 @@ body#{$themedarkclassname}{
           }
         }
       }
-
     }
-
   }
 }
 /* Form UI Dark */
