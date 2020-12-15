@@ -28,7 +28,7 @@ import PerfectScrollbar from 'perfect-scrollbar';
 })();
 /* Header News Ticker End */
 
-/* Document Load PerfectScrollbar General and Table Multiple Start */
+/* PerfectScrollbar General and Table Multiple Start */
 document.addEventListener('DOMContentLoaded',()=>{
 
 
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
 
 });
-/* Document Load PerfectScrollbar General and Table Multiple End */
+/* PerfectScrollbar General and Table Multiple End */
 
 /* Progress Range Start - https://css-tricks.com/value-bubbles-for-range-inputs */
 const allRanges = document.querySelectorAll(".rangeprogress");

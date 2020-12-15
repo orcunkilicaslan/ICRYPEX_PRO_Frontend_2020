@@ -1,7 +1,6 @@
 
 import Chartist from "chartist";
 
-
 /* Document Load Order Book Start */
 document.addEventListener('DOMContentLoaded',()=>{
 

@@ -7,7 +7,7 @@ import Collapse from './../../../../node_modules/bootstrap.native/src/components
 import Dropdown from './../../../../node_modules/bootstrap.native/src/components/dropdown-native.js'
 import Modal from './../../../../node_modules/bootstrap.native/src/components/modal-native.js'
 import Popover from './../../../../node_modules/bootstrap.native/src/components/popover-native.js'
-import ScrollSpy from './../../../../node_modules/bootstrap.native/src/components/scrollspy-native.js'
+//import ScrollSpy from './../../../../node_modules/bootstrap.native/src/components/scrollspy-native.js'
 import Tab from './../../../../node_modules/bootstrap.native/src/components/tab-native.js'
 import Toast from './../../../../node_modules/bootstrap.native/src/components/toast-native.js'
 import Tooltip from './../../../../node_modules/bootstrap.native/src/components/tooltip-native.js'
@@ -26,7 +26,7 @@ export default {
   Dropdown,
   Modal,
   Popover,
-  ScrollSpy,
+//  ScrollSpy,
   Tab,
   Toast,
   Tooltip,

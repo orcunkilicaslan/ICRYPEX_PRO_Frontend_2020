@@ -1,31 +1,12 @@
 
-import Chartist from "chartist";
-
-/* Variables */
-const OoTabOorTabCont           = document.querySelector('.openorders .openorders-taborders');
-const ooTabOorScrllHead         = document.querySelector('.openorders .openorders-taborders .ooopenorderstable .scrollbar-tbl-th');
-const ooTabOorScrllBody         = document.querySelector('.openorders .openorders-taborders .ooopenorderstable .scrollbar-tbl-tb');
-const ooTabHstTabCont           = document.querySelector('.openorders .openorders-tabhistory');
-const ooTabHstScrllTble         = document.querySelector('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-horizontal');
-const ooTabHstScrllHead         = document.querySelector('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-th');
-const ooTabHstScrllBody         = document.querySelector('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb');
-const ooTabHstTblBrwsWrp        = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp');
-const ooTabHstTblBrwsBtn        = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstr');
-const ooTabHstTblBrwsDiv        = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstbl');
-const ooTabActTabCont           = document.querySelector('.openorders .openorders-tabactivities');
-const ooTabActPendScrllHead     = document.querySelector('.openorders .openorders-tabactivities .activitiespendingtable .scrollbar-tbl-th');
-const ooTabActPendScrllBody     = document.querySelector('.openorders .openorders-tabactivities .activitiespendingtable .scrollbar-tbl-tb');
-const ooTabActHistScrllHead     = document.querySelector('.openorders .openorders-tabactivities .activitieshistorytable .scrollbar-tbl-th');
-const ooTabActHistScrllBody     = document.querySelector('.openorders .openorders-tabactivities .activitieshistorytable .scrollbar-tbl-tb');
-
-const ooTabAssAdrTabBtcCont         = document.querySelector('.openorders .openorders-tabassets .assetsaddress .assetsaddress-tabbtc');
-const ooTabAssAdrTabBtcScrllHead    = document.querySelector('.openorders .openorders-tabassets .assetsaddress .assetsaddress-tabbtc .asaddresstable .scrollbar-tbl-th');
-const ooTabAssAdrTabBtcScrllBody    = document.querySelector('.openorders .openorders-tabassets .assetsaddress .assetsaddress-tabbtc .asaddresstable .scrollbar-tbl-tb');
-/* Variables */
-
-
 /* Document Load Open Orders Start */
-document.addEventListener('DOMContentLoaded',()=>{
+function ooTabsArea() {
+    const ooTabContent              = document.querySelector('.openorders .openorders-tabcontent');
+    const ooTabHstTabCont           = document.querySelector('.openorders .openorders-tabhistory');
+    const ooTabHstScrllTble         = document.querySelector('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-horizontal');
+    const ooTabHstTblBrwsWrp        = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp');
+    const ooTabHstTblBrwsBtn        = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstr');
+    const ooTabHstTblBrwsDiv        = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstbl');
 
     // Transaction History Perfect Scrollbar (Horizontal)
     ooTabHstScrllTble.addEventListener('ps-scroll-x', () =>{
@@ -45,12 +26,16 @@ document.addEventListener('DOMContentLoaded',()=>{
 
         });
     }
+}
 
-});
+document.addEventListener("DOMContentLoaded", ooTabsArea);
+window.addEventListener("resize", ooTabsArea);
 /* Document Load Open Orders End */
 
 
 /* Bootstrap Tab Open Orders */
+import Chartist from "chartist";
+
 document.querySelector('.openorders .openorders-tabs').addEventListener('show.bs.tab', function(e){
 
     // Asset Tab Donut Chart
