@@ -114,7 +114,14 @@
             }
           }
         }
+      }
 
+      &.datebirthlabelgroup{
+        .custom-select ~ label{
+          color: $site-clr-white;
+          top: -9px;
+          z-index: 3;
+        }
       }
     }
 

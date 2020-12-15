@@ -1,23 +1,21 @@
 
-/* Variables */
-const mdDivTblHeight        = (document.querySelector('.marketdata').clientHeight - 24) - document.querySelector('.marketdata .marketdata-tabs').clientHeight;
-const mdTabSymTabCont       = document.querySelector('.marketdata .marketdata-tabsymbol');
-const mdTabSymScrllHead     = document.querySelector('.marketdata .marketdata-tabsymbol .mdsymboltable .scrollbar-tbl-th');
-const mdTabSymScrllBody     = document.querySelector('.marketdata .marketdata-tabsymbol .mdsymboltable .scrollbar-tbl-tb');
-const mdTabLstTabCont       = document.querySelector('.marketdata .marketdata-tablast');
-const mdTabLstScrllHead     = document.querySelector('.marketdata .marketdata-tablast .mdlasttable .scrollbar-tbl-th');
-const mdTabLstScrllBody     = document.querySelector('.marketdata .marketdata-tablast .mdlasttable .scrollbar-tbl-tb');
-/* Variables */
-
-
 /* Document Load Market Data Start */
-document.addEventListener('DOMContentLoaded',()=>{
+function mdTabsArea() {
+    const mdTabContent      = document.querySelector('.marketdata .marketdata-tabcontent');
+    const mdTabSymTblTh     = document.querySelector('.marketdata .mdsymboltable .scrollbar-tbl-th');
+    const mdTabSymTblTb     = document.querySelector('.marketdata .mdsymboltable .scrollbar-tbl-tb');
+    const mdTabLstTblTh     = document.querySelector('.marketdata .mdlasttable .scrollbar-tbl-th');
+    const mdTabLstTblTb     = document.querySelector('.marketdata .mdlasttable .scrollbar-tbl-tb');
 
     // Market Data Symbol
-    mdTabSymScrllBody.style.height = (mdDivTblHeight - mdTabSymScrllHead.clientHeight - 36) + "px";
+    mdTabSymTblTb.style.height = (mdTabContent.clientHeight - mdTabSymTblTh.clientHeight - 60) + "px";
 
     // Market Data Last Transactions
-    mdTabLstScrllBody.style.height = (mdDivTblHeight - mdTabLstScrllHead.clientHeight - 20) + "px";
+    mdTabLstTblTb.style.height = (mdTabContent.clientHeight - mdTabLstTblTh.clientHeight - 50) + "px";
 
-});
+
+}
+
+document.addEventListener("DOMContentLoaded", mdTabsArea);
+window.addEventListener("resize", mdTabsArea);
 /* Document Load Market Data End */
