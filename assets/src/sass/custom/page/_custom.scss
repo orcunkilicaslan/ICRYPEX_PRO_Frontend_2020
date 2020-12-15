@@ -18,6 +18,22 @@ body{
   overflow: hidden;
 }
 
+.boxulinfolist{
+
+  > li{
+    @include responsive-font-size($var-custom-font-size-base);
+    margin: 5px 0;
+
+    &:first-child{margin-top: 0;}
+    &:last-child{margin-bottom: 0;}
+
+    > i[class*="icon16"]{
+      vertical-align: bottom;
+    }
+  }
+
+}
+
 .tooltipbox{
 
   &-head{
