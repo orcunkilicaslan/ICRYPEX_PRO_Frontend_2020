@@ -81,12 +81,40 @@
     }
 
     .input-group{
+
+      .input-group-prepend + .form-control{
+        &:invalid ~ label{
+          padding-left: inherit;
+        }
+      }
+
       .form-control{
+
         &:focus ~ label,
         &:focus-within ~ label,
         &:valid ~ label{
           z-index: 3;
+          padding-left: 0 !important;
         }
+      }
+
+      &.phonelabelgroup{
+
+        .input-group-prepend{
+
+          .custom-select{
+            width: 80px;
+          }
+
+          + .form-control{
+            padding-left: $input-padding-y*2;
+
+            &:invalid ~ label{
+              padding-left: 80px;
+            }
+          }
+        }
+
       }
     }
 

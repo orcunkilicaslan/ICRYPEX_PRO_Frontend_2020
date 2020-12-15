@@ -1,25 +1,89 @@
 
+import PerfectScrollbar from 'perfect-scrollbar';
+
 /* Header News Ticker Start - https://codepen.io/dheerajkawatra/pen/gwdoEJ */
 (function() {
-    // var t0 = performance.now();
-    setInterval(function() {
-        var parent = document.querySelector('.newstickerbars');
-        var slide = parent.querySelectorAll('.newstickerbars-item');
 
-        for (var i = 0; i < slide.length; i++) {
-            var x = slide[i];
+    // var t0 = performance.now();
+
+    setInterval(function() {
+
+        const newsTickerBarsArea = document.querySelector('.newstickerbars');
+        const newsTickerBarsItem = newsTickerBarsArea.querySelectorAll('.newstickerbars-item');
+
+        for (let i = 0; i < newsTickerBarsItem.length; i++) {
+            let x = newsTickerBarsItem[i];
             x.classList.toggle('sliding-now');
         }
 
         setTimeout(function() {
-            parent.appendChild(slide[0]);
+            newsTickerBarsArea.appendChild(newsTickerBarsItem[0]);
         }, 5000);
 
     }, 5000);
+
     // var t1 = performance.now();
     // console.log("Carousel taking " + (t1 - t0) + " milliseconds.");
+
 })();
 /* Header News Ticker End */
+
+/* Document Load PerfectScrollbar General and Table Multiple Start */
+document.addEventListener('DOMContentLoaded',()=>{
+
+
+    // General Vertical
+    const perScrollGeneral = document.querySelectorAll(".jsGeneralScrollbar");
+    for (let iSc = 0; iSc < perScrollGeneral.length; iSc++) {
+
+        const psGeneralMultiple = new PerfectScrollbar(perScrollGeneral[iSc], {
+            wheelSpeed: 0.50,
+            wheelPropagation: true,
+            minScrollbarLength: 10,
+            suppressScrollX: true
+        });
+
+    }
+
+
+    // Scrollbar Table Vertical
+    const perScrollTblTable = document.querySelectorAll(".scrollbar");
+    const perScrollTblThead = document.querySelectorAll(".scrollbar .scrollbar-tbl-th");
+    const perScrollTblTbody = document.querySelectorAll(".scrollbar .scrollbar-tbl-tb");
+    for (let iTbody = 0; iTbody < perScrollTblTbody.length; iTbody++) {
+
+        const psTableMultiple = new PerfectScrollbar(perScrollTblTbody[iTbody], {
+            wheelSpeed: 0.50,
+            wheelPropagation: true,
+            minScrollbarLength: 10,
+            suppressScrollX: true
+        });
+
+        for (let iThead = 0; iThead < perScrollTblThead.length; iThead++) {
+
+            if (perScrollTblTbody[iTbody].querySelectorAll('.ps--active-y')){
+                perScrollTblThead[iThead].classList.add('active-y');
+            }
+
+        }
+    }
+
+
+    //  Scrollbar Table Horizontal
+    const perScrollTblHoriz = document.querySelectorAll(".scrollbar .scrollbar-horizontal");
+    for (let iHoriz = 0; iHoriz < perScrollTblHoriz.length; iHoriz++) {
+
+        const psHorizMultiple = new PerfectScrollbar(perScrollTblHoriz[iHoriz], {
+            wheelSpeed: 0.50,
+            wheelPropagation: true,
+            minScrollbarLength: 10,
+            suppressScrollY: true
+        });
+
+    }
+
+});
+/* Document Load PerfectScrollbar General and Table Multiple End */
 
 /* Progress Range Start - https://css-tricks.com/value-bubbles-for-range-inputs */
 const allRanges = document.querySelectorAll(".rangeprogress");

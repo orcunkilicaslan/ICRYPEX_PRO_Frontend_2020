@@ -1,8 +1,5 @@
 
-import PerfectScrollbar from 'perfect-scrollbar';
 import Chartist from "chartist";
-import Modal from "bootstrap.native/dist/components/modal-native";
-
 
 /* Variables */
 const OoTabOorTabCont           = document.querySelector('.openorders .openorders-taborders');
@@ -30,44 +27,10 @@ const ooTabAssAdrTabBtcScrllBody    = document.querySelector('.openorders .openo
 /* Document Load Open Orders Start */
 document.addEventListener('DOMContentLoaded',()=>{
 
-
-    // Open Order Perfect Scrollbar
-    const psOoTabOOr = new PerfectScrollbar(ooTabOorScrllBody, {
-        wheelSpeed: 0.50,
-        wheelPropagation: true,
-        minScrollbarLength: 10,
-        suppressScrollX: true
-    });
-    if (ooTabOorScrllBody.querySelectorAll('.ps--active-y')){
-        ooTabOorScrllHead.classList.add('active-y');
-    }
-
-
-
     // Transaction History Perfect Scrollbar (Horizontal)
-    const psOoTabHTb = new PerfectScrollbar(ooTabHstScrllTble, {
-        wheelSpeed: 0.50,
-        wheelPropagation: true,
-        minScrollbarLength: 10,
-        suppressScrollY: true
-    });
     ooTabHstScrllTble.addEventListener('ps-scroll-x', () =>{
         ooTabHstScrllTble.style.width = ooTabHstTabCont.clientWidth + "px";
     });
-
-
-
-    // Transaction History Perfect Scrollbar (Vertical)
-    const psOoTabHst = new PerfectScrollbar(ooTabHstScrllBody, {
-        wheelSpeed: 0.50,
-        wheelPropagation: true,
-        minScrollbarLength: 10,
-        suppressScrollX: true
-    });
-    if (ooTabHstScrllBody.querySelectorAll('.ps--active-y')){
-        ooTabHstScrllHead.classList.add('active-y');
-    }
-
 
 
     // Transaction History Table Browse
@@ -82,46 +45,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 
         });
     }
-
-
-
-    // Assets Address BTC Perfect Scrollbar
-    const psOoTabAssAdrBtc = new PerfectScrollbar(ooTabAssAdrTabBtcScrllBody, {
-        wheelSpeed: 0.50,
-        wheelPropagation: true,
-        minScrollbarLength: 10,
-        suppressScrollX: true
-    });
-    if (ooTabAssAdrTabBtcScrllBody.querySelectorAll('.ps--active-y')){
-        ooTabAssAdrTabBtcScrllHead.classList.add('active-y');
-    }
-
-
-
-    // Account Activities Pending Perfect Scrollbar
-    const psOoTabActPendTblPend = new PerfectScrollbar(ooTabActPendScrllBody, {
-        wheelSpeed: 0.50,
-        wheelPropagation: true,
-        minScrollbarLength: 10,
-        suppressScrollX: true
-    });
-    if (ooTabActPendScrllBody.querySelectorAll('.ps--active-y')){
-        ooTabActPendScrllHead.classList.add('active-y');
-    }
-
-
-
-    // Account Activities Pending Perfect Scrollbar
-    const psOoTabActHistTblPend = new PerfectScrollbar(ooTabActHistScrllBody, {
-        wheelSpeed: 0.50,
-        wheelPropagation: true,
-        minScrollbarLength: 10,
-        suppressScrollX: true
-    });
-    if (ooTabActHistScrllBody.querySelectorAll('.ps--active-y')){
-        ooTabActHistScrllHead.classList.add('active-y');
-    }
-
 
 });
 /* Document Load Open Orders End */
