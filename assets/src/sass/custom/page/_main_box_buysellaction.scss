@@ -38,13 +38,6 @@
 
       .infoiconbox{
         margin-left: 5px;
-        cursor: pointer;
-        @include scale(1.1);
-        @include transition-multiple(all 0.15s ease-in-out);
-
-        &:hover{
-          @include svg-filter(100%, 0, 300, 300%);
-        }
       }
     }
 

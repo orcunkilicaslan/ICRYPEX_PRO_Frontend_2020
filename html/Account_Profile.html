@@ -1208,147 +1208,148 @@
                             </div>
                         </div>
                         <div class="maincont-box-cont">
-                            <div class="maincont-account mcontbox">
-                                <div class="mcontbox-title">
-                                    <h3>Profil</h3>
-                                </div>
-                                <div class="mcontbox-cont accprofile">
-                                    <div class="accprofile-info siteformui">
-                                        <fieldset>
-                                            <legend>Kişisel Bilgiler</legend>
-                                            <div class="form-row">
-                                                <div class="accprofile-info-avatar col-auto">
-                                                    <form class="dropzone" action="/file-upload" autocomplete="off" novalidate="">
-                                                        <div class="dropzone-previews"></div>
-                                                        <div class="dz-message" data-dz-message="">
-                                                            <i class="dz-message-icon"></i>
-                                                            <span class="dz-message-btxt">Sürükle &amp; Bırak</span>
-                                                            <span class="dz-message-stxt">[JPG, PNG]<br />Maks 1MB</span>
-                                                        </div>
-                                                        <input type="hidden" name="filetype" value="1">
-                                                    </form>
-                                                </div>
-                                                <div class="accprofile-info-form col">
-                                                    <div class="labelfocustop">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" value="Orcun KILICASLAN" readonly />
-                                                            <label>Adınız Soyadınız</label>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="email" class="form-control" value="orcun.kilicaslan@icrypex.com" readonly />
-                                                            <label>E-Posta</label>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" value="905322281477" readonly />
-                                                            <label>Telefon</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
+                            <div class="maincont-account">
+                                <div class="mcontbox accprofile">
+                                    <div class="mcontbox-title">
+                                        <h3>Profil</h3>
                                     </div>
-                                    <div class="accprofile-conf">
-                                        <form class="siteformui" autocomplete="off" novalidate="">
-                                            <div class="labelfocustop">
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" value="12345678901" readonly />
-                                                            <label>Kimlik No</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group input-group datebirthlabelgroup">
-                                                            <select class="custom-select">
-                                                                <option selected disabled>GÜN</option>
-                                                                <option value="01">01</option>
-                                                                <option value="02">02</option>
-                                                            </select>
-                                                            <select class="custom-select">
-                                                                <option selected disabled>AY</option>
-                                                                <option value="01">01</option>
-                                                                <option value="02">02</option>
-                                                            </select>
-                                                            <select class="custom-select">
-                                                                <option selected disabled>YIL</option>
-                                                                <option value="2020">2020</option>
-                                                                <option value="2019">2019</option>
-                                                            </select>
-                                                            <label>Doğum Tarihi</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <button class="btn btn-primary w-100" type="button">KAYDET</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <ul class="boxulinfolist">
-                                            <li class="iconinfogray">Gireceğiniz bilgiler Nüfus ve Vatandaşlık İşleri Genel Müdürlüğü verileriyle karşılaştırılacaktır.</li>
-                                        </ul>
-                                    </div>
-                                    <div class="accprofile-addr">
-                                        <form class="siteformui" autocomplete="off" novalidate="">
+                                    <div class="mcontbox-cont">
+                                        <div class="accprofile-info siteformui">
                                             <fieldset>
-                                                <legend>Adres Bilgileri</legend>
-                                                <div class="labelfocustop">
-                                                    <div class="form-row">
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <select class="custom-select" disabled>
-                                                                    <option disabled>Ülke</option>
-                                                                    <option value="TR" selected>Türkiye</option>
-                                                                    <option value="USA">Amerika</option>
-                                                                </select>
-                                                                <label>Ülke</label>
+                                                <legend>Kişisel Bilgiler</legend>
+                                                <div class="form-row">
+                                                    <div class="accprofile-info-avatar col-auto">
+                                                        <form class="dropzone" action="/file-upload" autocomplete="off" novalidate="">
+                                                            <input type="hidden" name="filetype" value="1">
+                                                            <div class="dz-message" data-dz-message="">
+                                                                <i class="dz-message-icon"></i>
+                                                                <span class="dz-message-btxt">Sürükle &amp; Bırak</span>
+                                                                <span class="dz-message-stxt">[JPG, PNG]<br />Maks 1MB</span>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-6">
+                                                        </form>
+                                                    </div>
+                                                    <div class="accprofile-info-form col">
+                                                        <div class="labelfocustop">
                                                             <div class="form-group">
-                                                                <select class="custom-select">
-                                                                    <option selected disabled>Seçiniz</option>
-                                                                    <option value="İstanbul">İstanbul</option>
-                                                                    <option value="Ankara">Ankara</option>
-                                                                </select>
-                                                                <label>Şehir</label>
+                                                                <input type="text" class="form-control" value="Orcun KILICASLAN" readonly />
+                                                                <label>Adınız Soyadınız</label>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="email" class="form-control" value="orcun.kilicaslan@icrypex.com" readonly />
+                                                                <label>E-Posta</label>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" value="905322281477" readonly />
+                                                                <label>Telefon</label>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-row">
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <select class="custom-select">
-                                                                    <option selected disabled>Seçiniz</option>
-                                                                    <option value="Sarıyer">Sarıyer</option>
-                                                                    <option value="Mecidiyeköy">Mecidiyeköy</option>
-                                                                </select>
-                                                                <label>İlçe</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <select class="custom-select">
-                                                                    <option selected disabled>Seçiniz</option>
-                                                                    <option value="Maslak">Maslak</option>
-                                                                </select>
-                                                                <label>Mahalle</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-row">
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <textarea class="form-control" rows="3"></textarea>
-                                                                <label>Adres</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="addrbtmbtn">
-                                                    <button class="btn btn-primary w-50" type="button">ADRESİ DÜZENLE</button>
                                                 </div>
                                             </fieldset>
-                                        </form>
+                                        </div>
+                                        <div class="accprofile-conf">
+                                            <form class="siteformui" autocomplete="off" novalidate="">
+                                                <div class="labelfocustop">
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" value="12345678901" readonly />
+                                                                <label>Kimlik No</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group input-group datebirthlabelgroup">
+                                                                <select class="custom-select">
+                                                                    <option selected disabled>GÜN</option>
+                                                                    <option value="01">01</option>
+                                                                    <option value="02">02</option>
+                                                                </select>
+                                                                <select class="custom-select">
+                                                                    <option selected disabled>AY</option>
+                                                                    <option value="01">01</option>
+                                                                    <option value="02">02</option>
+                                                                </select>
+                                                                <select class="custom-select">
+                                                                    <option selected disabled>YIL</option>
+                                                                    <option value="2020">2020</option>
+                                                                    <option value="2019">2019</option>
+                                                                </select>
+                                                                <label>Doğum Tarihi</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <button class="btn btn-primary w-100" type="button">KAYDET</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <ul class="boxulinfolist">
+                                                <li class="iconinfogray">Gireceğiniz bilgiler Nüfus ve Vatandaşlık İşleri Genel Müdürlüğü verileriyle karşılaştırılacaktır.</li>
+                                            </ul>
+                                        </div>
+                                        <div class="accprofile-addr">
+                                            <form class="siteformui" autocomplete="off" novalidate="">
+                                                <fieldset>
+                                                    <legend>Adres Bilgileri</legend>
+                                                    <div class="labelfocustop">
+                                                        <div class="form-row">
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <select class="custom-select" disabled>
+                                                                        <option disabled>Ülke</option>
+                                                                        <option value="TR" selected>Türkiye</option>
+                                                                        <option value="USA">Amerika</option>
+                                                                    </select>
+                                                                    <label>Ülke</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <select class="custom-select">
+                                                                        <option selected disabled>Seçiniz</option>
+                                                                        <option value="İstanbul">İstanbul</option>
+                                                                        <option value="Ankara">Ankara</option>
+                                                                    </select>
+                                                                    <label>Şehir</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <select class="custom-select">
+                                                                        <option selected disabled>Seçiniz</option>
+                                                                        <option value="Sarıyer">Sarıyer</option>
+                                                                        <option value="Mecidiyeköy">Mecidiyeköy</option>
+                                                                    </select>
+                                                                    <label>İlçe</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <select class="custom-select">
+                                                                        <option selected disabled>Seçiniz</option>
+                                                                        <option value="Maslak">Maslak</option>
+                                                                    </select>
+                                                                    <label>Mahalle</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <textarea class="form-control" rows="3"></textarea>
+                                                                    <label>Adres</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="addrbtmbtn">
+                                                        <button class="btn btn-primary w-50" type="button">ADRESİ DÜZENLE</button>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

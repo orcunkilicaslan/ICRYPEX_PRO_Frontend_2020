@@ -2,6 +2,72 @@
 .maincont-account{
 
   .accconfirm{
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+
+    &-upload{
+      @include flexbox-display-flex();
+      @include flexbox-flex-wrap(wrap);
+      //@include flexbox-justify-content(center);
+      margin-left: -$nav-link-padding-x;
+      margin-right: -$nav-link-padding-x;
+
+      &-col{
+        @include flexbox-flex-basis(0);
+        @include flexbox-flex-grow(1);
+        width: 100%;
+        max-width: calc(100% / 3);
+        padding: 0 $nav-link-padding-x;
+        position: relative;
+
+        &::before{
+          content: "";
+          background-color: $site-brdr-dark;
+          width: 1px;
+          height: 180px;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        &:first-child::before{
+          display: none;
+        }
+      }
+
+      .formflexlabel{
+
+        + .dropzone{
+          margin-top: 0.375rem;
+        }
+      }
+
+      .dropzone{
+        height: 150px;
+
+        + .btn{
+          margin-top: $nav-link-padding-x;
+        }
+      }
+
+    }
+
+    &-btmbtn{
+      @include flexbox-display-flex();
+      @include flexbox-flex-flow(column);
+      @include flexbox-align-items(center);
+      padding-top: $nav-link-padding-x*1.25;
+      margin-top: $nav-link-padding-x*1.5;
+      margin-bottom: $nav-link-padding-x*0.5;
+      border-top: 1px solid $site-brdr-dark;
+    }
+
+    + .boxulinfolist{
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
   }
 }

@@ -17,6 +17,8 @@
   }
 
   .boxulinfolist{
+    width: 100%;
+
     > li{
       @include responsive-font-size($var-custom-font-size-base);
       min-height: 16px;
@@ -31,7 +33,7 @@
         content: "";
         background-image: url(#{$path-img-url-icons}/icons_spite_darksmalliconcolored.svg#{$cache-busting});
         background-repeat: no-repeat;
-        background-position: 0 0;
+        background-position: 9999px 9999px;
         width: 16px;
         height: 16px;
         display: block;
@@ -164,6 +166,10 @@
 
     &-cont{
       padding: $nav-link-padding-x;
+    }
+
+    + ul.boxulinfolist{
+      margin-top: 0.5rem;
     }
 
   }

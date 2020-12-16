@@ -47,19 +47,37 @@ body{
     padding: 10px 0 0;
     margin-top: 7.5px;
     border-top: 1px solid $site-brdr-dark;
+
+    img{
+      width: 100%;
+      display: block;
+      @include border-radius($var-custom-border-radius-sm);
+
+      + p{
+        margin-top: 0.375rem;
+      }
+    }
+
+    p{
+      &:last-child{margin-bottom: 0.375rem;}
+    }
+
+    .commissiontable{
+      min-width: 320px;
+
+      .tbl-thead .tbl-th{color: $site-clr-text-soft-sec;}
+      .txt[class*="tbl"]{width: 100px}
+      .spc[class*="tbl"]{width: 2px;}
+      .mkr[class*="tbl"],
+      .tkr[class*="tbl"]{
+        background-color: $site-clr-darkblue-700;
+        text-align: center;
+      }
+    }
   }
 
-  .commissiontable{
-    min-width: 320px;
-
-    .tbl-thead .tbl-th{color: $site-clr-text-soft-sec;}
-    .txt[class*="tbl"]{width: 100px}
-    .spc[class*="tbl"]{width: 2px;}
-    .mkr[class*="tbl"],
-    .tkr[class*="tbl"]{
-      background-color: $site-clr-darkblue-700;
-      text-align: center;
-    }
+  &.popoversm{
+    max-width: 250px;
   }
 
 }
