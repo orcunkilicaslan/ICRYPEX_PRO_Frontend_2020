@@ -1,0 +1,131 @@
+
+/* Table UI Soft */
+.sitetablediv{
+  @include responsive-font-size($var-custom-font-size-base);
+  line-height: 1;
+
+  .tbl{
+
+    &-tr{
+      @include flexbox-display-flex();
+      @include flexbox-align-items(center);
+      @include flexbox-justify-content(space-between);
+      //@include border-radius($var-custom-border-radius);
+      @include transition-multiple(color 0.15s ease-in-out, background-color 0.15s ease-in-out);
+    }
+
+    &-th,
+    &-td{
+      padding-left: 4px;
+      padding-right: 4px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      @include transition-multiple(color 0.15s ease-in-out, background-color 0.15s ease-in-out);
+    }
+
+    &-th.fxd,
+    &-td.fxd{
+      @include flexbox-flex-basis(0);
+      @include flexbox-flex-grow(1);
+      max-width: 100%;
+    }
+
+    &-th.aut,
+    &-td.aut{
+      @include flexbox-flex(0 0 auto);
+      width: auto;
+      max-width: 100%;
+    }
+
+    &-th{
+      color: $site-clr-white;
+      padding-top: 7px;
+      padding-bottom: 10px;
+    }
+
+    &-td{
+      color: $site-clr-text-soft-sec;
+      padding-top: 3px;
+      padding-bottom: 5px;
+    }
+
+    &-brdrbtm{
+      > .tbl-tr{
+        border-top: 1px solid $site-brdr-dark;
+      }
+    }
+
+    &-striped{
+      > .tbl-tr:nth-child(odd),
+      > *:nth-child(odd) >.tbl-tr{
+        background-color: $site-clr-darkblue-600;
+      }
+    }
+
+    &-hovered{
+      > .tbl-tr:hover,
+      > * > .tbl-tr:hover{
+        background-color: transparentize($site-clr-darkblue-100, 0.75);
+
+        .tbl-td{
+          color: lighten($site-clr-text-soft-sec, 20%);
+        }
+      }
+    }
+
+    &-thead{}
+
+    &-tbody{
+
+      > div[class$="tr"]{
+        @include border-radius($var-custom-border-radius);
+      }
+
+    }
+
+  }
+
+}
+/* Table UI Soft */
+
+/* Table UI Dark */
+body#{$themedarkclassname}{}
+/* Table UI Dark */
+
+.scrollbar{
+
+  &-vert{}
+
+  &-horizontal{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: auto;
+
+    > .ps__rail-x .ps__thumb-x{min-width: 50px;}
+  }
+
+  &-tbl{
+
+    &-th{
+      &[class*="active-y"]{
+        > .tbl-thead{padding-left: 10px;}
+      }
+    }
+
+    &-tb{
+      //height: 450px;
+      position: relative;
+      overflow: hidden;
+
+      > .ps__rail-y .ps__thumb-y{min-height: 20px;}
+
+      &.ps{
+        > .tbl-tbody{padding-left: 10px;}
+      }
+    }
+
+  }
+
+}

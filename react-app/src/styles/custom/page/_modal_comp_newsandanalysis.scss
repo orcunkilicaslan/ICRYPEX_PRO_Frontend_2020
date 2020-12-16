@@ -1,0 +1,42 @@
+
+.modalcomp{
+
+  &-newsanalysis{
+    @include flexbox-display-flex();
+    @include flexbox-flex-flow(column);
+    height: 100%;
+
+    &-tabs{}
+
+    &-tabcontent{
+      @include flexbox-flex(1);
+      margin-top: $modal-inner-padding;
+      padding-top: 0 !important;
+      border-top: 1px solid $site-brdr-dark;
+    }
+
+    .accbuild{
+
+      &-collapse{
+        img{
+          @include border-radius($var-custom-border-radius-sm);
+
+          + p{
+            margin-top: $modal-inner-padding/2;
+          }
+        }
+      }
+    }
+
+  }
+
+  &-wrp{}
+
+  &-news,
+  &-analysis{
+    height: 720px;
+    position: relative;
+    overflow: hidden;
+  }
+
+}

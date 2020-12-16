@@ -1,0 +1,26 @@
+/**
+ * Kullanım:
+ *	@include BootstrapMaxWidthResponsive(xl){}
+ *
+        xz: 0,
+        xm: 400px
+        xs: 520px
+        sm: 620px
+        md: 820px
+        lg: 1060px
+        xl: 1380px
+        hd: 1620px
+        1k: 1940px
+        2k: 2580px
+ *
+ */
+
+// Max Width Responsive
+@mixin BootstrapMaxWidthResponsive($point){
+	@media (max-width: (map-get($bootstrap-grid-breakpoints, $point) - 1)){@content}
+}
+
+// Min Width Responsive
+@mixin BootstrapMinWidthResponsive($point){
+	@media (min-width: map-get($bootstrap-grid-breakpoints, $point)){@content}
+}

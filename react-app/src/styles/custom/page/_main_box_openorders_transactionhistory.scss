@@ -1,0 +1,75 @@
+
+.mainbox-openorders{
+
+  .openorders-tabhistory{
+
+    .ootransactionhistorytable{
+      padding: 5px 0;
+
+      .sitetablediv.scrollbar-tbl{
+        min-width: 920px;
+        padding-bottom: 10px;
+
+        .brws[class*="tbl"]{
+          width: 22px;
+          text-align: center;
+
+          > a{margin: 0 2px;}
+        }
+        .nmbr[class*="tbl"]{width: 60px;}
+        .date[class*="tbl"]{width: 90px;}
+        .symb[class*="tbl"]{width: 60px;}
+        .type[class*="tbl"]{width: 100px;}
+        .avrg[class*="tbl"]{}
+        .pric[class*="tbl"]{}
+        .hppn[class*="tbl"]{}
+        .amnt[class*="tbl"]{}
+        .totl[class*="tbl"]{}
+        .comm[class*="tbl"]{width: 60px;}
+        .stts[class*="tbl"]{width: 60px;}
+      }
+    }
+
+    .hsttblbrws{
+
+      &wrp{}
+
+      &tr{
+        cursor: pointer;
+
+        &.active{
+          background-color: transparentize($site-clr-darkblue-100, 0.75);
+          @include border-radii($var-custom-border-radius,$var-custom-border-radius,0,0);
+
+          .tbl-td{
+            color: lighten($site-clr-text-soft-sec, 20%);
+          }
+        }
+      }
+
+      &tbl{
+        display: none;
+
+        &.show{display: block;}
+
+        .sitetablediv{
+          margin-bottom: 7.5px;
+          border: 1px solid $site-brdr-dark;
+          @include border-radii(0,0,$var-custom-border-radius,$var-custom-border-radius);
+
+          .tbl-thead .tbl-th,
+          .tbl-tbody .tbl-td{padding-top: 3px; padding-bottom: 5px;}
+
+          .date[class*="tbl"]{width: 110px;}
+          .hppr[class*="tbl"]{}
+          .hppn[class*="tbl"]{}
+          .comm[class*="tbl"]{width: 80px;}
+          .totl[class*="tbl"]{text-align: right;}
+
+        }
+      }
+    }
+
+  }
+}
+

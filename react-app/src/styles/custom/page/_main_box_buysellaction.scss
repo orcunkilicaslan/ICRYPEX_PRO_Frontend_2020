@@ -1,0 +1,178 @@
+
+.mainbox-buysellaction{
+
+  .buysellaction{
+    @include flexbox-display-flex();
+    @include flexbox-flex-flow(column);
+    height: 100%;
+    padding: 10px 10px 12px;
+
+    &-head{
+      @include flexbox-display-flex();
+      @include flexbox-flex-wrap(wrap);
+      @include flexbox-align-items(center);
+      line-height: 1.2;
+
+      &-col{
+        @include flexbox-flex-basis(0);
+        @include flexbox-flex-grow(1);
+        max-width: 100%;
+
+        &.tabarea{}
+
+        &.cominfo{
+          @include flexbox-display-flex();
+          @include flexbox-align-items(center);
+          @include flexbox-justify-content(flex-end);
+        }
+
+        h6{
+          color: $site-clr-text-soft-pri;
+          margin: 0 5px 0 10px;
+        }
+
+        h6, p{
+          @include responsive-font-size($var-custom-font-size-base);
+        }
+      }
+
+      .infoiconbox{
+        margin-left: 5px;
+      }
+    }
+
+    &-tabs{}
+
+    &-tabcontent{
+      @include flexbox-flex(1);
+      padding: 10px 0 0;
+      margin-top: 6px;
+      border-top: 1px solid $site-brdr-dark;
+      @include border-radius(0);
+
+      > div[class*="tab"]{
+        margin: 0;
+      }
+    }
+
+    &-tabmarket{}
+
+    &-tablimit{}
+
+    &-tabstoplimit{}
+
+    &-formarea{
+      @include flexbox-display-flex();
+      @include flexbox-flex-wrap(wrap);
+      height: 100%;
+
+      &-col{
+        @include flexbox-flex-basis(0);
+        @include flexbox-flex-grow(1);
+        max-width: 100%;
+        position: relative;
+
+        &.buycol{
+          padding-right: 10px;
+        }
+        &.sellcol{
+          padding-left: 10px;
+        }
+
+        &::before{
+          content: "";
+          background-color: $site-brdr-dark;
+          width: 1px;
+          height: 100%;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+
+        &:last-child::before{display: none;}
+      }
+
+    }
+
+    &-form{
+      @include flexbox-display-flex();
+      @include flexbox-flex-flow(column);
+      @include flexbox-justify-content(space-between);
+      height: 100%;
+
+      .formhead{
+        @include flexbox-display-flex();
+        @include flexbox-align-items(center);
+        @include flexbox-justify-content(space-between);
+        padding-bottom: 5px;
+
+        h4{
+          color: $site-clr-white;
+          margin: 0;
+        }
+
+        h4, p{
+          @include responsive-font-size($var-custom-font-size-base);
+        }
+
+        &-curr{
+          @include flexbox-display-flex();
+          @include flexbox-align-items(center);
+          @include flexbox-justify-content(flex-end);
+
+          i[class*="icon"]{
+            margin-right: 10px;
+          }
+        }
+      }
+
+      .formfieldset{
+        @include flexbox-flex(1);
+        @include flexbox-display-flex();
+        @include flexbox-flex-flow(column);
+        @include flexbox-justify-content(space-around);
+        height: 100%;
+
+        .form-group{
+          margin-bottom: 0.25rem;
+        }
+      }
+
+      .formrange{
+        //margin: 0.25rem 0;
+
+        .aligncenter{
+          @include flexbox-align-items(center);
+          margin: 0.25rem 0;
+
+          .col-auto{padding-right: 10px;}
+        }
+
+        .rangeprogress{
+          margin-top: 2px;
+
+          .rangeprogress-circle{
+            &[data-val*="0"]{
+              span:nth-child(1){background-color: $site-clr-blue;}
+            }
+            &[data-val*="33"]{
+              span:nth-child(1), span:nth-child(2){background-color: $site-clr-blue;}
+            }
+            &[data-val*="66"]{
+              span:nth-child(1), span:nth-child(2), span:nth-child(3){background-color: $site-clr-blue;}
+            }
+            &[data-val*="100"]{
+              span{background-color: $site-clr-blue;}
+            }
+          }
+        }
+      }
+
+      .formbttm{
+        .btn{
+          width: 100%;
+        }
+      }
+    }
+  }
+}

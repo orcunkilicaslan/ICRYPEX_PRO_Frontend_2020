@@ -1,0 +1,31 @@
+
+.mainbox-openorders{
+
+  .openorders-taborders{
+
+    .ooopenorderstable{
+      padding: 5px 0;
+
+      .sitetablediv{
+
+        .symb[class*="tbl"]{width: 60px;}
+        .date[class*="tbl"]{width: 105px;}
+        .type[class*="tbl"]{}
+        .pric[class*="tbl"]{}
+        .amnt[class*="tbl"]{}
+        .hppn[class*="tbl"]{}
+        .bttn[class*="tbl"]{
+          width: 50px;
+          text-align: right;
+
+          > a, button{
+            background-color: transparent;
+            padding: 0;
+            margin: 0 2px;
+          }
+        }
+      }
+    }
+  }
+}
+

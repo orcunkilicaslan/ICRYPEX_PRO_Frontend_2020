@@ -1,0 +1,204 @@
+.bootstrap-datepicker-custom{
+  //position: relative;
+  //z-index: 1 !important;
+
+  .form-control{
+    //text-align: center !important;
+    //text-transform: uppercase !important;
+  }
+
+  .input-group{
+    .input-group-append{
+      i[class*="siteiconsdropdown"]{
+        display: block;
+        margin: 7px;
+      }
+    }
+  }
+
+  .datepicker{
+    padding: 7px 10px 10px !important;
+    @include border-radius(0 !important);
+
+    @include BootstrapMaxWidthResponsive(sm){
+      left: 3px!important;
+      right: 3px!important;
+    }
+
+    &-dropdown{
+      //width: 100% !important;
+      min-width: 260px !important;
+      max-width: 260px !important;
+      margin: 5px 0 0!important;
+      background-clip: inherit !important;
+
+      @include BootstrapMaxWidthResponsive(sm){
+        max-width: none !important;
+        margin: 3px 0 0!important;
+      }
+    }
+
+    &-orient-right,
+    &-orient-left{
+      &::before{
+        border-left-width: 12px !important;
+        border-right-width: 12px !important;
+        border-bottom-width: 12px !important;
+        top: -12px !important;
+
+        @include BootstrapMaxWidthResponsive(sm){
+          border-left-width: 7px !important;
+          border-right-width: 7px !important;
+          border-bottom-width: 7px !important;
+          top: -7px !important;
+        }
+      }
+
+      &::after{
+        border-left-width: 11px !important;
+        border-right-width: 11px !important;
+        border-bottom-width: 11px !important;
+        top: -11px !important;
+
+        @include BootstrapMaxWidthResponsive(sm){
+          border-left-width: 6px !important;
+          border-right-width: 6px !important;
+          border-bottom-width: 6px !important;
+          top: -6px !important;
+        }
+      }
+
+      @include BootstrapMaxWidthResponsive(sm){
+        &::before{
+          left: calc(50% - 12px) !important;
+          right: auto !important;
+        }
+        &::after{
+          left: calc(50% - 11px) !important;
+          right: auto !important;
+        }
+      }
+    }
+
+    &-orient-right{}
+    &-orient-left{}
+
+    table{
+      width: 100% !important;
+
+      thead, thead tr, tbody, tbody tr{
+        width: 100% !important;
+        @include flexbox-display-flex();
+        @include flexbox-flex-wrap(wrap);
+      }
+
+      thead tr th, tbody tr td{
+        height: auto;
+        font-weight: normal !important;
+        @include flexbox-flex(auto);
+      }
+
+      thead{
+        tr{
+
+          &:nth-child(3){
+            margin-top: 5px;
+          }
+
+          th{
+            font-weight: 500 !important;
+            @include border-radius(0 !important);
+            @include transition(background, 0.05s, ease-in-out);
+          }
+        }
+      }
+
+      tbody{
+        tr{
+          td{
+            @include border-radius(0 !important);
+            @include transition(background, 0.05s, ease-in-out);
+
+            &[colspan="7"]{
+              position: relative;
+              top: 5px;
+            }
+
+            &.cw{
+              font-weight: 500 !important;
+            }
+          }
+        }
+      }
+    }
+
+    &-switch{
+      width: calc(100% - 60px) !important;
+      background-color: transparent !important;
+      text-transform: uppercase;
+      font-size: 17px !important;
+      padding-top: 4px;
+      height: 30px !important;
+
+      &:hover{
+        background-color: transparent !important;
+      }
+    }
+
+    .prev,
+    .next{
+      text-indent: -9999px !important;
+      width: 30px !important;
+      height: 30px !important;
+      border-width: 1px;
+      border-style: solid;
+      border-color: #f2f2f2;
+      position: relative;
+      @include transition-multiple(background 0.2s ease-in-out, border 0.2s ease-in-out);
+
+      &::before{
+        content: "";
+        position:absolute;
+        width: 9px;
+        height: 9px;
+        padding: 0;
+        border-top: 2px solid #666666;
+        border-right: 2px solid #666666;
+      }
+
+      &:hover{
+        background-color: #f2f2f2;
+      }
+    }
+
+    .prev{
+      &::before{
+        top: calc(50% - 4px);
+        left: calc(50% - 2px);
+        @include rotate(225);
+      }
+    }
+
+    .next{
+      &::before{
+        top: calc(50% - 4px);
+        left: calc(50% - 5px);
+        @include rotate(45);
+      }
+    }
+
+    .today,
+    .active,
+    .focused{
+      border-color: transparent !important;
+    }
+
+    span.month,
+    span.year,
+    span.decade,
+    span.century{
+      @include transition(background, 0.05s, ease-in-out);
+    }
+  }
+
+}

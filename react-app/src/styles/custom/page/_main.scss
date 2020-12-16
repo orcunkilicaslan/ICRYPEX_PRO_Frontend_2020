@@ -1,0 +1,54 @@
+
+.main{
+  @include flexbox-display-flex();
+  @include flexbox-flex-flow(column);
+  height: 100%;
+
+  &-h100{
+
+    > .container-fluid{
+      height: 100%;
+
+      > .row{height: 100%;}
+    }
+  }
+
+  &-cryptocoinbar{
+    padding: $grid-gutter-width $grid-gutter-width/2 0;
+  }
+
+  &-body{
+    padding: $grid-gutter-width $grid-gutter-width/2;
+    height: 100%;
+
+    &-leftside{
+      @include headerleftandbodyleftsidewidth(0px);
+
+      .mainbox-marketdata{height: 100%;}
+    }
+
+    &-rightcont{
+      @include flexbox-display-flex();
+      @include flexbox-flex-flow(column);
+      height: 100%;
+
+      .mainbox-cryptocoinbar{margin-bottom: $grid-gutter-width;}
+      .mainbox-tradingviewbig{@include flexbox-flex(1);}
+
+    }
+  }
+
+  &-foot{
+    @include flexbox-display-flex();
+    @include flexbox-flex-flow(column);
+    //height: 100%;
+    padding: 0 $grid-gutter-width/2 $grid-gutter-width;
+
+    .mainbox{
+      //height: 100%;
+      height: 290px;
+      overflow: hidden;
+    }
+  }
+
+}

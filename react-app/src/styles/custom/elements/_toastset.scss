@@ -1,0 +1,55 @@
+.toast{
+  min-width: 250px;
+
+  &-header{
+    position: relative;
+
+    > .close{
+      color: $site-clr-white;
+      background-color: transparent;
+      width: 18px;
+      height: 18px;
+      display: block;
+      font-size: 1.25rem;
+      font-weight: $var-custom-font-weight-normal;
+      border: 1px solid $site-clr-white;
+      padding: 0;
+      margin: 0;
+      opacity: 1;
+      text-shadow: none;
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      @include translateY(-50%);
+      @include border-radius(50%);
+
+      span{
+        position: relative;
+        top: -3px;
+      }
+    }
+
+  }
+
+  &-success{
+    border-color: $site-clr-green;
+
+    .toast-header{
+      background-color: $site-clr-green;
+      border-bottom-color: $site-clr-green;
+    }
+
+  }
+
+  &-sideright{
+    position: absolute;
+    bottom: 0;
+    right: $grid-gutter-width * 2;
+    z-index: 10;
+
+    &:not(:last-child){
+      margin-bottom: $grid-gutter-width * 2;
+    }
+  }
+
+}

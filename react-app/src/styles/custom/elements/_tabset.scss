@@ -1,0 +1,231 @@
+/* Tabs UI Soft */
+.sitetabs{
+
+  &.nav{
+    border-bottom-width: 0;
+  }
+
+  &.nav-tabs{
+
+    .nav-item{
+      @include responsive-font-size($var-custom-font-size-base);
+
+      &:first-child .nav-link{border-left-width: 0;}
+      &:last-child .nav-link{border-right-width: 0;}
+
+      &.show{
+        .nav-link{}
+      }
+    }
+
+    .nav-link{
+      border-top-width: 0 !important;
+      white-space: nowrap;
+
+      &.active{}
+    }
+  }
+
+  &.nav-pills{
+    .nav-item{
+      @include responsive-font-size($var-custom-font-size-base);
+    }
+
+    .nav-link{
+      white-space: nowrap;
+
+      &.active{}
+    }
+  }
+
+  &.tab-content{
+    background-color: transparent;
+    padding: 5px 0;
+    @include border-radius($var-custom-border-radius);
+
+    > div[class*="tab"]{
+      overflow: hidden;
+      height: 100%;
+
+      &.active{
+        @include flexbox-display-flex();
+        @include flexbox-flex-flow(column);
+      }
+    }
+
+    .tabcont{
+
+      &-head{
+        @include flexbox-display-flex();
+        @include flexbox-flex-wrap(wrap);
+        @include flexbox-align-items(center);
+        @include flexbox-justify-content(space-between);
+        line-height: 1.2;
+        padding: 5px 0;
+
+        &-col{
+          @include flexbox-display-flex();
+          @include flexbox-align-items(center);
+          @include flexbox-flex(0 0 auto);
+          width: auto;
+          max-width: 100%;
+
+          &:first-child{}
+
+          &:last-child{
+            @include flexbox-justify-content(flex-end);
+
+            i.sm-wallet{
+              margin-right: 5px;
+            }
+          }
+
+          h6{
+            color: lighten($site-clr-text-soft-sec, 10%);
+            margin: 0 5px;
+          }
+
+          h6, p{
+            @include responsive-font-size($var-custom-font-size-base);
+          }
+        }
+
+        &-navpills{
+          width: 100%;
+          min-width: 200px;
+        }
+      }
+
+      &-filterbar{
+        @include flexbox-align-items(center);
+        padding: 5px 0;
+        position: relative;
+
+        @include placeholder{
+          color: $site-clr-text-soft-sec;
+        }
+
+        .btn-secondary,
+        .form-control{
+          @include responsive-font-size($var-custom-font-size-base);
+        }
+
+        .btn-secondary{
+          color: $site-clr-text-soft-sec;
+
+          &:hover,
+          &:focus,
+          &:not(:disabled):not(.disabled):active,
+          &:not(:disabled):not(.disabled).active{
+            color: $site-clr-white;
+          }
+        }
+
+        .custom-checkbox{
+          margin-left: 5px;
+        }
+
+        + div{
+          @include flexbox-flex(1);
+        }
+      }
+    }
+  }
+
+}
+/* Tabs UI Soft */
+
+/* Tabs UI Dark */
+body#{$themedarkclassname}{
+  .sitetabs{
+
+    &.nav-tabs{
+
+      .nav-item{
+        &.show{
+          .nav-link{}
+        }
+      }
+
+      .nav-link{
+        color: $site-clr-text-soft-pri;
+        background-color: $site-clr-darkblue-800;
+        border-color: $site-clr-darkblue-900;
+
+        &.active{
+          color: $site-clr-white;
+          background-color: $site-clr-darkblue-700;
+          border-color: transparent transparent $site-clr-darkblue-700;
+        }
+      }
+    }
+
+    &.nav-pills{
+
+      .nav-item{
+
+        .nav-link{
+          color: $site-clr-text-soft-pri;
+        }
+
+      }
+
+      &.nav-justified{
+
+        .nav-item{
+
+          &.show{
+            .nav-link{}
+          }
+
+          .nav-link{
+            margin-left: -1px;
+            @include border-radius(0);
+          }
+
+          &:first-child{
+            .nav-link{
+              margin-left: 0;
+              @include border-radii($var-custom-border-radius-sm,0,0,$var-custom-border-radius-sm);
+            }
+          }
+
+          &:last-child{
+            .nav-link{
+              @include border-radii(0,$var-custom-border-radius-sm,$var-custom-border-radius-sm,0);
+            }
+          }
+        }
+      }
+
+      &.pillsver{
+        @include flexbox-flex-direction(column);
+
+        .nav-item{
+          padding: 2.5px 0;
+
+          &:first-child{padding-top: 0;}
+          &:last-child{padding-bottom: 0;}
+
+          .nav-link{text-align: center;}
+        }
+
+      }
+
+
+      .nav-link{
+        color: $site-clr-text-soft-pri;
+        border: 1px solid $site-clr-darkblue-400;
+
+        &.active{
+          color: $site-clr-white;
+          background-color: $site-clr-darkblue-400;
+        }
+      }
+    }
+
+    &.tab-content{}
+
+  }
+}
+/* Tabs UI Dark */

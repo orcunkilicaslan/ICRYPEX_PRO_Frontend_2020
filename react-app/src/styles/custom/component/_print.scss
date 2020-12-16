@@ -1,0 +1,10 @@
+// Component Print
+@media print{
+  
+  .component {
+    &-gradientbg {
+      background: none !important;
+    }
+  }
+
+}
