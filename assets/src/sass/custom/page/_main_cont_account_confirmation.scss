@@ -2,6 +2,9 @@
 .maincont-account{
 
   .accconfirm{
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
 
     &-upload{
       @include flexbox-display-flex();
@@ -41,7 +44,7 @@
       }
 
       .dropzone{
-        height: 180px;
+        height: 150px;
 
         + .btn{
           margin-top: $nav-link-padding-x;
@@ -58,6 +61,12 @@
       margin-top: $nav-link-padding-x*1.5;
       margin-bottom: $nav-link-padding-x*0.5;
       border-top: 1px solid $site-brdr-dark;
+    }
+
+    + .boxulinfolist{
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
   }

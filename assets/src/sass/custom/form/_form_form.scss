@@ -218,6 +218,7 @@
   fieldset{
     legend{
       @include responsive-font-size($var-custom-font-size-base);
+      font-weight: $var-custom-font-weight-bold;
       margin-bottom: $form-group-margin-bottom*1.5;
 
       + .labelfocustop{

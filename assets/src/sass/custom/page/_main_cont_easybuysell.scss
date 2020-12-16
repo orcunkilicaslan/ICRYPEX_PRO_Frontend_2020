@@ -1,10 +1,12 @@
 
 .maincont-easybuysell{
   width: 100%;
-  max-width: 660px;
   margin-top: 5%;
 
   .easybuysell{
+    max-width: 660px;
+    margin-left: auto;
+    margin-right: auto;
 
     &-tabs{
       margin-bottom: $grid-gutter-width*4;
