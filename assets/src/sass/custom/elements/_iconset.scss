@@ -60,6 +60,16 @@
       &.sm-info{background-position: calc(-16px*7) -14px;}
       &.sm-question{background-position: calc(-16px*8) -14px;}
       &.sm-check{background-position: calc(-16px*9) -14px;}
+
+      &.infoiconbox{
+        cursor: pointer;
+        @include scale(1.1);
+        @include transition-multiple(all 0.15s ease-in-out);
+
+        &:hover{
+          @include svg-filter(100%, 0, 300, 300%);
+        }
+      }
     }
 
     &.icon20{

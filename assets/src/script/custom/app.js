@@ -1,6 +1,4 @@
 
-import PerfectScrollbar from 'perfect-scrollbar';
-
 /* Header News Ticker Start - https://codepen.io/dheerajkawatra/pen/gwdoEJ */
 (function() {
 
@@ -29,6 +27,8 @@ import PerfectScrollbar from 'perfect-scrollbar';
 /* Header News Ticker End */
 
 /* PerfectScrollbar General and Table Multiple Start */
+import PerfectScrollbar from 'perfect-scrollbar';
+
 document.addEventListener('DOMContentLoaded',()=>{
 
 
@@ -84,6 +84,20 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 });
 /* PerfectScrollbar General and Table Multiple End */
+
+/* Dropzone Multiple Start */
+import Dropzone from 'dropzone';
+
+const dzoneGeneral = document.querySelectorAll(".dropzone");
+for (let iDz = 0; iDz < dzoneGeneral.length; iDz++) {
+
+    var dzoneMultiple = new Dropzone(dzoneGeneral[iDz], {
+        thumbnailWidth: null,
+        thumbnailHeight: null
+    });
+
+}
+/* Dropzone Multiple End */
 
 /* Progress Range Start - https://css-tricks.com/value-bubbles-for-range-inputs */
 const allRanges = document.querySelectorAll(".rangeprogress");

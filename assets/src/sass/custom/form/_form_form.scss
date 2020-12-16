@@ -52,7 +52,7 @@
       //@include flexbox-align-items(center);
       @include flexbox-justify-content(space-between);
       @include flexbox-flex(0 0 auto);
-      width: auto;
+      //width: auto;
       max-width: 100%;
     }
   }
