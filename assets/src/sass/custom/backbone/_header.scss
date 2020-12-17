@@ -292,24 +292,31 @@ $headlogo-clr-red:                $site-clr-red;
 /* Dark Theme */
 body#{$themedarkclassname}{
 
-  .header{
-    &-right{
-      &-sett{
-        &-theme{
+  .header-right-sett-theme .switchthemebg{
+    .lightsidesvg path{
+      fill: $site-brdr-dark-opacity;
+    }
 
-          .switchthemebg{
-            .lightsidesvg path{
-              fill: $site-brdr-dark-opacity;
-            }
-
-            .darksidesvg path{
-              fill: $site-clr-green;
-            }
-          }
-        }
-      }
+    .darksidesvg path{
+      fill: $site-clr-green;
     }
   }
 
 }
 /* Dark Theme */
+
+/* Light Theme */
+body#{$themelightclassname}{
+
+  .header-right-sett-theme .switchthemebg{
+    .lightsidesvg path{
+      fill: $site-clr-green;
+    }
+
+    .darksidesvg path{
+      fill: $site-brdr-dark-opacity;
+    }
+  }
+
+}
+/* Light Theme */

@@ -1,17 +1,19 @@
 # ICRYPEX PRO Frontend
 
 #### Web Public Area Frontend List
- - [Home_Page](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Home_Page.html)
- - [Kolay_Al_Step_01](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Al_Step_01.html)
- - [Kolay_Al_Step_02](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Al_Step_02.html)
- - [Kolay_Al_Step_03](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Al_Step_03.html)
- - [Kolay_Al_Step_04](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Al_Step_04.html)
- - [Kolay_Sat_Step_01](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Sat_Step_01.html)
- - [Kolay_Sat_Step_02](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Sat_Step_02.html)
- - [Kolay_Sat_Step_03](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Sat_Step_03.html)
- - [Kolay_Sat_Step_04](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Sat_Step_04.html)
- - [Account_Profile](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Account_Profile.html)
- - [Account_Confirmation](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Account_Confirmation.html)
+- [Home_Page](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Home_Page.html)
+- [Kolay_Al_Step_01](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Al_Step_01.html)
+- [Kolay_Al_Step_02](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Al_Step_02.html)
+- [Kolay_Al_Step_03](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Al_Step_03.html)
+- [Kolay_Al_Step_04](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Al_Step_04.html)
+- [Kolay_Sat_Step_01](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Sat_Step_01.html)
+- [Kolay_Sat_Step_02](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Sat_Step_02.html)
+- [Kolay_Sat_Step_03](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Sat_Step_03.html)
+- [Kolay_Sat_Step_04](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Sat_Step_04.html)
+- [Account_Profile](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Account_Profile.html)
+- [Account_Confirmation](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Account_Confirmation.html)
+- [Account_Assets](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Account_Assets.html)
+
    
 
 # NodeJS Kurulumu

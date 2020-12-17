@@ -1,0 +1,195 @@
+
+.maincont-account{
+
+  .accassets{
+    max-width: 990px;
+    margin-left: auto;
+    margin-right: auto;
+
+    &-distribution{
+
+      .assetsdist{
+        @include flexbox-display-flex();
+        @include flexbox-align-items(center);
+        width: 100%;
+        height: 100%;
+        background-color: $site-clr-darkblue-600;
+        padding: $nav-link-padding-x $nav-link-padding-x*1.5;
+        border: 1px solid $site-brdr-dark;
+        @include border-radius($var-custom-border-radius-lg*4);
+
+        &-donut{
+          @include flexbox-flex(0 0 auto);
+          width: auto;
+          max-width: 100%;
+          margin-right: $nav-link-padding-x*2;
+          position: relative;
+
+          .asssetdonutchrt{
+            width: 170px;
+            height: 170px;
+          }
+
+          .asssetdonutinfo{
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            padding: 24px;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            &-box{
+              background-color: $site-clr-darkblue-400;
+              width: 100%;
+              height: 100%;
+              padding: 25px 8px;
+              border: 1px solid lighten($site-clr-darkblue-400, 20%);
+              @include border-radius(100%);
+              display: block;
+
+              h6{margin-bottom: 2px;}
+
+              h6, p{
+                color: $site-clr-text-soft-sec;
+                @include responsive-font-size($var-custom-font-size-base * 1.08);
+                font-weight: $var-custom-font-weight-normal;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+              }
+
+              h6 + p{
+                color: $site-clr-white;
+              }
+
+              p + p{
+                padding-top: 2px;
+                margin-top: 2px;
+                border-top: 1px solid lighten($site-clr-darkblue-400, 20%);
+              }
+            }
+          }
+        }
+
+        &-list{
+          @include flexbox-flex-basis(0);
+          @include flexbox-flex-grow(1);
+          max-width: 100%;
+
+          h6{color: lighten($site-clr-text-soft-sec, 25%);}
+
+          h6, p{
+            @include responsive-font-size($var-custom-font-size-base);
+            font-weight: $var-custom-font-weight-normal;
+            margin: 0;
+          }
+
+          .asssetalllist{
+            @include flexbox-display-flex();
+            @include flexbox-flex-wrap(wrap);
+            line-height: 1;
+
+            > li{
+              @include flexbox-display-flex();
+              @include flexbox-align-items(center);
+              @include flexbox-flex(0 0 calc(100%/4));
+              max-width: calc(100%/4);
+              padding: 10px 0;
+
+              .circle{
+                @include flexbox-flex(0 0 auto);
+                width: auto;
+                padding: 5px;
+                margin-right: 6px;
+                border: 2px solid $site-clr-darkblue-400;
+                @include border-radius(100%);
+
+                > i{
+                  background-color: $site-clr-darkblue-400;
+                  width: 14px;
+                  height: 14px;
+                  border: 1px solid lighten($site-clr-darkblue-400, 20%);
+                  @include border-radius(100%);
+                  display: block;
+                }
+              }
+
+              .info{
+                @include flexbox-flex-basis(0);
+                @include flexbox-flex-grow(1);
+                max-width: 100%;
+                padding-right: 10px;
+              }
+            }
+          }
+        }
+
+        svg[class$="donut"] g[class$="a"] path, ul li[class$="try"] .circle{fill: $site-clr-curr-try; border-color: $site-clr-curr-try;}
+        svg[class$="donut"] g[class$="b"] path, ul li[class$="usd"] .circle{fill: $site-clr-curr-usd; border-color: $site-clr-curr-usd;}
+        svg[class$="donut"] g[class$="c"] path, ul li[class$="btc"] .circle{fill: $site-clr-curr-btc; border-color: $site-clr-curr-btc;}
+        svg[class$="donut"] g[class$="d"] path, ul li[class$="ltc"] .circle{fill: $site-clr-curr-ltc; border-color: $site-clr-curr-ltc;}
+        svg[class$="donut"] g[class$="e"] path, ul li[class$="eth"] .circle{fill: $site-clr-curr-eth; border-color: $site-clr-curr-eth;}
+        svg[class$="donut"] g[class$="f"] path, ul li[class$="xrp"] .circle{fill: $site-clr-curr-xrp; border-color: $site-clr-curr-xrp;}
+        svg[class$="donut"] g[class$="g"] path, ul li[class$="bat"] .circle{fill: $site-clr-curr-bat; border-color: $site-clr-curr-bat;}
+        svg[class$="donut"] g[class$="h"] path, ul li[class$="link"] .circle{fill: $site-clr-curr-link; border-color: $site-clr-curr-link;}
+        svg[class$="donut"] g[class$="i"] path, ul li[class$="xlm"] .circle{fill: $site-clr-curr-xlm; border-color: $site-clr-curr-xlm;}
+        svg[class$="donut"] g[class$="j"] path, ul li[class$="avax"] .circle{fill: $site-clr-curr-avax; border-color: $site-clr-curr-avax;}
+        svg[class$="donut"] g[class$="k"] path, ul li[class$="tryb"] .circle{fill: $site-clr-curr-tryb; border-color: $site-clr-curr-tryb;}
+        svg[class$="donut"] g[class$="l"] path, ul li[class$="mpay"] .circle{fill: $site-clr-curr-mpay; border-color: $site-clr-curr-mpay;}
+      }
+
+      + .accassets-address{
+        margin-top: $nav-link-padding-x*1.5;
+      }
+    }
+
+    &-address{
+
+      .accassaddr{
+
+        &-tabs{
+          margin-bottom: 5px;
+        }
+
+        &-tabcontent{
+          height: 100%;
+
+          > div[class*="tab"]{
+            display: none;
+            height: 100%;
+            margin: 0;
+
+            &.active{
+              display: block;
+            }
+          }
+
+          .sitetablediv{
+
+            .ico[class*="tbl"]{
+              width: 65px;
+              text-align: left;
+
+              > a{margin: 2px 5px 0;}
+            }
+            .add[class*="tbl"]{}
+            .ass[class*="tbl"],
+            .crt[class*="tbl"]{width: 150px;}
+            .btn[class*="tbl"]{
+              width: 200px;
+              text-align: right;
+
+              > a{
+                width: 80px;
+                margin: 0 5px;
+                padding: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

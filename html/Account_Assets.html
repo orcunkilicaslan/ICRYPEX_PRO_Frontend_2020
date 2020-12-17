@@ -1188,8 +1188,8 @@
                             <div id="pr_account" class="buysellaction-tabmarket tab-pane show active" role="tabpanel">
                                 <ul class="nav">
                                     <li class="nav-item"><a class="nav-link" href="Account_Profile.html" title="Profil" rel="bookmark">Profil</a></li>
-                                    <li class="nav-item"><a class="nav-link active" href="Account_Confirmation.html" title="Hesap Onayı &amp; Limit" rel="bookmark">Hesap Onayı &amp; Limit</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="Account_Assets.html" title="Varlıklar" rel="bookmark">Varlıklar</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="Account_Confirmation.html" title="Hesap Onayı &amp; Limit" rel="bookmark">Hesap Onayı &amp; Limit</a></li>
+                                    <li class="nav-item"><a class="nav-link active" href="Account_Assets.html" title="Varlıklar" rel="bookmark">Varlıklar</a></li>
                                     <li class="nav-item"><a class="nav-link" href="Account_Commision.html" title="Komisyon Oranları" rel="bookmark">Komisyon Oranları</a></li>
                                     <li class="nav-item"><a class="nav-link" href="Account_Notification.html" title="Bildirimler" rel="bookmark">Bildirimler</a></li>
                                     <li class="nav-item"><a class="nav-link" href="Account_Activities.html" title="Hesap Hareketleri" rel="bookmark">Hesap Hareketleri</a></li>
@@ -1209,85 +1209,225 @@
                         </div>
                         <div class="maincont-box-cont">
                             <div class="maincont-account">
-                                <div class="mcontbox accconfirm">
+                                <div class="mcontbox accassets">
                                     <div class="mcontbox-title">
-                                        <h3>Birinci Seviye Bilgileri</h3>
-                                        <p><span class="sitecolortextpri">Limit:</span> Günlük <span class="sitecolortextpri">0-100.000 TRY</span>, Aylık <span class="sitecolortextpri">0-1.000.000 TRY</span> veya kripto para karşılığı <i class="icon-sprtsmiconclrd icon16 sm-question ml-1"></i></p>
+                                        <h3>Varlıklar</h3>
+                                        <p><i class="icon-sprtsmiconclrd icon16 sm-wallet mr-1"></i> Yaklaşık Olarak <span class="sitecolortextpri">1.350.750,00 TRY</span> / <span class="sitecolortextpri">44.815,00 BTC</span></p>
                                     </div>
                                     <div class="mcontbox-cont">
-                                        <div class="accconfirm-upload siteformui">
-                                            <div class="accconfirm-upload-col">
-                                                <div class="formflexlabel">
-                                                    <label>Kimlik Ön Yüzü</label>
-                                                    <i class="icon-sprtsmiconclrd icon16 sm-question infoiconbox" data-toggle="popover" data-trigger="focus" tabindex="0" data-container="body" data-html="true" data-placement="bottom" data-content="
-                                                <div class='tooltipbox popoversm'>
-                                                    <div class='tooltipbox-head'><div class='tooltipbox-head-col'>Kimlik Ön Yüzü</div><div class='tooltipbox-head-col'>Destek 0850 255 1079</div></div>
-                                                    <div class='tooltipbox-body'><p>Ehliyet ve Kimlik Kriterleri: Üzerinde TC kimlik numarası yazıyor olmalı, Son 10 yılda alınmış olmalı, Fotoğraflı, deforme olmamış ve bilgiler okunabiliyor olmalı</p></div>
-                                                </div>
-                                                "></i>
-                                                </div>
-                                                <form class="dropzone" action="/file-upload" autocomplete="off" novalidate="">
-                                                    <input type="hidden" name="filetype" value="1">
-                                                    <div class="dz-message" data-dz-message="">
-                                                        <i class="dz-message-icon"></i>
-                                                        <span class="dz-message-btxt">Sürükle &amp; Bırak</span>
-                                                        <span class="dz-message-stxt">[JPG, PNG]<br />Maks 1MB</span>
+                                        <div class="accassets-distribution">
+                                            <div class="boxwrpsmtitle">Varlık Dökümü</div>
+                                            <div class="assetsdist">
+                                                <div class="assetsdist-donut">
+                                                    <div class="asssetdonutchrt ct-chart"></div>
+                                                    <div class="asssetdonutinfo">
+                                                        <div class="asssetdonutinfo-box">
+                                                            <h6>Toplam</h6>
+                                                            <p>1.350.750,00 TRY</p>
+                                                            <p>0.0028200 BTC</p>
+                                                        </div>
                                                     </div>
-                                                </form>
-                                                <button class="btn btn-primary w-100">Dosya Seç</button>
-                                            </div>
-                                            <div class="accconfirm-upload-col">
-                                                <div class="formflexlabel">
-                                                    <label>Kimlik Arka Yüzü</label>
-                                                    <i class="icon-sprtsmiconclrd icon16 sm-question infoiconbox" data-toggle="popover" data-trigger="focus" tabindex="0" data-container="body" data-html="true" data-placement="bottom" data-content="
-                                                <div class='tooltipbox popoversm'>
-                                                    <div class='tooltipbox-head'><div class='tooltipbox-head-col'>Kimlik Arka Yüzü</div><div class='tooltipbox-head-col'>Destek 0850 255 1079</div></div>
-                                                    <div class='tooltipbox-body'><p>Ehliyet ve Kimlik Kriterleri: Üzerinde TC kimlik numarası yazıyor olmalı, Son 10 yılda alınmış olmalı, Fotoğraflı, deforme olmamış ve bilgiler okunabiliyor olmalı</p></div>
                                                 </div>
-                                                "></i>
+                                                <div class="assetsdist-list">
+                                                    <ul class="asssetalllist">
+                                                        <li class="asssetcurr-try">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>TRY</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-usd">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>USD</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-btc">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>BTC</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-ltc">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>LTC</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-eth">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>ETH</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-xrp">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>XRP</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-bat">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>BAT</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-link">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>LINK</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-xlm">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>XLM</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-avax">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>AVAX</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-tryb">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>TRYB</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                        <li class="asssetcurr-mpay">
+                                                            <div class="circle"><i></i></div>
+                                                            <div class="info"><h6>MPAY</h6><p>0.00000000</p></div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
-                                                <form class="dropzone" action="/file-upload" autocomplete="off" novalidate="">
-                                                    <input type="hidden" name="filetype" value="1">
-                                                    <div class="dz-message" data-dz-message="">
-                                                        <i class="dz-message-icon"></i>
-                                                        <span class="dz-message-btxt">Sürükle &amp; Bırak</span>
-                                                        <span class="dz-message-stxt">[JPG, PNG]<br />Maks 1MB</span>
-                                                    </div>
-                                                </form>
-                                                <button class="btn btn-primary w-100">Dosya Seç</button>
-                                            </div>
-                                            <div class="accconfirm-upload-col">
-                                                <div class="formflexlabel">
-                                                    <label>Dilekçeli Fotoğraf</label>
-                                                    <i class="icon-sprtsmiconclrd icon16 sm-question infoiconbox" data-toggle="popover" data-trigger="focus" tabindex="0" data-container="body" data-html="true" data-placement="bottom" data-content="
-                                                <div class='tooltipbox popoversm'>
-                                                    <div class='tooltipbox-head'><div class='tooltipbox-head-col'>Dilekçeli Fotoğraf</div><div class='tooltipbox-head-col'>Destek 0850 255 1079</div></div>
-                                                    <div class='tooltipbox-body'><img class='d-block' src='../assets/img/elements/popover_selfie_sample_image.jpg' alt='' width='350' height='290' /><p class='desc'>Kimlik belgesi ile birlikte boş bir kağıda 'ICRYPEX 21.06.2019' (o günün tarihi) yazılması kaydı ile kişinin kafa ve omuz bölgesini içeren bir fotoğraf olmalıdır.</p></div>
-                                                </div>
-                                                "></i>
-                                                </div>
-                                                <form class="dropzone" action="/file-upload" autocomplete="off" novalidate="">
-                                                    <input type="hidden" name="filetype" value="1">
-                                                    <div class="dz-message" data-dz-message="">
-                                                        <i class="dz-message-icon"></i>
-                                                        <span class="dz-message-btxt">Sürükle &amp; Bırak</span>
-                                                        <span class="dz-message-stxt">[JPG, PNG]<br />Maks 1MB</span>
-                                                    </div>
-                                                </form>
-                                                <button class="btn btn-primary w-100">Dosya Seç</button>
                                             </div>
                                         </div>
-                                        <div class="accconfirm-btmbtn">
-                                            <button class="btn btn-success w-50" type="button">KAYDET</button>
+                                        <div class="accassets-address">
+                                            <div class="boxwrpsmtitle">Adresler</div>
+                                            <div class="accassaddr">
+                                                <div class="accassaddr-tabs sitetabs nav btn-group" role="tablist">
+                                                    <a class="btn btn-secondary active" href="#accassaddr_btc" data-toggle="tab" role="tab" aria-selected="true">BTC</a>
+                                                    <a class="btn btn-secondary" href="#accassaddr_ltc" data-toggle="tab" role="tab" aria-selected="false">LTC</a>
+                                                    <a class="btn btn-secondary" href="#accassaddr_eth" data-toggle="tab" role="tab" aria-selected="false">ETH</a>
+                                                    <a class="btn btn-secondary" href="#accassaddr_xrp" data-toggle="tab" role="tab" aria-selected="false">XRP</a>
+                                                    <a class="btn btn-secondary" href="#accassaddr_mpay" data-toggle="tab" role="tab" aria-selected="false">MPAY</a>
+                                                    <a class="btn btn-secondary" href="#accassaddr_bat" data-toggle="tab" role="tab" aria-selected="false">BAT</a>
+                                                    <a class="btn btn-secondary" href="#accassaddr_xlm" data-toggle="tab" role="tab" aria-selected="false">XLM</a>
+                                                    <a class="btn btn-secondary" href="#accassaddr_tryb" data-toggle="tab" role="tab" aria-selected="false">TRYB</a>
+                                                </div>
+                                                <div class="accassaddr-tabcontent sitetabs">
+                                                    <div id="accassaddr_btc" class="tab-pane fade show active" role="tabpanel">
+                                                        <div class="sitetablediv">
+                                                            <div class="tbl-thead">
+                                                                <div class="tbl-tr">
+                                                                    <div class="tbl-th aut ico"></div>
+                                                                    <div class="tbl-th fxd add">Adres</div>
+                                                                    <div class="tbl-th aut ass">Varlık</div>
+                                                                    <div class="tbl-th aut crt">Oluşturulma</div>
+                                                                    <div class="tbl-th aut btn"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tbl-tbody tbl-striped tbl-hovered">
+                                                                <div class="tbl-tr">
+                                                                    <div class="tbl-td aut ico">
+                                                                        <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                        <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress01"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                    </div>
+                                                                    <div class="tbl-td fxd add asaddress01">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
+                                                                    <div class="tbl-td aut ass">0.02003240 BTC</div>
+                                                                    <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                    <div class="tbl-td aut btn">
+                                                                        <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                        <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tbl-tr">
+                                                                    <div class="tbl-td aut ico">
+                                                                        <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                        <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress02"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                    </div>
+                                                                    <div class="tbl-td fxd add asaddress02">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
+                                                                    <div class="tbl-td aut ass">0.02003240 ETH</div>
+                                                                    <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                    <div class="tbl-td aut btn">
+                                                                        <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                        <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tbl-tr">
+                                                                    <div class="tbl-td aut ico">
+                                                                        <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                        <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress03"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                    </div>
+                                                                    <div class="tbl-td fxd add asaddress03">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
+                                                                    <div class="tbl-td aut ass">0.02003240 BTC</div>
+                                                                    <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                    <div class="tbl-td aut btn">
+                                                                        <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                        <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tbl-tr">
+                                                                    <div class="tbl-td aut ico">
+                                                                        <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                        <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress04"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                    </div>
+                                                                    <div class="tbl-td fxd add asaddress04">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
+                                                                    <div class="tbl-td aut ass">0.02003240 ETH</div>
+                                                                    <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                    <div class="tbl-td aut btn">
+                                                                        <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                        <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tbl-tr">
+                                                                    <div class="tbl-td aut ico">
+                                                                        <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                        <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress05"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                    </div>
+                                                                    <div class="tbl-td fxd add asaddress05">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
+                                                                    <div class="tbl-td aut ass">0.02003240 BTC</div>
+                                                                    <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                    <div class="tbl-td aut btn">
+                                                                        <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                        <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tbl-tr">
+                                                                    <div class="tbl-td aut ico">
+                                                                        <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                        <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress06"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                    </div>
+                                                                    <div class="tbl-td fxd add asaddress06">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
+                                                                    <div class="tbl-td aut ass">0.02003240 ETH</div>
+                                                                    <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                    <div class="tbl-td aut btn">
+                                                                        <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                        <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tbl-tr">
+                                                                    <div class="tbl-td aut ico">
+                                                                        <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmiconclrd icon16 sm-qrcode"></i></a>
+                                                                        <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress07"><i class="icon-sprtsmiconclrd icon16 sm-copybtn"></i></a>
+                                                                    </div>
+                                                                    <div class="tbl-td fxd add asaddress07">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
+                                                                    <div class="tbl-td aut ass">0.02003240 BTC</div>
+                                                                    <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                    <div class="tbl-td aut btn">
+                                                                        <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                        <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="accassaddr_ltc" class="tab-pane fade" role="tabpanel">
+                                                        <div>LTC</div>
+                                                    </div>
+                                                    <div id="accassaddr_eth" class="tab-pane fade" role="tabpanel">
+                                                        <div>ETH</div>
+                                                    </div>
+                                                    <div id="accassaddr_xrp" class="tab-pane fade" role="tabpanel">
+                                                        <div>XRP</div>
+                                                    </div>
+                                                    <div id="accassaddr_mpay" class="tab-pane fade" role="tabpanel">
+                                                        <div>MPAY</div>
+                                                    </div>
+                                                    <div id="accassaddr_bat" class="tab-pane fade" role="tabpanel">
+                                                        <div>BAT</div>
+                                                    </div>
+                                                    <div id="accassaddr_xlm" class="tab-pane fade" role="tabpanel">
+                                                        <div>XLM</div>
+                                                    </div>
+                                                    <div id="accassaddr_tryb" class="tab-pane fade" role="tabpanel">
+                                                        <div>TRYB</div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <ul class="boxulinfolist">
-                                    <li class="iconinfogray">
-                                        Dosya boyutları ile ilgili sorun yaşıyorsanız aşağıdaki sitelerden küçültme işlemi yapabilirsiniz:<br />
-                                        JPG ve PNG: <a class="urllink" href="https://www.imagecompressor.com/tr" title="" rel="external nofollow">www.imagecompressor.com/tr</a> PDF: <a class="urllink" href="https://www.smallpdf.com/tr/compress-pdf" title="" rel="external nofollow">www.smallpdf.com/tr/compress-pdf</a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
