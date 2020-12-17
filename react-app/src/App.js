@@ -10,7 +10,9 @@ function App() {
   return (
     <Fragment>
       <Header />
-      <div style={{ margin: "4rem 0", width: "100%", border: "1px solid red"}} />
+      <div
+        style={{ margin: "4rem 0", width: "100%", border: "1px solid red" }}
+      />
       <header className="header">
         <div className="container-fluid">
           <div className="row">
