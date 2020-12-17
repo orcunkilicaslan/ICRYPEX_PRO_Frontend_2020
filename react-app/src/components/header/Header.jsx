@@ -2,6 +2,7 @@ import classNames from "classnames";
 
 import HeaderLeft from "./HeaderLeft";
 import HeaderCenter from "./HeaderCenter";
+import HeaderRight from "./HeaderRight";
 
 export const Header = props => {
   const { className } = props;
@@ -12,6 +13,7 @@ export const Header = props => {
         <div className="row">
           <HeaderLeft />
           <HeaderCenter />
+          <HeaderRight />
         </div>
       </div>
     </header>
