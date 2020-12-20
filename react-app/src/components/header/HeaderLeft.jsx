@@ -13,7 +13,7 @@ const HeaderLeft = props => {
           ICRYPEX PRO
         </a>
       </div>
-      <div className="header-left-btn">
+      <div className="header-left-nav">
         <LinkButton
           size="sm"
           variant="primary"

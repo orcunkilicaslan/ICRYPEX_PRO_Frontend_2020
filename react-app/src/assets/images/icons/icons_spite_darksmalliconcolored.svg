@@ -113,23 +113,30 @@
     </g>
   </g>
   <g id="_14" data-name="14">
-    <g id="ShowHide" transform="translate(42)">
+    <g id="ArrowMore" transform="translate(56)">
       <rect id="icon_bg-15" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
+      <g id="blue_arrow" transform="translate(3.563 2.5)">
+        <path id="Arrow" d="M9,0,4.505,4.5,0,0" transform="translate(3.625 9) rotate(-90)" fill="none" stroke="#388cff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Arrow-2" data-name="Arrow" d="M9,0,4.505,4.5,0,0" transform="translate(0.25 9) rotate(-90)" fill="none" stroke="#388cff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+    </g>
+    <g id="ShowHide" transform="translate(42)">
+      <rect id="icon_bg-16" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
       <g id="eye_hidden" transform="translate(1 3)">
         <path id="Path" d="M28.964,12.46A2.544,2.544,0,1,0,31.508,15,2.544,2.544,0,0,0,28.964,12.46Z" transform="translate(-22.76 -10.769)" fill="none" stroke="#92a4c5" stroke-miterlimit="10" stroke-width="1" fill-rule="evenodd"/>
         <path id="Path-2" data-name="Path" d="M6.744.5A6.652,6.652,0,0,0,.54,4.734a6.663,6.663,0,0,0,12.41,0A6.648,6.648,0,0,0,6.744.5Z" transform="translate(-0.54 -0.5)" fill="none" stroke="#92a4c5" stroke-miterlimit="10" stroke-width="1" fill-rule="evenodd"/>
       </g>
     </g>
     <g id="Detail" transform="translate(28)">
-      <rect id="icon_bg-16" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
+      <rect id="icon_bg-17" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
       <path id="Detail-2" data-name="Detail" d="M10.185,10.761,8.7,9.267a2.527,2.527,0,0,1-1.287.363A2.686,2.686,0,0,1,4.78,6.9,2.686,2.686,0,0,1,7.41,4.165,2.686,2.686,0,0,1,10.04,6.9a2.782,2.782,0,0,1-.6,1.723l1.417,1.422a.515.515,0,0,1,.012.707.471.471,0,0,1-.68.012ZM5.742,6.9A1.7,1.7,0,0,0,7.41,8.631a1.609,1.609,0,0,0,.994-.35v0l.006,0A1.749,1.749,0,0,0,9.078,6.9a1.669,1.669,0,1,0-3.337,0ZM.481,10.572a.491.491,0,0,1-.481-.5V.5A.49.49,0,0,1,.481,0h9.21a.49.49,0,0,1,.481.5V3.691a.482.482,0,1,1-.962,0V1H.962V9.572H4.777a.5.5,0,0,1,0,1ZM2.324,8.659a.5.5,0,0,1,0-1H3.552a.5.5,0,0,1,0,1Zm0-1.917a.5.5,0,0,1,0-1H3.552a.5.5,0,0,1,0,1Zm0-1.915a.5.5,0,0,1,0-1H4.166a.5.5,0,0,1,0,1Zm0-1.915a.5.5,0,0,1,0-1H7.849a.5.5,0,0,1,0,1Z" transform="translate(2 2.4)" fill="#92a4c5" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
     </g>
     <g id="Delete" transform="translate(14)">
-      <rect id="icon_bg-17" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
+      <rect id="icon_bg-18" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
       <path id="Delete-2" data-name="Delete" d="M1.977,12a.522.522,0,0,1-.5-.538V2.489H.5A.521.521,0,0,1,0,1.952a.522.522,0,0,1,.5-.538H3.887V.538A.522.522,0,0,1,4.391,0H7.61a.522.522,0,0,1,.5.538v.876H11.5a.522.522,0,0,1,.5.538.521.521,0,0,1-.5.537h-.972v8.973a.521.521,0,0,1-.5.538Zm.5-1.075H9.517V2.489H2.481ZM4.9,1.414h2.21V1.076H4.9ZM7.54,8.831l-1.53-1.5-1.53,1.5a.549.549,0,1,1-.769-.785L5.225,6.565,3.71,5.081a.55.55,0,0,1,.77-.787l1.531,1.5,1.53-1.5a.551.551,0,0,1,.77.787L6.8,6.563,8.311,8.046a.55.55,0,1,1-.77.785Z" transform="translate(1 1)" fill="#e84a55" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
     </g>
     <g id="Edit">
-      <rect id="icon_bg-18" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
+      <rect id="icon_bg-19" data-name="icon_bg" width="14" height="14" fill="#fff" opacity="0"/>
       <path id="Edit-2" data-name="Edit" d="M.5,12a.5.5,0,0,1-.5-.491V1.991A.5.5,0,0,1,.5,1.5H5.786a.492.492,0,1,1,0,.983H1.006v8.535H9.733V7.158a.5.5,0,0,1,1.005,0v4.351a.5.5,0,0,1-.5.491ZM2.149,9.6V7.327L9.52.215a.636.636,0,0,1,.953,0L11.78,1.521a.641.641,0,0,1,.008.959L4.385,9.6Zm1-1.852V8.6h.832L8.9,3.87l-.85-.848ZM8.771,2.327l.851.85L10.844,2l-.851-.851Z" transform="translate(1 1)" fill="#388cff" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
     </g>
   </g>

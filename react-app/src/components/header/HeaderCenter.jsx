@@ -1,4 +1,3 @@
-import { ReactComponent as ShowAllArrow } from "../../assets/images/header/show_all_arrow.svg";
 
 const items = [
   "Murat Alaçayır: 01 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
@@ -11,12 +10,12 @@ const items = [
 const HeaderCenter = props => {
   return (
     <div className="header-center col">
-      <div className="siteformui">
+      <div className="newstickerbars siteformui">
         <div className="input-group input-group-sm">
           <div className="input-group-prepend">
             <span className="input-group-text newslefttxt">Haber & Analiz</span>
           </div>
-          <div className="newstickerbars form-control">
+          <div className="newstickerbars-box form-control">
             {items.map((item, idx) => {
               return (
                   <a
@@ -41,7 +40,7 @@ const HeaderCenter = props => {
                 data-target="#modalHeadNewsAll"
             >
               <span>Tümü</span>
-              <ShowAllArrow />
+              <i className="icon-sprtsmiconclrd icon14 sm-arrowmore"></i>
             </a>
           </div>
         </div>
