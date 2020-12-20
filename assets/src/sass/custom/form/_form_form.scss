@@ -389,7 +389,7 @@
 /* Form UI Soft */
 
 /* Form UI Dark */
-body#{$themedarkclassname}{
+#{$themedarkclassname}{
   .siteformui{
 
     @include placeholder{
