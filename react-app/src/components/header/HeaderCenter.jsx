@@ -16,34 +16,34 @@ const HeaderCenter = props => {
           <div className="input-group-prepend">
             <span className="input-group-text newslefttxt">Haber & Analiz</span>
           </div>
-        </div>
-        <div className="newstickerbars form-control">
-          {items.map((item, idx) => {
-            return (
-              <a
-                key={idx}
-                className="newstickerbars-item"
+          <div className="newstickerbars form-control">
+            {items.map((item, idx) => {
+              return (
+                  <a
+                      key={idx}
+                      className="newstickerbars-item"
+                      href="#"
+                      title=""
+                      data-toggle="modal"
+                      data-target="#modalHeadNewsAll"
+                  >
+                    {item}
+                  </a>
+              );
+            })}
+          </div>
+          <div className="input-group-append">
+            <a
+                className="input-group-text newsallbtn"
                 href="#"
-                title=""
+                title="Tümü"
                 data-toggle="modal"
                 data-target="#modalHeadNewsAll"
-              >
-                {item}
-              </a>
-            );
-          })}
-        </div>
-        <div className="input-group-append">
-          <a
-            className="input-group-text newsallbtn"
-            href="#"
-            title="Tümü"
-            data-toggle="modal"
-            data-target="#modalHeadNewsAll"
-          >
-            <span>Tümü</span>
-            <ShowAllArrow />
-          </a>
+            >
+              <span>Tümü</span>
+              <ShowAllArrow />
+            </a>
+          </div>
         </div>
       </div>
     </div>
