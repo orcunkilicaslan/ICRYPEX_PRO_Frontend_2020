@@ -1,7 +1,6 @@
 import { ReactComponent as SideLight } from "../../assets/images/header/header_theme_sidelight.svg";
 import { ReactComponent as SideDark } from "../../assets/images/header/header_theme_sidedark.svg";
 import { LinkButton } from "../LinkButton.jsx";
-import "./HeaderCenter";
 
 const HeaderRight = props => {
   return (
@@ -16,7 +15,7 @@ const HeaderRight = props => {
                     id="headThemeColor"
                     className="custom-control-input"
                     type="checkbox"
-                    checked
+                    defaultChecked
                 />
                 <label htmlFor="headThemeColor" className="custom-control-label" />
             </div>

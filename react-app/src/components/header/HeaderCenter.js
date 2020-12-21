@@ -4,7 +4,7 @@
 
   setInterval(function() {
 
-    const newsTickerBarsArea = document.querySelector('.newstickerbars .newstickerbars-box');
+    const newsTickerBarsArea = document.querySelector('.newstickerbars-box');
     const newsTickerBarsItem = newsTickerBarsArea.querySelectorAll('.newstickerbars-item');
 
     for (let i = 0; i < newsTickerBarsItem.length; i++) {

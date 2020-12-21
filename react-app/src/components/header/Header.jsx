@@ -1,8 +1,8 @@
 import classNames from "classnames";
 
-import HeaderLeft from "./HeaderLeft";
-import HeaderCenter from "./HeaderCenter";
-import HeaderRight from "./HeaderRight";
+import HeaderLeft from "./HeaderLeft.jsx";
+import HeaderCenter from "./HeaderCenter.jsx";
+import HeaderRight from "./HeaderRight.jsx";
 
 export const Header = props => {
   const { className } = props;

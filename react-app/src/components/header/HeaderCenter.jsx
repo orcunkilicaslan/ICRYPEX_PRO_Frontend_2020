@@ -1,3 +1,4 @@
+import "./HeaderCenter.js";
 
 const items = [
   "Murat Alaçayır: 01 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
