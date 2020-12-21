@@ -32,11 +32,11 @@
         position: relative;
       }
 
-      .lightsidesvg{
+      .sidelightsvg{
         left: -7px;
       }
 
-      .darksidesvg{
+      .sidedarksvg{
         right: 0;
       }
     }
@@ -139,8 +139,8 @@
 #{$themedarkclassname}{
 
   .header .header-right-theme .switchthemebg{
-    .lightsidesvg path{fill: $site-brdr-dark-opacity;}
-    .darksidesvg path{fill: $site-clr-green;}
+    .sidelightsvg path{fill: $site-brdr-dark-opacity;}
+    .sidedarksvg path{fill: $site-clr-green;}
   }
 
 }
@@ -150,8 +150,8 @@
 #{$themelightclassname}{
 
   .header .header-right-theme .switchthemebg{
-    .lightsidesvg path{fill: $site-clr-green;}
-    .darksidesvg path{fill: $site-brdr-dark-opacity;}
+    .sidelightsvg path{fill: $site-clr-green;}
+    .sidedarksvg path{fill: $site-brdr-dark-opacity;}
   }
 
 }
