@@ -12914,7 +12914,7 @@ button:-moz-focusring,
     background-image: url("data:image/svg+xml;base64,PHN2ZyBpZD0iY2FsZW5kYXIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiB2aWV3Qm94PSIwIDAgMTggMTgiPg0KICA8ZyBpZD0iR3JvdXBfMTYzIiBkYXRhLW5hbWU9Ikdyb3VwIDE2MyI+DQogICAgPGcgaWQ9Ikdyb3VwXzE2MiIgZGF0YS1uYW1lPSJHcm91cCAxNjIiPg0KICAgICAgPHBhdGggaWQ9IlBhdGhfNzQ3IiBkYXRhLW5hbWU9IlBhdGggNzQ3IiBkPSJNMjc5LDI4MC4wNTlhMS40MDgsMS40MDgsMCwwLDAsMS40MDYsMS40MDZoMS42NTJhMS40MDgsMS40MDgsMCwwLDAsMS40MDYtMS40MDZ2LTEuNjUyQTEuNDA4LDEuNDA4LDAsMCwwLDI4Mi4wNTksMjc3aC0xLjY1MkExLjQwOCwxLjQwOCwwLDAsMCwyNzksMjc4LjQwNlptMS40MDYtMS42NTJoMS42NTJ2MS42NTJoLTEuNjUzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI2OS4xOTEgLTI2Ny4yNjIpIiBmaWxsPSIjMTI0MDdkIi8+DQogICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzIyIiBkYXRhLW5hbWU9IkVsbGlwc2UgMjIiIGN4PSIwLjUiIGN5PSIwLjUiIHI9IjAuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMgNykiIGZpbGw9IiMxMjQwN2QiLz4NCiAgICAgIDxjaXJjbGUgaWQ9IkVsbGlwc2VfMjMiIGRhdGEtbmFtZT0iRWxsaXBzZSAyMyIgY3g9IjAuNSIgY3k9IjAuNSIgcj0iMC41IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMCA3KSIgZmlsbD0iIzEyNDA3ZCIvPg0KICAgICAgPHBhdGggaWQ9IlBhdGhfNzQ4IiBkYXRhLW5hbWU9IlBhdGggNzQ4IiBkPSJNMTcuMywxMi4zNzVhLjcuNywwLDAsMCwuNy0uN1Y0LjIxOWEyLjgxNiwyLjgxNiwwLDAsMC0yLjgxMi0yLjgxMmgtLjkxNFYuN2EuNy43LDAsMCwwLTEuNDA2LDB2LjdoLTMuMlYuN0EuNy43LDAsMCwwLDguMjYyLjd2LjdINS4xVi43QS43LjcsMCwwLDAsMy42OTEuN3YuN0gyLjgxM0EyLjgxNiwyLjgxNiwwLDAsMCwwLDQuMjE5VjE1LjE4OEEyLjgxNiwyLjgxNiwwLDAsMCwyLjgxMywxOEgxNS4xODhBMi44MTYsMi44MTYsMCwwLDAsMTgsMTUuMTg4YS43LjcsMCwwLDAtMS40MDYsMCwxLjQwOCwxLjQwOCwwLDAsMS0xLjQwNiwxLjQwNkgyLjgxM2ExLjQwOCwxLjQwOCwwLDAsMS0xLjQwNi0xLjQwNlY0LjIxOUExLjQwOCwxLjQwOCwwLDAsMSwyLjgxMywyLjgxM2guODc5di43YS43LjcsMCwwLDAsMS40MDYsMHYtLjdIOC4yNjJ2LjdhLjcuNywwLDAsMCwxLjQwNiwwdi0uN2gzLjJ2LjdhLjcuNywwLDAsMCwxLjQwNiwwdi0uN2guOTE0YTEuNDA4LDEuNDA4LDAsMCwxLDEuNDA2LDEuNDA2djcuNDUzQS43LjcsMCwwLDAsMTcuMywxMi4zNzVaIiBmaWxsPSIjMTI0MDdkIi8+DQogICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI0IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjQiIGN4PSIwLjUiIGN5PSIwLjUiIHI9IjAuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNCAxMykiIGZpbGw9IiMxMjQwN2QiLz4NCiAgICAgIDxjaXJjbGUgaWQ9IkVsbGlwc2VfMjUiIGRhdGEtbmFtZT0iRWxsaXBzZSAyNSIgY3g9IjAuNSIgY3k9IjAuNSIgcj0iMC41IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0IDcpIiBmaWxsPSIjMTI0MDdkIi8+DQogICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSIwLjUiIGN5PSIwLjUiIHI9IjAuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNCAxMCkiIGZpbGw9IiMxMjQwN2QiLz4NCiAgICAgIDxjaXJjbGUgaWQ9IkVsbGlwc2VfMjciIGRhdGEtbmFtZT0iRWxsaXBzZSAyNyIgY3g9IjAuNSIgY3k9IjAuNSIgcj0iMC41IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3IDEwKSIgZmlsbD0iIzEyNDA3ZCIvPg0KICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV8yOCIgZGF0YS1uYW1lPSJFbGxpcHNlIDI4IiBjeD0iMC41IiBjeT0iMC41IiByPSIwLjUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDcgNykiIGZpbGw9IiMxMjQwN2QiLz4NCiAgICAgIDxjaXJjbGUgaWQ9IkVsbGlwc2VfMjkiIGRhdGEtbmFtZT0iRWxsaXBzZSAyOSIgY3g9IjAuNSIgY3k9IjAuNSIgcj0iMC41IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3IDEzKSIgZmlsbD0iIzEyNDA3ZCIvPg0KICAgIDwvZz4NCiAgPC9nPg0KPC9zdmc+DQo="); }
 
 .icon-sprtsmiconclrd {
-  background-image: url(../../img/icons/icons_spite_darksmalliconcolored.svg?v=u4323db33);
+  background-image: url(../../img/icons/icons_spite_darksmalliconcolored.svg?v=uc79cc59d);
   background-repeat: no-repeat;
   background-position: 0 0;
   display: inline-block;
@@ -12990,7 +12990,7 @@ button:-moz-focusring,
         background-position: calc(-20px*3) -30px; }
 
 .icon-sprtbgiconclrd {
-  background-image: url(../../img/icons/icons_spite_darkbigiconcolored.svg?v=u4323db33);
+  background-image: url(../../img/icons/icons_spite_darkbigiconcolored.svg?v=uc79cc59d);
   background-repeat: no-repeat;
   background-position: 0 0;
   display: inline-block;
@@ -13798,7 +13798,7 @@ html.themedark .sitetabs.nav-pills .nav-link {
   .header-left-logo {
     margin: 0 5px; }
     .header-left-logo .headlogo {
-      background-image: url(../../img/header/header_pro_logo.svg?v=u4323db33);
+      background-image: url(../../img/header/header_pro_logo.svg?v=uc79cc59d);
       background-repeat: no-repeat;
       background-size: contain;
       background-position: left center;
@@ -13872,6 +13872,8 @@ html.themedark .sitetabs.nav-pills .nav-link {
     padding: 0 10px;
     position: relative; }
     .header-right-theme .custom-switch .custom-control-label::after {
+      background-color: #15B583; }
+    .header-right-theme .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
       background-color: #15B583; }
     .header-right-theme .custom-switch .custom-control-input:checked ~ .custom-control-label::before {
       background-color: transparent; }
@@ -15748,7 +15750,7 @@ body {
     .mainbox-openorders .openorders-tabdandw .depositandwithdraw .dandwtab-tabcrypto-form .formbttm .btn {
       width: 100%; }
   .mainbox-openorders .openorders-tabdandw .depositandwithdraw .banksprttablogos {
-    background-image: url(../../img/icons/icons_spite_banklogos.svg?v=u4323db33);
+    background-image: url(../../img/icons/icons_spite_banklogos.svg?v=uc79cc59d);
     background-repeat: no-repeat;
     background-position: 0 0;
     display: inline-block;
@@ -15913,7 +15915,7 @@ body {
         margin-bottom: 0; }
       .maincont .boxulinfolist > li::before {
         content: "";
-        background-image: url(../../img/icons/icons_spite_darksmalliconcolored.svg?v=u4323db33);
+        background-image: url(../../img/icons/icons_spite_darksmalliconcolored.svg?v=uc79cc59d);
         background-repeat: no-repeat;
         background-position: 9999px 9999px;
         width: 16px;

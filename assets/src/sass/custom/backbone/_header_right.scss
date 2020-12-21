@@ -7,13 +7,9 @@
     padding: 0 10px;
     position: relative;
 
-    .custom-switch .custom-control-label::after{
-      background-color: $site-clr-green;
-    }
-
-    .custom-switch .custom-control-input:checked ~ .custom-control-label::before{
-      background-color: transparent;
-    }
+    .custom-switch .custom-control-label::after{background-color: $site-clr-green;}
+    .custom-switch .custom-control-input:checked ~ .custom-control-label::after{background-color: $site-clr-green;}
+    .custom-switch .custom-control-input:checked ~ .custom-control-label::before{background-color: transparent;}
 
     .switchthemebg{
       @include flexbox-display-flex();
@@ -32,13 +28,9 @@
         position: relative;
       }
 
-      .sidelightsvg{
-        left: -7px;
-      }
+      .sidelightsvg{left: -7px;}
 
-      .sidedarksvg{
-        right: 0;
-      }
+      .sidedarksvg{right: 0;}
     }
   }
 
