@@ -1,4 +1,4 @@
-import {IconSet} from "../IconSet";
+import { IconSet } from "../IconSet";
 
 const items = [
   "Murat Alaçayır: 01 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
@@ -19,35 +19,34 @@ const HeaderCenter = props => {
           <div className="newstickerbars-box form-control">
             {items.map((item, idx) => {
               return (
-                  <a
-                      key={idx}
-                      className="newstickerbars-item"
-                      href="#"
-                      title=""
-                      data-toggle="modal"
-                      data-target="#modalHeadNewsAll"
-                  >
-                    {item}
-                  </a>
+                <a
+                  key={idx}
+                  className="newstickerbars-item"
+                  href="#"
+                  title=""
+                  data-toggle="modal"
+                  data-target="#modalHeadNewsAll"
+                >
+                  {item}
+                </a>
               );
             })}
           </div>
           <div className="input-group-append">
             <a
-                className="input-group-text newsallbtn"
-                href="#"
-                title="Tümü"
-                data-toggle="modal"
-                data-target="#modalHeadNewsAll"
+              className="input-group-text newsallbtn"
+              href="#"
+              title="Tümü"
+              data-toggle="modal"
+              data-target="#modalHeadNewsAll"
             >
               <span>Tümü</span>
               <IconSet
-                  sprite="icon-sprtsmiconclrd"
-                  size="icon14"
-                  name="sm-arrowmore"
-                  variant=""
-              >
-              </IconSet>
+                sprite="icon-sprtsmiconclrd"
+                size="icon14"
+                name="sm-arrowmore"
+                variant=""
+              ></IconSet>
             </a>
           </div>
         </div>
