@@ -1,6 +1,7 @@
 import classNames from "classnames";
 
 export const IconSet = props => {
+
   const {
     className,
     sprite,
@@ -10,6 +11,7 @@ export const IconSet = props => {
     children,
     ...rest
   } = props;
+
   const icncls = classNames(className, {
     [`${sprite}`]: Boolean(sprite),
     [`${size}`]: Boolean(size),
@@ -18,9 +20,9 @@ export const IconSet = props => {
   });
 
   return (
-
   <i className={icncls} {...rest}>
     {children}
   </i>
   );
+
 };

@@ -1,6 +1,7 @@
 import classNames from "classnames";
 
 export const LinkButton = props => {
+
   const {
     className,
     href = "",
@@ -10,6 +11,7 @@ export const LinkButton = props => {
     children,
     ...rest
   } = props;
+
   const cls = classNames("btn", className, {
     [`btn-${size}`]: Boolean(size),
     [`btn-${variant}`]: Boolean(variant),
@@ -20,4 +22,5 @@ export const LinkButton = props => {
       {children}
     </a>
   );
+
 };
