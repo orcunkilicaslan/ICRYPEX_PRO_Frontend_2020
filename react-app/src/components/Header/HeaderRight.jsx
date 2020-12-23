@@ -34,7 +34,7 @@ const HeaderRight = props => {
             size="icon20"
             name="sm-pagefullscreen"
             variant=""
-          ></IconSet>
+          />
         </a>
         <a
           className="headsignedinicon support"
@@ -47,7 +47,7 @@ const HeaderRight = props => {
             size="icon20"
             name="sm-support"
             variant=""
-          ></IconSet>
+          />
         </a>
         <a
           className="headsignedinicon notif"

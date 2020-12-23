@@ -46,7 +46,7 @@ const HeaderCenter = props => {
                 size="icon14"
                 name="sm-arrowmore"
                 variant=""
-              ></IconSet>
+              />
             </a>
           </div>
         </div>
