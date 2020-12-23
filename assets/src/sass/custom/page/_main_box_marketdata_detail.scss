@@ -1,0 +1,16 @@
+
+.mainbox-marketdata{
+
+  .marketdata-detail{
+
+    .mddetailtable{
+      .sitetablediv{
+        .txt[class*="tbl"]{text-align: left;}
+        .chg[class*="tbl"]{text-align: right;}
+        .per[class*="tbl"]{width: 15px; text-align: center;}
+        @extend %extcurrperupdownlineicon;
+      }
+    }
+  }
+
+}

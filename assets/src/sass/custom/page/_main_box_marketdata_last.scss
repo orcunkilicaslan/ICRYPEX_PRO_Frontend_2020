@@ -1,0 +1,16 @@
+
+.mainbox-marketdata{
+
+  .marketdata-last{
+    .mdlasttable{
+      padding: 5px 0;
+
+      .sitetablediv{
+        .time[class*="tbl"]{text-align: left;}
+        .amnt[class*="tbl"],
+        .pric[class*="tbl"]{text-align: right;}
+      }
+    }
+  }
+
+}
