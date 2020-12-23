@@ -6,7 +6,7 @@ const HeaderLeft = props => {
       <div className="header-left-logo">
         <a
           className="headlogo"
-          href="Home_Page.html"
+          href="/"
           title="ICRYPEX PRO"
           rel="bookmark"
         >
@@ -17,7 +17,7 @@ const HeaderLeft = props => {
         <LinkButton
           size="sm"
           variant="primary"
-          href="Kolay_Al_Step_01.html"
+          href="/"
           title="Kolay AL-Sat"
         >
           Kolay AL-Sat
@@ -25,7 +25,7 @@ const HeaderLeft = props => {
         <LinkButton
           size="sm"
           variant="secondary"
-          href="Home_Page.html"
+          href="/"
           title="PRO Görünüm"
         >
           PRO Görünüm

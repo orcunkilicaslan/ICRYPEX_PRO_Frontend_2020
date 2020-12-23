@@ -1,3 +1,4 @@
+import {IconSet} from "../IconSet";
 
 const items = [
   "Murat Alaçayır: 01 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
@@ -40,7 +41,13 @@ const HeaderCenter = props => {
                 data-target="#modalHeadNewsAll"
             >
               <span>Tümü</span>
-              <i className="icon-sprtsmiconclrd icon14 sm-arrowmore"></i>
+              <IconSet
+                  sprite="icon-sprtsmiconclrd"
+                  size="icon14"
+                  name="sm-arrowmore"
+                  variant=""
+              >
+              </IconSet>
             </a>
           </div>
         </div>
