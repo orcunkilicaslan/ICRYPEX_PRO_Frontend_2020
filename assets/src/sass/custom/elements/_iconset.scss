@@ -6,6 +6,7 @@
 @import "../../plugin/option/mixin";
 
 .icon{
+  $iconclassname: &;
 
   &-svg{
     background-repeat: no-repeat;
@@ -27,8 +28,6 @@
     }
   }
 
-
-
   &-sprtsmiconclrd{
     background-image: url(#{$path-img-url-icons}/icons_spite_darksmalliconcolored.svg#{$cache-busting});
     background-repeat: no-repeat;
@@ -36,31 +35,31 @@
     display: inline-block;
     position: relative;
 
-    &.icon14{
+    &#{$iconclassname}-14{
       width: 14px;
       height: 14px;
 
-      &.sm-edit{background-position: calc(-14px*0) 0;}
-      &.sm-delete{background-position: calc(-14px*1) 0;}
-      &.sm-browse{background-position: calc(-14px*2) 0;}
-      &.sm-showhide{background-position: calc(-14px*3) 0;}
-      &.sm-arrowmore{background-position: calc(-14px*4) 0;}
+      &#{$iconclassname}-edit{background-position: calc(-14px*0) 0;}
+      &#{$iconclassname}-delete{background-position: calc(-14px*1) 0;}
+      &#{$iconclassname}-browse{background-position: calc(-14px*2) 0;}
+      &#{$iconclassname}-showhide{background-position: calc(-14px*3) 0;}
+      &#{$iconclassname}-arrowmore{background-position: calc(-14px*4) 0;}
     }
 
-    &.icon16{
+    &#{$iconclassname}-16{
       width: 16px;
       height: 16px;
 
-      &.sm-wallet{background-position: calc(-16px*0) -14px;}
-      &.sm-qrcode{background-position: calc(-16px*1) -14px;}
-      &.sm-copybtn{background-position: calc(-16px*2) -14px;}
-      &.sm-transfer{background-position: calc(-16px*3) -14px;}
-      &.sm-addbtn{background-position: calc(-16px*4) -14px;}
-      &.sm-change{background-position: calc(-16px*5) -14px;}
-      &.sm-bell{background-position: calc(-16px*6) -14px;}
-      &.sm-info{background-position: calc(-16px*7) -14px;}
-      &.sm-question{background-position: calc(-16px*8) -14px;}
-      &.sm-check{background-position: calc(-16px*9) -14px;}
+      &#{$iconclassname}-wallet{background-position: calc(-16px*0) -14px;}
+      &#{$iconclassname}-qrcode{background-position: calc(-16px*1) -14px;}
+      &#{$iconclassname}-copybtn{background-position: calc(-16px*2) -14px;}
+      &#{$iconclassname}-transfer{background-position: calc(-16px*3) -14px;}
+      &#{$iconclassname}-addbtn{background-position: calc(-16px*4) -14px;}
+      &#{$iconclassname}-change{background-position: calc(-16px*5) -14px;}
+      &#{$iconclassname}-bell{background-position: calc(-16px*6) -14px;}
+      &#{$iconclassname}-info{background-position: calc(-16px*7) -14px;}
+      &#{$iconclassname}-question{background-position: calc(-16px*8) -14px;}
+      &#{$iconclassname}-check{background-position: calc(-16px*9) -14px;}
 
       &.infoiconbox{
         cursor: pointer;
@@ -73,13 +72,13 @@
       }
     }
 
-    &.icon20{
+    &#{$iconclassname}-20{
       width: 20px;
       height: 20px;
 
-      &.sm-support{background-position: calc(-20px*0) -30px;}
-      &.sm-notif{background-position: calc(-20px*1) -30px;}
-      &.sm-pagefullscreen{
+      &#{$iconclassname}-support{background-position: calc(-20px*0) -30px;}
+      &#{$iconclassname}-notif{background-position: calc(-20px*1) -30px;}
+      &#{$iconclassname}-pagefullscreen{
         background-position: calc(-20px*2) -30px;
 
         &.hide{background-position: calc(-20px*2) -30px;}
@@ -96,23 +95,23 @@
     position: relative;
 
 
-    &.icon50gray{
+    &#{$iconclassname}-50gray{
       width: 50px;
       height: 50px;
 
-      &.bg-check{background-position: calc(-50px*0) 0;}
-      &.bg-close{background-position: calc(-50px*1) 0;}
-      &.bg-delete{background-position: calc(-50px*2) 0;}
-      &.bg-user{background-position: calc(-50px*3) 0;}
-      &.bg-newuser{background-position: calc(-50px*4) 0;}
+      &#{$iconclassname}-check{background-position: calc(-50px*0) 0;}
+      &#{$iconclassname}-close{background-position: calc(-50px*1) 0;}
+      &#{$iconclassname}-delete{background-position: calc(-50px*2) 0;}
+      &#{$iconclassname}-user{background-position: calc(-50px*3) 0;}
+      &#{$iconclassname}-newuser{background-position: calc(-50px*4) 0;}
     }
 
-    &.icon50clrd{
+    &#{$iconclassname}-50clrd{
       width: 50px;
       height: 50px;
 
-      &.bg-check{background-position: calc(-50px*0) -50px;}
-      &.bg-close{background-position: calc(-50px*1) -50px;}
+      &#{$iconclassname}-check{background-position: calc(-50px*0) -50px;}
+      &#{$iconclassname}-close{background-position: calc(-50px*1) -50px;}
     }
   }
 }
