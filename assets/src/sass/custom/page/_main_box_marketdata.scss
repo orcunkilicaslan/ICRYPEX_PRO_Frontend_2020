@@ -2,23 +2,12 @@
 .mainbox-marketdata{
 
   .marketdata{
-    @include flexbox-display-flex();
-    @include flexbox-flex-flow(column);
-    height: 100%;
 
-    &-tabs{
+    &-tabs{}
 
-      .tab-content{
-        @include flexbox-flex(1);
-        padding-left: 10px;
-        padding-right: 10px;
-
-        .tabcont-head{
-          color: $site-clr-white;
-          padding-bottom: 10px;
-        }
-      }
-
+    .tabcont-head{
+      color: $site-clr-white;
+      padding-bottom: 10px;
     }
 
     .sitetablediv{

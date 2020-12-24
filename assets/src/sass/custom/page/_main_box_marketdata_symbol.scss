@@ -2,6 +2,7 @@
 .mainbox-marketdata{
 
   .marketdata-symbol{
+    padding: 5px 10px;
 
     .tabcont-filterbar{
       @include flexbox-align-items(inherit);
