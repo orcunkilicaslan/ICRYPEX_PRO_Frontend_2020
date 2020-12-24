@@ -42,6 +42,8 @@
     background-color: transparent;
     @include border-radius($var-custom-border-radius);
 
+    /*
+
     > div[class*="tab"]{
       overflow: hidden;
       height: 100%;
@@ -51,6 +53,7 @@
         @include flexbox-flex-flow(column);
       }
     }
+    */
 
     .tabcont{
 
@@ -236,5 +239,11 @@
 
   .tab-content{
     @include flexbox-flex(1);
+
+    .tab-pane{
+      height: 100%;
+
+      > div{height: 100%;}
+    }
   }
 }
