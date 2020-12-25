@@ -1,0 +1,149 @@
+/* Components Variables Settings */
+$tableborderclr:              $global-table-border-color;
+$tableborderclr-focus:        darken($global-table-border-color, 10%);
+/* Components Variables Settings */
+
+.sitetable{
+  color: $site-clr-text-dark-sec;
+  margin: 0;
+
+  thead tr th, tbody tr td{
+    vertical-align: middle;
+    line-height: 1;
+  }
+
+  thead{
+    tr{
+      th{
+        @include responsive-font-size(1rem);
+        font-weight: $var-custom-btn-font-weight;
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+    }
+  }
+
+  tbody{
+    tr{
+
+      &.tdcolspan{
+        td{
+          background-color: $tableborderclr;
+          font-weight: $var-custom-btn-font-weight;
+        }
+      }
+
+      &:last-child{
+        td{
+          border-bottom: 1px solid transparent;
+        }
+      }
+
+      td{
+        @include responsive-font-size(1rem);
+        padding-top: 10px;
+        padding-bottom: 10px;
+        vertical-align: unset;
+      }
+    }
+  }
+
+  &.theadsoftdark{
+    thead{
+      tr{
+        th{
+          background-color: transparentize($tableborderclr, 0.50);
+        }
+      }
+    }
+  }
+
+  &.tbodyodd{
+    tbody{
+      tr{
+        &:nth-child(even){
+          background-color: transparentize($tableborderclr, 0.75);
+        }
+        td{}
+      }
+    }
+  }
+
+  &.smalltable{
+    thead{
+      tr{
+        th{
+          font-size: 14px;
+          padding-top: 9px;
+          padding-bottom: 9px;
+        }
+      }
+    }
+    tbody{
+      tr{
+        td{
+          font-size: 12px;
+          padding-top: 7px;
+          padding-bottom: 7px;
+        }
+      }
+    }
+  }
+
+  &.linetable{
+    thead tr th{
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+    tbody tr td{
+      padding-top: 12px;
+      padding-bottom: 12px;
+
+      .btn-sm{
+      }
+    }
+  }
+
+  &.hovertable{
+    thead tr th,
+    tbody tr td{
+      &:first-child{
+        padding-left: 2px;
+      }
+      &:last-child{
+        padding-right: 2px;
+      }
+    }
+
+    thead tr th{
+      border-bottom: none;
+    }
+
+    tbody tr{
+
+      &:first-child td{
+        border-top: 1px solid $tableborderclr;
+      }
+      &:hover{
+        td{
+          border-bottom: 1px solid;
+          border-color: $tableborderclr-focus;
+        }
+      }
+
+      &.tdcolspan{
+        &:hover{
+          td{
+            border-color: $tableborderclr;
+          }
+        }
+      }
+    }
+  }
+
+  &.fixedtable{table-layout: fixed;}
+
+  .centercell{text-align: center;}
+}

@@ -1,0 +1,163 @@
+/* Form UI New */
+.siteformui{
+
+  .labelfocustop{
+
+    > .row,
+    > .form-row{
+      margin-top: $form-group-margin-bottom * 1.5;
+
+      &:first-child{margin-top: 0 !important;}
+    }
+
+    .form-group{
+      background-color: $input-bg;
+      position: relative;
+      z-index: 0;
+      margin-top: $form-group-margin-bottom * 1.5;
+      @include border-radius($input-border-radius);
+
+      &:first-child{margin-top: 0 !important;}
+
+      label{
+        color: $input-color;
+        //background-color: $site-clr-darkblue-700;
+        @include font-size($input-font-size);
+        font-weight: $input-font-weight;
+        width: calc(100% - #{$input-padding-x*2});
+        margin: 0;
+        position:absolute;
+        //top: 10px;
+        left: $input-padding-x;
+        z-index: -1;
+        @include transition-multiple(all 0.3s ease-in-out);
+
+      }
+
+      .form-control{
+        background-color: transparent;
+        //width: 100%;
+
+        &:disabled,
+        &[readonly]{
+          background-color: $input-disabled-bg;
+        }
+
+        &:invalid ~ label{
+          top: 8px;
+        }
+
+        &:disabled ~ label,
+        &[readonly] ~ label,
+        &:focus ~ label,
+        &:focus-within ~ label,
+        &:valid ~ label{
+          color: $site-clr-white;
+          top: -9px;
+          z-index: 0;
+        }
+
+        &:focus ~ .bttmline:before,
+        &:focus ~ .bttmline:after{
+          width:50%;
+        }
+
+        &:focus ~ .bttmline:before,
+        &:focus ~ .bttmline:after{
+          background: $site-clr-red;
+        }
+
+        &:valid ~ .bttmline:before,
+        &:valid ~ .bttmline:after{
+          background: $site-clr-green;
+        }
+      }
+
+      .custom-select ~ label{
+        color: $site-clr-white;
+        top: -9px;
+        z-index: 3;
+      }
+    }
+
+    .input-group{
+
+      .input-group-prepend + .form-control{
+        &:invalid ~ label{
+          padding-left: inherit;
+        }
+      }
+
+      .form-control{
+
+        &:focus ~ label,
+        &:focus-within ~ label,
+        &:valid ~ label{
+          z-index: 3;
+          padding-left: 0 !important;
+        }
+      }
+
+      &.phonelabelgroup{
+
+        .input-group-prepend{
+
+          .custom-select{
+            width: 80px;
+          }
+
+          + .form-control{
+            padding-left: $input-padding-y*2;
+
+            &:invalid ~ label{
+              padding-left: 80px;
+            }
+          }
+        }
+      }
+
+      &.datebirthlabelgroup{
+        .custom-select ~ label{
+          color: $site-clr-white;
+          top: -9px;
+          z-index: 3;
+        }
+      }
+    }
+
+    .bttmline{
+      position: relative;
+      display: block;
+      z-index: 3;
+
+      &::before,
+      &::after {
+        content: "";
+        height: 1px;
+        width: 0;
+        bottom: 0;
+        position: absolute;
+        @include transition(all, 0.3s, ease-in-out);
+      }
+      &::before{left:50%;}
+      &::after{right:50%;}
+    }
+
+    .custom-control-input{
+      &:valid{
+        ~ .custom-control-label::before{border-color: $site-clr-green;}
+      }
+      &:invalid{
+        ~ .custom-control-label::before{border-color: $site-clr-red;}
+      }
+    }
+
+    &.form-row{
+      > div[class*="col"] label{
+        //padding-left: $form-grid-gutter-width / 2;
+      }
+    }
+  }
+
+}
+/* Form UI New */

@@ -1,0 +1,191 @@
+
+.maincont-easybuysell{
+  width: 100%;
+  margin-top: 5%;
+
+  .easybuysell{
+    max-width: 660px;
+    margin-left: auto;
+    margin-right: auto;
+
+    &-tabs{
+      margin-bottom: $grid-gutter-width*4;
+
+      .nav{
+
+        &-link{
+          padding: $nav-link-padding-y*1.38 $nav-link-padding-x*1.38;
+
+          &.active{
+            position: relative;
+          }
+        }
+
+        &-buy.active{
+          color: lighten($site-clr-green, 10%) !important;
+          background-color: transparentize($site-clr-green, 0.85) !important;
+          border-color: $site-clr-green !important;
+        }
+
+        &-sell.active{
+          color: lighten($site-clr-red, 10%) !important;
+          background-color: transparentize($site-clr-red, 0.85) !important;
+          border-color: $site-clr-red !important;
+        }
+      }
+    }
+
+    &-cont{}
+
+    &-form{
+
+      &-inputs{
+
+        .form-group{
+
+          .formflexlabel{
+            margin-bottom: $form-group-margin-bottom*0.75;
+
+            label{
+              color: $site-clr-white;
+            }
+
+            .labelassets{}
+
+            .labelprice{
+
+              svg.tildesm{
+                position: relative;
+                top: -1px;
+
+                path{fill: $site-clr-text-soft-sec;}
+              }
+            }
+          }
+
+          &.col-auto{
+            @include flexbox-display-flex();
+            @include flexbox-align-items(flex-end);
+
+            .inputchangeicon{
+              background-color: $site-clr-darkblue-400;
+              padding: 6px;
+              margin: 4px 6px;
+              @include border-radius(50%);
+
+              > i[class*="change"]{
+                display: block;
+              }
+            }
+          }
+
+          .form-control:disabled,
+          .form-control[readonly]{
+            color: $site-clr-text-soft-sec;
+            background-color: $input-bg;
+
+            &:focus{
+              border-color: $input-border-color;
+            }
+          }
+          .custom-select:disabled{
+            background-color: $bootstrap-custom-select-bg;
+          }
+        }
+      }
+
+      &-btns{
+        @include flexbox-display-flex();
+        @include flexbox-justify-content(center);
+        margin-top: $form-group-margin-bottom;
+        text-align: center;
+      }
+    }
+
+    &-confirm{
+      margin-top: $grid-gutter-width*4;
+
+      &-title{
+        text-align: center;
+        padding: $grid-gutter-width 0;
+        margin-bottom: $grid-gutter-width;
+        border-top: 1px solid $site-brdr-dark;
+        border-bottom: 1px solid $site-brdr-dark;
+
+        h3,h4,h5{
+          @include flexbox-display-flex();
+          @include flexbox-justify-content(center);
+          @include flexbox-align-items(center);
+          color: $site-clr-white;
+          @include responsive-font-size($var-custom-font-size-base);
+          font-weight: $var-custom-font-weight-normal;
+          margin: 0;
+
+          > i[class*="icon"]{
+            margin: 0 3px;
+          }
+
+          + p{margin-top: 3px;}
+        }
+
+        p{margin-bottom: 1px;}
+      }
+
+      &-table{
+        border-bottom: 1px solid $site-brdr-dark;
+        padding-bottom: $grid-gutter-width*2;
+
+        .sitetablediv{
+          .type[class*="tbl"]{width: 120px; text-align: left;}
+          .symb[class*="tbl"]{width: 80px; text-align: left;}
+          .comm[class*="tbl"]{width: 80px; text-align: left;}
+          .amtc[class*="tbl"],
+          .amts[class*="tbl"]{text-align: left;}
+          .totl[class*="tbl"]{text-align: right;}
+        }
+      }
+
+      &-btns{
+        @include flexbox-display-flex();
+        @include flexbox-flex-wrap(wrap);
+        @include flexbox-justify-content(space-between);
+        margin-top: $grid-gutter-width*4;
+
+        > *{
+          @include flexbox-flex-basis(0);
+          @include flexbox-flex-grow(1);
+          max-width: 100%;
+          margin: 0 $grid-gutter-width*2;
+
+          &:first-child{margin-left: 0;}
+          &:last-child{margin-right: 0;}
+        }
+      }
+
+      &-result{
+        margin-top: $grid-gutter-width*4;
+      }
+
+      &.resultsuccess{
+
+        .easybuysell-confirm-title{
+          h3,h4,h5{
+            color: $site-clr-green;
+          }
+        }
+
+        .easybuysell-confirm-table{
+          padding-bottom: 0;
+          border-bottom: none;
+        }
+
+        .easybuysell-confirm-btns{
+          display: none !important;
+        }
+      }
+    }
+
+  }
+
+}
+

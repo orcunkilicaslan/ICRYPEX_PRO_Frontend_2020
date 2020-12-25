@@ -1,0 +1,54 @@
+/* Site Font Family Set */
+$site-custom-font-family: ();
+$site-custom-font-family: map-merge(
+                (
+                        "default":              $site-font-family-default
+                ),
+                $site-custom-font-family
+);
+
+@each $fontfamily, $value in $site-custom-font-family {
+  .sitefontfamily#{$fontfamily}{font-family: $value !important;}
+}
+/* Site Font Family Set */
+
+/* Site Font Weight Set */
+$site-custom-font-weight: ();
+$site-custom-font-weight: map-merge(
+                (
+                        "light":        $var-custom-font-weight-light,
+                        "normal":       $var-custom-font-weight-normal,
+                        "bold":         $var-custom-font-weight-bold,
+                        "bolder":       $var-custom-font-weight-bolder
+                ),
+                $site-custom-font-weight
+);
+
+@each $fontweight, $value in $site-custom-font-weight {
+  .sitefontweight#{$fontweight}{font-weight: $value !important;}
+}
+/* Site Font Weight Set */
+
+/* Site Font Size Set */
+$site-default-font-size: ();
+$site-default-font-size: map-merge(
+                (
+                        "10": 10px,
+                        "11": 11px,
+                        "12": 12px,
+                        "13": 13px,
+                        "14": 14px,
+                        "15": 15px,
+                        "16": 16px,
+                        "17": 17px,
+                        "18": 18px,
+                        "19": 19px,
+                        "20": 20px
+                ),
+                $site-default-font-size
+);
+
+@each $fontsize, $value in $site-default-font-size {
+  .sitefontsize#{$fontsize}{font-size: $value !important;}
+}
+/* Site Font Size Set */

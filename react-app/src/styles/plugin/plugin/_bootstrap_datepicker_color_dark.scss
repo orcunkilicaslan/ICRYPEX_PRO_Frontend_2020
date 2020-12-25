@@ -1,0 +1,107 @@
+
+.datepickerdark{
+
+  .datepicker{
+
+    &-dropdown{
+      color: $site-clr-white !important;
+      background-color: $global-clr-dark-blue !important;
+      border-color: $global-clr-dark-blue !important;
+
+      &::before{
+        border-bottom-color: $global-clr-dark-blue !important;
+      }
+
+      &::after{
+        border-bottom-color: $global-clr-dark-blue !important;
+      }
+    }
+
+    .prev,
+    .next{
+      border-color: lighten($global-clr-dark-blue, 10%) !important;
+
+      &::before{
+        border-top-color: $global-clr-white !important;
+        border-right-color: $global-clr-white !important;
+      }
+
+      &:hover{
+        background-color: lighten($global-clr-dark-blue, 10%) !important;
+        border-color: lighten($global-clr-dark-blue, 10%) !important;
+      }
+    }
+
+    &-days{
+      table{
+        tbody{
+          border-color: lighten($global-clr-dark-blue, 10%) !important;
+
+          tr{
+            td{
+
+              &.day{
+                &:hover{
+                  color: $global-clr-white !important;
+                  background-color: lighten($global-clr-dark-blue, 10%) !important;
+                }
+              }
+
+              &.today{
+                color: $global-clr-white !important;
+                background-image: none !important;
+                background-color: lighten($global-clr-dark-blue, 10%) !important;
+              }
+
+              &.active{
+                background-image: none !important;
+                background-color: lighten($global-clr-green, 5%) !important;
+
+                &:hover{
+                  background-color: lighten($global-clr-dark-blue, 5%) !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .old,
+    .new{
+      color: lighten($global-clr-dark-blue, 15%) !important;
+    }
+
+    span.month,
+    span.year,
+    span.decade,
+    span.century{
+      &:hover{
+        color: $global-clr-white !important;
+        background-color: lighten($global-clr-dark-blue, 10%) !important;
+      }
+    }
+    span.month.focused,
+    span.year.focused,
+    span.decade.focused,
+    span.century.focused{
+      color: $global-clr-white !important;
+      background-image: none !important;
+      background-color: lighten($global-clr-green, 5%) !important;
+      &:hover{
+        color: $global-clr-white !important;
+        background-color: lighten($global-clr-dark-blue, 10%) !important;
+      }
+    }
+    span.month.active,
+    span.year.active,
+    span.decade.active,
+    span.century.active{
+      background-color: lighten($global-clr-green, 5%) !important;
+
+      &:hover{
+        background-color: lighten($global-clr-dark-blue, 5%) !important;
+      }
+    }
+  }
+}
