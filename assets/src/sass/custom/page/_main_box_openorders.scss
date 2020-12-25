@@ -2,50 +2,47 @@
 .mainbox-openorders{
 
   .openorders{
-    @include flexbox-display-flex();
-    @include flexbox-flex-flow(column);
-    height: 100%;
+    //height: auto;
 
-    &-tabs{}
+    &-tabs{
 
-    &-tabcontent{
-      @include flexbox-flex(1);
-      padding-left: 10px;
-      padding-right: 10px;
+      > .tab-content{
 
-      .tabcont{
+        .tabcont{
 
-        &-head{
-          + div{
-            padding: 10px 0;
-            margin-top: 5px;
-            border-top: 1px solid $site-brdr-dark;
-          }
-        }
-
-        &-filterbar{
-
-          &.siteformui{
-            select,
-            .form-control{
-              background-color: transparent;
-            }
-
-            .custom-checkbox{
-              margin-bottom: 0;
+          &-head{
+            + div{
+              padding: 10px 0;
+              margin-top: 5px;
+              border-top: 1px solid $site-brdr-dark;
             }
           }
 
-          + div[class*="table"] .sitetablediv .scrollbar-tbl-tb{
-            height: 160px;
+          &-filterbar{
+
+            &.siteformui{
+              select,
+              .form-control{
+                background-color: transparent;
+              }
+
+              .custom-checkbox{
+                margin-bottom: 0;
+              }
+            }
+
+            + div[class*="table"] .sitetablediv .scrollbar-tbl-tb{
+              height: 160px;
+            }
           }
+        }
+
+        .sitetablediv.scrollbar-tbl{
+          > .scrollbar-tbl-th .tbl-thead{border-top: 1px solid $site-brdr-dark; border-bottom: 1px solid $site-brdr-dark; margin-bottom: 7px;}
+          > .scrollbar-tbl-th .tbl-thead .tbl-th{color: $site-clr-text-soft-sec; padding-top: 5px; padding-bottom: 7px;}
         }
       }
 
-      .sitetablediv.scrollbar-tbl{
-        > .scrollbar-tbl-th .tbl-thead{border-top: 1px solid $site-brdr-dark; border-bottom: 1px solid $site-brdr-dark; margin-bottom: 7px;}
-        > .scrollbar-tbl-th .tbl-thead .tbl-th{color: $site-clr-text-soft-sec; padding-top: 5px; padding-bottom: 7px;}
-      }
     }
 
   }

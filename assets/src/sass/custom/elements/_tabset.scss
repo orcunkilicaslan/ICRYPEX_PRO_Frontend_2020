@@ -237,10 +237,10 @@
   @include flexbox-flex-flow(column);
   height: 100%;
 
-  .tab-content{
+  > .tab-content{
     @include flexbox-flex(1);
 
-    .tab-pane{
+    > .tab-pane{
       height: 100%;
 
       > div{height: 100%;}
