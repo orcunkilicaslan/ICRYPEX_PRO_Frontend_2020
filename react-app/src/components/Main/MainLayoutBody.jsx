@@ -1,4 +1,6 @@
 import MarketData from "../MarketData/MarketData.jsx";
+import CompCryptocoinbar from "./CompCryptocoinbar.jsx";
+import CompTradingViewBig from "./CompTradingViewBig.jsx";
 
 const MainLayoutBody = props => {
     return (
@@ -10,7 +12,10 @@ const MainLayoutBody = props => {
                         <MarketData />
                     </aside>
 
-                    <section className="main-body-rightcont col"></section>
+                    <section className="main-body-rightcont col">
+                        <CompCryptocoinbar />
+                        <CompTradingViewBig />
+                    </section>
 
                 </div>
             </div>

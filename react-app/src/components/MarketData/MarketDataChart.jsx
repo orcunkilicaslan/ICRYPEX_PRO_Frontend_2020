@@ -2,7 +2,12 @@
 const MarketDataChart = props => {
     return (
         <div className="marketdata-chart">
-            CHART AREA
+
+            <div className="tabcont tabcont-head">
+                <p>BTC/TRY - Bitcoin / Türk Lirası</p>
+            </div>
+            <div className="mdchartarea"></div>
+
         </div>
     );
 };

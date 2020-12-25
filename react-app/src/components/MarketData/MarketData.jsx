@@ -1,7 +1,7 @@
-import MarketDataSymbol from "./MarketDataSymbol";
-import MarketDataDetail from "./MarketDataDetail";
-import MarketDataLast from "./MarketDataLast";
-import MarketDataChart from "./MarketDataChart";
+import MarketDataSymbol from "./MarketDataSymbol.jsx";
+import MarketDataDetail from "./MarketDataDetail.jsx";
+import MarketDataLast from "./MarketDataLast.jsx";
+import MarketDataChart from "./MarketDataChart.jsx";
 
 const MarketData = props => {
     return (

@@ -12,7 +12,6 @@ function App() {
         <Fragment>
             <Header />
             <Main />
-            <Footer />
         </Fragment>
     );
 }
