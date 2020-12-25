@@ -148,7 +148,7 @@ gulp.task('watch', () => {
     });
 
     const watch = [
-        folder_html_main + '**/*.html',
+        //folder_html_main + '**/*.html',
         folder_src_main + 'sass/**/*.scss',
         folder_src_main + 'sass/**/*.sass',
         folder_src_main + 'sass/**/*.css',

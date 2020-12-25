@@ -53,17 +53,12 @@
     }
 
     &-chartbox{
-      @include flexbox-display-flex();
-      @include flexbox-flex-wrap(wrap);
       padding-top: 12px;
       margin-top: 10px;
       border-top: 1px solid $site-brdr-dark;
 
-      &-col{
-        @include flexbox-flex-basis(0);
-        @include flexbox-flex-grow(1);
-        max-width: 100%;
-        position: relative;
+      > .col{
+        padding: 0;
 
         &.chartbuy{
           div[class*="rectangle"]{
@@ -73,7 +68,7 @@
           div[class*="ordertable"],
           div[class*="rectangle"]{padding-right: 10px;}
           .sitetablediv .tbl-tbody .pric[class*="tbl"]{color: $site-clr-green;}
-          .sitetablediv .tbl-tbody .tbl-tr::before{background-color: $site-clr-green; left: -5px;}
+          .sitetablediv .tbl-tbody .tbl-tr::before{background-color: $site-clr-green; left: -4px;}
           .sitetablediv .tbl-tbody .tbl-tr.orderactive::before{opacity: 1;}
         }
 
@@ -84,7 +79,7 @@
           div[class*="ordertable"],
           div[class*="rectangle"]{padding-left: 10px;}
           .sitetablediv .tbl-tbody .pric[class*="tbl"]{color: $site-clr-red;}
-          .sitetablediv .tbl-tbody .tbl-tr::before{background-color: $site-clr-red; right: -5px;}
+          .sitetablediv .tbl-tbody .tbl-tr::before{background-color: $site-clr-red; right: -4px;}
           .sitetablediv .tbl-tbody .tbl-tr.orderactive::before{opacity: 1;}
         }
 
@@ -144,7 +139,7 @@
               height: 4px;
               opacity: 0;
               position: absolute;
-              top: 50%;
+              top: calc(50% + 1px);
               @include translateY(-50%);
               @include border-radius(6px);
               @include transition-multiple(opacity 0.15s ease-in-out);

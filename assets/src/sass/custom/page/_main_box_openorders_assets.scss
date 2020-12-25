@@ -1,37 +1,20 @@
 
 .mainbox-openorders{
 
-  .openorders-tabassets{
+  .openorders-assets{
+    padding: 5px 10px;
 
     .assets{
-      @include flexbox-display-flex();
-      @include flexbox-flex-flow(column);
-      @include flexbox-flex(1);
-      height: 100%;
 
       &-tabs{}
 
-      &-tabcontent{
-        height: 100%;
-
-        > div[class*="tab"]{
-          display: none;
-          height: 100%;
-          margin: 0;
-
-          &.active{
-            display: block;
-          }
-        }
-      }
-
-      &-tabassets{
-        margin: 0;
+      &-chartlist{
+        @include flexbox-display-flex();
+        @include flexbox-align-items(center);
 
         .assetchartarea{
           @include flexbox-display-flex();
           @include flexbox-align-items(center);
-          height: 100%;
 
           &-donut{
             @include flexbox-flex(0 0 auto);
@@ -156,25 +139,13 @@
         }
       }
 
-      &-tabaddress{
+      &-addrslist{
 
         .assetsaddress{
 
           &-tabs{}
 
-          &-tabcontent{
-            height: 100%;
-
-            > div[class*="tab"]{
-              display: none;
-              height: 100%;
-              margin: 0;
-
-              &.active{
-                display: block;
-              }
-            }
-          }
+          &-tablebox{}
 
         }
 
@@ -203,17 +174,15 @@
               }
             }
 
-            .tbl-td{padding-bottom: 4px;}
+            .tbl-td{padding-bottom: 2px;}
 
             &.scrollbar-tbl > .scrollbar-tbl-th .tbl-thead{border-top-width: 0;}
-            &.scrollbar-tbl > .scrollbar-tbl-tb .tbl-tbody{height: 120px;}
+            &.scrollbar-tbl > .scrollbar-tbl-tb .tbl-tbody{height: 110px;}
           }
         }
 
       }
-
     }
-
   }
 }
 

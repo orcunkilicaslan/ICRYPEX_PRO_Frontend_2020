@@ -1,11 +1,11 @@
 
 /* Document Load Market Data Start */
 function mdTabsArea() {
-    const mdTabContent      = document.querySelector('.marketdata .marketdata-tabcontent');
-    const mdTabSymTblTh     = document.querySelector('.marketdata .mdsymboltable .scrollbar-tbl-th');
-    const mdTabSymTblTb     = document.querySelector('.marketdata .mdsymboltable .scrollbar-tbl-tb');
-    const mdTabLstTblTh     = document.querySelector('.marketdata .mdlasttable .scrollbar-tbl-th');
-    const mdTabLstTblTb     = document.querySelector('.marketdata .mdlasttable .scrollbar-tbl-tb');
+    const mdTabContent      = document.querySelector('.marketdata-tabs > .tab-content');
+    const mdTabSymTblTh     = document.querySelector('.marketdata-tabs .mdsymboltable .scrollbar-tbl-th');
+    const mdTabSymTblTb     = document.querySelector('.marketdata-tabs .mdsymboltable .scrollbar-tbl-tb');
+    const mdTabLstTblTh     = document.querySelector('.marketdata-tabs .mdlasttable .scrollbar-tbl-th');
+    const mdTabLstTblTb     = document.querySelector('.marketdata-tabs .mdlasttable .scrollbar-tbl-tb');
 
     // Market Data Symbol
     mdTabSymTblTb.style.height = (mdTabContent.clientHeight - mdTabSymTblTh.clientHeight - 60) + "px";
