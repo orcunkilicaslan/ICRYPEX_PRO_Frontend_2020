@@ -2,9 +2,6 @@
 .mainbox-buysellaction{
 
   .buysellaction{
-    @include flexbox-display-flex();
-    @include flexbox-flex-flow(column);
-    height: 100%;
     padding: 10px 10px 12px;
 
     &-head{
@@ -41,43 +38,24 @@
       }
     }
 
-    &-tabs{}
-
-    &-tabcontent{
-      @include flexbox-flex(1);
+    .tab-content{
       padding: 10px 0 0;
       margin-top: 6px;
       border-top: 1px solid $site-brdr-dark;
       @include border-radius(0);
-
-      > div[class*="tab"]{
-        margin: 0;
-      }
     }
 
-    &-tabmarket{}
+    &-market{}
 
-    &-tablimit{}
+    &-limit{}
 
-    &-tabstoplimit{}
+    &-stoplimit{}
 
     &-formarea{
-      @include flexbox-display-flex();
-      @include flexbox-flex-wrap(wrap);
       height: 100%;
 
-      &-col{
-        @include flexbox-flex-basis(0);
-        @include flexbox-flex-grow(1);
-        max-width: 100%;
+      > .col{
         position: relative;
-
-        &.buycol{
-          padding-right: 10px;
-        }
-        &.sellcol{
-          padding-left: 10px;
-        }
 
         &::before{
           content: "";
@@ -90,8 +68,12 @@
         }
 
         &:last-child::before{display: none;}
-      }
 
+        &.buycol{padding-right: 10px;}
+
+        &.sellcol{padding-left: 10px;}
+
+      }
     }
 
     &-form{

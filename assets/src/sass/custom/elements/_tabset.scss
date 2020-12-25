@@ -40,8 +40,9 @@
 
   &.tab-content{
     background-color: transparent;
-    padding: 5px 0;
     @include border-radius($var-custom-border-radius);
+
+    /*
 
     > div[class*="tab"]{
       overflow: hidden;
@@ -52,6 +53,7 @@
         @include flexbox-flex-flow(column);
       }
     }
+    */
 
     .tabcont{
 
@@ -131,7 +133,6 @@
       }
     }
   }
-
 }
 /* Tabs UI Soft */
 
@@ -229,3 +230,20 @@
   }
 }
 /* Tabs UI Dark */
+
+
+.tabareaflexflow{
+  @include flexbox-display-flex();
+  @include flexbox-flex-flow(column);
+  height: 100%;
+
+  > .tab-content{
+    @include flexbox-flex(1);
+
+    > .tab-pane{
+      height: 100%;
+
+      > div{height: 100%;}
+    }
+  }
+}

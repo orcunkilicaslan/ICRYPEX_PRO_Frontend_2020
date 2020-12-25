@@ -6,61 +6,40 @@
 @import "../../plugin/option/mixin";
 
 .icon{
+  $iconclassname: &;
 
-  &-svg{
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain;
-    overflow: hidden;
-    display: inline-block;
-    position: relative;
-
-    &-update{
-      width: 16px;
-      height: 16px;
-      background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4NCiAgPGcgaWQ9InVwZGF0ZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtMC4xMDgpIj4NCiAgICA8ZyBpZD0iR3JvdXBfMTAyIiBkYXRhLW5hbWU9Ikdyb3VwIDEwMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwLjEwOCkiPg0KICAgICAgPGcgaWQ9Ikdyb3VwXzEwMSIgZGF0YS1uYW1lPSJHcm91cCAxMDEiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiPg0KICAgICAgICA8cGF0aCBpZD0iUGF0aF82MjgiIGRhdGEtbmFtZT0iUGF0aCA2MjgiIGQ9Ik0xNiw1Ljg5NVYuNTc1TDEzLjg4OCwyLjY4OGwtLjIzNy0uMjM3YTgsOCwwLDEsMCwyLjM0Miw1LjY1N0gxNC40NDZhNi40NSw2LjQ1LDAsMSwxLTEuODg5LTQuNTYybC4yMzcuMjM3TDEwLjY4Miw1LjlaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIC0wLjEwOCkiIGZpbGw9IiMwZDc4YzQiLz4NCiAgICAgIDwvZz4NCiAgICA8L2c+DQogICAgPGcgaWQ9Ikdyb3VwXzEwNCIgZGF0YS1uYW1lPSJHcm91cCAxMDQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDYuNDE1IDUuMjQzKSI+DQogICAgICA8ZyBpZD0iR3JvdXBfMTAzIiBkYXRhLW5hbWU9Ikdyb3VwIDEwMyI+DQogICAgICAgIDxwYXRoIGlkPSJQYXRoXzYyOSIgZGF0YS1uYW1lPSJQYXRoIDYyOSIgZD0iTTIwNy45MzQsMTY4LjA3NlYxNjUuMmgtMS41Njl2NC40NDZoNC40NDZ2LTEuNTY5WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTIwNi4zNjUgLTE2NS4xOTkpIiBmaWxsPSIjMGQ3OGM0Ii8+DQogICAgICA8L2c+DQogICAgPC9nPg0KICA8L2c+DQo8L3N2Zz4NCg==");
-    }
-    &-calendar{
-      width: 18px;
-      height: 18px;
-      background-image: url("data:image/svg+xml;base64,PHN2ZyBpZD0iY2FsZW5kYXIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiB2aWV3Qm94PSIwIDAgMTggMTgiPg0KICA8ZyBpZD0iR3JvdXBfMTYzIiBkYXRhLW5hbWU9Ikdyb3VwIDE2MyI+DQogICAgPGcgaWQ9Ikdyb3VwXzE2MiIgZGF0YS1uYW1lPSJHcm91cCAxNjIiPg0KICAgICAgPHBhdGggaWQ9IlBhdGhfNzQ3IiBkYXRhLW5hbWU9IlBhdGggNzQ3IiBkPSJNMjc5LDI4MC4wNTlhMS40MDgsMS40MDgsMCwwLDAsMS40MDYsMS40MDZoMS42NTJhMS40MDgsMS40MDgsMCwwLDAsMS40MDYtMS40MDZ2LTEuNjUyQTEuNDA4LDEuNDA4LDAsMCwwLDI4Mi4wNTksMjc3aC0xLjY1MkExLjQwOCwxLjQwOCwwLDAsMCwyNzksMjc4LjQwNlptMS40MDYtMS42NTJoMS42NTJ2MS42NTJoLTEuNjUzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI2OS4xOTEgLTI2Ny4yNjIpIiBmaWxsPSIjMTI0MDdkIi8+DQogICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzIyIiBkYXRhLW5hbWU9IkVsbGlwc2UgMjIiIGN4PSIwLjUiIGN5PSIwLjUiIHI9IjAuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMgNykiIGZpbGw9IiMxMjQwN2QiLz4NCiAgICAgIDxjaXJjbGUgaWQ9IkVsbGlwc2VfMjMiIGRhdGEtbmFtZT0iRWxsaXBzZSAyMyIgY3g9IjAuNSIgY3k9IjAuNSIgcj0iMC41IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMCA3KSIgZmlsbD0iIzEyNDA3ZCIvPg0KICAgICAgPHBhdGggaWQ9IlBhdGhfNzQ4IiBkYXRhLW5hbWU9IlBhdGggNzQ4IiBkPSJNMTcuMywxMi4zNzVhLjcuNywwLDAsMCwuNy0uN1Y0LjIxOWEyLjgxNiwyLjgxNiwwLDAsMC0yLjgxMi0yLjgxMmgtLjkxNFYuN2EuNy43LDAsMCwwLTEuNDA2LDB2LjdoLTMuMlYuN0EuNy43LDAsMCwwLDguMjYyLjd2LjdINS4xVi43QS43LjcsMCwwLDAsMy42OTEuN3YuN0gyLjgxM0EyLjgxNiwyLjgxNiwwLDAsMCwwLDQuMjE5VjE1LjE4OEEyLjgxNiwyLjgxNiwwLDAsMCwyLjgxMywxOEgxNS4xODhBMi44MTYsMi44MTYsMCwwLDAsMTgsMTUuMTg4YS43LjcsMCwwLDAtMS40MDYsMCwxLjQwOCwxLjQwOCwwLDAsMS0xLjQwNiwxLjQwNkgyLjgxM2ExLjQwOCwxLjQwOCwwLDAsMS0xLjQwNi0xLjQwNlY0LjIxOUExLjQwOCwxLjQwOCwwLDAsMSwyLjgxMywyLjgxM2guODc5di43YS43LjcsMCwwLDAsMS40MDYsMHYtLjdIOC4yNjJ2LjdhLjcuNywwLDAsMCwxLjQwNiwwdi0uN2gzLjJ2LjdhLjcuNywwLDAsMCwxLjQwNiwwdi0uN2guOTE0YTEuNDA4LDEuNDA4LDAsMCwxLDEuNDA2LDEuNDA2djcuNDUzQS43LjcsMCwwLDAsMTcuMywxMi4zNzVaIiBmaWxsPSIjMTI0MDdkIi8+DQogICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI0IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjQiIGN4PSIwLjUiIGN5PSIwLjUiIHI9IjAuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNCAxMykiIGZpbGw9IiMxMjQwN2QiLz4NCiAgICAgIDxjaXJjbGUgaWQ9IkVsbGlwc2VfMjUiIGRhdGEtbmFtZT0iRWxsaXBzZSAyNSIgY3g9IjAuNSIgY3k9IjAuNSIgcj0iMC41IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0IDcpIiBmaWxsPSIjMTI0MDdkIi8+DQogICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSIwLjUiIGN5PSIwLjUiIHI9IjAuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNCAxMCkiIGZpbGw9IiMxMjQwN2QiLz4NCiAgICAgIDxjaXJjbGUgaWQ9IkVsbGlwc2VfMjciIGRhdGEtbmFtZT0iRWxsaXBzZSAyNyIgY3g9IjAuNSIgY3k9IjAuNSIgcj0iMC41IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3IDEwKSIgZmlsbD0iIzEyNDA3ZCIvPg0KICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV8yOCIgZGF0YS1uYW1lPSJFbGxpcHNlIDI4IiBjeD0iMC41IiBjeT0iMC41IiByPSIwLjUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDcgNykiIGZpbGw9IiMxMjQwN2QiLz4NCiAgICAgIDxjaXJjbGUgaWQ9IkVsbGlwc2VfMjkiIGRhdGEtbmFtZT0iRWxsaXBzZSAyOSIgY3g9IjAuNSIgY3k9IjAuNSIgcj0iMC41IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3IDEzKSIgZmlsbD0iIzEyNDA3ZCIvPg0KICAgIDwvZz4NCiAgPC9nPg0KPC9zdmc+DQo=");
-    }
-  }
-
-
-
-  &-sprtsmiconclrd{
+  &-sprtsmclrd{
     background-image: url(#{$path-img-url-icons}/icons_spite_darksmalliconcolored.svg#{$cache-busting});
     background-repeat: no-repeat;
     background-position: 0 0;
     display: inline-block;
     position: relative;
 
-    &.icon14{
+    &#{$iconclassname}-14{
       width: 14px;
       height: 14px;
 
-      &.sm-edit{background-position: calc(-14px*0) 0;}
-      &.sm-delete{background-position: calc(-14px*1) 0;}
-      &.sm-browse{background-position: calc(-14px*2) 0;}
-      &.sm-showhide{background-position: calc(-14px*3) 0;}
-      &.sm-arrowmore{background-position: calc(-14px*4) 0;}
+      &#{$iconclassname}-edit{background-position: calc(-14px*0) 0;}
+      &#{$iconclassname}-delete{background-position: calc(-14px*1) 0;}
+      &#{$iconclassname}-browse{background-position: calc(-14px*2) 0;}
+      &#{$iconclassname}-showhide{background-position: calc(-14px*3) 0;}
+      &#{$iconclassname}-arrowmore{background-position: calc(-14px*4) 0;}
     }
 
-    &.icon16{
+    &#{$iconclassname}-16{
       width: 16px;
       height: 16px;
 
-      &.sm-wallet{background-position: calc(-16px*0) -14px;}
-      &.sm-qrcode{background-position: calc(-16px*1) -14px;}
-      &.sm-copybtn{background-position: calc(-16px*2) -14px;}
-      &.sm-transfer{background-position: calc(-16px*3) -14px;}
-      &.sm-addbtn{background-position: calc(-16px*4) -14px;}
-      &.sm-change{background-position: calc(-16px*5) -14px;}
-      &.sm-bell{background-position: calc(-16px*6) -14px;}
-      &.sm-info{background-position: calc(-16px*7) -14px;}
-      &.sm-question{background-position: calc(-16px*8) -14px;}
-      &.sm-check{background-position: calc(-16px*9) -14px;}
+      &#{$iconclassname}-wallet{background-position: calc(-16px*0) -14px;}
+      &#{$iconclassname}-qrcode{background-position: calc(-16px*1) -14px;}
+      &#{$iconclassname}-copybtn{background-position: calc(-16px*2) -14px;}
+      &#{$iconclassname}-transfer{background-position: calc(-16px*3) -14px;}
+      &#{$iconclassname}-addbtn{background-position: calc(-16px*4) -14px;}
+      &#{$iconclassname}-change{background-position: calc(-16px*5) -14px;}
+      &#{$iconclassname}-bell{background-position: calc(-16px*6) -14px;}
+      &#{$iconclassname}-info{background-position: calc(-16px*7) -14px;}
+      &#{$iconclassname}-question{background-position: calc(-16px*8) -14px;}
+      &#{$iconclassname}-check{background-position: calc(-16px*9) -14px;}
 
       &.infoiconbox{
         cursor: pointer;
@@ -73,13 +52,13 @@
       }
     }
 
-    &.icon20{
+    &#{$iconclassname}-20{
       width: 20px;
       height: 20px;
 
-      &.sm-support{background-position: calc(-20px*0) -30px;}
-      &.sm-notif{background-position: calc(-20px*1) -30px;}
-      &.sm-pagefullscreen{
+      &#{$iconclassname}-support{background-position: calc(-20px*0) -30px;}
+      &#{$iconclassname}-notif{background-position: calc(-20px*1) -30px;}
+      &#{$iconclassname}-pagefullscreen{
         background-position: calc(-20px*2) -30px;
 
         &.hide{background-position: calc(-20px*2) -30px;}
@@ -88,7 +67,7 @@
     }
   }
 
-  &-sprtbgiconclrd{
+  &-sprtlgclrd{
     background-image: url(#{$path-img-url-icons}/icons_spite_darkbigiconcolored.svg#{$cache-busting});
     background-repeat: no-repeat;
     background-position: 0 0;
@@ -96,23 +75,23 @@
     position: relative;
 
 
-    &.icon50gray{
+    &#{$iconclassname}-50gray{
       width: 50px;
       height: 50px;
 
-      &.bg-check{background-position: calc(-50px*0) 0;}
-      &.bg-close{background-position: calc(-50px*1) 0;}
-      &.bg-delete{background-position: calc(-50px*2) 0;}
-      &.bg-user{background-position: calc(-50px*3) 0;}
-      &.bg-newuser{background-position: calc(-50px*4) 0;}
+      &#{$iconclassname}-check{background-position: calc(-50px*0) 0;}
+      &#{$iconclassname}-close{background-position: calc(-50px*1) 0;}
+      &#{$iconclassname}-delete{background-position: calc(-50px*2) 0;}
+      &#{$iconclassname}-user{background-position: calc(-50px*3) 0;}
+      &#{$iconclassname}-newuser{background-position: calc(-50px*4) 0;}
     }
 
-    &.icon50clrd{
+    &#{$iconclassname}-50clrd{
       width: 50px;
       height: 50px;
 
-      &.bg-check{background-position: calc(-50px*0) -50px;}
-      &.bg-close{background-position: calc(-50px*1) -50px;}
+      &#{$iconclassname}-check{background-position: calc(-50px*0) -50px;}
+      &#{$iconclassname}-close{background-position: calc(-50px*1) -50px;}
     }
   }
 }

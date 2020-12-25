@@ -1,12 +1,12 @@
 
 /* Document Load Open Orders Start */
 function ooTabsArea() {
-    const ooTabContent              = document.querySelector('.openorders .openorders-tabcontent');
-    const ooTabHstTabCont           = document.querySelector('.openorders .openorders-tabhistory');
-    const ooTabHstScrllTble         = document.querySelector('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-horizontal');
-    const ooTabHstTblBrwsWrp        = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp');
-    const ooTabHstTblBrwsBtn        = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstr');
-    const ooTabHstTblBrwsDiv        = document.querySelectorAll('.openorders .openorders-tabhistory .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstbl');
+    const ooTabContent              = document.querySelector('.openorders-tabs > .tab-content');
+    const ooTabHstTabCont           = document.querySelector('.openorders-tabs .openorders-history');
+    const ooTabHstScrllTble         = document.querySelector('.openorders-tabs .openorders-history .ootransactionhistorytable .scrollbar-horizontal');
+    const ooTabHstTblBrwsWrp        = document.querySelectorAll('.openorders .openorders-history .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp');
+    const ooTabHstTblBrwsBtn        = document.querySelectorAll('.openorders .openorders-history .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstr');
+    const ooTabHstTblBrwsDiv        = document.querySelectorAll('.openorders .openorders-history .ootransactionhistorytable .scrollbar-tbl-tb .hsttblbrwswrp .hsttblbrwstbl');
 
     // Transaction History Perfect Scrollbar (Horizontal)
     ooTabHstScrllTble.addEventListener('ps-scroll-x', () =>{
@@ -36,7 +36,7 @@ window.addEventListener("resize", ooTabsArea);
 /* Bootstrap Tab Open Orders */
 import Chartist from "chartist";
 
-document.querySelector('.openorders .openorders-tabs').addEventListener('show.bs.tab', function(e){
+document.querySelector('.openorders-tabs > .nav-tabs').addEventListener('show.bs.tab', function(e){
 
     // Asset Tab Donut Chart
     const ooAssetsDonutChart = new Chartist.Pie('.assets .assetchartarea .assetchartarea-donut .asssetdonutchrt', {
