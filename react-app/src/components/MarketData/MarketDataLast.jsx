@@ -1,7 +1,7 @@
 
 const MarketDataLast = props => {
     return (
-        <div>
+        <div className="marketdata-last">
             LAST AREA
         </div>
     );

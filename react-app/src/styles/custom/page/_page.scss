@@ -10,6 +10,10 @@
 @import "main";
 @import "main_box";
 @import "main_box_marketdata";
+@import "main_box_marketdata_symbol";
+@import "main_box_marketdata_detail";
+@import "main_box_marketdata_last";
+@import "main_box_marketdata_chart";
 @import "main_box_cryptocoinbar";
 @import "main_box_tradingview";
 @import "main_box_orderbook";
@@ -28,6 +32,7 @@
 @import "main_cont_account";
 @import "main_cont_account_profile";
 @import "main_cont_account_confirmation";
+@import "main_cont_account_assets";
 
 
 // Modal Component

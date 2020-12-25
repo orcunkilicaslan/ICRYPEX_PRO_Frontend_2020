@@ -1,7 +1,8 @@
 
 .mainbox-openorders{
 
-  .openorders-tabactivities{
+  .openorders-activities{
+    padding: 5px 10px;
 
     .tabcont-head{
 
@@ -44,29 +45,11 @@
     }
 
     .activities{
-      @include flexbox-display-flex();
-      @include flexbox-flex-flow(column);
-      @include flexbox-flex(1);
-      height: 100%;
       padding-top: 0 !important;
 
       &-tabs{}
 
-      &-tabcontent{
-        height: 100%;
-
-        > div[class*="tab"]{
-          display: none;
-          height: 100%;
-          margin: 0;
-
-          &.active{
-            display: block;
-          }
-        }
-      }
-
-      &-tabpending{
+      &-pending{
 
         .activitiespendingtable{
           padding: 5px 0;
@@ -109,7 +92,7 @@
 
       }
 
-      &-tabhistory{
+      &-history{
 
         .activitieshistorytable{
           padding-bottom: 5px;
@@ -117,7 +100,7 @@
           .sitetablediv.scrollbar-tbl{
 
             > .scrollbar-tbl-tb{
-              height: 125px;
+              height: 120px !important;
             }
           }
 

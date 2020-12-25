@@ -1,7 +1,7 @@
 
 const MarketDataChart = props => {
     return (
-        <div>
+        <div className="marketdata-chart">
             CHART AREA
         </div>
     );

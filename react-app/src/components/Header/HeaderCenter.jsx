@@ -42,10 +42,9 @@ const HeaderCenter = props => {
             >
               <span>Tümü</span>
               <IconSet
-                sprite="icon-sprtsmiconclrd"
-                size="icon14"
-                name="sm-arrowmore"
-                variant=""
+                sprite="sprtsmclrd"
+                size="14"
+                name="arrowmore"
               />
             </a>
           </div>

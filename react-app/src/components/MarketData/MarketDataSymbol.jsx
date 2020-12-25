@@ -5,7 +5,7 @@ import {LinkButton} from "../LinkButton";
 
 const MarketDataSymbol = props => {
     return (
-        <div>
+        <div className="marketdata-symbol">
             <div className="tabcont tabcont-filterbar siteformui row">
                 <div className="btn-group btn-group-sm col" role="group">
                     <LinkButton

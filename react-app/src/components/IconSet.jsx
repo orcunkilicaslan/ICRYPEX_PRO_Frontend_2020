@@ -7,20 +7,18 @@ export const IconSet = props => {
     sprite,
     size,
     name,
-    variant,
     children,
     ...rest
   } = props;
 
-  const icncls = classNames(className, {
-    [`${sprite}`]: Boolean(sprite),
-    [`${size}`]: Boolean(size),
-    [`${name}`]: Boolean(name),
-    [`${variant}`]: Boolean(variant)
+  const cls = classNames(className, {
+    [`icon-${sprite}`]: Boolean(sprite),
+    [`icon-${size}`]: Boolean(size),
+    [`icon-${name}`]: Boolean(name)
   });
 
   return (
-  <i className={icncls} {...rest}>
+  <i className={cls} {...rest}>
     {children}
   </i>
   );

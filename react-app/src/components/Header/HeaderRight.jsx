@@ -30,10 +30,9 @@ const HeaderRight = props => {
           data-toggle="fullscreenbtn"
         >
           <IconSet
-            sprite="icon-sprtsmiconclrd"
-            size="icon20"
-            name="sm-pagefullscreen"
-            variant=""
+            sprite="sprtsmclrd"
+            size="20"
+            name="pagefullscreen"
           />
         </a>
         <a
@@ -43,10 +42,9 @@ const HeaderRight = props => {
           rel="bookmark"
         >
           <IconSet
-            sprite="icon-sprtsmiconclrd"
-            size="icon20"
-            name="sm-support"
-            variant=""
+            sprite="sprtsmclrd"
+            size="20"
+            name="support"
           />
         </a>
         <a
@@ -61,10 +59,9 @@ const HeaderRight = props => {
             data-placement="bottom"
           >
             <IconSet
-              sprite="icon-sprtsmiconclrd"
-              size="icon20"
-              name="sm-notif"
-              variant=""
+              sprite="sprtsmclrd"
+              size="20"
+              name="notif"
             >
               <span className="badge badge-pill badge-danger">4</span>
             </IconSet>

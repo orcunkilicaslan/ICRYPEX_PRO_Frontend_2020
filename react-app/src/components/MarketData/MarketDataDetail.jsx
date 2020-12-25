@@ -1,7 +1,7 @@
 
 const MarketDataDetail = props => {
     return (
-        <div>
+        <div className="marketdata-detail">
             DETAIL AREA
         </div>
     );

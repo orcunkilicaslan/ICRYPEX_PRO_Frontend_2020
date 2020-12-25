@@ -1,7 +1,7 @@
 import { ReactComponent as PerLineIcon } from "../../assets/images/icons/path_icon_pericon.svg";
 import { IconSet } from "../IconSet.jsx";
 
-const priceList = {
+const priceListJSON = {
 
     "coinid": 1,
     "data": {
@@ -34,39 +34,39 @@ const CompCryptocoinbar = props => {
                             <ul className="bigstatslist">
                                 <li>
                                     <h6>Son Fiyat</h6>
-                                    <p>{priceList.data.lastPrice} TRY</p>
+                                    <p>{priceListJSON.data.lastPrice} TRY</p>
                                 </li>
                                 <li>
                                     <h6>En İyi Alış</h6>
-                                    <p>{priceList.data.bestBuy} TRY</p>
+                                    <p>{priceListJSON.data.bestBuy} TRY</p>
                                 </li>
                                 <li>
                                     <h6>En İyi Satış</h6>
-                                    <p>{priceList.data.bestSell} TRY</p>
+                                    <p>{priceListJSON.data.bestSell} TRY</p>
                                 </li>
                                 <li>
                                     <h6>24s Değişim</h6>
-                                    <p>{priceList.data.change24h} TRY</p>
+                                    <p>{priceListJSON.data.change24h} TRY</p>
                                 </li>
                                 <li>
                                     <h6>24s En Yüksek</h6>
-                                    <p>{priceList.data.high24h} TRY</p>
+                                    <p>{priceListJSON.data.high24h} TRY</p>
                                 </li>
                                 <li>
                                     <h6>24s En Düşük</h6>
-                                    <p>{priceList.data.lastPrice} TRY</p>
+                                    <p>{priceListJSON.data.lastPrice} TRY</p>
                                 </li>
                                 <li>
                                     <h6>24s Ortalama</h6>
-                                    <p>{priceList.data.average24h} TRY</p>
+                                    <p>{priceListJSON.data.average24h} TRY</p>
                                 </li>
                                 <li>
                                     <h6>BTC Hacim</h6>
-                                    <p>{priceList.data.volume} TRY</p>
+                                    <p>{priceListJSON.data.volume} TRY</p>
                                 </li>
                                 <li>
                                     <h6>Kazılacak BTC</h6>
-                                    <p>{priceList.data.excavating} BTC</p>
+                                    <p>{priceListJSON.data.excavating} BTC</p>
                                 </li>
                             </ul>
                         </div>
@@ -82,10 +82,9 @@ const CompCryptocoinbar = props => {
                             >
                                 <div className="iconbtn-svg">
                                     <IconSet
-                                        sprite="icon-sprtsmiconclrd"
-                                        size="icon16"
-                                        name="sm-bell"
-                                        variant=""
+                                        sprite="sprtsmclrd"
+                                        size="16"
+                                        name="bell"
                                     >
                                     </IconSet>
                                 </div>

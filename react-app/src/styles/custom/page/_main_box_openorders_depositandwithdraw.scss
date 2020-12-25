@@ -1,121 +1,140 @@
 
 .mainbox-openorders{
 
-  .openorders-tabdandw{
+  .openorders-dandw{
+    padding: 5px 10px;
 
     .depositandwithdraw{
-      @include flexbox-display-flex();
-      @include flexbox-flex-flow(column);
-      @include flexbox-flex(1);
-      height: 100%;
 
       &-tabs{}
 
-      &-tabcontent{
-        padding: 0;
-        height: 100%;
+      &-deposit{}
 
-        > div[class*="tab"]{
-          margin: 0;
-        }
-      }
+      &-withdraw{}
 
-      &-tabdeposit{}
-
-      &-tabwithdraw{}
-
-      &-bttminfolist{
+      .bttminfolist{
         @extend %extcontullistdotted;
       }
 
       .dandwtab{
 
-        &-wrapper{
+        &-wrp{
           @include flexbox-display-flex();
           @include flexbox-flex-wrap(wrap);
           height: 100%;
+
+          &-side{
+            @include flexbox-display-flex();
+            @include flexbox-flex-flow(column);
+            @include flexbox-flex(0 0 auto);
+            width: 180px;
+            max-width: 100%;
+            padding-right: 10px;
+            border-right: 1px solid $site-brdr-dark;
+
+            .nav-pills{
+              @include flexbox-flex(1);
+            }
+
+            .confirmcheckbox{
+              .custom-checkbox{
+                margin-top: 10px;
+
+                .custom-control-label{
+                  line-height: 1;
+
+                  a{color: $site-clr-text-soft-sec;}
+                }
+              }
+            }
+          }
+
+          &-cont{
+            @include flexbox-flex-basis(0);
+            @include flexbox-flex-grow(1);
+            max-width: 100%;
+            padding-left: 10px;
+          }
         }
 
-        &-side{
+        &-form{
           @include flexbox-display-flex();
           @include flexbox-flex-flow(column);
-          @include flexbox-flex(0 0 auto);
-          width: 180px;
-          max-width: 100%;
-          padding-right: 10px;
-          border-right: 1px solid $site-brdr-dark;
-
-          &-navpills{
-            @include flexbox-flex(1);
-          }
-
-          .custom-checkbox{
-            margin-top: 10px;
-
-            .custom-control-label{
-              line-height: 1;
-
-              a{color: $site-clr-text-soft-sec;}
-            }
-          }
-        }
-
-        &-cont{
-          @include flexbox-flex-basis(0);
-          @include flexbox-flex-grow(1);
-          max-width: 100%;
-          padding-left: 10px;
-        }
-
-        &-tabcontent{
-          padding: 0;
           height: 100%;
 
-          > div[class*="tab"]{
-            margin: 0;
-          }
-        }
-
-        &-tabbank{
-
-          &-tabs{
-            padding-bottom: 5px;
-
-            .banklogostablink{
-              margin: 0 5px;
-
-              &:first-child{margin-left: 0;}
-              &:last-child{margin-right: 0;}
-
-              &.active .banksprttablogos{
-                background-position-y: 0;
-              }
-            }
-
-          }
-
-          &-tabcontent{
-            height: 100%;
-
-            > div[class*="tab"]{
-              display: none;
-              height: 100%;
-              margin: 0;
-
-              &.active{
-                display: block;
-              }
-            }
-          }
-
-          &-form{
+          > *[class*="form"],
+          > form{
             @include flexbox-display-flex();
             @include flexbox-flex-flow(column);
             height: 100%;
 
             .formfieldset{
               @include flexbox-flex(1);
+            }
 
+            .formbttm{
+              .btn{width: 100%;}
+            }
+          }
+        }
+
+        &-bank{
+
+          &-tabs{
+
+            .banksprttablogos{
+              background-image: url(#{$path-img-url-icons}/icons_spite_banklogos.svg#{$cache-busting});
+              background-repeat: no-repeat;
+              background-position: 0 0;
+              display: inline-block;
+              position: relative;
+              height: 20px;
+              @include transition-multiple(background-position 0.3s ease-in-out);
+
+
+              &.logoakbank{
+                width: 76px;
+                background-position: 0 -20px;
+              }
+
+              &.logoziraat{
+                width: 94px;
+                background-position: -76px -20px;
+              }
+
+              &.logoodeabank{
+                width: 76px;
+                background-position: -170px -20px;
+              }
+
+              &.logovakifbank{
+                width: 90px;
+                background-position: -246px -20px;
+              }
+            }
+
+            > .nav{
+              padding-bottom: 5px;
+
+              .banklogostablink{
+                margin: 0 5px;
+
+                &:first-child{margin-left: 0;}
+                &:last-child{margin-right: 0;}
+
+                &.active .banksprttablogos{
+                  background-position-y: 0;
+                }
+              }
+            }
+
+            > .tab-content{}
+          }
+
+          .depositbankform{}
+
+          .withdrawbankform{
+            .formfieldset{
               .form-control{
                 &.totalbalance{
                   @include flexbox-flex(0 0 auto);
@@ -128,85 +147,25 @@
                 }
               }
             }
-
-            .formbttm{
-              .btn{
-                width: 100%;
-              }
-            }
           }
         }
 
-        &-tabpapara{
+        &-papara{
 
-          &-form{
-            @include flexbox-display-flex();
-            @include flexbox-flex-flow(column);
-            height: 100%;
+          .depositpaparaform{}
 
-            .formfieldset{
-              @include flexbox-flex(1);
-            }
-
-            .formbttm{
-              .btn{
-                width: 100%;
-              }
-            }
-          }
+          .withdrawpaparaform{}
 
         }
 
-        &-tabcrypto{
+        &-crypto{
 
-          &-form{
-            @include flexbox-display-flex();
-            @include flexbox-flex-flow(column);
-            height: 100%;
+          .depositcryptoform{}
 
-            .formfieldset{
-              @include flexbox-flex(1);
-            }
+          .withdrawcryptoform{}
 
-            .formbttm{
-              .btn{
-                width: 100%;
-              }
-            }
-          }
         }
 
-      }
-
-      .banksprttablogos{
-        background-image: url(#{$path-img-url-icons}/icons_spite_banklogos.svg#{$cache-busting});
-        background-repeat: no-repeat;
-        background-position: 0 0;
-        display: inline-block;
-        position: relative;
-        height: 20px;
-        @include transition-multiple(background-position 0.3s ease-in-out);
-
-
-        &.logoakbank{
-          width: 76px;
-          background-position: 0 -20px;
-        }
-
-        &.logoziraat{
-          width: 94px;
-          background-position: -76px -20px;
-        }
-
-        &.logoodeabank{
-          width: 76px;
-          background-position: -170px -20px;
-        }
-
-        &.logovakifbank{
-          width: 90px;
-          background-position: -246px -20px;
-        }
       }
     }
   }
