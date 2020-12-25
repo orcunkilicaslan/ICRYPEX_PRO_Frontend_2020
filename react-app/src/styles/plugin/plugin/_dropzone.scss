@@ -1,0 +1,182 @@
+// Dropzone
+@import '../../../../../node_modules/dropzone/dist/dropzone';
+
+.dropzone{
+  background-color: $bootstrap-input-bg;
+  min-height: inherit;
+  padding: $input-padding-y*2;
+  border: $input-border-width dashed $global-clr-blue;
+  @include border-radius($input-border-radius);
+  @include transition-multiple(background 0.3s ease-in-out, border 0.3s ease-in-out);
+
+  &.dz-drag-hover{
+    background-color: $bootstrap-input-disabled-bg;
+    border-color: $global-clr-orange;
+    border-style: dashed;
+
+    .dz-message{
+      opacity: 1;
+    }
+  }
+
+  .dz{
+
+    &-message{
+      @include flexbox-display-flex();
+      @include flexbox-flex-flow(column);
+      @include flexbox-align-items(center);
+      @include flexbox-justify-content(center);
+      height: 100%;
+      margin: 0;
+
+      &-icon,
+      &-btxt,
+      &-stxt{
+        display: block;
+        text-align: center;
+      }
+
+      &-icon{
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNiIgaGVpZ2h0PSIzNCIgdmlld0JveD0iMCAwIDI2IDM0Ij4NCiAgPGcgaWQ9Ikljb25fRHJhZ19Ecm9wIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjUgMC41KSI+DQogICAgPHBhdGggaWQ9IlBhdGgiIGQ9Ik0yMy41LDMuNUg4LjVjLTEuNDgzLDAtMiwuNTE3LTIsMnYyOWMwLDEuNDgzLjUxNywyLDIsMmgyMGMxLjQ4MywwLDMtLjUxNywzLTJ2LTIyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTYuNSAtMy41KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNjg3Y2EyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iMSIvPg0KICAgIDxwYXRoIGlkPSJQYXRoLTIiIGRhdGEtbmFtZT0iUGF0aCIgZD0iTTE4LjgsMy40djcuNjU3QTEuMzMsMS4zMywwLDAsMCwyMC4xMTEsMTIuNEgyNi44IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMS44IC0zLjQpIiBmaWxsPSJub25lIiBzdHJva2U9IiM2ODdjYTIiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLXdpZHRoPSIxIi8+DQogICAgPHBhdGggaWQ9IlBhdGgtMyIgZGF0YS1uYW1lPSJQYXRoIiBkPSJNMTIuNiwxMC44Mjd2OC41MWMwLC41MjUuNDI0LjQyLjUzLjQybDIuMTIxLS45NDYsMS4zNzksMy4wNDdhLjY3MS42NzEsMCwwLDAsLjk1NS4zMTVsLjYzNi0uMzE1YS42MzcuNjM3LDAsMCwwLC40MjQtLjk0NmwtMS4zNzktMy4wNDcsMi4xMjEtLjk0NmMuMTA2LS4xMDUuMjEyLS4yMS4yMTItLjMxNSwwLS4yMSwwLS4zMTUtLjEwNi0uNDJMMTMuMTMsMTAuNDA3Yy0uMTA2LS4xMDUtLjMxOC0uMjEtLjQyNC0uMTA1UzEyLjYsMTAuNTEyLDEyLjYsMTAuODI3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMuNTk5IDAuNzQxKSIgZmlsbD0iIzY4N2NhMiIvPg0KICA8L2c+DQo8L3N2Zz4NCg==");
+        background-repeat: no-repeat;
+        background-position: center center;
+        display: inline-block;
+        position: relative;
+        width: 30px;
+        height: 35px;
+        margin-bottom: 5px;
+      }
+
+      &-btxt{
+        @include responsive-font-size($var-custom-font-size-base);
+      }
+
+      &-stxt{
+        @include responsive-font-size($var-custom-font-size-base);
+      }
+    }
+
+    &-preview{
+      @include flexbox-display-flex();
+      @include flexbox-flex-flow(column);
+      @include flexbox-align-items(center);
+      @include flexbox-justify-content(center);
+      height: 100%;
+      min-height: auto;
+      margin: 0;
+
+      &.dz-image-preview{
+        background-color: $bootstrap-input-disabled-bg;
+        @include border-radius($input-border-radius);
+      }
+
+      &.dz-file-preview{
+        .dz-image{
+          background: $bootstrap-input-disabled-bg;
+          @include border-radius($input-border-radius);
+        }
+      }
+
+      .dz-image{
+        @include flexbox-display-flex();
+        @include flexbox-flex-flow(column);
+        @include flexbox-align-items(center);
+        @include flexbox-justify-content(center);
+        width: 100%;
+        height: 100%;
+        @include border-radius($input-border-radius);
+
+        > img{
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          @include border-radius($input-border-radius);
+          @include scale(1.02);
+          @include transition-multiple(filter 0.3s ease-in-out, transform 0.3s ease-in-out);
+        }
+      }
+
+      .dz-details{
+        @include flexbox-display-flex();
+        @include flexbox-flex-flow(column);
+        @include flexbox-align-items(center);
+        @include flexbox-justify-content(space-between);
+        height: 100%;
+        @include responsive-font-size($var-custom-font-size-base);
+        padding: $input-padding-y;
+
+        .dz-filename,
+        .dz-size{
+          width: 100%;
+
+          span{
+            color: $global-clr-white;
+            background-color: transparentize($global-clr-green, 0.3);
+            padding: 0 5px 1px;
+            @include border-radius($var-custom-border-radius-sm);
+          }
+        }
+
+        .dz-size{
+          @include responsive-font-size($var-custom-font-size-base);
+        }
+
+        .dz-filename:hover span{
+          background-color: transparentize($global-clr-green, 0.1);
+          border-color: $global-clr-green;
+        }
+      }
+
+      .dz-progress{
+        background-color: $site-brdr-dark;
+        height: 8px;
+        margin-top: -4px;
+
+        .dz-upload{
+          @include background-linear(lighten($site-clr-green, 15%), $site-clr-green, 0);
+        }
+      }
+
+      .dz-success-mark svg,
+      .dz-error-mark svg{
+        background-color: transparentize($global-clr-white, 0.3);
+        @include box-shadow(0px 0px 0px 8px transparentize($global-clr-white, 0.3));
+        @include border-radius(50%);
+        @include scale(0.6);
+      }
+
+      .dz-success-mark svg path{
+        stroke: $global-clr-green;
+        stroke-opacity: 1;
+        fill: transparentize($global-clr-green, 0.15);
+        fill-opacity: 1;
+      }
+
+      .dz-error-mark svg g{
+        stroke: $global-clr-red;
+        stroke-opacity: 1;
+        fill: transparentize($global-clr-red, 0.15);
+        fill-opacity: 1;
+      }
+
+      .dz-error-message{
+        color: $global-clr-white;
+        @include background-linear($global-clr-red, lighten($global-clr-red, 5%));
+        @include responsive-font-size($var-custom-font-size-base);
+        padding: $input-padding-y;
+        @include border-radius($var-custom-border-radius-sm);
+
+        &::after{
+          border-bottom-color: lighten($global-clr-red, 5%);
+        }
+      }
+
+      &:hover{
+        .dz-image img{
+          @include filter-multiple(blur(1px));
+          @include scale(1.2);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+.alertx{
+  $alertclassname: &;
+
+  &-primary{
+    #{$alertclassname}-heading{color: $bootstrap-primary;}
+  }
+  &-secondary{
+    #{$alertclassname}-heading{color: $bootstrap-secondary;}
+  }
+  &-success{
+    #{$alertclassname}-heading{color: $bootstrap-success;}
+  }
+  &-danger{
+    #{$alertclassname}-heading{color: $bootstrap-danger;}
+  }
+  &-info{
+    #{$alertclassname}-heading{color: $bootstrap-info;}
+  }
+  &-warning{
+    #{$alertclassname}-heading{color: $bootstrap-warning;}
+  }
+  &-light{
+    #{$alertclassname}-heading{color: $bootstrap-light;}
+  }
+  &-dark{
+    #{$alertclassname}-heading{color: $bootstrap-dark;}
+  }
+
+  &-dismissible{
+    padding-right: 50px;
+
+    .close{
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      top: calc(50% - 8px);
+      right: 15px;
+      padding: 0;
+      text-indent: -9999px;
+      opacity: 1;
+      @include transition(transform, 0.3s, ease-in-out);
+
+      &::before,
+      &::after{
+        content: "";
+        position: absolute;
+        background-color: transparentize($bootstrap-danger, 0.20);
+        width: 16px;
+        height: 2px;
+        left: 0;
+        top: calc(50% - 1px);
+      }
+      &::before{
+        @include rotate(45);
+      }
+      &::after{
+        @include rotate(135);
+      }
+
+      &:hover{
+        @include rotate(90);
+      }
+    }
+  }
+
+  &-flex{
+    @include flexbox-display-flex();
+    @include flexbox-align-items(center);
+    position: relative;
+
+    #{$alertclassname}-icon{margin-right: 15px;}
+  }
+
+  &-sweet{
+
+    #{$alertclassname}-icon{
+      position: absolute;
+      width: 0;
+      height: 90px;
+      left: 0;
+      @include scale(0.5);
+    }
+    #{$alertclassname}-desc{
+      margin-left: 55px;
+    }
+
+    #{$alertclassname}-heading{text-transform: uppercase;}
+
+    #{$alertclassname}-desc{
+      p{color: $site-clr-text-dark-pri;}
+    }
+
+    &-big{
+      padding: 25px;
+
+      #{$alertclassname}-icon{
+        @include scale(0.8);
+      }
+      #{$alertclassname}-desc{
+        margin-left: 85px;
+      }
+    }
+  }
+
+  &-bgdark{
+    #{$alertclassname}-desc{
+    }
+  }
+
+}

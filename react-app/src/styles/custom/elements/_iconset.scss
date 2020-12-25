@@ -1,0 +1,152 @@
+// Global Variables
+@import "../../plugin/option/variables";
+@import "../../plugin/option/variables_bootstrap";
+
+// Global Mixin
+@import "../../plugin/option/mixin";
+
+.icon{
+  $iconclassname: &;
+
+  &-sprtsmclrd{
+    background-image: url(#{$path-img-url-icons}/icons_spite_darksmalliconcolored.svg#{$cache-busting});
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    display: inline-block;
+    position: relative;
+
+    &#{$iconclassname}-14{
+      width: 14px;
+      height: 14px;
+
+      &#{$iconclassname}-edit{background-position: calc(-14px*0) 0;}
+      &#{$iconclassname}-delete{background-position: calc(-14px*1) 0;}
+      &#{$iconclassname}-browse{background-position: calc(-14px*2) 0;}
+      &#{$iconclassname}-showhide{background-position: calc(-14px*3) 0;}
+      &#{$iconclassname}-arrowmore{background-position: calc(-14px*4) 0;}
+    }
+
+    &#{$iconclassname}-16{
+      width: 16px;
+      height: 16px;
+
+      &#{$iconclassname}-wallet{background-position: calc(-16px*0) -14px;}
+      &#{$iconclassname}-qrcode{background-position: calc(-16px*1) -14px;}
+      &#{$iconclassname}-copybtn{background-position: calc(-16px*2) -14px;}
+      &#{$iconclassname}-transfer{background-position: calc(-16px*3) -14px;}
+      &#{$iconclassname}-addbtn{background-position: calc(-16px*4) -14px;}
+      &#{$iconclassname}-change{background-position: calc(-16px*5) -14px;}
+      &#{$iconclassname}-bell{background-position: calc(-16px*6) -14px;}
+      &#{$iconclassname}-info{background-position: calc(-16px*7) -14px;}
+      &#{$iconclassname}-question{background-position: calc(-16px*8) -14px;}
+      &#{$iconclassname}-check{background-position: calc(-16px*9) -14px;}
+
+      &.infoiconbox{
+        cursor: pointer;
+        @include scale(1.1);
+        @include transition-multiple(all 0.15s ease-in-out);
+
+        &:hover{
+          @include svg-filter(100%, 0, 300, 300%);
+        }
+      }
+    }
+
+    &#{$iconclassname}-20{
+      width: 20px;
+      height: 20px;
+
+      &#{$iconclassname}-support{background-position: calc(-20px*0) -30px;}
+      &#{$iconclassname}-notif{background-position: calc(-20px*1) -30px;}
+      &#{$iconclassname}-pagefullscreen{
+        background-position: calc(-20px*2) -30px;
+
+        &.hide{background-position: calc(-20px*2) -30px;}
+        &.show{background-position: calc(-20px*3) -30px;}
+      }
+    }
+  }
+
+  &-sprtlgclrd{
+    background-image: url(#{$path-img-url-icons}/icons_spite_darkbigiconcolored.svg#{$cache-busting});
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    display: inline-block;
+    position: relative;
+
+
+    &#{$iconclassname}-50gray{
+      width: 50px;
+      height: 50px;
+
+      &#{$iconclassname}-check{background-position: calc(-50px*0) 0;}
+      &#{$iconclassname}-close{background-position: calc(-50px*1) 0;}
+      &#{$iconclassname}-delete{background-position: calc(-50px*2) 0;}
+      &#{$iconclassname}-user{background-position: calc(-50px*3) 0;}
+      &#{$iconclassname}-newuser{background-position: calc(-50px*4) 0;}
+    }
+
+    &#{$iconclassname}-50clrd{
+      width: 50px;
+      height: 50px;
+
+      &#{$iconclassname}-check{background-position: calc(-50px*0) -50px;}
+      &#{$iconclassname}-close{background-position: calc(-50px*1) -50px;}
+    }
+  }
+}
+
+.siteicons{
+
+  &dropdown{
+    background-color: transparent;
+    padding: 0;
+    width: 12px;
+    height: 12px;
+    position: relative;
+
+    &::after{
+      display: none;
+    }
+
+    &::before{
+      content: "";
+      position:absolute;
+      width: 7px;
+      height: 7px;
+      padding: 0;
+      border-top: 2px solid $site-clr-darkblue-200;
+      border-right: 2px solid $site-clr-darkblue-200;
+    }
+
+    &.updirection{
+      &::before{
+        top: calc(50% - 2px);
+        left: calc(50% - 4px);
+        @include rotate(315);
+      }
+    }
+    &.downdirection{
+      &::before{
+        top: calc(50% - 5px);
+        left: calc(50% - 4px);
+        @include rotate(135);
+      }
+    }
+    &.leftdirection{
+      &::before{
+        top: calc(50% - 4px);
+        left: calc(50% - 2px);
+        @include rotate(225);
+      }
+    }
+    &.rightdirection{
+      &::before{
+        top: calc(50% - 4px);
+        left: calc(50% - 5px);
+        @include rotate(45);
+      }
+    }
+  }
+
+}

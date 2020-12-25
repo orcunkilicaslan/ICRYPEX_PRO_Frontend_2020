@@ -1,0 +1,123 @@
+
+.mainbox-openorders{
+
+  .openorders-activities{
+    padding: 5px 10px;
+
+    .tabcont-head{
+
+      .printiconlink{
+        @include flexbox-display-flex();
+        @include flexbox-align-items(center);
+        color: $site-clr-text-soft-sec;
+        @include transition-multiple(all 0.15s ease-in-out);
+
+        &:hover{
+          color: $site-clr-white;
+
+          .printiconbox-icon{
+            fill: $site-clr-white;
+          }
+
+          .printiconbox-circle{
+            stroke: $site-clr-darkblue-400;
+            fill: $site-clr-darkblue-400;
+          }
+        }
+
+        .printiconbox{
+          width: 18px;
+          margin-left: 5px;
+          cursor: pointer;
+
+          &-icon{
+            fill: $site-clr-darkblue-200;
+            @include transition-multiple(all 0.15s ease-in-out);
+          }
+
+          &-circle{
+            stroke: $site-clr-darkblue-400;
+            fill: transparent;
+            @include transition-multiple(all 0.15s ease-in-out);
+          }
+        }
+      }
+    }
+
+    .activities{
+      padding-top: 0 !important;
+
+      &-tabs{}
+
+      &-pending{
+
+        .activitiespendingtable{
+          padding: 5px 0;
+
+          .sitetablediv.scrollbar-tbl{
+
+            > .scrollbar-tbl-th .tbl-thead{
+              border-top-width: 0;
+
+              .tbl-th{
+                padding-top: 0;
+              }
+            }
+
+            > .scrollbar-tbl-tb{
+              height: 160px;
+            }
+          }
+
+          .sitetablediv{
+            .nmbr[class*="tbl"]{width: 60px;}
+            .date[class*="tbl"]{width: 90px;}
+            .type[class*="tbl"]{width: 60px;}
+            .mthd[class*="tbl"]{width: 80px;}
+            .bank[class*="tbl"]{width: 80px;}
+            .amnt[class*="tbl"]{}
+            .stts[class*="tbl"]{width: 80px;}
+            .bttn[class*="tbl"]{
+              width: 22px;
+              text-align: right;
+
+              > a, button{
+                background-color: transparent;
+                padding: 0;
+                margin: 0 2px;
+              }
+            }
+          }
+        }
+
+      }
+
+      &-history{
+
+        .activitieshistorytable{
+          padding-bottom: 5px;
+
+          .sitetablediv.scrollbar-tbl{
+
+            > .scrollbar-tbl-tb{
+              height: 120px !important;
+            }
+          }
+
+          .sitetablediv{
+            .nmbr[class*="tbl"]{width: 60px;}
+            .date[class*="tbl"]{width: 85px;}
+            .type[class*="tbl"]{width: 60px;}
+            .mthd[class*="tbl"]{width: 60px;}
+            .bank[class*="tbl"]{width: 60px;}
+            .amnt[class*="tbl"]{}
+            .txid[class*="tbl"]{width: 120px;}
+            .stts[class*="tbl"]{width: 60px;}
+          }
+        }
+      }
+
+    }
+  }
+}
+

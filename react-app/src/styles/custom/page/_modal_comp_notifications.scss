@@ -1,0 +1,47 @@
+
+.modalcomp{
+
+  &-notif{
+
+    .headsmtitle{
+      padding-bottom: $modal-inner-padding;
+      border-bottom: 1px solid $site-brdr-dark;
+    }
+
+    &-wrp{}
+
+    &-list{
+      height: 750px;
+      position: relative;
+      overflow: hidden;
+
+      .accbuild{
+
+        &-heading{
+          position: relative;
+
+          &::before{
+            content: "";
+            background-color: $site-clr-red;
+            width: 6px;
+            height: 6px;
+            position: absolute;
+            left: 0;
+            top: 6px;
+            @include border-radius(50px);
+          }
+        }
+
+        &-heading,
+        &-collapse{
+          padding-left: 15px;
+        }
+
+        &-item.notifread .accbuild-heading::before{
+          background-color: $site-clr-text-soft-pri !important;
+        }
+      }
+    }
+  }
+
+}

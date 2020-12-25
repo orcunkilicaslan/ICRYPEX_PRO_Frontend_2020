@@ -1,0 +1,16 @@
+// Global Mixin
+@import "../../plugin/option/mixin";
+@import "../../plugin/option/mixin_rfs_bootstrap";
+@import "../../plugin/option/mixin_responsive_bootstrap";
+@import "../../plugin/option/mixin_responsive_resass";
+
+@mixin headerleftandbodyleftsidewidth($width) {
+  width: calc(400px - #{$width});
+
+  @include BootstrapMaxWidthResponsive(hd){
+    width: calc(380px - #{$width});
+  }
+  @include BootstrapMaxWidthResponsive(xl){
+    width: calc(360px - #{$width});
+  }
+}
