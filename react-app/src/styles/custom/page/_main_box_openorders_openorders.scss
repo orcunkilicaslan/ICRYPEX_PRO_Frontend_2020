@@ -19,10 +19,11 @@
           width: 50px;
           text-align: right;
 
-          > a, button{
+          > .btn, a, button{
             background-color: transparent;
             padding: 0;
             margin: 0 2px;
+            line-height: 1;
           }
         }
       }
