@@ -4,7 +4,7 @@ export const Button = props => {
 
   const {
     className,
-    type,
+    type = "button",
     size,
     variant,
     children,

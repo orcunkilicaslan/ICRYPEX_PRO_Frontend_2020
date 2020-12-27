@@ -1,35 +1,75 @@
+import React, { useState } from 'react';
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import classnames from 'classnames';
+
 import MarketDataSymbol from "./MarketDataSymbol.jsx";
 import MarketDataDetail from "./MarketDataDetail.jsx";
 import MarketDataLast from "./MarketDataLast.jsx";
 import MarketDataChart from "./MarketDataChart.jsx";
 
 const MarketData = props => {
+
+    const [activeTab, setActiveTab] = useState('1');
+
+    const toggle = tab => {
+        if(activeTab !== tab) setActiveTab(tab);
+    }
+
     return (
         <div className="mainbox mainbox-marketdata">
             <div className="marketdata marketdata-tabs tabareaflexflow">
-
-                <ul className="sitetabs nav nav-tabs nav-justified" role="tablist">
-                    <li className="nav-item"><a className="nav-link active" href="#md_symbol" data-toggle="tab" role="tab" aria-selected="true">Sembol</a></li>
-                    <li className="nav-item"><a className="nav-link" href="#md_detail" data-toggle="tab" role="tab" aria-selected="false">Detay</a></li>
-                    <li className="nav-item"><a className="nav-link" href="#md_last" data-toggle="tab" role="tab" aria-selected="false">Son İşlemler</a></li>
-                    <li className="nav-item"><a className="nav-link" href="#md_chart" data-toggle="tab" role="tab" aria-selected="false">Grafik</a></li>
-                </ul>
-
-                <div className="sitetabs tab-content">
-                    <div id="md_symbol" className="tab-pane fade show active" role="tabpanel">
+                <Nav
+                    tabs
+                    justified
+                    className="sitetabs"
+                >
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: activeTab === '1' })}
+                            onClick={() => { toggle('1'); }}
+                        >
+                            Sembol
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: activeTab === '2' })}
+                            onClick={() => { toggle('2'); }}
+                        >
+                            Detay
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: activeTab === '3' })}
+                            onClick={() => { toggle('3'); }}
+                        >
+                            Son İşlemler
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: activeTab === '4' })}
+                            onClick={() => { toggle('4'); }}
+                        >
+                            Grafik
+                        </NavLink>
+                    </NavItem>
+                </Nav>
+                <TabContent className="sitetabs" activeTab={activeTab}>
+                    <TabPane tabId="1">
                         <MarketDataSymbol />
-                    </div>
-                    <div id="md_detail" className="tab-pane fade" role="tabpanel">
+                    </TabPane>
+                    <TabPane tabId="2">
                         <MarketDataDetail />
-                    </div>
-                    <div id="md_last" className="tab-pane fade" role="tabpanel">
+                    </TabPane>
+                    <TabPane tabId="3">
                         <MarketDataLast />
-                    </div>
-                    <div id="md_chart" className="tab-pane fade" role="tabpanel">
+                    </TabPane>
+                    <TabPane tabId="4">
                         <MarketDataChart />
-                    </div>
-                </div>
-
+                    </TabPane>
+                </TabContent>
             </div>
         </div>
     );
