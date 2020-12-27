@@ -26,7 +26,7 @@ const BuySellActionMarket = props => {
                                     <InputGroupAddon addonType="prepend">
                                         <InputGroupText>Fiyat</InputGroupText>
                                     </InputGroupAddon>
-                                    <Input />
+                                    <Input type="text" />
                                     <InputGroupAddon addonType="append">
                                         <Input className="custom-select" type="select" name="curr">
                                             <option>TRY</option>
@@ -110,7 +110,7 @@ const BuySellActionMarket = props => {
                                     <InputGroupAddon addonType="prepend">
                                         <InputGroupText>Fiyat</InputGroupText>
                                     </InputGroupAddon>
-                                    <Input />
+                                    <Input type="text" />
                                     <InputGroupAddon addonType="append">
                                         <Input className="custom-select" type="select" name="curr">
                                             <option>TRY</option>
