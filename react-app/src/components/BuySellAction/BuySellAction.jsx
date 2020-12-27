@@ -1,24 +1,54 @@
+import React, { useState } from 'react';
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import classnames from 'classnames';
 import { IconSet } from "../IconSet.jsx";
+
 import BuySellActionMarket from "./BuySellActionMarket.jsx";
 
 const BuySellAction = props => {
+
+    const [activeTab, setActiveTab] = useState('1');
+
+    const toggle = tab => {
+        if(activeTab !== tab) setActiveTab(tab);
+    }
+
     return (
         <div className="mainbox mainbox-buysellaction">
             <div className="buysellaction tabareaflexflow">
 
                 <div className="buysellaction-head">
                     <div className="buysellaction-head-col tabarea">
-                        <ul className="sitetabs nav nav-pills nav-justified" role="tablist">
-                            <li className="nav-item">
-                                <a className="nav-link active" href="#bs_market" data-toggle="tab" role="tab" aria-selected="true">Market</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#bs_limit" data-toggle="tab" role="tab" aria-selected="false">Limit</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#bs_stoplimit" data-toggle="tab" role="tab" aria-selected="false">Stop Limit</a>
-                            </li>
-                        </ul>
+                        <Nav
+                            pills
+                            justified
+                            className="sitetabs"
+                        >
+                            <NavItem>
+                                <NavLink
+                                    className={classnames({ active: activeTab === '1' })}
+                                    onClick={() => { toggle('1'); }}
+                                >
+                                    Market
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink
+                                    className={classnames({ active: activeTab === '2' })}
+                                    onClick={() => { toggle('2'); }}
+                                >
+                                    Limit
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink
+                                    className={classnames({ active: activeTab === '3' })}
+                                    onClick={() => { toggle('3'); }}
+                                >
+                                    Stop Limit
+                                </NavLink>
+                            </NavItem>
+                        </Nav>
                     </div>
                     <div className="buysellaction-head-col cominfo">
                         <h6>İşlem Komisyonu</h6>
@@ -37,13 +67,17 @@ const BuySellAction = props => {
                         />
                     </div>
                 </div>
-                <div className="sitetabs tab-content">
-                    <div id="bs_market" className="tab-pane fade show active" role="tabpanel">
+                <TabContent className="sitetabs" activeTab={activeTab}>
+                    <TabPane tabId="1">
                         <BuySellActionMarket />
-                    </div>
-                    <div id="bs_limit" className="tab-pane fade" role="tabpanel">B</div>
-                    <div id="bs_stoplimit" className="tab-pane fade" role="tabpanel">C</div>
-                </div>
+                    </TabPane>
+                    <TabPane tabId="2">
+                        Limit
+                    </TabPane>
+                    <TabPane tabId="3">
+                        Stop Limit
+                    </TabPane>
+                </TabContent>
             </div>
         </div>
     );
