@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-export const LinkButton = props => {
+export const ButtonLink = props => {
 
   const {
     className,

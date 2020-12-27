@@ -1,7 +1,7 @@
 import { ReactComponent as SideLight } from "../../assets/images/header/header_theme_sidelight.svg";
 import { ReactComponent as SideDark } from "../../assets/images/header/header_theme_sidedark.svg";
 
-import { LinkButton } from "../LinkButton.jsx";
+import { ButtonLink } from "../ButtonLink.jsx";
 import { IconSet } from "../IconSet.jsx";
 
 const HeaderRight = props => {
@@ -69,7 +69,7 @@ const HeaderRight = props => {
         </a>
       </div>
       <div className="header-right-notsignedin pr-2">
-        <LinkButton
+        <ButtonLink
           size="sm"
           variant="secondary"
           href="#"
@@ -78,8 +78,8 @@ const HeaderRight = props => {
           data-target="#modalHeadSignIn"
         >
           Üye Girişi
-        </LinkButton>
-        <LinkButton
+        </ButtonLink>
+        <ButtonLink
           size="sm"
           variant="success"
           href="#"
@@ -88,11 +88,11 @@ const HeaderRight = props => {
           data-target="#modalHeadSignUp"
         >
           Kayıt Ol
-        </LinkButton>
+        </ButtonLink>
       </div>
       <div className="header-right-signedin d-none"></div>
       <div className="header-right-lang">
-        <LinkButton
+        <ButtonLink
           size="sm"
           variant="secondary"
           className="active"
@@ -100,10 +100,10 @@ const HeaderRight = props => {
           title="TR"
         >
           TR
-        </LinkButton>
-        <LinkButton size="sm" variant="secondary" href="#" title="EN">
+        </ButtonLink>
+        <ButtonLink size="sm" variant="secondary" href="#" title="EN">
           EN
-        </LinkButton>
+        </ButtonLink>
       </div>
     </div>
   );

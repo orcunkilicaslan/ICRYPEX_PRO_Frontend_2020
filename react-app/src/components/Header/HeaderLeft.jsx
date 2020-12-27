@@ -1,4 +1,4 @@
-import { LinkButton } from "../LinkButton.jsx";
+import { ButtonLink } from "../ButtonLink.jsx";
 
 const HeaderLeft = props => {
   return (
@@ -14,22 +14,22 @@ const HeaderLeft = props => {
         </a>
       </div>
       <div className="header-left-nav">
-        <LinkButton
+        <ButtonLink
           size="sm"
           variant="primary"
           href="/"
           title="Kolay AL-Sat"
         >
           Kolay AL-Sat
-        </LinkButton>
-        <LinkButton
+        </ButtonLink>
+        <ButtonLink
           size="sm"
           variant="secondary"
           href="/"
           title="PRO Görünüm"
         >
           PRO Görünüm
-        </LinkButton>
+        </ButtonLink>
       </div>
     </div>
   );

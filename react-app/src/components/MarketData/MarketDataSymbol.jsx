@@ -1,53 +1,53 @@
 import { ReactComponent as MdTableFavIcon } from "../../assets/images/icons/path_icon_mdtable_fav.svg";
 import { ReactComponent as MdTableSearchIcon } from "../../assets/images/icons/path_icon_mdtable_search.svg";
 import { ReactComponent as PerLineIcon } from "../../assets/images/icons/path_icon_pericon.svg";
-import {LinkButton} from "../LinkButton";
+import { ButtonLink } from "../ButtonLink.jsx";
 
 const MarketDataSymbol = props => {
     return (
         <div className="marketdata-symbol">
             <div className="tabcont tabcont-filterbar siteformui row">
                 <div className="btn-group btn-group-sm col" role="group">
-                    <LinkButton
+                    <ButtonLink
                         size="sm"
                         variant="secondary"
                         href="/"
                         title="Favorilerim"
                     >
                         <MdTableFavIcon className="filterfavico" />
-                    </LinkButton>
-                    <LinkButton
+                    </ButtonLink>
+                    <ButtonLink
                         size="sm"
                         variant="secondary"
                         href="/"
                         title="TRY"
                     >
                         TRY
-                    </LinkButton>
-                    <LinkButton
+                    </ButtonLink>
+                    <ButtonLink
                         size="sm"
                         variant="secondary"
                         href="/"
                         title="USD"
                     >
                         USD
-                    </LinkButton>
-                    <LinkButton
+                    </ButtonLink>
+                    <ButtonLink
                         size="sm"
                         variant="secondary"
                         href="/"
                         title="USDT"
                     >
                         USDT
-                    </LinkButton>
-                    <LinkButton
+                    </ButtonLink>
+                    <ButtonLink
                         size="sm"
                         variant="secondary active"
                         href="/"
                         title="Tümü"
                     >
                         Tümü
-                    </LinkButton>
+                    </ButtonLink>
                 </div>
                 <div className="btn-group btn-group-sm col-auto" role="group">
                     <input className="mdsearchinput form-control form-control-sm" type="text" placeholder="Arama" value="" />
