@@ -1,3 +1,4 @@
+import ChartistGraph from 'react-chartist';
 
 const orderbookbuytable = [
 
@@ -153,6 +154,35 @@ const orderbookselltable = [
 
 ];
 
+const orderbookbuydata = {
+    series: [[1,2,3,4,5,7,9,11,12,13,15,18]]
+};
+
+const orderbookselldata = {
+    series: [[18,15,13,12,11,9,7,5,4,3,2,1]]
+};
+
+const orderbookchartoptions = {
+    reverseData: false,
+    horizontalBars: true,
+    fullWidth: true,
+    axisX:{
+        offset: 0
+    },
+    axisY:{
+        offset: 0
+    },
+    chartPadding:{
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
+    }
+};
+
+const orderbookcharttype = 'Bar'
+
+
 const OrderBook = props => {
     return (
         <div className="mainbox mainbox-orderbook">
@@ -184,7 +214,7 @@ const OrderBook = props => {
                     <div className="col chartbuy">
                         <div className="orderbook-chartarea">
                             <div className="orderbook-chartarea-rectangle">
-                                <div className="orderbookchart orderbookchartbuy ct-chart"></div>
+                                <ChartistGraph className="orderbookchart orderbookchartbuy" data={orderbookbuydata} options={orderbookchartoptions} type={orderbookcharttype} />
                             </div>
                             <div className="orderbook-chartarea-ordertable">
                                 <div className="sitetablediv">
@@ -215,7 +245,7 @@ const OrderBook = props => {
                     <div className="col chartsell">
                         <div className="orderbook-chartarea">
                             <div className="orderbook-chartarea-rectangle">
-                                <div className="orderbookchart orderbookchartsell ct-chart"></div>
+                                <ChartistGraph className="orderbookchart orderbookchartsell" data={orderbookselldata} options={orderbookchartoptions} type={orderbookcharttype} />
                             </div>
                             <div className="orderbook-chartarea-ordertable">
                                 <div className="sitetablediv">
