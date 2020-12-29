@@ -1,4 +1,158 @@
 
+const orderbookbuytable = [
+
+    {
+        id      : "01",
+        total   : "0.4908453",
+        amount  : "234.3444",
+        price   : "0.000230"
+    },
+    {
+        id      : "02",
+        total   : "1.8045543",
+        amount  : "432.0045",
+        price   : "0.000432"
+    },
+    {
+        id      : "03",
+        total   : "0.2334455",
+        amount  : "023.9450",
+        price   : "0.000053"
+    },
+    {
+        id      : "04",
+        total   : "0.2390449",
+        amount  : "302.8432",
+        price   : "0.000452"
+    },
+    {
+        id      : "05",
+        total   : "1.0734532",
+        amount  : "904.9322",
+        price   : "0.035573"
+    },
+    {
+        id      : "06",
+        total   : "2.0794121",
+        amount  : "932.9935",
+        price   : "0.000035"
+    },
+    {
+        id      : "07",
+        total   : "0.4908453",
+        amount  : "234.3444",
+        price   : "0.000230"
+    },
+    {
+        id      : "08",
+        total   : "1.8045543",
+        amount  : "432.0045",
+        price   : "0.000432"
+    },
+    {
+        id      : "09",
+        total   : "0.2334455",
+        amount  : "023.9450",
+        price   : "0.000053"
+    },
+    {
+        id      : "10",
+        total   : "0.2390449",
+        amount  : "302.8432",
+        price   : "0.000452"
+    },
+    {
+        id      : "11",
+        total   : "1.0734532",
+        amount  : "904.9322",
+        price   : "0.035573"
+    },
+    {
+        id      : "12",
+        total   : "2.0794121",
+        amount  : "932.9935",
+        price   : "0.000035"
+    }
+
+];
+
+const orderbookselltable = [
+
+    {
+        id      : "01",
+        total   : "0.4908453",
+        amount  : "234.3444",
+        price   : "0.000230"
+    },
+    {
+        id      : "02",
+        total   : "1.8045543",
+        amount  : "432.0045",
+        price   : "0.000432"
+    },
+    {
+        id      : "03",
+        total   : "0.2334455",
+        amount  : "023.9450",
+        price   : "0.000053"
+    },
+    {
+        id      : "04",
+        total   : "0.2390449",
+        amount  : "302.8432",
+        price   : "0.000452"
+    },
+    {
+        id      : "05",
+        total   : "1.0734532",
+        amount  : "904.9322",
+        price   : "0.035573"
+    },
+    {
+        id      : "06",
+        total   : "2.0794121",
+        amount  : "932.9935",
+        price   : "0.000035"
+    },
+    {
+        id      : "07",
+        total   : "0.4908453",
+        amount  : "234.3444",
+        price   : "0.000230"
+    },
+    {
+        id      : "08",
+        total   : "1.8045543",
+        amount  : "432.0045",
+        price   : "0.000432"
+    },
+    {
+        id      : "09",
+        total   : "0.2334455",
+        amount  : "023.9450",
+        price   : "0.000053"
+    },
+    {
+        id      : "10",
+        total   : "0.2390449",
+        amount  : "302.8432",
+        price   : "0.000452"
+    },
+    {
+        id      : "11",
+        total   : "1.0734532",
+        amount  : "904.9322",
+        price   : "0.035573"
+    },
+    {
+        id      : "12",
+        total   : "2.0794121",
+        amount  : "932.9935",
+        price   : "0.000035"
+    }
+
+];
+
 const OrderBook = props => {
     return (
         <div className="mainbox mainbox-orderbook">
@@ -42,66 +196,17 @@ const OrderBook = props => {
                                         </div>
                                     </div>
                                     <div className="tbl-tbody">
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd totl">0.4908453</div>
-                                            <div className="tbl-td fxd amnt">234.3444</div>
-                                            <div className="tbl-td fxd pric">0.000230</div>
-                                        </div>
-                                        <div className="tbl-tr orderactive">
-                                            <div className="tbl-td fxd totl">1.8045543</div>
-                                            <div className="tbl-td fxd amnt">432.0045</div>
-                                            <div className="tbl-td fxd pric">0.000432</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd totl">0.2334455</div>
-                                            <div className="tbl-td fxd amnt">023.9450</div>
-                                            <div className="tbl-td fxd pric">0.000053</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd totl">0.2390449</div>
-                                            <div className="tbl-td fxd amnt">302.8432</div>
-                                            <div className="tbl-td fxd pric">0.000452</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd totl">1.0734532</div>
-                                            <div className="tbl-td fxd amnt">904.9322</div>
-                                            <div className="tbl-td fxd pric">0.035573</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd totl">2.0794121</div>
-                                            <div className="tbl-td fxd amnt">932.9935</div>
-                                            <div className="tbl-td fxd pric">0.000035</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd totl">0.4908453</div>
-                                            <div className="tbl-td fxd amnt">234.3444</div>
-                                            <div className="tbl-td fxd pric">0.000230</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd totl">1.8045543</div>
-                                            <div className="tbl-td fxd amnt">432.0045</div>
-                                            <div className="tbl-td fxd pric">0.000432</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd totl">0.2334455</div>
-                                            <div className="tbl-td fxd amnt">023.9450</div>
-                                            <div className="tbl-td fxd pric">0.000053</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd totl">0.2390449</div>
-                                            <div className="tbl-td fxd amnt">302.8432</div>
-                                            <div className="tbl-td fxd pric">0.000452</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd totl">1.0734532</div>
-                                            <div className="tbl-td fxd amnt">904.9322</div>
-                                            <div className="tbl-td fxd pric">0.035573</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd totl">2.0794121</div>
-                                            <div className="tbl-td fxd amnt">932.9935</div>
-                                            <div className="tbl-td fxd pric">0.000035</div>
-                                        </div>
+
+                                        {orderbookbuytable.map(({ id, total, amount, price }) => {
+                                            return (
+                                                <div className={"tbl-tr " + (id === "03" ? "orderactive" : "")} key={id}>
+                                                    <div className="tbl-td fxd totl">{total}</div>
+                                                    <div className="tbl-td fxd amnt">{amount}</div>
+                                                    <div className="tbl-td fxd pric">{price}</div>
+                                                </div>
+                                            );
+                                        })}
+
                                     </div>
                                 </div>
                             </div>
@@ -122,66 +227,17 @@ const OrderBook = props => {
                                         </div>
                                     </div>
                                     <div className="tbl-tbody">
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd pric">0.000230</div>
-                                            <div className="tbl-td fxd amnt">234.3444</div>
-                                            <div className="tbl-td fxd totl">0.4908453</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd pric">0.000432</div>
-                                            <div className="tbl-td fxd amnt">432.0045</div>
-                                            <div className="tbl-td fxd totl">1.8045543</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd pric">0.000053</div>
-                                            <div className="tbl-td fxd amnt">023.9450</div>
-                                            <div className="tbl-td fxd totl">0.2334455</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd pric">0.000452</div>
-                                            <div className="tbl-td fxd amnt">302.8432</div>
-                                            <div className="tbl-td fxd totl">0.2390449</div>
-                                        </div>
-                                        <div className="tbl-tr orderactive">
-                                            <div className="tbl-td fxd pric">0.035573</div>
-                                            <div className="tbl-td fxd amnt">904.9322</div>
-                                            <div className="tbl-td fxd totl">1.0734532</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd pric">0.000035</div>
-                                            <div className="tbl-td fxd amnt">932.9935</div>
-                                            <div className="tbl-td fxd totl">2.0794121</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd pric">0.000230</div>
-                                            <div className="tbl-td fxd amnt">234.3444</div>
-                                            <div className="tbl-td fxd totl">0.4908453</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd pric">0.000432</div>
-                                            <div className="tbl-td fxd amnt">432.0045</div>
-                                            <div className="tbl-td fxd totl">1.8045543</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd pric">0.000053</div>
-                                            <div className="tbl-td fxd amnt">023.9450</div>
-                                            <div className="tbl-td fxd totl">0.2334455</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd pric">0.000452</div>
-                                            <div className="tbl-td fxd amnt">302.8432</div>
-                                            <div className="tbl-td fxd totl">0.2390449</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd pric">0.035573</div>
-                                            <div className="tbl-td fxd amnt">904.9322</div>
-                                            <div className="tbl-td fxd totl">1.0734532</div>
-                                        </div>
-                                        <div className="tbl-tr">
-                                            <div className="tbl-td fxd pric">0.000035</div>
-                                            <div className="tbl-td fxd amnt">932.9935</div>
-                                            <div className="tbl-td fxd totl">2.0794121</div>
-                                        </div>
+
+                                        {orderbookselltable.map(({ id, total, amount, price }) => {
+                                            return (
+                                                <div className={"tbl-tr " + (id === "08" ? "orderactive" : "")} key={id}>
+                                                    <div className="tbl-td fxd pric">{price}</div>
+                                                    <div className="tbl-td fxd amnt">{amount}</div>
+                                                    <div className="tbl-td fxd totl">{total}</div>
+                                                </div>
+                                            );
+                                        })}
+
                                     </div>
                                 </div>
                             </div>
