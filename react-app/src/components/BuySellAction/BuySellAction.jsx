@@ -54,9 +54,7 @@ const BuySellAction = props => {
               css üzerinden müdahale edilirse daha temiz olur
             */}
             <h6>İşlem Komisyonu</h6>
-            <p style={{ marginLeft: "auto" }}>
-              Piyasa Yapıcı 0.25% <br /> Piyasa Alıcı 0.35%
-            </p>
+            <p>Piyasa Yapıcı 0.25% - Piyasa Alıcı 0.35%</p>
             <IconSet
               sprite="sprtsmclrd"
               size="16"
