@@ -3,6 +3,51 @@ import { ReactComponent as MdTableSearchIcon } from "../../assets/images/icons/p
 import { ReactComponent as PerLineIcon } from "../../assets/images/icons/path_icon_pericon.svg";
 import { ButtonLink } from "../ButtonLink.jsx";
 
+const mdsymboltable = [
+
+    {
+        pair: "BTC/TRY",
+        data: {
+            buy     : "3.63500",
+            sell    : "2.45300",
+            volume  : "10.23M",
+            change  : "-2.22%",
+            mdper   : "up",
+        }
+    },
+    {
+        pair: "BTC/USD",
+        data: {
+            buy     : "5.88721",
+            sell    : "1.095200",
+            volume  : "14.02M",
+            change  : "+1.38%",
+            mdper   : "down",
+        }
+    },
+    {
+        pair: "BTC/USDT",
+        data: {
+            buy     : "4.99102",
+            sell    : "4.05740",
+            volume  : "24.80M",
+            change  : "+2.24%",
+            mdper   : "down",
+        }
+    },
+    {
+        pair: "ETH/TRY",
+        data: {
+            buy     : "1.88932",
+            sell    : "3.94618",
+            volume  : "12.39M",
+            change  : "+3.57%",
+            mdper   : "up",
+        }
+    }
+
+];
+
 const MarketDataSymbol = props => {
     return (
         <div className="marketdata-symbol">
@@ -73,66 +118,27 @@ const MarketDataSymbol = props => {
                     </div>
                     <div className="scrollbar-tbl-tb">
                         <div className="tbl-tbody tbl-striped tbl-hovered">
-                            <div className="tbl-tr">
-                                <div className="tbl-td aut fav">
-                                    <a className="tablefavico" href="#" title="Favorime Ekle">
-                                        <MdTableFavIcon />
-                                    </a>
-                                </div>
-                                <div className="tbl-td fxd sym">BTC/TRY</div>
-                                <div className="tbl-td fxd buy">3.63500</div>
-                                <div className="tbl-td fxd sll">2.45300</div>
-                                <div className="tbl-td fxd vol">10.23M</div>
-                                <div className="tbl-td fxd chg">-2.22%</div>
-                                <div className="tbl-td aut per">
-                                    <PerLineIcon className="mdper mdper-up" />
-                                </div>
-                            </div>
-                            <div className="tbl-tr">
-                                <div className="tbl-td aut fav">
-                                    <a className="tablefavico" href="#" title="Favorime Ekle">
-                                        <MdTableFavIcon />
-                                    </a>
-                                </div>
-                                <div className="tbl-td fxd sym">BTC/USD</div>
-                                <div className="tbl-td fxd buy">5.88721</div>
-                                <div className="tbl-td fxd sll">1.095200</div>
-                                <div className="tbl-td fxd vol">14.02M</div>
-                                <div className="tbl-td fxd chg">+1.38%</div>
-                                <div className="tbl-td aut per">
-                                    <PerLineIcon className="mdper mdper-down" />
-                                </div>
-                            </div>
-                            <div className="tbl-tr">
-                                <div className="tbl-td aut fav">
-                                    <a className="tablefavico" href="#" title="Favorime Ekle">
-                                        <MdTableFavIcon />
-                                    </a>
-                                </div>
-                                <div className="tbl-td fxd sym">BTC/USDT</div>
-                                <div className="tbl-td fxd buy">4.99102</div>
-                                <div className="tbl-td fxd sll">4.05740</div>
-                                <div className="tbl-td fxd vol">24.80M</div>
-                                <div className="tbl-td fxd chg">+2.24%</div>
-                                <div className="tbl-td aut per">
-                                    <PerLineIcon className="mdper mdper-down" />
-                                </div>
-                            </div>
-                            <div className="tbl-tr">
-                                <div className="tbl-td aut fav">
-                                    <a className="tablefavico" href="#" title="Favorime Ekle">
-                                        <MdTableFavIcon />
-                                    </a>
-                                </div>
-                                <div className="tbl-td fxd sym">ETH/TRY</div>
-                                <div className="tbl-td fxd buy">1.88932</div>
-                                <div className="tbl-td fxd sll">3.94618</div>
-                                <div className="tbl-td fxd vol">12.39M</div>
-                                <div className="tbl-td fxd chg">+3.57%</div>
-                                <div className="tbl-td aut per">
-                                    <PerLineIcon className="mdper mdper-up" />
-                                </div>
-                            </div>
+
+                            {mdsymboltable.map(({ pair, data:{buy, sell, volume, change, mdper} }) => {
+                                return (
+                                    <div className="tbl-tr" key={pair}>
+                                        <div className="tbl-td aut fav">
+                                            <a className="tablefavico" href="#" title="Favorime Ekle">
+                                                <MdTableFavIcon />
+                                            </a>
+                                        </div>
+                                        <div className="tbl-td fxd sym">{pair}</div>
+                                        <div className="tbl-td fxd buy">{buy}</div>
+                                        <div className="tbl-td fxd sll">{sell}</div>
+                                        <div className="tbl-td fxd vol">{volume}</div>
+                                        <div className="tbl-td fxd chg">{change}</div>
+                                        <div className="tbl-td aut per">
+                                            <PerLineIcon className={"mdper mdper-" + mdper} />
+                                        </div>
+                                    </div>
+                                );
+                            })}
+
                         </div>
                     </div>
                 </div>
