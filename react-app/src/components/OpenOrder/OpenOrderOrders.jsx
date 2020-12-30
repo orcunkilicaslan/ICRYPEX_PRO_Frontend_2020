@@ -2,6 +2,71 @@ import { Row, Col, Label, Input, ButtonGroup } from "reactstrap";
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 
+const orderstable = [
+
+    {
+        id          : "01",
+        pair        : "BTC/TRY",
+        date        : "10.06.2020",
+        time        : "21:54:57",
+        typetext    : "Stop Limit",
+        typeresult1 : "1",
+        typeresult2 : "Alış",
+        price       : "32464.25 TRY",
+        amount      : "22,430.124 TRY",
+        transaction : "1,43004833 BTC"
+    },
+    {
+        id          : "02",
+        pair        : "ETH/TRY",
+        date        : "08.06.2020",
+        time        : "18:23:12",
+        typetext    : "Market",
+        typeresult1 : "1",
+        typeresult2 : "Alış",
+        price       : "45.505931 TRY",
+        amount      : "35,120.985 TRY",
+        transaction : "2.3000000 BTC"
+    },
+    {
+        id          : "03",
+        pair        : "MPAY/TRY",
+        date        : "02.06.2020",
+        time        : "12:45:52",
+        typetext    : "Limit",
+        typeresult1 : "0",
+        typeresult2 : "Satış",
+        price       : "27.87390 TRY",
+        amount      : "27.87390 TRY",
+        transaction : "0.8000000 BTC"
+    },
+    {
+        id          : "04",
+        pair        : "BAB/USD",
+        date        : "29.05.2020",
+        time        : "13:21:19",
+        typetext    : "Market",
+        typeresult1 : "0",
+        typeresult2 : "Satış",
+        price       : "12.4647833 TRY",
+        amount      : "12.4647833 TRY",
+        transaction : "1.70000000 BTC"
+    },
+    {
+        id          : "05",
+        pair        : "XRP/USDT",
+        date        : "18.05.2020",
+        time        : "10:18:43",
+        typetext    : "Market",
+        typeresult1 : "1",
+        typeresult2 : "Alış",
+        price       : "23.4938 TRY",
+        amount      : "23.4938 TRY",
+        transaction : "6.45000000 BTC"
+    }
+
+];
+
 const OpenOrderOrders = props => {
     return (
         <div className="openorders-orders">
@@ -81,167 +146,38 @@ const OpenOrderOrders = props => {
                     </div>
                     <div className="scrollbar-tbl-tb">
                         <div className="tbl-tbody tbl-striped tbl-hovered">
-                            <div className="tbl-tr">
-                                <div className="tbl-td aut symb">BTC/TRY</div>
-                                <div className="tbl-td aut date">10.06.2020-21:54:57</div>
-                                <div className="tbl-td fxd type">Stop Limit - <span className="sitecolorgreen">Alış</span></div>
-                                <div className="tbl-td fxd pric">32464.25 TRY</div>
-                                <div className="tbl-td fxd amnt">22,430.124 TRY</div>
-                                <div className="tbl-td fxd hppn">1,43004833 BTC</div>
-                                <div className="tbl-td aut bttn">
-                                    <Button type="button">
-                                        <IconSet
-                                            sprite="sprtsmclrd"
-                                            size="14"
-                                            name="edit"
-                                        />
-                                    </Button>
-                                    <Button type="button">
-                                        <IconSet
-                                            sprite="sprtsmclrd"
-                                            size="14"
-                                            name="delete"
-                                            data-toggle="modal"
-                                            data-target="#ooModalDeleteOrder"
-                                        />
-                                    </Button>
-                                </div>
-                            </div>
-                            <div className="tbl-tr">
-                                <div className="tbl-td aut symb">ETH/TRY</div>
-                                <div className="tbl-td aut date">08.06.2020-18:23:12</div>
-                                <div className="tbl-td fxd type">Market - <span className="sitecolorgreen">Alış</span>
-                                </div>
-                                <div className="tbl-td fxd pric">45.505931 TRY</div>
-                                <div className="tbl-td fxd amnt">35,120.985 TRY</div>
-                                <div className="tbl-td fxd hppn">2.3000000 BTC</div>
-                                <div className="tbl-td aut bttn">
-                                    <Button type="button">
-                                        <IconSet
-                                            sprite="sprtsmclrd"
-                                            size="14"
-                                            name="edit"
-                                        />
-                                    </Button>
-                                    <Button type="button">
-                                        <IconSet
-                                            sprite="sprtsmclrd"
-                                            size="14"
-                                            name="delete"
-                                            data-toggle="modal"
-                                            data-target="#ooModalDeleteOrder"
-                                        />
-                                    </Button>
-                                </div>
-                            </div>
-                            <div className="tbl-tr">
-                                <div className="tbl-td aut symb">MPAY/TRY</div>
-                                <div className="tbl-td aut date">02.06.2020-12:45:52</div>
-                                <div className="tbl-td fxd type">Limit - <span className="sitecolorred">Satış</span>
-                                </div>
-                                <div className="tbl-td fxd pric">27.87390 TRY</div>
-                                <div className="tbl-td fxd amnt">27.87390 TRY</div>
-                                <div className="tbl-td fxd hppn">0.8000000 BTC</div>
-                                <div className="tbl-td aut bttn">
-                                    <Button type="button">
-                                        <IconSet
-                                            sprite="sprtsmclrd"
-                                            size="14"
-                                            name="edit"
-                                        />
-                                    </Button>
-                                    <Button type="button">
-                                        <IconSet
-                                            sprite="sprtsmclrd"
-                                            size="14"
-                                            name="delete"
-                                            data-toggle="modal"
-                                            data-target="#ooModalDeleteOrder"
-                                        />
-                                    </Button>
-                                </div>
-                            </div>
-                            <div className="tbl-tr">
-                                <div className="tbl-td aut symb">BAB/USD</div>
-                                <div className="tbl-td aut date">29.05.2020-13:21:19</div>
-                                <div className="tbl-td fxd type">Market - <span className="sitecolorred">Satış</span>
-                                </div>
-                                <div className="tbl-td fxd pric">12.4647833 TRY</div>
-                                <div className="tbl-td fxd amnt">12.4647833 TRY</div>
-                                <div className="tbl-td fxd hppn">1.70000000 BTC</div>
-                                <div className="tbl-td aut bttn">
-                                    <Button type="button">
-                                        <IconSet
-                                            sprite="sprtsmclrd"
-                                            size="14"
-                                            name="edit"
-                                        />
-                                    </Button>
-                                    <Button type="button">
-                                        <IconSet
-                                            sprite="sprtsmclrd"
-                                            size="14"
-                                            name="delete"
-                                            data-toggle="modal"
-                                            data-target="#ooModalDeleteOrder"
-                                        />
-                                    </Button>
-                                </div>
-                            </div>
-                            <div className="tbl-tr">
-                                <div className="tbl-td aut symb">XRP/USDT</div>
-                                <div className="tbl-td aut date">18.05.2020-10:18:43</div>
-                                <div className="tbl-td fxd type">Market - <span className="sitecolorgreen">Alış</span>
-                                </div>
-                                <div className="tbl-td fxd pric">23.4938 TRY</div>
-                                <div className="tbl-td fxd amnt">23.4938 TRY</div>
-                                <div className="tbl-td fxd hppn">6.45000000 BTC</div>
-                                <div className="tbl-td aut bttn">
-                                    <Button type="button">
-                                        <IconSet
-                                            sprite="sprtsmclrd"
-                                            size="14"
-                                            name="edit"
-                                        />
-                                    </Button>
-                                    <Button type="button">
-                                        <IconSet
-                                            sprite="sprtsmclrd"
-                                            size="14"
-                                            name="delete"
-                                            data-toggle="modal"
-                                            data-target="#ooModalDeleteOrder"
-                                        />
-                                    </Button>
-                                </div>
-                            </div>
-                            <div className="tbl-tr">
-                                <div className="tbl-td aut symb">NEO/TRY</div>
-                                <div className="tbl-td aut date">02.05.2020-12:23:20</div>
-                                <div className="tbl-td fxd type">Limit - <span className="sitecolorred">Satış</span>
-                                </div>
-                                <div className="tbl-td fxd pric">13.99032 TRY</div>
-                                <div className="tbl-td fxd amnt">13.99032 TRY</div>
-                                <div className="tbl-td fxd hppn">0.45000000 BTC</div>
-                                <div className="tbl-td aut bttn">
-                                    <Button type="button">
-                                        <IconSet
-                                            sprite="sprtsmclrd"
-                                            size="14"
-                                            name="edit"
-                                        />
-                                    </Button>
-                                    <Button type="button">
-                                        <IconSet
-                                            sprite="sprtsmclrd"
-                                            size="14"
-                                            name="delete"
-                                            data-toggle="modal"
-                                            data-target="#ooModalDeleteOrder"
-                                        />
-                                    </Button>
-                                </div>
-                            </div>
+
+                            {orderstable.map(({ id, pair, date, time, typetext, typeresult1, typeresult2, price,amount, transaction }) => {
+                                return (
+                                    <div className="tbl-tr" key={id}>
+                                        <div className="tbl-td aut symb">{pair}</div>
+                                        <div className="tbl-td aut date">{date} - {time}</div>
+                                        <div className="tbl-td fxd type">{typetext} - <span className={ typeresult1 === "1" ? "sitecolorgreen" : "sitecolorred" }>{typeresult2}</span></div>
+                                        <div className="tbl-td fxd pric">{price}</div>
+                                        <div className="tbl-td fxd amnt">{amount}</div>
+                                        <div className="tbl-td fxd hppn">{transaction}</div>
+                                        <div className="tbl-td aut bttn">
+                                            <Button type="button">
+                                                <IconSet
+                                                    sprite="sprtsmclrd"
+                                                    size="14"
+                                                    name="edit"
+                                                />
+                                            </Button>
+                                            <Button type="button">
+                                                <IconSet
+                                                    sprite="sprtsmclrd"
+                                                    size="14"
+                                                    name="delete"
+                                                    data-toggle="modal"
+                                                    data-target="#ooModalDeleteOrder"
+                                                />
+                                            </Button>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+
                         </div>
                     </div>
                 </div>
