@@ -1,3 +1,5 @@
+import { UncontrolledTooltip } from 'reactstrap';
+
 import { ReactComponent as SideLight } from "../../assets/images/header/header_theme_sidelight.svg";
 import { ReactComponent as SideDark } from "../../assets/images/header/header_theme_sidedark.svg";
 
@@ -5,6 +7,7 @@ import { ButtonLink } from "../ButtonLink.jsx";
 import { IconSet } from "../IconSet.jsx";
 
 const HeaderRight = props => {
+
   return (
     <div className="header-right col-auto">
       <div className="header-right-theme siteformui">
@@ -53,19 +56,18 @@ const HeaderRight = props => {
           data-toggle="modal"
           data-target="#modalHeadNotifications"
         >
-          <span
-            title="4 Yeni Bildiriminiz Var"
-            data-toggle="tooltip"
-            data-placement="bottom"
-          >
+          <span id="headTooltipNotif">
             <IconSet
-              sprite="sprtsmclrd"
-              size="20"
-              name="notif"
+                sprite="sprtsmclrd"
+                size="20"
+                name="notif"
             >
               <span className="badge badge-pill badge-danger">4</span>
             </IconSet>
           </span>
+          <UncontrolledTooltip placement="bottom" target="headTooltipNotif">
+            4 Yeni Bildiriminiz Var
+          </UncontrolledTooltip>
         </a>
       </div>
       <div className="header-right-notsignedin pr-2">
