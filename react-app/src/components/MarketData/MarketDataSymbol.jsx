@@ -2,9 +2,9 @@ import { ReactComponent as MdTableFavIcon } from "../../assets/images/icons/path
 import { ReactComponent as MdTableSearchIcon } from "../../assets/images/icons/path_icon_mdtable_search.svg";
 import { ReactComponent as PerLineIcon } from "../../assets/images/icons/path_icon_pericon.svg";
 
+import { ButtonGroup, Input} from 'reactstrap';
+import { Button } from "../Button";
 import { TableMain, TableThead, TableTbody, TableTr, TableTh, TableTd } from "../TableMain.jsx";
-import { ButtonLink } from "../ButtonLink.jsx";
-
 
 const mdsymboltable = [
 
@@ -55,54 +55,49 @@ const MarketDataSymbol = props => {
     return (
         <div className="marketdata-symbol">
             <div className="tabcont tabcont-filterbar siteformui row">
-                <div className="btn-group btn-group-sm col" role="group">
-                    <ButtonLink
-                        size="sm"
-                        variant="secondary"
-                        href="/"
-                        title="Favorilerim"
-                    >
-                        <MdTableFavIcon className="filterfavico" />
-                    </ButtonLink>
-                    <ButtonLink
-                        size="sm"
-                        variant="secondary"
-                        href="/"
-                        title="TRY"
-                    >
-                        TRY
-                    </ButtonLink>
-                    <ButtonLink
-                        size="sm"
-                        variant="secondary"
-                        href="/"
-                        title="USD"
-                    >
-                        USD
-                    </ButtonLink>
-                    <ButtonLink
-                        size="sm"
-                        variant="secondary"
-                        href="/"
-                        title="USDT"
-                    >
-                        USDT
-                    </ButtonLink>
-                    <ButtonLink
+                <ButtonGroup size="sm" className="col">
+                    <Button
+                        type="button"
                         size="sm"
                         variant="secondary active"
-                        href="/"
-                        title="Tümü"
+                    >
+                        <MdTableFavIcon className="filterfavico" />
+                    </Button>
+                    <Button
+                        type="button"
+                        size="sm"
+                        variant="secondary"
+                    >
+                        TRY
+                    </Button>
+                    <Button
+                        type="button"
+                        size="sm"
+                        variant="secondary"
+                    >
+                        USD
+                    </Button>
+                    <Button
+                        type="button"
+                        size="sm"
+                        variant="secondary"
+                    >
+                        USDT
+                    </Button>
+                    <Button
+                        type="button"
+                        size="sm"
+                        variant="secondary"
                     >
                         Tümü
-                    </ButtonLink>
-                </div>
-                <div className="btn-group btn-group-sm col-auto" role="group">
-                    <input className="mdsearchinput form-control form-control-sm" type="text" placeholder="Arama" value="" />
+                    </Button>
+                </ButtonGroup>
+                <ButtonGroup size="sm" className="col-auto">
+                    <Input className="mdsearchinput" bsSize="sm" placeholder="Arama" />
                     <div className="mdsearchicon">
                         <MdTableSearchIcon />
                     </div>
-                </div>
+                </ButtonGroup>
             </div>
             <div className="mdsymboltable scrollbar">
                 <TableMain scrollbar>
