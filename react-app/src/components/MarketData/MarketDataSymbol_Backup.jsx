@@ -1,10 +1,7 @@
 import { ReactComponent as MdTableFavIcon } from "../../assets/images/icons/path_icon_mdtable_fav.svg";
 import { ReactComponent as MdTableSearchIcon } from "../../assets/images/icons/path_icon_mdtable_search.svg";
 import { ReactComponent as PerLineIcon } from "../../assets/images/icons/path_icon_pericon.svg";
-
-import { TableMain, TableThead, TableTbody, TableTr, TableTh, TableTd } from "../TableMain.jsx";
 import { ButtonLink } from "../ButtonLink.jsx";
-
 
 const mdsymboltable = [
 
@@ -105,42 +102,46 @@ const MarketDataSymbol = props => {
                 </div>
             </div>
             <div className="mdsymboltable scrollbar">
-                <TableMain scrollbar>
-                    <TableThead scrollbar>
-                        <TableTr>
-                            <TableTh sizeauto className="fav"></TableTh>
-                            <TableTh sizefixed className="sym">Sembol</TableTh>
-                            <TableTh sizefixed className="buy">Alış</TableTh>
-                            <TableTh sizefixed className="sll">Satış</TableTh>
-                            <TableTh sizefixed className="vol">Hacim</TableTh>
-                            <TableTh sizefixed className="chg">Değişim</TableTh>
-                            <TableTh sizeauto className="per"></TableTh>
-                        </TableTr>
-                    </TableThead>
-                    <TableTbody scrollbar striped hovered>
+                <div className="sitetablediv scrollbar-tbl">
+                    <div className="scrollbar-tbl-th">
+                        <div className="tbl-thead">
+                            <div className="tbl-tr">
+                                <div className="tbl-th aut fav"></div>
+                                <div className="tbl-th fxd sym">Sembol</div>
+                                <div className="tbl-th fxd buy">Alış</div>
+                                <div className="tbl-th fxd sll">Satış</div>
+                                <div className="tbl-th fxd vol">Hacim</div>
+                                <div className="tbl-th fxd chg">Değişim</div>
+                                <div className="tbl-th aut per"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="scrollbar-tbl-tb">
+                        <div className="tbl-tbody tbl-striped tbl-hovered">
 
-                        {mdsymboltable.map(({ pair, data:{buy, sell, volume, change, mdper} }) => {
-                            return (
-                                <TableTr key={pair}>
-                                    <TableTd sizeauto className="fav">
-                                        <a className="tablefavico" href="#" title="Favorime Ekle">
-                                            <MdTableFavIcon />
-                                        </a>
-                                    </TableTd>
-                                    <TableTd sizefixed className="sym">{pair}</TableTd>
-                                    <TableTd sizefixed className="buy">{buy}</TableTd>
-                                    <TableTd sizefixed className="sll">{sell}</TableTd>
-                                    <TableTd sizefixed className="vol">{volume}</TableTd>
-                                    <TableTd sizefixed className="chg">{change}</TableTd>
-                                    <TableTd sizeauto className="per">
-                                        <PerLineIcon className={"mdper mdper-" + mdper} />
-                                    </TableTd>
-                                </TableTr>
-                            );
-                        })}
+                            {mdsymboltable.map(({ pair, data:{buy, sell, volume, change, mdper} }) => {
+                                return (
+                                    <div className="tbl-tr" key={pair}>
+                                        <div className="tbl-td aut fav">
+                                            <a className="tablefavico" href="#" title="Favorime Ekle">
+                                                <MdTableFavIcon />
+                                            </a>
+                                        </div>
+                                        <div className="tbl-td fxd sym">{pair}</div>
+                                        <div className="tbl-td fxd buy">{buy}</div>
+                                        <div className="tbl-td fxd sll">{sell}</div>
+                                        <div className="tbl-td fxd vol">{volume}</div>
+                                        <div className="tbl-td fxd chg">{change}</div>
+                                        <div className="tbl-td aut per">
+                                            <PerLineIcon className={"mdper mdper-" + mdper} />
+                                        </div>
+                                    </div>
+                                );
+                            })}
 
-                    </TableTbody>
-                </TableMain>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
