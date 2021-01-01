@@ -48,11 +48,6 @@ const BuySellAction = props => {
             </Nav>
           </div>
           <div className="buysellaction-head-col cominfo">
-            {/* 
-              bu div içinde hizalama ve overflow sorunu vardı
-              marginLeft vererek ve <br/> ekleyerek geçici çözdüm
-              css üzerinden müdahale edilirse daha temiz olur
-            */}
             <h6>İşlem Komisyonu</h6>
             <p>Piyasa Yapıcı 0.25% - Piyasa Alıcı 0.35%</p>
             <IconSet

@@ -1,4 +1,4 @@
-import { UncontrolledTooltip } from 'reactstrap';
+import { UncontrolledTooltip } from "reactstrap";
 
 import { ReactComponent as SideLight } from "../../assets/images/header/header_theme_sidelight.svg";
 import { ReactComponent as SideDark } from "../../assets/images/header/header_theme_sidedark.svg";
@@ -32,11 +32,7 @@ const HeaderRight = props => {
           title="Tam Sayfa Görünümü"
           data-toggle="fullscreenbtn"
         >
-          <IconSet
-            sprite="sprtsmclrd"
-            size="20"
-            name="pagefullscreen"
-          />
+          <IconSet sprite="sprtsmclrd" size="20" name="pagefullscreen" />
         </a>
         <a
           className="headsignedinicon support"
@@ -44,11 +40,7 @@ const HeaderRight = props => {
           title="Destek"
           rel="bookmark"
         >
-          <IconSet
-            sprite="sprtsmclrd"
-            size="20"
-            name="support"
-          />
+          <IconSet sprite="sprtsmclrd" size="20" name="support" />
         </a>
         <a
           className="headsignedinicon notif"
@@ -57,11 +49,7 @@ const HeaderRight = props => {
           data-target="#modalHeadNotifications"
         >
           <span id="headTooltipNotif">
-            <IconSet
-                sprite="sprtsmclrd"
-                size="20"
-                name="notif"
-            >
+            <IconSet sprite="sprtsmclrd" size="20" name="notif">
               <span className="badge badge-pill badge-danger">4</span>
             </IconSet>
           </span>

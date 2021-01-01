@@ -7,9 +7,7 @@ import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-i18n
-  .use(initReactI18next)
-  .init({
+i18n.use(initReactI18next).init({
     resources: {
       en: {
         coinbar: {
