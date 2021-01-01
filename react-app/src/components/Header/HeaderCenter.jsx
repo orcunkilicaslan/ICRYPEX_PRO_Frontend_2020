@@ -1,6 +1,9 @@
+import { useReducer, useEffect } from "react";
+import { Col, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
+
 import { IconSet } from "../IconSet";
 
-const items = [
+const ITEMS = [
   "Murat Alaçayır: 01 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
   "Murat Alaçayır: 02 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
   "Murat Alaçayır: 03 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
@@ -9,30 +12,51 @@ const items = [
 ];
 
 const HeaderCenter = props => {
+  const [{ item }, dispatch] = useReducer(
+    (state, action) => {
+      switch (action.type) {
+        case "NEXT":
+          return {
+            item: ITEMS[(state.idx + 1) % ITEMS.length],
+            idx: state.idx + 1,
+          };
+        default:
+          return state;
+      }
+    },
+    { item: ITEMS[0], idx: 0 }
+  );
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      dispatch({ type: "NEXT" });
+    }, 5000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
-    <div className="header-center col">
+    <Col className="header-center">
       <div className="newstickerbars siteformui">
-        <div className="input-group input-group-sm">
-          <div className="input-group-prepend">
-            <span className="input-group-text newslefttxt">Haber & Analiz</span>
-          </div>
+        <InputGroup size="sm">
+          <InputGroupAddon addonType="prepend">
+            <InputGroupText className="newslefttxt">
+              Haber & Analiz
+            </InputGroupText>
+          </InputGroupAddon>
           <div className="newstickerbars-box form-control">
-            {items.map((item, idx) => {
-              return (
-                <a
-                  key={idx}
-                  className="newstickerbars-item"
-                  href="#"
-                  title=""
-                  data-toggle="modal"
-                  data-target="#modalHeadNewsAll"
-                >
-                  {item}
-                </a>
-              );
-            })}
+            <a
+              className="newstickerbars-item"
+              href="#"
+              title=""
+              data-toggle="modal"
+              data-target="#modalHeadNewsAll"
+            >
+              {item}
+            </a>
           </div>
-          <div className="input-group-append">
+          <InputGroupAddon addonType="append">
+            {/* <InputGroupText> */}
             <a
               className="input-group-text newsallbtn"
               href="#"
@@ -41,16 +65,13 @@ const HeaderCenter = props => {
               data-target="#modalHeadNewsAll"
             >
               <span>Tümü</span>
-              <IconSet
-                sprite="sprtsmclrd"
-                size="14"
-                name="arrowmore"
-              />
+              <IconSet sprite="sprtsmclrd" size="14" name="arrowmore" />
             </a>
-          </div>
-        </div>
+            {/* </InputGroupText> */}
+          </InputGroupAddon>
+        </InputGroup>
       </div>
-    </div>
+    </Col>
   );
 };
 
