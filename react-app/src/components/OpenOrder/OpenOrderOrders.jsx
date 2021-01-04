@@ -1,6 +1,7 @@
 import { Row, Col, Label, Input, ButtonGroup } from "reactstrap";
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
+import Table from "../Table.jsx";
 
 const orderstable = [
 
@@ -70,7 +71,6 @@ const orderstable = [
 const OpenOrderOrders = props => {
     return (
         <div className="openorders-orders">
-
             <Row className="tabcont tabcont-filterbar siteformui">
                 <Col xs="auto">
                     <Input className="custom-select custom-select-sm" type="select">
@@ -130,60 +130,66 @@ const OpenOrderOrders = props => {
                 </Col>
             </Row>
             <div className="ooopenorderstable scrollbar">
-                <div className="sitetablediv scrollbar-tbl">
-                    <div className="scrollbar-tbl-th">
-                        <div className="tbl-thead">
-                            <div className="tbl-tr">
-                                <div className="tbl-th aut symb">Çift</div>
-                                <div className="tbl-th aut date">Tarih</div>
-                                <div className="tbl-th fxd type">İşlem Tipi</div>
-                                <div className="tbl-th fxd pric">Fiyat</div>
-                                <div className="tbl-th fxd amnt">Miktar</div>
-                                <div className="tbl-th fxd hppn">Gerçekleşen</div>
-                                <div className="tbl-th aut bttn"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="scrollbar-tbl-tb">
-                        <div className="tbl-tbody tbl-striped tbl-hovered">
+                <Table>
+                    <Table.Thead scrollbar>
+                        <Table.Tr>
+                            <Table.Th sizeauto className="symb">Çift</Table.Th>
+                            <Table.Th sizeauto className="date">Tarih</Table.Th>
+                            <Table.Th sizefixed className="type">İşlem Tipi</Table.Th>
+                            <Table.Th sizefixed className="pric">Fiyat</Table.Th>
+                            <Table.Th sizefixed className="amnt">Miktar</Table.Th>
+                            <Table.Th sizefixed className="hppn">Gerçekleşen</Table.Th>
+                            <Table.Th sizeauto className="bttn"></Table.Th>
+                        </Table.Tr>
+                    </Table.Thead>
+                    <Table.Tbody striped hovered scrollbar>
 
-                            {orderstable.map(({ id, pair, date, time, typetext, typeresult1, typeresult2, price,amount, transaction }) => {
-                                return (
-                                    <div className="tbl-tr" key={id}>
-                                        <div className="tbl-td aut symb">{pair}</div>
-                                        <div className="tbl-td aut date">{date} - {time}</div>
-                                        <div className="tbl-td fxd type">{typetext} - <span className={ typeresult1 === "1" ? "sitecolorgreen" : "sitecolorred" }>{typeresult2}</span></div>
-                                        <div className="tbl-td fxd pric">{price}</div>
-                                        <div className="tbl-td fxd amnt">{amount}</div>
-                                        <div className="tbl-td fxd hppn">{transaction}</div>
-                                        <div className="tbl-td aut bttn">
-                                            <Button type="button">
-                                                <IconSet
-                                                    sprite="sprtsmclrd"
-                                                    size="14"
-                                                    name="edit"
-                                                />
-                                            </Button>
-                                            <Button type="button">
-                                                <IconSet
-                                                    sprite="sprtsmclrd"
-                                                    size="14"
-                                                    name="delete"
-                                                    data-toggle="modal"
-                                                    data-target="#ooModalDeleteOrder"
-                                                />
-                                            </Button>
-                                        </div>
-                                    </div>
-                                );
-                            })}
+                        {orderstable.map(({ id, pair, date, time, typetext, typeresult1, typeresult2, price,amount, transaction }) => {
+                            return (
+                                <Table.Tr key={id}>
+                                    <Table.Td sizeauto className="symb">
+                                        {pair}
+                                    </Table.Td>
+                                    <Table.Td sizeauto className="date">
+                                        {date} - {time}
+                                    </Table.Td>
+                                    <Table.Td sizefixed className="type">
+                                        {typetext} - <span className={ typeresult1 === "1" ? "sitecolorgreen" : "sitecolorred" }>{typeresult2}</span>
+                                    </Table.Td>
+                                    <Table.Td sizefixed className="pric">
+                                        {price}
+                                    </Table.Td>
+                                    <Table.Td sizefixed className="amnt">
+                                        {amount}
+                                    </Table.Td>
+                                    <Table.Td sizefixed className="hppn">
+                                        {transaction}
+                                    </Table.Td>
+                                    <Table.Td sizeauto className="bttn">
+                                        <Button type="button">
+                                            <IconSet
+                                                sprite="sprtsmclrd"
+                                                size="14"
+                                                name="edit"
+                                            />
+                                        </Button>
+                                        <Button type="button">
+                                            <IconSet
+                                                sprite="sprtsmclrd"
+                                                size="14"
+                                                name="delete"
+                                                data-toggle="modal"
+                                                data-target="#ooModalDeleteOrder"
+                                            />
+                                        </Button>
+                                    </Table.Td>
+                                </Table.Tr>
+                            );
+                        })}
 
-                        </div>
-                    </div>
-                </div>
+                    </Table.Tbody>
+                </Table>
             </div>
-
-
         </div>
     );
 };
