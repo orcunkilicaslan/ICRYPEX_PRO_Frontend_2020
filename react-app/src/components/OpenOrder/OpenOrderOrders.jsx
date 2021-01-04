@@ -74,17 +74,17 @@ const OpenOrderOrders = props => {
             <Row className="tabcont tabcont-filterbar siteformui">
                 <Col xs="auto">
                     <Input className="custom-select custom-select-sm" type="select">
-                        <option>Çift</option>
-                        <option>...</option>
-                        <option>...</option>
+                        {["Çift", "...", "..."].map((el, idx) => {
+                            return <option key={`${el}_${idx}`}>{el}</option>
+                        })}
                     </Input>
                 </Col>
                 <Col xs="auto">
                     <Input className="custom-select custom-select-sm" type="select">
                         <option selected disabled>İşlem Tipi</option>
-                        <option>Stop Limit</option>
-                        <option>Market</option>
-                        <option>Limit</option>
+                        {["Stop Limit", "Market", "Limit"].map((el, idx) => {
+                            return <option key={`${el}_${idx}`}>{el}</option>
+                        })}
                     </Input>
                 </Col>
                 <Col>
