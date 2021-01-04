@@ -1,5 +1,7 @@
 import ChartistGraph from 'react-chartist';
 
+import Table from "../Table.jsx";
+
 const orderbookbuytable = [
 
     {
@@ -217,28 +219,40 @@ const OrderBook = props => {
                                 <ChartistGraph className="orderbookchart orderbookchartbuy" data={orderbookbuydata} options={orderbookchartoptions} type={orderbookcharttype} />
                             </div>
                             <div className="orderbook-chartarea-ordertable">
-                                <div className="sitetablediv">
-                                    <div className="tbl-thead">
-                                        <div className="tbl-tr">
-                                            <div className="tbl-th fxd totl">Toplam</div>
-                                            <div className="tbl-th fxd amnt">Miktar</div>
-                                            <div className="tbl-th fxd pric">Fiyat</div>
-                                        </div>
-                                    </div>
-                                    <div className="tbl-tbody">
+                                <Table>
+                                    <Table.Thead>
+                                        <Table.Tr>
+                                            <Table.Th sizefixed className="totl">
+                                                Toplam
+                                            </Table.Th>
+                                            <Table.Th sizefixed className="amnt">
+                                                Miktar
+                                            </Table.Th>
+                                            <Table.Th sizefixed className="pric">
+                                                Fiyat
+                                            </Table.Th>
+                                        </Table.Tr>
+                                    </Table.Thead>
+                                    <Table.Tbody>
 
                                         {orderbookbuytable.map(({ id, total, amount, price }) => {
                                             return (
-                                                <div className={"tbl-tr " + (id === "03" ? "orderactive" : "")} key={id}>
-                                                    <div className="tbl-td fxd totl">{total}</div>
-                                                    <div className="tbl-td fxd amnt">{amount}</div>
-                                                    <div className="tbl-td fxd pric">{price}</div>
-                                                </div>
+                                                <Table.Tr className={id === "03" ? "orderactive" : false} key={id}>
+                                                    <Table.Td sizefixed className="totl">
+                                                        {total}
+                                                    </Table.Td>
+                                                    <Table.Td sizefixed className="amnt">
+                                                        {amount}
+                                                    </Table.Td>
+                                                    <Table.Td sizefixed className="pric">
+                                                        {price}
+                                                    </Table.Td>
+                                                </Table.Tr>
                                             );
                                         })}
 
-                                    </div>
-                                </div>
+                                    </Table.Tbody>
+                                </Table>
                             </div>
                         </div>
                     </div>
@@ -248,28 +262,40 @@ const OrderBook = props => {
                                 <ChartistGraph className="orderbookchart orderbookchartsell" data={orderbookselldata} options={orderbookchartoptions} type={orderbookcharttype} />
                             </div>
                             <div className="orderbook-chartarea-ordertable">
-                                <div className="sitetablediv">
-                                    <div className="tbl-thead">
-                                        <div className="tbl-tr">
-                                            <div className="tbl-th fxd pric">Fiyat</div>
-                                            <div className="tbl-th fxd amnt">Miktar</div>
-                                            <div className="tbl-th fxd totl">Toplam</div>
-                                        </div>
-                                    </div>
-                                    <div className="tbl-tbody">
+                                <Table>
+                                    <Table.Thead>
+                                        <Table.Tr>
+                                            <Table.Th sizefixed className="pric">
+                                                Fiyat
+                                            </Table.Th>
+                                            <Table.Th sizefixed className="amnt">
+                                                Miktar
+                                            </Table.Th>
+                                            <Table.Th sizefixed className="totl">
+                                                Toplam
+                                            </Table.Th>
+                                        </Table.Tr>
+                                    </Table.Thead>
+                                    <Table.Tbody>
 
                                         {orderbookselltable.map(({ id, total, amount, price }) => {
                                             return (
-                                                <div className={"tbl-tr " + (id === "08" ? "orderactive" : "")} key={id}>
-                                                    <div className="tbl-td fxd pric">{price}</div>
-                                                    <div className="tbl-td fxd amnt">{amount}</div>
-                                                    <div className="tbl-td fxd totl">{total}</div>
-                                                </div>
+                                                <Table.Tr className={id === "08" ? "orderactive" : false} key={id}>
+                                                    <Table.Td sizefixed className="pric">
+                                                        {price}
+                                                    </Table.Td>
+                                                    <Table.Td sizefixed className="amnt">
+                                                        {amount}
+                                                    </Table.Td>
+                                                    <Table.Td sizefixed className="totl">
+                                                        {total}
+                                                    </Table.Td>
+                                                </Table.Tr>
                                             );
                                         })}
 
-                                    </div>
-                                </div>
+                                    </Table.Tbody>
+                                </Table>
                             </div>
                         </div>
                     </div>
