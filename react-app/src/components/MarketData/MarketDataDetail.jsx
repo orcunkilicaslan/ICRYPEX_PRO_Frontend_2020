@@ -1,5 +1,7 @@
 import { ReactComponent as PerLineIcon } from "../../assets/images/icons/path_icon_pericon.svg";
 
+import Table from "../Table.jsx";
+
 const mddetailtable = [
 
     {
@@ -44,23 +46,27 @@ const MarketDataDetail = props => {
             </div>
 
             <div className="mddetailtable">
-                <div className="sitetablediv">
-                    <div className="tbl-tbody tbl-striped">
+                <Table>
+                    <Table.Tbody striped>
 
                         {mddetailtable.map(({ label, change, mdper }) => {
                             return (
-                                <div className="tbl-tr" key={label}>
-                                    <div className="tbl-td fxd txt">{label}</div>
-                                    <div className="tbl-td fxd chg"><span className={ mdper === "up" ? "sitecolorgreen" : "sitecolorred" }>{change}</span></div>
-                                    <div className="tbl-td aut per">
+                                <Table.Tr key={label}>
+                                    <Table.Td sizefixed className="txt">
+                                        {label}
+                                    </Table.Td>
+                                    <Table.Td sizefixed className="chg">
+                                        <span className={ mdper === "up" ? "sitecolorgreen" : "sitecolorred" }>{change}</span>
+                                    </Table.Td>
+                                    <Table.Td sizeauto className="per">
                                         <PerLineIcon className={"mdper mdper-" + mdper} />
-                                    </div>
-                                </div>
+                                    </Table.Td>
+                                </Table.Tr>
                             );
                         })}
 
-                    </div>
-                </div>
+                    </Table.Tbody>
+                </Table>
             </div>
 
         </div>

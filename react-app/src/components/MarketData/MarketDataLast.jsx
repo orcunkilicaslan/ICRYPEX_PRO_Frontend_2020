@@ -1,3 +1,4 @@
+import Table from "../Table.jsx";
 
 const mdlasttable = [
 
@@ -45,32 +46,28 @@ const MarketDataLast = props => {
         <div className="marketdata-last">
 
             <div className="mdlasttable scrollbar">
-                <div className="sitetablediv scrollbar-tbl">
-                    <div className="scrollbar-tbl-th">
-                        <div className="tbl-thead">
-                            <div className="tbl-tr">
-                                <div className="tbl-th fxd time">Zaman</div>
-                                <div className="tbl-th fxd amnt">Miktar</div>
-                                <div className="tbl-th fxd pric">Fiyat (TRY)</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="scrollbar-tbl-tb">
-                        <div className="tbl-tbody tbl-striped tbl-hovered">
+                <Table>
+                    <Table.Thead scrollbar>
+                        <Table.Tr>
+                            <Table.Th sizefixed className="time">Zaman</Table.Th>
+                            <Table.Th sizefixed className="amnt">Miktar</Table.Th>
+                            <Table.Th sizefixed className="pric">Fiyat (TRY)</Table.Th>
+                        </Table.Tr>
+                    </Table.Thead>
+                    <Table.Tbody striped hovered scrollbar>
 
-                            {mdlasttable.map(({ id, time, amount, price }) => {
-                                return (
-                                    <div className="tbl-tr" key={id}>
-                                        <div className="tbl-td fxd time">{time}</div>
-                                        <div className="tbl-td fxd amnt">{amount}</div>
-                                        <div className="tbl-td fxd pric">{price}</div>
-                                    </div>
-                                );
-                            })}
+                        {mdlasttable.map(({ id, time, amount, price }) => {
+                            return (
+                                <Table.Tr key={id}>
+                                    <Table.Td sizefixed className="time">{time}</Table.Td>
+                                    <Table.Td sizefixed className="amnt">{amount}</Table.Td>
+                                    <Table.Td sizefixed className="pric">{price}</Table.Td>
+                                </Table.Tr>
+                            );
+                        })}
 
-                        </div>
-                    </div>
-                </div>
+                    </Table.Tbody>
+                </Table>
             </div>
 
         </div>
