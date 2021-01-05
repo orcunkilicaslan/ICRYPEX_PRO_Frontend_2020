@@ -1,15 +1,31 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "localforage";
 
 import uiReducer from "./ui.slice";
 
-let store;
-const reducer = combineReducers({
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+let store, persistor;
+const rootReducer = combineReducers({
   ui: uiReducer,
 });
 
-export const getStore = () => {
-  if (!store) store = configureStore({ reducer });
+const reducer = persistReducer(persistConfig, rootReducer);
 
-  return store;
+export const getStore = () => {
+  if (!store) {
+    store = configureStore({
+      reducer,
+      // middleware: getDefaultMiddleware => getDefaultMiddleware(),
+    });
+
+    persistor = persistStore(store);
+  }
+
+  return { store, persistor };
 };
