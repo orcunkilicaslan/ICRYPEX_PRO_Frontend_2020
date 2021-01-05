@@ -4,9 +4,12 @@ import { ReactComponent as SideLight } from "../../assets/images/header/header_t
 import { ReactComponent as SideDark } from "../../assets/images/header/header_theme_sidedark.svg";
 
 import { ButtonLink } from "../ButtonLink.jsx";
+import { Button } from "../Button.jsx";
+
 import { IconSet } from "../IconSet.jsx";
 
 const HeaderRight = props => {
+  const { setLanguage } = props;
 
   return (
     <div className="header-right col-auto">
@@ -82,18 +85,23 @@ const HeaderRight = props => {
       </div>
       <div className="header-right-signedin d-none"></div>
       <div className="header-right-lang">
-        <ButtonLink
+        <Button
           size="sm"
           variant="secondary"
           className="active"
-          href="#"
+          onClick={() => setLanguage("tr")}
           title="TR"
         >
           TR
-        </ButtonLink>
-        <ButtonLink size="sm" variant="secondary" href="#" title="EN">
+        </Button>
+        <Button
+          size="sm"
+          variant="secondary"
+          onClick={() => setLanguage("en")}
+          title="EN"
+        >
           EN
-        </ButtonLink>
+        </Button>
       </div>
     </div>
   );

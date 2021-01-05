@@ -20,8 +20,7 @@ const priceListJSON = {
 };
 
 const CompCryptocoinbar = props => {
-  const { t, i18n } = useTranslation("coinbar");
-  i18n.changeLanguage("tr-TR");
+  const { t } = useTranslation("coinbar");
 
   return (
     <div className="mainbox mainbox-cryptocoinbar">
