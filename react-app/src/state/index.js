@@ -8,6 +8,7 @@ import uiReducer from "./ui.slice";
 const persistConfig = {
   key: "root",
   storage,
+  debug: true,
 };
 
 let store, persistor;
@@ -18,14 +19,20 @@ const rootReducer = combineReducers({
 const reducer = persistReducer(persistConfig, rootReducer);
 
 export const getStore = () => {
+  let resolve;
+
   if (!store) {
     store = configureStore({
       reducer,
       // middleware: getDefaultMiddleware => getDefaultMiddleware(),
     });
 
-    persistor = persistStore(store);
+    persistor = persistStore(store, null, () => {
+      resolve({ store, persistor });
+    });
   }
 
-  return { store, persistor };
+  return new Promise(res => {
+    resolve = res;
+  });
 };

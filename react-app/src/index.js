@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
@@ -9,56 +8,29 @@ import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { getStore } from "./state/";
+import initI18n from "./setupI18n";
 
-i18n.use(initReactI18next).init({
-  resources: {
-    en: {
-      coinbar: {
-        lastPrice: "Last Price",
-        bestBuy: "Best Buy",
-        bestSell: "Best Sell",
-        change24h: "Change 24h",
-        high24h: "High 24h",
-        low24h: "Low 24h",
-        average24h: "Average 24h",
-        volume: "Volume",
-        excavating: "Excavating",
-      },
-    },
-    tr: {
-      coinbar: {
-        lastPrice: "Son Fiyat",
-        bestBuy: "En İyi Alış",
-        bestSell: "En İyi Satış",
-        change24h: "24s Değişim",
-        high24h: "24s En Yüksek",
-        low24h: "24s En Düşük",
-        average24h: "24s Ortalama",
-        volume: "Hacim",
-        excavating: "Kazılacak",
-      },
-    },
-  },
-  lng: "en",
-  fallbackLng: "en",
+run();
 
-  interpolation: {
-    escapeValue: false,
-  },
-});
+async function run() {
+  const { store, persistor } = await getStore();
+  const {
+    ui: { lang },
+  } = store.getState();
 
-const { store, persistor } = getStore();
+  await initI18n(lang);
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <App />
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+  ReactDOM.render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </Provider>
+    </React.StrictMode>,
+    document.getElementById("root")
+  );
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
