@@ -12,11 +12,11 @@ const tabs = [
   },
   {
     title: "Limit",
-    component: () => "limit",
+    component: () => <div className="marketdata-chart">limit</div>,
   },
   {
     title: "Stop Limit",
-    component: () => "stop limit",
+    component: () => <div className="marketdata-chart">stop limit</div>,
   },
 ];
 

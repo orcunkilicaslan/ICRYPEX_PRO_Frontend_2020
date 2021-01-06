@@ -7,15 +7,13 @@ export const Footer = props => {
   const { className } = props;
 
   return (
-      <footer className={classNames("footer", className)}>
-        <div className="container-fluid">
-          <div className="row">
-
-            <FooterLeft />
-            <FooterRight/>
-
-          </div>
+    <footer className={classNames("footer", className)}>
+      <div className="container-fluid">
+        <div className="row">
+          <FooterLeft />
+          <FooterRight />
         </div>
-      </footer>
+      </div>
+    </footer>
   );
 };

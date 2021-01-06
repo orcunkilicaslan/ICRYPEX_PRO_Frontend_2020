@@ -4,9 +4,6 @@ import classnames from "classnames";
 
 import OpenOrderOrders from "./OpenOrderOrders.jsx";
 import OpenOrderTransactionHistory from "./OpenOrderTransactionHistory.jsx";
-import OpenOrderAssets from "./OpenOrderAssets.jsx";
-import OpenOrderDepositWithdrawal from "./OpenOrderDepositWithdrawal.jsx";
-import OpenOrderAccountActivities from "./OpenOrderAccountActivities.jsx";
 
 const tabs = [
   {
@@ -19,15 +16,15 @@ const tabs = [
   },
   {
     title: "Varlıklar",
-    component: OpenOrderAssets,
+    component: () => <div>Varlıklar</div>,
   },
   {
     title: "Yatır-Çek",
-    component: OpenOrderDepositWithdrawal,
+    component: () => <div>Yatır-Çek</div>,
   },
   {
     title: "Hesap Hareketleri",
-    component: OpenOrderAccountActivities,
+    component: () => <div>Hesap Hareketleri</div>,
   },
 ];
 

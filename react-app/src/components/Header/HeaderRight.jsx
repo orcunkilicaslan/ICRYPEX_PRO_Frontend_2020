@@ -1,11 +1,10 @@
 import { UncontrolledTooltip } from "reactstrap";
 
-import { ReactComponent as SideLight } from "../../assets/images/header/header_theme_sidelight.svg";
-import { ReactComponent as SideDark } from "../../assets/images/header/header_theme_sidedark.svg";
+import { ReactComponent as SideLight } from "~/assets/images/header/header_theme_sidelight.svg";
+import { ReactComponent as SideDark } from "~/assets/images/header/header_theme_sidedark.svg";
 
 import { ButtonLink } from "../ButtonLink.jsx";
 import { Button } from "../Button.jsx";
-
 import { IconSet } from "../IconSet.jsx";
 
 const HeaderRight = props => {

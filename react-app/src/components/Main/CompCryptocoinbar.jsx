@@ -1,7 +1,7 @@
 import { InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
 import { useTranslation } from "react-i18next";
 
-import { ReactComponent as PerLineIcon } from "../../assets/images/icons/path_icon_pericon.svg";
+import { ReactComponent as PerLineIcon } from "~/assets/images/icons/path_icon_pericon.svg";
 import { IconSet } from "../IconSet.jsx";
 
 const priceListJSON = {

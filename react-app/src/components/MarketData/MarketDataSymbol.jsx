@@ -1,8 +1,9 @@
 import { ButtonGroup, Input } from "reactstrap";
 
-import { ReactComponent as MdTableFavIcon } from "../../assets/images/icons/path_icon_mdtable_fav.svg";
-import { ReactComponent as MdTableSearchIcon } from "../../assets/images/icons/path_icon_mdtable_search.svg";
-import { ReactComponent as PerLineIcon } from "../../assets/images/icons/path_icon_pericon.svg";
+import { ReactComponent as MdTableFavIcon } from "~/assets/images/icons/path_icon_mdtable_fav.svg";
+import { ReactComponent as MdTableSearchIcon } from "~/assets/images/icons/path_icon_mdtable_search.svg";
+import { ReactComponent as PerLineIcon } from "~/assets/images/icons/path_icon_pericon.svg";
+
 import { Button } from "../Button";
 import Table from "../Table.jsx";
 
@@ -59,7 +60,7 @@ const MarketDataSymbol = props => {
           </Button>
           {["TRY", "USD", "USDT", "Tümü"].map(elem => {
             return (
-              <Button type="button" size="sm" variant="secondary">
+              <Button key={elem} type="button" size="sm" variant="secondary">
                 {elem}
               </Button>
             );

@@ -7,9 +7,6 @@ import MarketDataDetail from "./MarketDataDetail.jsx";
 import MarketDataLast from "./MarketDataLast.jsx";
 import MarketDataChart from "./MarketDataChart.jsx";
 
-// title'lar backend'den gelebilir
-// o zaman bu array component içinde tanımlanırdı ve "title"
-// değerleri GET edilip ilgili komponentlerle yeni array .map() edilirdi
 const tabs = [
   {
     title: "Sembol",
