@@ -1,6 +1,6 @@
 import classnames from "classnames";
 
-import { ReactComponent as PerLineIcon } from "../../assets/images/icons/path_icon_pericon.svg";
+import { ReactComponent as PerLineIcon } from "~/assets/images/icons/path_icon_pericon.svg";
 import Table from "../Table.jsx";
 
 const mddetailtable = [
