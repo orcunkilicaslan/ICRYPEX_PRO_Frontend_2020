@@ -35,4 +35,13 @@ module.exports = {
       },
     },
   },
+  devServer: {
+    proxy: {
+      "/api": {
+        target: "https://localhost:3443",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 };
