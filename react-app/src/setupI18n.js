@@ -35,6 +35,7 @@ const init = (initialLang = "en") => {
           },
         },
       },
+      supportedLngs: SUPPORTED_LANGUAGES,
       lng: initialLang,
       fallbackLng: "en",
 
