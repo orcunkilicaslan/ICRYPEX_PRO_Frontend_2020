@@ -1,5 +1,5 @@
-import { Fragment } from "react";
 import "bootstrap/dist/js/bootstrap.bundle.js";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.scss";
 import Header from "./components/Header/Header.jsx";
@@ -8,10 +8,14 @@ import { Main } from "./components/Main/Main.jsx";
 
 function App() {
   return (
-    <Fragment>
+    <Router>
       <Header />
-      <Main />
-    </Fragment>
+      <Switch>
+        <Route exact path="/">
+          <Main />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
