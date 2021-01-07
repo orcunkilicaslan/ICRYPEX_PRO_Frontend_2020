@@ -1,19 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import i18n from "i18next";
 
-const SUPPORTED_LANGUAGES = ["en", "tr"];
+import { SUPPORTED_LANGUAGES } from "~/setupI18n";
 
 const uiSlice = createSlice({
   name: "ui",
   initialState: { lang: "en" },
   reducers: {
-    setLanguage(state, action) {
-      const language = action.payload;
+    setLanguage: {
+      reducer: (state, { payload }) => {
+        state.lang = payload;
+      },
+      prepare: language => {
+        if (SUPPORTED_LANGUAGES.includes(language)) {
+          i18n.changeLanguage(language);
+        }
 
-      if (SUPPORTED_LANGUAGES.includes(language)) {
-        i18n.changeLanguage(language);
-        state.lang = language;
-      }
+        return { payload: language };
+      },
     },
   },
 });

@@ -1,6 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
+export const SUPPORTED_LANGUAGES = ["en", "tr"];
+
 const init = (initialLang = "en") => {
   return new Promise((resolve, reject) => {
     i18n.use(initReactI18next).init({
