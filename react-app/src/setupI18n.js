@@ -4,6 +4,7 @@ import { initReactI18next } from "react-i18next";
 const init = (initialLang = "en") => {
   return new Promise((resolve, reject) => {
     i18n.use(initReactI18next).init({
+      debug: process.env.NODE_ENV === "development",
       resources: {
         en: {
           coinbar: {

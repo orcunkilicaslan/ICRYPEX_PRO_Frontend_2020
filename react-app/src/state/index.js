@@ -8,7 +8,7 @@ import uiReducer from "./ui.slice";
 const persistConfig = {
   key: "root",
   storage,
-  debug: true,
+  debug: process.env.NODE_ENV === "development",
 };
 
 let store, persistor;
