@@ -5,7 +5,7 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import "./index.scss";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+// import reportWebVitals from "./reportWebVitals";
 import { getStore } from "./state/";
 import initI18n from "./setupI18n";
 
@@ -32,4 +32,4 @@ async function run() {
 }
 
 // Learn more: https://bit.ly/CRA-vitals
-reportWebVitals(console.log);
+// reportWebVitals(console.log);

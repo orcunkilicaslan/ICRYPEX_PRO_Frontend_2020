@@ -35,13 +35,13 @@ module.exports = {
       },
     },
   },
-  devServer: {
-    proxy: {
-      "/api": {
-        target: "https://localhost:3443",
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
+  // devServer: {
+  //   proxy: {
+  //     "/api": {
+  //       target: "https://mobile.guvenlibtc.com:443/api",
+  //       // changeOrigin: true,
+  //       secure: false,
+  //     },
+  //   },
+  // },
 };

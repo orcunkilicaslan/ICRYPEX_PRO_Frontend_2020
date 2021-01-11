@@ -11,9 +11,13 @@ import { getServerDeviceKey } from "~/state/api.slice";
 
 const App = props => {
   const { getServerDeviceKey } = props;
+  const init = async () => {
+    const result = await getServerDeviceKey();
+    console.log("result", result);
+  };
 
   useEffect(() => {
-    getServerDeviceKey();
+    init();
   }, [getServerDeviceKey]);
 
   return (

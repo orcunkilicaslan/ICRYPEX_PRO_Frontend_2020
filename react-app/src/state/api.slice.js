@@ -1,10 +1,56 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { create } from "apisauce";
+import { stringify } from "querystring";
 
+import { makeLocalKey } from "~/util/";
+
+const MD5_secret = process.env.REACT_APP_MD5_SECRET;
 const api = create({
-  baseURL: process.env.REACT_APP_API_BASE,
-  // headers: { "x-culture-code": "tr" },
+  baseURL: null,
+  headers: {
+    // "Content-Type": "application/x-www-form-urlencoded",
+    "x-culture-code": "tr",
+  },
 });
+
+api.axiosInstance.interceptors.request.use(
+  async config => {
+    const { method, url } = config;
+    config.headers = {
+      // Authorization: `Bearer ${keys.access_token}`,
+      Accept: "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
+    };
+
+    console.log("req: %s | %s", method, url);
+    return config;
+  },
+  error => {
+    Promise.reject(error);
+  }
+);
+
+api.axiosInstance.interceptors.response.use(
+  response => {
+    const {
+      config: { method, url },
+      data: { status },
+    } = response;
+
+    console.log("res: %s | %s: status %s", method, url, status);
+    return response;
+  },
+  async function (error) {
+    // const originalRequest = error.config;
+    // if (error.response.status === 403 && !originalRequest._retry) {
+    //   originalRequest._retry = true;
+    //   const access_token = await refreshAccessToken();
+    //   axios.defaults.headers.common["Authorization"] = "Bearer " + access_token;
+    //   return axiosApiInstance(originalRequest);
+    // }
+    return Promise.reject(error);
+  }
+);
 
 const apiSlice = createSlice({
   name: "api",
@@ -27,13 +73,14 @@ const apiSlice = createSlice({
       reducer: (state, { payload }) => {
         state.serverdevicekey = payload;
       },
-      prepare: async (localkey, deviceuuid) => {
-        const response = await api.post("/getserverdevicekey", {
-          localkey,
-          deviceuuid,
-        });
+      prepare: async () => {
+        const { localkey, deviceuuid } = await makeLocalKey(MD5_secret);
+        const response = await api.post(
+          "/getserverdevicekey",
+          stringify({ localkey, deviceuuid })
+        );
 
-        return { payload: response.data };
+        return { payload: response.data.description };
       },
     },
   },

@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@binance/fingerprint": "^1.3.39",
     "@reduxjs/toolkit": "^1.5.0",
+    "@skavinvarnan/cryptlib": "^1.0.3",
     "apisauce": "^2.0.1",
     "bootstrap": "4.5.2",
     "classnames": "^2.2.6",
@@ -21,9 +23,9 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "npm run up && npm run dev",
+    "start": "npm run dev",
     "up": "docker-compose -f proxy/docker-compose.yml up -d",
-    "dev": "craco start",
+    "dev": "HTTPS=true craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
@@ -52,5 +54,6 @@
     "esm": "^3.2.25",
     "node-sass": "4.14.1",
     "react-scripts": "4.0.1"
-  }
+  },
+  "proxy": "https://mobile.guvenlibtc.com:443/api"
 }
