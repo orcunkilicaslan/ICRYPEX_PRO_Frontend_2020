@@ -4,9 +4,16 @@ import { stringify } from "querystring";
 
 import { makeLocalKey } from "~/util/";
 
+let baseURL;
+if (process.env.NODE_ENV === "production") {
+  baseURL = process.env.REACT_APP_API_BASE;
+} else {
+  baseURL = null;
+}
+
 const MD5_secret = process.env.REACT_APP_MD5_SECRET;
 const api = create({
-  baseURL: null,
+  baseURL,
   headers: {
     // "Content-Type": "application/x-www-form-urlencoded",
     "x-culture-code": "tr",
