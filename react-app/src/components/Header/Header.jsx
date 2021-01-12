@@ -1,13 +1,18 @@
+import { useCallback } from "react";
 import classNames from "classnames";
-import { connect } from "react-redux";
-import { setLanguage } from "../../state/ui.slice";
+import { useDispatch } from "react-redux";
 
+import { setLanguage } from "~/state/slices/ui.slice";
 import HeaderLeft from "./HeaderLeft.jsx";
 import HeaderCenter from "./HeaderCenter.jsx";
 import HeaderRight from "./HeaderRight.jsx";
 
 const Header = props => {
-  const { className, setLanguage } = props;
+  const { className } = props;
+  const dispatch = useDispatch();
+  const changeLanguage = useCallback(lang => {
+    dispatch(setLanguage(lang));
+  }, []);
 
   return (
     <header className={classNames("header", className)}>
@@ -15,11 +20,11 @@ const Header = props => {
         <div className="row">
           <HeaderLeft />
           <HeaderCenter />
-          <HeaderRight setLanguage={setLanguage} />
+          <HeaderRight setLanguage={changeLanguage} />
         </div>
       </div>
     </header>
   );
 };
 
-export default connect(null, { setLanguage })(Header);
+export default Header;
