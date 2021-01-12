@@ -32,6 +32,8 @@ export const getStore = () => {
     persistor = persistStore(store, null, () => {
       resolve({ store, persistor });
     });
+  } else {
+    resolve({ store, persistor });
   }
 
   return new Promise(res => {
