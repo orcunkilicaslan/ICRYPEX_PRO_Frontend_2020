@@ -1,8 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
 import { create } from "apisauce";
-import { stringify } from "querystring";
-
-import { makeLocalKey } from "~/util/";
 
 let baseURL;
 if (process.env.NODE_ENV === "production") {
@@ -11,11 +7,9 @@ if (process.env.NODE_ENV === "production") {
   baseURL = null;
 }
 
-const MD5_secret = process.env.REACT_APP_MD5_SECRET;
 const api = create({
   baseURL,
   headers: {
-    // "Content-Type": "application/x-www-form-urlencoded",
     "x-culture-code": "tr",
   },
 });
@@ -23,6 +17,7 @@ const api = create({
 api.axiosInstance.interceptors.request.use(
   async config => {
     const { method, url } = config;
+    // TODO: get headers from redux state
     config.headers = {
       // Authorization: `Bearer ${keys.access_token}`,
       Accept: "application/json",
@@ -59,40 +54,4 @@ api.axiosInstance.interceptors.response.use(
   }
 );
 
-const apiSlice = createSlice({
-  name: "api",
-  initialState: { prelogintoken: "", accesstoken: "", serverdevicekey: "" },
-  reducers: {
-    getPreLoginToken: {
-      reducer: (state, { payload }) => {
-        state.prelogintoken = payload;
-      },
-      prepare: async (localkey, serverdevicekey) => {
-        const response = await api.post("/getprelogintoken", {
-          localkey,
-          serverdevicekey,
-        });
-
-        return { payload: response.data };
-      },
-    },
-    getServerDeviceKey: {
-      reducer: (state, { payload }) => {
-        state.serverdevicekey = payload;
-      },
-      prepare: async () => {
-        const { localkey, deviceuuid } = await makeLocalKey(MD5_secret);
-        const response = await api.post(
-          "/getserverdevicekey",
-          stringify({ localkey, deviceuuid })
-        );
-
-        return { payload: response.data.description };
-      },
-    },
-  },
-});
-
-export const { getPreLoginToken, getServerDeviceKey } = apiSlice.actions;
-
-export default apiSlice.reducer;
+export default api;

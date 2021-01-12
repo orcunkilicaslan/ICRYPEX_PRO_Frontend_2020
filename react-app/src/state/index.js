@@ -3,8 +3,8 @@ import { combineReducers } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "localforage";
 
-import uiReducer from "./ui.slice";
-import apiReducer from "./api.slice";
+import uiReducer from "./slices/ui.slice";
+import apiReducer from "./slices/api.slice";
 
 const persistConfig = {
   key: "root",
