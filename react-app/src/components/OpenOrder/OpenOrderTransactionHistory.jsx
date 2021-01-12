@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { Row, Col, Label, Input, ButtonGroup } from "reactstrap";
 import classnames from "classnames";
-// import { Tab } from "bootstrap/js/src";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
@@ -100,33 +100,60 @@ const historytable = [
 ];
 
 const OpenOrderTransactionHistory = props => {
+  const [selected1, setSelected1] = useState("");
+  const [selected2, setSelected2] = useState("");
+  const [selected3, setSelected3] = useState("");
+
   return (
     <div className="openorders-history">
       <Row className="tabcont tabcont-filterbar siteformui">
         <Col>
-          <Input className="custom-select custom-select-sm" type="select">
+          <Input
+            className="custom-select custom-select-sm"
+            type="select"
+            value={selected1}
+            onChange={({ target }) => {
+              setSelected1(target.value);
+            }}
+          >
             {["Çift", "...", "..."].map((el, idx) => {
               return <option key={`${el}_${idx}`}>{el}</option>;
             })}
           </Input>
         </Col>
         <Col>
-          <Input className="custom-select custom-select-sm" type="select">
-            <option selected disabled>
-              İşlem Tipi
-            </option>
-            {["Stop Limit", "Market", "Limit"].map((el, idx) => {
-              return <option key={`${el}_${idx}`}>{el}</option>;
+          <Input
+            className="custom-select custom-select-sm"
+            type="select"
+            value={selected2}
+            onChange={({ target }) => {
+              setSelected2(target.value);
+            }}
+          >
+            {["İşlem Tipi", "Stop Limit", "Market", "Limit"].map((el, idx) => {
+              return (
+                <option disabled={idx === 0} key={`${el}_${idx}`}>
+                  {el}
+                </option>
+              );
             })}
           </Input>
         </Col>
         <Col>
-          <Input className="custom-select custom-select-sm" type="select">
-            <option selected disabled>
-              Durum
-            </option>
-            {["Gerçekleşti", "Beklemede"].map((el, idx) => {
-              return <option key={`${el}_${idx}`}>{el}</option>;
+          <Input
+            className="custom-select custom-select-sm"
+            type="select"
+            value={selected3}
+            onChange={({ target }) => {
+              setSelected3(target.value);
+            }}
+          >
+            {["Durum", "Gerçekleşti", "Beklemede"].map((el, idx) => {
+              return (
+                <option disabled={idx === 0} key={`${el}_${idx}`}>
+                  {el}
+                </option>
+              );
             })}
           </Input>
         </Col>

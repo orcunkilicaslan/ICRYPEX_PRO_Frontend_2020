@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Row, Col, Label, Input, ButtonGroup } from "reactstrap";
 import classnames from "classnames";
 
@@ -69,23 +70,41 @@ const orderstable = [
 ];
 
 const OpenOrderOrders = props => {
+  const [selected1, setSelected1] = useState("");
+  const [selected2, setSelected2] = useState("");
+
   return (
     <div className="openorders-orders">
       <Row className="tabcont tabcont-filterbar siteformui">
         <Col xs="auto">
-          <Input className="custom-select custom-select-sm" type="select">
+          <Input
+            className="custom-select custom-select-sm"
+            type="select"
+            value={selected1}
+            onChange={({ target }) => {
+              setSelected1(target.value);
+            }}
+          >
             {["Çift", "...", "..."].map((el, idx) => {
               return <option key={`${el}_${idx}`}>{el}</option>;
             })}
           </Input>
         </Col>
         <Col xs="auto">
-          <Input className="custom-select custom-select-sm" type="select">
-            <option selected disabled>
-              İşlem Tipi
-            </option>
-            {["Stop Limit", "Market", "Limit"].map((el, idx) => {
-              return <option key={`${el}_${idx}`}>{el}</option>;
+          <Input
+            className="custom-select custom-select-sm"
+            type="select"
+            value={selected2}
+            onChange={({ target }) => {
+              setSelected2(target.value);
+            }}
+          >
+            {["İşlem Tipi", "Stop Limit", "Market", "Limit"].map((el, idx) => {
+              return (
+                <option disabled={idx === 0} key={`${el}_${idx}`}>
+                  {el}
+                </option>
+              );
             })}
           </Input>
         </Col>
