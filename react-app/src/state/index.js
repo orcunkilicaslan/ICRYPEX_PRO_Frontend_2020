@@ -1,5 +1,4 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import { combineReducers } from "redux";
 import {
   persistStore,
   persistReducer,
@@ -12,23 +11,16 @@ import {
 } from "redux-persist";
 import storage from "localforage";
 
-import uiReducer from "./slices/ui.slice";
-import apiReducer from "./slices/api.slice";
+import rootReducer from "./rootReducer";
 
 const persistConfig = {
   key: "root",
   storage,
   debug: process.env.NODE_ENV === "development",
 };
-
-let store, persistor;
-const rootReducer = combineReducers({
-  ui: uiReducer,
-  api: apiReducer,
-});
-
 const reducer = persistReducer(persistConfig, rootReducer);
 
+let store, persistor;
 export const getStore = () => {
   let resolve;
 
