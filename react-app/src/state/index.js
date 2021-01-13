@@ -1,6 +1,15 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import { persistStore, persistReducer } from "redux-persist";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 import storage from "localforage";
 
 import uiReducer from "./slices/ui.slice";
@@ -26,7 +35,11 @@ export const getStore = () => {
   if (!store) {
     store = configureStore({
       reducer,
-      // middleware: getDefaultMiddleware => getDefaultMiddleware(),concat()
+      middleware: getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }),
     });
 
     persistor = persistStore(store, null, () => {
