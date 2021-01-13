@@ -45,3 +45,12 @@ export const getStore = () => {
     resolve = res;
   });
 };
+
+if (process.env.NODE_ENV === "development" && module.hot) {
+  module.hot.accept("./rootReducer", () => {
+    if (store) {
+      const newRootReducer = require("./rootReducer").default;
+      store.replaceReducer(newRootReducer);
+    }
+  });
+}
