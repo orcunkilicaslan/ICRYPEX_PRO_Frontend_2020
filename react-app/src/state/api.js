@@ -10,50 +10,53 @@ if (process.env.NODE_ENV === "production") {
 const api = create({
   baseURL,
   headers: {
-    "x-culture-code": "tr",
+    Accept: "application/json",
+    "Content-Type": "application/x-www-form-urlencoded",
   },
 });
 
-api.axiosInstance.interceptors.request.use(
-  async config => {
-    const { method, url } = config;
-    // TODO: get headers from redux state
-    config.headers = {
-      // Authorization: `Bearer ${keys.access_token}`,
-      Accept: "application/json",
-      "Content-Type": "application/x-www-form-urlencoded",
-    };
+api.addAsyncRequestTransform(request => async () => {
+  const { method, url, headers } = request;
+  console.log("req: %s | %s | %O", method, url, request);
 
-    console.log("req: %s | %s | %O", method, url, config);
-    return config;
-  },
-  error => {
-    console.log("axios request error: %O", error);
-    Promise.reject(error);
-  }
-);
+  // TODO: get headers from redux state
+  headers["x-culture-code"] = "tr";
+});
 
-api.axiosInstance.interceptors.response.use(
-  response => {
-    const {
-      config: { method, url },
-      data: { status },
-    } = response;
+api.addAsyncResponseTransform(response => {
+  const { ok, status, config, data } = response;
+  console.log(
+    "res: %s | %s | %s %O",
+    config.method,
+    config.url,
+    status,
+    response
+  );
 
-    console.log("res: %s | %s: status %s | %O", method, url, status, response);
-    return response;
-  },
-  async function (error) {
-    // const originalRequest = error.config;
-    // if (error.response.status === 403 && !originalRequest._retry) {
+  if (ok && data.status) {
+    return Promise.resolve(response);
+  } else if (ok && !data.status) {
+    console.error(
+      "%s | %s | %s %s",
+      config.method,
+      config.url,
+      data.type,
+      data.errormessage
+    );
+
+    return Promise.resolve(response);
+  } else {
+    // const { originalRequest } = config;
+
+    // if (status === 403 && !originalRequest._retry) {
     //   originalRequest._retry = true;
     //   const access_token = await refreshAccessToken();
     //   axios.defaults.headers.common["Authorization"] = "Bearer " + access_token;
     //   return axiosApiInstance(originalRequest);
     // }
-    console.log("axios response error: %O", error);
-    return Promise.reject(error);
+
+    return Promise.reject(response);
   }
-);
+});
 
 export default api;
