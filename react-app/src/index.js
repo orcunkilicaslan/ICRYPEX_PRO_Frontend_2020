@@ -20,7 +20,7 @@ async function run() {
   Persistor = persistor;
 
   await initI18n(lang);
-  await render();
+  render();
 
   // Learn more: https://bit.ly/CRA-vitals
   // reportWebVitals(console.log);

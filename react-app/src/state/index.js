@@ -38,6 +38,7 @@ export const getStore = () => {
       resolve({ store, persistor });
     });
   } else {
+    // TODO: setTimeout(0) gerekebilir
     resolve({ store, persistor });
   }
 

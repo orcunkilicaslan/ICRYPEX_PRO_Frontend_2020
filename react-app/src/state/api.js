@@ -24,10 +24,11 @@ api.axiosInstance.interceptors.request.use(
       "Content-Type": "application/x-www-form-urlencoded",
     };
 
-    console.log("req: %s | %s", method, url);
+    console.log("req: %s | %s | %O", method, url, config);
     return config;
   },
   error => {
+    console.log("axios request error: %O", error);
     Promise.reject(error);
   }
 );
@@ -39,7 +40,7 @@ api.axiosInstance.interceptors.response.use(
       data: { status },
     } = response;
 
-    console.log("res: %s | %s: status %s", method, url, status);
+    console.log("res: %s | %s: status %s | %O", method, url, status, response);
     return response;
   },
   async function (error) {
@@ -50,6 +51,7 @@ api.axiosInstance.interceptors.response.use(
     //   axios.defaults.headers.common["Authorization"] = "Bearer " + access_token;
     //   return axiosApiInstance(originalRequest);
     // }
+    console.log("axios response error: %O", error);
     return Promise.reject(error);
   }
 );
