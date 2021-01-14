@@ -9,6 +9,7 @@ import { getStore } from "./state/";
 import initI18n from "./setupI18n";
 import { makeLocalKey } from "./util";
 import {
+  fetchSettings,
   fetchPreloginToken,
   fetchServerDeviceKey,
   setDeviceId,
@@ -34,6 +35,7 @@ async function run() {
   store.dispatch(setLocalKey(localkey));
   await store.dispatch(fetchServerDeviceKey());
   await store.dispatch(fetchPreloginToken());
+  await store.dispatch(fetchSettings());
   render();
 
   // Learn more: https://bit.ly/CRA-vitals

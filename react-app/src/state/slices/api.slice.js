@@ -35,6 +35,27 @@ export const fetchPreloginToken = createAsyncThunk(
   }
 );
 
+export const fetchSettings = createAsyncThunk(
+  "api/settings",
+  async (_, { getState }) => {
+    const {
+      api: { mediumid, versionno, settingno, prelogintoken },
+    } = getState();
+
+    const response = await api.post(
+      "/settings",
+      stringify({ mediumid, versionno, settingno }),
+      {
+        headers: {
+          "x-access-token": prelogintoken,
+        },
+      }
+    );
+
+    return response.data;
+  }
+);
+
 const apiSlice = createSlice({
   name: "api",
   initialState: {
@@ -43,6 +64,10 @@ const apiSlice = createSlice({
     serverdevicekey: null,
     localkey: null,
     deviceuuid: null,
+    mediumid: 1,
+    versionno: "1.0.0",
+    settingno: 9,
+    settings: null,
   },
   reducers: {
     setLocalKey: (state, { payload }) => {
@@ -66,6 +91,13 @@ const apiSlice = createSlice({
       const { description } = action.payload;
 
       state.prelogintoken = description;
+    },
+    [fetchSettings.fulfilled]: (state, { payload }) => {
+      const {
+        description: { settings },
+      } = payload;
+
+      state.settings = settings;
     },
   },
 });
