@@ -5,7 +5,11 @@ import api from "../api";
 
 export const fetchServerDeviceKey = createAsyncThunk(
   "api/serverdevicekey",
-  async ({ localkey, deviceuuid }) => {
+  async (_, { getState }) => {
+    const {
+      api: { localkey, deviceuuid },
+    } = getState();
+
     const response = await api.post(
       "/getserverdevicekey",
       stringify({ localkey, deviceuuid })
@@ -15,31 +19,57 @@ export const fetchServerDeviceKey = createAsyncThunk(
   }
 );
 
+export const fetchPreloginToken = createAsyncThunk(
+  "api/prelogintoken",
+  async (_, { getState }) => {
+    const {
+      api: { localkey, serverdevicekey },
+    } = getState();
+
+    const response = await api.post(
+      "/getprelogintoken",
+      stringify({ localkey, serverdevicekey })
+    );
+
+    return response.data;
+  }
+);
+
 const apiSlice = createSlice({
   name: "api",
-  initialState: { prelogintoken: "", accesstoken: "", serverdevicekey: "" },
-  reducers: {
-    // getPreLoginToken: {
-    //   reducer: (state, { payload }) => {
-    //     state.prelogintoken = payload;
-    //   },
-    //   prepare: async (localkey, serverdevicekey) => {
-    //     const response = await api.post("/getprelogintoken", {
-    //       localkey,
-    //       serverdevicekey,
-    //     });
-
-    //     return { payload: response.data };
-    //   },
-    // },
+  initialState: {
+    prelogintoken: null,
+    accesstoken: null,
+    serverdevicekey: null,
+    localkey: null,
+    deviceuuid: null,
   },
-  extraReducers: builder => {
-    builder.addCase(fetchServerDeviceKey.fulfilled, (state, action) => {
+  reducers: {
+    setLocalKey: (state, { payload }) => {
+      if (!state.localkey) {
+        state.localkey = payload;
+      }
+    },
+    setDeviceId: (state, { payload }) => {
+      if (!state.deviceuuid) {
+        state.deviceuuid = payload;
+      }
+    },
+  },
+  extraReducers: {
+    [fetchServerDeviceKey.fulfilled]: (state, action) => {
       const { description } = action.payload;
 
       state.serverdevicekey = description;
-    });
+    },
+    [fetchPreloginToken.fulfilled]: (state, action) => {
+      const { description } = action.payload;
+
+      state.prelogintoken = description;
+    },
   },
 });
+
+export const { setDeviceId, setLocalKey } = apiSlice.actions;
 
 export default apiSlice.reducer;
