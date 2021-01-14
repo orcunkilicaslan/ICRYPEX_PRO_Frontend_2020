@@ -1,11 +1,19 @@
 import { combineReducers } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
+import storage from "localforage";
 
 import uiReducer from "./slices/ui.slice";
 import apiReducer from "./slices/api.slice";
 
+const apiPersistConfig = {
+  key: "api",
+  storage,
+  blacklist: ["prelogintoken", "serverdevicekey", "accesstoken"],
+};
+
 const rootReducer = combineReducers({
   ui: uiReducer,
-  api: apiReducer,
+  api: persistReducer(apiPersistConfig, apiReducer),
 });
 
 export default rootReducer;

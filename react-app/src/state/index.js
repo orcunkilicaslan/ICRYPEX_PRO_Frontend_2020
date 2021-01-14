@@ -17,6 +17,7 @@ const persistConfig = {
   key: "root",
   storage,
   debug: process.env.NODE_ENV === "development",
+  blacklist: ["api"],
 };
 const reducer = persistReducer(persistConfig, rootReducer);
 
