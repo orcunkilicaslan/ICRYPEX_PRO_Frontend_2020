@@ -4,6 +4,7 @@ import storage from "localforage";
 
 import uiReducer from "./slices/ui.slice";
 import apiReducer from "./slices/api.slice";
+import userReducer from "./slices/user.slice";
 
 const apiPersistConfig = {
   key: "api",
@@ -14,6 +15,7 @@ const apiPersistConfig = {
 const rootReducer = combineReducers({
   ui: uiReducer,
   api: persistReducer(apiPersistConfig, apiReducer),
+  user: userReducer,
 });
 
 export default rootReducer;
