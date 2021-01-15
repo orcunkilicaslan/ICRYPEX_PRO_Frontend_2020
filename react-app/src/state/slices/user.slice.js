@@ -44,20 +44,19 @@ export const signinUser = createAsyncThunk(
   }
 );
 
-export const signinWithSms = createAsyncThunk(
-  "user/signinwithsms",
-  async (secret, { getState }) => {
+export const fetchUserInfo = createAsyncThunk(
+  "user/info",
+  async (_, { getState }) => {
     const {
-      user: { customerid },
-      api: { prelogintoken },
+      api: { accesstoken },
     } = getState();
 
     const response = await api.post(
-      "/signinwithsms",
-      stringify({ customerid, secret }),
+      "/userinfo",
+      {},
       {
         headers: {
-          "x-access-token": prelogintoken,
+          "x-access-token": accesstoken,
         },
       }
     );
@@ -81,6 +80,18 @@ const userSlice = createSlice({
       const { description } = action.payload;
 
       state.customerid = description?.customerid;
+    },
+    [signinUser.fulfilled]: (state, action) => {
+      const { description } = action.payload;
+
+      state.customerid = description?.customerid;
+    },
+    [fetchUserInfo.fulfilled]: (state, action) => {
+      const { description = {} } = action.payload;
+
+      for (const [key, value] of Object.entries(description)) {
+        state[key] = value;
+      }
     },
   },
 });
