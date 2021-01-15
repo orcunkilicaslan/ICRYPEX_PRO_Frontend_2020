@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Form,
@@ -21,8 +21,9 @@ import { IconSet } from "../IconSet.jsx";
 import {
   signupUser,
   signinUser,
-  signinWithSms,
+  fetchUserInfo,
 } from "~/state/slices/user.slice";
+import { signinWithSms } from "~/state/slices/api.slice";
 
 const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
 
@@ -30,6 +31,7 @@ const HeaderRight = props => {
   const { setLanguage } = props;
   const dispatch = useDispatch();
   const { countryCodes } = useSelector(state => state.api.settings);
+  const user = useSelector(state => state.user);
   const [signUpForm, setSignUpForm] = useState({
     firstname: "",
     lastname: "",
@@ -40,6 +42,11 @@ const HeaderRight = props => {
     confirm: "",
     termsofuse: false,
     ecommerce: false,
+  });
+
+  const [signInForm, setSignInForm] = useState({
+    email: user.email || "",
+    password: "",
   });
   const [signUpModal, setSignUpModal] = useState(false);
   const [signInModal, setSignInModal] = useState(false);
@@ -58,6 +65,13 @@ const HeaderRight = props => {
     setSignInModal(!signInModal);
   };
 
+  const onSignInFormChange = ({ target }) => {
+    setSignInForm(prev => ({
+      ...prev,
+      [target.name]: target.value,
+    }));
+  };
+
   const onSignUpFormChange = ({ target }) => {
     if (target.type === "checkbox") {
       setSignUpForm(prev => ({
@@ -72,20 +86,43 @@ const HeaderRight = props => {
     }
   };
 
-  const submitSignup = async () => {
+  const submitSignup = async event => {
+    event.preventDefault();
+    event.stopPropagation();
     const { phone, countrycode } = signUpForm;
     const { payload } = await dispatch(
       signupUser({ ...signUpForm, phone: `${countrycode}${phone}` })
     );
 
-    if (payload.status) {
-      signInModalToggle();
+    if (payload?.status) {
       setIsEnteringCode(true);
+      signInModalToggle();
     }
   };
 
-  const submitSecret = () => {
-    dispatch(signinWithSms(verifyCode));
+  const submitSecret = async event => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const { payload } = await dispatch(signinWithSms(verifyCode));
+
+    if (payload?.status) {
+      dispatch(fetchUserInfo());
+    }
+
+    signInModalToggle();
+    setIsEnteringCode(false);
+  };
+
+  const submitSignin = async event => {
+    event.preventDefault();
+    event.stopPropagation();
+    const { payload } = await dispatch(signinUser(signInForm));
+
+    if (payload?.status) {
+      setIsEnteringCode(true);
+      signInModalToggle();
+    }
   };
 
   return (
@@ -139,9 +176,21 @@ const HeaderRight = props => {
         </a>
       </div>
       <div className="header-right-notsignedin pr-2">
-        <Button size="sm" variant="secondary" onClick={signInModalToggle}>
-          Üye Girişi
-        </Button>
+        {user.firstname && user.lastname ? (
+          <span>
+            Merhaba {user.firstname} {String(user.lastname).toUpperCase()}
+          </span>
+        ) : (
+          <Fragment>
+            {" "}
+            <Button size="sm" variant="secondary" onClick={signInModalToggle}>
+              Üye Girişi
+            </Button>
+            <Button size="sm" variant="success" onClick={signUpModalToggle}>
+              Kayıt Ol
+            </Button>{" "}
+          </Fragment>
+        )}
         <Modal
           wrapClassName=""
           modalClassName="modal-rightside"
@@ -163,7 +212,14 @@ const HeaderRight = props => {
                 <Form className="siteformui" autoComplete="off" noValidate>
                   <div className="labelfocustop">
                     <FormGroup>
-                      <Input type="email" pattern=".{0}|.{1,}" required />
+                      <Input
+                        type="email"
+                        pattern=".{0}|.{1,}"
+                        required
+                        name="email"
+                        value={signInForm.email}
+                        onChange={onSignInFormChange}
+                      />
                       <Label>E-Posta</Label>
                     </FormGroup>
                     <FormGroup>
@@ -172,6 +228,9 @@ const HeaderRight = props => {
                         type="password"
                         pattern=".{0}|.{1,}"
                         required
+                        name="password"
+                        value={signInForm.password}
+                        onChange={onSignInFormChange}
                       />
                       <Label>Şifre</Label>
                       <Button
@@ -204,7 +263,11 @@ const HeaderRight = props => {
                       </a>
                     </div>
                   </div>
-                  <Button variant="secondary" className="w-100 active">
+                  <Button
+                    variant="secondary"
+                    className="w-100 active"
+                    onClick={submitSignin}
+                  >
                     DOĞRULAMA KODU GÖNDER
                   </Button>
                 </Form>
@@ -242,9 +305,6 @@ const HeaderRight = props => {
             )}
           </ModalBody>
         </Modal>
-        <Button size="sm" variant="success" onClick={signUpModalToggle}>
-          Kayıt Ol
-        </Button>
         <Modal
           wrapClassName=""
           modalClassName="modal-rightside"
