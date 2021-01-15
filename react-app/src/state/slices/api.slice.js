@@ -56,6 +56,28 @@ export const fetchSettings = createAsyncThunk(
   }
 );
 
+export const signinWithSms = createAsyncThunk(
+  "api/signinwithsms",
+  async (secret, { dispatch, getState }) => {
+    const {
+      user: { customerid },
+      api: { prelogintoken },
+    } = getState();
+
+    const response = await api.post(
+      "/signinwithsms",
+      stringify({ customerid, secret }),
+      {
+        headers: {
+          "x-access-token": prelogintoken,
+        },
+      }
+    );
+
+    return response.data;
+  }
+);
+
 const apiSlice = createSlice({
   name: "api",
   initialState: {
@@ -93,11 +115,14 @@ const apiSlice = createSlice({
       state.prelogintoken = description;
     },
     [fetchSettings.fulfilled]: (state, { payload }) => {
-      const {
-        description: { settings },
-      } = payload;
+      const { description } = payload;
 
-      state.settings = settings;
+      state.settings = description?.settings;
+    },
+    [signinWithSms.fulfilled]: (state, { payload }) => {
+      const { description } = payload;
+
+      state.accesstoken = description;
     },
   },
 });
