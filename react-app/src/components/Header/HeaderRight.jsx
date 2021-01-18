@@ -32,6 +32,7 @@ const HeaderRight = props => {
   const dispatch = useDispatch();
   const { countryCodes } = useSelector(state => state.api.settings);
   const user = useSelector(state => state.user);
+  const { accesstoken } = useSelector(state => state.api);
   const [signUpForm, setSignUpForm] = useState({
     firstname: "",
     lastname: "",
@@ -46,7 +47,7 @@ const HeaderRight = props => {
 
   const [signInForm, setSignInForm] = useState({
     email: user.email || "",
-    password: "",
+    password: "", // TODO: make password Input uncontrolled
   });
   const [signUpModal, setSignUpModal] = useState(false);
   const [signInModal, setSignInModal] = useState(false);
@@ -121,7 +122,6 @@ const HeaderRight = props => {
 
     if (payload?.status) {
       setIsEnteringCode(true);
-      signInModalToggle();
     }
   };
 
@@ -143,7 +143,10 @@ const HeaderRight = props => {
         </div>
       </div>
       <div className="header-right-icons">
-        <Button className="headsignedinicon fullscreen" data-toggle="fullscreenbtn">
+        <Button
+          className="headsignedinicon fullscreen"
+          data-toggle="fullscreenbtn"
+        >
           <IconSet sprite="sprtsmclrd" size="20" name="pagefullscreen" />
         </Button>
         <Button className="headsignedinicon support">
@@ -160,259 +163,80 @@ const HeaderRight = props => {
           </UncontrolledTooltip>
         </Button>
       </div>
-
-      {user.firstname && user.lastname ? (
-          <div className="header-right-signedin pr-2">
-            <Button className="useraccountarea">
-              <div className="useraccountarea-avatar rounded-pill">
-                <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
-              </div>
-              <h3 className="useraccountarea-name">{user.firstname} {String(user.lastname).toUpperCase()}</h3>
-              <i className="siteiconsdropdown downdirection"></i>
-            </Button>
-          </div>
+      {accesstoken ? (
+        <div className="header-right-signedin pr-2">
+          <Button className="useraccountarea">
+            <div className="useraccountarea-avatar rounded-pill">
+              <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
+            </div>
+            <h3 className="useraccountarea-name">
+              {user.firstname} {String(user.lastname).toUpperCase()}
+            </h3>
+            <i className="siteiconsdropdown downdirection"></i>
+          </Button>
+        </div>
       ) : (
-          <div className="header-right-notsignedin">
-            <Fragment>
+        <div className="header-right-notsignedin">
+          <Fragment>
+            <Button size="sm" variant="secondary" onClick={signInModalToggle}>
+              Üye Girişi
+            </Button>
+            <Button size="sm" variant="success" onClick={signUpModalToggle}>
+              Kayıt Ol
+            </Button>
 
-              <Button size="sm" variant="secondary" onClick={signInModalToggle}>
-                Üye Girişi
-              </Button>
-              <Button size="sm" variant="success" onClick={signUpModalToggle}>
-                Kayıt Ol
-              </Button>
-
-              <Modal
-                  wrapClassName=""
-                  modalClassName="modal-rightside"
-                  size="sm"
-                  isOpen={signInModal}
-                  toggle={signInModalToggle}
-                  keyboard={false}
-                  fade={false}
-                  autoFocus={false}
-                  backdrop="static"
-              >
-                <ModalHeader toggle={signInModalToggle}>ÜYE GİRİŞİ</ModalHeader>
-                <ModalBody className="modalcomp modalcomp-sign">
-                  <div className="modalcomp-sign-icon">
-                    <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
-                  </div>
-                  {!isEnteringCode ? (
-                      <div className="modalcomp-sign-form">
-                        <Form className="siteformui" autoComplete="off" noValidate>
-                          <div className="labelfocustop">
-                            <FormGroup>
-                              <Input
-                                  type="email"
-                                  pattern=".{0}|.{1,}"
-                                  required
-                                  name="email"
-                                  value={signInForm.email}
-                                  onChange={onSignInFormChange}
-                              />
-                              <Label>E-Posta</Label>
-                            </FormGroup>
-                            <FormGroup>
-                              <Input
-                                  className="signuppassword"
-                                  type="password"
-                                  pattern=".{0}|.{1,}"
-                                  required
-                                  name="password"
-                                  value={signInForm.password}
-                                  onChange={onSignInFormChange}
-                              />
-                              <Label>Şifre</Label>
-                              <Button
-                                  className="showhidepass"
-                                  data-toggle="showhidepassword"
-                                  data-target=".signuppassword"
-                              >
-                                <IconSet
-                                    sprite="sprtsmclrd"
-                                    size="14"
-                                    name="showhide"
-                                />
-                              </Button>
-                            </FormGroup>
-                          </div>
-                          <div className="recaptcha">
-                            <div className="recaptcha-area">
-                              <div className="recaptcha-check">
-                                <ReCAPTCHA
-                                    className="g-recaptcha"
-                                    theme="dark"
-                                    sitekey={RECAPTCHA_KEY}
-                                />
-                              </div>
-                              <Label>Ben robot değilim</Label>
-                            </div>
-                            <div>
-                              <a className="text-muted" href="#">
-                                Şifremi Unuttum
-                              </a>
-                            </div>
-                          </div>
-                          <Button
-                              variant="secondary"
-                              className="w-100 active"
-                              onClick={submitSignin}
-                          >
-                            DOĞRULAMA KODU GÖNDER
-                          </Button>
-                        </Form>
-                      </div>
-                  ) : (
-                      <div className="modalcomp-sign-form">
-                        <div className="headsmtitle mb-1">
-                          <h6 className="text-center w-100">
-                            Doğrulama Kodunu Giriniz
-                          </h6>
-                        </div>
-                        <Form className="siteformui" autoComplete="off" noValidate>
-                          <div className="labelfocustop">
-                            <FormGroup>
-                              <Input
-                                  className="text-center"
-                                  type="text"
-                                  pattern=".{0}|.{1,}"
-                                  required
-                                  value={verifyCode}
-                                  onChange={({ target }) => setVerifyCode(target.value)}
-                              />
-                              <Label className="text-center">Doğrulama Kodu</Label>
-                            </FormGroup>
-                          </div>
-                          <Button
-                              variant="success"
-                              className="w-100 mt-2"
-                              onClick={submitSecret}
-                          >
-                            GİRİŞ YAP
-                          </Button>
-                        </Form>
-                      </div>
-                  )}
-                </ModalBody>
-              </Modal>
-              <Modal
-                  wrapClassName=""
-                  modalClassName="modal-rightside"
-                  size="sm"
-                  isOpen={signUpModal}
-                  toggle={signUpModalToggle}
-                  keyboard={false}
-                  fade={false}
-                  autoFocus={false}
-                  backdrop="static"
-              >
-                <ModalHeader toggle={signUpModalToggle}>KAYIT OL</ModalHeader>
-                <ModalBody className="modalcomp modalcomp-sign">
-                  <div className="modalcomp-sign-icon">
-                    <IconSet sprite="sprtlgclrd" size="50gray" name="newuser" />
-                  </div>
+            <Modal
+              wrapClassName=""
+              modalClassName="modal-rightside"
+              size="sm"
+              isOpen={signInModal}
+              toggle={signInModalToggle}
+              keyboard={false}
+              fade={false}
+              autoFocus={false}
+              backdrop="static"
+            >
+              <ModalHeader toggle={signInModalToggle}>ÜYE GİRİŞİ</ModalHeader>
+              <ModalBody className="modalcomp modalcomp-sign">
+                <div className="modalcomp-sign-icon">
+                  <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
+                </div>
+                {!isEnteringCode ? (
                   <div className="modalcomp-sign-form">
                     <Form className="siteformui" autoComplete="off" noValidate>
                       <div className="labelfocustop">
                         <FormGroup>
                           <Input
-                              type="text"
-                              pattern=".{0}|.{1,}"
-                              required
-                              name="firstname"
-                              value={signUpForm.firstname}
-                              onChange={onSignUpFormChange}
-                          />
-                          <Label>Adınız</Label>
-                        </FormGroup>
-                        <FormGroup>
-                          <Input
-                              type="text"
-                              pattern=".{0}|.{1,}"
-                              required
-                              name="lastname"
-                              value={signUpForm.lastname}
-                              onChange={onSignUpFormChange}
-                          />
-                          <Label>Soyadınız</Label>
-                        </FormGroup>
-                        <FormGroup className="input-group phonelabelgroup">
-                          <InputGroupAddon addonType="prepend">
-                            <Input
-                                className="custom-select"
-                                type="select"
-                                name="countrycode"
-                                value={signUpForm.countrycode}
-                                onChange={onSignUpFormChange}
-                            >
-                              {countryPhoneCode.map((code, idx) => {
-                                return (
-                                    <option value={code} key={`${code}_${idx}`}>
-                                      {code}
-                                    </option>
-                                );
-                              })}
-                            </Input>
-                          </InputGroupAddon>
-                          <Input
-                              className="text-left"
-                              type="text"
-                              pattern=".{0}|.{1,}"
-                              required
-                              name="phone"
-                              value={signUpForm.phone}
-                              onChange={onSignUpFormChange}
-                          />
-                          <Label>Telefon</Label>
-                        </FormGroup>
-                        <FormGroup>
-                          <Input
-                              type="email"
-                              pattern=".{0}|.{1,}"
-                              required
-                              name="email"
-                              value={signUpForm.email}
-                              onChange={onSignUpFormChange}
+                            type="email"
+                            pattern=".{0}|.{1,}"
+                            required
+                            name="email"
+                            value={signInForm.email}
+                            onChange={onSignInFormChange}
                           />
                           <Label>E-Posta</Label>
                         </FormGroup>
                         <FormGroup>
                           <Input
-                              className="signuppassword"
-                              type="password"
-                              pattern=".{0}|.{1,}"
-                              required
-                              name="password"
-                              value={signUpForm.password}
-                              onChange={onSignUpFormChange}
+                            className="signuppassword"
+                            type="password"
+                            pattern=".{0}|.{1,}"
+                            required
+                            name="password"
+                            value={signInForm.password}
+                            onChange={onSignInFormChange}
                           />
                           <Label>Şifre</Label>
                           <Button
-                              className="showhidepass"
-                              data-toggle="showhidepassword"
-                              data-target=".signuppassword"
+                            className="showhidepass"
+                            data-toggle="showhidepassword"
+                            data-target=".signuppassword"
                           >
-                            <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
-                          </Button>
-                        </FormGroup>
-                        <FormGroup>
-                          <Input
-                              className="signuprepassword"
-                              type="password"
-                              pattern=".{0}|.{1,}"
-                              required
-                              name="confirm"
-                              value={signUpForm.confirm}
-                              onChange={onSignUpFormChange}
-                          />
-                          <Label>Şifre Doğrulama</Label>
-                          <Button
-                              className="showhidepass"
-                              data-toggle="showhidepassword"
-                              data-target=".signuprepassword"
-                          >
-                            <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
+                            <IconSet
+                              sprite="sprtsmclrd"
+                              size="14"
+                              name="showhide"
+                            />
                           </Button>
                         </FormGroup>
                       </div>
@@ -420,73 +244,261 @@ const HeaderRight = props => {
                         <div className="recaptcha-area">
                           <div className="recaptcha-check">
                             <ReCAPTCHA
-                                className="g-recaptcha"
-                                theme="dark"
-                                sitekey={RECAPTCHA_KEY}
+                              className="g-recaptcha"
+                              theme="dark"
+                              sitekey={RECAPTCHA_KEY}
                             />
                           </div>
                           <Label>Ben robot değilim</Label>
                         </div>
-                      </div>
-                      <div className="checkboxarea">
-                        <div className="custom-control custom-checkbox">
-                          <Input
-                              className="custom-control-input"
-                              id="termsOfUseCheck"
-                              type="checkbox"
-                              name="termsofuse"
-                              value={signUpForm.termsofuse}
-                              onClick={onSignUpFormChange}
-                          />
-                          <Label
-                              className="custom-control-label"
-                              htmlFor="termsOfUseCheck"
-                              check
-                          >
-                            18 Yaşında olduğumu beyan ederim,{" "}
-                            <a href="#" title="" rel="bookmark" target="_blank">
-                              <u>Ön Bilgilendirme Metni</u>
-                            </a>{" "}
-                            ve{" "}
-                            <a href="#" title="" rel="bookmark" target="_blank">
-                              <u>Kullanım Sözleşmesini</u>
-                            </a>{" "}
-                            okudum ve onaylıyorum.
-                          </Label>
-                        </div>
-                        <div className="custom-control custom-checkbox">
-                          <Input
-                              className="custom-control-input"
-                              id="announcementsCheck"
-                              type="checkbox"
-                              name="ecommerce"
-                              value={signUpForm.ecommerce}
-                              onChange={onSignUpFormChange}
-                          />
-                          <Label
-                              className="custom-control-label"
-                              htmlFor="announcementsCheck"
-                              check
-                          >
-                            Ticari reklam ve duyurulardan haber almak istiyorum.
-                          </Label>
+                        <div>
+                          <a className="text-muted" href="#">
+                            Şifremi Unuttum
+                          </a>
                         </div>
                       </div>
                       <Button
-                          variant="success"
-                          className="w-100"
-                          onClick={submitSignup}
+                        variant="secondary"
+                        className="w-100 active"
+                        onClick={submitSignin}
                       >
-                        KAYIT OL
+                        DOĞRULAMA KODU GÖNDER
                       </Button>
                     </Form>
                   </div>
-                </ModalBody>
-              </Modal>
-            </Fragment>
-          </div>
+                ) : (
+                  <div className="modalcomp-sign-form">
+                    <div className="headsmtitle mb-1">
+                      <h6 className="text-center w-100">
+                        Doğrulama Kodunu Giriniz
+                      </h6>
+                    </div>
+                    <Form className="siteformui" autoComplete="off" noValidate>
+                      <div className="labelfocustop">
+                        <FormGroup>
+                          <Input
+                            className="text-center"
+                            type="text"
+                            pattern=".{0}|.{1,}"
+                            required
+                            value={verifyCode}
+                            onChange={({ target }) =>
+                              setVerifyCode(target.value)
+                            }
+                          />
+                          <Label className="text-center">Doğrulama Kodu</Label>
+                        </FormGroup>
+                      </div>
+                      <Button
+                        variant="success"
+                        className="w-100 mt-2"
+                        onClick={submitSecret}
+                      >
+                        GİRİŞ YAP
+                      </Button>
+                    </Form>
+                  </div>
+                )}
+              </ModalBody>
+            </Modal>
+            <Modal
+              wrapClassName=""
+              modalClassName="modal-rightside"
+              size="sm"
+              isOpen={signUpModal}
+              toggle={signUpModalToggle}
+              keyboard={false}
+              fade={false}
+              autoFocus={false}
+              backdrop="static"
+            >
+              <ModalHeader toggle={signUpModalToggle}>KAYIT OL</ModalHeader>
+              <ModalBody className="modalcomp modalcomp-sign">
+                <div className="modalcomp-sign-icon">
+                  <IconSet sprite="sprtlgclrd" size="50gray" name="newuser" />
+                </div>
+                <div className="modalcomp-sign-form">
+                  <Form className="siteformui" autoComplete="off" noValidate>
+                    <div className="labelfocustop">
+                      <FormGroup>
+                        <Input
+                          type="text"
+                          pattern=".{0}|.{1,}"
+                          required
+                          name="firstname"
+                          value={signUpForm.firstname}
+                          onChange={onSignUpFormChange}
+                        />
+                        <Label>Adınız</Label>
+                      </FormGroup>
+                      <FormGroup>
+                        <Input
+                          type="text"
+                          pattern=".{0}|.{1,}"
+                          required
+                          name="lastname"
+                          value={signUpForm.lastname}
+                          onChange={onSignUpFormChange}
+                        />
+                        <Label>Soyadınız</Label>
+                      </FormGroup>
+                      <FormGroup className="input-group phonelabelgroup">
+                        <InputGroupAddon addonType="prepend">
+                          <Input
+                            className="custom-select"
+                            type="select"
+                            name="countrycode"
+                            value={signUpForm.countrycode}
+                            onChange={onSignUpFormChange}
+                          >
+                            {countryPhoneCode.map((code, idx) => {
+                              return (
+                                <option value={code} key={`${code}_${idx}`}>
+                                  {code}
+                                </option>
+                              );
+                            })}
+                          </Input>
+                        </InputGroupAddon>
+                        <Input
+                          className="text-left"
+                          type="text"
+                          pattern=".{0}|.{1,}"
+                          required
+                          name="phone"
+                          value={signUpForm.phone}
+                          onChange={onSignUpFormChange}
+                        />
+                        <Label>Telefon</Label>
+                      </FormGroup>
+                      <FormGroup>
+                        <Input
+                          type="email"
+                          pattern=".{0}|.{1,}"
+                          required
+                          name="email"
+                          value={signUpForm.email}
+                          onChange={onSignUpFormChange}
+                        />
+                        <Label>E-Posta</Label>
+                      </FormGroup>
+                      <FormGroup>
+                        <Input
+                          className="signuppassword"
+                          type="password"
+                          pattern=".{0}|.{1,}"
+                          required
+                          name="password"
+                          value={signUpForm.password}
+                          onChange={onSignUpFormChange}
+                        />
+                        <Label>Şifre</Label>
+                        <Button
+                          className="showhidepass"
+                          data-toggle="showhidepassword"
+                          data-target=".signuppassword"
+                        >
+                          <IconSet
+                            sprite="sprtsmclrd"
+                            size="14"
+                            name="showhide"
+                          />
+                        </Button>
+                      </FormGroup>
+                      <FormGroup>
+                        <Input
+                          className="signuprepassword"
+                          type="password"
+                          pattern=".{0}|.{1,}"
+                          required
+                          name="confirm"
+                          value={signUpForm.confirm}
+                          onChange={onSignUpFormChange}
+                        />
+                        <Label>Şifre Doğrulama</Label>
+                        <Button
+                          className="showhidepass"
+                          data-toggle="showhidepassword"
+                          data-target=".signuprepassword"
+                        >
+                          <IconSet
+                            sprite="sprtsmclrd"
+                            size="14"
+                            name="showhide"
+                          />
+                        </Button>
+                      </FormGroup>
+                    </div>
+                    <div className="recaptcha">
+                      <div className="recaptcha-area">
+                        <div className="recaptcha-check">
+                          <ReCAPTCHA
+                            className="g-recaptcha"
+                            theme="dark"
+                            sitekey={RECAPTCHA_KEY}
+                          />
+                        </div>
+                        <Label>Ben robot değilim</Label>
+                      </div>
+                    </div>
+                    <div className="checkboxarea">
+                      <div className="custom-control custom-checkbox">
+                        <Input
+                          className="custom-control-input"
+                          id="termsOfUseCheck"
+                          type="checkbox"
+                          name="termsofuse"
+                          value={signUpForm.termsofuse}
+                          onClick={onSignUpFormChange}
+                        />
+                        <Label
+                          className="custom-control-label"
+                          htmlFor="termsOfUseCheck"
+                          check
+                        >
+                          18 Yaşında olduğumu beyan ederim,{" "}
+                          <a href="#" title="" rel="bookmark" target="_blank">
+                            <u>Ön Bilgilendirme Metni</u>
+                          </a>{" "}
+                          ve{" "}
+                          <a href="#" title="" rel="bookmark" target="_blank">
+                            <u>Kullanım Sözleşmesini</u>
+                          </a>{" "}
+                          okudum ve onaylıyorum.
+                        </Label>
+                      </div>
+                      <div className="custom-control custom-checkbox">
+                        <Input
+                          className="custom-control-input"
+                          id="announcementsCheck"
+                          type="checkbox"
+                          name="ecommerce"
+                          value={signUpForm.ecommerce}
+                          onChange={onSignUpFormChange}
+                        />
+                        <Label
+                          className="custom-control-label"
+                          htmlFor="announcementsCheck"
+                          check
+                        >
+                          Ticari reklam ve duyurulardan haber almak istiyorum.
+                        </Label>
+                      </div>
+                    </div>
+                    <Button
+                      variant="success"
+                      className="w-100"
+                      onClick={submitSignup}
+                    >
+                      KAYIT OL
+                    </Button>
+                  </Form>
+                </div>
+              </ModalBody>
+            </Modal>
+          </Fragment>
+        </div>
       )}
-
       <div className="header-right-lang">
         <Button
           size="sm"
