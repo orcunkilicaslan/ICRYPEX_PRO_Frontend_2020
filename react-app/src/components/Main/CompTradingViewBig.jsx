@@ -6,11 +6,11 @@ const CompTradingViewBig = props => {
       <div className="tradingviewbig">
         <div className="tradingview-widget-container">
             <TradingViewWidget
-                symbol={"BINANCE:BTCTRY"}
+                symbol={"BINANCE:BTCUSDT"}
                 theme={"Dark"}
                 locale={"TR"}
                 timezone={"Europe/Istanbul"}
-                interval={"5"}
+                interval={"3"}
                 style={"1"}
                 toolbar_bg={"#f1f3f6"}
                 hide_legend={true}

@@ -27,7 +27,7 @@ const CompCryptocoinbar = props => {
       <div className="cryptocoinbar siteformui">
         <InputGroup size="lg">
           <InputGroupAddon addonType="prepend">
-            <InputGroupText className="selectedcur">BTC/TRY</InputGroupText>
+            <InputGroupText className="selectedcur">BTC/USDT</InputGroupText>
           </InputGroupAddon>
           <div className="cryptostatsbar">
             <div className="cryptostatsbar-biger">

@@ -407,6 +407,11 @@
       //color: $site-clr-text-soft-sec;
     }
 
+    select > option{
+      color: $custom-select-color;
+      background-color: $custom-select-bg;
+    }
+
     .form-control{
       //color: $site-clr-text-soft-pri;
       //background-color: $site-clr-darkblue-600;
