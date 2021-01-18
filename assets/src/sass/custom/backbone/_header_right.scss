@@ -79,6 +79,7 @@
       color: $site-clr-white;
       background-color: transparent;
       @include responsive-font-size($var-custom-font-size-base);
+      padding: 0;
       position: relative;
 
       &-avatar{
@@ -89,7 +90,7 @@
         overflow: hidden;
         position: relative;
 
-        > i.icon-sprtbgiconclrd{
+        > i[class*="user"]{
           @include transform-multiple(scale(0.55) translate(-24px, -24px));
         }
 

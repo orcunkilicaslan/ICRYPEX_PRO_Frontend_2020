@@ -178,9 +178,13 @@ const HeaderRight = props => {
 
       {user.firstname && user.lastname ? (
           <div className="header-right-signedin pr-2">
-          <span>
-            Merhaba {user.firstname} {String(user.lastname).toUpperCase()}
-          </span>
+            <Button className="useraccountarea">
+              <div className="useraccountarea-avatar rounded-pill">
+                <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
+              </div>
+              <h3 className="useraccountarea-name">{user.firstname} {String(user.lastname).toUpperCase()}</h3>
+              <i className="siteiconsdropdown downdirection"></i>
+            </Button>
           </div>
       ) : (
           <div className="header-right-notsignedin">
@@ -497,6 +501,7 @@ const HeaderRight = props => {
             </Fragment>
           </div>
       )}
+
       <div className="header-right-lang">
         <Button
           size="sm"

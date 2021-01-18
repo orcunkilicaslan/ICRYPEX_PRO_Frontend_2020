@@ -2,6 +2,7 @@
 .eslintcache
 node_modules/
 package-lock.json
+yarn.lock
 
 assets/dist/css/custom-app.css.map
 assets/dist/js/custom-app.js.map
