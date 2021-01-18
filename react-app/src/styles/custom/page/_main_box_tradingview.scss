@@ -10,7 +10,7 @@
       @include border-radius($var-custom-border-radius);
       overflow: hidden;
 
-      > div{
+      > div, article{
         height: 100%;
 
         div[id*="wrapper"]{

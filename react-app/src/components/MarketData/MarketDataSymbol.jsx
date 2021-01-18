@@ -102,9 +102,9 @@ const MarketDataSymbol = props => {
                 return (
                   <Table.Tr key={pair}>
                     <Table.Td sizeauto className="fav">
-                      <a className="tablefavico" href="#" title="Favorime Ekle">
+                      <Button className="tablefavico">
                         <MdTableFavIcon />
-                      </a>
+                      </Button>
                     </Table.Td>
                     <Table.Td sizefixed className="sym">
                       {pair}

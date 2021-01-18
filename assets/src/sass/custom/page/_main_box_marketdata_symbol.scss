@@ -78,7 +78,11 @@
         //.scrollbar-tbl-tb{height: 450px;}
 
         .tablefavico{
+          background-color: transparent;
+          padding: 0;
+          line-height: 1;
           display: block;
+
           svg{
             position: relative;
             top: -1px;

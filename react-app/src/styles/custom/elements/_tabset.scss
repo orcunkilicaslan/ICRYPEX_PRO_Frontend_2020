@@ -21,8 +21,11 @@
     .nav-link{
       border-top-width: 0 !important;
       white-space: nowrap;
+      cursor: pointer;
 
-      &.active{}
+      &.active{
+        cursor: default;
+      }
     }
   }
 
