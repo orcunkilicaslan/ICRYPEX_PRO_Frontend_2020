@@ -9,7 +9,12 @@ const HeaderLeft = props => {
         </a>
       </div>
       <div className="header-left-nav">
-        <ButtonLink size="sm" variant="primary" href="/" title="Kolay AL-Sat">
+        <ButtonLink
+          size="sm"
+          variant="primary"
+          href="/kolay"
+          title="Kolay AL-Sat"
+        >
           Kolay AL-Sat
         </ButtonLink>
         <ButtonLink size="sm" variant="secondary" href="/" title="PRO Görünüm">

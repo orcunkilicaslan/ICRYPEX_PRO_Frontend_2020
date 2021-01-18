@@ -1,7 +1,7 @@
 import classNames from "classnames";
+import { NavLink } from "react-router-dom";
 
 export const ButtonLink = props => {
-
   const {
     className,
     href = "",
@@ -18,9 +18,8 @@ export const ButtonLink = props => {
   });
 
   return (
-    <a className={cls} href={href} title={title} rel="bookmark" {...rest}>
+    <NavLink className={cls} to={href} title={title} {...rest}>
       {children}
-    </a>
+    </NavLink>
   );
-
 };
