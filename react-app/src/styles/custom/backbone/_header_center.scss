@@ -55,7 +55,11 @@
             .input-group-text{
               color: $site-clr-white;
 
-              &.newsallbtn{}
+              &.newsallbtn{
+                background-color: transparent;
+                border-width: 1px;
+                border-left-width: 0;
+              }
             }
           }
         }

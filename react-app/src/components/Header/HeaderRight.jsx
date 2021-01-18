@@ -143,28 +143,13 @@ const HeaderRight = props => {
         </div>
       </div>
       <div className="header-right-icons">
-        <a
-          className="headsignedinicon fullscreen"
-          href="#"
-          title="Tam Sayfa Görünümü"
-          data-toggle="fullscreenbtn"
-        >
+        <Button className="headsignedinicon fullscreen" data-toggle="fullscreenbtn">
           <IconSet sprite="sprtsmclrd" size="20" name="pagefullscreen" />
-        </a>
-        <a
-          className="headsignedinicon support"
-          href="#"
-          title="Destek"
-          rel="bookmark"
-        >
+        </Button>
+        <Button className="headsignedinicon support">
           <IconSet sprite="sprtsmclrd" size="20" name="support" />
-        </a>
-        <a
-          className="headsignedinicon notif"
-          href="#"
-          data-toggle="modal"
-          data-target="#modalHeadNotifications"
-        >
+        </Button>
+        <Button className="headsignedinicon notif">
           <span id="headTooltipNotif">
             <IconSet sprite="sprtsmclrd" size="20" name="notif">
               <span className="badge badge-pill badge-danger">4</span>
@@ -173,7 +158,7 @@ const HeaderRight = props => {
           <UncontrolledTooltip placement="bottom" target="headTooltipNotif">
             4 Yeni Bildiriminiz Var
           </UncontrolledTooltip>
-        </a>
+        </Button>
       </div>
 
       {user.firstname && user.lastname ? (

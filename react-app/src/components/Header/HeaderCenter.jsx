@@ -2,6 +2,7 @@ import { useReducer, useEffect } from "react";
 import { Col, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
 
 import { IconSet } from "../IconSet";
+import { Button } from "../Button";
 
 const ITEMS = [
   "Murat Alaçayır: 01 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
@@ -48,25 +49,16 @@ const HeaderCenter = props => {
             <a
               className="newstickerbars-item"
               href="#"
-              title=""
-              data-toggle="modal"
-              data-target="#modalHeadNewsAll"
             >
               {item}
             </a>
           </div>
           <InputGroupAddon addonType="append">
             {/* <InputGroupText> */}
-            <a
-              className="input-group-text newsallbtn"
-              href="#"
-              title="Tümü"
-              data-toggle="modal"
-              data-target="#modalHeadNewsAll"
-            >
+            <Button className="input-group-text newsallbtn">
               <span>Tümü</span>
               <IconSet sprite="sprtsmclrd" size="14" name="arrowmore" />
-            </a>
+            </Button>
             {/* </InputGroupText> */}
           </InputGroupAddon>
         </InputGroup>
