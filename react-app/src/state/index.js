@@ -19,13 +19,12 @@ const persistConfig = {
   debug: process.env.NODE_ENV === "development",
   blacklist: ["api"],
 };
+
+export let store;
 const reducer = persistReducer(persistConfig, rootReducer);
 
-let store, persistor;
 export const getStore = () => {
-  let resolve;
-
-  if (!store) {
+  return new Promise(resolve => {
     store = configureStore({
       reducer,
       middleware: getDefaultMiddleware({
@@ -35,16 +34,9 @@ export const getStore = () => {
       }),
     });
 
-    persistor = persistStore(store, null, () => {
+    const persistor = persistStore(store, null, () => {
       resolve({ store, persistor });
     });
-  } else {
-    // TODO: setTimeout(0) gerekebilir
-    resolve({ store, persistor });
-  }
-
-  return new Promise(res => {
-    resolve = res;
   });
 };
 

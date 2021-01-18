@@ -1,5 +1,7 @@
 import { create } from "apisauce";
 
+import { store } from ".";
+
 let baseURL;
 if (process.env.NODE_ENV === "production") {
   baseURL = process.env.REACT_APP_API_BASE;
@@ -18,12 +20,12 @@ const api = create({
 api.addAsyncRequestTransform(request => async () => {
   const { method, url, headers } = request;
   console.log("req: %s | %s | %O", method, url, request);
+  const { ui } = store.getState();
 
-  // TODO: get headers from redux state
-  headers["x-culture-code"] = "tr";
+  headers["x-culture-code"] = ui.lang || "tr";
 });
 
-api.addAsyncResponseTransform(response => {
+api.addAsyncResponseTransform(async response => {
   const { ok, status, config, data } = response;
   console.log(
     "res: %s | %s | %s %O",
@@ -34,8 +36,10 @@ api.addAsyncResponseTransform(response => {
   );
 
   if (ok && data.status) {
-    return Promise.resolve(response);
+    // http response 2xx && api status 1
+    return response;
   } else if (ok && !data.status) {
+    // http response 2xx && api status 0
     console.error(
       "%s | %s | %s %s",
       config.method,
@@ -44,8 +48,9 @@ api.addAsyncResponseTransform(response => {
       data.errormessage
     );
 
-    return Promise.resolve(response);
+    return response;
   } else {
+    // http response !2xx
     // const { originalRequest } = config;
 
     // if (status === 403 && !originalRequest._retry) {
