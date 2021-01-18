@@ -36,8 +36,11 @@
 
     .nav-link{
       white-space: nowrap;
+      cursor: pointer;
 
-      &.active{}
+      &.active{
+        cursor: default;
+      }
     }
   }
 

@@ -98,35 +98,35 @@ const MarketDataSymbol = props => {
           </Table.Thead>
           <Table.Tbody scrollbar striped hovered>
             {mdsymboltable.map(
-              ({ pair, data: { buy, sell, volume, change, mdper } }) => {
-                return (
-                  <Table.Tr key={pair}>
-                    <Table.Td sizeauto className="fav">
-                      <Button className="tablefavico">
-                        <MdTableFavIcon />
-                      </Button>
-                    </Table.Td>
-                    <Table.Td sizefixed className="sym">
-                      {pair}
-                    </Table.Td>
-                    <Table.Td sizefixed className="buy">
-                      {buy}
-                    </Table.Td>
-                    <Table.Td sizefixed className="sll">
-                      {sell}
-                    </Table.Td>
-                    <Table.Td sizefixed className="vol">
-                      {volume}
-                    </Table.Td>
-                    <Table.Td sizefixed className="chg">
-                      {change}
-                    </Table.Td>
-                    <Table.Td sizeauto className="per">
-                      <PerLineIcon className={`mdper mdper-${mdper}`} />
-                    </Table.Td>
-                  </Table.Tr>
-                );
-              }
+                ({ pair, data: { buy, sell, volume, change, mdper } }) => {
+                  return (
+                      <Table.Tr key={pair}>
+                        <Table.Td sizeauto className="fav">
+                          <Button className="tablefavico">
+                            <MdTableFavIcon />
+                          </Button>
+                        </Table.Td>
+                        <Table.Td sizefixed className="sym">
+                          {pair}
+                        </Table.Td>
+                        <Table.Td sizefixed className="buy">
+                          {buy}
+                        </Table.Td>
+                        <Table.Td sizefixed className="sll">
+                          {sell}
+                        </Table.Td>
+                        <Table.Td sizefixed className="vol">
+                          {volume}
+                        </Table.Td>
+                        <Table.Td sizefixed className="chg">
+                          {change}
+                        </Table.Td>
+                        <Table.Td sizeauto className="per">
+                          <PerLineIcon className={`mdper mdper-${mdper}`} />
+                        </Table.Td>
+                      </Table.Tr>
+                  );
+                }
             )}
           </Table.Tbody>
         </Table>

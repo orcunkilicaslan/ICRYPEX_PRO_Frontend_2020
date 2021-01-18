@@ -1,3 +1,4 @@
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import classNames from "classnames";
 
 const Table = props => {
@@ -62,7 +63,7 @@ export function Tbody(props) {
       "scrollbar-tbl-tb": Boolean(scrollbar),
     });
 
-    return <div className={scrollbarClassName}>{tableTbody}</div>;
+    return <PerfectScrollbar className={scrollbarClassName}>{tableTbody}</PerfectScrollbar>;
   }
 
   return tableTbody;
