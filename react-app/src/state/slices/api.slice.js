@@ -102,6 +102,15 @@ const apiSlice = createSlice({
         state.deviceuuid = payload;
       }
     },
+    setMediumId: (state, { payload }) => {
+      state.mediumid = payload;
+  },
+    setVersionNo: (state, { payload }) => {
+      state.versionno = payload;
+    },
+    setSettingNo: (state, { payload }) => {
+      state.settingno = payload;
+    },
   },
   extraReducers: {
     [fetchServerDeviceKey.fulfilled]: (state, action) => {
