@@ -30,9 +30,9 @@ const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
 const HeaderRight = props => {
   const { setLanguage } = props;
   const dispatch = useDispatch();
-  const { countryCodes } = useSelector(state => state.api.settings);
-  const user = useSelector(state => state.user);
-  const { accesstoken } = useSelector(state => state.api);
+  const User = useSelector(state => state.user);
+  const { settings: Settings, accesstoken } = useSelector(state => state.api);
+
   const [signUpForm, setSignUpForm] = useState({
     firstname: "",
     lastname: "",
@@ -46,7 +46,7 @@ const HeaderRight = props => {
   });
 
   const [signInForm, setSignInForm] = useState({
-    email: user.email || "",
+    email: User.email || "",
     password: "", // TODO: make password Input uncontrolled
   });
   const [signUpModal, setSignUpModal] = useState(false);
@@ -54,7 +54,9 @@ const HeaderRight = props => {
   const [isEnteringCode, setIsEnteringCode] = useState(false);
   const [verifyCode, setVerifyCode] = useState("");
 
-  const countryPhoneCode = countryCodes.map(({ country_code }) => country_code);
+  const countryPhoneCode = Settings?.countryCodes?.map(
+    ({ country_code }) => country_code
+  );
 
   const signUpModalToggle = () => {
     setSignInModal(false);
@@ -104,7 +106,6 @@ const HeaderRight = props => {
   const submitSecret = async event => {
     event.preventDefault();
     event.stopPropagation();
-
     const { payload } = await dispatch(signinWithSms(verifyCode));
 
     if (payload?.status) {
@@ -170,7 +171,7 @@ const HeaderRight = props => {
               <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
             </div>
             <h3 className="useraccountarea-name">
-              {user.firstname} {String(user.lastname).toUpperCase()}
+              {User.firstname} {String(User.lastname).toUpperCase()}
             </h3>
             <i className="siteiconsdropdown downdirection"></i>
           </Button>
@@ -351,7 +352,7 @@ const HeaderRight = props => {
                             value={signUpForm.countrycode}
                             onChange={onSignUpFormChange}
                           >
-                            {countryPhoneCode.map((code, idx) => {
+                            {countryPhoneCode?.map((code, idx) => {
                               return (
                                 <option value={code} key={`${code}_${idx}`}>
                                   {code}
