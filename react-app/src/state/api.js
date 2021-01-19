@@ -1,7 +1,7 @@
 import { create } from "apisauce";
 
 import { store } from ".";
-import { pushError } from "./slices/ui.slice";
+// import { pushError } from "./slices/ui.slice";
 
 let baseURL;
 if (process.env.NODE_ENV === "production") {
@@ -49,9 +49,9 @@ api.addAsyncResponseTransform(async response => {
       data.errormessage
     );
 
-    store.dispatch(pushError({ type: data.type, message: data.errormessage }));
+    // store.dispatch(pushError({ type: data.type, message: data.errormessage }));
 
-    return response;
+    return Promise.reject(response);
   } else {
     // http response !2xx
     // const { originalRequest } = config;
