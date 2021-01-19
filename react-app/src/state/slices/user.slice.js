@@ -65,16 +65,22 @@ export const fetchUserInfo = createAsyncThunk(
   }
 );
 
+const initialState = {
+  firstname: null,
+  lastname: null,
+  phone: null,
+  email: null,
+  customerid: null,
+};
+
 const userSlice = createSlice({
   name: "user",
-  initialState: {
-    firstname: null,
-    lastname: null,
-    phone: null,
-    email: null,
-    customerid: null,
+  initialState,
+  reducers: {
+    reset: state => {
+      state = initialState;
+    },
   },
-  reducers: {},
   extraReducers: {
     [signupUser.fulfilled]: (state, action) => {
       const { description } = action.payload;
@@ -95,5 +101,7 @@ const userSlice = createSlice({
     },
   },
 });
+
+export const { reset } = userSlice.actions;
 
 export default userSlice.reducer;

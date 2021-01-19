@@ -58,7 +58,7 @@ export const fetchSettings = createAsyncThunk(
 
 export const signinWithSms = createAsyncThunk(
   "api/signinwithsms",
-  async (secret, { dispatch, getState }) => {
+  async (secret, { getState }) => {
     const {
       user: { customerid },
       api: { prelogintoken },
@@ -78,9 +78,7 @@ export const signinWithSms = createAsyncThunk(
   }
 );
 
-const apiSlice = createSlice({
-  name: "api",
-  initialState: {
+const initialState = {
     prelogintoken: null,
     accesstoken: null,
     serverdevicekey: null,
@@ -89,8 +87,12 @@ const apiSlice = createSlice({
     mediumid: 1,
     versionno: "1.0.0",
     settingno: 9,
-    settings: null,
-  },
+  settings: {},
+};
+
+const apiSlice = createSlice({
+  name: "api",
+  initialState,
   reducers: {
     setLocalKey: (state, { payload }) => {
       if (!state.localkey) {
@@ -110,6 +112,9 @@ const apiSlice = createSlice({
     },
     setSettingNo: (state, { payload }) => {
       state.settingno = payload;
+    },
+    reset: state => {
+      state = initialState;
     },
   },
   extraReducers: {
@@ -136,6 +141,6 @@ const apiSlice = createSlice({
   },
 });
 
-export const { setDeviceId, setLocalKey } = apiSlice.actions;
+export const { setDeviceId, setLocalKey, reset } = apiSlice.actions;
 
 export default apiSlice.reducer;
