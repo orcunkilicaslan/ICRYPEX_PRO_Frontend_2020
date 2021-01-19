@@ -18,6 +18,8 @@ import { ReactComponent as SideDark } from "~/assets/images/header/header_theme_
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
+import { LanguageButtons } from "../LanguageButtons.jsx";
+
 import {
   signupUser,
   signinUser,
@@ -32,6 +34,7 @@ const HeaderRight = props => {
   const dispatch = useDispatch();
   const User = useSelector(state => state.user);
   const { settings: Settings, accesstoken } = useSelector(state => state.api);
+  const { lang: currentLanguage } = useSelector(state => state.ui);
 
   const [signUpForm, setSignUpForm] = useState({
     firstname: "",
@@ -501,23 +504,11 @@ const HeaderRight = props => {
         </div>
       )}
       <div className="header-right-lang">
-        <Button
-          size="sm"
-          variant="secondary"
-          className="active"
-          onClick={() => setLanguage("tr")}
-          title="TR"
-        >
-          TR
-        </Button>
-        <Button
-          size="sm"
-          variant="secondary"
-          onClick={() => setLanguage("en")}
-          title="EN"
-        >
-          EN
-        </Button>
+        <LanguageButtons
+          languages={Settings.languages}
+          currentLanguage={currentLanguage}
+          setLanguage={setLanguage}
+        />
       </div>
     </div>
   );
