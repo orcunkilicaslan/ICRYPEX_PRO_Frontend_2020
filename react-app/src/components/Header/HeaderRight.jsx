@@ -56,6 +56,7 @@ const HeaderRight = props => {
   const [signInModal, setSignInModal] = useState(false);
   const [isEnteringCode, setIsEnteringCode] = useState(false);
   const [verifyCode, setVerifyCode] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const countryPhoneCode = Settings?.countryCodes?.map(
     ({ country_code }) => country_code
@@ -64,11 +65,13 @@ const HeaderRight = props => {
   const signUpModalToggle = () => {
     setSignInModal(false);
     setSignUpModal(!signUpModal);
+    setErrorMessage(null);
   };
 
   const signInModalToggle = () => {
     setSignUpModal(false);
     setSignInModal(!signInModal);
+    setErrorMessage(null);
   };
 
   const onSignInFormChange = ({ target }) => {
@@ -95,6 +98,7 @@ const HeaderRight = props => {
   const submitSignup = async event => {
     event.preventDefault();
     event.stopPropagation();
+    setErrorMessage(null);
     const { phone, countrycode } = signUpForm;
     const { payload } = await dispatch(
       signupUser({ ...signUpForm, phone: `${countrycode}${phone}` })
@@ -103,29 +107,37 @@ const HeaderRight = props => {
     if (payload?.status) {
       setIsEnteringCode(true);
       signInModalToggle();
+    } else {
+      setErrorMessage(payload?.errormessage);
     }
   };
 
   const submitSecret = async event => {
     event.preventDefault();
     event.stopPropagation();
+    setErrorMessage(null);
     const { payload } = await dispatch(signinWithSms(verifyCode));
 
     if (payload?.status) {
       dispatch(fetchUserInfo());
+      signInModalToggle();
+      setIsEnteringCode(false);
+    } else {
+      setErrorMessage(payload?.errormessage);
     }
-
-    signInModalToggle();
-    setIsEnteringCode(false);
   };
 
   const submitSignin = async event => {
     event.preventDefault();
     event.stopPropagation();
+    setErrorMessage(null);
     const { payload } = await dispatch(signinUser(signInForm));
 
     if (payload?.status) {
       setIsEnteringCode(true);
+      setErrorMessage(null);
+    } else {
+      setErrorMessage(payload?.errormessage);
     }
   };
 
@@ -205,6 +217,9 @@ const HeaderRight = props => {
                 <div className="modalcomp-sign-icon">
                   <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
                 </div>
+                {errorMessage && (
+                  <span style={{ color: "red" }}>{errorMessage}</span>
+                )}
                 {!isEnteringCode ? (
                   <div className="modalcomp-sign-form">
                     <Form className="siteformui" autoComplete="off" noValidate>
@@ -321,6 +336,9 @@ const HeaderRight = props => {
                 <div className="modalcomp-sign-icon">
                   <IconSet sprite="sprtlgclrd" size="50gray" name="newuser" />
                 </div>
+                {errorMessage && (
+                  <span style={{ color: "red" }}>{errorMessage}</span>
+                )}
                 <div className="modalcomp-sign-form">
                   <Form className="siteformui" autoComplete="off" noValidate>
                     <div className="labelfocustop">
