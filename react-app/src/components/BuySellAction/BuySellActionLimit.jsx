@@ -15,7 +15,7 @@ import {
 import { IconSet } from "../IconSet.jsx";
 import { Button } from "../Button.jsx";
 
-const BuySellActionMarket = props => {
+const BuySellActionLimit = props => {
 
   const [selectedBuyPrice, setSelectedBuyPrice] = useState("");
   const [selectedBuyAmount, setSelectedBuyAmount] = useState("");
@@ -25,7 +25,7 @@ const BuySellActionMarket = props => {
   const [rangeSellPortfolio, setRangeSellPortfolio] = useState("");
 
   return (
-    <div className="buysellaction-market">
+    <div className="buysellaction-limit">
       <Row className="buysellaction-formarea">
         <Col className="buycol">
           <Form
@@ -94,8 +94,8 @@ const BuySellActionMarket = props => {
                 <Col>
                   <div className="rangeprogress">
                     <Progress
-                      className="rangeprogress-progress"
-                      value={rangeBuyPortfolio}
+                        className="rangeprogress-progress"
+                        value={rangeBuyPortfolio}
                     />
                   </div>
                   <div className="rangeprogress-circle d-none" data-val={rangeBuyPortfolio}>
@@ -106,15 +106,15 @@ const BuySellActionMarket = props => {
                   </div>
                   <output className="rangeprogress-bubble"></output>
                   <Input
-                    className="rangeprogress-range custom-range"
-                    type="range"
-                    min={100 / 4}
-                    max={100}
-                    step={100 / 4}
-                    value={rangeBuyPortfolio}
-                    onChange={({ target }) => {
-                      setRangeBuyPortfolio(target.value);
-                    }}
+                      className="rangeprogress-range custom-range"
+                      type="range"
+                      min={100 / 4}
+                      max={100}
+                      step={100 / 4}
+                      value={rangeBuyPortfolio}
+                      onChange={({ target }) => {
+                        setRangeBuyPortfolio(target.value);
+                      }}
                   />
                 </Col>
               </Row>
@@ -246,4 +246,4 @@ const BuySellActionMarket = props => {
   );
 };
 
-export default BuySellActionMarket;
+export default BuySellActionLimit;

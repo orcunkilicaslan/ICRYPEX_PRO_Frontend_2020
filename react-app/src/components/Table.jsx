@@ -45,11 +45,12 @@ export function Thead(props) {
 }
 
 export function Tbody(props) {
-  const { className, scrollbar, striped, hovered, children, ...rest } = props;
+  const { className, scrollbar, striped, hovered, borderbottom, children, ...rest } = props;
 
   const tableClass = classNames("tbl-tbody", className, {
     "tbl-striped": Boolean(striped),
     "tbl-hovered": Boolean(hovered),
+    "tbl-brdrbtm": Boolean(borderbottom),
   });
 
   const tableTbody = (

@@ -21,6 +21,11 @@
           @include flexbox-display-flex();
           @include flexbox-align-items(center);
           @include flexbox-justify-content(flex-end);
+
+          .popoverbtn{
+            padding: 0;
+            line-height: 1;
+          }
         }
 
         h6{

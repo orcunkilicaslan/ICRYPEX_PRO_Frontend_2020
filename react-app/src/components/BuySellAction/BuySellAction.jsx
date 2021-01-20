@@ -1,9 +1,13 @@
 import { useState } from "react";
-import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
+import { TabContent, TabPane, Nav, NavItem, NavLink, UncontrolledPopover, PopoverBody } from "reactstrap";
 import classnames from "classnames";
 
 import { IconSet } from "../IconSet.jsx";
+import { Button } from "../Button.jsx";
+import Table from "../Table.jsx";
 import BuySellActionMarket from "./BuySellActionMarket.jsx";
+import BuySellActionLimit from "./BuySellActionLimit.jsx";
+import BuySellActionStopLimit from "./BuySellActionStopLimit.jsx";
 
 const tabs = [
   {
@@ -12,11 +16,29 @@ const tabs = [
   },
   {
     title: "Limit",
-    component: () => <div className="marketdata-chart">limit</div>,
+    component: BuySellActionLimit,
   },
   {
     title: "Stop Limit",
-    component: () => <div className="marketdata-chart">stop limit</div>,
+    component: BuySellActionStopLimit,
+  },
+];
+
+const commissiontable = [
+  {
+    level: "100.000",
+    maker: "0.0025",
+    taker: "0.0035"
+  },
+  {
+    level: "1.000.000",
+    maker: "0.0015",
+    taker: "0.0035"
+  },
+  {
+    level: "5.000.000",
+    maker: "0.0010",
+    taker: "0.0025"
   },
 ];
 
@@ -50,18 +72,59 @@ const BuySellAction = props => {
           <div className="buysellaction-head-col cominfo">
             <h6>İşlem Komisyonu</h6>
             <p>Piyasa Yapıcı 0.25% - Piyasa Alıcı 0.35%</p>
-            <IconSet
-              sprite="sprtsmclrd"
-              size="16"
-              name="info infoiconbox"
-              data-toggle="popover"
-              data-trigger="focus"
-              tabIndex="0"
-              data-container="body"
-              data-html="true"
-              data-placement="bottom"
-              data-content="<div class='tooltipbox'><div class='tooltipbox-head'><div class='tooltipbox-head-col'>VIP UCRET</div><div class='tooltipbox-head-col'>DESTEK 0850 255 1079</div></div><div class='tooltipbox-body'><div class='sitetablediv commissiontable'><div class='tbl-thead'><div class='tbl-tr'><div class='tbl-th aut txt'>TRY Hacim /<br />30 Gün</div><div class='tbl-th fxd mkr'>Piyasa Yapıcı Emirler<br/>[MAKER]</div><div class='tbl-th aut spc'></div><div class='tbl-th fxd tkr'>Piyasa Alıcı Emirler<br/>[TAKER]</div></div></div><div class='tbl-tbody tbl-brdrbtm'><div class='tbl-tr'><div class='tbl-td aut txt'>100.000</div><div class='tbl-td fxd mkr'>0.0025</div><div class='tbl-td aut spc'></div><div class='tbl-td fxd tkr'>0.0035</div></div><div class='tbl-tr'><div class='tbl-td aut txt'>1.000.000</div><div class='tbl-td fxd mkr'>0.0015</div><div class='tbl-td aut spc'></div><div class='tbl-td fxd tkr'>0.0030</div></div><div class='tbl-tr'><div class='tbl-td aut txt'>5.000.000</div><div class='tbl-td fxd mkr'>0.0010</div><div class='tbl-td aut spc'></div><div class='tbl-td fxd tkr'>0.0025</div></div></div></div></div></div>"
-            />
+            <Button id="buysellactionPopover" className="popoverbtn">
+              <IconSet
+                  sprite="sprtsmclrd"
+                  size="16"
+                  name="info infoiconbox"
+              />
+            </Button>
+            <UncontrolledPopover trigger="focus" placement="bottom" target="buysellactionPopover">
+              <PopoverBody className="tooltipbox">
+                <div className="tooltipbox-head">
+                  <div className="tooltipbox-head-col">VIP UCRET</div>
+                  <div className="tooltipbox-head-col">DESTEK 0850 255 1079</div>
+                </div>
+                <div className="tooltipbox-body">
+                  <Table className="commissiontable">
+                    <Table.Thead>
+                      <Table.Tr>
+                        <Table.Th sizeauto className="txt">
+                          TRY Hacim /<br/>30 Gün
+                        </Table.Th>
+                        <Table.Th sizefixed className="mkr">
+                          Piyasa Yapıcı Emirler<br/>[MAKER]
+                        </Table.Th>
+                        <Table.Th sizeauto className="spc" />
+                        <Table.Th sizefixed className="tkr">
+                          Piyasa Alıcı Emirler<br/>[TAKER]
+                        </Table.Th>
+                      </Table.Tr>
+                    </Table.Thead>
+                    <Table.Tbody borderbottom>
+
+                      {commissiontable.map(({ level, maker, taker }) => {
+                        return (
+                            <Table.Tr key={level}>
+                              <Table.Td sizeauto className="txt">
+                                {level}
+                              </Table.Td>
+                              <Table.Td sizefixed className="mkr">
+                                {maker}
+                              </Table.Td>
+                              <Table.Td sizeauto className="spc" />
+                              <Table.Td sizefixed className="tkr">
+                                {taker}
+                              </Table.Td>
+                            </Table.Tr>
+                        );
+                      })}
+
+                    </Table.Tbody>
+                  </Table>
+                </div>
+              </PopoverBody>
+            </UncontrolledPopover>
           </div>
         </div>
         <TabContent className="sitetabs" activeTab={activeTab}>

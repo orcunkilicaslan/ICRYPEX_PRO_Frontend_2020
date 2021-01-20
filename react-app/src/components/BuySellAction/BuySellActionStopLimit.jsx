@@ -15,17 +15,19 @@ import {
 import { IconSet } from "../IconSet.jsx";
 import { Button } from "../Button.jsx";
 
-const BuySellActionMarket = props => {
+const BuySellActionStopLimit = props => {
 
   const [selectedBuyPrice, setSelectedBuyPrice] = useState("");
+  const [selectedBuyLimit, setSelectedBuyLimit] = useState("");
   const [selectedBuyAmount, setSelectedBuyAmount] = useState("");
   const [rangeBuyPortfolio, setRangeBuyPortfolio] = useState("");
   const [selectedSellPrice, setSelectedSellPrice] = useState("");
+  const [selectedSellLimit, setSelectedSellLimit] = useState("");
   const [selectedSellAmount, setSelectedSellAmount] = useState("");
   const [rangeSellPortfolio, setRangeSellPortfolio] = useState("");
 
   return (
-    <div className="buysellaction-market">
+    <div className="buysellaction-stoplimit">
       <Row className="buysellaction-formarea">
         <Col className="buycol">
           <Form
@@ -66,6 +68,28 @@ const BuySellActionMarket = props => {
               <FormGroup>
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">
+                    <InputGroupText>Limit</InputGroupText>
+                  </InputGroupAddon>
+                  <Input type="text" />
+                  <InputGroupAddon addonType="append">
+                    <Input
+                        className="custom-select"
+                        type="select"
+                        value={selectedBuyLimit}
+                        onChange={({ target }) => {
+                          setSelectedBuyLimit(target.value);
+                        }}
+                    >
+                      {["TRY", "USD"].map((el, idx) => {
+                        return <option key={`${el}_${idx}`}>{el}</option>;
+                      })}
+                    </Input>
+                  </InputGroupAddon>
+                </InputGroup>
+              </FormGroup>
+              <FormGroup>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">
                     <InputGroupText>Miktar</InputGroupText>
                   </InputGroupAddon>
                   <Input />
@@ -94,8 +118,8 @@ const BuySellActionMarket = props => {
                 <Col>
                   <div className="rangeprogress">
                     <Progress
-                      className="rangeprogress-progress"
-                      value={rangeBuyPortfolio}
+                        className="rangeprogress-progress"
+                        value={rangeBuyPortfolio}
                     />
                   </div>
                   <div className="rangeprogress-circle d-none" data-val={rangeBuyPortfolio}>
@@ -106,15 +130,15 @@ const BuySellActionMarket = props => {
                   </div>
                   <output className="rangeprogress-bubble"></output>
                   <Input
-                    className="rangeprogress-range custom-range"
-                    type="range"
-                    min={100 / 4}
-                    max={100}
-                    step={100 / 4}
-                    value={rangeBuyPortfolio}
-                    onChange={({ target }) => {
-                      setRangeBuyPortfolio(target.value);
-                    }}
+                      className="rangeprogress-range custom-range"
+                      type="range"
+                      min={100 / 4}
+                      max={100}
+                      step={100 / 4}
+                      value={rangeBuyPortfolio}
+                      onChange={({ target }) => {
+                        setRangeBuyPortfolio(target.value);
+                      }}
                   />
                 </Col>
               </Row>
@@ -161,6 +185,28 @@ const BuySellActionMarket = props => {
                         value={selectedSellPrice}
                         onChange={({ target }) => {
                           setSelectedSellPrice(target.value);
+                        }}
+                    >
+                      {["TRY", "USD"].map((el, idx) => {
+                        return <option key={`${el}_${idx}`}>{el}</option>;
+                      })}
+                    </Input>
+                  </InputGroupAddon>
+                </InputGroup>
+              </FormGroup>
+              <FormGroup>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>Limit</InputGroupText>
+                  </InputGroupAddon>
+                  <Input type="text" />
+                  <InputGroupAddon addonType="append">
+                    <Input
+                        className="custom-select"
+                        type="select"
+                        value={selectedSellLimit}
+                        onChange={({ target }) => {
+                          setSelectedSellLimit(target.value);
                         }}
                     >
                       {["TRY", "USD"].map((el, idx) => {
@@ -246,4 +292,4 @@ const BuySellActionMarket = props => {
   );
 };
 
-export default BuySellActionMarket;
+export default BuySellActionStopLimit;
