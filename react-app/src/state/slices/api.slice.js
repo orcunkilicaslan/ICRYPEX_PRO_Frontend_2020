@@ -118,7 +118,9 @@ const apiSlice = createSlice({
       state.settingno = payload;
     },
     reset: state => {
-      state = initialState;
+      for (const [key, value] of Object.entries(initialState)) {
+        state[key] = value;
+      }
     },
   },
   extraReducers: {

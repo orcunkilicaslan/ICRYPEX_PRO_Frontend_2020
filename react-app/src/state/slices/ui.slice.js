@@ -27,7 +27,9 @@ const uiSlice = createSlice({
       state.errors.push({ type, message });
     },
     reset: state => {
-      state = initialState;
+      for (const [key, value] of Object.entries(initialState)) {
+        state[key] = value;
+      }
     },
   },
 });

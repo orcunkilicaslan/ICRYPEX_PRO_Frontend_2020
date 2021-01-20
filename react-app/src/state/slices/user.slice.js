@@ -81,7 +81,9 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     reset: state => {
-      state = initialState;
+      for (const [key, value] of Object.entries(initialState)) {
+        state[key] = value;
+      }
     },
   },
   extraReducers: {
