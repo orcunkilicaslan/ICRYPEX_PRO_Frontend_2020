@@ -14,7 +14,7 @@ const api = create({
   baseURL,
   headers: {
     Accept: "application/json",
-    "Content-Type": "application/x-www-form-urlencoded",
+    "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
   },
 });
 

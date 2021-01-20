@@ -147,6 +147,13 @@ const apiSlice = createSlice({
   },
 });
 
-export const { setDeviceId, setLocalKey, reset } = apiSlice.actions;
+export const {
+  setDeviceId,
+  setLocalKey,
+  setMediumId,
+  setVersionNo,
+  setSettingNo,
+  reset,
+} = apiSlice.actions;
 
 export default apiSlice.reducer;
