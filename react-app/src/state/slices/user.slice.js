@@ -5,7 +5,7 @@ import api from "../api";
 
 export const signupUser = createAsyncThunk(
   "user/signup",
-  async (userDetails, { getState }) => {
+  async (userDetails, { getState, rejectWithValue }) => {
     const {
       api: { prelogintoken, mediumid },
     } = getState();
@@ -20,13 +20,14 @@ export const signupUser = createAsyncThunk(
       }
     );
 
-    return response.data;
+    if (response.data.status) return response.data;
+    else return rejectWithValue(response.data);
   }
 );
 
 export const signinUser = createAsyncThunk(
   "user/signin",
-  async ({ email, password }, { getState }) => {
+  async ({ email, password }, { getState, rejectWithValue }) => {
     const {
       user,
       api: { prelogintoken },
@@ -40,13 +41,14 @@ export const signinUser = createAsyncThunk(
       },
     });
 
-    return response.data;
+    if (response.data.status) return response.data;
+    else return rejectWithValue(response.data);
   }
 );
 
 export const fetchUserInfo = createAsyncThunk(
   "user/info",
-  async (_, { getState }) => {
+  async (_, { getState, rejectWithValue }) => {
     const {
       api: { accesstoken },
     } = getState();
@@ -61,7 +63,8 @@ export const fetchUserInfo = createAsyncThunk(
       }
     );
 
-    return response.data;
+    if (response.data.status) return response.data;
+    else return rejectWithValue(response.data);
   }
 );
 

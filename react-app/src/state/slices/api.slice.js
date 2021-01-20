@@ -5,7 +5,7 @@ import api from "../api";
 
 export const fetchServerDeviceKey = createAsyncThunk(
   "api/serverdevicekey",
-  async (_, { getState }) => {
+  async (_, { getState, rejectWithValue }) => {
     const {
       api: { localkey, deviceuuid },
     } = getState();
@@ -15,13 +15,14 @@ export const fetchServerDeviceKey = createAsyncThunk(
       stringify({ localkey, deviceuuid })
     );
 
-    return response.data;
+    if (response.data.status) return response.data;
+    else return rejectWithValue(response.data);
   }
 );
 
 export const fetchPreloginToken = createAsyncThunk(
   "api/prelogintoken",
-  async (_, { getState }) => {
+  async (_, { getState, rejectWithValue }) => {
     const {
       api: { localkey, serverdevicekey },
     } = getState();
@@ -31,13 +32,14 @@ export const fetchPreloginToken = createAsyncThunk(
       stringify({ localkey, serverdevicekey })
     );
 
-    return response.data;
+    if (response.data.status) return response.data;
+    else return rejectWithValue(response.data);
   }
 );
 
 export const fetchSettings = createAsyncThunk(
   "api/settings",
-  async (_, { getState }) => {
+  async (_, { getState, rejectWithValue }) => {
     const {
       api: { mediumid, versionno, settingno, prelogintoken },
     } = getState();
@@ -52,13 +54,14 @@ export const fetchSettings = createAsyncThunk(
       }
     );
 
-    return response.data;
+    if (response.data.status) return response.data;
+    else return rejectWithValue(response.data);
   }
 );
 
 export const signinWithSms = createAsyncThunk(
   "api/signinwithsms",
-  async (secret, { getState }) => {
+  async (secret, { getState, rejectWithValue }) => {
     const {
       user: { customerid },
       api: { prelogintoken },
@@ -74,19 +77,20 @@ export const signinWithSms = createAsyncThunk(
       }
     );
 
-    return response.data;
+    if (response.data.status) return response.data;
+    else return rejectWithValue(response.data);
   }
 );
 
 const initialState = {
-    prelogintoken: null,
-    accesstoken: null,
-    serverdevicekey: null,
-    localkey: null,
-    deviceuuid: null,
-    mediumid: 1,
-    versionno: "1.0.0",
-    settingno: 9,
+  prelogintoken: null,
+  accesstoken: null,
+  serverdevicekey: null,
+  localkey: null,
+  deviceuuid: null,
+  mediumid: 1,
+  versionno: "1.0.0",
+  settingno: 9,
   settings: {},
 };
 
@@ -106,7 +110,7 @@ const apiSlice = createSlice({
     },
     setMediumId: (state, { payload }) => {
       state.mediumid = payload;
-  },
+    },
     setVersionNo: (state, { payload }) => {
       state.versionno = payload;
     },

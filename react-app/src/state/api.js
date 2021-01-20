@@ -50,8 +50,7 @@ api.addAsyncResponseTransform(async response => {
     );
 
     // store.dispatch(pushError({ type: data.type, message: data.errormessage }));
-
-    return Promise.reject(response);
+    return response;
   } else {
     // http response !2xx
     // const { originalRequest } = config;
