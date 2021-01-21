@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { stringify } from "querystring";
 
-import api from "../api";
+import * as api from "../api";
 
 export const fetchServerDeviceKey = createAsyncThunk(
   "api/serverdevicekey",
@@ -10,10 +9,7 @@ export const fetchServerDeviceKey = createAsyncThunk(
       api: { localkey, deviceuuid },
     } = getState();
 
-    const response = await api.post(
-      "/getserverdevicekey",
-      stringify({ localkey, deviceuuid })
-    );
+    const response = await api.fetchServerDeviceKey({ localkey, deviceuuid });
 
     if (response.data.status) return response.data;
     else return rejectWithValue(response.data);
@@ -27,10 +23,10 @@ export const fetchPreloginToken = createAsyncThunk(
       api: { localkey, serverdevicekey },
     } = getState();
 
-    const response = await api.post(
-      "/getprelogintoken",
-      stringify({ localkey, serverdevicekey })
-    );
+    const response = await api.fetchPreloginToken({
+      localkey,
+      serverdevicekey,
+    });
 
     if (response.data.status) return response.data;
     else return rejectWithValue(response.data);
@@ -44,9 +40,8 @@ export const fetchSettings = createAsyncThunk(
       api: { mediumid, versionno, settingno, prelogintoken },
     } = getState();
 
-    const response = await api.post(
-      "/settings",
-      stringify({ mediumid, versionno, settingno }),
+    const response = await api.fetchSettings(
+      { mediumid, versionno, settingno },
       {
         headers: {
           "x-access-token": prelogintoken,
@@ -67,9 +62,8 @@ export const signinWithSms = createAsyncThunk(
       api: { prelogintoken },
     } = getState();
 
-    const response = await api.post(
-      "/signinwithsms",
-      stringify({ customerid, secret }),
+    const response = await api.signinWithSms(
+      { customerid, secret },
       {
         headers: {
           "x-access-token": prelogintoken,

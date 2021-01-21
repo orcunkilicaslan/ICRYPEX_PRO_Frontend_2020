@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { stringify } from "querystring";
 
-import api from "../api";
+import * as api from "../api";
 
 export const signupUser = createAsyncThunk(
   "user/signup",
@@ -10,9 +9,8 @@ export const signupUser = createAsyncThunk(
       api: { prelogintoken, mediumid },
     } = getState();
 
-    const response = await api.post(
-      "/signup",
-      stringify({ mediumid, ...userDetails }),
+    const response = await api.signupUser(
+      { mediumid, ...userDetails },
       {
         headers: {
           "x-access-token": prelogintoken,
@@ -35,11 +33,14 @@ export const signinUser = createAsyncThunk(
 
     if (!email) email = user.email;
 
-    const response = await api.post("/signin", stringify({ email, password }), {
-      headers: {
-        "x-access-token": prelogintoken,
-      },
-    });
+    const response = await api.signinUser(
+      { email, password },
+      {
+        headers: {
+          "x-access-token": prelogintoken,
+        },
+      }
+    );
 
     if (response.data.status) return response.data;
     else return rejectWithValue(response.data);
@@ -53,8 +54,7 @@ export const fetchUserInfo = createAsyncThunk(
       api: { accesstoken },
     } = getState();
 
-    const response = await api.post(
-      "/userinfo",
+    const response = await api.fetchUserInfo(
       {},
       {
         headers: {

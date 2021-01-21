@@ -1,7 +1,6 @@
 import { create } from "apisauce";
 
-import { store } from ".";
-// import { pushError } from "./slices/ui.slice";
+import { store } from "..";
 
 let baseURL;
 if (process.env.NODE_ENV === "production") {
@@ -10,7 +9,7 @@ if (process.env.NODE_ENV === "production") {
   baseURL = null;
 }
 
-const api = create({
+const instance = create({
   baseURL,
   headers: {
     Accept: "application/json",
@@ -18,7 +17,7 @@ const api = create({
   },
 });
 
-api.addAsyncRequestTransform(request => async () => {
+instance.addAsyncRequestTransform(request => async () => {
   const { method, url, headers } = request;
   console.log("req: %s | %s | %O", method, url, request);
   const { ui } = store.getState();
@@ -26,7 +25,7 @@ api.addAsyncRequestTransform(request => async () => {
   headers["x-culture-code"] = ui.lang || "tr";
 });
 
-api.addAsyncResponseTransform(async response => {
+instance.addAsyncResponseTransform(async response => {
   const { ok, status, config, data } = response;
   console.log(
     "res: %s | %s | %s %O",
@@ -49,7 +48,6 @@ api.addAsyncResponseTransform(async response => {
       data.errormessage
     );
 
-    // store.dispatch(pushError({ type: data.type, message: data.errormessage }));
     return response;
   } else {
     // http response !2xx
@@ -66,4 +64,5 @@ api.addAsyncResponseTransform(async response => {
   }
 });
 
-export default api;
+export * from "./requests";
+export default instance;
