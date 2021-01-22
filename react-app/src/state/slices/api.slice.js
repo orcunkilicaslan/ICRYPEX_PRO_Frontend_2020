@@ -76,6 +76,27 @@ export const signinWithSms = createAsyncThunk(
   }
 );
 
+export const refreshToken = createAsyncThunk(
+  "api/refreshtoken",
+  async (_, { getState, rejectWithValue }) => {
+    const {
+      api: { prelogintoken, accesstoken },
+    } = getState();
+
+    const response = await api.refreshToken(
+      { accesstoken },
+      {
+        headers: {
+          "x-access-token": prelogintoken,
+        },
+      }
+    );
+
+    if (response.data.status) return response.data;
+    else return rejectWithValue(response.data);
+  }
+);
+
 const initialState = {
   prelogintoken: null,
   accesstoken: null,
@@ -134,6 +155,11 @@ const apiSlice = createSlice({
       state.settings = description?.settings;
     },
     [signinWithSms.fulfilled]: (state, { payload }) => {
+      const { description } = payload;
+
+      state.accesstoken = description;
+    },
+    [refreshToken.fulfilled]: (state, { payload }) => {
       const { description } = payload;
 
       state.accesstoken = description;
