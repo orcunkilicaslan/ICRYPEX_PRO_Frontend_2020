@@ -26,7 +26,7 @@ instance.addAsyncRequestTransform(request => async () => {
 });
 
 instance.addAsyncResponseTransform(async response => {
-  const { ok, status, config, data } = response;
+  const { ok, status, config, data, problem } = response;
   console.log(
     "res: %s | %s | %s %O",
     config.method,
@@ -35,11 +35,9 @@ instance.addAsyncResponseTransform(async response => {
     response
   );
 
-  if (ok && data.status) {
-    // http response 2xx && api status 1
-    return response;
-  } else if (ok && !data.status) {
-    // http response 2xx && api status 0
+  if (ok) {
+    if (data.status) return response;
+
     console.error(
       "%s | %s | %s %s",
       config.method,
@@ -48,19 +46,23 @@ instance.addAsyncResponseTransform(async response => {
       data.errormessage
     );
 
-    return response;
+    switch (data.type) {
+      case "prelogintoken":
+      case "accesstoken":
+      default:
+        return Promise.reject(response);
+    }
   } else {
-    // http response !2xx
-    // const { originalRequest } = config;
-
-    // if (status === 403 && !originalRequest._retry) {
-    //   originalRequest._retry = true;
-    //   const access_token = await refreshAccessToken();
-    //   axios.defaults.headers.common["Authorization"] = "Bearer " + access_token;
-    //   return axiosApiInstance(originalRequest);
-    // }
-
-    return Promise.reject(response);
+    switch (problem) {
+      case "CLIENT_ERROR":
+      case "SERVER_ERROR":
+      case "TIMEOUT_ERROR":
+      case "CONNECTION_ERROR":
+      case "NETWORK_ERROR":
+      case "CANCEL_ERROR":
+      default:
+        return Promise.reject(response);
+    }
   }
 });
 

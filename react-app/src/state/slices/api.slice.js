@@ -9,10 +9,13 @@ export const fetchServerDeviceKey = createAsyncThunk(
       api: { localkey, deviceuuid },
     } = getState();
 
-    const response = await api.fetchServerDeviceKey({ localkey, deviceuuid });
+    try {
+      const response = await api.fetchServerDeviceKey({ localkey, deviceuuid });
 
-    if (response.data.status) return response.data;
-    else return rejectWithValue(response.data);
+      return response.data;
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
   }
 );
 
@@ -23,13 +26,16 @@ export const fetchPreloginToken = createAsyncThunk(
       api: { localkey, serverdevicekey },
     } = getState();
 
-    const response = await api.fetchPreloginToken({
-      localkey,
-      serverdevicekey,
-    });
+    try {
+      const response = await api.fetchPreloginToken({
+        localkey,
+        serverdevicekey,
+      });
 
-    if (response.data.status) return response.data;
-    else return rejectWithValue(response.data);
+      return response.data;
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
   }
 );
 
@@ -40,17 +46,20 @@ export const fetchSettings = createAsyncThunk(
       api: { mediumid, versionno, settingno, prelogintoken },
     } = getState();
 
-    const response = await api.fetchSettings(
-      { mediumid, versionno, settingno },
-      {
-        headers: {
-          "x-access-token": prelogintoken,
-        },
-      }
-    );
+    try {
+      const response = await api.fetchSettings(
+        { mediumid, versionno, settingno },
+        {
+          headers: {
+            "x-access-token": prelogintoken,
+          },
+        }
+      );
 
-    if (response.data.status) return response.data;
-    else return rejectWithValue(response.data);
+      return response.data;
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
   }
 );
 
@@ -62,17 +71,20 @@ export const signinWithSms = createAsyncThunk(
       api: { prelogintoken },
     } = getState();
 
-    const response = await api.signinWithSms(
-      { customerid, secret },
-      {
-        headers: {
-          "x-access-token": prelogintoken,
-        },
-      }
-    );
+    try {
+      const response = await api.signinWithSms(
+        { customerid, secret },
+        {
+          headers: {
+            "x-access-token": prelogintoken,
+          },
+        }
+      );
 
-    if (response.data.status) return response.data;
-    else return rejectWithValue(response.data);
+      return response.data;
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
   }
 );
 
@@ -83,17 +95,20 @@ export const refreshToken = createAsyncThunk(
       api: { prelogintoken, accesstoken },
     } = getState();
 
-    const response = await api.refreshToken(
-      { accesstoken },
-      {
-        headers: {
-          "x-access-token": prelogintoken,
-        },
-      }
-    );
+    try {
+      const response = await api.refreshToken(
+        { accesstoken },
+        {
+          headers: {
+            "x-access-token": prelogintoken,
+          },
+        }
+      );
 
-    if (response.data.status) return response.data;
-    else return rejectWithValue(response.data);
+      return response.data;
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
   }
 );
 
@@ -145,6 +160,7 @@ const apiSlice = createSlice({
       state.serverdevicekey = description;
     },
     [fetchPreloginToken.fulfilled]: (state, action) => {
+      console.log("action", action);
       const { description } = action.payload;
 
       state.prelogintoken = description;

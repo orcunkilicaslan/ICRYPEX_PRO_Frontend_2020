@@ -9,17 +9,20 @@ export const signupUser = createAsyncThunk(
       api: { prelogintoken, mediumid },
     } = getState();
 
-    const response = await api.signupUser(
-      { mediumid, ...userDetails },
-      {
-        headers: {
-          "x-access-token": prelogintoken,
-        },
-      }
-    );
+    try {
+      const response = await api.signupUser(
+        { mediumid, ...userDetails },
+        {
+          headers: {
+            "x-access-token": prelogintoken,
+          },
+        }
+      );
 
-    if (response.data.status) return response.data;
-    else return rejectWithValue(response.data);
+      return response.data;
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
   }
 );
 
@@ -33,17 +36,20 @@ export const signinUser = createAsyncThunk(
 
     if (!email) email = user.email;
 
-    const response = await api.signinUser(
-      { email, password },
-      {
-        headers: {
-          "x-access-token": prelogintoken,
-        },
-      }
-    );
+    try {
+      const response = await api.signinUser(
+        { email, password },
+        {
+          headers: {
+            "x-access-token": prelogintoken,
+          },
+        }
+      );
 
-    if (response.data.status) return response.data;
-    else return rejectWithValue(response.data);
+      return response.data;
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
   }
 );
 
@@ -54,17 +60,20 @@ export const fetchUserInfo = createAsyncThunk(
       api: { accesstoken },
     } = getState();
 
-    const response = await api.fetchUserInfo(
-      {},
-      {
-        headers: {
-          "x-access-token": accesstoken,
-        },
-      }
-    );
+    try {
+      const response = await api.fetchUserInfo(
+        {},
+        {
+          headers: {
+            "x-access-token": accesstoken,
+          },
+        }
+      );
 
-    if (response.data.status) return response.data;
-    else return rejectWithValue(response.data);
+      return response.data;
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
   }
 );
 
