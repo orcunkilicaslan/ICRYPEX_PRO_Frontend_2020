@@ -1,4 +1,4 @@
-import "bootstrap/dist/js/bootstrap.bundle.js";
+// import "bootstrap/dist/js/bootstrap.bundle.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
