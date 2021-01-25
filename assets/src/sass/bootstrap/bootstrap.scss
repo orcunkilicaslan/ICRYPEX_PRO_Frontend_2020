@@ -1,9 +1,9 @@
 // Global Variables
-@import "../plugin/option/variables";
-@import "../plugin/option/variables_bootstrap";
+@import "../../../../react-app/src/styles/plugin/option/variables";
+@import "../../../../react-app/src/styles/plugin/option/variables_bootstrap";
 
 // Custom Bootstrap Variables
-@import "bootstrap/custom_variables";
+@import "../../../../react-app/src/styles/bootstrap/bootstrap/custom_variables";
 
 // Core Bootstrap
 @import "bootstrap/core_bootstrap";
