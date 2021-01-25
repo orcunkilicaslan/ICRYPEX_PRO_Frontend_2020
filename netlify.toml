@@ -1,0 +1,21 @@
+[build]
+base = "react-app/"
+command = "npm run build"
+publish = "build/"
+
+[context.production]
+# environment = { ACCESS_TOKEN = "super secret", NODE_VERSION = "14.15.3" }
+
+[[redirects]]
+from = "/*"
+status = 200
+to = "/index.html"
+
+[[headers]]
+for = "/*"
+[headers.values]
+Access-Control-Allow-Headers = "Origin, X-Requested-With, Content-Type, Accept"
+Access-Control-Allow-Methods = "POST"
+Access-Control-Allow-Origin = "*"
+Access-Control-Max-Age = "3600"
+Content-Type = "text/plain"
