@@ -160,7 +160,6 @@ const apiSlice = createSlice({
       state.serverdevicekey = description;
     },
     [fetchPreloginToken.fulfilled]: (state, action) => {
-      console.log("action", action);
       const { description } = action.payload;
 
       state.prelogintoken = description;

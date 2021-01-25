@@ -8,7 +8,7 @@ const TTL = "30 mins";
 
 export const fetchServerDeviceKey = buildRequest("/getserverdevicekey");
 export const fetchPreloginToken = buildRequest("/getprelogintoken");
-export const fetchSettings = buildCachedRequest("/settings");
+export const fetchSettings = buildRequest("/settings");
 export const signinWithSms = buildRequest("/signinwithsms");
 export const signupUser = buildRequest("/signup");
 export const signinUser = buildRequest("/signin");

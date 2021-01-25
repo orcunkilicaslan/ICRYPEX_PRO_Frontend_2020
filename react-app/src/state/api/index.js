@@ -3,8 +3,8 @@ import retry, { exponentialDelay } from "axios-retry";
 
 import { store } from "..";
 
-const isProd = process.env.NODE_ENV === "production"
-const API_BASE = process.env.REACT_APP_API_BASE
+const isProd = process.env.NODE_ENV === "production";
+const API_BASE = process.env.REACT_APP_API_BASE;
 const instance = create({
   baseURL: isProd ? API_BASE : null,
   headers: {
