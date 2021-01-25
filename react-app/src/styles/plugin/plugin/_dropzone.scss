@@ -1,5 +1,6 @@
 // Dropzone
-@import '../../../../../node_modules/dropzone/dist/dropzone';
+//@import '../../../../../node_modules/dropzone/dist/dropzone';
+@import '~dropzone/dist/dropzone';
 
 .dropzone{
   background-color: $bootstrap-input-bg;
