@@ -83,7 +83,7 @@
 
     &-control{
       &-label{
-        font-weight: $var-custom-font-weight-normal;
+        font-weight: $font-weight-normal;
 
         &::before{}
         &::before,
@@ -251,7 +251,7 @@
     }
 
     label{
-      font-weight: $var-custom-font-weight-normal;
+      font-weight: $font-weight-normal;
       margin: 0;
 
       &::before,

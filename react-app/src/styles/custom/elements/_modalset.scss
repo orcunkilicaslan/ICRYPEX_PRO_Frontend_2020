@@ -14,7 +14,7 @@
       height: 22px;
       display: block;
       font-size: 1.5rem;
-      font-weight: $var-custom-font-weight-normal;
+      font-weight: $font-weight-normal;
       padding: 0;
       margin: 0;
       opacity: 1;
@@ -44,7 +44,7 @@
       height: 22px;
       display: block;
       font-size: 1.5rem;
-      font-weight: $var-custom-font-weight-normal;
+      font-weight: $font-weight-normal;
       border: 1px solid $site-brdr-dark;
       padding: 0;
       margin: 0;
@@ -93,7 +93,7 @@
     h1,h2,h3,h4,h5,h6{
       color: $site-clr-white;
       @include responsive-font-size($var-custom-font-size-base);
-      font-weight: $var-custom-font-weight-normal;
+      font-weight: $font-weight-normal;
       margin: 0;
     }
 

@@ -670,15 +670,15 @@ $bootstrap-modal-scale-transform:                   $var-custom-modal-scale-tran
 /* Bootstrap Modals Settings */
 
 /* Bootstrap Alerts Settings */
-$bootstrap-alert-padding-y:                         .75rem;
-$bootstrap-alert-padding-x:                         1.25rem;
-$bootstrap-alert-margin-bottom:                     1rem;
-$bootstrap-alert-border-radius:                     $bootstrap-border-radius;
-$bootstrap-alert-link-font-weight:                  $bootstrap-font-weight-bold;
-$bootstrap-alert-border-width:                      $bootstrap-border-width;
-$bootstrap-alert-bg-level:                          -10;
-$bootstrap-alert-border-level:                      -9;
-$bootstrap-alert-color-level:                       6;
+$bootstrap-alert-padding-y:                         $var-custom-alert-padding-y;
+$bootstrap-alert-padding-x:                         $var-custom-alert-padding-x;
+$bootstrap-alert-margin-bottom:                     $var-custom-alert-margin-bottom;
+$bootstrap-alert-border-radius:                     $var-custom-alert-border-radius;
+$bootstrap-alert-link-font-weight:                  $var-custom-alert-link-font-weight;
+$bootstrap-alert-border-width:                      $var-custom-alert-border-width;
+$bootstrap-alert-bg-level:                          $var-custom-alert-bg-level;
+$bootstrap-alert-border-level:                      $var-custom-alert-border-level;
+$bootstrap-alert-color-level:                       $var-custom-alert-color-level;
 /* Bootstrap Alerts Settings */
 
 /* Bootstrap Progress Bars Settings */

@@ -156,3 +156,15 @@ $var-custom-modal-show-transform:                 none !important;
 $var-custom-modal-transition:                     transform .3s ease-out;
 $var-custom-modal-scale-transform:                scale(1.02);
 /* Site Modal Settings */
+
+/* Site Alert Settings */
+$var-custom-alert-padding-y:                      .5rem;
+$var-custom-alert-padding-x:                      .55rem; //1.25rem;
+$var-custom-alert-margin-bottom:                  1rem;
+$var-custom-alert-border-radius:                  $var-custom-border-radius-sm;
+$var-custom-alert-link-font-weight:               $var-custom-font-weight-bold;
+$var-custom-alert-border-width:                   $var-custom-border-width;
+$var-custom-alert-bg-level:                       -10;
+$var-custom-alert-border-level:                   5;
+$var-custom-alert-color-level:                    0;
+/* Site Alert Settings */

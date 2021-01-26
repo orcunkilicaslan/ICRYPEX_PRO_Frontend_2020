@@ -17,7 +17,9 @@ const   gulp                        = require('gulp'),
 
         folder_html_main            = './html/',
         folder_assets_main          = './assets/',
+        folder_assets_react         = './react-app/',
         folder_src_main             = folder_assets_main + 'src/',
+        folder_src_react            = folder_assets_react + 'src/',
         folder_dist_main            = folder_assets_main + 'dist/',
 
         folder_node_modules         = './node_modules/',
@@ -152,6 +154,12 @@ gulp.task('watch', () => {
         folder_src_main + 'sass/**/*.scss',
         folder_src_main + 'sass/**/*.sass',
         folder_src_main + 'sass/**/*.css',
+
+        folder_src_react + 'styles/plugin/**/*.scss',
+        folder_src_react + 'styles/plugin/**/*.sass',
+        folder_src_react + 'styles/custom/**/*.scss',
+        folder_src_react + 'styles/custom/**/*.sass',
+
         folder_src_main + 'script/**/*.js'
     ];
 
