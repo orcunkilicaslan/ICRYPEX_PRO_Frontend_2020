@@ -12,9 +12,12 @@
     "chartist": "^0.11.4",
     "classnames": "^2.2.6",
     "dropzone": "^5.7.2",
+    "event-target-polyfill": "0.0.2",
     "i18next": "^19.8.4",
     "keshi": "^2.0.4",
     "localforage": "^1.9.0",
+    "lodash": "^4.17.20",
+    "nanoid": "^3.1.20",
     "react": "^17.0.1",
     "react-chartist": "^0.14.3",
     "react-dom": "^17.0.1",
@@ -29,7 +32,8 @@
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
     "use-socketio": "^2.1.0",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "yet-another-abortcontroller-polyfill": "0.0.3"
   },
   "scripts": {
     "start": "craco start",
