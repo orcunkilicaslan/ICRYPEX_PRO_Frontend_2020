@@ -1,5 +1,3 @@
-// import { create } from "apisauce";
-// import retry, { exponentialDelay } from "axios-retry";
 import "yet-another-abortcontroller-polyfill";
 import "event-target-polyfill";
 import { fetch as _fetch } from "whatwg-fetch";
@@ -24,7 +22,7 @@ const instance = {
       body,
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        "Content-Type": "application/x-www-form-urlencoded",
         "x-culture-code": ui.lang || "tr",
       },
       credentials: "same-origin",
