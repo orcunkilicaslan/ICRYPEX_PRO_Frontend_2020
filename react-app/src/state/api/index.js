@@ -1,22 +1,19 @@
-import "yet-another-abortcontroller-polyfill";
-import "event-target-polyfill";
 import { fetch as _fetch } from "whatwg-fetch";
-import { nanoid } from "nanoid";
+import retry from "@doruk/fetch-retry";
 import merge from "lodash/merge";
 
 import { store } from "..";
+import { fetchPreloginToken } from "../slices/api.slice";
 
 const isProd = process.env.NODE_ENV === "production";
 const API_BASE = process.env.REACT_APP_API_BASE;
-const baseURL = isProd ? API_BASE : "";
-const fetch = "signal" in new Request("") ? window.fetch : _fetch;
-const AbortControllers = new Map();
+let baseURL = isProd ? API_BASE : "";
+const fetch = retry(_fetch);
 
 const instance = {
-  post: (uri, body, { headers }) => {
+  post: (uri, body, opts = {}) => {
     const { ui } = store.getState();
-    const controller = new AbortController();
-    const _id = nanoid();
+    const { headers } = opts;
     const options = {
       method: "POST",
       body,
@@ -25,62 +22,75 @@ const instance = {
         "Content-Type": "application/x-www-form-urlencoded",
         "x-culture-code": ui.lang || "tr",
       },
-      credentials: "same-origin",
-      signal: controller.signal,
+      credentials: "include",
+      retries: 5 * (isProd ? 10 : 1),
+      retryDelay: (attempt, error, response) => {
+        return Math.pow(2, attempt % 15) * 1000;
+      },
+      retryOn: async (attempt, error, response) => {
+        if (error !== null || response.status >= 400) return doRetry();
+
+        if (response.status === 200) {
+          const { data } = await getJSONData(response);
+
+          if (data?.status === 0) {
+            console.error(`${uri} | ${data.type} | ${data.errormessage}`);
+
+            switch (data.type) {
+              case "prelogintoken": {
+                const { payload } = await store.dispatch(fetchPreloginToken());
+
+                return doRetry({
+                  headers: { "x-access-token": payload?.description },
+                });
+              }
+              default:
+                return false;
+            }
+          }
+        }
+
+        return false;
+
+        function doRetry(value) {
+          console.warn(
+            `${response.status} | Retrying request to ${uri}. Attempt no ${
+              attempt + 1
+            }`,
+            response.data
+          );
+          return value || true;
+        }
+      },
     };
 
-    AbortControllers.set(_id, controller);
     merge(options.headers, headers);
 
-    const request = fetch(`${baseURL}${uri}`, options)
-      .then(async response => {
-        const { ok, status, statusText, url } = response;
-        console.log(`Response: ${url} | ${status}`, response);
+    return fetch(`${baseURL}${uri}`, options).then(async response => {
+      console.log(`${response.status} | ${uri} %O`, response.data);
 
-        if (ok) {
-          const data = await response.json();
-          if (data?.status) {
-            return { data };
-          } else {
-            const error = new Error(data.errormessage);
-            error.name = "INTERNAL";
-            error.type = data.type;
-            error.data = data;
-            error.response = response;
-            throw error;
-          }
-        } else {
-          const error = new Error(statusText);
-          error.response = response;
-          throw error;
-        }
-      })
-      .catch(error => {
-        if (error.name === "AbortError") {
-          console.warn(`Request ${_id} was aborted`);
-        }
+      const { data } = await getJSONData(response);
 
-        if (error.name === "INTERNAL") {
-          const { response, type, message } = error;
-          console.error(`${response.url} | ${type} | ${message}`);
-
-          switch (error.type) {
-            case "prelogintoken":
-            case "accesstoken":
-            default:
-              return Promise.reject(error);
-          }
-        }
-      });
-
-    request.id = _id;
-    return request;
+      if (data?.status) {
+        return Promise.resolve(response);
+      } else {
+        return Promise.reject(response);
+      }
+    });
   },
-  abort: id => {
-    const controller = AbortControllers.get(id);
-    if (controller) controller?.abort();
+  setBaseURL: url => {
+    baseURL = url;
+    return baseURL;
   },
 };
 
 export * from "./requests";
 export default instance;
+
+async function getJSONData(response) {
+  if (!response.bodyUsed) {
+    response.data = await response.json();
+  }
+
+  return response;
+}
