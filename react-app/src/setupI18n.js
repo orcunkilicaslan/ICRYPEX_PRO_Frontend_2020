@@ -20,6 +20,11 @@ const init = (initialLang = "en") => {
             volume: "Volume",
             excavating: "Excavating",
           },
+          alertResult: {
+            success: "SUCCESS",
+            warning: "WARNING!",
+            error: "ERROR!"
+          }
         },
         tr: {
           coinbar: {
@@ -33,6 +38,11 @@ const init = (initialLang = "en") => {
             volume: "Hacim",
             excavating: "Kazılacak",
           },
+          alertResult: {
+            success: "BAŞARILI",
+            warning: "UYARI!",
+            error: "HATA!"
+          }
         },
       },
       supportedLngs: SUPPORTED_LANGUAGES,

@@ -19,6 +19,7 @@ import { ReactComponent as SideDark } from "~/assets/images/header/header_theme_
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import { LanguageButtons } from "../LanguageButtons.jsx";
+import { AlertResult } from "../AlertResult.jsx";
 
 import {
   signupUser,
@@ -218,7 +219,7 @@ const HeaderRight = props => {
                   <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
                 </div>
                 {errorMessage && (
-                  <span style={{ color: "red" }}>{errorMessage}</span>
+                  <AlertResult error>{errorMessage}</AlertResult>
                 )}
                 {!isEnteringCode ? (
                   <div className="modalcomp-sign-form">
@@ -337,7 +338,7 @@ const HeaderRight = props => {
                   <IconSet sprite="sprtlgclrd" size="50gray" name="newuser" />
                 </div>
                 {errorMessage && (
-                  <span style={{ color: "red" }}>{errorMessage}</span>
+                    <AlertResult error>{errorMessage}</AlertResult>
                 )}
                 <div className="modalcomp-sign-form">
                   <Form className="siteformui" autoComplete="off" noValidate>
