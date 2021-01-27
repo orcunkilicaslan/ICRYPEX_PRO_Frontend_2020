@@ -4,6 +4,7 @@ import classnames from "classnames";
 
 import OpenOrderOrders from "./OpenOrderOrders.jsx";
 import OpenOrderTransactionHistory from "./OpenOrderTransactionHistory.jsx";
+import OpenOrderAssets from "./OpenOrderAssets.jsx";
 
 const tabs = [
   {
@@ -16,7 +17,7 @@ const tabs = [
   },
   {
     title: "Varlıklar",
-    component: () => <div>Varlıklar</div>,
+    component: OpenOrderAssets,
   },
   {
     title: "Yatır-Çek",
@@ -29,6 +30,7 @@ const tabs = [
 ];
 
 const OpenOrder = props => {
+
   const [activeTab, setActiveTab] = useState(tabs[0].title);
 
   const toggle = tab => {

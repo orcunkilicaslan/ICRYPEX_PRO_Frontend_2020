@@ -158,7 +158,11 @@
               width: 52px;
               text-align: center;
 
-              > a{margin: 2px 2px 0;}
+              > a, button{
+                margin: 0 2px;
+                padding: 0;
+                height: 18px;
+              }
             }
             .add[class*="tbl"]{}
             .ass[class*="tbl"]{width: 100px;}
@@ -167,7 +171,7 @@
               width: 145px;
               text-align: center;
 
-              > a{
+              > a, button{
                 width: 60px;
                 margin: 0 2px;
                 padding: 0;
