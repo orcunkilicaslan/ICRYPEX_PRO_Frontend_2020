@@ -36,7 +36,7 @@ const instance = {
           if (data?.status === 0) {
             console.error(`${uri} | ${data.type} | ${data.errormessage}`);
 
-            switch (data.type) {
+            switch (data?.type) {
               case "prelogintoken": {
                 const { payload } = await store.dispatch(fetchPreloginToken());
 
@@ -54,10 +54,10 @@ const instance = {
 
         function doRetry(value) {
           console.warn(
-            `${response.status} | Retrying request to ${uri}. Attempt no ${
+            `${response?.status} | Retrying request to ${uri}. Attempt no ${
               attempt + 1
             }`,
-            response.data
+            response?.data
           );
           return value || true;
         }
@@ -79,8 +79,7 @@ const instance = {
     });
   },
   setBaseURL: url => {
-    baseURL = url;
-    return baseURL;
+    return (baseURL = url);
   },
 };
 
