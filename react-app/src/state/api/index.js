@@ -1,9 +1,10 @@
 import { fetch as _fetch } from "whatwg-fetch";
 import retry from "@doruk/fetch-retry";
 import merge from "lodash/merge";
+import qs from "querystring";
 
 import { store } from "..";
-import { fetchPreloginToken } from "../slices/api.slice";
+import { fetchServerDeviceKey, fetchPreloginToken } from "../slices/api.slice";
 
 const isProd = process.env.NODE_ENV === "production";
 const API_BASE = process.env.REACT_APP_API_BASE;
@@ -42,6 +43,19 @@ const instance = {
 
                 return doRetry({
                   headers: { "x-access-token": payload?.description },
+                });
+              }
+              case "serverdevicekey": {
+                const data = qs.parse(body);
+                const { payload } = await store.dispatch(
+                  fetchServerDeviceKey()
+                );
+
+                return doRetry({
+                  body: qs.stringify({
+                    ...data,
+                    serverdevicekey: payload?.description,
+                  }),
                 });
               }
               default:
