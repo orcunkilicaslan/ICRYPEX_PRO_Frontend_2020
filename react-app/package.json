@@ -10,6 +10,7 @@
     "bootstrap": "4.5.2",
     "chartist": "^0.11.4",
     "classnames": "^2.2.6",
+    "date-fns": "^2.16.1",
     "dropzone": "^5.7.2",
     "event-target-polyfill": "0.0.2",
     "i18next": "^19.8.4",
