@@ -11,35 +11,15 @@
         @include flexbox-align-items(center);
         color: $site-clr-text-soft-sec;
         @include transition-multiple(all 0.15s ease-in-out);
+        padding: 0;
+        margin: 0;
 
         &:hover{
           color: $site-clr-white;
-
-          .printiconbox-icon{
-            fill: $site-clr-white;
-          }
-
-          .printiconbox-circle{
-            stroke: $site-clr-darkblue-400;
-            fill: $site-clr-darkblue-400;
-          }
         }
 
-        .printiconbox{
-          width: 18px;
+        i[class*="icon"]{
           margin-left: 5px;
-          cursor: pointer;
-
-          &-icon{
-            fill: $site-clr-darkblue-200;
-            @include transition-multiple(all 0.15s ease-in-out);
-          }
-
-          &-circle{
-            stroke: $site-clr-darkblue-400;
-            fill: transparent;
-            @include transition-multiple(all 0.15s ease-in-out);
-          }
         }
       }
     }
@@ -85,6 +65,7 @@
                 background-color: transparent;
                 padding: 0;
                 margin: 0 2px;
+                height: 16px;
               }
             }
           }

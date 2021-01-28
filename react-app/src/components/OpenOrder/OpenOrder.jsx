@@ -5,6 +5,7 @@ import classnames from "classnames";
 import OpenOrderOrders from "./OpenOrderOrders.jsx";
 import OpenOrderTransactionHistory from "./OpenOrderTransactionHistory.jsx";
 import OpenOrderAssets from "./OpenOrderAssets.jsx";
+import OpenOrderAccountActivities from "./OpenOrderAccountActivities.jsx";
 
 const tabs = [
   {
@@ -25,7 +26,7 @@ const tabs = [
   },
   {
     title: "Hesap Hareketleri",
-    component: () => <div>Hesap Hareketleri</div>,
+    component: OpenOrderAccountActivities,
   },
 ];
 
