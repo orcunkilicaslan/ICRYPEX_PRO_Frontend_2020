@@ -155,29 +155,19 @@ const apiSlice = createSlice({
   },
   extraReducers: {
     [fetchServerDeviceKey.fulfilled]: (state, action) => {
-      const { description } = action.payload;
-
-      state.serverdevicekey = description;
+      state.serverdevicekey = action?.payload?.description;
     },
     [fetchPreloginToken.fulfilled]: (state, action) => {
-      const { description } = action.payload;
-
-      state.prelogintoken = description;
+      state.prelogintoken = action?.payload?.description;
     },
-    [fetchSettings.fulfilled]: (state, { payload }) => {
-      const { description } = payload;
-
-      state.settings = description?.settings;
+    [fetchSettings.fulfilled]: (state, action) => {
+      state.settings = action?.payload?.description?.settings;
     },
-    [signinWithSms.fulfilled]: (state, { payload }) => {
-      const { description } = payload;
-
-      state.accesstoken = description;
+    [signinWithSms.fulfilled]: (state, action) => {
+      state.accesstoken = action?.payload?.description;
     },
-    [refreshToken.fulfilled]: (state, { payload }) => {
-      const { description } = payload;
-
-      state.accesstoken = description;
+    [refreshToken.fulfilled]: (state, action) => {
+      state.accesstoken = action?.payload?.description;
     },
   },
 });

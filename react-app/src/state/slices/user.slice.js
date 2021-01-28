@@ -97,17 +97,13 @@ const userSlice = createSlice({
   },
   extraReducers: {
     [signupUser.fulfilled]: (state, action) => {
-      const { description } = action.payload;
-
-      state.customerid = description?.customerid;
+      state.customerid = action?.payload?.description?.customerid;
     },
     [signinUser.fulfilled]: (state, action) => {
-      const { description } = action.payload;
-
-      state.customerid = description?.customerid;
+      state.customerid = action?.payload?.description?.customerid;
     },
     [fetchUserInfo.fulfilled]: (state, action) => {
-      const { description = {} } = action.payload;
+      const description = action?.payload?.description || {};
 
       for (const [key, value] of Object.entries(description)) {
         state[key] = value;
