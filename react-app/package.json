@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@binance/fingerprint": "^1.3.39",
-    "@doruk/fetch-retry": "^5.0.0",
+    "@doruk/fetch-retry": "^5.0.2",
     "@reduxjs/toolkit": "^1.5.0",
     "@skavinvarnan/cryptlib": "^1.0.3",
     "bootstrap": "4.5.2",

@@ -1164,10 +1164,10 @@
   resolved "https://registry.npmjs.org/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@doruk/fetch-retry@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.npmjs.org/@doruk/fetch-retry/-/fetch-retry-5.0.0.tgz#bc6dd5ec76e72bd433d073eaa11b6842bf7083fc"
-  integrity sha512-OzpqAScwRfU9G/JS266GV9BMQ/Ljmiz1MYAIQA8cHoUo4WTtMw5EhquV+tsSvGyvgM9PHp91XUOnVMniu8ouYA==
+"@doruk/fetch-retry@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.npmjs.org/@doruk/fetch-retry/-/fetch-retry-5.0.2.tgz#604e80ff1dd3bb3bd6c05d2111bf3f47829c70d6"
+  integrity sha512-gk9q8aTBcziiIaxc1Cw7egsxcmnCva3aLg55LBXQBZGHJ9l/wgtFH2t9R/2jt7fg3+RuwT/6a5pJWHGA6Z4byA==
   dependencies:
     lodash.merge "^4.6.2"
 
