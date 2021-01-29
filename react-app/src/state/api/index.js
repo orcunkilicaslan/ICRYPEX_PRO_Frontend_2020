@@ -7,8 +7,8 @@ import { store } from "..";
 import { fetchServerDeviceKey, fetchPreloginToken } from "../slices/api.slice";
 
 const isProd = process.env.NODE_ENV === "production";
-const API_BASE = process.env.REACT_APP_API_BASE;
-let baseURL = isProd ? API_BASE : "";
+// const API_BASE = process.env.REACT_APP_API_BASE;
+let baseURL = isProd ? "/api" : "";
 const fetch = retry(_fetch);
 
 const instance = {

@@ -11,10 +11,17 @@ from = "/*"
 status = 200
 to = "/index.html"
 
-[[headers]]
-for = "/*"
-[headers.values]
-Access-Control-Allow-Headers = "Origin, X-Requested-With, Content-Type, Accept, x-culture-code, x-access-token"
-Access-Control-Allow-Methods = "POST"
-Access-Control-Allow-Origin = "*"
-Access-Control-Max-Age = "3600"
+[[redirects]]
+  from = "/api/*"
+  to = "https://mobile.guvenlibtc.com:443/api/:splat"
+  status = 200
+  force = true
+  # headers = {X-From = "Netlify"}
+
+# [[headers]]
+# for = "/*"
+# [headers.values]
+# Access-Control-Allow-Headers = "Origin, X-Requested-With, Content-Type, Accept, x-culture-code, x-access-token"
+# Access-Control-Allow-Methods = "POST"
+# Access-Control-Allow-Origin = "*"
+# Access-Control-Max-Age = "3600"
