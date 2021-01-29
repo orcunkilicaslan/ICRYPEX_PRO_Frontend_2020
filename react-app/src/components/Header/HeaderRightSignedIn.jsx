@@ -100,7 +100,7 @@ const HeaderRightSignedIn = props => {
                     autoFocus={false}
                     backdrop="static"
                 >
-                    <ModalHeader toggle={signedUserModalToggle}>KAYIT OL</ModalHeader>
+                    <ModalHeader toggle={signedUserModalToggle}>{User.firstname} {String(User.lastname).toUpperCase()}</ModalHeader>
                     <ModalBody className="modalcomp modalcomp-usermenu">
 
                         <Button variant="secondary" className="modalcomp-usermenu-notif w-100">
