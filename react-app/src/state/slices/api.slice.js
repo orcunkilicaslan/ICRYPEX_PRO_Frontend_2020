@@ -174,6 +174,14 @@ const apiSlice = createSlice({
       state.accesstoken = null;
       state.prelogintoken = null;
     },
+    [signoutUser.rejected]: (state, action) => {
+      const message = action?.payload?.errormessage;
+
+      if (message.includes("expired")) {
+        state.accesstoken = null;
+        state.prelogintoken = null;
+      }
+    },
   },
 });
 
