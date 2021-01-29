@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { LanguageButtons } from "../LanguageButtons.jsx";
 import HeaderRightTheme from "./HeaderRightTheme.jsx";
 import HeaderRightIcons from "./HeaderRightIcons.jsx";
-// import HeaderRightSignedInNot from "./HeaderRightSignedInNot.jsx";
+import HeaderRightSignedInNot from "./HeaderRightSignedInNot.jsx";
 import HeaderRightSignedIn from "./HeaderRightSignedIn.jsx";
 import {
   signupUser,
