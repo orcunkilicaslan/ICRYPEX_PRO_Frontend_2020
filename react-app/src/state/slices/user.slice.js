@@ -2,6 +2,30 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as api from "../api";
 
+export const signoutUser = createAsyncThunk(
+  "user/signout",
+  async (_, { getState, rejectWithValue }) => {
+    const {
+      api: { accesstoken },
+    } = getState();
+
+    try {
+      const response = await api.signoutUser(
+        {},
+        {
+          headers: {
+            "x-access-token": accesstoken,
+          },
+        }
+      );
+
+      return response.data;
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
+  }
+);
+
 export const signupUser = createAsyncThunk(
   "user/signup",
   async (userDetails, { getState, rejectWithValue }) => {
@@ -101,6 +125,9 @@ const userSlice = createSlice({
     },
     [signinUser.fulfilled]: (state, action) => {
       state.customerid = action?.payload?.description?.customerid;
+    },
+    [signoutUser.fulfilled]: (state, action) => {
+      state.customerid = null;
     },
     [fetchUserInfo.fulfilled]: (state, action) => {
       const description = action?.payload?.description || {};

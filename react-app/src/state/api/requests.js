@@ -12,6 +12,7 @@ export const fetchSettings = buildRequest("/settings");
 export const signinWithSms = buildRequest("/signinwithsms");
 export const signupUser = buildRequest("/signup");
 export const signinUser = buildRequest("/signin");
+export const signoutUser = buildRequest("/signout");
 export const fetchUserInfo = buildCachedRequest("/userinfo");
 export const refreshToken = buildRequest("/refreshtoken");
 

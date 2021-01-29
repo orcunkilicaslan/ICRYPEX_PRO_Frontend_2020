@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as api from "../api";
+import { signoutUser } from "./user.slice";
 
 export const fetchServerDeviceKey = createAsyncThunk(
   "api/serverdevicekey",
@@ -168,6 +169,10 @@ const apiSlice = createSlice({
     },
     [refreshToken.fulfilled]: (state, action) => {
       state.accesstoken = action?.payload?.description;
+    },
+    [signoutUser.fulfilled]: state => {
+      state.accesstoken = null;
+      state.prelogintoken = null;
     },
   },
 });
