@@ -126,7 +126,7 @@ const userSlice = createSlice({
     [signinUser.fulfilled]: (state, action) => {
       state.customerid = action?.payload?.description?.customerid;
     },
-    [signoutUser.fulfilled]: (state, action) => {
+    [signoutUser.fulfilled]: state => {
       state.customerid = null;
     },
     [fetchUserInfo.fulfilled]: (state, action) => {
