@@ -7,16 +7,16 @@ publish = "build/"
 # environment = { ACCESS_TOKEN = "super secret", NODE_VERSION = "14.15.3" }
 
 [[redirects]]
-from = "/*"
-status = 200
-to = "/index.html"
-
-[[redirects]]
-from = "/api/"
-to = "https://mobile.guvenlibtc.com:443/api"
+from = "/api/*"
+to = "https://mobile.guvenlibtc.com:443/api/:splat"
 status = 200
 force = true
 # headers = {X-From = "Netlify"}
+
+[[redirects]]
+from = "/*"
+status = 200
+to = "/index.html"
 
 # [[headers]]
 # for = "/*"
