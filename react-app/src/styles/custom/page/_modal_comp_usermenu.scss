@@ -46,6 +46,7 @@
 
         a{
           color: $site-clr-text-soft-sec;
+          padding: 0;
           @include transition-multiple(color 0.3s ease-in-out);
 
           &:hover{
