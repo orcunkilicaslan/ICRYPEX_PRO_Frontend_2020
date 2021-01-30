@@ -41,10 +41,6 @@ const usermenulistaccount = [
     href: "#",
   },
   {
-    title: "Bildirim Seçenekleri",
-    href: "#",
-  },
-  {
     title: "Banka Hesap Bilgileri",
     href: "#",
   },

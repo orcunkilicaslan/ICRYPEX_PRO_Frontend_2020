@@ -1,14 +1,5 @@
 import { useState, useRef } from "react";
-import {
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  InputGroupAddon,
-  Modal,
-  ModalHeader,
-  ModalBody,
-} from "reactstrap";
+import { Form, FormGroup, Label, Input, InputGroupAddon, Modal, ModalHeader, ModalBody } from "reactstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 
 import { Button } from "../Button.jsx";
