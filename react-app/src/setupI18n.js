@@ -9,6 +9,14 @@ const init = (initialLang = "en") => {
       debug: process.env.NODE_ENV === "development",
       resources: {
         en: {
+          common: {
+            yes: "Yes",
+            no: "No",
+            cancel: "Cancel",
+            amount: "Amount",
+            pair: "Pair",
+            deleteAll: "Delete All"
+          },
           coinbar: {
             lastPrice: "Last Price",
             bestBuy: "Best Buy",
@@ -19,14 +27,25 @@ const init = (initialLang = "en") => {
             average24h: "Average 24h",
             volume: "Volume",
             excavating: "Excavating",
+            setAlarm: "SET ALARM",
+            createAlarm: "CREATE ALARM",
+            hidePairs: "Hide Other Pairs"
           },
           alertResult: {
             success: "SUCCESS",
             warning: "WARNING!",
-            error: "ERROR!"
-          }
+            error: "ERROR!",
+          },
         },
         tr: {
+          common: {
+            yes: "Evet",
+            no: "Hayır",
+            cancel: "İptal",
+            amount: "Miktar",
+            pair: "Çift",
+            deleteAll: "Tümünü Sil"
+          },
           coinbar: {
             lastPrice: "Son Fiyat",
             bestBuy: "En İyi Alış",
@@ -37,12 +56,15 @@ const init = (initialLang = "en") => {
             average24h: "24s Ortalama",
             volume: "Hacim",
             excavating: "Kazılacak",
+            setAlarm: "ALARM KUR",
+            createAlarm: "ALARM OLUŞTUR",
+            hidePairs: "Diğer Çiftleri Gizle"
           },
           alertResult: {
             success: "BAŞARILI",
             warning: "UYARI!",
-            error: "HATA!"
-          }
+            error: "HATA!",
+          },
         },
       },
       supportedLngs: SUPPORTED_LANGUAGES,
