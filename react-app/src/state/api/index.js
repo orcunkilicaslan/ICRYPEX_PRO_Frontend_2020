@@ -4,7 +4,11 @@ import merge from "lodash/merge";
 import qs from "querystring";
 
 import { store } from "..";
-import { fetchServerDeviceKey, fetchPreloginToken } from "../slices/api.slice";
+import {
+  fetchServerDeviceKey,
+  fetchPreloginToken,
+  refreshToken,
+} from "../slices/api.slice";
 
 const isProd = process.env.NODE_ENV === "production";
 // const API_BASE = process.env.REACT_APP_API_BASE;
@@ -56,6 +60,13 @@ const instance = {
                     ...data,
                     serverdevicekey: payload?.description,
                   }),
+                });
+              }
+              case "accesstoken": {
+                const { payload } = await store.dispatch(refreshToken());
+
+                return doRetry({
+                  headers: { "x-access-token": payload?.description },
                 });
               }
               default:
