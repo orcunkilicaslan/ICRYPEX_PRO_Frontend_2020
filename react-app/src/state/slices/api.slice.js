@@ -170,9 +170,11 @@ const apiSlice = createSlice({
     [refreshToken.fulfilled]: (state, action) => {
       state.accesstoken = action?.payload?.description;
     },
+    [refreshToken.rejected]: state => {
+      state.accesstoken = null;
+    },
     [signoutUser.fulfilled]: state => {
       state.accesstoken = null;
-      state.prelogintoken = null;
     },
     [signoutUser.rejected]: (state, action) => {
       const message = action?.payload?.errormessage;

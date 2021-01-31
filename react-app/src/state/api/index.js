@@ -65,6 +65,8 @@ const instance = {
               case "accesstoken": {
                 const { payload } = await store.dispatch(refreshToken());
 
+                if (!payload.status) return false;
+
                 return doRetry({
                   headers: { "x-access-token": payload?.description },
                 });
