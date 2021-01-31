@@ -1164,10 +1164,10 @@
   resolved "https://registry.npmjs.org/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@doruk/fetch-retry@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.npmjs.org/@doruk/fetch-retry/-/fetch-retry-5.0.2.tgz#604e80ff1dd3bb3bd6c05d2111bf3f47829c70d6"
-  integrity sha512-gk9q8aTBcziiIaxc1Cw7egsxcmnCva3aLg55LBXQBZGHJ9l/wgtFH2t9R/2jt7fg3+RuwT/6a5pJWHGA6Z4byA==
+"@doruk/fetch-retry@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.npmjs.org/@doruk/fetch-retry/-/fetch-retry-5.2.0.tgz#2813ed96f43e626415bae5bcc1abc4f5811f7856"
+  integrity sha512-YF9i1EaKXk0u/mD4hoJFvtowS8+D3AxHvJn1eiYewjvxm9SAkIwf7T62W9cvwOh+/bcWuOSbbXTe64mzzf8lMw==
   dependencies:
     lodash.merge "^4.6.2"
 
@@ -4307,9 +4307,9 @@ ejs@^2.6.1:
   integrity sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==
 
 electron-to-chromium@^1.3.564, electron-to-chromium@^1.3.634:
-  version "1.3.648"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.3.648.tgz#b05926eca1843c04b283e682a1fc6c10af7e9dda"
-  integrity sha512-4POzwyQ80tkDiBwkxn7IpfzioimrjRSFX1sCQ3pLZsYJ5ERYmwzdq0hZZ3nFP7Z6GtmnSn3xwWDm8FPlMeOoEQ==
+  version "1.3.649"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.3.649.tgz#3aa8be052d4d268ede45d8e98d0cd60ffefad607"
+  integrity sha512-ojGDupQ3UMkvPWcTICe4JYe17+o9OLiFMPoduoR72Zp2ILt1mRVeqnxBEd6s/ptekrnsFU+0A4lStfBe/wyG/A==
 
 elliptic@^6.5.3:
   version "6.5.3"
