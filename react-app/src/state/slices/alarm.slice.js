@@ -176,6 +176,6 @@ export default alarmSlice.reducer;
 function mdperize(array = []) {
   return array.map(elem => ({
     ...elem,
-    mdper: elem["pricealarmtypeid"] === 1 ? "up" : "down",
+    mdper: elem["price_alarm_type_id"] === 1 ? "up" : "down",
   }));
 }
