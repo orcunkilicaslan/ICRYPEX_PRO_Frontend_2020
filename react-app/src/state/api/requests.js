@@ -8,13 +8,18 @@ const TTL = "30 mins";
 
 export const fetchServerDeviceKey = buildRequest("/getserverdevicekey");
 export const fetchPreloginToken = buildRequest("/getprelogintoken");
-export const fetchSettings = buildRequest("/settings");
+export const fetchSettings = buildCachedRequest("/settings");
 export const signinWithSms = buildRequest("/signinwithsms");
 export const signupUser = buildRequest("/signup");
 export const signinUser = buildRequest("/signin");
 export const signoutUser = buildRequest("/signout");
 export const fetchUserInfo = buildCachedRequest("/userinfo");
 export const refreshToken = buildRequest("/refreshtoken");
+export const fetchPriceAlarms = buildRequest("/pricealarms");
+export const fetchPairPriceAlarms = buildRequest("/pairpricealarms");
+export const createPairPriceAlarm = buildRequest("/pairpricealarms/create");
+export const deletePairPriceAlarm = buildRequest("/pricealarms/delete");
+export const deletePairPriceAlarms = buildRequest("/pricealarms/deleteall");
 
 function buildRequest(uri) {
   return (args = {}, opts = {}) => {
