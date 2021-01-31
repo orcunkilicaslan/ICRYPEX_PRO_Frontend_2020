@@ -1,5 +1,5 @@
 // AOS
-@import '../../../../../node_modules/aos/dist/aos';
+@import '~aos/dist/aos';
 
 // Mobile Disabled
 @include BootstrapMaxWidthResponsive(lg){

@@ -1,3 +1,8 @@
+$path-assets-url:         "../../../react-app/src/assets" !global;
+$path-fonts-url:          "#{$path-assets-url}/fonts" !global;
+$path-img-url:            "#{$path-assets-url}/images" !global;
+$path-img-url-icons:      "#{$path-img-url}/icons" !global;
+
 // Option
 @import "../../../../react-app/src/styles/custom/option/option";
 

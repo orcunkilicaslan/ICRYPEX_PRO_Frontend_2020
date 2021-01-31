@@ -63,10 +63,10 @@ $site-clr-text-dark-sec:                #5C6582;
 
 /* Site Main Path Settings */
 $cache-busting:           #{'?v='}(unique_id());
-$path-assets-url:         "../../../assets";
-$path-fonts-url:          "../../../assets/fonts";
-$path-img-url:            "../../../assets/images";
-$path-img-url-icons:      "../../../assets/images/icons";
+$path-assets-url:         "../../../assets" !default;
+$path-fonts-url:          "#{$path-assets-url}/fonts" !default;
+$path-img-url:            "#{$path-assets-url}/images" !default;
+$path-img-url-icons:      "#{$path-img-url}/icons" !default;
 /* Site Main Path Settings */
 
 /* Site Main Class Settings */
