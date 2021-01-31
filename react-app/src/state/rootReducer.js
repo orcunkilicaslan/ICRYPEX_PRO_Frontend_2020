@@ -9,7 +9,7 @@ import userReducer from "./slices/user.slice";
 const apiPersistConfig = {
   key: "api",
   storage,
-  blacklist: ["prelogintoken", "serverdevicekey", "accesstoken"],
+  // blacklist: ["prelogintoken", "serverdevicekey", "accesstoken"],
 };
 
 const rootReducer = combineReducers({
