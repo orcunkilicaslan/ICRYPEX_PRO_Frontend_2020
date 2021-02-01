@@ -20,6 +20,7 @@ import {
 const MarketDataSymbol = props => {
   const dispatch = useDispatch();
   const favoritePairIDs = useSelector(state => state.pair.favorites);
+  const { accesstoken } = useSelector(state => state.api);
   const { prices: pricesData = [] } = useSelector(state => state.socket);
   const { t } = useTranslation(["finance", "common"]);
   const tabs = ["TRY", "USD", "USDT", t("common:all")];
@@ -27,8 +28,8 @@ const MarketDataSymbol = props => {
   useSocket("prices");
 
   useEffect(() => {
-    dispatch(fetchFavoritePairs());
-  }, [dispatch]);
+    if (accesstoken) dispatch(fetchFavoritePairs());
+  }, [dispatch, accesstoken]);
 
   const onAddFavorite = pairname => {
     dispatch(addFavoritePair(pairname));
