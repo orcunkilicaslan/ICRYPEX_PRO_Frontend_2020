@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import "./App.scss";
 import Header from "./components/Header/Header.jsx";
 import { Main } from "./components/Main/Main.jsx";
-// import { Footer } from "./components/Footer/Footer";
+import BuySell from "./pages/BuySell";
 import { useSocket } from "~/state/hooks/";
 
 const App = props => {
@@ -54,6 +54,9 @@ const App = props => {
       <Switch>
         <Route exact path="/">
           <Main />
+        </Route>
+        <Route exact path="/kolay">
+          <BuySell />
         </Route>
       </Switch>
     </Router>
