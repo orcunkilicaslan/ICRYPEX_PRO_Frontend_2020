@@ -15,7 +15,19 @@ const init = (initialLang = "en") => {
             cancel: "Cancel",
             amount: "Amount",
             pair: "Pair",
-            deleteAll: "Delete All"
+            deleteAll: "Delete All",
+            symbol: "Symbol",
+            detail: "Detail",
+            recentTransactions: "Recent Transactions",
+            graph: "Graph",
+            change: "Change",
+            volume: "Volume",
+            all: "All",
+            search: "Search",
+          },
+          finance: {
+            ask: "Ask",
+            bid: "Bid",
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -29,7 +41,7 @@ const init = (initialLang = "en") => {
             excavating: "Excavating",
             setAlarm: "SET ALARM",
             createAlarm: "CREATE ALARM",
-            hidePairs: "Hide Other Pairs"
+            hidePairs: "Hide Other Pairs",
           },
           alertResult: {
             success: "SUCCESS",
@@ -44,7 +56,19 @@ const init = (initialLang = "en") => {
             cancel: "İptal",
             amount: "Miktar",
             pair: "Çift",
-            deleteAll: "Tümünü Sil"
+            deleteAll: "Tümünü Sil",
+            symbol: "Sembol",
+            detail: "Detay",
+            recentTransactions: "Son İşlemler",
+            graph: "Grafik",
+            change: "Değişim",
+            volume: "Hacim",
+            all: "Tümü",
+            search: "Ara",
+          },
+          finance: {
+            ask: "Alış",
+            bid: "Satış",
           },
           coinbar: {
             lastPrice: "Son Fiyat",
@@ -58,7 +82,7 @@ const init = (initialLang = "en") => {
             excavating: "Kazılacak",
             setAlarm: "ALARM KUR",
             createAlarm: "ALARM OLUŞTUR",
-            hidePairs: "Diğer Çiftleri Gizle"
+            hidePairs: "Diğer Çiftleri Gizle",
           },
           alertResult: {
             success: "BAŞARILI",
