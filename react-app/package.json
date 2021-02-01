@@ -65,5 +65,9 @@
     "node-sass": "4.14.1",
     "react-scripts": "4.0.1"
   },
-  "proxy": "https://mobile.guvenlibtc.com:443/api"
+  "proxy": "https://mobile.guvenlibtc.com:443/api",
+  "resolutions": {
+    "socket.io-client": "2.4.0",
+    "socket.io-parser": "3.3.2"
+  }
 }
