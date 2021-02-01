@@ -26,6 +26,7 @@ import {
   deletePairPriceAlarm,
   deletePairPriceAlarms,
 } from "~/state/slices/alarm.slice";
+import {AlertResult} from "~/components/AlertResult";
 
 const STEP = 10;
 const MINIMUM = 0;
@@ -163,9 +164,6 @@ const CompCryptocoinbar = props => {
         <ModalHeader toggle={alarmModalToggle}>{t("setAlarm")}</ModalHeader>
         <ModalBody className="modalcomp modalcomp-setalarm">
           <div className="modalcomp-setalarm-data">
-            {errorMessage ? (
-              <span style={{ color: "red" }}>{errorMessage}</span>
-            ) : null}
             <div className="databigger">
               <PerLineIcon className="mdper mdper-up" />
               <span className="sitecolorgreen">999,999.99</span>
@@ -176,6 +174,9 @@ const CompCryptocoinbar = props => {
             </div>
           </div>
           <div className="modalcomp-setalarm-form">
+            {errorMessage ? (
+                <AlertResult error>{errorMessage}</AlertResult>
+            ) : null}
             <Form className="siteformui" autoComplete="off" noValidate>
               <div className="setalarmspinner">
                 <FormGroup className="input-group">
