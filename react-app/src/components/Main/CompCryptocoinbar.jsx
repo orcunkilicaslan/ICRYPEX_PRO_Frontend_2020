@@ -125,9 +125,9 @@ const CompCryptocoinbar = props => {
               </ul>
             </div>
           </div>
-          {accesstoken ? (
             <InputGroupAddon addonType="append">
               <InputGroupText className="alarmbtn">
+                {accesstoken ? (
                 <Button
                   size="sm"
                   className="iconbtn iconbtn-warning"
@@ -144,9 +144,9 @@ const CompCryptocoinbar = props => {
                     <span>{t("setAlarm")}</span>
                   </div>
                 </Button>
+                ) : null}
               </InputGroupText>
             </InputGroupAddon>
-          ) : null}
         </InputGroup>
       </div>
 
