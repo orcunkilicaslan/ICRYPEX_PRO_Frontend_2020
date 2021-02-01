@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ButtonGroup, Input } from "reactstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import classnames from "classnames";
 
@@ -11,13 +11,32 @@ import { ReactComponent as PerLineIcon } from "~/assets/images/icons/path_icon_p
 import { Button } from "../Button";
 import Table from "../Table.jsx";
 import { useSocket } from "~/state/hooks/";
+import {
+  fetchFavoritePairs,
+  addFavoritePair,
+  removeFavoritePair,
+} from "~/state/slices/pair.slice";
 
 const MarketDataSymbol = props => {
+  const dispatch = useDispatch();
+  const favoritePairIDs = useSelector(state => state.pair.favorites);
   const { prices: pricesData = [] } = useSelector(state => state.socket);
   const { t } = useTranslation(["finance", "common"]);
   const tabs = ["TRY", "USD", "USDT", t("common:all")];
   const [activeTab, setActiveTab] = useState(tabs[tabs.length - 1]);
   useSocket("prices");
+
+  useEffect(() => {
+    dispatch(fetchFavoritePairs());
+  }, [dispatch]);
+
+  const onAddFavorite = pairname => {
+    dispatch(addFavoritePair(pairname));
+  };
+
+  const onRemoveFavorite = pairname => {
+    dispatch(removeFavoritePair(pairname));
+  };
 
   return (
     <div className="marketdata-symbol">
@@ -79,21 +98,27 @@ const MarketDataSymbol = props => {
           <Table.Tbody scrollbar striped hovered>
             {pricesData.map((data = {}) => {
               const {
+                id,
                 name,
                 ask: buy,
                 bid: sell,
                 volume,
                 changepercent,
                 symbol,
-                isfavorite,
               } = data;
               const mdper = changepercent > 0 ? "up" : "down";
+              const isFavorite = favoritePairIDs.includes(id);
+
+              const onClick = () => {
+                if (isFavorite) onRemoveFavorite(name);
+                else onAddFavorite(name);
+              };
 
               return (
                 <Table.Tr key={symbol}>
                   <Table.Td sizeauto className="fav">
-                    <Button className="tablefavico">
-                      <MdTableFavIcon stroke={isfavorite ? "gold" : "none"} />
+                    <Button className="tablefavico" onClick={onClick}>
+                      <MdTableFavIcon stroke={isFavorite ? "gold" : "none"} />
                     </Button>
                   </Table.Td>
                   <Table.Td sizefixed className="sym">

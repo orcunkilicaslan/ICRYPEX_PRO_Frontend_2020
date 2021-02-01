@@ -3,9 +3,86 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from "../api";
 import { fetchSettings } from "./api.slice";
 
+export const fetchFavoritePairs = createAsyncThunk(
+  "pair/fetchfavorites",
+  async (_, { getState, rejectWithValue }) => {
+    const {
+      api: { accesstoken },
+    } = getState();
+
+    try {
+      const response = await api.fetchFavoritePairs(
+        {},
+        {
+          headers: {
+            "x-access-token": accesstoken,
+          },
+        }
+      );
+
+      return response.data;
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
+  }
+);
+
+export const addFavoritePair = createAsyncThunk(
+  "pair/addfavorite",
+  async (pairname, { getState, rejectWithValue, dispatch }) => {
+    const {
+      api: { accesstoken },
+    } = getState();
+
+    try {
+      const response = await api.addFavoritePair(
+        { pairname },
+        {
+          headers: {
+            "x-access-token": accesstoken,
+          },
+        }
+      );
+
+      dispatch(fetchFavoritePairs());
+
+      return { pairname, ...response?.data };
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
+  }
+);
+
+export const removeFavoritePair = createAsyncThunk(
+  "pair/removefavorite",
+  async (pairname, { getState, rejectWithValue, dispatch }) => {
+    const {
+      api: { accesstoken },
+    } = getState();
+
+    try {
+      const response = await api.removeFavoritePair(
+        { pairname },
+        {
+          headers: {
+            "x-access-token": accesstoken,
+          },
+        }
+      );
+
+      dispatch(fetchFavoritePairs());
+
+      return { pairname, ...response?.data };
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
+  }
+);
+
 const initialState = {
   selected: "BTC / TRY",
   all: [],
+  favorites: [],
 };
 
 const pairSlice = createSlice({
@@ -30,6 +107,9 @@ const pairSlice = createSlice({
   extraReducers: {
     [fetchSettings.fulfilled]: (state, action) => {
       state.all = action?.payload?.description?.settings?.pairs;
+    },
+    [fetchFavoritePairs.fulfilled]: (state, action) => {
+      state.favorites = action?.payload?.description;
     },
   },
 });
