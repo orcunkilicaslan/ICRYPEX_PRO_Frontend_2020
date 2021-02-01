@@ -7,6 +7,7 @@ import apiReducer from "./slices/api.slice";
 import userReducer from "./slices/user.slice";
 import alarmReducer from "./slices/alarm.slice";
 import pairReducer from "./slices/pair.slice";
+import socketReducer from "./slices/socket.slice";
 
 const apiPersistConfig = {
   key: "api",
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   alarm: alarmReducer,
   pair: pairReducer,
+  socket: socketReducer,
 });
 
 export default rootReducer;
