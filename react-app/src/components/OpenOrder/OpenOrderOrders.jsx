@@ -150,7 +150,7 @@ const OpenOrderOrders = props => {
         </Col>
       </Row>
       <div className="ooopenorderstable scrollbar">
-        <Table>
+        <Table scrollbar>
           <Table.Thead scrollbar>
             <Table.Tr>
               <Table.Th sizeauto className="symb">
