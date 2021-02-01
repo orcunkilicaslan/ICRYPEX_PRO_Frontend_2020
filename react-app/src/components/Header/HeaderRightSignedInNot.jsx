@@ -135,7 +135,9 @@ const HeaderRightSignedInNot = props => {
           <div className="modalcomp-sign-icon">
             <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
           </div>
-          {errorMessage && <AlertResult error>{errorMessage}</AlertResult>}
+          {errorMessage ? (
+              <AlertResult error>{errorMessage}</AlertResult>
+          ) : null}
           {isEnteringCode ? (
             <div className="modalcomp-sign-form">
               <div className="headsmtitle mb-1">
@@ -243,7 +245,9 @@ const HeaderRightSignedInNot = props => {
           <div className="modalcomp-sign-icon">
             <IconSet sprite="sprtlgclrd" size="50gray" name="newuser" />
           </div>
-          {errorMessage && <AlertResult error>{errorMessage}</AlertResult>}
+          {errorMessage ? (
+              <AlertResult error>{errorMessage}</AlertResult>
+          ) : null}
           <div className="modalcomp-sign-form">
             <Form className="siteformui" autoComplete="off" noValidate>
               <div className="labelfocustop">
