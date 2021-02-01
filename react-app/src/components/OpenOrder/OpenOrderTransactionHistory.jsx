@@ -105,268 +105,266 @@ const OpenOrderTransactionHistory = props => {
   const [selected3, setSelected3] = useState("");
 
   return (
-    <div className="openorders-history">
-      <Row className="tabcont tabcont-filterbar siteformui">
-        <Col>
-          <Input
-            className="custom-select custom-select-sm"
-            type="select"
-            value={selected1}
-            onChange={({ target }) => {
-              setSelected1(target.value);
-            }}
-          >
-            {["Çift", "...", "..."].map((el, idx) => {
-              return <option key={`${el}_${idx}`}>{el}</option>;
-            })}
-          </Input>
-        </Col>
-        <Col>
-          <Input
-            className="custom-select custom-select-sm"
-            type="select"
-            value={selected2}
-            onChange={({ target }) => {
-              setSelected2(target.value);
-            }}
-          >
-            {["İşlem Tipi", "Stop Limit", "Market", "Limit"].map((el, idx) => {
-              return (
-                <option disabled={idx === 0} key={`${el}_${idx}`}>
-                  {el}
-                </option>
-              );
-            })}
-          </Input>
-        </Col>
-        <Col>
-          <Input
-            className="custom-select custom-select-sm"
-            type="select"
-            value={selected3}
-            onChange={({ target }) => {
-              setSelected3(target.value);
-            }}
-          >
-            {["Durum", "Gerçekleşti", "Beklemede"].map((el, idx) => {
-              return (
-                <option disabled={idx === 0} key={`${el}_${idx}`}>
-                  {el}
-                </option>
-              );
-            })}
-          </Input>
-        </Col>
-        <Col>
-          <ButtonGroup size="sm" className="w-100">
-            <Button type="button" size="sm" variant="secondary active">
-              1G
-            </Button>
-            <Button type="button" size="sm" variant="secondary">
-              1H
-            </Button>
-            <Button type="button" size="sm" variant="secondary">
-              1A
-            </Button>
-            <Button type="button" size="sm" variant="secondary">
-              3A
-            </Button>
-          </ButtonGroup>
-        </Col>
-        <Col xs="auto">
-          <Input
-            type="text"
-            bsSize="sm"
-            placeholder="Başlangıç - Bitiş Tarihi"
-          />
-        </Col>
-        <Col xs="auto">
-          <div className="custom-control custom-checkbox">
+      <div className="openorders-history">
+        <Row className="tabcont tabcont-filterbar siteformui">
+          <Col>
             <Input
-              className="custom-control-input"
-              type="checkbox"
-              id="ordersHideOtherPairs"
-              defaultChecked
-            />
-            <Label
-              className="custom-control-label"
-              htmlFor="ordersHideOtherPairs"
-              check
+                className="custom-select custom-select-sm"
+                type="select"
+                value={selected1}
+                onChange={({ target }) => {
+                  setSelected1(target.value);
+                }}
             >
-              Diğer Çiftleri Gizle
-            </Label>
-          </div>
-        </Col>
-      </Row>
-      <div className="ootransactionhistorytable scrollbar">
-        <Table scrollbar>
-          <Table.Thead scrollbar>
-            <Table.Tr>
-              <Table.Th sizeauto className="brws"></Table.Th>
-              <Table.Th sizeauto className="nmbr">
-                İşlem No
-              </Table.Th>
-              <Table.Th sizeauto className="date">
-                Tarih
-              </Table.Th>
-              <Table.Th sizeauto className="symb">
-                Çift
-              </Table.Th>
-              <Table.Th sizeauto className="type">
-                İşlem Tipi
-              </Table.Th>
-              <Table.Th sizefixed className="avrg">
-                Ortalama
-              </Table.Th>
-              <Table.Th sizefixed className="pric">
-                Fiyat
-              </Table.Th>
-              <Table.Th sizefixed className="hppn">
-                Gerçekleşen
-              </Table.Th>
-              <Table.Th sizefixed className="amnt">
-                Miktar
-              </Table.Th>
-              <Table.Th sizefixed className="totl">
-                Toplam
-              </Table.Th>
-              <Table.Th sizeauto className="comm">
-                Komisyon
-              </Table.Th>
-              <Table.Th sizeauto className="stts">
-                Durum
-              </Table.Th>
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody striped hovered scrollbar>
-            {historytable.map(
-              ({
-                id,
-                idnmbr,
-                date,
-                time,
-                pair,
-                typetext,
-                typeresult1,
-                typeresult2,
-                average,
-                price,
-                transaction,
-                amount,
-                total,
-                commission,
-                statustype,
-                statustext,
-              }) => {
-                const cls1 = classnames({
-                  sitecolorgreen: typeresult1 === "1",
-                  sitecolorred: typeresult1 !== "1",
-                });
-
-                const cls2 = classnames({
-                  sitecolorgreen: statustype === "1",
-                  sitecolorred: statustype !== "1",
-                });
-
+              {["Çift", "...", "..."].map((el, idx) => {
+                return <option key={`${el}_${idx}`}>{el}</option>;
+              })}
+            </Input>
+          </Col>
+          <Col>
+            <Input
+                className="custom-select custom-select-sm"
+                type="select"
+                value={selected2}
+                onChange={({ target }) => {
+                  setSelected2(target.value);
+                }}
+            >
+              {["İşlem Tipi", "Stop Limit", "Market", "Limit"].map((el, idx) => {
                 return (
-                  <div className="hsttblbrwswrp" key={id}>
-                    <div className="hsttblbrwstr">
-                      <Table.Tr>
-                        <Table.Td sizeauto className="brws">
-                          <a href="#" title="İşlemi İnceleyin">
-                            <IconSet
-                              sprite="sprtsmclrd"
-                              size="14"
-                              name="browse"
-                            />
-                          </a>
-                        </Table.Td>
-                        <Table.Td sizeauto className="nmbr">
-                          {idnmbr}
-                        </Table.Td>
-                        <Table.Td sizeauto className="date">
-                          {date} - {time}
-                        </Table.Td>
-                        <Table.Td sizeauto className="symb">
-                          {pair}
-                        </Table.Td>
-                        <Table.Td sizeauto className="type">
-                          {typetext} -{" "}
-                          <span className={cls1}>{typeresult2}</span>
-                        </Table.Td>
-                        <Table.Td sizefixed className="avrg">
-                          {average}
-                        </Table.Td>
-                        <Table.Td sizefixed className="pric">
-                          {price}
-                        </Table.Td>
-                        <Table.Td sizefixed className="hppn">
-                          {transaction}
-                        </Table.Td>
-                        <Table.Td sizefixed className="amnt">
-                          {amount}
-                        </Table.Td>
-                        <Table.Td sizefixed className="totl">
-                          {total}
-                        </Table.Td>
-                        <Table.Td sizeauto className="comm">
-                          {commission}
-                        </Table.Td>
-                        <Table.Td sizeauto className="stts">
-                          <span className={cls2}>{statustext}</span>
-                        </Table.Td>
-                      </Table.Tr>
-                    </div>
-                    <div className="hsttblbrwstbl">
-                      <Table>
-                        <Table.Thead>
-                          <Table.Tr>
-                            <Table.Th sizeauto className="date">
-                              Tarih
-                            </Table.Th>
-                            <Table.Th sizefixed className="hppr">
-                              Gerçekleşen Fiyat
-                            </Table.Th>
-                            <Table.Th sizefixed className="hppn">
-                              Gerçekleşen
-                            </Table.Th>
-                            <Table.Th sizeauto className="comm">
-                              Komisyon
-                            </Table.Th>
-                            <Table.Th sizefixed className="totl">
-                              Toplam
-                            </Table.Th>
-                          </Table.Tr>
-                        </Table.Thead>
-                        <Table.Tbody>
-                          <Table.Tr>
-                            <Table.Td sizeauto className="date">
-                              21.02.2020 18:23
+                    <option disabled={idx === 0} key={`${el}_${idx}`}>
+                      {el}
+                    </option>
+                );
+              })}
+            </Input>
+          </Col>
+          <Col>
+            <Input
+                className="custom-select custom-select-sm"
+                type="select"
+                value={selected3}
+                onChange={({ target }) => {
+                  setSelected3(target.value);
+                }}
+            >
+              {["Durum", "Gerçekleşti", "Beklemede"].map((el, idx) => {
+                return (
+                    <option disabled={idx === 0} key={`${el}_${idx}`}>
+                      {el}
+                    </option>
+                );
+              })}
+            </Input>
+          </Col>
+          <Col>
+            <ButtonGroup size="sm" className="w-100">
+              <Button type="button" size="sm" variant="secondary active">
+                1G
+              </Button>
+              <Button type="button" size="sm" variant="secondary">
+                1H
+              </Button>
+              <Button type="button" size="sm" variant="secondary">
+                1A
+              </Button>
+              <Button type="button" size="sm" variant="secondary">
+                3A
+              </Button>
+            </ButtonGroup>
+          </Col>
+          <Col xs="auto">
+            <Input
+                type="text"
+                bsSize="sm"
+                placeholder="Başlangıç - Bitiş Tarihi"
+            />
+          </Col>
+          <Col xs="auto">
+            <div className="custom-control custom-checkbox">
+              <Input
+                  className="custom-control-input"
+                  type="checkbox"
+                  id="ordersHideOtherPairs"
+                  defaultChecked
+              />
+              <Label
+                  className="custom-control-label"
+                  htmlFor="ordersHideOtherPairs"
+                  check
+              >
+                Diğer Çiftleri Gizle
+              </Label>
+            </div>
+          </Col>
+        </Row>
+        <div className="ootransactionhistorytable scrollbar">
+          <Table scrollbar>
+            <Table.Thead scrollbar>
+              <Table.Tr>
+                <Table.Th sizeauto className="brws"></Table.Th>
+                <Table.Th sizeauto className="nmbr">
+                  İşlem No
+                </Table.Th>
+                <Table.Th sizeauto className="date">
+                  Tarih
+                </Table.Th>
+                <Table.Th sizeauto className="symb">
+                  Çift
+                </Table.Th>
+                <Table.Th sizeauto className="type">
+                  İşlem Tipi
+                </Table.Th>
+                <Table.Th sizefixed className="avrg">
+                  Ortalama
+                </Table.Th>
+                <Table.Th sizefixed className="pric">
+                  Fiyat
+                </Table.Th>
+                <Table.Th sizefixed className="hppn">
+                  Gerçekleşen
+                </Table.Th>
+                <Table.Th sizefixed className="amnt">
+                  Miktar
+                </Table.Th>
+                <Table.Th sizefixed className="totl">
+                  Toplam
+                </Table.Th>
+                <Table.Th sizeauto className="comm">
+                  Komisyon
+                </Table.Th>
+                <Table.Th sizeauto className="stts">
+                  Durum
+                </Table.Th>
+              </Table.Tr>
+            </Table.Thead>
+            <Table.Tbody striped hovered scrollbar>
+              {historytable.map(
+                  ({
+                     id,
+                     idnmbr,
+                     date,
+                     time,
+                     pair,
+                     typetext,
+                     typeresult1,
+                     typeresult2,
+                     average,
+                     price,
+                     transaction,
+                     amount,
+                     total,
+                     commission,
+                     statustype,
+                     statustext,
+                   }) => {
+                    const cls1 = classnames({
+                      sitecolorgreen: typeresult1 === "1",
+                      sitecolorred: typeresult1 !== "1",
+                    });
+
+                    const cls2 = classnames({
+                      sitecolorgreen: statustype === "1",
+                      sitecolorred: statustype !== "1",
+                    });
+
+                    return (
+                        <div className="hsttblbrwswrp" key={id}>
+                          <Table.Tr className="hsttblbrwstr">
+                            <Table.Td sizeauto className="brws">
+                              <a href="#" title="İşlemi İnceleyin">
+                                <IconSet
+                                    sprite="sprtsmclrd"
+                                    size="14"
+                                    name="browse"
+                                />
+                              </a>
                             </Table.Td>
-                            <Table.Td sizefixed className="hppr">
-                              33,650 TRY
+                            <Table.Td sizeauto className="nmbr">
+                              {idnmbr}
+                            </Table.Td>
+                            <Table.Td sizeauto className="date">
+                              {date} - {time}
+                            </Table.Td>
+                            <Table.Td sizeauto className="symb">
+                              {pair}
+                            </Table.Td>
+                            <Table.Td sizeauto className="type">
+                              {typetext} -{" "}
+                              <span className={cls1}>{typeresult2}</span>
+                            </Table.Td>
+                            <Table.Td sizefixed className="avrg">
+                              {average}
+                            </Table.Td>
+                            <Table.Td sizefixed className="pric">
+                              {price}
                             </Table.Td>
                             <Table.Td sizefixed className="hppn">
-                              0,763282734 BTC
+                              {transaction}
                             </Table.Td>
-                            <Table.Td sizeauto className="comm">
-                              45 TRY
+                            <Table.Td sizefixed className="amnt">
+                              {amount}
                             </Table.Td>
                             <Table.Td sizefixed className="totl">
-                              24,564 TRY
+                              {total}
+                            </Table.Td>
+                            <Table.Td sizeauto className="comm">
+                              {commission}
+                            </Table.Td>
+                            <Table.Td sizeauto className="stts">
+                              <span className={cls2}>{statustext}</span>
                             </Table.Td>
                           </Table.Tr>
-                        </Table.Tbody>
-                      </Table>
-                    </div>
-                  </div>
-                );
-              }
-            )}
-          </Table.Tbody>
-        </Table>
+                          <div className="hsttblbrwstbl">
+                            <Table>
+                              <Table.Thead>
+                                <Table.Tr>
+                                  <Table.Th sizeauto className="date">
+                                    Tarih
+                                  </Table.Th>
+                                  <Table.Th sizefixed className="hppr">
+                                    Gerçekleşen Fiyat
+                                  </Table.Th>
+                                  <Table.Th sizefixed className="hppn">
+                                    Gerçekleşen
+                                  </Table.Th>
+                                  <Table.Th sizeauto className="comm">
+                                    Komisyon
+                                  </Table.Th>
+                                  <Table.Th sizefixed className="totl">
+                                    Toplam
+                                  </Table.Th>
+                                </Table.Tr>
+                              </Table.Thead>
+                              <Table.Tbody>
+                                <Table.Tr>
+                                  <Table.Td sizeauto className="date">
+                                    21.02.2020 18:23
+                                  </Table.Td>
+                                  <Table.Td sizefixed className="hppr">
+                                    33,650 TRY
+                                  </Table.Td>
+                                  <Table.Td sizefixed className="hppn">
+                                    0,763282734 BTC
+                                  </Table.Td>
+                                  <Table.Td sizeauto className="comm">
+                                    45 TRY
+                                  </Table.Td>
+                                  <Table.Td sizefixed className="totl">
+                                    24,564 TRY
+                                  </Table.Td>
+                                </Table.Tr>
+                              </Table.Tbody>
+                            </Table>
+                          </div>
+                        </div>
+                    );
+                  }
+              )}
+            </Table.Tbody>
+          </Table>
+        </div>
       </div>
-    </div>
   );
 };
 
