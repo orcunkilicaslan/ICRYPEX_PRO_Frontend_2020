@@ -117,11 +117,13 @@ const MarketDataSymbol = props => {
 
               return (
                 <Table.Tr key={symbol}>
-                  <Table.Td sizeauto className="fav">
-                    <Button className="tablefavico" onClick={onClick}>
-                      <MdTableFavIcon stroke={isFavorite ? "gold" : "none"} />
-                    </Button>
-                  </Table.Td>
+                  {accesstoken ? (
+                    <Table.Td sizeauto className="fav">
+                      <Button className="tablefavico" onClick={onClick}>
+                        <MdTableFavIcon stroke={isFavorite ? "gold" : "none"} />
+                      </Button>
+                    </Table.Td>
+                  ) : null}
                   <Table.Td sizefixed className="sym">
                     {name}
                   </Table.Td>
