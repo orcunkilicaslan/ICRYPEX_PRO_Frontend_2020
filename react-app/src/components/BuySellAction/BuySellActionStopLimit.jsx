@@ -15,8 +15,10 @@ import {
 
 import { IconSet } from "../IconSet.jsx";
 import { Button } from "../Button.jsx";
+import { LoginButtons } from "../LoginButtons";
 
 const BuySellActionStopLimit = props => {
+  const { openSigninModal, openSignupModal } = props;
   const { accesstoken } = useSelector(state => state.api);
 
   const [selectedBuyPrice, setSelectedBuyPrice] = useState("");
@@ -163,10 +165,10 @@ const BuySellActionStopLimit = props => {
                 {accesstoken ? (
                   <Button variant="success">BTC AL</Button>
                 ) : (
-                  <Button variant="secondary" className="active">
-                    ÜYE OLUN <span className="sitecolortextsec">YADA</span>{" "}
-                    GİRİŞ YAPIN
-                  </Button>
+                  <LoginButtons
+                    openSigninModal={openSigninModal}
+                    openSignupModal={openSignupModal}
+                  />
                 )}
               </div>
             </div>
@@ -303,10 +305,10 @@ const BuySellActionStopLimit = props => {
               {accesstoken ? (
                 <Button variant="danger">BTC SAT</Button>
               ) : (
-                <Button variant="secondary" className="active">
-                  ÜYE OLUN <span className="sitecolortextsec">YADA</span> GİRİŞ
-                  YAPIN
-                </Button>
+                <LoginButtons
+                  openSigninModal={openSigninModal}
+                  openSignupModal={openSignupModal}
+                />
               )}
             </div>
           </Form>

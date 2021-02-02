@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import {
   TabContent,
   TabPane,
@@ -9,6 +9,7 @@ import {
   PopoverBody,
 } from "reactstrap";
 import classnames from "classnames";
+import { useDispatch } from "react-redux";
 
 import { IconSet } from "../IconSet.jsx";
 import { Button } from "../Button.jsx";
@@ -16,6 +17,7 @@ import Table from "../Table.jsx";
 import BuySellActionMarket from "./BuySellActionMarket.jsx";
 import BuySellActionLimit from "./BuySellActionLimit.jsx";
 import BuySellActionStopLimit from "./BuySellActionStopLimit.jsx";
+import { setOpenModal } from "~/state/slices/ui.slice";
 
 const tabs = [
   {
@@ -51,7 +53,16 @@ const commissiontable = [
 ];
 
 const BuySellAction = props => {
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState(tabs[0].title);
+
+  const openSigninModal = useCallback(() => {
+    dispatch(setOpenModal("signin"));
+  }, [dispatch]);
+
+  const openSignupModal = useCallback(() => {
+    dispatch(setOpenModal("signup"));
+  }, [dispatch]);
 
   const toggle = tab => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -144,7 +155,10 @@ const BuySellAction = props => {
           {tabs.map(({ title, component: Comp }) => {
             return (
               <TabPane key={title} tabId={title}>
-                <Comp />
+                <Comp
+                  openSigninModal={openSigninModal}
+                  openSignupModal={openSignupModal}
+                />
               </TabPane>
             );
           })}
