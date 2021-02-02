@@ -3,12 +3,18 @@ import i18n from "i18next";
 
 import { SUPPORTED_LANGUAGES } from "~/setupI18n";
 
-const initialState = { lang: "en" };
+const initialState = { lang: "en", openModal: "" };
+const MODALS = ["none", "signin", "signup", "settings"];
 
 const uiSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
+    setOpenModal: (state, { payload }) => {
+      if (MODALS.includes(payload) && payload !== state.openModal) {
+        state.openModal = payload;
+      }
+    },
     setLanguage: {
       reducer: (state, { payload }) => {
         state.lang = payload;
@@ -29,6 +35,6 @@ const uiSlice = createSlice({
   },
 });
 
-export const { setLanguage, reset } = uiSlice.actions;
+export const { setOpenModal, setLanguage, reset } = uiSlice.actions;
 
 export default uiSlice.reducer;

@@ -10,15 +10,20 @@ import {
   ModalBody,
 } from "reactstrap";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import { AlertResult } from "../AlertResult.jsx";
+import { LoginButtons } from "../LoginButtons";
+import { setOpenModal } from "~/state/slices/ui.slice";
 
 const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
 
 const HeaderRightSignedInNot = props => {
+  const dispatch = useDispatch();
   const { user, countryCodes, onSignup, onSignin, onSigninSMS } = props;
+  const { openModal } = useSelector(state => state.ui);
   const [signUpForm, setSignUpForm] = useState({
     firstname: "",
     lastname: "",
@@ -34,8 +39,6 @@ const HeaderRightSignedInNot = props => {
   const passwordField = useRef();
   const [userEmail, setUserEmail] = useState(user.email || "");
 
-  const [signUpModal, setSignUpModal] = useState(false);
-  const [signInModal, setSignInModal] = useState(false);
   const [isEnteringCode, setIsEnteringCode] = useState(false);
   const [verifyCode, setVerifyCode] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
@@ -44,16 +47,18 @@ const HeaderRightSignedInNot = props => {
     ({ country_code }) => country_code
   );
 
-  const signUpModalToggle = () => {
-    setSignInModal(false);
-    setSignUpModal(!signUpModal);
+  const openSignupModal = () => {
+    dispatch(setOpenModal("signup"));
     setErrorMessage(null);
   };
 
-  const signInModalToggle = () => {
-    setSignUpModal(false);
-    setSignInModal(!signInModal);
+  const openSigninModal = () => {
+    dispatch(setOpenModal("signin"));
     setErrorMessage(null);
+  };
+
+  const clearOpenModals = () => {
+    dispatch(setOpenModal("none"));
   };
 
   const onSignUpFormChange = ({ target }) => {
@@ -83,7 +88,7 @@ const HeaderRightSignedInNot = props => {
 
     if (status) {
       setIsEnteringCode(true);
-      signInModalToggle();
+      openSigninModal();
     } else {
       setErrorMessage(errormessage);
     }
@@ -121,25 +126,23 @@ const HeaderRightSignedInNot = props => {
 
   return (
     <div className="header-right-notsignedin">
-      <Button size="sm" variant="secondary" onClick={signInModalToggle}>
-        Üye Girişi
-      </Button>
-      <Button size="sm" variant="success" onClick={signUpModalToggle}>
-        Kayıt Ol
-      </Button>
+      <LoginButtons
+        openSigninModal={openSigninModal}
+        openSignupModal={openSignupModal}
+      />
 
       <Modal
         wrapClassName=""
         modalClassName="modal-rightside"
         size="sm"
-        isOpen={signInModal}
-        toggle={signInModalToggle}
+        isOpen={openModal === "signin"}
+        toggle={clearOpenModals}
         keyboard={false}
         fade={false}
         autoFocus={false}
         backdrop="static"
       >
-        <ModalHeader toggle={signInModalToggle}>ÜYE GİRİŞİ</ModalHeader>
+        <ModalHeader toggle={clearOpenModals}>ÜYE GİRİŞİ</ModalHeader>
         <ModalBody className="modalcomp modalcomp-sign">
           <div className="modalcomp-sign-icon">
             <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
@@ -242,14 +245,14 @@ const HeaderRightSignedInNot = props => {
         wrapClassName=""
         modalClassName="modal-rightside"
         size="sm"
-        isOpen={signUpModal}
-        toggle={signUpModalToggle}
+        isOpen={openModal === "signup"}
+        toggle={clearOpenModals}
         keyboard={false}
         fade={false}
         autoFocus={false}
         backdrop="static"
       >
-        <ModalHeader toggle={signUpModalToggle}>KAYIT OL</ModalHeader>
+        <ModalHeader toggle={clearOpenModals}>KAYIT OL</ModalHeader>
         <ModalBody className="modalcomp modalcomp-sign">
           <div className="modalcomp-sign-icon">
             <IconSet sprite="sprtlgclrd" size="50gray" name="newuser" />

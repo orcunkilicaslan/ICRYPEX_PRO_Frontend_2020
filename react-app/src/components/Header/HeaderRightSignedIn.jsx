@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Modal,
   ModalBody,
@@ -7,9 +7,11 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
+import { setOpenModal } from "~/state/slices/ui.slice";
 
 const usermenulistaccount = [
   {
@@ -67,15 +69,20 @@ const usermenulistsecurity = [
 
 const HeaderRightSignedIn = props => {
   const { user, onSignout } = props;
-  const [signedUserModal, setsignedUserModal] = useState(false);
+  const dispatch = useDispatch();
+  const { openModal } = useSelector(state => state.ui);
 
-  const signedUserModalToggle = () => {
-    setsignedUserModal(!signedUserModal);
+  const openSettingsModal = () => {
+    dispatch(setOpenModal("settings"));
+  };
+
+  const clearOpenModals = () => {
+    dispatch(setOpenModal("none"));
   };
 
   return (
     <div className="header-right-signedin pr-2">
-      <Button className="useraccountarea" onClick={signedUserModalToggle}>
+      <Button className="useraccountarea" onClick={openSettingsModal}>
         <div className="useraccountarea-avatar rounded-pill">
           <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
         </div>
@@ -88,14 +95,14 @@ const HeaderRightSignedIn = props => {
         wrapClassName=""
         modalClassName="modal-rightside"
         size="sm"
-        isOpen={signedUserModal}
-        toggle={signedUserModalToggle}
+        isOpen={openModal === "settings"}
+        toggle={clearOpenModals}
         keyboard={false}
         fade={false}
         autoFocus={false}
         backdrop="static"
       >
-        <ModalHeader toggle={signedUserModalToggle}>
+        <ModalHeader toggle={clearOpenModals}>
           {user.firstname} {String(user.lastname).toUpperCase()}
         </ModalHeader>
         <ModalBody className="modalcomp modalcomp-usermenu">

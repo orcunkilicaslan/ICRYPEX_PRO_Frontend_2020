@@ -24,6 +24,8 @@ const init = (initialLang = "en") => {
             volume: "Volume",
             all: "All",
             search: "Search",
+            signin: "Sign In",
+            signup: "Sign Up",
           },
           finance: {
             ask: "Ask",
@@ -65,6 +67,8 @@ const init = (initialLang = "en") => {
             volume: "Hacim",
             all: "Tümü",
             search: "Ara",
+            signin: "Üye Girişi",
+            signup: "Kayıt Ol",
           },
           finance: {
             ask: "Alış",
