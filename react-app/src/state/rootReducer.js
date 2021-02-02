@@ -12,7 +12,7 @@ import socketReducer from "./slices/socket.slice";
 const apiPersistConfig = {
   key: "api",
   storage,
-  // blacklist: ["prelogintoken", "serverdevicekey", "accesstoken"],
+  blacklist: ["settingno", "mediumid", "versionno"],
 };
 
 const rootReducer = combineReducers({
