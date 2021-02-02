@@ -102,10 +102,23 @@ export const fetchUserInfo = createAsyncThunk(
 );
 
 const initialState = {
-  firstname: null,
-  lastname: null,
-  phone: null,
-  email: null,
+  firstname: "",
+  lastname: "",
+  phone: "",
+  email: "",
+  displayname: "",
+  profilepicturefilename: null,
+  unreadednotificationcount: 0,
+  emailverified: false,
+  customergroupid: 1,
+  nationalid: null,
+  dateofbirth: null,
+  countryid: null,
+  cityid: null,
+  districtid: null,
+  regionid: null,
+  address: null,
+  registrationdate: null,
   customerid: null,
 };
 
