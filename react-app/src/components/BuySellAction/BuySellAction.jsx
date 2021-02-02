@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { TabContent, TabPane, Nav, NavItem, NavLink, UncontrolledPopover, PopoverBody } from "reactstrap";
+import {
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledPopover,
+  PopoverBody,
+} from "reactstrap";
 import classnames from "classnames";
 
 import { IconSet } from "../IconSet.jsx";
@@ -28,17 +36,17 @@ const commissiontable = [
   {
     level: "100.000",
     maker: "0.0025",
-    taker: "0.0035"
+    taker: "0.0035",
   },
   {
     level: "1.000.000",
     maker: "0.0015",
-    taker: "0.0035"
+    taker: "0.0035",
   },
   {
     level: "5.000.000",
     maker: "0.0010",
-    taker: "0.0025"
+    taker: "0.0025",
   },
 ];
 
@@ -73,53 +81,58 @@ const BuySellAction = props => {
             <h6>İşlem Komisyonu</h6>
             <p>Piyasa Yapıcı 0.25% - Piyasa Alıcı 0.35%</p>
             <Button id="buysellactionPopover" className="popoverbtn">
-              <IconSet
-                  sprite="sprtsmclrd"
-                  size="16"
-                  name="info infoiconbox"
-              />
+              <IconSet sprite="sprtsmclrd" size="16" name="info infoiconbox" />
             </Button>
-            <UncontrolledPopover trigger="focus" placement="bottom" target="buysellactionPopover">
+            <UncontrolledPopover
+              trigger="focus"
+              placement="bottom"
+              target="buysellactionPopover"
+            >
               <PopoverBody className="tooltipbox">
                 <div className="tooltipbox-head">
                   <div className="tooltipbox-head-col">VIP UCRET</div>
-                  <div className="tooltipbox-head-col">DESTEK 0850 255 1079</div>
+                  <div className="tooltipbox-head-col">
+                    DESTEK 0850 255 1079
+                  </div>
                 </div>
                 <div className="tooltipbox-body">
                   <Table className="commissiontable">
                     <Table.Thead>
                       <Table.Tr>
                         <Table.Th sizeauto className="txt">
-                          TRY Hacim /<br/>30 Gün
+                          TRY Hacim /<br />
+                          30 Gün
                         </Table.Th>
                         <Table.Th sizefixed className="mkr">
-                          Piyasa Yapıcı Emirler<br/>[MAKER]
+                          Piyasa Yapıcı Emirler
+                          <br />
+                          [MAKER]
                         </Table.Th>
                         <Table.Th sizeauto className="spc" />
                         <Table.Th sizefixed className="tkr">
-                          Piyasa Alıcı Emirler<br/>[TAKER]
+                          Piyasa Alıcı Emirler
+                          <br />
+                          [TAKER]
                         </Table.Th>
                       </Table.Tr>
                     </Table.Thead>
                     <Table.Tbody borderbottom>
-
                       {commissiontable.map(({ level, maker, taker }) => {
                         return (
-                            <Table.Tr key={level}>
-                              <Table.Td sizeauto className="txt">
-                                {level}
-                              </Table.Td>
-                              <Table.Td sizefixed className="mkr">
-                                {maker}
-                              </Table.Td>
-                              <Table.Td sizeauto className="spc" />
-                              <Table.Td sizefixed className="tkr">
-                                {taker}
-                              </Table.Td>
-                            </Table.Tr>
+                          <Table.Tr key={level}>
+                            <Table.Td sizeauto className="txt">
+                              {level}
+                            </Table.Td>
+                            <Table.Td sizefixed className="mkr">
+                              {maker}
+                            </Table.Td>
+                            <Table.Td sizeauto className="spc" />
+                            <Table.Td sizefixed className="tkr">
+                              {taker}
+                            </Table.Td>
+                          </Table.Tr>
                         );
                       })}
-
                     </Table.Tbody>
                   </Table>
                 </div>

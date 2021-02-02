@@ -65,11 +65,7 @@ const HeaderRight = props => {
       <HeaderRightTheme />
       <HeaderRightIcons />
       {accesstoken ? (
-        <HeaderRightSignedIn
-          user={User}
-          settings={Settings}
-          onSignout={onSignout}
-        />
+        <HeaderRightSignedIn user={User} onSignout={onSignout} />
       ) : (
         <HeaderRightSignedInNot
           user={User}

@@ -31,7 +31,6 @@ const tabs = [
 ];
 
 const OpenOrder = props => {
-
   const [activeTab, setActiveTab] = useState(tabs[0].title);
 
   const toggle = tab => {

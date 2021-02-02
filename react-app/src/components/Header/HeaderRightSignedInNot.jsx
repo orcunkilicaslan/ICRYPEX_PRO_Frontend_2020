@@ -1,5 +1,14 @@
 import { useState, useRef } from "react";
-import { Form, FormGroup, Label, Input, InputGroupAddon, Modal, ModalHeader, ModalBody } from "reactstrap";
+import {
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  InputGroupAddon,
+  Modal,
+  ModalHeader,
+  ModalBody,
+} from "reactstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 
 import { Button } from "../Button.jsx";
@@ -136,7 +145,7 @@ const HeaderRightSignedInNot = props => {
             <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
           </div>
           {errorMessage ? (
-              <AlertResult error>{errorMessage}</AlertResult>
+            <AlertResult error>{errorMessage}</AlertResult>
           ) : null}
           {isEnteringCode ? (
             <div className="modalcomp-sign-form">
@@ -246,7 +255,7 @@ const HeaderRightSignedInNot = props => {
             <IconSet sprite="sprtlgclrd" size="50gray" name="newuser" />
           </div>
           {errorMessage ? (
-              <AlertResult error>{errorMessage}</AlertResult>
+            <AlertResult error>{errorMessage}</AlertResult>
           ) : null}
           <div className="modalcomp-sign-form">
             <Form className="siteformui" autoComplete="off" noValidate>

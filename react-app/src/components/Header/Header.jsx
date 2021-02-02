@@ -10,9 +10,12 @@ import HeaderRight from "./HeaderRight.jsx";
 const Header = props => {
   const { className } = props;
   const dispatch = useDispatch();
-  const changeLanguage = useCallback(lang => {
-    dispatch(setLanguage(lang));
-  }, []);
+  const changeLanguage = useCallback(
+    lang => {
+      dispatch(setLanguage(lang));
+    },
+    [dispatch]
+  );
 
   return (
     <header className={classNames("header", className)}>

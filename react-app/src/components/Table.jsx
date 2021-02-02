@@ -1,4 +1,4 @@
-import PerfectScrollbar from 'react-perfect-scrollbar'
+import PerfectScrollbar from "react-perfect-scrollbar";
 import classNames from "classnames";
 
 const Table = props => {
@@ -45,7 +45,15 @@ export function Thead(props) {
 }
 
 export function Tbody(props) {
-  const { className, scrollbar, striped, hovered, borderbottom, children, ...rest } = props;
+  const {
+    className,
+    scrollbar,
+    striped,
+    hovered,
+    borderbottom,
+    children,
+    ...rest
+  } = props;
 
   const tableClass = classNames("tbl-tbody", className, {
     "tbl-striped": Boolean(striped),
@@ -64,7 +72,11 @@ export function Tbody(props) {
       "scrollbar-tbl-tb": Boolean(scrollbar),
     });
 
-    return <PerfectScrollbar className={scrollbarClassName}>{tableTbody}</PerfectScrollbar>;
+    return (
+      <PerfectScrollbar className={scrollbarClassName}>
+        {tableTbody}
+      </PerfectScrollbar>
+    );
   }
 
   return tableTbody;

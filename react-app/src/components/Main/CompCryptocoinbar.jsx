@@ -26,7 +26,7 @@ import {
   deletePairPriceAlarm,
   deletePairPriceAlarms,
 } from "~/state/slices/alarm.slice";
-import {AlertResult} from "~/components/AlertResult";
+import { AlertResult } from "~/components/AlertResult";
 
 const STEP = 10;
 const MINIMUM = 0;
@@ -87,9 +87,9 @@ const CompCryptocoinbar = props => {
       price: amount,
     };
 
-    const { payload = {} } = await dispatch(createPairPriceAlarm(data));
+    const { payload } = await dispatch(createPairPriceAlarm(data));
 
-    if (payload.status === 0) setErrorMessage(payload.errormessage);
+    if (payload?.status === 0) setErrorMessage(payload.errormessage);
   };
 
   const deleteAlarm = id => {
@@ -125,9 +125,9 @@ const CompCryptocoinbar = props => {
               </ul>
             </div>
           </div>
-            <InputGroupAddon addonType="append">
-              <InputGroupText className="alarmbtn">
-                {accesstoken ? (
+          <InputGroupAddon addonType="append">
+            <InputGroupText className="alarmbtn">
+              {accesstoken ? (
                 <Button
                   size="sm"
                   className="iconbtn iconbtn-warning"
@@ -144,9 +144,9 @@ const CompCryptocoinbar = props => {
                     <span>{t("setAlarm")}</span>
                   </div>
                 </Button>
-                ) : null}
-              </InputGroupText>
-            </InputGroupAddon>
+              ) : null}
+            </InputGroupText>
+          </InputGroupAddon>
         </InputGroup>
       </div>
 
@@ -175,7 +175,7 @@ const CompCryptocoinbar = props => {
           </div>
           <div className="modalcomp-setalarm-form">
             {errorMessage ? (
-                <AlertResult error>{errorMessage}</AlertResult>
+              <AlertResult error>{errorMessage}</AlertResult>
             ) : null}
             <Form className="siteformui" autoComplete="off" noValidate>
               <div className="setalarmspinner">

@@ -46,10 +46,7 @@ const HeaderCenter = props => {
             </InputGroupText>
           </InputGroupAddon>
           <div className="newstickerbars-box form-control">
-            <a
-              className="newstickerbars-item"
-              href="#"
-            >
+            <a className="newstickerbars-item" href="#">
               {item}
             </a>
           </div>

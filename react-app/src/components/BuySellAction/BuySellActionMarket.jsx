@@ -14,10 +14,9 @@ import {
 
 import { IconSet } from "../IconSet.jsx";
 import { Button } from "../Button.jsx";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const BuySellActionMarket = props => {
-
   const { accesstoken } = useSelector(state => state.api);
 
   const [selectedBuyPrice, setSelectedBuyPrice] = useState("");
@@ -40,7 +39,7 @@ const BuySellActionMarket = props => {
               <h4 className="formhead-title">BTC AL</h4>
               <div className="formhead-curr">
                 <IconSet sprite="sprtsmclrd" size="16" name="wallet" />
-                <p>{accesstoken ? ("49,950,000.00") : ("-") } TRY</p>
+                <p>{accesstoken ? "49,950,000.00" : "-"} TRY</p>
               </div>
             </div>
             <div className="formfieldset">
@@ -52,12 +51,12 @@ const BuySellActionMarket = props => {
                   <Input type="text" />
                   <InputGroupAddon addonType="append">
                     <Input
-                        className="custom-select"
-                        type="select"
-                        value={selectedBuyPrice}
-                        onChange={({ target }) => {
-                          setSelectedBuyPrice(target.value);
-                        }}
+                      className="custom-select"
+                      type="select"
+                      value={selectedBuyPrice}
+                      onChange={({ target }) => {
+                        setSelectedBuyPrice(target.value);
+                      }}
                     >
                       {["TRY", "USD"].map((el, idx) => {
                         return <option key={`${el}_${idx}`}>{el}</option>;
@@ -74,12 +73,12 @@ const BuySellActionMarket = props => {
                   <Input />
                   <InputGroupAddon addonType="append">
                     <Input
-                        className="custom-select"
-                        type="select"
-                        value={selectedBuyAmount}
-                        onChange={({ target }) => {
-                          setSelectedBuyAmount(target.value);
-                        }}
+                      className="custom-select"
+                      type="select"
+                      value={selectedBuyAmount}
+                      onChange={({ target }) => {
+                        setSelectedBuyAmount(target.value);
+                      }}
                     >
                       {["BTC", "ETH"].map((el, idx) => {
                         return <option key={`${el}_${idx}`}>{el}</option>;
@@ -91,57 +90,59 @@ const BuySellActionMarket = props => {
             </div>
             <div className="formrange">
               {accesstoken ? (
-                  <Row className="aligncenter">
-                    <Col xs="auto">
-                      <Label>Portföy</Label>
-                    </Col>
-                    <Col>
-                      <div className="rangeprogress">
-                        <Progress
-                            className="rangeprogress-progress"
-                            value={rangeBuyPortfolio}
-                        />
-                      </div>
-                      <div className="rangeprogress-circle d-none" data-val={rangeBuyPortfolio}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                      </div>
-                      <output className="rangeprogress-bubble"></output>
-                      <Input
-                          className="rangeprogress-range custom-range"
-                          type="range"
-                          min={100 / 4}
-                          max={100}
-                          step={100 / 4}
-                          value={rangeBuyPortfolio}
-                          onChange={({ target }) => {
-                            setRangeBuyPortfolio(target.value);
-                          }}
+                <Row className="aligncenter">
+                  <Col xs="auto">
+                    <Label>Portföy</Label>
+                  </Col>
+                  <Col>
+                    <div className="rangeprogress">
+                      <Progress
+                        className="rangeprogress-progress"
+                        value={rangeBuyPortfolio}
                       />
-                    </Col>
-                  </Row>
-              ) : null }
+                    </div>
+                    <div
+                      className="rangeprogress-circle d-none"
+                      data-val={rangeBuyPortfolio}
+                    >
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                    <output className="rangeprogress-bubble"></output>
+                    <Input
+                      className="rangeprogress-range custom-range"
+                      type="range"
+                      min={100 / 4}
+                      max={100}
+                      step={100 / 4}
+                      value={rangeBuyPortfolio}
+                      onChange={({ target }) => {
+                        setRangeBuyPortfolio(target.value);
+                      }}
+                    />
+                  </Col>
+                </Row>
+              ) : null}
               <Row className="aligncenter">
                 <Col xs="auto">
                   <Label>Toplam</Label>
                 </Col>
                 <Col className="text-right">
-                  <span>{accesstoken ? ("12,000,00.00") : ("-") } TRY</span>
+                  <span>{accesstoken ? "12,000,00.00" : "-"} TRY</span>
                 </Col>
               </Row>
             </div>
             <div className="formbttm">
               <div className="formbttm">
                 {accesstoken ? (
-                    <Button variant="success">
-                      BTC AL
-                    </Button>
+                  <Button variant="success">BTC AL</Button>
                 ) : (
-                    <Button variant="secondary" className="active">
-                      ÜYE OLUN <span className="sitecolortextsec">YADA</span> GİRİŞ YAPIN
-                    </Button>
+                  <Button variant="secondary" className="active">
+                    ÜYE OLUN <span className="sitecolortextsec">YADA</span>{" "}
+                    GİRİŞ YAPIN
+                  </Button>
                 )}
               </div>
             </div>
@@ -169,12 +170,12 @@ const BuySellActionMarket = props => {
                   <Input type="text" />
                   <InputGroupAddon addonType="append">
                     <Input
-                        className="custom-select"
-                        type="select"
-                        value={selectedSellPrice}
-                        onChange={({ target }) => {
-                          setSelectedSellPrice(target.value);
-                        }}
+                      className="custom-select"
+                      type="select"
+                      value={selectedSellPrice}
+                      onChange={({ target }) => {
+                        setSelectedSellPrice(target.value);
+                      }}
                     >
                       {["TRY", "USD"].map((el, idx) => {
                         return <option key={`${el}_${idx}`}>{el}</option>;
@@ -191,12 +192,12 @@ const BuySellActionMarket = props => {
                   <Input />
                   <InputGroupAddon addonType="append">
                     <Input
-                        className="custom-select"
-                        type="select"
-                        value={selectedSellAmount}
-                        onChange={({ target }) => {
-                          setSelectedSellAmount(target.value);
-                        }}
+                      className="custom-select"
+                      type="select"
+                      value={selectedSellAmount}
+                      onChange={({ target }) => {
+                        setSelectedSellAmount(target.value);
+                      }}
                     >
                       {["BTC", "ETH"].map((el, idx) => {
                         return <option key={`${el}_${idx}`}>{el}</option>;
@@ -208,56 +209,58 @@ const BuySellActionMarket = props => {
             </div>
             <div className="formrange">
               {accesstoken ? (
-                  <Row className="aligncenter">
-                    <Col xs="auto">
-                      <Label>Portföy</Label>
-                    </Col>
-                    <Col>
-                      <div className="rangeprogress">
-                        <Progress
-                            className="rangeprogress-progress"
-                            value={rangeSellPortfolio}
-                        />
-                      </div>
-                      <div className="rangeprogress-circle d-none" data-val={rangeSellPortfolio}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                      </div>
-                      <output className="rangeprogress-bubble"></output>
-                      <Input
-                          className="rangeprogress-range custom-range"
-                          type="range"
-                          min={100 / 4}
-                          max={100}
-                          step={100 / 4}
-                          value={rangeSellPortfolio}
-                          onChange={({ target }) => {
-                            setRangeSellPortfolio(target.value);
-                          }}
+                <Row className="aligncenter">
+                  <Col xs="auto">
+                    <Label>Portföy</Label>
+                  </Col>
+                  <Col>
+                    <div className="rangeprogress">
+                      <Progress
+                        className="rangeprogress-progress"
+                        value={rangeSellPortfolio}
                       />
-                    </Col>
-                  </Row>
-              ) : null }
+                    </div>
+                    <div
+                      className="rangeprogress-circle d-none"
+                      data-val={rangeSellPortfolio}
+                    >
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                    <output className="rangeprogress-bubble"></output>
+                    <Input
+                      className="rangeprogress-range custom-range"
+                      type="range"
+                      min={100 / 4}
+                      max={100}
+                      step={100 / 4}
+                      value={rangeSellPortfolio}
+                      onChange={({ target }) => {
+                        setRangeSellPortfolio(target.value);
+                      }}
+                    />
+                  </Col>
+                </Row>
+              ) : null}
               <Row className="aligncenter">
                 <Col xs="auto">
                   <Label>Toplam</Label>
                 </Col>
                 <Col className="text-right">
-                  <span>{accesstoken ? ("12,000,00.00") : ("-") } TRY</span>
+                  <span>{accesstoken ? "12,000,00.00" : "-"} TRY</span>
                 </Col>
               </Row>
             </div>
             <div className="formbttm">
               {accesstoken ? (
-                  <Button variant="danger">
-                    BTC SAT
-                  </Button>
+                <Button variant="danger">BTC SAT</Button>
               ) : (
-                  <Button variant="secondary" className="active">
-                    ÜYE OLUN <span className="sitecolortextsec">YADA</span> GİRİŞ YAPIN
-                  </Button>
+                <Button variant="secondary" className="active">
+                  ÜYE OLUN <span className="sitecolortextsec">YADA</span> GİRİŞ
+                  YAPIN
+                </Button>
               )}
             </div>
           </Form>

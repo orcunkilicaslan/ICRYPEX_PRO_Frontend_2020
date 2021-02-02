@@ -1,7 +1,6 @@
 import classNames from "classnames";
 
 export const Button = props => {
-
   const {
     className,
     type = "button",
@@ -21,5 +20,4 @@ export const Button = props => {
       {children}
     </button>
   );
-
 };
