@@ -9,6 +9,11 @@ const init = (initialLang = "en") => {
       debug: process.env.NODE_ENV === "development",
       resources: {
         en: {
+          navMenu: {
+            easybuysell: "Easy Buy-Sell",
+            easybuy: "Easy Buy",
+            easysell: "Easy Sell"
+          },
           common: {
             yes: "Yes",
             no: "No",
@@ -52,6 +57,11 @@ const init = (initialLang = "en") => {
           },
         },
         tr: {
+          navMenu: {
+            easybuysell: "Kolay Al-Sat",
+            easybuy: "Kolay Al",
+            easysell: "Kolay Sat"
+          },
           common: {
             yes: "Evet",
             no: "Hayır",
