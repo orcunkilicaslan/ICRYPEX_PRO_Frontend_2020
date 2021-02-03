@@ -80,11 +80,15 @@ export const removeFavoritePair = createAsyncThunk(
   }
 );
 
+const pairFilters = ["all", "starred", "TRY", "USD", "USDT"];
+
 const initialState = {
   selected: null,
   all: [],
   symbols: [],
   favorites: [],
+  visiblePairIDs: [],
+  pairFilter: pairFilters[0],
   cryptoCurrency: "",
   fiatCurrency: "",
 };
@@ -110,6 +114,39 @@ const pairSlice = createSlice({
         }
       },
     },
+    setPairFilter: {
+      reducer: (state, action) => {
+        const filter = action?.payload;
+
+        if (pairFilters.includes(filter)) {
+          state.pairFilter = filter;
+
+          switch (filter?.toLowerCase()) {
+            case "starred": {
+              state.visiblePairIDs = state.favorites?.length
+                ? state.all
+                    ?.filter(({ id }) => state.favorites.includes(id))
+                    .map(({ id }) => id)
+                : [];
+              break;
+            }
+            case "all": {
+              state.visiblePairIDs = state.all.map(({ id }) => id);
+              break;
+            }
+            default: {
+              state.visiblePairIDs = state.all
+                ?.filter(({ name }) => {
+                  const [_, fiatCurrency] = getPairTuple(name); // eslint-disable-line
+
+                  return filter === fiatCurrency;
+                })
+                .map(({ id }) => id);
+            }
+          }
+        }
+      },
+    },
     reset: state => {
       for (const [key, value] of Object.entries(initialState)) {
         state[key] = value;
@@ -118,7 +155,11 @@ const pairSlice = createSlice({
   },
   extraReducers: {
     [fetchSettings.fulfilled]: (state, action) => {
-      const all = action?.payload?.description?.settings?.pairs;
+      const all = action?.payload?.description?.settings?.pairs?.map?.(pair => {
+        const { id, ...rest } = pair;
+
+        return { id: parseInt(id, 10), ...rest };
+      });
       const symbols = all.map?.(({ symbol }) => symbol);
 
       if (!state.selected) {
@@ -134,16 +175,18 @@ const pairSlice = createSlice({
       state.symbols = symbols;
     },
     [fetchFavoritePairs.fulfilled]: (state, action) => {
-      state.favorites = action?.payload?.description;
+      const favorites = action?.payload?.description;
+
+      state.favorites = favorites;
+      if (state.pairFilter === "starred") {
+        state.visiblePairIDs = state.visiblePairIDs.filter(
+          id => favorites.includes(id)
+        );
+      }
     },
-    // [mergeData.fulfilled]: (state, action) => {
-    //   const prices = action?.payload?.prices;
-    //   const selected = state.all.find(pair => symbol === pair?.symbol);
-    //   if (selected) state.selected = selected;
-    // },
   },
 });
 
-export const { reset, setSelectedPair } = pairSlice.actions;
+export const { reset, setSelectedPair, setPairFilter } = pairSlice.actions;
 
 export default pairSlice.reducer;

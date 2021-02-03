@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useMemo, useEffect } from "react";
 import { ButtonGroup, Input } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -16,21 +16,39 @@ import {
   addFavoritePair,
   removeFavoritePair,
   setSelectedPair,
+  setPairFilter,
 } from "~/state/slices/pair.slice";
 
 const MarketDataSymbol = props => {
   const dispatch = useDispatch();
-  const favoritePairIDs = useSelector(state => state.pair.favorites);
+  const { t } = useTranslation(["finance", "common"]);
+  const filters = [
+    { label: "TRY", filter: "TRY" },
+    { label: "USD", filter: "USD" },
+    { label: "USDT", filter: "USDT" },
+    { label: t("common:all"), filter: "all" },
+  ];
+  const {
+    favorites: favoritePairIDs,
+    pairFilter,
+    visiblePairIDs,
+  } = useSelector(state => state.pair);
   const { accesstoken } = useSelector(state => state.api);
   const { prices: pricesData = [] } = useSelector(state => state.socket);
-  const { t } = useTranslation(["finance", "common"]);
-  const tabs = ["TRY", "USD", "USDT", t("common:all")];
-  const [activeTab, setActiveTab] = useState(tabs[tabs.length - 1]);
+  const visiblePrices = useMemo(() => {
+    return pricesData.filter(({ id }) => {
+      return visiblePairIDs.includes(id);
+    });
+  }, [visiblePairIDs, pricesData]);
   useSocket("prices");
 
   useEffect(() => {
     if (accesstoken) dispatch(fetchFavoritePairs());
   }, [dispatch, accesstoken]);
+
+  const onPairFilter = filter => {
+    dispatch(setPairFilter(filter));
+  };
 
   const onAddFavorite = pairname => {
     dispatch(addFavoritePair(pairname));
@@ -48,21 +66,30 @@ const MarketDataSymbol = props => {
     <div className="marketdata-symbol">
       <div className="tabcont tabcont-filterbar siteformui row">
         <ButtonGroup size="sm" className="col">
-          <Button type="button" size="sm" variant="secondary">
-            <MdTableFavIcon className="filterfavico" />
-          </Button>
-          {tabs.map(elem => {
-            const cls = classnames({ active: elem === activeTab });
+          {accesstoken ? (
+            <Button
+              type="button"
+              size="sm"
+              variant="secondary"
+              className={classnames({ active: "starred" === pairFilter })}
+              onClick={() => onPairFilter("starred")}
+            >
+              <MdTableFavIcon className="filterfavico" />
+            </Button>
+          ) : null}
+          {filters.map(({ label, filter }) => {
+            const cls = classnames({ active: filter === pairFilter });
 
             return (
               <Button
-                key={elem}
+                key={filter}
                 type="button"
                 size="sm"
                 variant="secondary"
                 className={cls}
+                onClick={() => onPairFilter(filter)}
               >
-                {elem}
+                {label}
               </Button>
             );
           })}
@@ -102,7 +129,7 @@ const MarketDataSymbol = props => {
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody scrollbar striped hovered>
-            {pricesData.map((data = {}) => {
+            {visiblePrices.map((data = {}) => {
               const {
                 id,
                 name,
