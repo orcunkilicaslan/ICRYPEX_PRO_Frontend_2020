@@ -1,6 +1,6 @@
 import { Container, Row } from "reactstrap";
 import MarketData from "~/components/MarketData/MarketData.jsx";
-import MainCont from "~/components/MainCont.jsx";
+import PrimaryMainCont from "~/components/PrimaryMainCont.jsx";
 
 const EasyBuySellBody = props => {
   return (
@@ -11,12 +11,17 @@ const EasyBuySellBody = props => {
                       <MarketData />
                   </aside>
                   <section className="main-body-rightcont col">
-                      <MainCont box>
-                          <MainCont.Title titleName="Kolay Al Sat" />
-                          <MainCont.Content contentName="easybuysell">
-                              Kolay Al Sat Content
-                          </MainCont.Content>
-                      </MainCont>
+                      <PrimaryMainCont box>
+                          <PrimaryMainCont.MainTitle titleName="Kolay Al Sat" />
+                          <PrimaryMainCont.MainContent contentClassName="easybuysell">
+                              <PrimaryMainCont.Sub className="easybuysell" titleName="Kolay Al Sat">
+                                  <PrimaryMainCont.SubTitle titleName="Kolay Al Sat" />
+                                  <PrimaryMainCont.SubContent>
+                                      Content
+                                  </PrimaryMainCont.SubContent>
+                              </PrimaryMainCont.Sub>
+                          </PrimaryMainCont.MainContent>
+                      </PrimaryMainCont>
                   </section>
               </Row>
           </Container>
