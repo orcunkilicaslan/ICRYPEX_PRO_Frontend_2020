@@ -15,8 +15,14 @@ const apiPersistConfig = {
   blacklist: ["settingno", "mediumid", "versionno"],
 };
 
+const UIPersistConfig = {
+  key: "ui",
+  storage,
+  blacklist: ["openModal"],
+};
+
 const rootReducer = combineReducers({
-  ui: uiReducer,
+  ui: persistReducer(UIPersistConfig, uiReducer),
   api: persistReducer(apiPersistConfig, apiReducer),
   user: userReducer,
   alarm: alarmReducer,
