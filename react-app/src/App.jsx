@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 import "./App.scss";
 import Header from "~/components/Header/Header.jsx";
-import { ProView } from "./pages/ProView/ProView.jsx";
+import { ProTrading } from "./pages/ProTrading/ProTrading.jsx";
 import { EasyBuySell }from "./pages/EasyBuySell/EasyBuySell.jsx";
 import { useSocket } from "~/state/hooks/";
 
@@ -53,7 +53,7 @@ const App = props => {
       <Header />
       <Switch>
         <Route exact path="/">
-          <ProView />
+          <ProTrading />
         </Route>
         <Route exact path="/kolay">
           <EasyBuySell />

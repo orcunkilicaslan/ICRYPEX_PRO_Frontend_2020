@@ -2,7 +2,7 @@ import OrderBook from "~/components/OrderBook/OrderBook.jsx";
 import BuySellAction from "~/components/BuySellAction/BuySellAction.jsx";
 import OpenOrder from "~/components/OpenOrder/OpenOrder.jsx";
 
-const ProViewFooter = props => {
+const ProTradingFooter = props => {
   return (
     <section className="main-foot main-h100">
       <div className="container-fluid">
@@ -22,4 +22,4 @@ const ProViewFooter = props => {
   );
 };
 
-export default ProViewFooter;
+export default ProTradingFooter;
