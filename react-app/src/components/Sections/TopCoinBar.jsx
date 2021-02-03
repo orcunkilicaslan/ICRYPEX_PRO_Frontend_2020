@@ -78,7 +78,6 @@ const TopCoinBar = props => {
       excavating: 55555,
     };
   } else selectedPriceData = {};
-  console.log({ selectedPriceData });
 
   useEffect(() => {
     if (accesstoken) dispatch(fetchPriceAlarms());
