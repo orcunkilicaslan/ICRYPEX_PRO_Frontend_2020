@@ -55,7 +55,7 @@ const App = props => {
         <Route exact path="/">
           <ProTrading />
         </Route>
-        <Route exact path="/kolay">
+        <Route exact path="/kolay-al">
           <EasyBuySell />
         </Route>
       </Switch>
