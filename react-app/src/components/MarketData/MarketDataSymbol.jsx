@@ -15,6 +15,7 @@ import {
   fetchFavoritePairs,
   addFavoritePair,
   removeFavoritePair,
+  setSelectedPair,
 } from "~/state/slices/pair.slice";
 
 const MarketDataSymbol = props => {
@@ -37,6 +38,10 @@ const MarketDataSymbol = props => {
 
   const onRemoveFavorite = pairname => {
     dispatch(removeFavoritePair(pairname));
+  };
+
+  const onSelectPair = symbol => {
+    dispatch(setSelectedPair(symbol));
   };
 
   return (
@@ -116,7 +121,7 @@ const MarketDataSymbol = props => {
               };
 
               return (
-                <Table.Tr key={symbol}>
+                <Table.Tr key={symbol} onClick={() => onSelectPair(symbol)}>
                   {accesstoken ? (
                     <Table.Td sizeauto className="fav">
                       <Button className="tablefavico" onClick={onClick}>

@@ -80,7 +80,7 @@ export const removeFavoritePair = createAsyncThunk(
 );
 
 const initialState = {
-  selected: "BTC / TRY",
+  selected: null,
   all: [],
   favorites: [],
 };
@@ -91,11 +91,14 @@ const pairSlice = createSlice({
   reducers: {
     setSelectedPair: {
       reducer: (state, action) => {
-        const pairname = action?.payload;
-        const isValid = pair =>
-          state.all.map(({ name }) => name).includes(pair);
+        const symbol = action?.payload;
+        const isValid = symbol =>
+          state.all.map(({ symbol }) => symbol).includes(symbol);
 
-        if (isValid(pairname)) state.selected = pairname;
+        if (isValid(symbol)) {
+          const selected = state.all.find(pair => symbol === pair?.symbol);
+          if (selected) state.selected = selected;
+        }
       },
     },
     reset: state => {
@@ -106,7 +109,10 @@ const pairSlice = createSlice({
   },
   extraReducers: {
     [fetchSettings.fulfilled]: (state, action) => {
-      state.all = action?.payload?.description?.settings?.pairs;
+      const all = action?.payload?.description?.settings?.pairs;
+
+      if (!state.selected) state.selected = all && all[0];
+      state.all = all;
     },
     [fetchFavoritePairs.fulfilled]: (state, action) => {
       state.favorites = action?.payload?.description;
