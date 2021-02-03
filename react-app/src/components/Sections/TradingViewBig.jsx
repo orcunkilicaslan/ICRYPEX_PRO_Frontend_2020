@@ -1,6 +1,6 @@
 import TradingViewWidget from "react-tradingview-widget";
 
-const CompTradingViewBig = props => {
+const TradingViewBig = props => {
   return (
     <div className="mainbox mainbox-tradingviewbig">
       <div className="tradingviewbig">
@@ -27,4 +27,4 @@ const CompTradingViewBig = props => {
   );
 };
 
-export default CompTradingViewBig;
+export default TradingViewBig;

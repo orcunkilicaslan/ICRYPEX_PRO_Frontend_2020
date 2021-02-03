@@ -1,8 +1,8 @@
-import OrderBook from "../OrderBook/OrderBook.jsx";
-import BuySellAction from "../BuySellAction/BuySellAction.jsx";
-import OpenOrder from "../OpenOrder/OpenOrder.jsx";
+import OrderBook from "~/components/OrderBook/OrderBook.jsx";
+import BuySellAction from "~/components/BuySellAction/BuySellAction.jsx";
+import OpenOrder from "~/components/OpenOrder/OpenOrder.jsx";
 
-const MainLayoutFoot = props => {
+const ProViewFooter = props => {
   return (
     <section className="main-foot main-h100">
       <div className="container-fluid">
@@ -22,4 +22,4 @@ const MainLayoutFoot = props => {
   );
 };
 
-export default MainLayoutFoot;
+export default ProViewFooter;

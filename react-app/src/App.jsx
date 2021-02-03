@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useEffect } from "react";
 
 import "./App.scss";
-import Header from "./components/Header/Header.jsx";
-import { Main } from "./components/Main/Main.jsx";
-import BuySell from "./pages/BuySell";
+import Header from "~/components/Header/Header.jsx";
+import { ProView } from "./pages/ProView/ProView.jsx";
+import { EasyBuySell }from "./pages/EasyBuySell/EasyBuySell.jsx";
 import { useSocket } from "~/state/hooks/";
 
 const App = props => {
@@ -53,10 +53,10 @@ const App = props => {
       <Header />
       <Switch>
         <Route exact path="/">
-          <Main />
+          <ProView />
         </Route>
         <Route exact path="/kolay">
-          <BuySell />
+          <EasyBuySell />
         </Route>
       </Switch>
     </Router>

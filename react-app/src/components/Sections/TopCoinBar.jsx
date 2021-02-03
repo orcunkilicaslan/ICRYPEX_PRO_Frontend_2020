@@ -46,7 +46,7 @@ const pricelist = {
   },
 };
 
-const CompCryptocoinbar = props => {
+const TopCoinBar = props => {
   const { t } = useTranslation(["coinbar", "common"]);
   const dispatch = useDispatch();
   const { all: allAlarms, isCreating } = useSelector(state => state.alarm);
@@ -101,7 +101,7 @@ const CompCryptocoinbar = props => {
   };
 
   return (
-    <div className="mainbox mainbox-cryptocoinbar">
+    <section className="mainbox mainbox-cryptocoinbar">
       <div className="cryptocoinbar siteformui">
         <InputGroup size="lg">
           <InputGroupAddon addonType="prepend">
@@ -335,8 +335,8 @@ const CompCryptocoinbar = props => {
           </div>
         </ModalBody>
       </Modal>
-    </div>
+    </section>
   );
 };
 
-export default CompCryptocoinbar;
+export default TopCoinBar;
