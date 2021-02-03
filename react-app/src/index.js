@@ -24,6 +24,11 @@ const MD5_secret = process.env.REACT_APP_MD5_SECRET;
 const SOCKET_BASE = process.env.REACT_APP_SOCKET_BASE;
 const isProd = process.env.NODE_ENV === "production";
 
+window.__env = {
+  HEAD: __env.HEAD, // eslint-disable-line
+  NODE_ENV: process.env.NODE_ENV,
+};
+
 run();
 
 let Store, Persistor;
