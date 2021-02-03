@@ -11,7 +11,6 @@ import {
 } from "../slices/api.slice";
 
 const isProd = process.env.NODE_ENV === "production";
-// const API_BASE = process.env.REACT_APP_API_BASE;
 let baseURL = isProd ? "/api" : "";
 const fetch = retry(_fetch);
 
@@ -69,6 +68,7 @@ const instance = {
 
                 return doRetry({
                   headers: { "x-access-token": payload?.description },
+                  retries: isProd ? 10 : 5,
                 });
               }
               default:
