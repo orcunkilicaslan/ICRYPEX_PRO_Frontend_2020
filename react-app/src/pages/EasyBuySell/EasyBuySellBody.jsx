@@ -4,6 +4,8 @@ import {useTranslation} from "react-i18next";
 
 import MarketData from "~/components/MarketData/MarketData.jsx";
 import PrimaryMainCont from "~/components/PrimaryMainCont.jsx";
+import EasyBuySellFormBuy from "~/pages/EasyBuySell/EasyBuySellFormBuy.jsx";
+import EasyBuySellFormSell from "~/pages/EasyBuySell/EasyBuySellFormSell.jsx";
 
 const EasyBuySellBody = props => {
 
@@ -51,10 +53,10 @@ const EasyBuySellBody = props => {
                                         </Nav>
                                         <Switch>
                                             <Route exact path="/kolay-al">
-                                                <div>KOLAY AL</div>
+                                                <EasyBuySellFormBuy />
                                             </Route>
                                             <Route exact path="/kolay-sat">
-                                                <div>KOLAY SAT</div>
+                                                <EasyBuySellFormSell />
                                             </Route>
                                         </Switch>
 

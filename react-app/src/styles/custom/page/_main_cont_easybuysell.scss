@@ -50,11 +50,18 @@
               color: $site-clr-white;
             }
 
+            .labelassets .btn,
+            .labelprice .btn{
+              margin: 0;
+              padding: 0;
+              height: 16px;
+            }
+
             .labelassets{}
 
             .labelprice{
 
-              svg.tildesm{
+              .tildesm{
                 position: relative;
                 top: -1px;
 
