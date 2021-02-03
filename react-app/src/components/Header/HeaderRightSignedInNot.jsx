@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
@@ -22,6 +23,7 @@ const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
 
 const HeaderRightSignedInNot = props => {
   const dispatch = useDispatch();
+  const { t } = useTranslation("common");
   const { user, countryCodes, onSignup, onSignin, onSigninSMS } = props;
   const { openModal } = useSelector(state => state.ui);
   const [signUpForm, setSignUpForm] = useState({
@@ -142,7 +144,9 @@ const HeaderRightSignedInNot = props => {
         autoFocus={false}
         backdrop="static"
       >
-        <ModalHeader toggle={clearOpenModals}>ÜYE GİRİŞİ</ModalHeader>
+        <ModalHeader toggle={clearOpenModals}>
+          {t("signin").toUpperCase()}
+        </ModalHeader>
         <ModalBody className="modalcomp modalcomp-sign">
           <div className="modalcomp-sign-icon">
             <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
@@ -252,7 +256,9 @@ const HeaderRightSignedInNot = props => {
         autoFocus={false}
         backdrop="static"
       >
-        <ModalHeader toggle={clearOpenModals}>KAYIT OL</ModalHeader>
+        <ModalHeader toggle={clearOpenModals}>
+          {t("signup").toUpperCase()}
+        </ModalHeader>
         <ModalBody className="modalcomp modalcomp-sign">
           <div className="modalcomp-sign-icon">
             <IconSet sprite="sprtlgclrd" size="50gray" name="newuser" />
