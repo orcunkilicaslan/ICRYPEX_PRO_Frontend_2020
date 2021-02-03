@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as api from "../api";
 import { fetchSettings } from "./api.slice";
+import { getPairTuple } from "~/util/";
 
 export const fetchFavoritePairs = createAsyncThunk(
   "pair/fetchfavorites",
@@ -82,7 +83,10 @@ export const removeFavoritePair = createAsyncThunk(
 const initialState = {
   selected: null,
   all: [],
+  symbols: [],
   favorites: [],
+  cryptoCurrency: "",
+  fiatCurrency: "",
 };
 
 const pairSlice = createSlice({
@@ -92,12 +96,17 @@ const pairSlice = createSlice({
     setSelectedPair: {
       reducer: (state, action) => {
         const symbol = action?.payload;
-        const isValid = symbol =>
-          state.all.map(({ symbol }) => symbol).includes(symbol);
 
-        if (isValid(symbol)) {
+        if (state.symbols.includes(symbol)) {
           const selected = state.all.find(pair => symbol === pair?.symbol);
-          if (selected) state.selected = selected;
+
+          if (selected) {
+            const [cryptoCurrency, fiatCurrency] = getPairTuple(selected.name);
+
+            state.selected = selected;
+            state.cryptoCurrency = cryptoCurrency;
+            state.fiatCurrency = fiatCurrency;
+          }
         }
       },
     },
@@ -110,13 +119,28 @@ const pairSlice = createSlice({
   extraReducers: {
     [fetchSettings.fulfilled]: (state, action) => {
       const all = action?.payload?.description?.settings?.pairs;
+      const symbols = all.map?.(({ symbol }) => symbol);
 
-      if (!state.selected) state.selected = all && all[0];
+      if (!state.selected) {
+        const pair = all?.[0];
+        const [cryptoCurrency, fiatCurrency] = getPairTuple(pair.name);
+
+        state.selected = pair;
+        state.cryptoCurrency = cryptoCurrency;
+        state.fiatCurrency = fiatCurrency;
+      }
+
       state.all = all;
+      state.symbols = symbols;
     },
     [fetchFavoritePairs.fulfilled]: (state, action) => {
       state.favorites = action?.payload?.description;
     },
+    // [mergeData.fulfilled]: (state, action) => {
+    //   const prices = action?.payload?.prices;
+    //   const selected = state.all.find(pair => symbol === pair?.symbol);
+    //   if (selected) state.selected = selected;
+    // },
   },
 });
 

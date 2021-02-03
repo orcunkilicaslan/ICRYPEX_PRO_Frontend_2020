@@ -14,7 +14,6 @@ import {
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
-// import classnames from "classnames";
 
 import { ReactComponent as PerLineIcon } from "~/assets/images/icons/path_icon_pericon.svg";
 import { IconSet } from "../IconSet.jsx";
@@ -50,12 +49,36 @@ const TopCoinBar = props => {
   const { t } = useTranslation(["coinbar", "common"]);
   const dispatch = useDispatch();
   const { all: allAlarms, isCreating } = useSelector(state => state.alarm);
-  const { selected: currentPair } = useSelector(state => state.pair);
+  const {
+    selected: currentPair,
+    fiatCurrency: selectedFiatCurrency,
+  } = useSelector(state => state.pair);
+  const { prices: pricesData = [] } = useSelector(state => state.socket);
   const { accesstoken } = useSelector(state => state.api);
   const [alarmModal, setAlarmModal] = useState(false);
   const [rangeAlarmPortfolio, setRangeAlarmPortfolio] = useState(0);
   const [amount, setAmount] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
+
+  let selectedPriceData = pricesData.find(
+    ({ symbol }) => symbol === currentPair?.symbol
+  );
+  if (selectedPriceData) {
+    const { high24hour, low24hour, avarage24hour, volume } = selectedPriceData;
+
+    selectedPriceData = {
+      lastPrice: 9999,
+      bestBuy: 111,
+      bestSell: 222,
+      change24h: "3%",
+      high24h: high24hour,
+      low24h: low24hour,
+      average24h: avarage24hour,
+      volume,
+      excavating: 55555,
+    };
+  } else selectedPriceData = {};
+  console.log({ selectedPriceData });
 
   useEffect(() => {
     if (accesstoken) dispatch(fetchPriceAlarms());
@@ -82,7 +105,7 @@ const TopCoinBar = props => {
   const createAlarm = async () => {
     setErrorMessage("");
     const data = {
-      pairname: currentPair,
+      pairname: currentPair?.name,
       pricealarmtypeid: rangeAlarmPortfolio > 0 ? 1 : 2,
       price: amount,
     };
@@ -105,7 +128,9 @@ const TopCoinBar = props => {
       <div className="cryptocoinbar siteformui">
         <InputGroup size="lg">
           <InputGroupAddon addonType="prepend">
-            <InputGroupText className="selectedcur">BTC/USDT</InputGroupText>
+            <InputGroupText className="selectedcur">
+              {currentPair.name}
+            </InputGroupText>
           </InputGroupAddon>
           <div className="cryptostatsbar">
             <div className="cryptostatsbar-biger">
@@ -114,11 +139,13 @@ const TopCoinBar = props => {
             </div>
             <div className="cryptostatsbar-stats">
               <ul className="bigstatslist">
-                {Object.entries(pricelist.data).map(([key, value]) => {
+                {Object.entries(selectedPriceData).map(([key, value]) => {
                   return (
                     <li key={key}>
                       <h6>{t(key)}</h6>
-                      <p>{value} TRY</p>
+                      <p>
+                        {value} {selectedFiatCurrency}
+                      </p>
                     </li>
                   );
                 })}
@@ -197,9 +224,9 @@ const TopCoinBar = props => {
                     className="text-right"
                     value={amount}
                     onChange={onAmount}
-                    min={0}
-                    max={999999999}
-                    step={10}
+                    // min={0}
+                    // max={999999999}
+                    // step={10}
                   />
                   <InputGroupAddon addonType="append">
                     <InputGroupText>TRY</InputGroupText>
@@ -303,11 +330,6 @@ const TopCoinBar = props => {
                 </Table.Thead>
                 <Table.Tbody striped hovered scrollbar>
                   {allAlarms.map(({ id, pairname, price, mdper }) => {
-                    // const cls = classnames({
-                    //   sitecolorgreen: mdper === "up",
-                    //   sitecolorred: mdper !== "up",
-                    // });
-
                     return (
                       <Table.Tr key={id}>
                         <Table.Td sizeauto className="symb">

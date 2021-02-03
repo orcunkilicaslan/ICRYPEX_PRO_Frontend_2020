@@ -25,3 +25,8 @@ export const makeLocalKey = async secret => {
     localkey,
   };
 };
+
+// "BTC / TRY" -> ["BTC", "TRY"]
+export const getPairTuple = pairname => {
+  return pairname?.split?.("/")?.map(string => string.trim());
+};
