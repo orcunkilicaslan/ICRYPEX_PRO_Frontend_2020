@@ -76,6 +76,18 @@ function render() {
   );
 }
 
-if (process.env.NODE_ENV === "development" && module.hot) {
-  module.hot.accept("./App", render);
+if (!isProd) {
+  if (module.hot) module.hot.accept("./App", render);
+
+  window.__util = {
+    async purge() {
+      try {
+        await Persistor.purge();
+        console.warn("localstorage data purged");
+      } catch (err) {
+        console.error("error while purgin localstorage data");
+        console.dir(err);
+      }
+    },
+  };
 }
