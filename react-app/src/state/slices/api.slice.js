@@ -3,6 +3,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from "../api";
 import { signoutUser } from "./user.slice";
 
+let refreshPromise;
+
 export const fetchServerDeviceKey = createAsyncThunk(
   "api/serverdevicekey",
   async (_, { getState, rejectWithValue }) => {
@@ -97,7 +99,9 @@ export const refreshToken = createAsyncThunk(
     } = getState();
 
     try {
-      const response = await api.refreshToken(
+      if (refreshPromise) return refreshPromise.then(({ data }) => data);
+
+      refreshPromise = api.refreshToken(
         { accesstoken },
         {
           headers: {
@@ -105,6 +109,9 @@ export const refreshToken = createAsyncThunk(
           },
         }
       );
+
+      const response = await refreshPromise;
+      refreshPromise = null;
 
       return response.data;
     } catch ({ data }) {
