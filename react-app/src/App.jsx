@@ -1,14 +1,17 @@
 // import "bootstrap/dist/js/bootstrap.bundle.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import "./App.scss";
 import Header from "~/components/Header/Header.jsx";
 import { ProTrading } from "./pages/ProTrading/ProTrading.jsx";
-import { EasyBuySell }from "./pages/EasyBuySell/EasyBuySell.jsx";
+import { EasyBuySell } from "./pages/EasyBuySell/EasyBuySell.jsx";
 import { useSocket } from "~/state/hooks/";
+import { refreshToken } from "./state/slices/api.slice";
 
 const App = props => {
+  const dispatch = useDispatch();
   const { socket } = useSocket();
 
   useEffect(() => {
@@ -24,6 +27,10 @@ const App = props => {
       // }
     });
     socket.on("connect_error", error => {
+      if (error?.message?.includes("accesstoken")) {
+        dispatch(refreshToken());
+      }
+      // debugger;
       console.error("Websocket connection error %s", error);
     });
     socket.io.on("reconnect_attempt", attempt => {
@@ -46,7 +53,7 @@ const App = props => {
     socket.io.on("ping", () => {
       console.log("Ping");
     });
-  }, [socket]);
+  }, [dispatch, socket]);
 
   return (
     <Router>

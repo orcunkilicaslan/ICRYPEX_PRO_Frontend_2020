@@ -45,16 +45,15 @@ module.exports = {
   //     ],
   //   ],
   // },
-  // devServer: whenDev(() => ({
-  //   https: true,
-  //   pfx: fs.readFileSync(path.resolve("./localhost.pfx")),
-  //   pfxPassphrase: "temp123!",
-  //   proxy: {
-  //     "/api": {
-  //       target: "https://mobile.guvenlibtc.com:443/api",
-  //       // changeOrigin: true,
-  //       secure: false,
-  //     },
-  //   },
-  // })),
+  devServer: {
+    https: true,
+    proxy: [
+      {
+        context: ["/socket", "/socket.io", "/api"],
+        target: "https://mobile.guvenlibtc.com:443",
+        changeOrigin: true,
+        secure: false,
+      },
+    ],
+  },
 };

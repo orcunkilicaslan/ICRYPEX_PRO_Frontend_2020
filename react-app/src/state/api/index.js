@@ -11,8 +11,8 @@ import {
 } from "../slices/api.slice";
 
 const isProd = process.env.NODE_ENV === "production";
-let baseURL = isProd ? "/api" : "";
 const fetch = retry(_fetch);
+let baseURL = process.env.REACT_APP_API_BASE;
 
 const instance = {
   post: (uri, body, opts = {}) => {
