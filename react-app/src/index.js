@@ -8,7 +8,7 @@ import { SocketIOProvider } from "use-socketio";
 import ms from "ms";
 
 import "./index.scss";
-// import reportWebVitals from "./reportWebVitals";
+import reportWebVitals from "./reportWebVitals";
 import { getStore } from "./state/";
 import initI18n from "./setupI18n";
 import { makeLocalKey } from "./util";
@@ -19,16 +19,19 @@ import {
   setDeviceId,
   setLocalKey,
 } from "./state/slices/api.slice";
+import { debug } from "~/util";
 
 const MD5_secret = process.env.REACT_APP_MD5_SECRET;
 const SOCKET_BASE = process.env.REACT_APP_SOCKET_BASE;
 const isProd = process.env.NODE_ENV === "production";
+const log = debug.extend("index");
 
 window.__env = {
   HEAD: __env.HEAD, // eslint-disable-line
   NODE_ENV: process.env.NODE_ENV,
 };
 
+reportWebVitals(debug.extend("vitals"));
 run();
 
 let Store, Persistor;
@@ -48,9 +51,6 @@ async function run() {
   await store.dispatch(fetchPreloginToken());
   await store.dispatch(fetchSettings());
   render();
-
-  // Learn more: https://bit.ly/CRA-vitals
-  // reportWebVitals(console.log);
 }
 
 function render() {
@@ -83,10 +83,9 @@ if (!isProd) {
     async purge() {
       try {
         await Persistor.purge();
-        console.warn("localstorage data purged");
+        log("Local database purged");
       } catch (err) {
-        console.error("error while purgin localstorage data");
-        console.dir(err);
+        log("Error while purging local database %O", err);
       }
     },
   };

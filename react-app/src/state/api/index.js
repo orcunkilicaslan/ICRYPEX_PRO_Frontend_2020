@@ -9,10 +9,12 @@ import {
   fetchPreloginToken,
   refreshToken,
 } from "../slices/api.slice";
+import { debug } from "~/util";
 
 const isProd = process.env.NODE_ENV === "production";
 const fetch = retry(_fetch);
 let baseURL = process.env.REACT_APP_API_BASE;
+const log = debug.extend("api");
 
 const instance = {
   post: (uri, body, opts = {}) => {
@@ -34,7 +36,7 @@ const instance = {
       retryOn: async (attempt, error, response) => {
         if (error !== null || response.status >= 400) {
           if (response.status === 403) {
-            console.error("status 403", { error, response });
+            debug("403 - skipping retry %o", { error, response });
             return false;
           }
 
@@ -45,7 +47,7 @@ const instance = {
           const { data } = await getJSONData(response);
 
           if (data?.status === 0) {
-            console.error(`${uri} | ${data.type} | ${data.errormessage}`);
+            debug(`${uri} | ${data.type} | ${data.errormessage}`);
 
             switch (data?.type) {
               case "prelogintoken": {
@@ -87,7 +89,7 @@ const instance = {
         return false;
 
         function doRetry(value) {
-          console.warn(
+          log(
             `${response?.status} | Retrying request to ${uri}. Attempt no ${
               attempt + 1
             }`,
@@ -101,7 +103,7 @@ const instance = {
     merge(options.headers, headers);
 
     return fetch(`${baseURL}${uri}`, options).then(async response => {
-      console.log(`${response.status} | ${uri} %O`, response.data);
+      log(`${response.status} | ${uri} %O`, response.data);
 
       const { data } = await getJSONData(response);
 

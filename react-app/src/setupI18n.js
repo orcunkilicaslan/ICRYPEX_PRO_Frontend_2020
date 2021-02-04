@@ -6,7 +6,7 @@ export const SUPPORTED_LANGUAGES = ["en", "tr"];
 const init = (initialLang = "en") => {
   return new Promise((resolve, reject) => {
     i18n.use(initReactI18next).init({
-      debug: process.env.NODE_ENV === "development",
+      debug: Boolean(process.env.REACT_APP_DEBUG),
       resources: {
         en: {
           app: {

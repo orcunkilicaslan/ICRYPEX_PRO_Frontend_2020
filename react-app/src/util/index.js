@@ -5,6 +5,11 @@ import {
   // getInfo,
   // saveCurrentDeviceId,
 } from "@binance/fingerprint";
+import _debug from "debug";
+
+export const debug = _debug("pro");
+const log = debug.extend("util");
+if (process.env.REACT_APP_DEBUG) _debug.enable("pro:*");
 
 let deviceuuid, localkey;
 export const makeLocalKey = async secret => {
@@ -15,7 +20,7 @@ export const makeLocalKey = async secret => {
       deviceuuid = fingerprint;
       localkey = cryptLib.encryptPlainTextWithRandomIV(fingerprint, secret);
     } catch (err) {
-      console.error("Error while generating local key", err);
+      log("Error while generating local key %O", err);
       throw err;
     }
   }

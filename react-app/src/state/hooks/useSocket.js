@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
 import { useSocket as _useSocket } from "use-socketio";
 import { useDispatch, useSelector } from "react-redux";
+import { debug } from "~/util";
 
 import { mergeData } from "../slices/socket.slice";
+
+const log = debug.extend("socket");
 
 export const useSocket = eventKey => {
   const dispatch = useDispatch();
   const { accesstoken } = useSelector(state => state.api);
   const [data, setData] = useState({});
   const { socket, subscribe, unsubscribe } = _useSocket(eventKey, data => {
-    console.log("event: %s %O", eventKey, data);
+    myLog(eventKey, data);
+    // throttledMerge(data);
     dispatch(mergeData({ [eventKey]: data }));
     setData(data);
   });
@@ -21,7 +25,7 @@ export const useSocket = eventKey => {
       };
 
       if (socket.disconnected) {
-        console.log("Connecting to %s", socket.io.uri);
+        log("Connecting to %s", socket.io.uri);
         socket.connect();
       }
 
@@ -29,7 +33,16 @@ export const useSocket = eventKey => {
         socket.disconnect();
       };
     }
-  }, [accesstoken, socket]);
+  }, [accesstoken, socket]); // eslint-disable-line
 
   return { data, socket, subscribe, unsubscribe };
 };
+
+function myLog(key, data) {
+  switch (key) {
+    case "prices":
+      return log("%s: %s pairs", key, data.length);
+    default:
+      break;
+  }
+}

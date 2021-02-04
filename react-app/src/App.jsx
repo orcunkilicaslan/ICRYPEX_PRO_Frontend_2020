@@ -9,6 +9,9 @@ import { ProTrading } from "./pages/ProTrading/ProTrading.jsx";
 import { EasyBuySell } from "./pages/EasyBuySell/EasyBuySell.jsx";
 import { useSocket } from "~/state/hooks/";
 import { refreshToken } from "./state/slices/api.slice";
+import { debug } from "~/util";
+
+const log = debug.extend("socket");
 
 const App = props => {
   const dispatch = useDispatch();
@@ -16,10 +19,10 @@ const App = props => {
 
   useEffect(() => {
     socket.on("connect", () => {
-      console.log("Websocket connected");
+      log("Connected");
     });
     socket.on("disconnect", reason => {
-      console.log("Websocket disconnected", reason);
+      log("Disconnected %s", reason);
 
       // if (reason === "io server disconnect") {
       //   // the disconnection was initiated by the server, you need to reconnect manually
@@ -30,28 +33,26 @@ const App = props => {
       if (error?.message?.includes("accesstoken")) {
         dispatch(refreshToken());
       }
-      // debugger;
-      console.error("Websocket connection error %s", error);
+
+      log("Connection error %o", error);
     });
     socket.io.on("reconnect_attempt", attempt => {
-      console.warn(`Attempting websocket reconnection no ${attempt}`);
+      log(`Attempting reconnection no ${attempt}`);
       // on reconnection, reset the transports option, as the Websocket
       // connection may have failed (caused by proxy, firewall, browser, ...)
       socket.io.opts.transports = ["polling", "websocket"];
     });
     socket.io.on("reconnect", attempt => {
-      console.warn(
-        `Succesfully reconnected to websocket on attempt ${attempt}`
-      );
+      log(`Reconnected on attempt ${attempt}`);
     });
     socket.io.on("reconnect_error", error => {
-      console.error("Websocket reconnection error %s", error);
+      log("Reconnection error %o", error);
     });
     socket.io.on("reconnect_failed", () => {
-      console.error("Websocket reconnection failed.");
+      log("Reconnection failed");
     });
     socket.io.on("ping", () => {
-      console.log("Ping");
+      log("Ping");
     });
   }, [dispatch, socket]);
 
