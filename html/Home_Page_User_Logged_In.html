@@ -63,14 +63,14 @@
                 </div>
                 <div class="header-right-icons">
                     <a class="headsignedinicon fullscreen" href="#" title="Tam Sayfa Görünümü" data-toggle="fullscreenbtn"><i class="icon-sprtsmclrd icon-20 icon-pagefullscreen hide"></i></a>
-                    <a class="headsignedinicon support d-none" href="#" title="Destek" rel="bookmark"><i class="icon-sprtsmclrd icon-20 icon-support"></i></a>
-                    <a class="headsignedinicon notif d-none" href="#" data-toggle="modal" data-target="#modalHeadNotifications"><span title="4 Yeni Bildiriminiz Var" data-toggle="tooltip" data-placement="bottom"><i class="icon-sprtsmclrd icon-20 icon-notif"></i><span class="badge badge-pill badge-danger">4</span></span></a>
+                    <a class="headsignedinicon support" href="#" title="Destek" rel="bookmark"><i class="icon-sprtsmclrd icon-20 icon-support"></i></a>
+                    <a class="headsignedinicon notif" href="#" data-toggle="modal" data-target="#modalHeadNotifications"><span title="4 Yeni Bildiriminiz Var" data-toggle="tooltip" data-placement="bottom"><i class="icon-sprtsmclrd icon-20 icon-notif"></i><span class="badge badge-pill badge-danger">4</span></span></a>
                 </div>
-                <div class="header-right-notsignedin">
+                <div class="header-right-notsignedin d-none">
                     <a class="btn btn-sm btn-secondary" href="#" title="Üye Girişi" data-toggle="modal" data-target="#modalHeadSignIn">Üye Girişi</a>
                     <a class="btn btn-sm btn-success" href="#" title="Kayıt Ol" data-toggle="modal" data-target="#modalHeadSignUp">Kayıt Ol</a>
                 </div>
-                <div class="header-right-signedin d-none">
+                <div class="header-right-signedin">
                     <a class="useraccountarea" href="#" title="Hesabım" data-toggle="modal" data-target="#modalHeadUserMenu">
                         <div class="useraccountarea-avatar rounded-pill">
                             <i class="icon-sprtlgclrd icon-50gray icon-user"></i>
@@ -1439,30 +1439,208 @@
                                     <div class="buysellaction-market">
                                         <div class="buysellaction-formarea row">
                                             <div class="col buycol">
-                                                <div class="usernotloginbox">
-                                                    <div class="usernotloginbox-content">
-                                                        <i class="icon-sprtlgclrd icon-50gray icon-close"></i>
-                                                        <h4>Bu Alanı Görüntüleyemiyorsunuz</h4>
-                                                        <p>Görüntüleyebilmeniz için "Kayıt Olun" yada "Üye Girişi" yapınız.</p>
-                                                        <div class="contbtn">
-                                                            <button type="button" class="btn btn-secondary btn-sm active">Üye Girişi</button>
-                                                            <button type="button" class="btn btn-success btn-sm">Kayıt Ol</button>
+                                                <form class="buysellaction-form siteformui" autocomplete="off" novalidate>
+                                                    <div class="formhead">
+                                                        <h4 class="formhead-title">BTC AL</h4>
+                                                        <div class="formhead-curr">
+                                                            <i class="icon-sprtsmclrd icon-16 icon-wallet"></i>
+                                                            <p>49,950,000.00 TRY</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="formfieldset">
+                                                        <div class="form-group input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Fiyat</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" value="12000.00">
+                                                            <div class="input-group-append">
+                                                                <select class="custom-select">
+                                                                    <option value="TRY">TRY</option>
+                                                                    <option value="USD">USD</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Miktar</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" value="1.842145">
+                                                            <div class="input-group-append">
+                                                                <select class="custom-select">
+                                                                    <option value="BTC">BTC</option>
+                                                                    <option value="ETH">ETH</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="formrange">
+                                                        <div class="row aligncenter">
+                                                            <div class="col-auto">
+                                                                <label>Portföy</label>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="rangeprogress">
+                                                                    <div class="rangeprogress-progress progress">
+                                                                        <div class="progress-bar" role="progressbar" style="width: 33.3333%" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                    </div>
+                                                                    <div class="rangeprogress-circle" data-val="">
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                    </div>
+                                                                    <output class="rangeprogress-bubble"></output>
+                                                                    <input class="rangeprogress-range custom-range" type="range" value="50" min="25" max="100" step="25" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row aligncenter">
+                                                            <div class="col-auto">
+                                                                <label>Toplam</label>
+                                                            </div>
+                                                            <div class="col text-right">
+                                                                <span>12,000,00.00 TRY</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="formbttm">
+                                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#buysellModalConfirm">BTC AL</button>
+                                                    </div>
+                                                </form>
+                                                <!-- Modal Add BuySell Transaction Confirmation -->
+                                                <div class="modal fade" id="buysellModalConfirm" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                                                        <div class="modal-content text-center">
+                                                            <div class="modal-close">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            </div>
+                                                            <div class="modal-body modal-confirm">
+                                                                <h4>İşlem Onayı</h4>
+                                                                <div class="sitetablediv mt-2">
+                                                                    <div class="tbl-tbody tbl-striped">
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td fxd text-left">İşlem Tipi</div>
+                                                                            <div class="tbl-td fxd text-right">Market - <span class="sitecolorgreen">Alış</span></div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td fxd text-left">Miktar - TRY</div>
+                                                                            <div class="tbl-td fxd text-right">999,999.99 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td fxd text-left">Miktar - BTC</div>
+                                                                            <div class="tbl-td fxd text-right">1.44804233 BTC</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td fxd text-left">Komisyon</div>
+                                                                            <div class="tbl-td fxd text-right">(0.18%) 1.32 TRY</div>
+                                                                        </div>
+                                                                        <div class="tbl-tr">
+                                                                            <div class="tbl-td fxd text-left">Toplam</div>
+                                                                            <div class="tbl-td fxd text-right">999,999.99 TRY</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-body modal-confirm d-none">
+                                                                <i class="icon-sprtlgclrd icon-50gray icon-check"></i>
+                                                                <h4>İşlem Onayı</h4>
+                                                                <p>İşleminiz Başarıyla Gerçekleştirildi.</p>
+                                                            </div>
+                                                            <div class="modal-footer row">
+                                                                <button type="button" class="btn btn-secondary active col" data-dismiss="modal">İPTAL ET</button>
+                                                                <button type="button" class="btn btn-primary col" data-toggle="modal" data-target="#buysellModalConfirmSuccess">ONAYLA</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="modal fade" id="buysellModalConfirmSuccess" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                                                        <div class="modal-content text-center">
+                                                            <div class="modal-close">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            </div>
+                                                            <div class="modal-body modal-confirm">
+                                                                <i class="icon-sprtlgclrd icon-50gray icon-check"></i>
+                                                                <h4>İşlem Onayı</h4>
+                                                                <p>İşleminiz Başarıyla Gerçekleştirildi.</p>
+                                                            </div>
+                                                            <div class="modal-footer row">
+                                                                <button type="button" class="btn btn-secondary active col" data-dismiss="modal">KAPAT</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Modal Add BuySell Transaction Confirmation -->
                                             </div>
                                             <div class="col sellcol">
-                                                <div class="usernotloginbox">
-                                                    <div class="usernotloginbox-content">
-                                                        <i class="icon-sprtlgclrd icon-50gray icon-close"></i>
-                                                        <h4>Bu Alanı Görüntüleyemiyorsunuz</h4>
-                                                        <p>Görüntüleyebilmeniz için "Kayıt Olun" yada "Üye Girişi" yapınız.</p>
-                                                        <div class="contbtn">
-                                                            <button type="button" class="btn btn-secondary btn-sm active">Üye Girişi</button>
-                                                            <button type="button" class="btn btn-success btn-sm">Kayıt Ol</button>
+                                                <form class="buysellaction-form siteformui" autocomplete="off" novalidate>
+                                                    <div class="formhead">
+                                                        <h4 class="formhead-title">BTC SAT</h4>
+                                                        <div class="formhead-curr">
+                                                            <i class="icon-sprtsmclrd icon-16 icon-wallet"></i>
+                                                            <p>49,950,000.00 TRY</p>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                    <div class="formfieldset">
+                                                        <div class="form-group input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Fiyat</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" value="12000.00">
+                                                            <div class="input-group-append">
+                                                                <select class="custom-select">
+                                                                    <option value="TRY">TRY</option>
+                                                                    <option value="USD">USD</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Miktar</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" value="1.842145">
+                                                            <div class="input-group-append">
+                                                                <select class="custom-select">
+                                                                    <option value="BTC">BTC</option>
+                                                                    <option value="ETH">ETH</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="formrange">
+                                                        <div class="row aligncenter">
+                                                            <div class="col-auto">
+                                                                <label>Portföy</label>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="rangeprogress">
+                                                                    <div class="rangeprogress-progress progress">
+                                                                        <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                    </div>
+                                                                    <div class="rangeprogress-circle" data-val="">
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                    </div>
+                                                                    <output class="rangeprogress-bubble"></output>
+                                                                    <input class="rangeprogress-range custom-range" type="range" min="25" max="100" step="25" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row aligncenter">
+                                                            <div class="col-auto">
+                                                                <label>Toplam</label>
+                                                            </div>
+                                                            <div class="col text-right">
+                                                                <span>12,000,00.00 TRY</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="formbttm">
+                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#buysellModalConfirm">BTC SAT</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
