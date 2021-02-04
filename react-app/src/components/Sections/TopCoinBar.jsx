@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   Form,
   FormGroup,
@@ -24,41 +24,40 @@ import {
   fetchPriceAlarms,
   deletePairPriceAlarm,
   deletePairPriceAlarms,
+  toggleHideOthers,
 } from "~/state/slices/alarm.slice";
+import { setOpenModal } from "~/state/slices/ui.slice";
+
 import { AlertResult } from "~/components/AlertResult";
 
 const STEP = 10;
 const MINIMUM = 0;
 const MAXIMUM = 999999999;
-const pricelist = {
-  coinid: 1,
-  data: {
-    lastPrice: "43,199",
-    bestBuy: "21,149",
-    bestSell: "12,345",
-    change24h: "10,539",
-    high24h: "24,247",
-    low24h: "7,357",
-    average24h: "32,643",
-    volume: "32,643",
-    excavating: "1,474,00",
-  },
-};
 
 const TopCoinBar = props => {
   const { t } = useTranslation(["coinbar", "common"]);
   const dispatch = useDispatch();
-  const { all: allAlarms, isCreating } = useSelector(state => state.alarm);
+  const {
+    all: allAlarms,
+    isCreating,
+    hideOthers,
+    byPair: byPairAlarms,
+  } = useSelector(state => state.alarm);
   const {
     selected: currentPair,
     fiatCurrency: selectedFiatCurrency,
   } = useSelector(state => state.pair);
   const { prices: pricesData = [] } = useSelector(state => state.socket);
   const { accesstoken } = useSelector(state => state.api);
-  const [alarmModal, setAlarmModal] = useState(false);
+  const { openModal } = useSelector(state => state.ui);
+  // const [alarmModal, setAlarmModal] = useState(false);
   const [rangeAlarmPortfolio, setRangeAlarmPortfolio] = useState(0);
   const [amount, setAmount] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
+  const visibleAlarms = useMemo(() => {
+    if (!hideOthers) return allAlarms;
+    else return byPairAlarms[currentPair?.name] || [];
+  }, [allAlarms, byPairAlarms, currentPair, hideOthers]);
 
   let selectedPriceData = pricesData.find(
     ({ symbol }) => symbol === currentPair?.symbol
@@ -82,10 +81,6 @@ const TopCoinBar = props => {
   useEffect(() => {
     if (accesstoken) dispatch(fetchPriceAlarms());
   }, [dispatch, accesstoken]);
-
-  const alarmModalToggle = () => {
-    setAlarmModal(!alarmModal);
-  };
 
   const onAmount = arg => {
     let newAmount;
@@ -120,6 +115,18 @@ const TopCoinBar = props => {
 
   const deleteAlarms = () => {
     dispatch(deletePairPriceAlarms());
+  };
+
+  const openAlarmModal = () => {
+    dispatch(setOpenModal("alarm"));
+  };
+
+  const clearOpenModals = () => {
+    dispatch(setOpenModal("none"));
+  };
+
+  const onToggleHideOthers = () => {
+    dispatch(toggleHideOthers());
   };
 
   return (
@@ -157,7 +164,7 @@ const TopCoinBar = props => {
                 <Button
                   size="sm"
                   className="iconbtn iconbtn-warning"
-                  onClick={alarmModalToggle}
+                  onClick={openAlarmModal}
                 >
                   <div className="iconbtn-svg">
                     <IconSet
@@ -180,14 +187,14 @@ const TopCoinBar = props => {
         wrapClassName=""
         modalClassName="modal-rightside"
         size="sm"
-        isOpen={alarmModal}
-        toggle={alarmModalToggle}
+        isOpen={openModal === "alarm"}
+        toggle={clearOpenModals}
         keyboard={false}
         fade={false}
         autoFocus={false}
         backdrop="static"
       >
-        <ModalHeader toggle={alarmModalToggle}>{t("setAlarm")}</ModalHeader>
+        <ModalHeader toggle={clearOpenModals}>{t("setAlarm")}</ModalHeader>
         <ModalBody className="modalcomp modalcomp-setalarm">
           <div className="modalcomp-setalarm-data">
             <div className="databigger">
@@ -228,7 +235,7 @@ const TopCoinBar = props => {
                     // step={10}
                   />
                   <InputGroupAddon addonType="append">
-                    <InputGroupText>TRY</InputGroupText>
+                    <InputGroupText>{selectedFiatCurrency}</InputGroupText>
                   </InputGroupAddon>
                   <InputGroupAddon addonType="append">
                     <Button
@@ -300,7 +307,8 @@ const TopCoinBar = props => {
                     className="custom-control-input"
                     type="checkbox"
                     id="setalarmsHideOtherPairs"
-                    defaultChecked
+                    checked={hideOthers}
+                    onChange={onToggleHideOthers}
                   />
                   <Label
                     className="custom-control-label"
@@ -328,7 +336,7 @@ const TopCoinBar = props => {
                   </Table.Tr>
                 </Table.Thead>
                 <Table.Tbody striped hovered scrollbar>
-                  {allAlarms.map(({ id, pairname, price, mdper }) => {
+                  {visibleAlarms.map(({ id, pairname, price, mdper }) => {
                     return (
                       <Table.Tr key={id}>
                         <Table.Td sizeauto className="symb">

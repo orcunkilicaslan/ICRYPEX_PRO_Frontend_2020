@@ -4,7 +4,7 @@ import i18n from "i18next";
 import { SUPPORTED_LANGUAGES } from "~/setupI18n";
 
 const initialState = { lang: "en", openModal: "" };
-const MODALS = ["none", "signin", "signup", "settings"];
+const MODALS = ["none", "signin", "signup", "settings", "alarm"];
 
 const uiSlice = createSlice({
   name: "ui",

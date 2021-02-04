@@ -129,6 +129,7 @@ export const deletePairPriceAlarms = createAsyncThunk(
 
 const initialState = {
   all: [],
+  hideOthers: false,
   byPair: {},
   isCreating: false,
 };
@@ -137,6 +138,9 @@ const alarmSlice = createSlice({
   name: "alarm",
   initialState,
   reducers: {
+    toggleHideOthers: state => {
+      state.hideOthers = !state.hideOthers;
+    },
     reset: state => {
       for (const [key, value] of Object.entries(initialState)) {
         state[key] = value;
@@ -169,7 +173,7 @@ const alarmSlice = createSlice({
   },
 });
 
-export const { reset } = alarmSlice.actions;
+export const { reset, toggleHideOthers } = alarmSlice.actions;
 
 export default alarmSlice.reducer;
 
