@@ -32,7 +32,14 @@ const instance = {
         return Math.pow(2, attempt % 15) * 1000;
       },
       retryOn: async (attempt, error, response) => {
-        if (error !== null || response.status >= 400) return doRetry();
+        if (error !== null || response.status >= 400) {
+          if (response.status === 403) {
+            console.error("status 403", { error, response });
+            return false;
+          }
+
+          return doRetry();
+        }
 
         if (response.status === 200) {
           const { data } = await getJSONData(response);
