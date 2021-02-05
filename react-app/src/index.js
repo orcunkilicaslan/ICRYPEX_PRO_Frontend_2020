@@ -59,7 +59,7 @@ function render() {
     autoConnect: false,
     reconnectionDelayMax: ms("3m"),
     reconnectionAttempts: isProd ? Infinity : 30,
-    transports: ["websocket"],
+    // transports: ["websocket"],
   };
 
   ReactDOM.render(
