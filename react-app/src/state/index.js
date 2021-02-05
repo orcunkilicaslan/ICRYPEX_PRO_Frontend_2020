@@ -16,7 +16,7 @@ import rootReducer from "./rootReducer";
 const persistConfig = {
   key: "root",
   storage,
-  debug: process.env.NODE_ENV === "development",
+  debug: Boolean(process.env.REACT_APP_DEBUG),
   blacklist: ["api", "ui"],
 };
 
