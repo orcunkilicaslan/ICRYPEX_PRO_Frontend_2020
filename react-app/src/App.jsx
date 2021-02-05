@@ -60,10 +60,10 @@ const App = props => {
     <Router>
       <Header />
       <Switch>
-        <Route exact path="/">
+        <Route exact path={["/", "/pro-gorunum"]}>
           <ProTrading />
         </Route>
-        <Route exact path="/kolay-*">
+        <Route exact path={["/kolay-al", "/kolay-sat"]}>
           <EasyBuySell />
         </Route>
       </Switch>

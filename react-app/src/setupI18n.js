@@ -10,10 +10,10 @@ const init = (initialLang = "en") => {
       resources: {
         en: {
           app: {
+            protrading: "PRO Trading",
             easybuysell: "Easy Buy-Sell",
             easybuy: "Easy Buy",
             easysell: "Easy Sell",
-            proview: "PRO Trading",
           },
           common: {
             yes: "Yes",
@@ -59,10 +59,10 @@ const init = (initialLang = "en") => {
         },
         tr: {
           app: {
+            protrading: "PRO Görünüm",
             easybuysell: "Kolay Al-Sat",
             easybuy: "Kolay Al",
             easysell: "Kolay Sat",
-            proview: "PRO Görünüm",
           },
           common: {
             yes: "Evet",
