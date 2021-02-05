@@ -35,8 +35,8 @@ const instance = {
       },
       retryOn: async (attempt, error, response) => {
         if (error !== null || response?.status >= 400) {
-          if (response.status === 403) {
-            debug("403 - skipping retry %o", { error, response });
+          if (response?.status === 403) {
+            log("403 - skipping retry %o", { error, response });
             return false;
           }
 
@@ -47,7 +47,7 @@ const instance = {
           const { data } = await getJSONData(response);
 
           if (data?.status === 0) {
-            debug(`${uri} | ${data.type} | ${data.errormessage}`);
+            log(`${uri} | ${data.type} | ${data.errormessage}`);
 
             switch (data?.type) {
               case "prelogintoken": {
