@@ -18,7 +18,7 @@ const apiPersistConfig = {
 const UIPersistConfig = {
   key: "ui",
   storage,
-  blacklist: ["openModal"],
+  whitelist: ["lang"],
 };
 
 const rootReducer = combineReducers({
