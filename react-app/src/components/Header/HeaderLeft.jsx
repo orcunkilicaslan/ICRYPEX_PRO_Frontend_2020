@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, NavLink } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import { Col } from "reactstrap";
 import { ButtonLink } from "../ButtonLink.jsx";
@@ -16,14 +16,13 @@ const HeaderLeft = props => {
     return (
         <Col xs="auto" className="header-left">
             <div className="header-left-logo">
-                <a
+                <NavLink
                     className="headlogo"
-                    href={pathHome}
+                    to={pathHome}
                     title="ICRYPEX PRO"
-                    rel="bookmark"
                 >
                     ICRYPEX PRO
-                </a>
+                </NavLink>
             </div>
             <div className="header-left-nav">
                 <ButtonLink
