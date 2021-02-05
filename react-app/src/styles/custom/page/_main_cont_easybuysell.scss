@@ -8,6 +8,10 @@
     margin-left: auto;
     margin-right: auto;
 
+    .usernotloginbox{
+      padding: 50px 0;
+    }
+
     &-tabs{
       margin-bottom: $grid-gutter-width*4;
 

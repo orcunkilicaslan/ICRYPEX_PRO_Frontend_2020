@@ -48,19 +48,6 @@
     background-color: transparent;
     @include border-radius($var-custom-border-radius);
 
-    /*
-
-    > div[class*="tab"]{
-      overflow: hidden;
-      height: 100%;
-
-      &.active{
-        @include flexbox-display-flex();
-        @include flexbox-flex-flow(column);
-      }
-    }
-    */
-
     .tabcont{
 
       &-head{
@@ -136,6 +123,17 @@
         + div{
           @include flexbox-flex(1);
         }
+      }
+    }
+
+    .tab-pane{
+      &.active{
+        @include animation-multi(tabPaneFadeIn 0.3s linear)
+      }
+
+      @include keyframes(tabPaneFadeIn){
+        from{opacity: 0;}
+        to{opacity: 1;}
       }
     }
   }

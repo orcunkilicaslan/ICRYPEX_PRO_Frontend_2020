@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
 import classnames from "classnames";
+import {useDispatch, useSelector} from "react-redux";
 
 import OpenOrderOrders from "./OpenOrderOrders.jsx";
 import OpenOrderTransactionHistory from "./OpenOrderTransactionHistory.jsx";
 import OpenOrderAssets from "./OpenOrderAssets.jsx";
 import OpenOrderAccountActivities from "./OpenOrderAccountActivities.jsx";
+import { setOpenModal } from "~/state/slices/ui.slice";
+import UserNotLoginBox from "~/pages/Sections/UserNotLoginBox";
 
 const tabs = [
   {
@@ -31,7 +34,17 @@ const tabs = [
 ];
 
 const OpenOrder = props => {
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState(tabs[0].title);
+  const { accesstoken } = useSelector(state => state.api);
+
+  const openSigninModal = useCallback(() => {
+    dispatch(setOpenModal("signin"));
+  }, [dispatch]);
+
+  const openSignupModal = useCallback(() => {
+    dispatch(setOpenModal("signup"));
+  }, [dispatch]);
 
   const toggle = tab => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -57,9 +70,16 @@ const OpenOrder = props => {
         <TabContent className="sitetabs" activeTab={activeTab}>
           {tabs.map(({ title, component: Comp }) => {
             return (
-              <TabPane key={title} tabId={title}>
-                <Comp />
-              </TabPane>
+                <TabPane key={title} tabId={title}>
+                  {accesstoken ? (
+                      <Comp />
+                  ) : (
+                      <UserNotLoginBox
+                          openSigninModal={openSigninModal}
+                          openSignupModal={openSignupModal}
+                      />
+                  )}
+                </TabPane>
             );
           })}
         </TabContent>

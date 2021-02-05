@@ -9,7 +9,7 @@ import {
   PopoverBody,
 } from "reactstrap";
 import classnames from "classnames";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import { IconSet } from "../IconSet.jsx";
 import { Button } from "../Button.jsx";
@@ -17,6 +17,7 @@ import Table from "../Table.jsx";
 import BuySellActionMarket from "./BuySellActionMarket.jsx";
 import BuySellActionLimit from "./BuySellActionLimit.jsx";
 import BuySellActionStopLimit from "./BuySellActionStopLimit.jsx";
+import UserNotLoginBox from "~/pages/Sections/UserNotLoginBox.jsx";
 import { setOpenModal } from "~/state/slices/ui.slice";
 
 const tabs = [
@@ -55,6 +56,7 @@ const commissiontable = [
 const BuySellAction = props => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState(tabs[0].title);
+  const { accesstoken } = useSelector(state => state.api);
 
   const openSigninModal = useCallback(() => {
     dispatch(setOpenModal("signin"));
@@ -102,16 +104,15 @@ const BuySellAction = props => {
               <PopoverBody className="tooltipbox">
                 <div className="tooltipbox-head">
                   <div className="tooltipbox-head-col">VIP UCRET</div>
-                  <div className="tooltipbox-head-col">
-                    DESTEK 0850 255 1079
-                  </div>
+                  <div className="tooltipbox-head-col">DESTEK 0850 255 1079</div>
                 </div>
                 <div className="tooltipbox-body">
                   <Table className="commissiontable">
                     <Table.Thead>
                       <Table.Tr>
                         <Table.Th sizeauto className="txt">
-                          TRY Hacim /<br />
+                          TRY Hacim /
+                          <br />
                           30 Gün
                         </Table.Th>
                         <Table.Th sizefixed className="mkr">
@@ -155,10 +156,14 @@ const BuySellAction = props => {
           {tabs.map(({ title, component: Comp }) => {
             return (
               <TabPane key={title} tabId={title}>
-                <Comp
-                  openSigninModal={openSigninModal}
-                  openSignupModal={openSignupModal}
-                />
+                {accesstoken ? (
+                    <Comp />
+                ) : (
+                    <UserNotLoginBox
+                        openSigninModal={openSigninModal}
+                        openSignupModal={openSignupModal}
+                    />
+                )}
               </TabPane>
             );
           })}
