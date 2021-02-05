@@ -25,7 +25,9 @@ const HeaderRightSignedInNot = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation("common");
   const { user, countryCodes, onSignup, onSignin, onSigninSMS } = props;
-  const { openModal } = useSelector(state => state.ui);
+  const { openModal, isSigningin, isSigningup, isVerifying } = useSelector(
+    state => state.ui
+  );
   const [signUpForm, setSignUpForm] = useState({
     firstname: "",
     lastname: "",
@@ -177,6 +179,7 @@ const HeaderRightSignedInNot = props => {
                   variant="success"
                   className="w-100 mt-2"
                   onClick={submitSecret}
+                  disabled={isVerifying}
                 >
                   GİRİŞ YAP
                 </Button>
@@ -237,6 +240,7 @@ const HeaderRightSignedInNot = props => {
                   variant="secondary"
                   className="w-100 active"
                   onClick={submitSignin}
+                  disabled={isSigningin}
                 >
                   DOĞRULAMA KODU GÖNDER
                 </Button>
@@ -430,6 +434,7 @@ const HeaderRightSignedInNot = props => {
                 variant="success"
                 className="w-100"
                 onClick={submitSignup}
+                disabled={isSigningup}
               >
                 KAYIT OL
               </Button>

@@ -2,8 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 import i18n from "i18next";
 
 import { SUPPORTED_LANGUAGES } from "~/setupI18n";
+import { signinWithSms } from "~/state/slices/api.slice";
+import { signinUser, signupUser } from "~/state/slices/user.slice";
 
-const initialState = { lang: "en", openModal: "" };
+const initialState = {
+  lang: "en",
+  openModal: "",
+  isSigningin: false,
+  isSigningup: false,
+  isVerifying: false,
+};
 const MODALS = ["none", "signin", "signup", "settings", "alarm"];
 
 const uiSlice = createSlice({
@@ -31,6 +39,35 @@ const uiSlice = createSlice({
       for (const [key, value] of Object.entries(initialState)) {
         state[key] = value;
       }
+    },
+  },
+  extraReducers: {
+    [signupUser.pending]: state => {
+      state.isSigningup = true;
+    },
+    [signupUser.fulfilled]: (state, action) => {
+      state.isSigningup = false;
+    },
+    [signupUser.rejected]: state => {
+      state.isSigningup = false;
+    },
+    [signinUser.pending]: state => {
+      state.isSigningin = true;
+    },
+    [signinUser.fulfilled]: (state, action) => {
+      state.isSigningin = false;
+    },
+    [signinUser.rejected]: state => {
+      state.isSigningin = false;
+    },
+    [signinWithSms.pending]: state => {
+      state.isVerifying = true;
+    },
+    [signinWithSms.fulfilled]: state => {
+      state.isVerifying = false;
+    },
+    [signinWithSms.rejected]: state => {
+      state.isVerifying = false;
     },
   },
 });
