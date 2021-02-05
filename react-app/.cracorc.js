@@ -53,6 +53,7 @@ module.exports = {
         target: "https://mobile.guvenlibtc.com:443",
         changeOrigin: true,
         secure: false,
+        ws: true,
       },
     ],
   },
