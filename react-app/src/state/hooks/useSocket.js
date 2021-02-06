@@ -39,10 +39,6 @@ export const useSocket = eventKey => {
 };
 
 function myLog(key, data) {
-  switch (key) {
-    case "prices":
-      return log("%s: %s pairs", key, data.length);
-    default:
-      break;
-  }
+  if (key === "prices") log("%s: %s pairs", key, data.length);
+  if (key.endsWith("orderbook")) log("%s: %j", key, data);
 }

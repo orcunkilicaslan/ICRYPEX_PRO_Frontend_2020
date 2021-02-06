@@ -31,6 +31,9 @@ export const getStore = () => {
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
+        immutableCheck: {
+          warnAfter: 50,
+        },
       }),
     });
 

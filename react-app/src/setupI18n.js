@@ -32,10 +32,16 @@ const init = (initialLang = "en") => {
             search: "Search",
             signin: "Sign In",
             signup: "Sign Up",
+            total: "Total",
+            high: "High",
+            low: "Low",
+            price: "Price",
           },
           finance: {
             ask: "Ask",
             bid: "Bid",
+            buyOrders: "Buy Orders",
+            sellOrders: "Sell Orders",
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -81,10 +87,16 @@ const init = (initialLang = "en") => {
             search: "Ara",
             signin: "Üye Girişi",
             signup: "Kayıt Ol",
+            total: "Toplam",
+            high: "Yüksek",
+            low: "Düşük",
+            price: "Fiyat",
           },
           finance: {
             ask: "Alış",
             bid: "Satış",
+            buyOrders: "Alış Emirleri",
+            sellOrders: "Satış Emirleri",
           },
           coinbar: {
             lastPrice: "Son Fiyat",

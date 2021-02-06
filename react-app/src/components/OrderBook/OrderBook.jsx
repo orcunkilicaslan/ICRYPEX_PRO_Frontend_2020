@@ -1,157 +1,10 @@
 import ChartistGraph from "react-chartist";
-import classnames from "classnames";
+// import classnames from "classnames";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Table from "../Table.jsx";
-
-const orderbookbuytable = [
-  {
-    id: "01",
-    total: "0.4908453",
-    amount: "234.3444",
-    price: "0.000230",
-  },
-  {
-    id: "02",
-    total: "1.8045543",
-    amount: "432.0045",
-    price: "0.000432",
-  },
-  {
-    id: "03",
-    total: "0.2334455",
-    amount: "023.9450",
-    price: "0.000053",
-  },
-  {
-    id: "04",
-    total: "0.2390449",
-    amount: "302.8432",
-    price: "0.000452",
-  },
-  {
-    id: "05",
-    total: "1.0734532",
-    amount: "904.9322",
-    price: "0.035573",
-  },
-  {
-    id: "06",
-    total: "2.0794121",
-    amount: "932.9935",
-    price: "0.000035",
-  },
-  {
-    id: "07",
-    total: "0.4908453",
-    amount: "234.3444",
-    price: "0.000230",
-  },
-  {
-    id: "08",
-    total: "1.8045543",
-    amount: "432.0045",
-    price: "0.000432",
-  },
-  {
-    id: "09",
-    total: "0.2334455",
-    amount: "023.9450",
-    price: "0.000053",
-  },
-  {
-    id: "10",
-    total: "0.2390449",
-    amount: "302.8432",
-    price: "0.000452",
-  },
-  {
-    id: "11",
-    total: "1.0734532",
-    amount: "904.9322",
-    price: "0.035573",
-  },
-  {
-    id: "12",
-    total: "2.0794121",
-    amount: "932.9935",
-    price: "0.000035",
-  },
-];
-
-const orderbookselltable = [
-  {
-    id: "01",
-    total: "0.4908453",
-    amount: "234.3444",
-    price: "0.000230",
-  },
-  {
-    id: "02",
-    total: "1.8045543",
-    amount: "432.0045",
-    price: "0.000432",
-  },
-  {
-    id: "03",
-    total: "0.2334455",
-    amount: "023.9450",
-    price: "0.000053",
-  },
-  {
-    id: "04",
-    total: "0.2390449",
-    amount: "302.8432",
-    price: "0.000452",
-  },
-  {
-    id: "05",
-    total: "1.0734532",
-    amount: "904.9322",
-    price: "0.035573",
-  },
-  {
-    id: "06",
-    total: "2.0794121",
-    amount: "932.9935",
-    price: "0.000035",
-  },
-  {
-    id: "07",
-    total: "0.4908453",
-    amount: "234.3444",
-    price: "0.000230",
-  },
-  {
-    id: "08",
-    total: "1.8045543",
-    amount: "432.0045",
-    price: "0.000432",
-  },
-  {
-    id: "09",
-    total: "0.2334455",
-    amount: "023.9450",
-    price: "0.000053",
-  },
-  {
-    id: "10",
-    total: "0.2390449",
-    amount: "302.8432",
-    price: "0.000452",
-  },
-  {
-    id: "11",
-    total: "1.0734532",
-    amount: "904.9322",
-    price: "0.035573",
-  },
-  {
-    id: "12",
-    total: "2.0794121",
-    amount: "932.9935",
-    price: "0.000035",
-  },
-];
+import { useSocket } from "~/state/hooks/";
 
 const orderbookbuydata = {
   series: [[1, 2, 3, 4, 5, 7, 9, 11, 12, 13, 15, 18]],
@@ -182,33 +35,53 @@ const orderbookchartoptions = {
 const orderbookcharttype = "Bar";
 
 const OrderBook = props => {
+  const { t } = useTranslation(["orderbook", "common"]);
+  const { selected, fiatCurrency, cryptoCurrency } = useSelector(
+    state => state.pair
+  );
+  const symbol = selected?.symbol?.toLowerCase?.();
+  const eventKey = `${symbol}orderbook`;
+  const { [eventKey]: bookData = {} } = useSelector(state => state.socket);
+  const {
+    buytotal = "",
+    buyhighestprice = "",
+    // difference = "",
+    selltotal = "",
+    selllowestprice = "",
+    buyorders = [],
+    sellorders = [],
+  } = bookData;
+  useSocket(eventKey);
+
   return (
     <div className="mainbox mainbox-orderbook">
       <div className="orderbook">
         <div className="orderbook-head">
           <div className="orderbook-head-col buyside">
-            <h4>Alış Emirleri</h4>
+            <h4>{t("buyOrders")}</h4>
             <p>
-              Toplam: <span className="sitecolorgreen">4790000 BTC</span>
+              {t("common:total")}:{" "}
+              <span className="sitecolorgreen">{`${buytotal} ${cryptoCurrency}`}</span>
             </p>
           </div>
           <div className="orderbook-head-col spreadside">
             <div className="spreadside-lr text-right">
-              <p className="sitecolorgreen">24566</p>
-              <p>High</p>
+              <p className="sitecolorgreen">{buyhighestprice}</p>
+              <p>{t("common:high")}</p>
             </div>
             <div className="spreadside-df text-center">
-              <p>134.65</p>
+              <p>{((buyhighestprice + selllowestprice) / 2)}</p>
             </div>
             <div className="spreadside-lr text-left">
-              <p className="sitecolorred">24230</p>
-              <p>Low</p>
+              <p className="sitecolorred">{selllowestprice}</p>
+              <p>{t("common:low")}</p>
             </div>
           </div>
           <div className="orderbook-head-col sellside">
-            <h4>Satış Emirleri</h4>
+            <h4>{t("sellOrders")}</h4>
             <p>
-              Toplam: <span className="sitecolorred">4790000 TRY</span>
+              {t("common:total")}:{" "}
+              <span className="sitecolorred">{`${selltotal} ${fiatCurrency}`}</span>
             </p>
           </div>
         </div>
@@ -228,24 +101,24 @@ const OrderBook = props => {
                   <Table.Thead>
                     <Table.Tr>
                       <Table.Th sizefixed className="totl">
-                        Toplam
+                        {t("common:total")}
                       </Table.Th>
                       <Table.Th sizefixed className="amnt">
-                        Miktar
+                        {t("common:amount")}
                       </Table.Th>
                       <Table.Th sizefixed className="pric">
-                        Fiyat
+                        {t("common:price")}
                       </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {orderbookbuytable.map(({ id, total, amount, price }) => {
-                      const cls = classnames({
-                        orderactive: id === "03",
-                      });
+                    {buyorders.map(({ total, amount, price }, idx) => {
+                      // const cls = classnames({
+                      //   orderactive: id === "03",
+                      // });
 
                       return (
-                        <Table.Tr className={cls} key={id}>
+                        <Table.Tr key={`${amount}_${idx}`}>
                           <Table.Td sizefixed className="totl">
                             {total}
                           </Table.Td>
@@ -278,24 +151,24 @@ const OrderBook = props => {
                   <Table.Thead>
                     <Table.Tr>
                       <Table.Th sizefixed className="pric">
-                        Fiyat
+                        {t("common:price")}
                       </Table.Th>
                       <Table.Th sizefixed className="amnt">
-                        Miktar
+                        {t("common:amount")}
                       </Table.Th>
                       <Table.Th sizefixed className="totl">
-                        Toplam
+                        {t("common:total")}
                       </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {orderbookselltable.map(({ id, total, amount, price }) => {
-                      const cls = classnames({
-                        orderactive: id === "08",
-                      });
+                    {sellorders.map(({ total, amount, price }, idx) => {
+                      // const cls = classnames({
+                      //   orderactive: id === "08",
+                      // });
 
                       return (
-                        <Table.Tr className={cls} key={id}>
+                        <Table.Tr key={`${amount}_${idx}`}>
                           <Table.Td sizefixed className="pric">
                             {price}
                           </Table.Td>
