@@ -36,7 +36,7 @@
     "yet-another-abortcontroller-polyfill": "0.0.3"
   },
   "scripts": {
-    "start": "cross-env craco start",
+    "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
@@ -62,7 +62,6 @@
   "devDependencies": {
     "@craco/craco": "^6.0.0",
     "babel-plugin-i18next-extract": "^0.8.2",
-    "cross-env": "^7.0.3",
     "esm": "^3.2.25",
     "git-revision-webpack-plugin": "^3.0.6",
     "node-sass": "4.14.1",
@@ -71,5 +70,6 @@
   "resolutions": {
     "socket.io-client": "2.4.0",
     "socket.io-parser": "3.3.2"
-  }
+  },
+  "proxy": "https://mobile.guvenlibtc.com:443"
 }

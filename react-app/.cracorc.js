@@ -45,16 +45,16 @@ module.exports = {
   //     ],
   //   ],
   // },
-  devServer: {
-    https: true,
-    proxy: [
-      {
-        context: ["/socket", "/socket.io", "/api"],
-        target: "https://mobile.guvenlibtc.com:443",
-        changeOrigin: true,
-        secure: false,
-        ws: true,
-      },
-    ],
-  },
+  // devServer: {
+    // https: true,
+    // proxy: [
+    //   {
+    //     context: ["/socket", "/socket.io", "/api"],
+    //     target: "https://mobile.guvenlibtc.com:443",
+    //     changeOrigin: true,
+    //     secure: false,
+    //     ws: true,
+    //   },
+    // ],
+  // },
 };
