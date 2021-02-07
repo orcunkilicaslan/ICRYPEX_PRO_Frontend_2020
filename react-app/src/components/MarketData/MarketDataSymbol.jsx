@@ -151,8 +151,8 @@ const MarketDataSymbol = props => {
                 <Table.Tr key={symbol} onClick={() => onSelectPair(symbol)}>
                   {accesstoken ? (
                     <Table.Td sizeauto className="fav">
-                      <Button className="tablefavico" onClick={onClick}>
-                        <MdTableFavIcon stroke={isFavorite ? "gold" : "none"} />
+                      <Button className={`tablefavico ${(isFavorite ? "faved" : null)}`} onClick={onClick}>
+                        <MdTableFavIcon />
                       </Button>
                     </Table.Td>
                   ) : null}
