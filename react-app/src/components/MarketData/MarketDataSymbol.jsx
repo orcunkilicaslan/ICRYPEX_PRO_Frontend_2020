@@ -10,7 +10,6 @@ import { ReactComponent as PerLineIcon } from "~/assets/images/icons/path_icon_p
 
 import { Button } from "../Button";
 import Table from "../Table.jsx";
-import { useSocket } from "~/state/hooks/";
 import {
   fetchFavoritePairs,
   addFavoritePair,
@@ -40,7 +39,6 @@ const MarketDataSymbol = props => {
       return visiblePairIDs.includes(id);
     });
   }, [visiblePairIDs, pricesData]);
-  useSocket("prices");
 
   useEffect(() => {
     if (accesstoken) dispatch(fetchFavoritePairs());

@@ -4,8 +4,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { SocketIOProvider } from "use-socketio";
-import ms from "ms";
 
 import "./index.scss";
 import reportWebVitals from "./reportWebVitals";
@@ -22,7 +20,6 @@ import {
 import { debug } from "~/util";
 
 const MD5_secret = process.env.REACT_APP_MD5_SECRET;
-const SOCKET_BASE = process.env.REACT_APP_SOCKET_BASE;
 const isProd = process.env.NODE_ENV === "production";
 const log = debug.extend("index");
 
@@ -55,21 +52,13 @@ async function run() {
 
 function render() {
   const App = require("./App").default;
-  const socketIoOptions = {
-    autoConnect: false,
-    reconnectionDelayMax: ms("3m"),
-    reconnectionAttempts: isProd ? Infinity : 30,
-    transports: ["websocket"],
-  };
 
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={Store}>
-        <SocketIOProvider url={SOCKET_BASE} opts={socketIoOptions}>
           <PersistGate loading={null} persistor={Persistor}>
             <App />
           </PersistGate>
-        </SocketIOProvider>
       </Provider>
     </React.StrictMode>,
     document.getElementById("root")

@@ -1,10 +1,8 @@
 import ChartistGraph from "react-chartist";
-// import classnames from "classnames";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import Table from "../Table.jsx";
-import { useSocket } from "~/state/hooks/";
 
 const orderbookbuydata = {
   series: [[1, 2, 3, 4, 5, 7, 9, 11, 12, 13, 15, 18]],
@@ -51,7 +49,6 @@ const OrderBook = props => {
     buyorders = [],
     sellorders = [],
   } = bookData;
-  useSocket(eventKey);
 
   return (
     <div className="mainbox mainbox-orderbook">
@@ -113,10 +110,6 @@ const OrderBook = props => {
                   </Table.Thead>
                   <Table.Tbody>
                     {buyorders.map(({ total, amount, price }, idx) => {
-                      // const cls = classnames({
-                      //   orderactive: id === "03",
-                      // });
-
                       return (
                         <Table.Tr key={`${amount}_${idx}`}>
                           <Table.Td sizefixed className="totl">
@@ -163,10 +156,6 @@ const OrderBook = props => {
                   </Table.Thead>
                   <Table.Tbody>
                     {sellorders.map(({ total, amount, price }, idx) => {
-                      // const cls = classnames({
-                      //   orderactive: id === "08",
-                      // });
-
                       return (
                         <Table.Tr key={`${amount}_${idx}`}>
                           <Table.Td sizefixed className="pric">
