@@ -35,7 +35,7 @@ const orderbookchartoptions = {
 const orderbookcharttype = "Bar";
 
 const OrderBook = props => {
-  const { t } = useTranslation(["orderbook", "common"]);
+  const { t } = useTranslation(["finance", "orderbook", "common"]);
   const { selected, fiatCurrency, cryptoCurrency } = useSelector(
     state => state.pair
   );
