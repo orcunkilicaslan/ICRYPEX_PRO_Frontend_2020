@@ -4,7 +4,7 @@ import ms from "ms";
 
 import { debug } from "~/util";
 import { refreshToken } from "../slices/api.slice";
-import { mergeData } from "../slices/socket.slice";
+import { mergeData, connected, disconnected } from "../slices/socket.slice";
 
 const log = debug.extend("socket");
 const defaults = {
@@ -19,12 +19,12 @@ export default function createSocketMiddleware(options) {
   return ({ dispatch, getState }) => {
     client.on("connect", () => {
       log("connected");
-      dispatch({ type: "@socket/connected" });
+      dispatch(connected());
     });
 
     client.on("disconnect", reason => {
       log("disconnected %s", reason);
-      dispatch({ type: "@socket/disconnected", payload: reason });
+      dispatch(disconnected(reason));
       // if (reason === "io server disconnect") {
       //   // the disconnection was initiated by the server, you need to reconnect manually
       //   client.connect();

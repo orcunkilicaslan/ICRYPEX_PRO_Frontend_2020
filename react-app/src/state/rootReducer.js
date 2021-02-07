@@ -21,13 +21,19 @@ const UIPersistConfig = {
   whitelist: ["lang"],
 };
 
+const socketPersistConfig = {
+  key: "socket",
+  storage,
+  blacklist: ["connected", "reason"],
+};
+
 const rootReducer = combineReducers({
   ui: persistReducer(UIPersistConfig, uiReducer),
   api: persistReducer(apiPersistConfig, apiReducer),
   user: userReducer,
   alarm: alarmReducer,
   pair: pairReducer,
-  socket: socketReducer,
+  socket: persistReducer(socketPersistConfig, socketReducer),
 });
 
 export default rootReducer;

@@ -1,12 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { merge } from "lodash";
 
-const initialState = {};
+const initialState = {
+  connected: false,
+  reason: null,
+};
 
 const socketSlice = createSlice({
   name: "socket",
   initialState,
   reducers: {
+    connected: state => {
+      state.connected = true;
+      state.reason = null;
+    },
+    disconnected: (state, action) => {
+      state.connected = false;
+      state.reason = action?.payload;
+    },
     mergeData: {
       reducer: (state, { payload }) => {
         merge(state, payload);
@@ -20,6 +31,11 @@ const socketSlice = createSlice({
   },
 });
 
-export const { mergeData, reset } = socketSlice.actions;
+export const {
+  connected,
+  disconnected,
+  mergeData,
+  reset,
+} = socketSlice.actions;
 
 export default socketSlice.reducer;

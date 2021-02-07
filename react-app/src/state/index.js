@@ -20,7 +20,7 @@ const persistConfig = {
   key: "root",
   storage,
   debug: Boolean(process.env.REACT_APP_DEBUG),
-  blacklist: ["api", "ui"],
+  blacklist: ["api", "ui", "socket"],
 };
 const socketIoOptions = {
   url: SOCKET_BASE,
