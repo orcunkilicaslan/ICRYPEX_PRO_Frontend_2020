@@ -157,7 +157,7 @@ const MarketDataSymbol = props => {
                     </Table.Td>
                   ) : null}
                   <Table.Td sizefixed className="sym">
-                    {name}
+                    {name.replace(/\s/g,'')}
                   </Table.Td>
                   <Table.Td sizefixed className="buy">
                     {buy}

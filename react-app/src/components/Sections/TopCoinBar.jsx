@@ -135,7 +135,7 @@ const TopCoinBar = props => {
         <InputGroup size="lg">
           <InputGroupAddon addonType="prepend">
             <InputGroupText className="selectedcur">
-              {currentPair.name}
+              {currentPair.name.replace(/\s/g,'')}
             </InputGroupText>
           </InputGroupAddon>
           <div className="cryptostatsbar">
