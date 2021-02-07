@@ -127,6 +127,10 @@
 
         .sitetablediv{
 
+          .tbl-tbody{
+            min-height: 192px;
+          }
+
           .tbl-thead .tbl-th{color: $site-clr-text-soft-sec; padding-top: 0;}
           .tbl-tbody .tbl-td{padding-top: 2px; padding-bottom: 2px;}
           .tbl-tbody .tbl-tr{
