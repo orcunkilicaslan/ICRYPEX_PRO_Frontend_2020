@@ -5,6 +5,8 @@ const initialState = {
   connected: false,
   reason: null,
   prices: [],
+  orderbooks: {},
+  orderhistories: {},
 };
 
 const socketSlice = createSlice({
@@ -21,6 +23,22 @@ const socketSlice = createSlice({
     },
     setPrices: (state, action) => {
       state.prices = action?.payload || [];
+    },
+    setOrderBook: {
+      reducer: (state, action) => {
+        merge(state.orderbooks, action?.payload);
+      },
+      prepare: (key, data) => {
+        return { payload: { [key]: data } };
+      },
+    },
+    setOrderHistory: {
+      reducer: (state, action) => {
+        merge(state.orderhistories, action?.payload);
+      },
+      prepare: (key, data) => {
+        return { payload: { [key]: data } };
+      },
     },
     mergeData: {
       reducer: (state, { payload }) => {
@@ -41,6 +59,8 @@ export const {
   mergeData,
   reset,
   setPrices,
+  setOrderBook,
+  setOrderHistory
 } = socketSlice.actions;
 
 export default socketSlice.reducer;

@@ -4,7 +4,14 @@ import ms from "ms";
 
 import { debug } from "~/util";
 import { refreshToken } from "../slices/api.slice";
-import { mergeData, connected, disconnected } from "../slices/socket.slice";
+import {
+  mergeData,
+  connected,
+  disconnected,
+  setPrices,
+  setOrderBook,
+  setOrderHistory,
+} from "../slices/socket.slice";
 
 const log = debug.extend("socket");
 const defaults = {
@@ -76,8 +83,16 @@ export default function createSocketMiddleware(options) {
 
           for (const key of eventKeys) {
             client.on(key, data => {
-              myLog(key, data);
-              dispatch(mergeData({ [key]: data }));
+              if (key.endsWith("orderbook")) {
+                log("%s: %d buytotal", key, data?.buytotal);
+                dispatch(setOrderBook(key, data));
+              } else if (key === "prices") {
+                log("%s: %s pairs", key, data.length);
+                dispatch(setPrices(data));
+              } else if (key.endsWith("orderhistory")) {
+                log("%s: %d orders", key, data?.length);
+                dispatch(setOrderHistory(key, data));
+              }
             });
           }
           // client.onAny((event, data) => {
@@ -90,10 +105,13 @@ export default function createSocketMiddleware(options) {
           token = payload?.description;
         }
 
-        if (token && client.disconnected) {
+        if (token) {
           client.io.opts.query = { token };
-          log("connecting to %s", client.io.uri);
-          client.connect();
+
+          if (client.disconnected) {
+            log("connecting to %s", client.io.uri);
+            client.connect();
+          }
         }
       }
 
@@ -111,10 +129,4 @@ function getEventKeys(symbols = []) {
     })
     .flat()
     .concat(["prices"]);
-}
-
-function myLog(key, data) {
-  if (key === "prices") log("%s: %s pairs", key, data.length);
-  if (key.endsWith("orderbook")) log("%s: %d buytotal", key, data?.buytotal);
-  if (key.endsWith("orderhistory")) log("%s: %d orders", key, data?.length);
 }

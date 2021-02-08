@@ -39,7 +39,9 @@ const OrderBook = props => {
   );
   const symbol = selected?.symbol?.toLowerCase?.();
   const eventKey = `${symbol}orderbook`;
-  const { [eventKey]: bookData = {} } = useSelector(state => state.socket);
+  const { [eventKey]: bookData = {} } = useSelector(
+    state => state.socket.orderbooks
+  );
   const {
     buytotal = "",
     buyhighestprice = "",
