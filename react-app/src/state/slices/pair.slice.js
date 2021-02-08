@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as api from "../api";
 import { fetchSettings } from "./api.slice";
+import { setPrices } from "./socket.slice";
 import { getPairTuple } from "~/util/";
 
 export const fetchFavoritePairs = createAsyncThunk(
@@ -81,7 +82,6 @@ export const removeFavoritePair = createAsyncThunk(
 );
 
 const pairFilters = ["all", "starred", "TRY", "USD", "USDT"];
-
 const initialState = {
   selected: null,
   all: [],
@@ -120,30 +120,7 @@ const pairSlice = createSlice({
 
         if (pairFilters.includes(filter)) {
           state.pairFilter = filter;
-
-          switch (filter?.toLowerCase()) {
-            case "starred": {
-              state.visiblePairIDs = state.favorites?.length
-                ? state.all
-                    ?.filter(({ id }) => state.favorites.includes(id))
-                    .map(({ id }) => id)
-                : [];
-              break;
-            }
-            case "all": {
-              state.visiblePairIDs = state.all.map(({ id }) => id);
-              break;
-            }
-            default: {
-              state.visiblePairIDs = state.all
-                ?.filter(({ name }) => {
-                  const [_, fiatCurrency] = getPairTuple(name); // eslint-disable-line
-
-                  return filter === fiatCurrency;
-                })
-                .map(({ id }) => id);
-            }
-          }
+          state.visiblePairIDs = getVisiblePairIDs(state, filter);
         }
       },
     },
@@ -179,9 +156,14 @@ const pairSlice = createSlice({
 
       state.favorites = favorites;
       if (state.pairFilter === "starred") {
-        state.visiblePairIDs = state.visiblePairIDs.filter(
-          id => favorites.includes(id)
+        state.visiblePairIDs = state.visiblePairIDs.filter(id =>
+          favorites.includes(id)
         );
+      }
+    },
+    [setPrices]: state => {
+      if (!state?.visiblePairIDs?.length) {
+        state.visiblePairIDs = getVisiblePairIDs(state, state.filter);
       }
     },
   },
@@ -190,3 +172,28 @@ const pairSlice = createSlice({
 export const { reset, setSelectedPair, setPairFilter } = pairSlice.actions;
 
 export default pairSlice.reducer;
+
+function getVisiblePairIDs(state, filter = "all") {
+  switch (filter?.toLowerCase()) {
+    case "starred": {
+      return state.favorites?.length
+        ? state.all
+            ?.filter(({ id }) => state.favorites.includes(id))
+            .map(({ id }) => id)
+        : [];
+    }
+    case "all": {
+      return state.all.map(({ id }) => id);
+    }
+    default: {
+      // filter is currency - i.e. TRY
+      return state.all
+        ?.filter(({ name }) => {
+          const [_, fiatCurrency] = getPairTuple(name); // eslint-disable-line
+
+          return filter === fiatCurrency;
+        })
+        .map(({ id }) => id);
+    }
+  }
+}

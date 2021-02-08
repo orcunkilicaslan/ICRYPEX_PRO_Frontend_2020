@@ -4,6 +4,7 @@ import { merge } from "lodash";
 const initialState = {
   connected: false,
   reason: null,
+  prices: [],
 };
 
 const socketSlice = createSlice({
@@ -17,6 +18,9 @@ const socketSlice = createSlice({
     disconnected: (state, action) => {
       state.connected = false;
       state.reason = action?.payload;
+    },
+    setPrices: (state, action) => {
+      state.prices = action?.payload || [];
     },
     mergeData: {
       reducer: (state, { payload }) => {
@@ -36,6 +40,7 @@ export const {
   disconnected,
   mergeData,
   reset,
+  setPrices,
 } = socketSlice.actions;
 
 export default socketSlice.reducer;
