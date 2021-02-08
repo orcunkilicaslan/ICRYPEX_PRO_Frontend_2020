@@ -3,6 +3,7 @@ import { ButtonGroup, Input } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import classnames from "classnames";
+import { useFuzzy } from "react-use-fuzzy";
 
 import { ReactComponent as MdTableFavIcon } from "~/assets/images/icons/path_icon_mdtable_fav.svg";
 import { ReactComponent as MdTableSearchIcon } from "~/assets/images/icons/path_icon_mdtable_search.svg";
@@ -34,15 +35,22 @@ const MarketDataSymbol = props => {
   } = useSelector(state => state.pair);
   const { accesstoken } = useSelector(state => state.api);
   const { prices: pricesData = [] } = useSelector(state => state.socket);
+  const { result, keyword, search, resetSearch } = useFuzzy(pricesData, {
+    keys: ["symbol"],
+    findAllMatches: true,
+  });
   const visiblePrices = useMemo(() => {
+    if (keyword) return result.map(({ item }) => item);
+
     return pricesData.filter(({ id }) => visiblePairIDs.includes(id));
-  }, [visiblePairIDs, pricesData]);
+  }, [visiblePairIDs, pricesData, keyword, result]);
 
   useEffect(() => {
     if (accesstoken) dispatch(fetchFavoritePairs());
   }, [dispatch, accesstoken]);
 
   const onPairFilter = filter => {
+    resetSearch();
     dispatch(setPairFilter(filter));
   };
 
@@ -95,6 +103,8 @@ const MarketDataSymbol = props => {
             className="mdsearchinput"
             bsSize="sm"
             placeholder={t("common:search")}
+            value={keyword}
+            onChange={e => search(e.target.value)}
           />
           <div className="mdsearchicon">
             <MdTableSearchIcon />
