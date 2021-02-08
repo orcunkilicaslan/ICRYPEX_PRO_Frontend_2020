@@ -6,6 +6,23 @@ import {
   // saveCurrentDeviceId,
 } from "@binance/fingerprint";
 import _debug from "debug";
+import { formatDistanceStrict } from "date-fns";
+import { enUS as en, tr } from "date-fns/locale";
+
+const locales = { en, tr };
+
+// by providing a default string of 'PP' or any of its variants for `formatStr`
+// it will format dates in whichever way is appropriate to the locale
+export const formatDistance = (
+  fromDate,
+  toDate,
+  { locale = "en", addSuffix = true }
+) => {
+  return formatDistanceStrict(fromDate, toDate, {
+    locale: locales[locale],
+    addSuffix,
+  });
+};
 
 export const debug = _debug("pro");
 const log = debug.extend("util");

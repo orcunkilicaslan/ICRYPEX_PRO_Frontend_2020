@@ -36,6 +36,7 @@ const init = (initialLang = "en") => {
             high: "High",
             low: "Low",
             price: "Price",
+            time: "Time",
           },
           finance: {
             ask: "Ask",
@@ -91,6 +92,7 @@ const init = (initialLang = "en") => {
             high: "Yüksek",
             low: "Düşük",
             price: "Fiyat",
+            time: "Zaman",
           },
           finance: {
             ask: "Alış",

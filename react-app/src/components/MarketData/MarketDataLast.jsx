@@ -1,45 +1,21 @@
-import Table from "../Table.jsx";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
-const mdlasttable = [
-  {
-    id: "01",
-    time: "09:04:24",
-    amount: "0.20493654",
-    price: "48,698",
-  },
-  {
-    id: "02",
-    time: "10:02:36",
-    amount: "0.00020498",
-    price: "48,698",
-  },
-  {
-    id: "03",
-    time: "10:01:50",
-    amount: "0.10252914",
-    price: "48,697",
-  },
-  {
-    id: "04",
-    time: "10:01:49",
-    amount: "0.02775202",
-    price: "48,679",
-  },
-  {
-    id: "05",
-    time: "10:01:49",
-    amount: "0.02062184",
-    price: "48,679",
-  },
-  {
-    id: "06",
-    time: "09:04:24",
-    amount: "0.20493654",
-    price: "48,698",
-  },
-];
+import Table from "../Table.jsx";
+import { formatDistance } from "~/util/";
 
 const MarketDataLast = props => {
+  const { t } = useTranslation(["common"]);
+  const {
+    selected: currentPair,
+    fiatCurrency: selectedFiatCurrency,
+  } = useSelector(state => state.pair);
+  const { lang } = useSelector(state => state.ui);
+  const pairKey = `${currentPair?.symbol?.toLowerCase()}orderhistory`;
+  const { [pairKey]: historyData = [] } = useSelector(
+    state => state.socket.orderhistories
+  );
+
   return (
     <div className="marketdata-last">
       <div className="mdlasttable scrollbar">
@@ -47,28 +23,39 @@ const MarketDataLast = props => {
           <Table.Thead scrollbar>
             <Table.Tr>
               <Table.Th sizefixed className="time">
-                Zaman
+                {t("time")}
               </Table.Th>
               <Table.Th sizefixed className="amnt">
-                Miktar
+                {t("amount")}
               </Table.Th>
               <Table.Th sizefixed className="pric">
-                Fiyat (TRY)
+                {`${t("price")} ${selectedFiatCurrency}`}
               </Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody striped hovered scrollbar>
-            {mdlasttable.map(({ id, time, amount, price }) => {
+            {historyData.map(transaction => {
+              const {
+                order_side_id,
+                created_at,
+                amount,
+                market_price,
+              } = transaction;
+
               return (
-                <Table.Tr key={id}>
+                <Table.Tr key={created_at}>
                   <Table.Td sizefixed className="time">
-                    {time}
+                    <span title={created_at}>
+                      {formatDistance(new Date(created_at), Date.now(), {
+                        locale: lang,
+                      })}
+                    </span>
                   </Table.Td>
                   <Table.Td sizefixed className="amnt">
                     {amount}
                   </Table.Td>
                   <Table.Td sizefixed className="pric">
-                    {price}
+                    {market_price}
                   </Table.Td>
                 </Table.Tr>
               );
