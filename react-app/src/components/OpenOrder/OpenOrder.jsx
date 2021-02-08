@@ -6,9 +6,10 @@ import {useDispatch, useSelector} from "react-redux";
 import OpenOrderOrders from "./OpenOrderOrders.jsx";
 import OpenOrderTransactionHistory from "./OpenOrderTransactionHistory.jsx";
 import OpenOrderAssets from "./OpenOrderAssets.jsx";
+import OpenOrderDepoWith from "./OpenOrderDepoWith.jsx";
 import OpenOrderAccountActivities from "./OpenOrderAccountActivities.jsx";
 import { setOpenModal } from "~/state/slices/ui.slice";
-import UserNotLoginBox from "~/pages/Sections/UserNotLoginBox";
+import UserNotLoginBox from "~/pages/Sections/UserNotLoginBox.jsx";
 
 const tabs = [
   {
@@ -25,7 +26,7 @@ const tabs = [
   },
   {
     title: "Yatır-Çek",
-    component: () => <div>Yatır-Çek</div>,
+    component: OpenOrderDepoWith,
   },
   {
     title: "Hesap Hareketleri",
