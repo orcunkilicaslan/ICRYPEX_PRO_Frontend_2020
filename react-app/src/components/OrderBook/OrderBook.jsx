@@ -67,7 +67,7 @@ const OrderBook = props => {
               <p>{t("common:high")}</p>
             </div>
             <div className="spreadside-df text-center">
-              <p>{((buyhighestprice + selllowestprice) / 2)}</p>
+              <p>{(buyhighestprice + selllowestprice) / 2}</p>
             </div>
             <div className="spreadside-lr text-left">
               <p className="sitecolorred">{selllowestprice}</p>

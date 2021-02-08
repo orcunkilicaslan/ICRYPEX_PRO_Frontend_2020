@@ -35,9 +35,7 @@ const MarketDataSymbol = props => {
   const { accesstoken } = useSelector(state => state.api);
   const { prices: pricesData = [] } = useSelector(state => state.socket);
   const visiblePrices = useMemo(() => {
-    return pricesData.filter(({ id }) => {
-      return visiblePairIDs.includes(id);
-    });
+    return pricesData.filter(({ id }) => visiblePairIDs.includes(id));
   }, [visiblePairIDs, pricesData]);
 
   useEffect(() => {
@@ -149,13 +147,16 @@ const MarketDataSymbol = props => {
                 <Table.Tr key={symbol} onClick={() => onSelectPair(symbol)}>
                   {accesstoken ? (
                     <Table.Td sizeauto className="fav">
-                      <Button className={`tablefavico ${(isFavorite ? "faved" : null)}`} onClick={onClick}>
+                      <Button
+                        className={`tablefavico ${isFavorite ? "faved" : null}`}
+                        onClick={onClick}
+                      >
                         <MdTableFavIcon />
                       </Button>
                     </Table.Td>
                   ) : null}
                   <Table.Td sizefixed className="sym">
-                    {name.replace(/\s/g,'')}
+                    {name.replace(/\s/g, "")}
                   </Table.Td>
                   <Table.Td sizefixed className="buy">
                     {buy}
