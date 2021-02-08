@@ -12,9 +12,8 @@ const MarketDataLast = props => {
   } = useSelector(state => state.pair);
   const { lang } = useSelector(state => state.ui);
   const pairKey = `${currentPair?.symbol?.toLowerCase()}orderhistory`;
-  const { [pairKey]: historyData = [] } = useSelector(
-    state => state.socket.orderhistories
-  );
+  const { orderhistories = {} } = useSelector(state => state.socket);
+  const { [pairKey]: historyData = [] } = orderhistories;
 
   return (
     <div className="marketdata-last">
