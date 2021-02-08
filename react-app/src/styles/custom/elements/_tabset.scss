@@ -125,17 +125,6 @@
         }
       }
     }
-
-    .tab-pane{
-      &.active{
-        @include animation-multi(tabPaneFadeIn 0.3s linear)
-      }
-
-      @include keyframes(tabPaneFadeIn){
-        from{opacity: 0;}
-        to{opacity: 1;}
-      }
-    }
   }
 }
 /* Tabs UI Soft */
@@ -251,3 +240,18 @@
     }
   }
 }
+
+/* React Tab Content */
+#root .sitetabs.tab-content{
+  .tab-pane{
+    &.active{
+      @include animation-multi(tabPaneFadeIn 0.3s linear)
+    }
+
+    @include keyframes(tabPaneFadeIn){
+      from{opacity: 0;}
+      to{opacity: 1;}
+    }
+  }
+}
+/* React Tab Content */
