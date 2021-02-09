@@ -14,6 +14,7 @@ const init = (initialLang = "en") => {
             easybuysell: "Easy Buy-Sell",
             easybuy: "Easy Buy",
             easysell: "Easy Sell",
+            newsanalysis: "News & Analysis",
           },
           common: {
             yes: "Yes",
@@ -70,6 +71,7 @@ const init = (initialLang = "en") => {
             easybuysell: "Kolay Al-Sat",
             easybuy: "Kolay Al",
             easysell: "Kolay Sat",
+            newsanalysis: "Haber & Analiz",
           },
           common: {
             yes: "Evet",

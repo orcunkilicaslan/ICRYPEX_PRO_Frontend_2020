@@ -1,5 +1,6 @@
 import { useReducer, useEffect } from "react";
 import { Col, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
+import { useTranslation } from "react-i18next";
 
 import { IconSet } from "../IconSet";
 import { Button } from "../Button";
@@ -13,6 +14,8 @@ const ITEMS = [
 ];
 
 const HeaderCenter = props => {
+  const { t } = useTranslation(["app", "common"]);
+
   const [{ item }, dispatch] = useReducer(
     (state, action) => {
       switch (action.type) {
@@ -42,7 +45,7 @@ const HeaderCenter = props => {
         <InputGroup size="sm">
           <InputGroupAddon addonType="prepend">
             <InputGroupText className="newslefttxt">
-              Haber & Analiz
+              {t("newsanalysis")}
             </InputGroupText>
           </InputGroupAddon>
           <div className="newstickerbars-box form-control">
@@ -51,12 +54,10 @@ const HeaderCenter = props => {
             </a>
           </div>
           <InputGroupAddon addonType="append">
-            {/* <InputGroupText> */}
             <Button className="input-group-text newsallbtn">
-              <span>Tümü</span>
+              <span>{t("common:all")}</span>
               <IconSet sprite="sprtsmclrd" size="14" name="arrowmore" />
             </Button>
-            {/* </InputGroupText> */}
           </InputGroupAddon>
         </InputGroup>
       </div>
