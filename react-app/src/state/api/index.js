@@ -57,7 +57,7 @@ const instance = {
                   headers: { "x-access-token": payload?.description },
                 });
               }
-              case "serverdevicekey": {
+              case "devicekey": {
                 const data = qs.parse(body);
                 const { payload } = await store.dispatch(
                   fetchServerDeviceKey()

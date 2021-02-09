@@ -33,7 +33,7 @@ const MarketDataLast = props => {
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody striped hovered scrollbar>
-            {historyData.map(transaction => {
+            {historyData.map((transaction, idx) => {
               const {
                 order_side_id,
                 created_at,
@@ -42,7 +42,7 @@ const MarketDataLast = props => {
               } = transaction;
 
               return (
-                <Table.Tr key={created_at}>
+                <Table.Tr key={`${created_at}_${idx}`}>
                   <Table.Td sizefixed className="time">
                     <span title={created_at}>
                       {formatDistance(new Date(created_at), Date.now(), {
