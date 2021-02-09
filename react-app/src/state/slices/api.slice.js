@@ -128,7 +128,7 @@ const initialState = {
   deviceuuid: null,
   mediumid: 1,
   versionno: "1.0.0",
-  settingno: 15,
+  settingno: 17,
   settings: {},
 };
 
