@@ -5,7 +5,6 @@ import ms from "ms";
 import { debug } from "~/util";
 import { refreshToken } from "../slices/api.slice";
 import {
-  mergeData,
   connected,
   disconnected,
   setPrices,
@@ -13,6 +12,7 @@ import {
   setOrderHistory,
 } from "../slices/socket.slice";
 
+let isSocketAlive;
 const log = debug.extend("socket");
 const defaults = {
   timeout: ms("30s"),
@@ -38,13 +38,7 @@ export default function createSocketMiddleware(options) {
       // }
     });
 
-    client.on("connect_error", error => {
-      const msg = error?.message;
-
-      if (msg?.includes("accesstoken")) dispatch(refreshToken());
-      log("connection error %O", error);
-    });
-
+    client.on("connect_error", error => log("connection error %O", error));
     client.io.on("reconnect_attempt", attempt => {
       log(`attempting reconnection no ${attempt}`);
       // on reconnection, reset the transports option, as the Websocket
@@ -61,7 +55,11 @@ export default function createSocketMiddleware(options) {
     });
 
     client.io.on("reconnect_failed", () => log("reconnection failed"));
-    client.io.on("ping", () => log("ping"));
+    client.io.on("ping", () => {
+      if (!isSocketAlive) dispatch(refreshToken());
+      isSocketAlive = false;
+      log("ping");
+    });
 
     return next => action => {
       const { type, payload } = action;
@@ -82,7 +80,8 @@ export default function createSocketMiddleware(options) {
           const eventKeys = getEventKeys(pair?.symbols);
 
           for (const key of eventKeys) {
-            client.on(key, data => {
+            client.on(key, data => { // eslint-disable-line
+              isSocketAlive = true; // eslint-disable-line
               if (key.endsWith("orderbook")) {
                 log("%s: %d buytotal", key, data?.buytotal);
                 dispatch(setOrderBook(key, data));
