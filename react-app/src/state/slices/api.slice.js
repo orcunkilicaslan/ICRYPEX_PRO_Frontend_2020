@@ -4,6 +4,7 @@ import * as api from "../api";
 import { signoutUser } from "./user.slice";
 
 let refreshPromise;
+let preLoginPromise;
 
 export const fetchServerDeviceKey = createAsyncThunk(
   "api/serverdevicekey",
@@ -30,10 +31,15 @@ export const fetchPreloginToken = createAsyncThunk(
     } = getState();
 
     try {
-      const response = await api.fetchPreloginToken({
+      if (preLoginPromise) return preLoginPromise.then(({ data }) => data);
+
+      preLoginPromise = await api.fetchPreloginToken({
         localkey,
         serverdevicekey,
       });
+
+      const response = await preLoginPromise;
+      preLoginPromise = null;
 
       return response.data;
     } catch ({ data }) {
