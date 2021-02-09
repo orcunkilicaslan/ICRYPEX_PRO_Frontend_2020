@@ -64,6 +64,10 @@ const init = (initialLang = "en") => {
             warning: "WARNING!",
             error: "ERROR!",
           },
+          notLoginBox: {
+            "cantview": "You can't view this section",
+            "toview": "To view, please Sign up or Sign in"
+          }
         },
         tr: {
           app: {
@@ -121,6 +125,10 @@ const init = (initialLang = "en") => {
             warning: "UYARI!",
             error: "HATA!",
           },
+          notLoginBox: {
+            "cantview": "Bu alanı görüntüleyemiyorsunuz",
+            "toview": "Görüntülemek için Üye Girişi ya da Kayıt Olun"
+          }
         },
       },
       supportedLngs: SUPPORTED_LANGUAGES,
