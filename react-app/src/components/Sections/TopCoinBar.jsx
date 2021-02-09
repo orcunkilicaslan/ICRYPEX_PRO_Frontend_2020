@@ -27,7 +27,6 @@ import {
   toggleHideOthers,
 } from "~/state/slices/alarm.slice";
 import { setOpenModal } from "~/state/slices/ui.slice";
-
 import { AlertResult } from "~/components/AlertResult";
 
 const STEP = 10;
@@ -50,7 +49,6 @@ const TopCoinBar = props => {
   const { prices: pricesData = [] } = useSelector(state => state.socket);
   const { accesstoken } = useSelector(state => state.api);
   const { openModal } = useSelector(state => state.ui);
-  // const [alarmModal, setAlarmModal] = useState(false);
   const [rangeAlarmPortfolio, setRangeAlarmPortfolio] = useState(0);
   const [amount, setAmount] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
@@ -59,24 +57,41 @@ const TopCoinBar = props => {
     else return byPairAlarms[currentPair?.name] || [];
   }, [allAlarms, byPairAlarms, currentPair, hideOthers]);
 
+  let visiblePriceData = {
+    bestBuy: "",
+    bestSell: "",
+    change24h: "",
+    high24h: "",
+    low24h: "",
+    average24h: "",
+    volume: "",
+  };
   let selectedPriceData = pricesData.find(
     ({ symbol }) => symbol === currentPair?.symbol
   );
   if (selectedPriceData) {
-    const { high24hour, low24hour, avarage24hour, volume } = selectedPriceData;
-
-    selectedPriceData = {
-      lastPrice: 9999,
-      bestBuy: 111,
-      bestSell: 222,
-      change24h: "3%",
-      high24h: high24hour,
-      low24h: low24hour,
-      average24h: avarage24hour,
+    const {
+      high24hour,
+      low24hour,
+      avarage24hour,
       volume,
-      excavating: 55555,
+      bid,
+      ask,
+      changepercent,
+    } = selectedPriceData;
+
+    visiblePriceData = {
+      bestBuy: `${bid} ${selectedFiatCurrency}`,
+      bestSell: `${ask} ${selectedFiatCurrency}`,
+      change24h: `${changepercent}%`,
+      high24h: `${high24hour} ${selectedFiatCurrency}`,
+      low24h: `${low24hour} ${selectedFiatCurrency}`,
+      average24h: `${avarage24hour} ${selectedFiatCurrency}`,
+      volume: `${volume} ${selectedFiatCurrency}`,
+      // lastPrice: 9999,
+      // excavating: 55555,
     };
-  } else selectedPriceData = {};
+  }
 
   useEffect(() => {
     if (accesstoken) dispatch(fetchPriceAlarms());
@@ -129,29 +144,34 @@ const TopCoinBar = props => {
     dispatch(toggleHideOthers());
   };
 
+  const upOrDown = selectedPriceData?.changepercent > 0 ? "up" : "down";
+  const siteColorClass = `sitecolor${upOrDown === "up" ? "green" : "red"}`;
+
   return (
     <section className="mainbox mainbox-cryptocoinbar">
       <div className="cryptocoinbar siteformui">
         <InputGroup size="lg">
           <InputGroupAddon addonType="prepend">
             <InputGroupText className="selectedcur">
-              {currentPair.name.replace(/\s/g,'')}
+              {currentPair.name.replace(/\s/g, "")}
             </InputGroupText>
           </InputGroupAddon>
           <div className="cryptostatsbar">
-            <div className="cryptostatsbar-biger">
-              <PerLineIcon className="mdper mdper-up" />
-              <span className="sitecolorgreen">9198.00</span>
-            </div>
+            {selectedPriceData ? (
+              <div className="cryptostatsbar-biger">
+                <PerLineIcon className={`mdper mdper-${upOrDown}`} />
+                <span className={siteColorClass}>
+                  {selectedPriceData.price}
+                </span>
+              </div>
+            ) : null}
             <div className="cryptostatsbar-stats">
               <ul className="bigstatslist">
-                {Object.entries(selectedPriceData).map(([key, value]) => {
+                {Object.entries(visiblePriceData).map(([key, value]) => {
                   return (
                     <li key={key}>
                       <h6>{t(key)}</h6>
-                      <p>
-                        {value} {selectedFiatCurrency}
-                      </p>
+                      <p>{value}</p>
                     </li>
                   );
                 })}
@@ -196,16 +216,24 @@ const TopCoinBar = props => {
       >
         <ModalHeader toggle={clearOpenModals}>{t("setAlarm")}</ModalHeader>
         <ModalBody className="modalcomp modalcomp-setalarm">
-          <div className="modalcomp-setalarm-data">
-            <div className="databigger">
-              <PerLineIcon className="mdper mdper-up" />
-              <span className="sitecolorgreen">999,999.99</span>
+          {selectedPriceData ? (
+            <div className="modalcomp-setalarm-data">
+              <div className="databigger">
+                <PerLineIcon className="mdper mdper-up" />
+                <span className="sitecolorgreen">
+                  {selectedPriceData.price}
+                </span>
+              </div>
+              <div className="datasmall">
+                <span>{selectedPriceData.pricechange}</span>
+                <span className={siteColorClass}>
+                  {upOrDown === "up" ? "+" : "-"}
+                  {selectedPriceData.changepercent}
+                </span>
+              </div>
             </div>
-            <div className="datasmall">
-              <span>633.59</span>
-              <span className="sitecolorgreen">+%5.76</span>
-            </div>
-          </div>
+          ) : null}
+
           <div className="modalcomp-setalarm-form">
             {errorMessage ? (
               <AlertResult error>{errorMessage}</AlertResult>
@@ -264,8 +292,8 @@ const TopCoinBar = props => {
                     <span></span>
                   </div>
                   <div className="rangeprogress-perc">
-                    <span className="sitecolorred">-%100</span>
-                    <span className="sitecolorgreen">+%100</span>
+                    <span className="sitecolorred">-100%</span>
+                    <span className="sitecolorgreen">+100%</span>
                   </div>
                   <output className="rangeprogress-bubble">
                     {rangeAlarmPortfolio}
@@ -299,7 +327,7 @@ const TopCoinBar = props => {
           <div className="modalcomp-setalarm-table">
             <div className="headsmtitle">
               <div className="headsmtitle-col">
-                <h6>BTC / TRY ALARMLARI</h6>
+                <h6>{hideOthers ? currentPair?.name : t("common:all")}</h6>
               </div>
               <div className="headsmtitle-col">
                 <div className="custom-control custom-checkbox">
