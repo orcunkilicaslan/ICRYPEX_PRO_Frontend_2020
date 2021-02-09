@@ -9,7 +9,7 @@ import {
   PopoverBody,
 } from "reactstrap";
 import classnames from "classnames";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { IconSet } from "../IconSet.jsx";
 import { Button } from "../Button.jsx";
@@ -104,7 +104,9 @@ const BuySellAction = props => {
               <PopoverBody className="tooltipbox">
                 <div className="tooltipbox-head">
                   <div className="tooltipbox-head-col">VIP UCRET</div>
-                  <div className="tooltipbox-head-col">DESTEK 0850 255 1079</div>
+                  <div className="tooltipbox-head-col">
+                    DESTEK 0850 255 1079
+                  </div>
                 </div>
                 <div className="tooltipbox-body">
                   <Table className="commissiontable">
@@ -157,12 +159,12 @@ const BuySellAction = props => {
             return (
               <TabPane key={title} tabId={title}>
                 {accesstoken ? (
-                    <Comp />
+                  <Comp />
                 ) : (
-                    <UserNotLoginBox
-                        openSigninModal={openSigninModal}
-                        openSignupModal={openSignupModal}
-                    />
+                  <UserNotLoginBox
+                    openSigninModal={openSigninModal}
+                    openSignupModal={openSignupModal}
+                  />
                 )}
               </TabPane>
             );

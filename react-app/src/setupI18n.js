@@ -44,6 +44,9 @@ const init = (initialLang = "en") => {
             bid: "Bid",
             buyOrders: "Buy Orders",
             sellOrders: "Sell Orders",
+            buywhat: "BUY {{item}}",
+            sellwhat: "SELL {{item}}",
+            portfolio: "Portfolio"
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -65,9 +68,9 @@ const init = (initialLang = "en") => {
             error: "ERROR!",
           },
           notLoginBox: {
-            "cantview": "You can't view this section",
-            "toview": "To view, please Sign up or Sign in"
-          }
+            cantview: "You can't view this section",
+            toview: "To view, please Sign up or Sign in",
+          },
         },
         tr: {
           app: {
@@ -105,6 +108,9 @@ const init = (initialLang = "en") => {
             bid: "Satış",
             buyOrders: "Alış Emirleri",
             sellOrders: "Satış Emirleri",
+            buywhat: "{{item}} AL",
+            sellwhat: "{{item}} SAT",
+            portfolio: "Portföy"
           },
           coinbar: {
             lastPrice: "Son Fiyat",
@@ -126,18 +132,14 @@ const init = (initialLang = "en") => {
             error: "HATA!",
           },
           notLoginBox: {
-            "cantview": "Bu alanı görüntüleyemiyorsunuz",
-            "toview": "Görüntülemek için Üye Girişi ya da Kayıt Olun"
-          }
+            cantview: "Bu alanı görüntüleyemiyorsunuz",
+            toview: "Görüntülemek için Üye Girişi ya da Kayıt Olun",
+          },
         },
       },
       supportedLngs: SUPPORTED_LANGUAGES,
       lng: initialLang,
       fallbackLng: "en",
-
-      interpolation: {
-        escapeValue: false,
-      },
     });
 
     resolve();
