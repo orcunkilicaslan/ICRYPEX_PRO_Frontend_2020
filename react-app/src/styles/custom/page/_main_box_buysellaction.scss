@@ -139,15 +139,24 @@
           margin-top: 2px;
 
           .rangeprogress-circle{
+
+            &.percstepa00,
             &[data-val*="0"]{
               span:nth-child(1){background-color: $site-clr-blue;}
             }
-            &[data-val*="33"]{
+            &.percstepa25,
+            &[data-val*="25"]{
               span:nth-child(1), span:nth-child(2){background-color: $site-clr-blue;}
             }
-            &[data-val*="66"]{
+            &.percstepa50,
+            &[data-val*="50"]{
               span:nth-child(1), span:nth-child(2), span:nth-child(3){background-color: $site-clr-blue;}
             }
+            &.percstepa75,
+            &[data-val*="75"]{
+              span:nth-child(1), span:nth-child(2), span:nth-child(3), span:nth-child(4){background-color: $site-clr-blue;}
+            }
+            &.percstepa100,
             &[data-val*="100"]{
               span{background-color: $site-clr-blue;}
             }

@@ -101,6 +101,7 @@ for (let iDz = 0; iDz < dzoneGeneral.length; iDz++) {
 
 /* Progress Range Start - https://css-tricks.com/value-bubbles-for-range-inputs */
 const allRanges = document.querySelectorAll(".rangeprogress");
+
 allRanges.forEach(wrap => {
     const range     = wrap.querySelector(".rangeprogress .rangeprogress-range");
     const bubble    = wrap.querySelector(".rangeprogress .rangeprogress-bubble");
@@ -110,7 +111,14 @@ allRanges.forEach(wrap => {
     range.addEventListener("input", () => {
         setBubble(range, bubble, circle, progress);
     });
+
     setBubble(range, bubble, circle, progress);
+
+    const rangePercent = [0, 25, 50, 75, 100];
+    for (let i = 0; i < rangePercent.length; i++) {
+        circle.innerHTML +=  "<span class =" + rangePercent[i] + ">" + "</span>";
+    }
+
 });
 
 function setBubble(range, bubble, circle, progress) {
@@ -119,18 +127,28 @@ function setBubble(range, bubble, circle, progress) {
     const max = range.max ? range.max : 100;
     const newVal = Number(((val - min) * 100) / (max - min));
 
+
     bubble.innerHTML =  "%" + val;
     bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
 
     progress.style.width = newVal + "%";
 
     circle.setAttribute('data-val', newVal);
+
+    if (newVal <= 24){
+        circle.className = "rangeprogress-circle percstepa00";
+    } else if (newVal <= 49) {
+        circle.className = "rangeprogress-circle percstepa25";
+    } else if (newVal <= 74) {
+        circle.className = "rangeprogress-circle percstepa50";
+    } else if (newVal <= 99) {
+        circle.className = "rangeprogress-circle percstepa75";
+    } else if (newVal === 100) {
+        circle.className = "rangeprogress-circle percstepa100";
+    }
+
 }
 /* Progress Range End */
-
-/* Input Spinner Start */
-
-/* Input Spinner End */
 
 /* Show/Hide Password Start */
 document.querySelectorAll('[data-toggle="showhidepassword"]').forEach(function (el) {
