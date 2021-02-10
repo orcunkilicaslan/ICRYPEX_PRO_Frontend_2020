@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 
 import { IconSet } from "../IconSet.jsx";
 import { Button } from "../Button.jsx";
+import classnames from "classnames";
 
 const buySellCurrencies = ["TRY", "USD"];
 const buySellCryptoCurrencies  = ["BTC", "ETH"];
@@ -32,6 +33,14 @@ const BuySellActionStopLimit = props => {
   const [selectedSellLimit, setSelectedSellLimit] = useState("");
   const [selectedSellAmount, setSelectedSellAmount] = useState("");
   const [rangeSellPortfolio, setRangeSellPortfolio] = useState(buySellRangePercent[0]);
+
+  const buyRangeCircleCls = classnames({
+
+  });
+
+  const sellRangeCircleCls = classnames({
+
+  });
 
   return (
     <div className="buysellaction-stoplimit">
@@ -131,14 +140,19 @@ const BuySellActionStopLimit = props => {
                       value={rangeBuyPortfolio}
                     />
                     <div
-                        className="rangeprogress-circle"
+                        className={`rangeprogress-circle ${buyRangeCircleCls}`}
                         data-val={rangeBuyPortfolio}
                     >
                       {buySellRangePercent.map((el, idx) => {
-                        return <span key={`${el}_${idx}`} className={el}></span>;
+                        return <span key={`${el}_${idx}`} className={`val-${el}`}></span>;
                       })}
                     </div>
-                    <output className="rangeprogress-bubble">{rangeBuyPortfolio}</output>
+                    <output
+                        className="rangeprogress-bubble"
+                        style={{left: `calc(${rangeBuyPortfolio}% + (${8 - rangeBuyPortfolio * 0.15}px))`}}
+                    >
+                      {rangeBuyPortfolio}
+                    </output>
                     <Input
                         className="rangeprogress-range custom-range"
                         type="range"
@@ -264,14 +278,19 @@ const BuySellActionStopLimit = props => {
                       value={rangeSellPortfolio}
                     />
                     <div
-                        className="rangeprogress-circle"
+                        className={`rangeprogress-circle ${sellRangeCircleCls}`}
                         data-val={rangeSellPortfolio}
                     >
                       {buySellRangePercent.map((el, idx) => {
-                        return <span key={`${el}_${idx}`} className={el}></span>;
+                        return <span key={`${el}_${idx}`} className={`val-${el}`}></span>;
                       })}
                     </div>
-                    <output className="rangeprogress-bubble">{rangeSellPortfolio}</output>
+                    <output
+                        className="rangeprogress-bubble"
+                        style={{left: `calc(${rangeSellPortfolio}% + (${8 - rangeSellPortfolio * 0.15}px))`}}
+                    >
+                      {rangeSellPortfolio}
+                    </output>
                     <Input
                         className="rangeprogress-range custom-range"
                         type="range"
