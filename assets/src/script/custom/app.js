@@ -116,7 +116,7 @@ allRanges.forEach(wrap => {
 
     const rangePercent = [0, 25, 50, 75, 100];
     for (let i = 0; i < rangePercent.length; i++) {
-        circle.innerHTML +=  "<span class =" + rangePercent[i] + ">" + "</span>";
+        circle.innerHTML +=  "<span class =" + "val-" + rangePercent[i] + ">" + "</span>";
     }
 
 });
