@@ -45,6 +45,7 @@ const TopCoinBar = props => {
   const {
     selected: currentPair,
     fiatCurrency: selectedFiatCurrency,
+    cryptoCurrency: selectedCryptoCurrency,
   } = useSelector(state => state.pair);
   const { prices: pricesData = [] } = useSelector(state => state.socket);
   const { accesstoken } = useSelector(state => state.api);
@@ -87,7 +88,7 @@ const TopCoinBar = props => {
       high24h: `${high24hour} ${selectedFiatCurrency}`,
       low24h: `${low24hour} ${selectedFiatCurrency}`,
       average24h: `${avarage24hour} ${selectedFiatCurrency}`,
-      volume: `${volume} ${selectedFiatCurrency}`,
+      volume: `${volume} ${selectedCryptoCurrency}`,
       // lastPrice: 9999,
       // excavating: 55555,
     };
