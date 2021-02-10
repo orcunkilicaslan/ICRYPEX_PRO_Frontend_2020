@@ -57,24 +57,6 @@
     }
   }
 
-  /*
-  select.form-control:not(.custom-select){
-    height: 40px;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-  select.form-control-sm:not(.custom-select){
-    height: 34px;
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
-  }
-  select.form-control-lg:not(.custom-select){
-    height: 46px;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-  */
-
   .custom{
 
     &-select{
@@ -125,6 +107,8 @@
         }
       }
     }
+
+    &-range{}
 
   }
 
@@ -271,6 +255,10 @@
     &-range{
       position: relative;
       z-index: 1;
+
+      &.form-control-range{
+        display: unset;
+      }
 
       &::-webkit-slider-thumb,
       &::-moz-range-thumb,

@@ -17,15 +17,21 @@ import { useTranslation } from "react-i18next";
 import { IconSet } from "../IconSet.jsx";
 import { Button } from "../Button.jsx";
 
+const buySellCurrencies = ["TRY", "USD"];
+const buySellCryptoCurrencies  = ["BTC", "ETH"];
+const buySellRangePercent = [0, 25, 50, 75, 100];
+
 const BuySellActionMarket = props => {
+
   const { t } = useTranslation(["common", "finance"]);
   const { fiatCurrency, cryptoCurrency } = useSelector(state => state.pair);
   const [selectedBuyPrice, setSelectedBuyPrice] = useState("");
   const [selectedBuyAmount, setSelectedBuyAmount] = useState("");
-  const [rangeBuyPortfolio, setRangeBuyPortfolio] = useState("");
+  const [rangeBuyPortfolio, setRangeBuyPortfolio] = useState(buySellRangePercent[0]);
   const [selectedSellPrice, setSelectedSellPrice] = useState("");
   const [selectedSellAmount, setSelectedSellAmount] = useState("");
-  const [rangeSellPortfolio, setRangeSellPortfolio] = useState("");
+  const [rangeSellPortfolio, setRangeSellPortfolio] = useState(buySellRangePercent[0]);
+
 
   return (
     <div className="buysellaction-market">
@@ -61,7 +67,7 @@ const BuySellActionMarket = props => {
                         setSelectedBuyPrice(target.value);
                       }}
                     >
-                      {["TRY", "USD"].map((el, idx) => {
+                      {buySellCurrencies.map((el, idx) => {
                         return <option key={`${el}_${idx}`}>{el}</option>;
                       })}
                     </Input>
@@ -83,7 +89,7 @@ const BuySellActionMarket = props => {
                         setSelectedBuyAmount(target.value);
                       }}
                     >
-                      {["BTC", "ETH"].map((el, idx) => {
+                      {buySellCryptoCurrencies.map((el, idx) => {
                         return <option key={`${el}_${idx}`}>{el}</option>;
                       })}
                     </Input>
@@ -102,28 +108,27 @@ const BuySellActionMarket = props => {
                       className="rangeprogress-progress"
                       value={rangeBuyPortfolio}
                     />
+                    <div
+                        className="rangeprogress-circle"
+                        data-val={rangeBuyPortfolio}
+                    >
+                      {buySellRangePercent.map((el, idx) => {
+                        return <span key={`${el}_${idx}`} className={el}></span>;
+                      })}
+                    </div>
+                    <output className="rangeprogress-bubble">{rangeBuyPortfolio}</output>
+                    <Input
+                        className="rangeprogress-range custom-range"
+                        type="range"
+                        min={0}
+                        max={100}
+                        step={1}
+                        value={rangeBuyPortfolio}
+                        onChange={({ target }) => {
+                          setRangeBuyPortfolio(target.value);
+                        }}
+                    />
                   </div>
-                  <div
-                    className="rangeprogress-circle d-none"
-                    data-val={rangeBuyPortfolio}
-                  >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-                  <output className="rangeprogress-bubble"></output>
-                  <Input
-                    className="rangeprogress-range custom-range"
-                    type="range"
-                    min={100 / 4}
-                    max={100}
-                    step={100 / 4}
-                    value={rangeBuyPortfolio}
-                    onChange={({ target }) => {
-                      setRangeBuyPortfolio(target.value);
-                    }}
-                  />
                 </Col>
               </Row>
               <Row className="aligncenter">
@@ -173,7 +178,7 @@ const BuySellActionMarket = props => {
                         setSelectedSellPrice(target.value);
                       }}
                     >
-                      {["TRY", "USD"].map((el, idx) => {
+                      {buySellCurrencies.map((el, idx) => {
                         return <option key={`${el}_${idx}`}>{el}</option>;
                       })}
                     </Input>
@@ -195,7 +200,7 @@ const BuySellActionMarket = props => {
                         setSelectedSellAmount(target.value);
                       }}
                     >
-                      {["BTC", "ETH"].map((el, idx) => {
+                      {buySellCryptoCurrencies.map((el, idx) => {
                         return <option key={`${el}_${idx}`}>{el}</option>;
                       })}
                     </Input>
@@ -214,28 +219,27 @@ const BuySellActionMarket = props => {
                       className="rangeprogress-progress"
                       value={rangeSellPortfolio}
                     />
+                    <div
+                        className="rangeprogress-circle"
+                        data-val={rangeSellPortfolio}
+                    >
+                      {buySellRangePercent.map((el, idx) => {
+                        return <span key={`${el}_${idx}`} className={el}></span>;
+                      })}
+                    </div>
+                    <output className="rangeprogress-bubble">{rangeSellPortfolio}</output>
+                    <Input
+                        className="rangeprogress-range custom-range"
+                        type="range"
+                        min={0}
+                        max={100}
+                        step={1}
+                        value={rangeSellPortfolio}
+                        onChange={({ target }) => {
+                          setRangeSellPortfolio(target.value);
+                        }}
+                    />
                   </div>
-                  <div
-                    className="rangeprogress-circle d-none"
-                    data-val={rangeSellPortfolio}
-                  >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-                  <output className="rangeprogress-bubble"></output>
-                  <Input
-                    className="rangeprogress-range custom-range"
-                    type="range"
-                    min={100 / 4}
-                    max={100}
-                    step={100 / 4}
-                    value={rangeSellPortfolio}
-                    onChange={({ target }) => {
-                      setRangeSellPortfolio(target.value);
-                    }}
-                  />
                 </Col>
               </Row>
               <Row className="aligncenter">
