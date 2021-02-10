@@ -18,20 +18,13 @@ import classnames from "classnames";
 import { IconSet } from "../IconSet.jsx";
 import { Button } from "../Button.jsx";
 
-const buySellCurrencies = ["TRY", "USD"];
-const buySellCryptoCurrencies  = ["BTC", "ETH"];
 const buySellRangePercent = [0, 25, 50, 75, 100];
 
 const BuySellActionStopLimit = props => {
+
   const { t } = useTranslation(["common", "finance"]);
   const { fiatCurrency, cryptoCurrency } = useSelector(state => state.pair);
-  const [selectedBuyPrice, setSelectedBuyPrice] = useState("");
-  const [selectedBuyLimit, setSelectedBuyLimit] = useState("");
-  const [selectedBuyAmount, setSelectedBuyAmount] = useState("");
   const [rangeBuyPortfolio, setRangeBuyPortfolio] = useState(buySellRangePercent[0]);
-  const [selectedSellPrice, setSelectedSellPrice] = useState("");
-  const [selectedSellLimit, setSelectedSellLimit] = useState("");
-  const [selectedSellAmount, setSelectedSellAmount] = useState("");
   const [rangeSellPortfolio, setRangeSellPortfolio] = useState(buySellRangePercent[0]);
 
   const buyRangeCircleCls = classnames({
@@ -76,18 +69,7 @@ const BuySellActionStopLimit = props => {
                   </InputGroupAddon>
                   <Input type="text" />
                   <InputGroupAddon addonType="append">
-                    <Input
-                      className="custom-select"
-                      type="select"
-                      value={selectedBuyPrice}
-                      onChange={({ target }) => {
-                        setSelectedBuyPrice(target.value);
-                      }}
-                    >
-                      {buySellCurrencies.map((el, idx) => {
-                        return <option key={`${el}_${idx}`}>{el}</option>;
-                      })}
-                    </Input>
+                    <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>
                 </InputGroup>
               </FormGroup>
@@ -98,18 +80,7 @@ const BuySellActionStopLimit = props => {
                   </InputGroupAddon>
                   <Input type="text" />
                   <InputGroupAddon addonType="append">
-                    <Input
-                      className="custom-select"
-                      type="select"
-                      value={selectedBuyLimit}
-                      onChange={({ target }) => {
-                        setSelectedBuyLimit(target.value);
-                      }}
-                    >
-                      {buySellCurrencies.map((el, idx) => {
-                        return <option key={`${el}_${idx}`}>{el}</option>;
-                      })}
-                    </Input>
+                    <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>
                 </InputGroup>
               </FormGroup>
@@ -120,18 +91,7 @@ const BuySellActionStopLimit = props => {
                   </InputGroupAddon>
                   <Input />
                   <InputGroupAddon addonType="append">
-                    <Input
-                      className="custom-select"
-                      type="select"
-                      value={selectedBuyAmount}
-                      onChange={({ target }) => {
-                        setSelectedBuyAmount(target.value);
-                      }}
-                    >
-                      {buySellCryptoCurrencies.map((el, idx) => {
-                        return <option key={`${el}_${idx}`}>{el}</option>;
-                      })}
-                    </Input>
+                    <InputGroupText>{cryptoCurrency}</InputGroupText>
                   </InputGroupAddon>
                 </InputGroup>
               </FormGroup>
@@ -214,18 +174,7 @@ const BuySellActionStopLimit = props => {
                   </InputGroupAddon>
                   <Input type="text" />
                   <InputGroupAddon addonType="append">
-                    <Input
-                      className="custom-select"
-                      type="select"
-                      value={selectedSellPrice}
-                      onChange={({ target }) => {
-                        setSelectedSellPrice(target.value);
-                      }}
-                    >
-                      {buySellCurrencies.map((el, idx) => {
-                        return <option key={`${el}_${idx}`}>{el}</option>;
-                      })}
-                    </Input>
+                    <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>
                 </InputGroup>
               </FormGroup>
@@ -236,18 +185,7 @@ const BuySellActionStopLimit = props => {
                   </InputGroupAddon>
                   <Input type="text" />
                   <InputGroupAddon addonType="append">
-                    <Input
-                      className="custom-select"
-                      type="select"
-                      value={selectedSellLimit}
-                      onChange={({ target }) => {
-                        setSelectedSellLimit(target.value);
-                      }}
-                    >
-                      {buySellCurrencies.map((el, idx) => {
-                        return <option key={`${el}_${idx}`}>{el}</option>;
-                      })}
-                    </Input>
+                    <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>
                 </InputGroup>
               </FormGroup>
@@ -258,18 +196,7 @@ const BuySellActionStopLimit = props => {
                   </InputGroupAddon>
                   <Input />
                   <InputGroupAddon addonType="append">
-                    <Input
-                      className="custom-select"
-                      type="select"
-                      value={selectedSellAmount}
-                      onChange={({ target }) => {
-                        setSelectedSellAmount(target.value);
-                      }}
-                    >
-                      {buySellCryptoCurrencies.map((el, idx) => {
-                        return <option key={`${el}_${idx}`}>{el}</option>;
-                      })}
-                    </Input>
+                    <InputGroupText>{cryptoCurrency}</InputGroupText>
                   </InputGroupAddon>
                 </InputGroup>
               </FormGroup>
