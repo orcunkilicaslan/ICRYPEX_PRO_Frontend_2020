@@ -31,7 +31,14 @@ export const fetchPreloginToken = createAsyncThunk(
     } = getState();
 
     try {
-      if (preLoginPromise) return preLoginPromise.then(({ data }) => data);
+      if (preLoginPromise) {
+        return preLoginPromise
+          .then(({ data }) => data)
+          .catch(({ data }) => rejectWithValue(data))
+          .finally(() => {
+            preLoginPromise = null;
+          });
+      }
 
       preLoginPromise = await api.fetchPreloginToken({
         localkey,
@@ -105,7 +112,14 @@ export const refreshToken = createAsyncThunk(
     } = getState();
 
     try {
-      if (refreshPromise) return refreshPromise.then(({ data }) => data);
+      if (refreshPromise) {
+        return refreshPromise
+          .then(({ data }) => data)
+          .catch(({ data }) => rejectWithValue(data))
+          .finally(() => {
+            refreshPromise = null;
+          });
+      }
 
       refreshPromise = api.refreshToken(
         { accesstoken },
@@ -190,12 +204,8 @@ const apiSlice = createSlice({
       state.accesstoken = null;
     },
     [signoutUser.rejected]: (state, action) => {
-      const message = action?.payload?.errormessage;
-
-      if (message.includes("expired")) {
-        state.accesstoken = null;
-        state.prelogintoken = null;
-      }
+      state.accesstoken = null;
+      state.prelogintoken = null;
     },
   },
 });

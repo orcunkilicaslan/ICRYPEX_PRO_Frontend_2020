@@ -1,3 +1,4 @@
+import "core-js/features/promise";
 import "yet-another-abortcontroller-polyfill";
 import "event-target-polyfill";
 import React from "react";
@@ -56,9 +57,9 @@ function render() {
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={Store}>
-          <PersistGate loading={null} persistor={Persistor}>
-            <App />
-          </PersistGate>
+        <PersistGate loading={null} persistor={Persistor}>
+          <App />
+        </PersistGate>
       </Provider>
     </React.StrictMode>,
     document.getElementById("root")
