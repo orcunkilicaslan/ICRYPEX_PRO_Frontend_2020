@@ -13,10 +13,10 @@ import {
 } from "reactstrap";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import classnames from "classnames";
 
 import { IconSet } from "../IconSet.jsx";
 import { Button } from "../Button.jsx";
-import classnames from "classnames";
 
 const buySellCurrencies = ["TRY", "USD"];
 const buySellCryptoCurrencies  = ["BTC", "ETH"];
@@ -33,11 +33,19 @@ const BuySellActionLimit = props => {
   const [rangeSellPortfolio, setRangeSellPortfolio] = useState(buySellRangePercent[0]);
 
   const buyRangeCircleCls = classnames({
-
+    percstepa00: (rangeBuyPortfolio >= 0  && rangeBuyPortfolio <= 24),
+    percstepa25: (rangeBuyPortfolio >= 25  && rangeBuyPortfolio <= 49),
+    percstepa50: (rangeBuyPortfolio >= 50  && rangeBuyPortfolio <= 74),
+    percstepa75: (rangeBuyPortfolio >= 75  && rangeBuyPortfolio <= 99),
+    percstepa100: rangeBuyPortfolio == 100,
   });
 
   const sellRangeCircleCls = classnames({
-
+    percstepa00: (rangeSellPortfolio >= 0  && rangeSellPortfolio <= 24),
+    percstepa25: (rangeSellPortfolio >= 25  && rangeSellPortfolio <= 49),
+    percstepa50: (rangeSellPortfolio >= 50  && rangeSellPortfolio <= 74),
+    percstepa75: (rangeSellPortfolio >= 75  && rangeSellPortfolio <= 99),
+    percstepa100: rangeSellPortfolio == 100,
   });
 
   return (
