@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
 import classnames from "classnames";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import OpenOrderOrders from "./OpenOrderOrders.jsx";
 import OpenOrderTransactionHistory from "./OpenOrderTransactionHistory.jsx";
@@ -71,16 +71,16 @@ const OpenOrder = props => {
         <TabContent className="sitetabs" activeTab={activeTab}>
           {tabs.map(({ title, component: Comp }) => {
             return (
-                <TabPane key={title} tabId={title}>
-                  {accesstoken ? (
-                      <Comp />
-                  ) : (
-                      <UserNotLoginBox
-                          openSigninModal={openSigninModal}
-                          openSignupModal={openSignupModal}
-                      />
-                  )}
-                </TabPane>
+              <TabPane key={title} tabId={title}>
+                {accesstoken ? (
+                  <Comp />
+                ) : (
+                  <UserNotLoginBox
+                    openSigninModal={openSigninModal}
+                    openSignupModal={openSignupModal}
+                  />
+                )}
+              </TabPane>
             );
           })}
         </TabContent>

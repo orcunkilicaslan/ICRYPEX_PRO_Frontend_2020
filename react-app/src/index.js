@@ -10,7 +10,7 @@ import "./index.scss";
 import reportWebVitals from "./reportWebVitals";
 import { getStore } from "./state/";
 import initI18n from "./setupI18n";
-import { makeLocalKey } from "./util";
+import { makeLocalKey, debug } from "./util/";
 import {
   fetchSettings,
   fetchPreloginToken,
@@ -18,7 +18,6 @@ import {
   setDeviceId,
   setLocalKey,
 } from "./state/slices/api.slice";
-import { debug } from "~/util";
 
 const MD5_secret = process.env.REACT_APP_MD5_SECRET;
 const isProd = process.env.NODE_ENV === "production";
