@@ -108,7 +108,7 @@ const BuySellActionLimit = props => {
                         className="rangeprogress-bubble"
                         style={{left: `calc(${rangeBuyPortfolio}% + (${8 - rangeBuyPortfolio * 0.15}px))`}}
                     >
-                      {rangeBuyPortfolio}
+                      {rangeBuyPortfolio}%
                     </output>
                     <Input
                         className="rangeprogress-range custom-range"
@@ -202,7 +202,7 @@ const BuySellActionLimit = props => {
                         className="rangeprogress-bubble"
                         style={{left: `calc(${rangeSellPortfolio}% + (${8 - rangeSellPortfolio * 0.15}px))`}}
                     >
-                      {rangeSellPortfolio}
+                      {rangeSellPortfolio}%
                     </output>
                     <Input
                         className="rangeprogress-range custom-range"
