@@ -362,7 +362,7 @@ const TopCoinBar = props => {
               </div>
             </Form>
           </div>
-          <div className="modalcomp-setalarm-table">
+          <div className={`modalcomp-setalarm-table ${!allAlarms?.length ? "d-none" : ""}`}>
             <div className="headsmtitle">
               <div className="headsmtitle-col">
                 <h6>{hideOthers ? currentPair?.name : t("common:all")}</h6>
