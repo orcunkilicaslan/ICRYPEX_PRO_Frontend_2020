@@ -2,6 +2,9 @@
 .modalcomp{
 
   &-setalarm{
+    @include flexbox-display-flex();
+    @include flexbox-flex-flow(column);
+    height: 100%;
 
     &-data{
 
@@ -43,32 +46,244 @@
 
       .setalarmrange{
         margin-top: 35px;
+        position: relative;
 
-        .rangeprogress{
-
-          .rangeprogress-bubble{
-            background-color: $site-clr-red;
+        &:hover{
+          .setalarmrange-bubble{
             opacity: 1;
+          }
+        }
 
-            &::after{
-              background-color: $site-clr-red;
+        &-range{
+          position: relative;
+          z-index: 1;
+
+          &.form-control-range{
+            display: unset;
+          }
+
+          &::-webkit-slider-thumb,
+          &::-moz-range-thumb,
+          &::-ms-thumb{
+            //background-color: $site-clr-darkblue-400;
+            background-color: transparent;
+            @include transition-multiple(background 0.15s ease-in-out);
+
+            &:hover,
+            &:focus{
+              background: $site-clr-blue;
             }
           }
 
-          .rangeprogress-circle{
-            &[data-val*="0"]{
-              span:nth-child(1){background-color: $site-clr-blue;}
-            }
-            &[data-val*="33"]{
-              span:nth-child(1), span:nth-child(2){background-color: $site-clr-blue;}
-            }
-            &[data-val*="66"]{
-              span:nth-child(1), span:nth-child(2), span:nth-child(3){background-color: $site-clr-blue;}
-            }
-            &[data-val*="100"]{
-              span{background-color: $site-clr-blue;}
+          &::-webkit-slider-thumb{
+            background-image: none;
+            background-color: $site-clr-darkblue-600;
+            border: 2px solid $site-clr-blue;
+            @include transition-multiple(background 0.15s ease-in-out);
+
+            &:active {
+              background-color: $site-clr-blue;
             }
           }
+
+          &::-webkit-slider-runnable-track{
+            //background-color: $site-clr-darkblue-400;
+            background-color: transparent;
+          }
+
+          &:hover::-webkit-slider-thumb{
+            //box-shadow: 0 0 0 3px $site-clr-white, 0 0 0 6px $site-clr-blue;
+            @include transition-multiple(all 0.15s ease-in-out);
+          }
+
+          &.valnegative{
+            &::-webkit-slider-thumb,
+            &::-moz-range-thumb,
+            &::-ms-thumb{
+              &:hover,
+              &:focus{
+                background: $site-clr-red !important;
+              }
+            }
+            &::-webkit-slider-thumb{
+              border: 2px solid $site-clr-red !important;
+
+              &:active {
+                background-color: $site-clr-red !important;
+              }
+            }
+          }
+
+          &.valpositive{
+            &::-webkit-slider-thumb,
+            &::-moz-range-thumb,
+            &::-ms-thumb{
+              &:hover,
+              &:focus{
+                background: $site-clr-green !important;;
+              }
+            }
+            &::-webkit-slider-thumb{
+              border: 2px solid $site-clr-green !important;
+
+              &:active {
+                background-color: $site-clr-green !important;
+              }
+            }
+          }
+
+        }
+
+        &-bubble{
+          background-color: $site-clr-blue;
+          color: $site-clr-white;
+          @include responsive-font-size($var-custom-font-size-base);
+          font-weight: $var-custom-font-weight-bold;
+          padding: 1px 8px 2px;
+          opacity: 1;
+          position: absolute;
+          top: calc(-#{$bootstrap-custom-range-thumb-width} * 2);
+          left: 50%;
+          @include translateX(-50%);
+          @include border-radius($var-custom-border-radius-sm);
+
+          &::after {
+            content: "";
+            background-color: $site-clr-blue;
+            width: 6px;
+            height: 6px;
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            @include transform-multiple(translateX(-50%) rotate(45deg));
+          }
+
+          &.valnegative{
+            background-color: $site-clr-red !important;
+
+            &::after {background-color: $site-clr-red !important;}
+          }
+
+          &.valpositive{
+            background-color: $site-clr-green !important;
+
+            &::after {background-color: $site-clr-green !important;}
+          }
+        }
+
+        &-progress{
+          @include flexbox-display-flex();
+          justify-content: space-between;
+          width: 100%;
+          position: absolute;
+          top: calc(#{$bootstrap-custom-range-thumb-width} / 2);
+
+          &.valnegative{}
+
+          &.valpositive{}
+
+          .progress{
+            @include flexbox-flex-basis(0);
+            @include flexbox-flex-grow(1);
+            width: 100%;
+            max-width: 100%;
+            background-color: $site-clr-darkblue-400;
+            height: $bootstrap-custom-range-track-height;
+
+            .progress-bar{
+              @include transition-multiple(none);
+            }
+
+            &.barnegative{
+              @include rotate(180);
+
+              .progress-bar{
+                background-color: $site-clr-red;
+              }
+            }
+
+            &.barpositive{
+              @include rotate(0);
+
+              .progress-bar{
+                background-color: $site-clr-green;
+              }
+            }
+          }
+        }
+
+        &-perc{
+          @include flexbox-display-flex();
+          @include flexbox-align-items(center);
+          @include flexbox-justify-content(space-between);
+          width: 100%;
+          position: absolute;
+          top: calc(-#{$bootstrap-custom-range-thumb-width} * 1.75);
+        }
+
+        &-circle{
+          @include flexbox-display-flex();
+          @include flexbox-align-items(center);
+          @include flexbox-justify-content(space-between);
+          width: 100%;
+          height: $bootstrap-custom-range-track-height;
+          position: absolute;
+          top: calc(#{$bootstrap-custom-range-thumb-width} / 2);
+
+          > span{
+            @include flexbox-flex(0 0 auto);
+            width: $bootstrap-custom-range-thumb-width / 1.5;
+            height: $bootstrap-custom-range-thumb-height / 1.5;
+            max-width: 100%;
+            background-color: $site-clr-darkblue-400;
+            @include border-radius($bootstrap-custom-range-thumb-border-radius);
+          }
+
+          &.percstepa00{
+            span.val-0{background-color: $site-clr-green;}
+          }
+          &.percstepa25{
+            span.val-0, span.val-25{background-color: $site-clr-green;}
+          }
+          &.percstepa50{
+            span.val-0, span.val-25, span.val-50{background-color: $site-clr-green;}
+          }
+          &.percstepa75{
+            span.val-0, span.val-25, span.val-50, span.val-75{background-color: $site-clr-green;}
+          }
+          &.percstepa100{
+            span{background-color: $site-clr-green;}
+          }
+
+          &.percstepp00{
+            span.val-0{background-color: $site-clr-red;}
+          }
+          &.percstepp25{
+            span.val-0, span.val--25{background-color: $site-clr-red;}
+          }
+          &.percstepp50{
+            span.val-0, span.val--25, span.val--50{background-color: $site-clr-red;}
+          }
+          &.percstepp75{
+            span.val-0, span.val--25, span.val--50, span.val--75{background-color: $site-clr-red;}
+          }
+          &.percstepp100{
+            span{background-color: $site-clr-red;}
+          }
+
+
+        }
+
+        // Firefox Fixed
+        ::-moz-range-track {
+          background: transparent;
+          border: 0;
+        }
+
+        // Firefox Fixed
+        input::-moz-focus-inner,
+        input::-moz-focus-outer{
+          border: 0;
         }
       }
 
@@ -78,6 +293,10 @@
     }
 
     &-table{
+      @include flexbox-display-flex();
+      @include flexbox-flex-flow(column);
+      @include flexbox-flex(1);
+      height: 100%;
       margin-top: 15px;
 
       .headsmtitle{
@@ -85,10 +304,12 @@
       }
 
       .setalarmtable{
+        @include flexbox-flex(1);
+
         .sitetablediv{
 
           .scrollbar-tbl-th .tbl-thead .tbl-th{color: $site-clr-text-soft-sec;}
-          .scrollbar-tbl-tb{height: 500px;}
+          .scrollbar-tbl-tb{height: 450px;}
           .symb[class*="tbl"]{width: 80px; text-align: left;}
           .amnt[class*="tbl"]{text-align: right;}
           .adlt[class*="tbl"]{
@@ -110,6 +331,10 @@
             margin-left: 3px;
           }
         }
+      }
+
+      .deletealarmbtn{
+        margin-top: 20px;
       }
     }
 

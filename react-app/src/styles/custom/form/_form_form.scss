@@ -352,8 +352,8 @@
 
       > span{
         @include flexbox-flex(0 0 auto);
-        width: $bootstrap-custom-range-thumb-width;
-        height: $bootstrap-custom-range-thumb-height;
+        width: $bootstrap-custom-range-thumb-width / 1.5;
+        height: $bootstrap-custom-range-thumb-height / 1.5;
         max-width: 100%;
         background-color: $site-clr-darkblue-400;
         @include border-radius($bootstrap-custom-range-thumb-border-radius);
