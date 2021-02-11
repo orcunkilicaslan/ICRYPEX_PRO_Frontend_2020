@@ -71,7 +71,7 @@ const TopCoinBar = props => {
     percstepp00: inRange(rangeAlarmPortfolio, -1, -25),
     percstepp25: inRange(rangeAlarmPortfolio, -25, -50),
     percstepp50: inRange(rangeAlarmPortfolio, -50, -75),
-    percstepp75: inRange(rangeAlarmPortfolio, -75, -100),
+    percstepp75: inRange(rangeAlarmPortfolio, -75, -99),
     percstepp100: rangeAlarmPortfolio === -100,
   });
 

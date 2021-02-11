@@ -11,9 +11,10 @@ import {
   InputGroupText,
   Progress,
 } from "reactstrap";
-import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import classnames from "classnames";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { inRange } from "lodash";
 
 import { IconSet } from "../IconSet.jsx";
 import { Button } from "../Button.jsx";
@@ -28,19 +29,19 @@ const BuySellActionStopLimit = props => {
   const [rangeSellPortfolio, setRangeSellPortfolio] = useState(buySellRangePercent[0]);
 
   const buyRangeCircleCls = classnames({
-    percstepa00: (rangeBuyPortfolio >= 0  && rangeBuyPortfolio <= 24),
-    percstepa25: (rangeBuyPortfolio >= 25  && rangeBuyPortfolio <= 49),
-    percstepa50: (rangeBuyPortfolio >= 50  && rangeBuyPortfolio <= 74),
-    percstepa75: (rangeBuyPortfolio >= 75  && rangeBuyPortfolio <= 99),
-    percstepa100: rangeBuyPortfolio == 100,
+    percstepa00: inRange(rangeBuyPortfolio, 0, 25),
+    percstepa25: inRange(rangeBuyPortfolio, 25, 50),
+    percstepa50: inRange(rangeBuyPortfolio, 50, 75),
+    percstepa75: inRange(rangeBuyPortfolio, 75, 100),
+    percstepa100: inRange(rangeBuyPortfolio, 100, 101),
   });
 
   const sellRangeCircleCls = classnames({
-    percstepa00: (rangeSellPortfolio >= 0  && rangeSellPortfolio <= 24),
-    percstepa25: (rangeSellPortfolio >= 25  && rangeSellPortfolio <= 49),
-    percstepa50: (rangeSellPortfolio >= 50  && rangeSellPortfolio <= 74),
-    percstepa75: (rangeSellPortfolio >= 75  && rangeSellPortfolio <= 99),
-    percstepa100: rangeSellPortfolio == 100,
+    percstepa00: inRange(rangeSellPortfolio, 0, 25),
+    percstepa25: inRange(rangeSellPortfolio, 25, 50),
+    percstepa50: inRange(rangeSellPortfolio, 50, 75),
+    percstepa75: inRange(rangeSellPortfolio, 75, 100),
+    percstepa100: inRange(rangeSellPortfolio, 100, 101),
   });
 
   return (
