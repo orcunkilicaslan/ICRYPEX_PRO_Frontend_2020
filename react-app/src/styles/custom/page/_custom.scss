@@ -18,6 +18,9 @@ body, #root{
   overflow: hidden;
 }
 
+.opacity-0{opacity: 0;}
+.opacity-1{opacity: 1;}
+
 .usernotloginbox{
   @include flexbox-display-flex();
   @include flexbox-flex-flow(column);

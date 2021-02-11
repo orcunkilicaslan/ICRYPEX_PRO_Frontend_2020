@@ -60,6 +60,7 @@ const init = (initialLang = "en") => {
             excavating: "Excavating",
             setAlarm: "SET ALARM",
             createAlarm: "CREATE ALARM",
+            deleteAllAlarms: "CLEAR ALL ALARMS",
             hidePairs: "Hide Other Pairs",
           },
           alertResult: {
@@ -124,6 +125,7 @@ const init = (initialLang = "en") => {
             excavating: "Kazılacak",
             setAlarm: "ALARM KUR",
             createAlarm: "ALARM OLUŞTUR",
+            deleteAllAlarms: "TÜM ALARMLARI SİL",
             hidePairs: "Diğer Çiftleri Gizle",
           },
           alertResult: {

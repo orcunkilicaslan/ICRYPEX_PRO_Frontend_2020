@@ -12,6 +12,7 @@ import {
   ModalHeader,
   Progress,
 } from "reactstrap";
+import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -29,9 +30,12 @@ import {
 import { setOpenModal } from "~/state/slices/ui.slice";
 import { AlertResult } from "~/components/AlertResult";
 
-const STEP = 10;
-const MINIMUM = 0;
-const MAXIMUM = 999999999;
+
+
+const rangeAlarmPercent = [-100, -75, -50, -25, 0, 25, 50, 75, 100];
+const spinnerStep = 10;
+const spinnerMin = 0;
+const spinnerMax = 999999999;
 
 const TopCoinBar = props => {
   const { t } = useTranslation(["coinbar", "common"]);
@@ -50,7 +54,25 @@ const TopCoinBar = props => {
   const { prices: pricesData = [] } = useSelector(state => state.socket);
   const { accesstoken } = useSelector(state => state.api);
   const { openModal } = useSelector(state => state.ui);
-  const [rangeAlarmPortfolio, setRangeAlarmPortfolio] = useState(0);
+
+  const [rangeAlarmPortfolio, setRangeAlarmPortfolio] = useState(rangeAlarmPercent[4]);
+
+  const rangeAlarmPortfolioValPositive = rangeAlarmPortfolio;
+  const rangeAlarmPortfolioValNegative = rangeAlarmPortfolio * -1;
+
+  const rangeAlarmCircleCls = classnames({
+    percstepa00: (rangeAlarmPortfolio >= 1  && rangeAlarmPortfolio <= 24),
+    percstepa25: (rangeAlarmPortfolio >= 25  && rangeAlarmPortfolio <= 49),
+    percstepa50: (rangeAlarmPortfolio >= 50  && rangeAlarmPortfolio <= 74),
+    percstepa75: (rangeAlarmPortfolio >= 75  && rangeAlarmPortfolio <= 99),
+    percstepa100: (rangeAlarmPortfolio === 100),
+    percstepp00: (rangeAlarmPortfolio <= -1  && rangeAlarmPortfolio >= -24),
+    percstepp25: (rangeAlarmPortfolio <= -25  && rangeAlarmPortfolio >= -49),
+    percstepp50: (rangeAlarmPortfolio <= -50  && rangeAlarmPortfolio >= -74),
+    percstepp75: (rangeAlarmPortfolio <= -75  && rangeAlarmPortfolio >= -99),
+    percstepp100: (rangeAlarmPortfolio === -100),
+  });
+
   const [amount, setAmount] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const visibleAlarms = useMemo(() => {
@@ -109,7 +131,7 @@ const TopCoinBar = props => {
       newAmount = parseInt(event.target.value, 10);
     }
 
-    if (newAmount >= MINIMUM && newAmount <= MAXIMUM) setAmount(newAmount);
+    if (newAmount >= spinnerMin && newAmount <= spinnerMax) setAmount(newAmount);
   };
 
   const createAlarm = async () => {
@@ -246,7 +268,7 @@ const TopCoinBar = props => {
                     <Button
                       variant="secondary"
                       className="active"
-                      onClick={() => onAmount(-STEP)}
+                      onClick={() => onAmount(-spinnerStep)}
                     >
                       -
                     </Button>
@@ -270,7 +292,7 @@ const TopCoinBar = props => {
                     <Button
                       variant="secondary"
                       className="active"
-                      onClick={() => onAmount(STEP)}
+                      onClick={() => onAmount(spinnerStep)}
                     >
                       +
                     </Button>
@@ -278,40 +300,47 @@ const TopCoinBar = props => {
                 </FormGroup>
               </div>
               <div className="setalarmrange">
-                <div className="rangeprogress">
+                <div className="setalarmrange-progress">
                   <Progress
-                    className="rangeprogress-progress"
-                    value={rangeAlarmPortfolio}
+                      className="barnegative"
+                      barClassName={rangeAlarmPortfolio >= 0 ? "opacity-0" : "opacity-1"}
+                      value={rangeAlarmPortfolioValNegative}
                   />
-                  <div
-                    className="rangeprogress-circle d-none"
+                  <Progress
+                      className="barpositive"
+                      barClassName={rangeAlarmPortfolio <= 0 ? "opacity-0" : "opacity-1"}
+                      value={rangeAlarmPortfolioValPositive}
+                  />
+                </div>
+                <div
+                    className={`setalarmrange-circle ${rangeAlarmCircleCls}`}
                     data-val={rangeAlarmPortfolio}
-                  >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-                  <div className="rangeprogress-perc">
-                    <span className="sitecolorred">-100%</span>
-                    <span className="sitecolorgreen">+100%</span>
-                  </div>
-                  <output className="rangeprogress-bubble">
-                    {rangeAlarmPortfolio}
-                  </output>
-                  <Input
-                    className="rangeprogress-range custom-range"
+                >
+                  {rangeAlarmPercent.map((el, idx) => {
+                    return <span key={`${el}_${idx}`} className={`val-${el}`}></span>;
+                  })}
+                </div>
+                <div className="setalarmrange-perc">
+                  <span className="sitecolorred">-100%</span>
+                  <span className="sitecolorgreen">+100%</span>
+                </div>
+                <output
+                    className={`setalarmrange-bubble ${rangeAlarmPortfolio > 0 ? "valpositive" : "valnegative"}`}
+                >
+                  {rangeAlarmPortfolio}%
+                </output>
+                <Input
+                    className={`setalarmrange-range custom-range ${rangeAlarmPortfolio > 0 ? "valpositive" : "valnegative"}`}
                     type="range"
                     min={-100}
                     max={100}
-                    step={25}
+                    step={1}
                     value={rangeAlarmPortfolio}
                     onChange={({ target }) => {
                       const int = parseInt(target.value, 10);
                       setRangeAlarmPortfolio(int);
                     }}
-                  />
-                </div>
+                />
               </div>
               <div className="setalarmbtn">
                 <Button
@@ -389,6 +418,16 @@ const TopCoinBar = props => {
                   })}
                 </Table.Tbody>
               </Table>
+            </div>
+            <div className="deletealarmbtn">
+              <Button
+                  variant="danger"
+                  className="w-100"
+                  onClick={deleteAlarms}
+                  disabled={isCreating}
+              >
+                {t("deleteAllAlarms")}
+              </Button>
             </div>
           </div>
         </ModalBody>

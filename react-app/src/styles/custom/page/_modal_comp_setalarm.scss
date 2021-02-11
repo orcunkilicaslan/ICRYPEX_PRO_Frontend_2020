@@ -252,7 +252,7 @@
             span.val-0, span.val-25, span.val-50, span.val-75{background-color: $site-clr-green;}
           }
           &.percstepa100{
-            span{background-color: $site-clr-green;}
+            span.val-0, span.val-25, span.val-50, span.val-75, span.val-100{background-color: $site-clr-green;}
           }
 
           &.percstepp00{
@@ -268,7 +268,7 @@
             span.val-0, span.val--25, span.val--50, span.val--75{background-color: $site-clr-red;}
           }
           &.percstepp100{
-            span{background-color: $site-clr-red;}
+            span.val-0, span.val--25, span.val--50, span.val--75, span.val--100{background-color: $site-clr-red;}
           }
 
 
