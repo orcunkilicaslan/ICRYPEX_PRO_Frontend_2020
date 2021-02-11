@@ -1,5 +1,5 @@
-import { useState } from "react";
-import {Row, Form, FormGroup, Label, Col, Input, InputGroup, InputGroupAddon, InputGroupText} from "reactstrap";
+import { useSelector } from "react-redux";
+import { Row, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
 
 import { ReactComponent as TildeSmIcon } from "~/assets/images/icons/path_icon_tildesm.svg";
 import { Button } from "~/components/Button.jsx";
@@ -8,8 +8,7 @@ import Table from "~/components/Table.jsx";
 
 const EasyBuySellFormSell = props => {
 
-    const [selected1, setSelected1] = useState("");
-    const [selected2, setSelected2] = useState("");
+    const { fiatCurrency, cryptoCurrency } = useSelector(state => state.pair);
 
     return (
         <div className="easybuysell-cont">
@@ -17,36 +16,23 @@ const EasyBuySellFormSell = props => {
                 <Row className="easybuysell-form-inputs">
                     <FormGroup className="col">
                         <div className="formflexlabel">
-                            <Label>MİKTAR TRY</Label>
+                            <Label>MİKTAR {cryptoCurrency}</Label>
                             <div className="labelassets">
-                                <p>Kullanılabilir: <span>1.41811575 BTC</span></p>
+                                <p>Kullanılabilir: <span>1.41811575 {cryptoCurrency}</span></p>
                                 <Button type="button" className="ml-1">
                                     <IconSet sprite="sprtsmclrd" size="16" name="addbtn" />
                                 </Button>
                             </div>
                         </div>
-                        <Row form>
-                            <Col xs="auto">
-                                <Input
-                                    className="custom-select"
-                                    type="select"
-                                    value={selected1}
-                                    onChange={({ target }) => {
-                                        setSelected1(target.value);
-                                    }}
-                                >
-                                    {["BTC", "ETH"].map((el, idx) => {
-                                        return <option key={`${el}_${idx}`}>{el}</option>;
-                                    })}
-                                </Input>
-                            </Col>
-                            <InputGroup className="col">
-                                <InputGroupAddon addonType="prepend">
-                                    <InputGroupText>Miktar</InputGroupText>
-                                </InputGroupAddon>
-                                <Input type="text" />
-                            </InputGroup>
-                        </Row>
+                        <InputGroup>
+                            <InputGroupAddon addonType="prepend">
+                                <InputGroupText>Miktar</InputGroupText>
+                            </InputGroupAddon>
+                            <Input type="text" />
+                            <InputGroupAddon addonType="append">
+                                <InputGroupText>{cryptoCurrency}</InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
                     </FormGroup>
                     <FormGroup className="col-auto">
                         <div className="inputchangeicon">
@@ -55,37 +41,24 @@ const EasyBuySellFormSell = props => {
                     </FormGroup>
                     <FormGroup className="col">
                         <div className="formflexlabel">
-                            <Label>MİKTAR TRY</Label>
+                            <Label>MİKTAR {fiatCurrency}</Label>
                             <div className="labelprice">
-                                <p>BTC Fiyat: <TildeSmIcon className="tildesm" /> <span>66,238.89 TRY</span></p>
+                                <p>{cryptoCurrency} Fiyat: <TildeSmIcon className="tildesm" /> <span>66,238.89 {fiatCurrency}</span></p>
                             </div>
                         </div>
-                        <Row form>
-                            <Col xs="auto">
-                                <Input
-                                    className="custom-select"
-                                    type="select"
-                                    value={selected2}
-                                    onChange={({ target }) => {
-                                        setSelected2(target.value);
-                                    }}
-                                >
-                                    {["TRY", "USD"].map((el, idx) => {
-                                        return <option key={`${el}_${idx}`}>{el}</option>;
-                                    })}
-                                </Input>
-                            </Col>
-                            <InputGroup className="col">
-                                <InputGroupAddon addonType="prepend">
-                                    <InputGroupText>Miktar</InputGroupText>
-                                </InputGroupAddon>
-                                <Input type="text" />
-                            </InputGroup>
-                        </Row>
+                        <InputGroup>
+                            <InputGroupAddon addonType="prepend">
+                                <InputGroupText>Miktar</InputGroupText>
+                            </InputGroupAddon>
+                            <Input type="text" />
+                            <InputGroupAddon addonType="append">
+                                <InputGroupText>{fiatCurrency}</InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
                     </FormGroup>
                 </Row>
                 <div className="easybuysell-form-btns">
-                    <Button variant="danger" className="w-50">BTC SAT</Button>
+                    <Button variant="danger" className="w-50">{cryptoCurrency} SAT</Button>
                 </div>
             </Form>
             <div className="easybuysell-confirm">
