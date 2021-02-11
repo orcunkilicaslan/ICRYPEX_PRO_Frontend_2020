@@ -132,6 +132,7 @@ const initialState = {
   hideOthers: false,
   byPair: {},
   isCreating: false,
+  isDeleting: false,
 };
 
 const alarmSlice = createSlice({
@@ -169,6 +170,24 @@ const alarmSlice = createSlice({
     },
     [createPairPriceAlarm.rejected]: state => {
       state.isCreating = false;
+    },
+    [deletePairPriceAlarm.pending]: state => {
+      state.isDeleting = true;
+    },
+    [deletePairPriceAlarm.fulfilled]: state => {
+      state.isDeleting = false;
+    },
+    [deletePairPriceAlarm.rejected]: state => {
+      state.isDeleting = false;
+    },
+    [deletePairPriceAlarms.pending]: state => {
+      state.isDeleting = true;
+    },
+    [deletePairPriceAlarms.fulfilled]: state => {
+      state.isDeleting = false;
+    },
+    [deletePairPriceAlarms.rejected]: state => {
+      state.isDeleting = false;
     },
   },
 });
