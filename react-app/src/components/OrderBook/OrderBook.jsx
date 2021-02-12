@@ -118,10 +118,10 @@ const OrderBook = props => {
                             {total}
                           </Table.Td>
                           <Table.Td sizefixed className="amnt">
-                            {amount}
+                            {amount?.toFixed?.(8)}
                           </Table.Td>
                           <Table.Td sizefixed className="pric">
-                            {price}
+                            {price?.toFixed?.(2)}
                           </Table.Td>
                         </Table.Tr>
                       );
@@ -164,10 +164,10 @@ const OrderBook = props => {
                             {price}
                           </Table.Td>
                           <Table.Td sizefixed className="amnt">
-                            {amount}
+                            {amount?.toFixed?.(8)}
                           </Table.Td>
                           <Table.Td sizefixed className="totl">
-                            {total}
+                            {total?.toFixed?.(2)}
                           </Table.Td>
                         </Table.Tr>
                       );
