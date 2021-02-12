@@ -14,6 +14,7 @@ function mdTabsArea() {
     mdTabLstTblTb.style.height = (mdTabContent.clientHeight - mdTabLstTblTh.clientHeight - 50) + "px";
 
 
+
 }
 
 document.addEventListener("DOMContentLoaded", mdTabsArea);

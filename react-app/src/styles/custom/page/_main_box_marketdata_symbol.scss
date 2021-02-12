@@ -34,8 +34,16 @@
         z-index: 1;
         @include transition-multiple(width 0.7s cubic-bezier(.77,0,.175,1), color 0.7s cubic-bezier(.77,0,.175,1), border-color 0.7s cubic-bezier(.77,0,.175,1));
 
-        &:focus{width: 375px; color: $site-clr-white !important; border-color: transparentize($site-clr-blue, 0.25);}
-        &:focus ~ .mdsearchicon svg path{fill: $site-clr-blue;}
+        &:focus,
+        &:valid{width: 375px; color: $site-clr-white !important; border-color: transparentize($site-clr-blue, 0.25);}
+        &:valid{text-transform: uppercase;}
+
+        &:focus ~ .mdsearchicon .svgsearch path{fill: $site-clr-blue;}
+        &:focus ~ .mdsearchicon .svgsearch{}
+        &:valid ~ .mdsearchicon{
+          .svgsearch{display: none;}
+          .svgclose{display: block;}
+        }
       }
 
       .mdsearchicon{
@@ -45,22 +53,42 @@
         position: absolute;
         right: 3px;
         z-index: 1;
-        cursor: pointer;
 
         svg{
           position: relative;
-          top: 3px;
+          height: 100%;
+        }
 
+        .svgsearch{
           path{
             fill: $site-clr-text-soft-sec;
             @include transition-multiple(fill 0.7s cubic-bezier(.77,0,.175,1));
           }
         }
+
+        .svgclose{
+          cursor: pointer;
+          display: none;
+
+          path{
+            fill: $site-clr-red;
+            @include transition-multiple(fill 0.7s cubic-bezier(.77,0,.175,1));
+          }
+        }
+      }
+
+      .mdcloseicon{
+        width: 20px;
+        height: 100%;
+        text-align: center;
+        position: absolute;
+        right: 3px;
+        z-index: 1;
+        cursor: pointer;
       }
 
       .btn-group.col{}
       .btn-group.col-auto{padding-right: 83px;}
-
     }
 
     .mdsymboltable{

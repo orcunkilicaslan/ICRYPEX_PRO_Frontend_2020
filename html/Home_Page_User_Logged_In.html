@@ -131,8 +131,11 @@
                                                 <a class="btn btn-sm btn-secondary active" href="#" title="Tümü" rel="bookmark">Tümü</a>
                                             </div>
                                             <div class="btn-group btn-group-sm col-auto" role="group">
-                                                <input class="mdsearchinput form-control form-control-sm" type="text" placeholder="Arama" value="" />
-                                                <div class="mdsearchicon"><svg xmlns="http://www.w3.org/2000/svg" width="11.541" height="11.527" viewBox="0 0 11.541 11.527"><path d="M26.574,67.109l-2.831-2.83a4.735,4.735,0,1,0-3.779,1.882,4.664,4.664,0,0,0,2.862-.965l2.846,2.815a.634.634,0,0,0,.459.19.66.66,0,0,0,.458-.19A.645.645,0,0,0,26.574,67.109Zm-6.594-2.23a3.463,3.463,0,1,1,2.451-5.914,3.379,3.379,0,0,1,1.012,2.451,3.47,3.47,0,0,1-1.012,2.451A3.4,3.4,0,0,1,19.981,64.879Z" transform="translate(-15.225 -56.673)" /></svg></div>
+                                                <input class="mdsearchinput form-control form-control-sm" type="text" placeholder="Arama" value="" pattern=".{0}|.{1,}" onkeyup="this.value = this.value.toUpperCase();" required="" />
+                                                <div class="mdsearchicon">
+                                                    <svg class="svgsearch" xmlns="http://www.w3.org/2000/svg" width="11.541" height="11.527" viewBox="0 0 11.541 11.527"><path d="M26.574,67.109l-2.831-2.83a4.735,4.735,0,1,0-3.779,1.882,4.664,4.664,0,0,0,2.862-.965l2.846,2.815a.634.634,0,0,0,.459.19.66.66,0,0,0,.458-.19A.645.645,0,0,0,26.574,67.109Zm-6.594-2.23a3.463,3.463,0,1,1,2.451-5.914,3.379,3.379,0,0,1,1.012,2.451,3.47,3.47,0,0,1-1.012,2.451A3.4,3.4,0,0,1,19.981,64.879Z" transform="translate(-15.225 -56.673)" /></svg>
+                                                    <svg class="svgclose" onclick="document.querySelector('.mdsearchinput').value='';" xmlns="http://www.w3.org/2000/svg" width="11.541" height="11.527" viewBox="0 0 11.54 11.51"><g transform="translate(-114 -2)"><rect width="11.541" height="11.527" transform="translate(114 2)" fill="transparent" opacity="0"/><path d="M14.056,13,10.493,9.434l3.562-3.562A.748.748,0,0,0,13,4.813v0L9.435,8.377,5.875,4.816A.748.748,0,0,0,4.817,5.874L8.379,9.435,4.815,13a.748.748,0,0,0,1.057,1.059v0l3.564-3.564L13,14.056A.748.748,0,0,0,14.059,13Z" transform="translate(110.405 -1.595)" /></g></svg>
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- Filter -->
