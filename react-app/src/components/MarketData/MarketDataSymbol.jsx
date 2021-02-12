@@ -6,7 +6,8 @@ import classnames from "classnames";
 import { useFuzzy } from "react-use-fuzzy";
 
 import { ReactComponent as MdTableFavIcon } from "~/assets/images/icons/path_icon_mdtable_fav.svg";
-import { ReactComponent as MdTableSearchIcon } from "~/assets/images/icons/path_icon_mdtable_search.svg";
+import { ReactComponent as MdTableSearchIcon } from "~/assets/images/icons/path_icon_mdtable_symbolfilter_search.svg";
+import { ReactComponent as MdTableCloseIcon } from "~/assets/images/icons/path_icon_mdtable_symbolfilter_close.svg";
 import { ReactComponent as PerLineIcon } from "~/assets/images/icons/path_icon_pericon.svg";
 
 import { Button } from "../Button";
@@ -105,9 +106,12 @@ const MarketDataSymbol = props => {
             placeholder={t("common:search")}
             value={keyword}
             onChange={e => search(e.target.value)}
+            pattern=".{0}|.{1,}"
+            required
           />
           <div className="mdsearchicon">
-            <MdTableSearchIcon />
+            <MdTableSearchIcon className="svgsearch" />
+            <MdTableCloseIcon className="svgclose" onClick={() => resetSearch()} />
           </div>
         </ButtonGroup>
       </div>
