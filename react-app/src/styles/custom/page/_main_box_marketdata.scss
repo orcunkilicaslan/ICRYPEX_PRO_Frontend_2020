@@ -3,11 +3,15 @@
 
   .marketdata{
 
-    &-tabs{}
+    &-tabs{
+
+      > .tab-content > .tab-pane > div{
+        padding: 10px;
+      }
+    }
 
     .tabcont-head{
       color: $site-clr-white;
-      padding-bottom: 10px;
     }
 
     .sitetablediv{

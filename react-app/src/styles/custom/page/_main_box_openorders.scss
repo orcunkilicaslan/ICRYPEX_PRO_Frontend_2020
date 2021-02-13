@@ -12,13 +12,17 @@
           padding-top: 16px;
         }
 
+        > .tab-pane > div{
+          padding: 10px;
+        }
+
         .tabcont{
 
           &-head{
+            border-bottom: 1px solid $site-brdr-dark;
+
             + div{
-              padding: 10px 0;
               margin-top: 5px;
-              border-top: 1px solid $site-brdr-dark;
             }
           }
 
@@ -36,7 +40,7 @@
             }
 
             + div[class*="table"] .sitetablediv .scrollbar-tbl-tb{
-              height: 160px;
+              height: 165px;
             }
           }
         }

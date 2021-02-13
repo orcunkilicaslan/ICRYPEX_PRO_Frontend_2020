@@ -94,6 +94,9 @@
 /* Table UI Dark */
 
 .scrollbar{
+  @include flexbox-display-flex();
+  @include flexbox-flex-flow(column);
+  height: 100%;
 
   &-vert{}
 
@@ -107,6 +110,7 @@
   }
 
   &-tbl{
+    height: 100%;
 
     &-th{
       &[class*="active-y"]{

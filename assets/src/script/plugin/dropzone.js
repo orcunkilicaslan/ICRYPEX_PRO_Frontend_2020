@@ -4,7 +4,7 @@
 import Dropzone from 'dropzone';
 
 // Prevent Dropzone from auto discovering this element:
-Dropzone.options.myAwesomeDropzone = false;
+//Dropzone.options.myAwesomeDropzone = false;
 // This is useful when you want to create the
 // Dropzone programmatically later
 

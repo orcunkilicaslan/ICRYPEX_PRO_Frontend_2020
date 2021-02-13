@@ -398,6 +398,15 @@
     select > option{
       color: $custom-select-color;
       background-color: $custom-select-bg;
+
+      &[disabled]{
+        display: none;
+      }
+
+      &[selected]{
+        color: $site-clr-white !important;
+      }
+
     }
 
     .form-control{

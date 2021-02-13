@@ -15,6 +15,7 @@
         .assetchartarea{
           @include flexbox-display-flex();
           @include flexbox-align-items(center);
+          height: 100%;
 
           &-donut{
             @include flexbox-flex(0 0 auto);
@@ -143,15 +144,18 @@
 
         .assetsaddress{
 
-          &-tabs{}
+          &-tabs{
+
+            .nav{
+              margin: 5px 0;
+            }
+          }
 
           &-tablebox{}
 
         }
 
         .asaddresstable{
-          padding: 5px 0;
-
           .sitetablediv{
 
             .ico[class*="tbl"]{
@@ -181,7 +185,7 @@
             .tbl-td{padding-bottom: 2px;}
 
             &.scrollbar-tbl > .scrollbar-tbl-th .tbl-thead{border-top-width: 0;}
-            &.scrollbar-tbl > .scrollbar-tbl-tb .tbl-tbody{height: 110px;}
+            &.scrollbar-tbl > .scrollbar-tbl-tb .tbl-tbody{height: 120px;}
           }
         }
 

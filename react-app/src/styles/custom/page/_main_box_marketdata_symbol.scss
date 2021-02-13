@@ -2,7 +2,9 @@
 .mainbox-marketdata{
 
   .marketdata-symbol{
-    padding: 5px 10px;
+    @include flexbox-display-flex();
+    @include flexbox-flex-flow(column);
+    height: 100%;
 
     .tabcont-filterbar{
       @include flexbox-align-items(inherit);
@@ -92,7 +94,6 @@
     }
 
     .mdsymboltable{
-      padding: 5px 0;
 
       .sitetablediv{
         .tbl-tbody .tbl-tr{cursor: pointer;}

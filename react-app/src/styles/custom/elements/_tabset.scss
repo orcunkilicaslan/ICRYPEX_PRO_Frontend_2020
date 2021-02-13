@@ -56,7 +56,7 @@
         @include flexbox-align-items(center);
         @include flexbox-justify-content(space-between);
         line-height: 1.2;
-        padding: 5px 0;
+        padding-bottom: 10px;
 
         &-col{
           @include flexbox-display-flex();
@@ -93,7 +93,7 @@
 
       &-filterbar{
         @include flexbox-align-items(center);
-        padding: 5px 0;
+        padding-bottom: 10px;
         position: relative;
 
         @include placeholder{
@@ -236,7 +236,11 @@
     > .tab-pane{
       height: 100%;
 
-      > div{height: 100%;}
+      > div{
+        @include flexbox-display-flex();
+        @include flexbox-flex-flow(column);
+        height: 100%;
+      }
     }
   }
 }

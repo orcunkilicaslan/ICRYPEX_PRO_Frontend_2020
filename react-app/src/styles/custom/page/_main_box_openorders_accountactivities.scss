@@ -25,15 +25,12 @@
     }
 
     .activities{
-      padding-top: 0 !important;
 
       &-tabs{}
 
       &-pending{
 
         .activitiespendingtable{
-          padding: 5px 0;
-
           .sitetablediv.scrollbar-tbl{
 
             > .scrollbar-tbl-th .tbl-thead{
@@ -74,6 +71,10 @@
       }
 
       &-history{
+
+        .tabcont-filterbar{
+          padding-bottom: 5px;
+        }
 
         .activitieshistorytable{
           padding-bottom: 5px;

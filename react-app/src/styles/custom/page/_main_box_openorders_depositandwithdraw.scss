@@ -2,9 +2,11 @@
 .mainbox-openorders{
 
   .openorders-dandw{
-    padding: 5px 10px;
-
     .depositandwithdraw{
+
+      > .tab-content{
+        margin-top: 5px;
+      }
 
       &-tabs{}
 
