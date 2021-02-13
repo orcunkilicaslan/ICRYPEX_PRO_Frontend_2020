@@ -2,6 +2,7 @@
 
 #### Web Public Area Frontend List
 - [Home_Page](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Home_Page.html)
+- [Home_Page_User_Logged_In](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Home_Page_User_Logged_In.html)
 - [Kolay_Al_Step_01](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Al_Step_01.html)
 - [Kolay_Al_Step_02](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Al_Step_02.html)
 - [Kolay_Al_Step_03](https://orcunkilicaslan.github.io/ICRYPEX_PRO_Frontend_2020/html/Kolay_Al_Step_03.html)
