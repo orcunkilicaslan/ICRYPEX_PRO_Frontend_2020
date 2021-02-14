@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
+
 import { IconSet } from "../IconSet.jsx";
 import OpenOrderDepoWithTabDeposit from "~/components/OpenOrder/OpenOrderDepoWithTabDeposit.jsx";
 import OpenOrderDepoWithTabWithdraw from "~/components/OpenOrder/OpenOrderDepoWithTabWithdraw.jsx";
+import { openOrderContext, TRANSACTION_MODES } from "./OpenOrder";
 
 const tabs = [
   {
@@ -17,12 +19,21 @@ const tabs = [
 ];
 
 const OpenOrderDepoWith = props => {
-
+  const {
+    state: { mode },
+  } = useContext(openOrderContext);
   const [activeTab, setActiveTab] = useState(tabs[0].title);
 
   const toggle = tab => {
     if (activeTab !== tab) setActiveTab(tab);
   };
+
+  useEffect(() => {
+    if (TRANSACTION_MODES.includes(mode)) {
+      const activeTab = mode === "deposit" ? tabs[0].title : tabs[1].title;
+      setActiveTab(activeTab);
+    }
+  }, [mode]);
 
   return (
     <div className="openorders-dandw openorders-dandw-tabs tabareaflexflow">

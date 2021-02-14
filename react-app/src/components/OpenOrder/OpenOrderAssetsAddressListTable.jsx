@@ -1,6 +1,9 @@
+import { useContext } from "react";
+
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
+import { openOrderContext } from "./OpenOrder";
 
 const assetadresslist = [
   {
@@ -13,6 +16,15 @@ const assetadresslist = [
 ];
 
 const OpenOrderAssetsAddressListTable = props => {
+  const { dispatch } = useContext(openOrderContext);
+
+  const onClick = mode => {
+    dispatch({
+      type: "depo_or_with",
+      payload: { tabIndex: 3, method: "crypto", mode },
+    });
+  };
+
   return (
     <div className="assetsaddress-tablebox">
       <div className="asaddresstable scrollbar">
@@ -55,10 +67,20 @@ const OpenOrderAssetsAddressListTable = props => {
                       {createdate} - {createtime}
                     </Table.Td>
                     <Table.Td sizeauto className="btn">
-                      <Button type="button" size="sm" variant="outline-success">
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline-success"
+                        onClick={() => onClick("deposit")}
+                      >
                         Yatır
                       </Button>
-                      <Button type="button" size="sm" variant="outline-danger">
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline-danger"
+                        onClick={() => onClick("withdraw")}
+                      >
                         Çek
                       </Button>
                     </Table.Td>
