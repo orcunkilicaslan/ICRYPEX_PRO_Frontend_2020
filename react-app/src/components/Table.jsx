@@ -2,17 +2,23 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import classNames from "classnames";
 
 const Table = props => {
-  const { className, scrollbar, children, ...rest } = props;
 
+  const {
+    className,
+    scrollbar,
+    children,
+    ...rest
+  } = props;
   const tableClass = classNames("sitetablediv", className, {
     "scrollbar-tbl": Boolean(scrollbar),
   });
 
   return (
-    <div className={tableClass} {...rest}>
-      {children}
-    </div>
+      <div className={tableClass} {...rest}>
+        {children}
+      </div>
   );
+
 };
 
 Table.Thead = Thead;
@@ -20,17 +26,22 @@ Table.Tbody = Tbody;
 Table.Tr = Tr;
 Table.Th = Th;
 Table.Td = Td;
-
 export default Table;
 
 export function Thead(props) {
-  const { className, scrollbar, children, ...rest } = props;
+
+  const {
+    className,
+    scrollbar,
+    children,
+    ...rest
+  } = props;
   const tableClass = classNames("tbl-thead", className);
 
   const tableThead = (
-    <div className={tableClass} {...rest}>
-      {children}
-    </div>
+      <div className={tableClass} {...rest}>
+        {children}
+      </div>
   );
 
   if (scrollbar) {
@@ -45,9 +56,11 @@ export function Thead(props) {
 }
 
 export function Tbody(props) {
+
   const {
     className,
     scrollbar,
+    scrollbarstyles,
     striped,
     hovered,
     borderbottom,
@@ -62,9 +75,9 @@ export function Tbody(props) {
   });
 
   const tableTbody = (
-    <div className={tableClass} {...rest}>
-      {children}
-    </div>
+      <div className={tableClass} {...rest}>
+        {children}
+      </div>
   );
 
   if (scrollbar) {
@@ -73,9 +86,12 @@ export function Tbody(props) {
     });
 
     return (
-      <PerfectScrollbar className={scrollbarClassName}>
-        {tableTbody}
-      </PerfectScrollbar>
+        <PerfectScrollbar
+            className={scrollbarClassName}
+            style={scrollbarstyles}
+        >
+          {tableTbody}
+        </PerfectScrollbar>
     );
   }
 
@@ -83,18 +99,30 @@ export function Tbody(props) {
 }
 
 export function Tr(props) {
-  const { className, children, ...rest } = props;
+
+  const {
+    className,
+    children,
+    ...rest
+  } = props;
   const tableTrClass = classNames("tbl-tr", className);
 
   return (
-    <div className={tableTrClass} {...rest}>
-      {children}
-    </div>
+      <div className={tableTrClass} {...rest}>
+        {children}
+      </div>
   );
 }
 
 export function Th(props) {
-  const { className, sizefixed, sizeauto, children, ...rest } = props;
+
+  const {
+    className,
+    sizefixed,
+    sizeauto,
+    children,
+    ...rest
+  } = props;
 
   const tableThClass = classNames("tbl-th", className, {
     fxd: Boolean(sizefixed),
@@ -102,23 +130,29 @@ export function Th(props) {
   });
 
   return (
-    <div className={tableThClass} {...rest}>
-      {children}
-    </div>
+      <div className={tableThClass} {...rest}>
+        {children}
+      </div>
   );
 }
 
 export function Td(props) {
-  const { className, sizefixed, sizeauto, children, ...rest } = props;
 
+  const {
+    className,
+    sizefixed,
+    sizeauto,
+    children,
+    ...rest
+  } = props;
   const tableTdClass = classNames("tbl-td", className, {
     fxd: Boolean(sizefixed),
     aut: Boolean(sizeauto),
   });
 
   return (
-    <div className={tableTdClass} {...rest}>
-      {children}
-    </div>
+      <div className={tableTdClass} {...rest}>
+        {children}
+      </div>
   );
 }

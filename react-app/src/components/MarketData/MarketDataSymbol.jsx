@@ -1,9 +1,9 @@
-import { useMemo, useEffect } from "react";
-import { ButtonGroup, Input } from "reactstrap";
+import { useMemo, useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
-import classnames from "classnames";
 import { useFuzzy } from "react-use-fuzzy";
+import { useTranslation } from "react-i18next";
+import { ButtonGroup, Input } from "reactstrap";
+import classnames from "classnames";
 
 import { ReactComponent as MdTableFavIcon } from "~/assets/images/icons/path_icon_mdtable_fav.svg";
 import { ReactComponent as MdTableSearchIcon } from "~/assets/images/icons/path_icon_mdtable_symbolfilter_search.svg";
@@ -67,133 +67,143 @@ const MarketDataSymbol = props => {
     dispatch(setSelectedPair(symbol));
   };
 
+  const tableCanvasRef = useRef(null);
+  const [tableHeight, setTableHeight] = useState(null);
+
+  useEffect(() => {
+    const handleTableResize = () => {setTableHeight(tableCanvasRef.current.offsetHeight)}
+    handleTableResize();
+    window.addEventListener('resize', handleTableResize);
+    return () => {window.removeEventListener('resize', handleTableResize)};
+  }, [tableCanvasRef]);
+
   return (
-    <div className="marketdata-symbol">
-      <div className="tabcont tabcont-filterbar siteformui row">
-        <ButtonGroup size="sm" className="col">
-          {accesstoken ? (
-            <Button
-              type="button"
-              size="sm"
-              variant="secondary"
-              className={classnames({ active: "starred" === pairFilter })}
-              onClick={() => onPairFilter("starred")}
-            >
-              <MdTableFavIcon className="filterfavico" />
-            </Button>
-          ) : null}
-          {filters.map(({ label, filter }) => {
-            const cls = classnames({ active: filter === pairFilter });
-
-            return (
-              <Button
-                key={filter}
-                type="button"
-                size="sm"
-                variant="secondary"
-                className={cls}
-                onClick={() => onPairFilter(filter)}
-              >
-                {label}
-              </Button>
-            );
-          })}
-        </ButtonGroup>
-        <ButtonGroup size="sm" className="col-auto">
-          <Input
-            className="mdsearchinput"
-            bsSize="sm"
-            placeholder={t("common:search")}
-            value={keyword}
-            onChange={e => search(e.target.value)}
-            pattern=".{0}|.{1,}"
-            required
-          />
-          <div className="mdsearchicon">
-            <MdTableSearchIcon className="svgsearch" />
-            <MdTableCloseIcon className="svgclose" onClick={() => resetSearch()} />
-          </div>
-        </ButtonGroup>
-      </div>
-      <div className="mdsymboltable scrollbar">
-        <Table scrollbar>
-          <Table.Thead scrollbar>
-            <Table.Tr>
-              <Table.Th sizeauto className="fav"></Table.Th>
-              <Table.Th sizefixed className="sym">
-                {t("common:symbol")}
-              </Table.Th>
-              <Table.Th sizefixed className="buy">
-                {t("ask")}
-              </Table.Th>
-              <Table.Th sizefixed className="sll">
-                {t("bid")}
-              </Table.Th>
-              <Table.Th sizefixed className="vol">
-                {t("common:volume")}
-              </Table.Th>
-              <Table.Th sizefixed className="chg">
-                {t("common:change")}
-              </Table.Th>
-              <Table.Th sizeauto className="per"></Table.Th>
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody scrollbar striped hovered>
-            {visiblePrices.map((data = {}) => {
-              const {
-                id,
-                name,
-                ask: buy,
-                bid: sell,
-                volume,
-                changepercent,
-                symbol,
-              } = data;
-              const mdper = changepercent > 0 ? "up" : "down";
-              const isFavorite = favoritePairIDs.includes(id);
-
-              const onClick = () => {
-                if (isFavorite) onRemoveFavorite(name);
-                else onAddFavorite(name);
-              };
+      <div className="marketdata-symbol">
+        <div className="tabcont tabcont-filterbar siteformui row">
+          <ButtonGroup size="sm" className="col">
+            {accesstoken ? (
+                <Button
+                    type="button"
+                    size="sm"
+                    variant="secondary"
+                    className={classnames({ active: "starred" === pairFilter })}
+                    onClick={() => onPairFilter("starred")}
+                >
+                  <MdTableFavIcon className="filterfavico" />
+                </Button>
+            ) : null}
+            {filters.map(({ label, filter }) => {
+              const cls = classnames({ active: filter === pairFilter });
 
               return (
-                <Table.Tr key={symbol} onClick={() => onSelectPair(symbol)}>
-                  {accesstoken ? (
-                    <Table.Td sizeauto className="fav">
-                      <Button
-                        className={`tablefavico ${isFavorite ? "faved" : null}`}
-                        onClick={onClick}
-                      >
-                        <MdTableFavIcon />
-                      </Button>
-                    </Table.Td>
-                  ) : null}
-                  <Table.Td sizefixed className="sym">
-                    {name.replace(/\s/g, "")}
-                  </Table.Td>
-                  <Table.Td sizefixed className="buy">
-                    {buy}
-                  </Table.Td>
-                  <Table.Td sizefixed className="sll">
-                    {sell}
-                  </Table.Td>
-                  <Table.Td sizefixed className="vol">
-                    {volume}
-                  </Table.Td>
-                  <Table.Td sizefixed className="chg">
-                    {changepercent}
-                  </Table.Td>
-                  <Table.Td sizeauto className="per">
-                    <PerLineIcon className={`mdper mdper-${mdper}`} />
-                  </Table.Td>
-                </Table.Tr>
+                  <Button
+                      key={filter}
+                      type="button"
+                      size="sm"
+                      variant="secondary"
+                      className={cls}
+                      onClick={() => onPairFilter(filter)}
+                  >
+                    {label}
+                  </Button>
               );
             })}
-          </Table.Tbody>
-        </Table>
+          </ButtonGroup>
+          <ButtonGroup size="sm" className="col-auto">
+            <Input
+                className="mdsearchinput"
+                bsSize="sm"
+                placeholder={t("common:search")}
+                value={keyword}
+                onChange={e => search(e.target.value)}
+                pattern=".{0}|.{1,}"
+                required
+            />
+            <div className="mdsearchicon">
+              <MdTableSearchIcon className="svgsearch" />
+              <MdTableCloseIcon className="svgclose" onClick={() => resetSearch()} />
+            </div>
+          </ButtonGroup>
+        </div>
+        <div className="mdsymboltable scrollbar" ref={tableCanvasRef}>
+          <Table scrollbar>
+            <Table.Thead scrollbar>
+              <Table.Tr>
+                <Table.Th sizeauto className="fav" />
+                <Table.Th sizefixed className="sym">
+                  {t("common:symbol")}
+                </Table.Th>
+                <Table.Th sizefixed className="buy">
+                  {t("ask")}
+                </Table.Th>
+                <Table.Th sizefixed className="sll">
+                  {t("bid")}
+                </Table.Th>
+                <Table.Th sizefixed className="vol">
+                  {t("common:volume")}
+                </Table.Th>
+                <Table.Th sizefixed className="chg">
+                  {t("common:change")}
+                </Table.Th>
+                <Table.Th sizeauto className="per" />
+              </Table.Tr>
+            </Table.Thead>
+            <Table.Tbody striped hovered scrollbar scrollbarstyles={{height: `${tableHeight - 25}px`}}>
+              {visiblePrices.map((data = {}) => {
+                const {
+                  id,
+                  name,
+                  ask: buy,
+                  bid: sell,
+                  volume,
+                  changepercent,
+                  symbol,
+                } = data;
+                const mdper = changepercent > 0 ? "up" : "down";
+                const isFavorite = favoritePairIDs.includes(id);
+
+                const onClick = () => {
+                  if (isFavorite) onRemoveFavorite(name);
+                  else onAddFavorite(name);
+                };
+
+                return (
+                    <Table.Tr key={symbol} onClick={() => onSelectPair(symbol)}>
+                      <Table.Td sizeauto className="fav">
+                        {accesstoken ? (
+                            <Button
+                                className={`tablefavico ${isFavorite ? "faved" : null}`}
+                                onClick={onClick}
+                            >
+                              <MdTableFavIcon />
+                            </Button>
+                        ) : null}
+                      </Table.Td>
+                      <Table.Td sizefixed className="sym">
+                        {name.replace(/\s/g, "")}
+                      </Table.Td>
+                      <Table.Td sizefixed className="buy">
+                        {buy}
+                      </Table.Td>
+                      <Table.Td sizefixed className="sll">
+                        {sell}
+                      </Table.Td>
+                      <Table.Td sizefixed className="vol">
+                        {volume}
+                      </Table.Td>
+                      <Table.Td sizefixed className="chg">
+                        {changepercent}
+                      </Table.Td>
+                      <Table.Td sizeauto className="per">
+                        <PerLineIcon className={`mdper mdper-${mdper}`} />
+                      </Table.Td>
+                    </Table.Tr>
+                );
+              })}
+            </Table.Tbody>
+          </Table>
+        </div>
       </div>
-    </div>
   );
 };
 
