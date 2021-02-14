@@ -23,7 +23,9 @@
         &:focus,
         &:not(:disabled):not(.disabled):active,
         &:not(:disabled):not(.disabled).active{
-          .filterfavico path{fill: $site-clr-white;}
+          .filterfavico path{
+            fill: lighten($site-clr-yellow, 15%);
+          }
         }
       }
 
