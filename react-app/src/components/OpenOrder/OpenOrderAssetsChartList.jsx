@@ -66,11 +66,11 @@ const OpenOrderAssetsChartList = props => {
                   key={symbol}
                 >
                   <div className="circle">
-                    <i></i>
+                    <i />
                   </div>
                   <div className="info">
                     <h6>{symbol}</h6>
-                    <p>{balance}</p>
+                    <p>{(symbol === "TRY") || (symbol === "USD") || (symbol === "EUR") ? balance.toFixed?.(2) : balance}</p>
                   </div>
                 </li>
               );

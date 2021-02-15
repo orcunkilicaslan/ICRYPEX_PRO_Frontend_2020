@@ -126,16 +126,19 @@
 
           svg[class$="donut"] g[class$="a"] path, ul li[class$="try"] .circle{fill: $site-clr-curr-try; border-color: $site-clr-curr-try;}
           svg[class$="donut"] g[class$="b"] path, ul li[class$="usd"] .circle{fill: $site-clr-curr-usd; border-color: $site-clr-curr-usd;}
-          svg[class$="donut"] g[class$="c"] path, ul li[class$="btc"] .circle{fill: $site-clr-curr-btc; border-color: $site-clr-curr-btc;}
-          svg[class$="donut"] g[class$="d"] path, ul li[class$="ltc"] .circle{fill: $site-clr-curr-ltc; border-color: $site-clr-curr-ltc;}
-          svg[class$="donut"] g[class$="e"] path, ul li[class$="eth"] .circle{fill: $site-clr-curr-eth; border-color: $site-clr-curr-eth;}
-          svg[class$="donut"] g[class$="f"] path, ul li[class$="xrp"] .circle{fill: $site-clr-curr-xrp; border-color: $site-clr-curr-xrp;}
-          svg[class$="donut"] g[class$="g"] path, ul li[class$="bat"] .circle{fill: $site-clr-curr-bat; border-color: $site-clr-curr-bat;}
-          svg[class$="donut"] g[class$="h"] path, ul li[class$="link"] .circle{fill: $site-clr-curr-link; border-color: $site-clr-curr-link;}
-          svg[class$="donut"] g[class$="i"] path, ul li[class$="xlm"] .circle{fill: $site-clr-curr-xlm; border-color: $site-clr-curr-xlm;}
-          svg[class$="donut"] g[class$="j"] path, ul li[class$="avax"] .circle{fill: $site-clr-curr-avax; border-color: $site-clr-curr-avax;}
+          svg[class$="donut"] g[class$="c"] path, ul li[class$="eur"] .circle{fill: $site-clr-curr-eur; border-color: $site-clr-curr-eur;}
+          svg[class$="donut"] g[class$="d"] path, ul li[class$="btc"] .circle{fill: $site-clr-curr-btc; border-color: $site-clr-curr-btc;}
+          svg[class$="donut"] g[class$="e"] path, ul li[class$="ltc"] .circle{fill: $site-clr-curr-ltc; border-color: $site-clr-curr-ltc;}
+          svg[class$="donut"] g[class$="f"] path, ul li[class$="eth"] .circle{fill: $site-clr-curr-eth; border-color: $site-clr-curr-eth;}
+          svg[class$="donut"] g[class$="g"] path, ul li[class$="xrp"] .circle{fill: $site-clr-curr-xrp; border-color: $site-clr-curr-xrp;}
+          svg[class$="donut"] g[class$="h"] path, ul li[class$="mpay"] .circle{fill: $site-clr-curr-mpay; border-color: $site-clr-curr-mpay;}
+          svg[class$="donut"] g[class$="i"] path, ul li[class$="bat"] .circle{fill: $site-clr-curr-bat; border-color: $site-clr-curr-bat;}
+          svg[class$="donut"] g[class$="j"] path, ul li[class$="xlm"] .circle{fill: $site-clr-curr-xlm; border-color: $site-clr-curr-xlm;}
           svg[class$="donut"] g[class$="k"] path, ul li[class$="tryb"] .circle{fill: $site-clr-curr-tryb; border-color: $site-clr-curr-tryb;}
-          svg[class$="donut"] g[class$="l"] path, ul li[class$="mpay"] .circle{fill: $site-clr-curr-mpay; border-color: $site-clr-curr-mpay;}
+          svg[class$="donut"] g[class$="l"] path, ul li[class$="usdt"] .circle{fill: $site-clr-curr-usdt; border-color: $site-clr-curr-usdt;}
+          svg[class$="donut"] g[class$="m"] path, ul li[class$="link"] .circle{fill: $site-clr-curr-link; border-color: $site-clr-curr-link;}
+          svg[class$="donut"] g[class$="n"] path, ul li[class$="avax"] .circle{fill: $site-clr-curr-avax; border-color: $site-clr-curr-avax;}
+          svg[class$="donut"] g[class$="o"] path, ul li[class$="algo"] .circle{fill: $site-clr-curr-algo; border-color: $site-clr-curr-algo;}
 
         }
       }
