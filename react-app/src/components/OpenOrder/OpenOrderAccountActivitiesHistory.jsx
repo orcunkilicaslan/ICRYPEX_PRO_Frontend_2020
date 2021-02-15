@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Col, Input, Row } from "reactstrap";
-import classnames from "classnames";
 import { format } from "date-fns";
+import { useClientRect } from "~/state/hooks";
+import classnames from "classnames";
 
 import { Button } from "../Button.jsx";
 import Table from "../Table.jsx";
@@ -27,6 +28,9 @@ const historytable = [
 ];
 
 const OpenOrderAccountActivitiesHistory = props => {
+
+  const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
+
   const today = format(new Date(), "yyyy-MM-dd");
   const [activityType, setActivityType] = useState(activityTypes[0]);
   const [paymentMethod, setPaymentMethod] = useState(paymentMethods[0]);
@@ -131,7 +135,7 @@ const OpenOrderAccountActivitiesHistory = props => {
           </Button>
         </Col>
       </Row>
-      <div className="activitieshistorytable scrollbar">
+      <div className="activitieshistorytable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
           <Table.Thead scrollbar>
             <Table.Tr>
@@ -161,7 +165,12 @@ const OpenOrderAccountActivitiesHistory = props => {
               </Table.Th>
             </Table.Tr>
           </Table.Thead>
-          <Table.Tbody striped hovered scrollbar>
+          <Table.Tbody
+              striped
+              hovered
+              scrollbar
+              scrollbarstyles={{ height: `${tableHeight - 36}px` }}
+          >
             {historytable.map(
               ({
                 transactionno,

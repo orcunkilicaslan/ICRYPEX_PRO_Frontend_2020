@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useClientRect } from "~/state/hooks";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
@@ -16,8 +17,10 @@ const assetadresslist = [
 ];
 
 const OpenOrderAssetsAddressListTable = props => {
-  const { dispatch } = useContext(openOrderContext);
 
+  const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
+
+  const { dispatch } = useContext(openOrderContext);
   const onClick = mode => {
     dispatch({
       type: "depo_or_with",
@@ -27,11 +30,11 @@ const OpenOrderAssetsAddressListTable = props => {
 
   return (
     <div className="assetsaddress-tablebox">
-      <div className="asaddresstable scrollbar">
+      <div className="asaddresstable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
           <Table.Thead scrollbar>
             <Table.Tr>
-              <Table.Th sizeauto className="ico"></Table.Th>
+              <Table.Th sizeauto className="ico" />
               <Table.Th sizefixed className="add">
                 Adres
               </Table.Th>
@@ -41,10 +44,15 @@ const OpenOrderAssetsAddressListTable = props => {
               <Table.Th sizeauto className="crt">
                 Oluşturulma
               </Table.Th>
-              <Table.Th sizeauto className="btn"></Table.Th>
+              <Table.Th sizeauto className="btn" />
             </Table.Tr>
           </Table.Thead>
-          <Table.Tbody striped hovered scrollbar>
+          <Table.Tbody
+              striped
+              hovered
+              scrollbar
+              scrollbarstyles={{ height: `${tableHeight - 36}px` }}
+          >
             {assetadresslist.map(
               ({ id, addresshash, createdate, createtime, balance }) => {
                 return (

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Row, Col, Label, Input, ButtonGroup } from "reactstrap";
+import { useClientRect } from "~/state/hooks";
 import classnames from "classnames";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
+
 
 const orderstable = [
   {
@@ -70,6 +72,9 @@ const orderstable = [
 ];
 
 const OpenOrderOrders = props => {
+
+  const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
+
   const [selected1, setSelected1] = useState("");
   const [selected2, setSelected2] = useState("");
 
@@ -149,7 +154,7 @@ const OpenOrderOrders = props => {
           </div>
         </Col>
       </Row>
-      <div className="ooopenorderstable scrollbar">
+      <div className="ooopenorderstable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
           <Table.Thead scrollbar>
             <Table.Tr>
@@ -171,10 +176,15 @@ const OpenOrderOrders = props => {
               <Table.Th sizefixed className="hppn">
                 Gerçekleşen
               </Table.Th>
-              <Table.Th sizeauto className="bttn"></Table.Th>
+              <Table.Th sizeauto className="bttn" />
             </Table.Tr>
           </Table.Thead>
-          <Table.Tbody striped hovered scrollbar>
+          <Table.Tbody
+              striped
+              hovered
+              scrollbar
+              scrollbarstyles={{ height: `${tableHeight - 36}px` }}
+          >
             {orderstable.map(
               ({
                 id,

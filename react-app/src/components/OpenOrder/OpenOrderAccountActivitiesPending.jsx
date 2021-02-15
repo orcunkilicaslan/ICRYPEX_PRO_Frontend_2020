@@ -1,7 +1,9 @@
+import { useClientRect } from "~/state/hooks";
+import classnames from "classnames";
+
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
-import classnames from "classnames";
 
 const pendingtable = [
   {
@@ -19,9 +21,12 @@ const pendingtable = [
 ];
 
 const OpenOrderAccountActivitiesPending = props => {
+
+  const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
+
   return (
     <div className="activities-pending">
-      <div className="activitiespendingtable scrollbar">
+      <div className="activitiespendingtable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
           <Table.Thead scrollbar>
             <Table.Tr>
@@ -46,10 +51,15 @@ const OpenOrderAccountActivitiesPending = props => {
               <Table.Th sizeauto className="stts">
                 Durum
               </Table.Th>
-              <Table.Th sizeauto className="bttn"></Table.Th>
+              <Table.Th sizeauto className="bttn" />
             </Table.Tr>
           </Table.Thead>
-          <Table.Tbody striped hovered scrollbar>
+          <Table.Tbody
+              striped
+              hovered
+              scrollbar
+              scrollbarstyles={{ height: `${tableHeight - 36}px` }}
+          >
             {pendingtable.map(
               ({
                 transactionno,

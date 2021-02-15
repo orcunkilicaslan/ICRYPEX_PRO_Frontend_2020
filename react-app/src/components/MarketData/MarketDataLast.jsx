@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
+import { useClientRect } from "~/state/hooks";
 import { useTranslation } from "react-i18next";
+import { formatDistance } from "~/util/";
 
 import Table from "../Table.jsx";
-import { formatDistance } from "~/util/";
 
 const MarketDataLast = props => {
   const { t } = useTranslation(["common"]);
@@ -14,10 +15,11 @@ const MarketDataLast = props => {
   const pairKey = `${currentPair?.symbol?.toLowerCase()}orderhistory`;
   const { orderhistories = {} } = useSelector(state => state.socket);
   const { [pairKey]: historyData = [] } = orderhistories;
+  const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
 
   return (
     <div className="marketdata-last">
-      <div className="mdlasttable scrollbar">
+      <div className="mdlasttable scrollbar" ref={tableCanvasRef}>
         <Table>
           <Table.Thead scrollbar>
             <Table.Tr>
@@ -32,7 +34,12 @@ const MarketDataLast = props => {
               </Table.Th>
             </Table.Tr>
           </Table.Thead>
-          <Table.Tbody striped hovered scrollbar>
+          <Table.Tbody
+              striped
+              hovered
+              scrollbar
+              scrollbarstyles={{ height: `${tableHeight - 25}px` }}
+          >
             {historyData.map((transaction, idx) => {
               const {
                 order_side_id,

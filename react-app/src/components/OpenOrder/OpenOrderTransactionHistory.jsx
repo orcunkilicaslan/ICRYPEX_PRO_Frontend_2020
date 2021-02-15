@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Row, Col, Label, Input, ButtonGroup } from "reactstrap";
+import { useClientRect } from "~/state/hooks";
 import classnames from "classnames";
 
 import { Button } from "../Button.jsx";
@@ -100,6 +101,9 @@ const historytable = [
 ];
 
 const OpenOrderTransactionHistory = props => {
+
+  const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
+
   const [selected1, setSelected1] = useState("");
   const [selected2, setSelected2] = useState("");
   const [selected3, setSelected3] = useState("");
@@ -198,11 +202,11 @@ const OpenOrderTransactionHistory = props => {
           </div>
         </Col>
       </Row>
-      <div className="ootransactionhistorytable scrollbar">
+      <div className="ootransactionhistorytable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
           <Table.Thead scrollbar>
             <Table.Tr>
-              <Table.Th sizeauto className="brws"></Table.Th>
+              <Table.Th sizeauto className="brws" />
               <Table.Th sizeauto className="nmbr">
                 İşlem No
               </Table.Th>
@@ -238,7 +242,12 @@ const OpenOrderTransactionHistory = props => {
               </Table.Th>
             </Table.Tr>
           </Table.Thead>
-          <Table.Tbody striped hovered scrollbar>
+          <Table.Tbody
+              striped
+              hovered
+              scrollbar
+              scrollbarstyles={{ height: `${tableHeight - 36}px` }}
+          >
             {historytable.map(
               ({
                 id,

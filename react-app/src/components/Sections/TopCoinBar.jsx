@@ -396,7 +396,7 @@ const TopCoinBar = props => {
                     <Table.Th sizefixed className="amnt">
                       {t("common:amount")}
                     </Table.Th>
-                    <Table.Th sizeauto className="adlt"></Table.Th>
+                    <Table.Th sizeauto className="adlt" />
                   </Table.Tr>
                 </Table.Thead>
                 <Table.Tbody striped hovered scrollbar>
