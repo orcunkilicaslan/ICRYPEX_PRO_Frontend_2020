@@ -23,6 +23,8 @@ export const deletePairPriceAlarms = buildRequest("/pricealarms/deleteall");
 export const fetchFavoritePairs = buildRequest("/favoritepairs");
 export const addFavoritePair = buildRequest("/addpairtofavorites");
 export const removeFavoritePair = buildRequest("/removepairfromfavorites");
+export const fetchAssets = buildRequest("/assets");
+export const fetchCryptoAddresses = buildRequest("/cryptoaddresses");
 
 function buildRequest(uri) {
   return (args = {}, opts = {}) => {
