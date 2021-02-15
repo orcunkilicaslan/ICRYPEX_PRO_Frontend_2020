@@ -70,7 +70,13 @@ const OpenOrderAssetsChartList = props => {
                   </div>
                   <div className="info">
                     <h6>{symbol}</h6>
-                    <p>{(symbol === "TRY") || (symbol === "USD") || (symbol === "EUR") ? balance.toFixed?.(2) : balance}</p>
+                    <p>
+                      {
+                        currencies.includes(symbol)
+                            ? balance.toFixed?.(2)
+                            : balance
+                      }
+                    </p>
                   </div>
                 </li>
               );
