@@ -218,7 +218,7 @@ const TopCoinBar = props => {
                       sprite="sprtsmclrd"
                       size="16"
                       name="bell"
-                    ></IconSet>
+                    />
                   </div>
                   <div className="iconbtn-txt">
                     <span>{t("setAlarm")}</span>
