@@ -1,73 +1,9 @@
+import { useEffect, useMemo, useState } from "react";
 import ChartistGraph from "react-chartist";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
-const assetbalancelist = [
-  {
-    currency: "TRY",
-    balance: "0.00000000",
-  },
-  {
-    currency: "USD",
-    balance: "0.00000000",
-  },
-  {
-    currency: "BTC",
-    balance: "0.00000000",
-  },
-  {
-    currency: "LTC",
-    balance: "0.00000000",
-  },
-  {
-    currency: "ETH",
-    balance: "0.00000000",
-  },
-  {
-    currency: "XRP",
-    balance: "0.00000000",
-  },
-  {
-    currency: "BAT",
-    balance: "0.00000000",
-  },
-  {
-    currency: "LINK",
-    balance: "0.00000000",
-  },
-  {
-    currency: "XLM",
-    balance: "0.00000000",
-  },
-  {
-    currency: "AVAX",
-    balance: "0.00000000",
-  },
-  {
-    currency: "TRYB",
-    balance: "0.00000000",
-  },
-  {
-    currency: "MPAY",
-    balance: "0.00000000",
-  },
-];
-
-const assetchartlistdata = {
-  labels: [
-    "TRY",
-    "USD",
-    "BTC",
-    "LTC",
-    "ETH",
-    "XRP",
-    "BAT",
-    "LINK",
-    "XLM",
-    "AVAX",
-    "TRYB",
-    "MPAY",
-  ],
-  series: [5, 15, 30, 10, 6, 7, 4, 1, 3, 5, 6, 8],
-};
+import { fetchAssets } from "~/state/slices/assets.slice";
 
 const assetchartlistoptions = {
   donut: true,
@@ -79,39 +15,61 @@ const assetchartlistoptions = {
 };
 
 const assetchartlisttype = "Pie";
+const currencies = ["TRY", "USD", "BTC"];
 
 const OpenOrderAssetsChartList = props => {
+  const dispatch = useDispatch();
+  const { t } = useTranslation("common");
+  const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
+  const { allAssets } = useSelector(state => state.assets);
+  const chartData = useMemo(() => {
+    const labels = allAssets?.balances?.map?.(({ symbol }) => symbol);
+    const series = allAssets?.balances?.map?.(
+      ({ [`currency_percent_${selectedCurrency}`]: percent = 0 }) =>
+        Number(percent).toFixed()
+    );
+
+    return { labels, series };
+  }, [allAssets, selectedCurrency]);
+
+  useEffect(() => {
+    dispatch(fetchAssets());
+  }, []);
+
   return (
     <div className="assets-chartlist">
       <div className="assetchartarea">
         <div className="assetchartarea-donut">
           <ChartistGraph
             className="asssetdonutchrt"
-            data={assetchartlistdata}
+            data={chartData}
             options={assetchartlistoptions}
             type={assetchartlisttype}
           />
           <div className="asssetdonutinfo">
             <div className="asssetdonutinfo-box">
-              <h6>Toplam</h6>
-              <p>1.350.750,00 TRY</p>
+              <h6>{t("total")}</h6>
+              <p>
+                {allAssets?.[`total_${selectedCurrency}`]?.toFixed?.(2)}{" "}
+                {selectedCurrency}
+              </p>
               <p>0.0028200 BTC</p>
             </div>
           </div>
         </div>
         <div className="assetchartarea-list">
           <ul className="asssetalllist">
-            {assetbalancelist.map(({ currency, balance }) => {
+            {allAssets?.balances?.map?.(({ symbol, balance }) => {
               return (
                 <li
-                  className={`asssetcurr-${currency.toLowerCase()}`}
-                  key={currency}
+                  className={`asssetcurr-${symbol?.toLowerCase?.()}`}
+                  key={symbol}
                 >
                   <div className="circle">
                     <i></i>
                   </div>
                   <div className="info">
-                    <h6>{currency}</h6>
+                    <h6>{symbol}</h6>
                     <p>{balance}</p>
                   </div>
                 </li>

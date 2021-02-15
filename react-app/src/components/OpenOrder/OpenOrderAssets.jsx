@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { IconSet } from "../IconSet.jsx";
 import OpenOrderAssetsChartList from "./OpenOrderAssetsChartList.jsx";
@@ -18,6 +20,9 @@ const tabs = [
 ];
 
 const OpenOrderAssets = props => {
+  const dispatch = useDispatch();
+  const { t } = useTranslation("common");
+  const { allAssets } = useSelector(state => state.assets);
   const [activeTab, setActiveTab] = useState(tabs[0].title);
 
   const toggle = tab => {
@@ -49,8 +54,11 @@ const OpenOrderAssets = props => {
         </div>
         <div className="tabcont-head-col">
           <IconSet sprite="sprtsmclrd" size="16" name="wallet" />
-          <h6>Yaklaşık Olarak</h6>
-          <p>1.350.750,00 TRY / 44.815,00 BTC</p>
+          <h6>{t("approximately")}</h6>
+          <p>
+            {allAssets?.total_TRY?.toFixed?.(2)} TRY /{" "}
+            {allAssets?.total_BTC?.toFixed?.(2)} BTC
+          </p>
         </div>
       </div>
       <div className="assets assets-tabs tabareaflexflow">

@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ButtonGroup, TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "../Button.jsx";
 import OpenOrderAssetsAddressListTable from "./OpenOrderAssetsAddressListTable.jsx";
+import { fetchCryptoAddresses } from "~/state/slices/assets.slice";
 
 const tabs = [
   {
@@ -41,7 +43,12 @@ const tabs = [
 ];
 
 const OpenOrderAssetsAddressList = props => {
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState(tabs[0].title);
+
+  useEffect(() => {
+    dispatch(fetchCryptoAddresses());
+  }, []);
 
   const toggle = tab => {
     if (activeTab !== tab) setActiveTab(tab);

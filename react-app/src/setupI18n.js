@@ -38,6 +38,7 @@ const init = (initialLang = "en") => {
             low: "Low",
             price: "Price",
             time: "Time",
+            "approximately": "Approximately",
           },
           finance: {
             ask: "Ask",
@@ -103,6 +104,7 @@ const init = (initialLang = "en") => {
             low: "Düşük",
             price: "Fiyat",
             time: "Zaman",
+            "approximately": "Yaklaşık",
           },
           finance: {
             ask: "Alış",
