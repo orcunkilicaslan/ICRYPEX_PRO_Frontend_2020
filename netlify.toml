@@ -22,7 +22,7 @@ to = "https://35.180.109.191/:splat"
 force = true
 from = "/socket.io/*"
 status = 200
-to = "https://35.180.109.191/:splat"
+to = "https://35.180.109.191/socket.io/:splat"
 
 [[redirects]]
 from = "/*"
