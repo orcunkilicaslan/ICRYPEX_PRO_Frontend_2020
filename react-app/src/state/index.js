@@ -24,9 +24,7 @@ const persistConfig = {
 };
 const socketIoOptions = {
   url: SOCKET_BASE,
-  autoConnect: false,
   reconnectionAttempts: isProd ? Infinity : 30,
-  // transports: ["websocket"],
 };
 
 export let store;

@@ -69,8 +69,13 @@ export default function createSocketMiddleware(options) {
     });
 
     return next => action => {
-      if (action.type === "socket/open") client.open();
-      if (action.type === "socket/close") client.close();
+      // if (action.type === "socket/open") {
+      //   if (client.disconnected) client.open();
+      // }
+
+      // if (action.type === "socket/close") {
+      //   if (client.connected) client.close();
+      // }
 
       next(action);
     };

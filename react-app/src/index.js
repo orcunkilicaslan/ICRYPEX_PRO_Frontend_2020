@@ -47,7 +47,6 @@ async function run() {
   await store.dispatch(fetchServerDeviceKey());
   await store.dispatch(fetchPreloginToken());
   await store.dispatch(fetchSettings());
-  store.dispatch({ type: "socket/open" });
   render();
 }
 
