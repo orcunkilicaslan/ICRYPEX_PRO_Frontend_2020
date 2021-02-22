@@ -9,6 +9,7 @@ import alarmReducer from "./slices/alarm.slice";
 import pairReducer from "./slices/pair.slice";
 import socketReducer from "./slices/socket.slice";
 import assetsReducer from "./slices/assets.slice";
+import orderReducer from "./slices/order.slice";
 
 const apiPersistConfig = {
   key: "api",
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   pair: pairReducer,
   socket: persistReducer(socketPersistConfig, socketReducer),
   assets: assetsReducer,
+  order: orderReducer,
 });
 
 export default rootReducer;

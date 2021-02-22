@@ -1,4 +1,4 @@
-import { useState, useCallback, createContext, useReducer } from "react";
+import { useCallback, createContext, useReducer } from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
 import classnames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import OpenOrderDepoWith from "./OpenOrderDepoWith.jsx";
 import OpenOrderAccountActivities from "./OpenOrderAccountActivities.jsx";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import UserNotLoginBox from "~/pages/Sections/UserNotLoginBox.jsx";
+import { setTabIndex } from "~/state/slices/order.slice";
 
 export const openOrderContext = createContext();
 export const TRANSACTION_MODES = ["deposit", "withdraw"];
@@ -41,7 +42,8 @@ const tabs = [
 
 const OpenOrder = props => {
   const dispatch = useDispatch();
-  const [activeTab, setActiveTab] = useState(tabs[0].title);
+  const { tabIndex } = useSelector(state => state.order);
+  const activeTab = tabs[tabIndex].title;
   const { accesstoken } = useSelector(state => state.api);
 
   const initialState = {
@@ -56,7 +58,7 @@ const OpenOrder = props => {
         const { tabIndex, mode, method } = payload;
 
         if (inRange(tabIndex, 0, tabs.length)) {
-          setActiveTab(tabs[tabIndex].title);
+          dispatch(setTabIndex(tabIndex));
         }
 
         const override = {};
@@ -84,9 +86,15 @@ const OpenOrder = props => {
     dispatch(setOpenModal("signup"));
   }, [dispatch]);
 
-  const toggle = tab => {
+  const toggle = title => {
     _dispatch({ type: "reset" });
-    if (activeTab !== tab) setActiveTab(tab);
+    if (activeTab !== title) {
+      const idx = tabs.findIndex(tab => tab.title === title);
+
+      if (inRange(idx, 0, tabs.length)) {
+        dispatch(setTabIndex(idx));
+      }
+    }
   };
 
   return (
