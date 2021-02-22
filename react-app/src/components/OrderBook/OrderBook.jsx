@@ -1,26 +1,24 @@
+import { useMemo } from "react";
 import ChartistGraph from "react-chartist";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { merge } from "lodash";
 
 import Table from "../Table.jsx";
 
-const orderbookbuydata = {
-  series: [[1, 2, 3, 4, 5, 7, 9, 11, 12, 13, 15, 18]],
-};
-
-const orderbookselldata = {
-  series: [[18, 15, 13, 12, 11, 9, 7, 5, 4, 3, 2, 1]],
-};
-
-const orderbookchartoptions = {
-  reverseData: false,
+const orderbookcharttype = "Bar";
+const chartOptions = {
   horizontalBars: true,
   fullWidth: true,
-  axisX: {
-    offset: 0,
-  },
   axisY: {
+    showGrid: false,
     offset: 0,
+    showLabel: false,
+  },
+  axisX: {
+    showGrid: false,
+    offset: 0,
+    showLabel: false,
   },
   chartPadding: {
     top: 0,
@@ -29,8 +27,6 @@ const orderbookchartoptions = {
     left: 0,
   },
 };
-
-const orderbookcharttype = "Bar";
 
 const OrderBook = props => {
   const { t } = useTranslation(["finance", "orderbook", "common"]);
@@ -51,6 +47,50 @@ const OrderBook = props => {
     buyorders = [],
     sellorders = [],
   } = bookData;
+
+  const { data: buyChartData, options: buyChartOptions } = useMemo(() => {
+    const getTotal = arr => {
+      return arr.reduce((acc, current) => {
+        return acc + current?.amount || 0;
+      }, 0);
+    };
+    const total = getTotal(buyorders);
+    const series = buyorders.map((order, idx, array) => {
+      const arr = array.slice(0, idx + 1);
+      const cumulative = getTotal(arr);
+
+      return (cumulative / total) * 100;
+    });
+    const options = merge(
+      { reverseData: false },
+      buyorders.length ? { height: `${buyorders.length * 16}px` } : {},
+      chartOptions
+    );
+
+    return { data: { series: [series] }, options };
+  }, [buyorders]);
+
+  const { data: sellChartData, options: sellChartOptions } = useMemo(() => {
+    const getTotal = arr => {
+      return arr.reduce((acc, current) => {
+        return acc + current?.total || 0;
+      }, 0);
+    };
+    const total = getTotal(sellorders);
+    const series = sellorders.map((order, idx, array) => {
+      const arr = array.slice(0, idx + 1);
+      const cumulative = getTotal(arr);
+
+      return (cumulative / total) * 100;
+    });
+    const options = merge(
+      { reverseData: true },
+      sellorders.length ? { height: `${sellorders.length * 16}px` } : {},
+      chartOptions
+    );
+
+    return { data: { series: [series] }, options };
+  }, [sellorders]);
 
   return (
     <div className="mainbox mainbox-orderbook">
@@ -90,8 +130,8 @@ const OrderBook = props => {
               <div className="orderbook-chartarea-rectangle">
                 <ChartistGraph
                   className="orderbookchart orderbookchartbuy"
-                  data={orderbookbuydata}
-                  options={orderbookchartoptions}
+                  data={buyChartData}
+                  options={buyChartOptions}
                   type={orderbookcharttype}
                 />
               </div>
@@ -136,8 +176,8 @@ const OrderBook = props => {
               <div className="orderbook-chartarea-rectangle">
                 <ChartistGraph
                   className="orderbookchart orderbookchartsell"
-                  data={orderbookselldata}
-                  options={orderbookchartoptions}
+                  data={sellChartData}
+                  options={sellChartOptions}
                   type={orderbookcharttype}
                 />
               </div>
