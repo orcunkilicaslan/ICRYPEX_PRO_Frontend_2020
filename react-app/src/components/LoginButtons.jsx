@@ -5,7 +5,7 @@ import { Button } from "./Button";
 
 export const LoginButtons = props => {
   const { openSignupModal, openSigninModal, ...rest } = props;
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["login"]);
 
   return (
     <ButtonGroup {...rest}>

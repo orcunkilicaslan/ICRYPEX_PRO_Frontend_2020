@@ -6,7 +6,7 @@ import { Button } from "~/components/Button.jsx";
 
 const UserNotLoginBox = props => {
   const { openSignupModal, openSigninModal, ...rest } = props;
-  const { t } = useTranslation("notLoginBox", "common");
+  const { t } = useTranslation(["login"]);
 
   return (
     <div className="usernotloginbox" {...rest}>
@@ -21,10 +21,10 @@ const UserNotLoginBox = props => {
             className="active"
             onClick={openSigninModal}
           >
-            {t("common:signin")}
+            {t("signin")}
           </Button>
           <Button size="sm" variant="success" onClick={openSignupModal}>
-            {t("common:signup")}
+            {t("signup")}
           </Button>
         </div>
       </div>

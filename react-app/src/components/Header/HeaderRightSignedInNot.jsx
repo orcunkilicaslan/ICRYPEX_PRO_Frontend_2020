@@ -23,7 +23,7 @@ const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
 
 const HeaderRightSignedInNot = props => {
   const dispatch = useDispatch();
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["login", "common"]);
   const { user, countryCodes, onSignup, onSignin, onSigninSMS } = props;
   const { openModal, isSigningin, isSigningup, isVerifying } = useSelector(
     state => state.ui
@@ -159,7 +159,7 @@ const HeaderRightSignedInNot = props => {
           {isEnteringCode ? (
             <div className="modalcomp-sign-form">
               <div className="headsmtitle mb-1">
-                <h6 className="text-center w-100">Doğrulama Kodunu Giriniz</h6>
+                <h6 className="text-center w-100">{t("enterCode")}</h6>
               </div>
               <Form className="siteformui" autoComplete="off" noValidate>
                 <div className="labelfocustop">
@@ -172,7 +172,9 @@ const HeaderRightSignedInNot = props => {
                       value={verifyCode}
                       onChange={({ target }) => setVerifyCode(target.value)}
                     />
-                    <Label className="text-center">Doğrulama Kodu</Label>
+                    <Label className="text-center">
+                      {t("verificationCode")}
+                    </Label>
                   </FormGroup>
                 </div>
                 <Button
@@ -181,7 +183,7 @@ const HeaderRightSignedInNot = props => {
                   onClick={submitSecret}
                   disabled={isVerifying}
                 >
-                  GİRİŞ YAP
+                  {t("signin")}
                 </Button>
               </Form>
             </div>
@@ -198,7 +200,7 @@ const HeaderRightSignedInNot = props => {
                       value={userEmail}
                       onChange={({ target }) => setUserEmail(target.value)}
                     />
-                    <Label>E-Posta</Label>
+                    <Label>{t("email")}</Label>
                   </FormGroup>
                   <FormGroup>
                     <Input
@@ -209,7 +211,7 @@ const HeaderRightSignedInNot = props => {
                       name="password"
                       innerRef={passwordField}
                     />
-                    <Label>Şifre</Label>
+                    <Label>{t("password")}</Label>
                     <Button
                       className="showhidepass"
                       data-toggle="showhidepassword"
@@ -228,11 +230,11 @@ const HeaderRightSignedInNot = props => {
                         sitekey={RECAPTCHA_KEY}
                       />
                     </div>
-                    <Label>Ben robot değilim</Label>
+                    <Label>{t("notARobot")}</Label>
                   </div>
                   <div>
                     <a className="text-muted" href="#">
-                      Şifremi Unuttum
+                      {t("forgotPassword")}
                     </a>
                   </div>
                 </div>
@@ -242,7 +244,7 @@ const HeaderRightSignedInNot = props => {
                   onClick={submitSignin}
                   disabled={isSigningin}
                 >
-                  DOĞRULAMA KODU GÖNDER
+                  {t("sendCode").toUpperCase()}
                 </Button>
               </Form>
             </div>
@@ -282,7 +284,7 @@ const HeaderRightSignedInNot = props => {
                     value={signUpForm.firstname}
                     onChange={onSignUpFormChange}
                   />
-                  <Label>Adınız</Label>
+                  <Label>{t("name")}</Label>
                 </FormGroup>
                 <FormGroup>
                   <Input
@@ -293,7 +295,7 @@ const HeaderRightSignedInNot = props => {
                     value={signUpForm.lastname}
                     onChange={onSignUpFormChange}
                   />
-                  <Label>Soyadınız</Label>
+                  <Label>{t("surname")}</Label>
                 </FormGroup>
                 <FormGroup className="input-group phonelabelgroup">
                   <InputGroupAddon addonType="prepend">
@@ -322,7 +324,7 @@ const HeaderRightSignedInNot = props => {
                     value={signUpForm.phone}
                     onChange={onSignUpFormChange}
                   />
-                  <Label>Telefon</Label>
+                  <Label>{t("phone")}</Label>
                 </FormGroup>
                 <FormGroup>
                   <Input
@@ -333,7 +335,7 @@ const HeaderRightSignedInNot = props => {
                     value={signUpForm.email}
                     onChange={onSignUpFormChange}
                   />
-                  <Label>E-Posta</Label>
+                  <Label>{t("email")}</Label>
                 </FormGroup>
                 <FormGroup>
                   <Input
@@ -345,7 +347,7 @@ const HeaderRightSignedInNot = props => {
                     value={signUpForm.password}
                     onChange={onSignUpFormChange}
                   />
-                  <Label>Şifre</Label>
+                  <Label>{t("password")}</Label>
                   <Button
                     className="showhidepass"
                     data-toggle="showhidepassword"
@@ -364,7 +366,7 @@ const HeaderRightSignedInNot = props => {
                     value={signUpForm.confirm}
                     onChange={onSignUpFormChange}
                   />
-                  <Label>Şifre Doğrulama</Label>
+                  <Label>{t("verifyPassword")}</Label>
                   <Button
                     className="showhidepass"
                     data-toggle="showhidepassword"
@@ -383,7 +385,7 @@ const HeaderRightSignedInNot = props => {
                       sitekey={RECAPTCHA_KEY}
                     />
                   </div>
-                  <Label>Ben robot değilim</Label>
+                  <Label>{t("notARobot")}</Label>
                 </div>
               </div>
               <div className="checkboxarea">
@@ -401,15 +403,15 @@ const HeaderRightSignedInNot = props => {
                     htmlFor="termsOfUseCheck"
                     check
                   >
-                    18 Yaşında olduğumu beyan ederim,{" "}
+                    {t("oldEnough")}{" "}
                     <a href="#" title="" rel="bookmark" target="_blank">
-                      <u>Ön Bilgilendirme Metni</u>
+                      <u>{t("preliminary")}</u>
                     </a>{" "}
-                    ve{" "}
+                    {t("common:and")}{" "}
                     <a href="#" title="" rel="bookmark" target="_blank">
-                      <u>Kullanım Sözleşmesini</u>
+                      <u>{t("termsOfService")}</u>
                     </a>{" "}
-                    okudum ve onaylıyorum.
+                    {t("readAndAgree")}
                   </Label>
                 </div>
                 <div className="custom-control custom-checkbox">
@@ -426,7 +428,7 @@ const HeaderRightSignedInNot = props => {
                     htmlFor="announcementsCheck"
                     check
                   >
-                    Ticari reklam ve duyurulardan haber almak istiyorum.
+                    {t("commercialConsent")}
                   </Label>
                 </div>
               </div>
@@ -436,7 +438,7 @@ const HeaderRightSignedInNot = props => {
                 onClick={submitSignup}
                 disabled={isSigningup}
               >
-                KAYIT OL
+                {t("signup").toUpperCase()}
               </Button>
             </Form>
           </div>
