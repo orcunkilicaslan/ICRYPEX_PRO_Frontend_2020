@@ -1533,16 +1533,242 @@
                                 <!-- Transaction History -->
                                 <!-- Assets -->
                                 <div id="oo_assets" class="tab-pane fade" role="tabpanel">
-                                    <div class="usernotloginbox">
-                                        <div class="usernotloginbox-content">
-                                            <i class="icon-sprtlgclrd icon-50gray icon-close"></i>
-                                            <h4>Bu Alanı Görüntüleyemiyorsunuz</h4>
-                                            <p>Görüntüleyebilmeniz için "Kayıt Olun" yada "Üye Girişi" yapınız.</p>
-                                            <div class="contbtn">
-                                                <button type="button" class="btn btn-secondary btn-sm active" data-toggle="modal" data-target="#modalHeadSignIn">Üye Girişi</button>
-                                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalHeadSignUp">Kayıt Ol</button>
+                                    <div class="openorders-assets tabareaflexflow">
+
+                                        <!-- Head -->
+                                        <div class="tabcont tabcont-head">
+                                            <div class="tabcont-head-col">
+                                                <ul class="tabcont-head-navpills assets-tabs sitetabs nav nav-pills nav-justified" role="tabpanel">
+                                                    <li class="nav-item"><a class="nav-link active" href="#assets_chartlist" data-toggle="tab" role="tab" aria-selected="true">Varlıklar</a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="#assets_addrslist" data-toggle="tab" role="tab" aria-selected="false">Adresler</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="tabcont-head-col">
+                                                <i class="icon-sprtsmclrd icon-16 icon-wallet"></i>
+                                                <h6>Yaklaşık Olarak</h6>
+                                                <p>1.350.750,00 TRY / 44.815,00 BTC</p>
                                             </div>
                                         </div>
+                                        <!-- Head -->
+                                        <!-- Assets Tabs -->
+                                        <div class="assets assets-tabs tabareaflexflow">
+                                            <div class="sitetabs tab-content">
+
+                                                <!-- Assets -->
+                                                <div id="assets_chartlist" class="tab-pane fade show active" role="tabpanel">
+                                                    <div class="noassetbalance">
+                                                        <div class="noassetbalance-content">
+                                                            <i class="icon-sprtlgclrd icon-50gray icon-close"></i>
+                                                            <h4>Bakiyeniz Bulunmamaktadır.</h4>
+                                                            <p>Görüntüleyebilmeniz için aşağıdaki para yatırma seçeneklerden birisini tercih edebilirsiniz.</p>
+                                                            <div class="contbtn">
+                                                                <button type="button" class="btn btn-secondary btn-sm">Banka</button>
+                                                                <button type="button" class="btn btn-secondary btn-sm">Papara</button>
+                                                                <button type="button" class="btn btn-secondary btn-sm">Kripto</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Assets -->
+                                                <!-- Address -->
+                                                <div id="assets_addrslist" class="tab-pane fade" role="tabpanel">
+                                                    <div class="assets-addrslist">
+                                                        <div class="assetsaddress assetsaddress-tabs tabareaflexflow">
+                                                            <div class="sitetabs nav btn-group btn-group-sm" role="tablist">
+                                                                <a class="btn btn-sm btn-secondary active" href="#assaddress_btc" data-toggle="tab" role="tab" aria-selected="true">BTC</a>
+                                                                <a class="btn btn-sm btn-secondary" href="#assaddress_ltc" data-toggle="tab" role="tab" aria-selected="false">LTC</a>
+                                                                <a class="btn btn-sm btn-secondary" href="#assaddress_eth" data-toggle="tab" role="tab" aria-selected="false">ETH</a>
+                                                                <a class="btn btn-sm btn-secondary" href="#assaddress_xrp" data-toggle="tab" role="tab" aria-selected="false">XRP</a>
+                                                                <a class="btn btn-sm btn-secondary" href="#assaddress_mpay" data-toggle="tab" role="tab" aria-selected="false">MPAY</a>
+                                                                <a class="btn btn-sm btn-secondary" href="#assaddress_bat" data-toggle="tab" role="tab" aria-selected="false">BAT</a>
+                                                                <a class="btn btn-sm btn-secondary" href="#assaddress_xlm" data-toggle="tab" role="tab" aria-selected="false">XLM</a>
+                                                                <a class="btn btn-sm btn-secondary" href="#assaddress_tryb" data-toggle="tab" role="tab" aria-selected="false">TRYB</a>
+                                                            </div>
+                                                            <div class="sitetabs tab-content">
+                                                                <div id="assaddress_btc" class="tab-pane fade show active" role="tabpanel">
+                                                                    <div class="assetsaddress-tablebox">
+                                                                        <div class="asaddresstable scrollbar">
+                                                                            <div class="sitetablediv scrollbar-tbl">
+                                                                                <div class="scrollbar-tbl-th">
+                                                                                    <div class="tbl-thead">
+                                                                                        <div class="tbl-tr">
+                                                                                            <div class="tbl-th aut ico"></div>
+                                                                                            <div class="tbl-th fxd add">Adres</div>
+                                                                                            <div class="tbl-th aut ass">Varlık</div>
+                                                                                            <div class="tbl-th aut crt">Oluşturulma</div>
+                                                                                            <div class="tbl-th aut btn"></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="scrollbar-tbl-tb">
+                                                                                    <div class="tbl-tbody tbl-striped tbl-hovered">
+                                                                                        <div class="tbl-tr">
+                                                                                            <div class="tbl-td aut ico">
+                                                                                                <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmclrd icon-16 icon-qrcode"></i></a>
+                                                                                                <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress01"><i class="icon-sprtsmclrd icon-16 icon-copybtn"></i></a>
+                                                                                            </div>
+                                                                                            <div class="tbl-td fxd add asaddress01">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
+                                                                                            <div class="tbl-td aut ass">0.02003240 BTC</div>
+                                                                                            <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                            <div class="tbl-td aut btn">
+                                                                                                <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                                <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="tbl-tr">
+                                                                                            <div class="tbl-td aut ico">
+                                                                                                <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmclrd icon-16 icon-qrcode"></i></a>
+                                                                                                <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress02"><i class="icon-sprtsmclrd icon-16 icon-copybtn"></i></a>
+                                                                                            </div>
+                                                                                            <div class="tbl-td fxd add asaddress02">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
+                                                                                            <div class="tbl-td aut ass">0.02003240 ETH</div>
+                                                                                            <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                            <div class="tbl-td aut btn">
+                                                                                                <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                                <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="tbl-tr">
+                                                                                            <div class="tbl-td aut ico">
+                                                                                                <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmclrd icon-16 icon-qrcode"></i></a>
+                                                                                                <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress03"><i class="icon-sprtsmclrd icon-16 icon-copybtn"></i></a>
+                                                                                            </div>
+                                                                                            <div class="tbl-td fxd add asaddress03">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
+                                                                                            <div class="tbl-td aut ass">0.02003240 BTC</div>
+                                                                                            <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                            <div class="tbl-td aut btn">
+                                                                                                <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                                <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="tbl-tr">
+                                                                                            <div class="tbl-td aut ico">
+                                                                                                <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmclrd icon-16 icon-qrcode"></i></a>
+                                                                                                <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress04"><i class="icon-sprtsmclrd icon-16 icon-copybtn"></i></a>
+                                                                                            </div>
+                                                                                            <div class="tbl-td fxd add asaddress04">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
+                                                                                            <div class="tbl-td aut ass">0.02003240 ETH</div>
+                                                                                            <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                            <div class="tbl-td aut btn">
+                                                                                                <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                                <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="tbl-tr">
+                                                                                            <div class="tbl-td aut ico">
+                                                                                                <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmclrd icon-16 icon-qrcode"></i></a>
+                                                                                                <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress05"><i class="icon-sprtsmclrd icon-16 icon-copybtn"></i></a>
+                                                                                            </div>
+                                                                                            <div class="tbl-td fxd add asaddress05">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
+                                                                                            <div class="tbl-td aut ass">0.02003240 BTC</div>
+                                                                                            <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                            <div class="tbl-td aut btn">
+                                                                                                <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                                <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="tbl-tr">
+                                                                                            <div class="tbl-td aut ico">
+                                                                                                <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmclrd icon-16 icon-qrcode"></i></a>
+                                                                                                <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress06"><i class="icon-sprtsmclrd icon-16 icon-copybtn"></i></a>
+                                                                                            </div>
+                                                                                            <div class="tbl-td fxd add asaddress06">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
+                                                                                            <div class="tbl-td aut ass">0.02003240 ETH</div>
+                                                                                            <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                            <div class="tbl-td aut btn">
+                                                                                                <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                                <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="tbl-tr">
+                                                                                            <div class="tbl-td aut ico">
+                                                                                                <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmclrd icon-16 icon-qrcode"></i></a>
+                                                                                                <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress07"><i class="icon-sprtsmclrd icon-16 icon-copybtn"></i></a>
+                                                                                            </div>
+                                                                                            <div class="tbl-td fxd add asaddress07">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
+                                                                                            <div class="tbl-td aut ass">0.02003240 BTC</div>
+                                                                                            <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                            <div class="tbl-td aut btn">
+                                                                                                <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                                <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="tbl-tr">
+                                                                                            <div class="tbl-td aut ico">
+                                                                                                <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmclrd icon-16 icon-qrcode"></i></a>
+                                                                                                <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress08"><i class="icon-sprtsmclrd icon-16 icon-copybtn"></i></a>
+                                                                                            </div>
+                                                                                            <div class="tbl-td fxd add asaddress08">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
+                                                                                            <div class="tbl-td aut ass">0.02003240 ETH</div>
+                                                                                            <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                            <div class="tbl-td aut btn">
+                                                                                                <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                                <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="tbl-tr">
+                                                                                            <div class="tbl-td aut ico">
+                                                                                                <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmclrd icon-16 icon-qrcode"></i></a>
+                                                                                                <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress09"><i class="icon-sprtsmclrd icon-16 icon-copybtn"></i></a>
+                                                                                            </div>
+                                                                                            <div class="tbl-td fxd add asaddress09">0x4A356640831fF69F10fCd55Be27588c51d34384c</div>
+                                                                                            <div class="tbl-td aut ass">0.02003240 BTC</div>
+                                                                                            <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                            <div class="tbl-td aut btn">
+                                                                                                <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                                <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="tbl-tr">
+                                                                                            <div class="tbl-td aut ico">
+                                                                                                <a href="#" title="QR Kodu Görüntüle"><i class="icon-sprtsmclrd icon-16 icon-qrcode"></i></a>
+                                                                                                <a href="#" title="Kopyala" data-toggle="copytoclipboard" data-target=".asaddress10"><i class="icon-sprtsmclrd icon-16 icon-copybtn"></i></a>
+                                                                                            </div>
+                                                                                            <div class="tbl-td fxd add asaddress10">33TLh4yvnVSoTABdCFvn916rdku2cSag2z</div>
+                                                                                            <div class="tbl-td aut ass">0.02003240 ETH</div>
+                                                                                            <div class="tbl-td aut crt">03/06/2020 12:51</div>
+                                                                                            <div class="tbl-td aut btn">
+                                                                                                <a class="btn btn-sm btn-outline-success" href="#" title="Yatır">Yatır</a>
+                                                                                                <a class="btn btn-sm btn-outline-danger" href="#" title="Yatır">Çek</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div id="assaddress_ltc" class="tab-pane fade" role="tabpanel">
+                                                                    <div>LTC</div>
+                                                                </div>
+                                                                <div id="assaddress_eth" class="tab-pane fade" role="tabpanel">
+                                                                    <div>ETH</div>
+                                                                </div>
+                                                                <div id="assaddress_xrp" class="tab-pane fade" role="tabpanel">
+                                                                    <div>XRP</div>
+                                                                </div>
+                                                                <div id="assaddress_mpay" class="tab-pane fade" role="tabpanel">
+                                                                    <div>MPAY</div>
+                                                                </div>
+                                                                <div id="assaddress_bat" class="tab-pane fade" role="tabpanel">
+                                                                    <div>BAT</div>
+                                                                </div>
+                                                                <div id="assaddress_xlm" class="tab-pane fade" role="tabpanel">
+                                                                    <div>XLM</div>
+                                                                </div>
+                                                                <div id="assaddress_tryb" class="tab-pane fade" role="tabpanel">
+                                                                    <div>TRYB</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Address -->
+
+                                            </div>
+                                        </div>
+                                        <!-- Assets Tabs -->
+
                                     </div>
                                 </div>
                                 <!-- Assets -->
