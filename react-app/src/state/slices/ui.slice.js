@@ -3,7 +3,11 @@ import i18n from "i18next";
 
 import { SUPPORTED_LANGUAGES } from "~/setupI18n";
 import { signinWithSms } from "~/state/slices/api.slice";
-import { signinUser, signupUser } from "~/state/slices/user.slice";
+import {
+  signinUser,
+  signupUser,
+  forgotPassword,
+} from "~/state/slices/user.slice";
 
 const initialState = {
   lang: "en",
@@ -68,6 +72,15 @@ const uiSlice = createSlice({
     },
     [signinWithSms.rejected]: state => {
       state.isVerifying = false;
+    },
+    [forgotPassword.pending]: state => {
+      state.isSigningin = true;
+    },
+    [forgotPassword.fulfilled]: (state, action) => {
+      state.isSigningin = false;
+    },
+    [forgotPassword.rejected]: state => {
+      state.isSigningin = false;
     },
   },
 });

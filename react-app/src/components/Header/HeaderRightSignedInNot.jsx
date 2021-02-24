@@ -24,7 +24,14 @@ const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
 const HeaderRightSignedInNot = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["login", "common"]);
-  const { user, countryCodes, onSignup, onSignin, onSigninSMS } = props;
+  const {
+    user,
+    countryCodes,
+    onSignup,
+    onSignin,
+    onSigninSMS,
+    onForgotPassword,
+  } = props;
   const { openModal, isSigningin, isSigningup, isVerifying } = useSelector(
     state => state.ui
   );
@@ -122,6 +129,22 @@ const HeaderRightSignedInNot = props => {
 
     if (status) {
       setIsEnteringCode(true);
+      setErrorMessage(null);
+    } else {
+      setErrorMessage(errormessage);
+    }
+  };
+
+  const submitForgotPassword = async event => {
+    event.preventDefault();
+    event.stopPropagation();
+    setErrorMessage(null);
+
+    const { status, errormessage } = await onForgotPassword({
+      email: userEmail,
+    });
+
+    if (status) {
       setErrorMessage(null);
     } else {
       setErrorMessage(errormessage);
@@ -233,7 +256,11 @@ const HeaderRightSignedInNot = props => {
                     <Label>{t("notARobot")}</Label>
                   </div>
                   <div>
-                    <a className="text-muted" href="#">
+                    <a
+                      className="text-muted"
+                      href="#"
+                      onClick={submitForgotPassword}
+                    >
                       {t("forgotPassword")}
                     </a>
                   </div>

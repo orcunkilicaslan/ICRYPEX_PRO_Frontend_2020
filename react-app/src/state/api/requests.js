@@ -25,6 +25,7 @@ export const addFavoritePair = buildRequest("/addpairtofavorites");
 export const removeFavoritePair = buildRequest("/removepairfromfavorites");
 export const fetchAssets = buildRequest("/assets");
 export const fetchCryptoAddresses = buildRequest("/cryptoaddresses");
+export const forgotPassword = buildRequest("/forgotpassword");
 
 function buildRequest(uri) {
   return (args = {}, opts = {}) => {

@@ -8,83 +8,94 @@ import HeaderRightIcons from "./HeaderRightIcons.jsx";
 import HeaderRightSignedInNot from "./HeaderRightSignedInNot.jsx";
 import HeaderRightSignedIn from "./HeaderRightSignedIn.jsx";
 import {
-    signupUser,
-    signinUser,
-    signoutUser,
-    fetchUserInfo,
+  signupUser,
+  signinUser,
+  signoutUser,
+  fetchUserInfo,
+  forgotPassword,
 } from "~/state/slices/user.slice";
 import { signinWithSms } from "~/state/slices/api.slice";
 
 const HeaderRight = props => {
-    const { setLanguage } = props;
-    const dispatch = useDispatch();
-    const User = useSelector(state => state.user);
-    const { settings: Settings, accesstoken } = useSelector(state => state.api);
-    const { lang: currentLanguage } = useSelector(state => state.ui);
+  const { setLanguage } = props;
+  const dispatch = useDispatch();
+  const User = useSelector(state => state.user);
+  const { settings: Settings, accesstoken } = useSelector(state => state.api);
+  const { lang: currentLanguage } = useSelector(state => state.ui);
 
-    useEffect(() => {
-        if (accesstoken) {
-            dispatch(fetchUserInfo());
-        }
-    }, [dispatch, accesstoken]);
+  useEffect(() => {
+    if (accesstoken) {
+      dispatch(fetchUserInfo());
+    }
+  }, [dispatch, accesstoken]);
 
-    const onSignup = useCallback(
-        async data => {
-            const { payload } = await dispatch(signupUser(data));
+  const onForgotPassword = useCallback(
+    async data => {
+      const { payload } = await dispatch(forgotPassword(data));
 
-            return payload;
-        },
-        [dispatch]
-    );
+      return payload;
+    },
+    [dispatch]
+  );
 
-    const onSignin = useCallback(
-        async data => {
-            const { payload } = await dispatch(signinUser(data));
+  const onSignup = useCallback(
+    async data => {
+      const { payload } = await dispatch(signupUser(data));
 
-            return payload;
-        },
-        [dispatch]
-    );
+      return payload;
+    },
+    [dispatch]
+  );
 
-    const onSigninSMS = useCallback(
-        async code => {
-            const { payload } = await dispatch(signinWithSms(code));
+  const onSignin = useCallback(
+    async data => {
+      const { payload } = await dispatch(signinUser(data));
 
-            return payload;
-        },
-        [dispatch]
-    );
+      return payload;
+    },
+    [dispatch]
+  );
 
-    const onSignout = useCallback(async () => {
-        const { payload } = await dispatch(signoutUser());
+  const onSigninSMS = useCallback(
+    async code => {
+      const { payload } = await dispatch(signinWithSms(code));
 
-        return payload;
-    }, [dispatch]);
+      return payload;
+    },
+    [dispatch]
+  );
 
-    return (
-        <Col xs="auto" className="header-right">
-            <HeaderRightTheme />
-            <HeaderRightIcons />
-            {accesstoken ? (
-                <HeaderRightSignedIn user={User} onSignout={onSignout} />
-            ) : (
-                <HeaderRightSignedInNot
-                    user={User}
-                    countryCodes={Settings?.countryCodes}
-                    onSignup={onSignup}
-                    onSignin={onSignin}
-                    onSigninSMS={onSigninSMS}
-                />
-            )}
-            <div className="header-right-lang">
-                <LanguageButtons
-                    languages={Settings?.languages}
-                    currentLanguage={currentLanguage}
-                    setLanguage={setLanguage}
-                />
-            </div>
-        </Col>
-    );
+  const onSignout = useCallback(async () => {
+    const { payload } = await dispatch(signoutUser());
+
+    return payload;
+  }, [dispatch]);
+
+  return (
+    <Col xs="auto" className="header-right">
+      <HeaderRightTheme />
+      <HeaderRightIcons />
+      {accesstoken ? (
+        <HeaderRightSignedIn user={User} onSignout={onSignout} />
+      ) : (
+        <HeaderRightSignedInNot
+          user={User}
+          countryCodes={Settings?.countryCodes}
+          onSignup={onSignup}
+          onSignin={onSignin}
+          onSigninSMS={onSigninSMS}
+          onForgotPassword={onForgotPassword}
+        />
+      )}
+      <div className="header-right-lang">
+        <LanguageButtons
+          languages={Settings?.languages}
+          currentLanguage={currentLanguage}
+          setLanguage={setLanguage}
+        />
+      </div>
+    </Col>
+  );
 };
 
 export default HeaderRight;
