@@ -184,7 +184,12 @@ const HeaderRightSignedInNot = props => {
               <div className="headsmtitle mb-1">
                 <h6 className="text-center w-100">{t("enterCode")}</h6>
               </div>
-              <Form className="siteformui" autoComplete="off" noValidate>
+              <Form
+                className="siteformui"
+                autoComplete="off"
+                noValidate
+                tag="div"
+              >
                 <div className="labelfocustop">
                   <FormGroup>
                     <Input
