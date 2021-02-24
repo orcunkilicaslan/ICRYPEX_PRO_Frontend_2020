@@ -124,7 +124,9 @@ const MarketDataSymbol = props => {
         <Table scrollbar>
           <Table.Thead scrollbar>
             <Table.Tr>
-              <Table.Th sizeauto className="fav" />
+              {accesstoken ? (
+                  <Table.Th sizeauto className="fav" />
+              ) : null}
               <Table.Th sizefixed className="sym">
                 {t("common:symbol")}
               </Table.Th>
@@ -169,16 +171,16 @@ const MarketDataSymbol = props => {
 
               return (
                 <Table.Tr key={symbol} onClick={() => onSelectPair(symbol)}>
+                  {accesstoken ? (
                   <Table.Td sizeauto className="fav">
-                    {accesstoken ? (
                       <Button
                         className={`tablefavico ${isFavorite ? "faved" : null}`}
                         onClick={onClick}
                       >
                         <MdTableFavIcon />
                       </Button>
-                    ) : null}
                   </Table.Td>
+                  ) : null}
                   <Table.Td sizefixed className="sym">
                     {name.replace(/\s/g, "")}
                   </Table.Td>
