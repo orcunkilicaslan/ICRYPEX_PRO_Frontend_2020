@@ -1,89 +1,55 @@
-import { useState, useEffect } from "react";
-import { ButtonGroup, TabContent, TabPane } from "reactstrap";
+import { useState, useEffect, useMemo } from "react";
+import { ButtonGroup } from "reactstrap";
 import classnames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
+import { groupBy } from "lodash";
 
 import { Button } from "../Button.jsx";
 import OpenOrderAssetsAddressListTable from "./OpenOrderAssetsAddressListTable.jsx";
 import { fetchCryptoAddresses } from "~/state/slices/assets.slice";
 
-const tabs = [
-  {
-    title: "BTC",
-    component: OpenOrderAssetsAddressListTable,
-  },
-  {
-    title: "LTC",
-    component: () => <div>LTC</div>,
-  },
-  {
-    title: "ETH",
-    component: () => <div>ETH</div>,
-  },
-  {
-    title: "XRP",
-    component: () => <div>XRP</div>,
-  },
-  {
-    title: "MPAY",
-    component: () => <div>MPAY</div>,
-  },
-  {
-    title: "BAT",
-    component: () => <div>BAT</div>,
-  },
-  {
-    title: "XLM",
-    component: () => <div>XLM</div>,
-  },
-  {
-    title: "TRYB",
-    component: () => <div>TRYB</div>,
-  },
-];
-
 const OpenOrderAssetsAddressList = props => {
   const dispatch = useDispatch();
-  const [activeTab, setActiveTab] = useState(tabs[0].title);
+  const { allCryptoAddresses } = useSelector(state => state.assets);
+  const { grouped: groupedAddresses, keys } = useMemo(() => {
+    const grouped = groupBy(allCryptoAddresses, ({ symbol }) => symbol);
+    const keys = Object.keys(grouped);
+
+    return { grouped, keys };
+  }, [allCryptoAddresses]);
+  const [activeTab, setActiveTab] = useState(keys[0]);
 
   useEffect(() => {
     dispatch(fetchCryptoAddresses());
-  }, []);
+  }, [dispatch]);
 
-  const toggle = tab => {
-    if (activeTab !== tab) setActiveTab(tab);
+  const toggle = symbol => {
+    if (activeTab !== symbol) setActiveTab(symbol);
   };
 
   return (
     <div className="assets-addrslist">
       <div className="assetsaddress assetsaddress-tabs tabareaflexflow">
         <ButtonGroup size="sm" className="sitetabs nav">
-          {tabs.map(tab => {
-            const { title } = tab;
-            const cls = classnames({ active: activeTab === title });
+          {keys.map(symbol => {
+            const cls = classnames({ active: activeTab === symbol });
 
             return (
               <Button
                 size="sm"
                 variant="secondary"
                 className={cls}
-                onClick={() => toggle(title)}
-                key={title}
+                onClick={() => toggle(symbol)}
+                key={symbol}
               >
-                {title}
+                {symbol}
               </Button>
             );
           })}
         </ButtonGroup>
-        <TabContent className="sitetabs" activeTab={activeTab}>
-          {tabs.map(({ title, component: Comp }) => {
-            return (
-              <TabPane key={title} tabId={title}>
-                <Comp />
-              </TabPane>
-            );
-          })}
-        </TabContent>
+        <OpenOrderAssetsAddressListTable
+          addresses={groupedAddresses[activeTab]}
+        />
       </div>
     </div>
   );
