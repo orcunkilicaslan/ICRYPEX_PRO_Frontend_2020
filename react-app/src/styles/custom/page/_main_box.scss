@@ -1,7 +1,7 @@
 
 .mainbox{
   background-color: $site-clr-darkblue-700;
-  @include border-radius($var-custom-border-radius);
+  @include border-radius($border-radius);
 
   .modal{
     z-index: $zindex-modal + 10;

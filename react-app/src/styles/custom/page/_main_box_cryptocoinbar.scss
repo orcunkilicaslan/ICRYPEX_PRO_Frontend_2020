@@ -33,20 +33,20 @@
       @include flexbox-flex(1 1 auto);
       width: 1%;
       min-width: 0;
-      padding: 0 $bootstrap-input-btn-padding-x-lg;
+      padding: 0 $input-btn-padding-x-lg;
       border-top: 1px solid $site-brdr-dark;
       border-bottom: 1px solid $site-brdr-dark;
       position: relative;
 
       @include BootstrapMaxWidthResponsive(hd){
-        padding: 0 $bootstrap-input-btn-padding-x-sm;
+        padding: 0 $input-btn-padding-x-sm;
       }
 
       &-biger{
         @include flexbox-display-flex();
-        @include responsive-font-size($var-custom-font-size-lg);
-        line-height: $var-custom-input-btn-line-height-lg;
-        padding: $bootstrap-input-btn-padding-y-lg $bootstrap-input-btn-padding-x-lg;
+        @include responsive-font-size($font-size-lg);
+        line-height: $input-btn-line-height;
+        padding: $input-btn-padding-y-lg $input-btn-padding-x-lg;
 
         &:first-child{padding-left: 0;}
 
@@ -64,18 +64,18 @@
 
         .bigstatslist{
           @include flexbox-display-flex();
-          @include responsive-font-size($var-custom-font-size-base);
+          @include responsive-font-size($font-size-base);
           line-height: 1.1;
 
           li{
             @include flexbox-flex(0 0 auto);
             width: auto;
             max-width: 100%;
-            padding: calc(#{$bootstrap-input-btn-padding-y-lg} - 2px) $bootstrap-input-btn-padding-x-lg;
+            padding: calc(#{$input-btn-padding-y-lg} - 2px) $input-btn-padding-x-lg;
 
             @include BootstrapMaxWidthResponsive(hd){
-              padding-left: $bootstrap-input-btn-padding-x-sm;
-              padding-right: $bootstrap-input-btn-padding-x-sm;
+              padding-left: $input-btn-padding-x-sm;
+              padding-right: $input-btn-padding-x-sm;
             }
 
             &:first-child{padding-left: 0;}
@@ -83,8 +83,8 @@
           }
 
           h6, p{
-            @include responsive-font-size($var-custom-font-size-base);
-            font-weight: $var-custom-font-weight-normal;
+            @include responsive-font-size($font-size-base);
+            font-weight: $font-weight-normal;
             margin: 0;
             white-space: nowrap;
             text-overflow: ellipsis;

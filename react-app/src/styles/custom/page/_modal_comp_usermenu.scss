@@ -31,15 +31,15 @@
 
     &-title{
       color: $site-clr-white;
-      @include responsive-font-size($var-custom-font-size-base * 1.1);
-      font-weight: $var-custom-font-weight-normal;
+      @include responsive-font-size($font-size-base * 1.1);
+      font-weight: $font-weight-normal;
       padding-bottom: $modal-inner-padding / 2;
       margin-bottom: $modal-inner-padding / 4;
       border-bottom: 1px solid $site-brdr-dark;
     }
 
     &-list{
-      @include responsive-font-size($var-custom-font-size-base);
+      @include responsive-font-size($font-size-base);
 
       li{
         padding: $modal-inner-padding/3 0;

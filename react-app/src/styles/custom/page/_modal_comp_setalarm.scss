@@ -11,9 +11,9 @@
       .databigger{
         @include flexbox-display-flex();
         @include flexbox-justify-content(center);
-        @include responsive-font-size($var-custom-font-size-lg * 1.33);
-        line-height: $var-custom-input-btn-line-height-lg;
-        //padding: $bootstrap-input-btn-padding-y-lg $bootstrap-input-btn-padding-x-lg;
+        @include responsive-font-size($font-size-lg * 1.33);
+        line-height: $input-btn-line-height-lg;
+        //padding: $input-btn-padding-y-lg $input-btn-padding-x-lg;
         padding-right: 15px;
 
         @extend %extcurrperupdownlineicon;
@@ -28,7 +28,7 @@
 
       .datasmall{
         color: $site-clr-white;
-        @include responsive-font-size($var-custom-font-size-base * 1.2);
+        @include responsive-font-size($font-size-base * 1.2);
         margin-top: 2px;
         text-align: center;
 
@@ -137,15 +137,15 @@
         &-bubble{
           background-color: $site-clr-blue;
           color: $site-clr-white;
-          @include responsive-font-size($var-custom-font-size-base);
+          @include responsive-font-size($font-size-base);
           font-weight: $var-custom-font-weight-bold;
           padding: 1px 8px 2px;
           opacity: 1;
           position: absolute;
-          top: calc(-#{$bootstrap-custom-range-thumb-width} * 2);
+          top: calc(-#{$custom-range-thumb-width} * 2);
           left: 50%;
           @include translateX(-50%);
-          @include border-radius($var-custom-border-radius-sm);
+          @include border-radius($border-radius-sm);
 
           &::after {
             content: "";
@@ -176,7 +176,7 @@
           justify-content: space-between;
           width: 100%;
           position: absolute;
-          top: calc(#{$bootstrap-custom-range-thumb-width} / 2);
+          top: calc(#{$custom-range-thumb-width} / 2);
 
           &.valnegative{}
 
@@ -188,7 +188,7 @@
             width: 100%;
             max-width: 100%;
             background-color: $site-clr-darkblue-400;
-            height: $bootstrap-custom-range-track-height;
+            height: $custom-range-track-height;
 
             .progress-bar{
               @include transition-multiple(none);
@@ -218,7 +218,7 @@
           @include flexbox-justify-content(space-between);
           width: 100%;
           position: absolute;
-          top: calc(-#{$bootstrap-custom-range-thumb-width} * 1.75);
+          top: calc(-#{$custom-range-thumb-width} * 1.75);
         }
 
         &-circle{
@@ -226,17 +226,17 @@
           @include flexbox-align-items(center);
           @include flexbox-justify-content(space-between);
           width: 100%;
-          height: $bootstrap-custom-range-track-height;
+          height: $custom-range-track-height;
           position: absolute;
-          top: calc(#{$bootstrap-custom-range-thumb-width} / 2);
+          top: calc(#{$custom-range-thumb-width} / 2);
 
           > span{
             @include flexbox-flex(0 0 auto);
-            width: $bootstrap-custom-range-thumb-width / 1.5;
-            height: $bootstrap-custom-range-thumb-height / 1.5;
+            width: $custom-range-thumb-width / 1.5;
+            height: $custom-range-thumb-height / 1.5;
             max-width: 100%;
             background-color: $site-clr-darkblue-400;
-            @include border-radius($bootstrap-custom-range-thumb-border-radius);
+            @include border-radius($custom-range-thumb-border-radius);
           }
 
           &.percstepa00{

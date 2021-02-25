@@ -36,7 +36,7 @@
             min-width: 75px;
             padding: 6px;
             margin: 0 7.5px;
-            @include border-radius($var-custom-border-radius-sm);
+            @include border-radius($border-radius-sm);
           }
 
         }
@@ -44,8 +44,8 @@
         h4{color: $site-clr-white;}
 
         h4, p{
-          @include responsive-font-size($var-custom-font-size-base);
-          font-weight: $var-custom-font-weight-normal;
+          @include responsive-font-size($font-size-base);
+          font-weight: $font-weight-normal;
           margin: 0;
         }
 

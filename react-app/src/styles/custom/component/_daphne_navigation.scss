@@ -5,13 +5,13 @@ $navmenu-clr:                           $site-clr-text-dark-pri;
 $navmenu-clrhover:                      $site-clr-cyan;
 $navmenu-headfontsize:                  1.08rem;
 $navmenu-headlineheight:                1;
-$navmenu-headfontweight:                $var-custom-font-weight-bold;
+$navmenu-headfontweight:                $font-weight-bold;
 $navmenu-headborderclr:                 transparent;
 $navmenu-headbgclr:                     transparent;
 
 $navsubmenu-headclr:                    $site-clr-cyan;
 $navsubmenu-headfontsize:               0.9rem;
-$navsubmenu-headfontweight:             $var-custom-font-weight-bold;
+$navsubmenu-headfontweight:             $font-weight-bold;
 $navsubmenu-navlinktxtclr:              $site-clr-text-dark-pri;
 $navsubmenu-navlinkbgclr:               lighten($site-clr-grylight, 1%);
 $navsubmenu-navlinktxtclrhover:         $site-clr-white;
@@ -219,7 +219,7 @@ $navmenu-resp-transition:               0.7s cubic-bezier(.77,0,.175,1);
         height: 0;
         border-left: 12px solid transparent;
         border-right: 12px solid transparent;
-        border-bottom: 12px solid $var-custom-body-bg;
+        border-bottom: 12px solid $body-bg;
         top: -12px;
         left: 25px;
 

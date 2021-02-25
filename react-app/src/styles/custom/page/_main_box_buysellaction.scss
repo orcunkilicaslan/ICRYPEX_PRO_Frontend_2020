@@ -34,7 +34,7 @@
         }
 
         h6, p{
-          @include responsive-font-size($var-custom-font-size-base);
+          @include responsive-font-size($font-size-base);
         }
       }
 
@@ -99,7 +99,7 @@
         }
 
         h4, p{
-          @include responsive-font-size($var-custom-font-size-base);
+          @include responsive-font-size($font-size-base);
         }
 
         &-curr{

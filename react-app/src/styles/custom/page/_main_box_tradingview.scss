@@ -7,7 +7,7 @@
 
     .tradingview-widget-container{
       height: 100%;
-      @include border-radius($var-custom-border-radius);
+      @include border-radius($border-radius);
       overflow: hidden;
 
       > div, article{

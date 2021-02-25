@@ -78,7 +78,7 @@
       @include flexbox-align-items(center);
       color: $site-clr-white;
       background-color: transparent;
-      @include responsive-font-size($var-custom-font-size-base);
+      @include responsive-font-size($font-size-base);
       padding: 0;
       line-height: 1;
       position: relative;
@@ -104,7 +104,7 @@
       }
 
       &-name{
-        @include responsive-font-size($var-custom-font-size-base);
+        @include responsive-font-size($font-size-base);
         margin: 0;
       }
 

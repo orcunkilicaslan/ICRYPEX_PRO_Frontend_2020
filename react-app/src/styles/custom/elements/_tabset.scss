@@ -8,7 +8,7 @@
   &.nav-tabs{
 
     .nav-item{
-      @include responsive-font-size($var-custom-font-size-base);
+      @include responsive-font-size($font-size-base);
 
       &:first-child .nav-link{border-left-width: 0;}
       &:last-child .nav-link{border-right-width: 0;}
@@ -31,7 +31,7 @@
 
   &.nav-pills{
     .nav-item{
-      @include responsive-font-size($var-custom-font-size-base);
+      @include responsive-font-size($font-size-base);
     }
 
     .nav-link{
@@ -46,7 +46,7 @@
 
   &.tab-content{
     background-color: transparent;
-    @include border-radius($var-custom-border-radius);
+    @include border-radius($border-radius);
 
     .tabcont{
 
@@ -81,7 +81,7 @@
           }
 
           h6, p{
-            @include responsive-font-size($var-custom-font-size-base);
+            @include responsive-font-size($font-size-base);
           }
         }
 
@@ -102,7 +102,7 @@
 
         .btn-secondary,
         .form-control{
-          @include responsive-font-size($var-custom-font-size-base);
+          @include responsive-font-size($font-size-base);
         }
 
         .btn-secondary{
@@ -180,13 +180,13 @@
           &:first-child{
             .nav-link{
               margin-left: 0;
-              @include border-radii($var-custom-border-radius-sm,0,0,$var-custom-border-radius-sm);
+              @include border-radii($border-radius-sm,0,0,$border-radius-sm);
             }
           }
 
           &:last-child{
             .nav-link{
-              @include border-radii(0,$var-custom-border-radius-sm,$var-custom-border-radius-sm,0);
+              @include border-radii(0,$border-radius-sm,$border-radius-sm,0);
             }
           }
         }

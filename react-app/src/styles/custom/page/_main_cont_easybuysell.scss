@@ -100,7 +100,7 @@
             }
           }
           .custom-select:disabled{
-            background-color: $bootstrap-custom-select-bg;
+            background-color: $custom-select-bg;
           }
         }
       }
@@ -128,8 +128,8 @@
           @include flexbox-justify-content(center);
           @include flexbox-align-items(center);
           color: $site-clr-white;
-          @include responsive-font-size($var-custom-font-size-base);
-          font-weight: $var-custom-font-weight-normal;
+          @include responsive-font-size($font-size-base);
+          font-weight: $font-weight-normal;
           margin: 0;
 
           > i[class*="icon"]{

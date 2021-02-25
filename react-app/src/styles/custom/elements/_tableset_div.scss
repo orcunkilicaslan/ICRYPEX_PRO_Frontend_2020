@@ -1,7 +1,7 @@
 
 /* Table UI Soft */
 .sitetablediv{
-  @include responsive-font-size($var-custom-font-size-base);
+  @include responsive-font-size($font-size-base);
   line-height: 1;
 
   .tbl{
@@ -79,7 +79,7 @@
     &-tbody{
 
       > div[class$="tr"]{
-        @include border-radius($var-custom-border-radius);
+        @include border-radius($border-radius);
       }
 
     }

@@ -16,10 +16,10 @@ $site-custom-font-family: map-merge(
 $site-custom-font-weight: ();
 $site-custom-font-weight: map-merge(
                 (
-                        "light":        $var-custom-font-weight-light,
-                        "normal":       $var-custom-font-weight-normal,
-                        "bold":         $var-custom-font-weight-bold,
-                        "bolder":       $var-custom-font-weight-bolder
+                        "light":        $font-weight-light,
+                        "normal":       $font-weight-normal,
+                        "bold":         $font-weight-bold,
+                        "bolder":       $font-weight-bolder
                 ),
                 $site-custom-font-weight
 );

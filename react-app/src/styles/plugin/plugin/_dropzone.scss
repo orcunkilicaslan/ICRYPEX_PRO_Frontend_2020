@@ -2,7 +2,7 @@
 @import '~dropzone/dist/dropzone';
 
 .dropzone{
-  background-color: $bootstrap-input-bg;
+  background-color: $input-bg;
   min-height: inherit;
   padding: $input-padding-y*2;
   border: $input-border-width dashed $global-clr-blue;
@@ -10,7 +10,7 @@
   @include transition-multiple(background 0.3s ease-in-out, border 0.3s ease-in-out);
 
   &.dz-drag-hover{
-    background-color: $bootstrap-input-disabled-bg;
+    background-color: $input-disabled-bg;
     border-color: $global-clr-orange;
     border-style: dashed;
 
@@ -48,11 +48,11 @@
       }
 
       &-btxt{
-        @include responsive-font-size($var-custom-font-size-base);
+        @include responsive-font-size($font-size-base);
       }
 
       &-stxt{
-        @include responsive-font-size($var-custom-font-size-base);
+        @include responsive-font-size($font-size-base);
       }
     }
 
@@ -66,13 +66,13 @@
       margin: 0;
 
       &.dz-image-preview{
-        background-color: $bootstrap-input-disabled-bg;
+        background-color: $input-disabled-bg;
         @include border-radius($input-border-radius);
       }
 
       &.dz-file-preview{
         .dz-image{
-          background: $bootstrap-input-disabled-bg;
+          background: $input-disabled-bg;
           @include border-radius($input-border-radius);
         }
       }
@@ -102,7 +102,7 @@
         @include flexbox-align-items(center);
         @include flexbox-justify-content(space-between);
         height: 100%;
-        @include responsive-font-size($var-custom-font-size-base);
+        @include responsive-font-size($font-size-base);
         padding: $input-padding-y;
 
         .dz-filename,
@@ -113,12 +113,12 @@
             color: $global-clr-white;
             background-color: transparentize($global-clr-green, 0.3);
             padding: 0 5px 1px;
-            @include border-radius($var-custom-border-radius-sm);
+            @include border-radius($border-radius-sm);
           }
         }
 
         .dz-size{
-          @include responsive-font-size($var-custom-font-size-base);
+          @include responsive-font-size($font-size-base);
         }
 
         .dz-filename:hover span{
@@ -162,9 +162,9 @@
       .dz-error-message{
         color: $global-clr-white;
         @include background-linear($global-clr-red, lighten($global-clr-red, 5%));
-        @include responsive-font-size($var-custom-font-size-base);
+        @include responsive-font-size($font-size-base);
         padding: $input-padding-y;
-        @include border-radius($var-custom-border-radius-sm);
+        @include border-radius($border-radius-sm);
 
         &::after{
           border-bottom-color: lighten($global-clr-red, 5%);

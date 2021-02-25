@@ -36,7 +36,7 @@
 
         &.active{
           background-color: transparentize($site-clr-darkblue-100, 0.75);
-          @include border-radii($var-custom-border-radius,$var-custom-border-radius,0,0);
+          @include border-radii($border-radius,$border-radius,0,0);
 
           .tbl-td{
             color: lighten($site-clr-text-soft-sec, 20%);
@@ -52,7 +52,7 @@
         .sitetablediv{
           margin-bottom: 7.5px;
           border: 1px solid $site-brdr-dark;
-          @include border-radii(0,0,$var-custom-border-radius,$var-custom-border-radius);
+          @include border-radii(0,0,$border-radius,$border-radius);
 
           .tbl-thead .tbl-th,
           .tbl-tbody .tbl-td{padding-top: 3px; padding-bottom: 5px;}

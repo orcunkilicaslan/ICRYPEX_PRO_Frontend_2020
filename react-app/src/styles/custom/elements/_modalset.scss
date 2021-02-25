@@ -64,14 +64,14 @@
 
     .modal-title{
       color: $site-clr-white;
-      @include responsive-font-size($var-custom-font-size-base);
-      font-weight: $var-custom-font-weight-bold;
+      @include responsive-font-size($font-size-base);
+      font-weight: $font-weight-bold;
       text-transform: uppercase;
     }
   }
 
   &-body{
-    @include responsive-font-size($var-custom-font-size-base);
+    @include responsive-font-size($font-size-base);
   }
 
   &-footer{
@@ -92,7 +92,7 @@
 
     h1,h2,h3,h4,h5,h6{
       color: $site-clr-white;
-      @include responsive-font-size($var-custom-font-size-base);
+      @include responsive-font-size($font-size-base);
       font-weight: $font-weight-normal;
       margin: 0;
     }

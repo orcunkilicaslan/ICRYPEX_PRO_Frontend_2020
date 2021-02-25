@@ -19,7 +19,7 @@
 
       &-collapse{
         img{
-          @include border-radius($var-custom-border-radius-sm);
+          @include border-radius($border-radius-sm);
 
           + p{
             margin-top: $modal-inner-padding/2;

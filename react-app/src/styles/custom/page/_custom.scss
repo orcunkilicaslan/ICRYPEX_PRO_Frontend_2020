@@ -25,7 +25,7 @@ body, #root{
   @include flexbox-display-flex();
   @include flexbox-flex-flow(column);
   @include flexbox-justify-content(space-between);
-  @include responsive-font-size($var-custom-font-size-base);
+  @include responsive-font-size($font-size-base);
   height: 100%;
 
   &-content{
@@ -43,7 +43,7 @@ body, #root{
 
     h1,h2,h3,h4,h5,h6{
       color: $site-clr-white;
-      @include responsive-font-size($var-custom-font-size-base);
+      @include responsive-font-size($font-size-base);
       font-weight: $font-weight-normal;
       margin: 0;
     }
@@ -82,8 +82,8 @@ body, #root{
       h4{color: $site-clr-white;}
 
       h4, p{
-        @include responsive-font-size($var-custom-font-size-base);
-        font-weight: $var-custom-font-weight-normal;
+        @include responsive-font-size($font-size-base);
+        font-weight: $font-weight-normal;
         margin: 0;
       }
 
@@ -98,7 +98,7 @@ body, #root{
     img{
       width: 100%;
       display: block;
-      @include border-radius($var-custom-border-radius-sm);
+      @include border-radius($border-radius-sm);
 
       + p{
         margin-top: 0.375rem;

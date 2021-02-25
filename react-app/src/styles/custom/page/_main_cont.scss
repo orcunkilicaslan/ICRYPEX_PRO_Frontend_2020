@@ -1,7 +1,7 @@
 
 .maincont{
   background-color: $site-clr-darkblue-700;
-  @include border-radius($var-custom-border-radius);
+  @include border-radius($border-radius);
 
   .modal{
     z-index: $zindex-modal + 10;
@@ -20,7 +20,7 @@
     width: 100%;
 
     > li{
-      @include responsive-font-size($var-custom-font-size-base);
+      @include responsive-font-size($font-size-base);
       min-height: 16px;
       margin: 5px 0;
       padding-left: 20px;
@@ -56,12 +56,12 @@
       border-bottom: 1px solid $site-brdr-dark;
       text-align: center;
       padding: $grid-gutter-width/2 !important;
-      @include border-radii($var-custom-border-radius-sm,$var-custom-border-radius-sm,0,0);
+      @include border-radii($border-radius-sm,$border-radius-sm,0,0);
 
       h1,h2,h3,h4,h5,h6{
         color: $site-clr-white;
-        @include responsive-font-size($var-custom-font-size-base);
-        font-weight: $var-custom-font-weight-normal;
+        @include responsive-font-size($font-size-base);
+        font-weight: $font-weight-normal;
         padding: $nav-link-padding-y $nav-link-padding-x;
         margin: 0;
       }
@@ -133,7 +133,7 @@
     width: 100%;
     background-color: $site-clr-darkblue-700;
     border: 1px solid $site-brdr-dark;
-    @include border-radius($var-custom-border-radius);
+    @include border-radius($border-radius);
 
     &-title{
       @include flexbox-display-flex();
@@ -142,11 +142,11 @@
       background-color: $site-clr-darkblue-500;
       border-bottom: 1px solid $site-brdr-dark;
       padding: $grid-gutter-width/2;
-      @include border-radii($var-custom-border-radius-sm,$var-custom-border-radius-sm,0,0);
+      @include border-radii($border-radius-sm,$border-radius-sm,0,0);
 
       > *{
-        @include responsive-font-size($var-custom-font-size-base);
-        font-weight: $var-custom-font-weight-normal;
+        @include responsive-font-size($font-size-base);
+        font-weight: $font-weight-normal;
         padding: $nav-link-padding-y $nav-link-padding-x;
       }
 
@@ -169,8 +169,8 @@
       padding: $nav-link-padding-x;
 
       .boxwrpsmtitle{
-        @include responsive-font-size($var-custom-font-size-base);
-        //font-weight: $var-custom-font-weight-bold;
+        @include responsive-font-size($font-size-base);
+        //font-weight: $font-weight-bold;
         margin-bottom: $form-group-margin-bottom;
 
         + .labelfocustop{
