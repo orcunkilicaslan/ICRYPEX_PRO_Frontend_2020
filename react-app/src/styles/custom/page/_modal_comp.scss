@@ -194,9 +194,7 @@
           width: auto;
           max-width: 100%;
           position: relative;
-        }
 
-        &[data-toggle="collapse"] .heading-detail{
           > i[class*="arrow"]{
             @include rotate(90);
             @include transition-multiple(transform 0.3s ease-in-out, top 0.3s ease-in-out);
@@ -211,32 +209,31 @@
 
       .collapse{
         &-content{
-          //padding: 0 $modal-inner-padding*1.5;
-        }
+          padding: 0 $modal-inner-padding*1.5 $modal-inner-padding/1.25;
 
-        &-foot{
-          @include flexbox-display-flex();
-          @include flexbox-flex-wrap(wrap);
-          @include flexbox-justify-content(space-between);
-          @include flexbox-align-items(center);
-          color: $site-clr-text-soft-sec;
-          width: 100%;
-          //padding: $modal-inner-padding/1.5 $modal-inner-padding*1.5 $modal-inner-padding;
+          .collapsefoot{
+            @include flexbox-display-flex();
+            @include flexbox-flex-wrap(wrap);
+            @include flexbox-justify-content(space-between);
+            @include flexbox-align-items(center);
+            width: 100%;
+            padding-top: $modal-inner-padding/1.5;
 
-          .footdate{
-            @include flexbox-flex-basis(0);
-            @include flexbox-flex-grow(1);
-            max-width: 100%;
-          }
+            &-date{
+              @include flexbox-flex-basis(0);
+              @include flexbox-flex-grow(1);
+              max-width: 100%;
+            }
 
-          .footbtn{
-            color: $site-clr-white;
-            @include flexbox-flex(0 0 auto);
-            width: auto;
-            max-width: 100%;
-            padding: 0;
-            margin: 0;
-            font-weight: $font-weight-normal;
+            &-btn{
+              color: $site-clr-white;
+              @include flexbox-flex(0 0 auto);
+              width: auto;
+              max-width: 100%;
+              padding: 0;
+              margin: 0;
+              font-weight: $font-weight-normal;
+            }
           }
         }
       }
@@ -244,6 +241,8 @@
   }
 
   &-psright{
+    position: relative;
+
     .ps{
       padding-right: 10px;
 

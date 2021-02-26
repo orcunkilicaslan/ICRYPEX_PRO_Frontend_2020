@@ -39,11 +39,7 @@
 
         .collapse{
           &-content{
-            padding: 0 $modal-inner-padding*1.5;
-          }
-
-          &-foot{
-            padding: $modal-inner-padding/1.5 $modal-inner-padding*1.5 $modal-inner-padding;
+            padding-left: $modal-inner-padding*1.5;
           }
         }
 
@@ -67,8 +63,7 @@
           }
 
           .collapse{
-            &-content,
-            &-foot{
+            &-content{
               color: $site-clr-white !important;
             }
           }
