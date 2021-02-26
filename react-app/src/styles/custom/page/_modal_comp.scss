@@ -7,7 +7,6 @@
     @include flexbox-align-items(center);
     @include flexbox-justify-content(space-between);
     line-height: 1.2;
-    //padding: 5px 0;
     padding-bottom: 5px;
 
     &-col{
@@ -29,6 +28,10 @@
       margin-bottom: $headings-margin-bottom;
       border: none;
     }
+  }
+
+  .footbtns{
+    padding-top: 5px;
   }
 
   .accbuild{
@@ -170,18 +173,6 @@
         @include flexbox-flex-wrap(wrap);
         @include flexbox-justify-content(space-between);
         padding: $modal-inner-padding/1.5 $modal-inner-padding;
-        position: relative;
-
-        &::before{
-          content: "";
-          background-color: $site-clr-red;
-          width: 6px;
-          height: 6px;
-          position: absolute;
-          left: $modal-inner-padding/1.5;
-          top: $modal-inner-padding*1.15;
-          @include border-radius(50px);
-        }
 
         &-title{
           @include flexbox-flex-basis(0);
@@ -190,7 +181,7 @@
           color: $site-clr-text-soft-pri;
           margin: 0;
           display: block;
-          padding-left: $modal-inner-padding/1.5;
+          //padding-left: $modal-inner-padding/1.5;
           @include transition-multiple(color 0.3s ease-in-out);
         }
 
@@ -217,20 +208,35 @@
 
       .collapse{
         &-content{
-          padding: 0 $modal-inner-padding*1.5;
+          //padding: 0 $modal-inner-padding*1.5;
         }
 
-        &-date{
+        &-foot{
+          @include flexbox-display-flex();
+          @include flexbox-flex-wrap(wrap);
+          @include flexbox-justify-content(space-between);
+          @include flexbox-align-items(center);
           color: $site-clr-text-soft-sec;
           width: 100%;
-          display: block;
-          padding: $modal-inner-padding/1.5 $modal-inner-padding*1.5 $modal-inner-padding;
+          //padding: $modal-inner-padding/1.5 $modal-inner-padding*1.5 $modal-inner-padding;
+
+          .footdate{
+            @include flexbox-flex-basis(0);
+            @include flexbox-flex-grow(1);
+            max-width: 100%;
+          }
+
+          .footbtn{
+            color: $site-clr-white;
+            @include flexbox-flex(0 0 auto);
+            width: auto;
+            max-width: 100%;
+            padding: 0;
+            margin: 0;
+            font-weight: $font-weight-normal;
+          }
         }
       }
-    }
-
-    &-item.notifread .heading::before{
-      background-color: $site-clr-text-soft-pri !important;
     }
   }
 

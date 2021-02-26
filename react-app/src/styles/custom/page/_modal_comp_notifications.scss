@@ -2,13 +2,79 @@
 .modalcomp{
 
   &-notif{
+    @include flexbox-display-flex();
+    @include flexbox-flex-flow(column);
+    height: 100%;
 
-    &-wrp{}
+    &-wrp{
+      @include flexbox-flex(1);
+    }
 
-    &-list{
-      height: 750px;
-      position: relative;
-      overflow: hidden;
+    &-list{}
+
+    .collapseacc{
+
+      &-item{
+
+        .heading{
+          position: relative;
+          $bulletarea:  $modal-inner-padding/1.5;
+
+          &::before{
+            content: "";
+            background-color: $site-clr-text-soft-pri;
+            width: 2px;
+            //height: calc(100% - 16px);
+            height: calc(100% - #{$bulletarea*2});
+            position: absolute;
+            left: $modal-inner-padding/1.5;
+            top: $bulletarea;
+            @include border-radius($border-radius-sm);
+          }
+
+          &-title{
+            padding-left: $modal-inner-padding/2;
+          }
+        }
+
+        .collapse{
+          &-content{
+            padding: 0 $modal-inner-padding*1.5;
+          }
+
+          &-foot{
+            padding: $modal-inner-padding/1.5 $modal-inner-padding*1.5 $modal-inner-padding;
+          }
+        }
+
+        &.notifnotread{
+          background-color: transparentize($site-clr-red, 0.95) !important;
+          border-color: transparentize($site-clr-red, 0.3) !important;
+
+          .heading{
+
+            &::before{
+              background-color: $site-clr-red !important;
+            }
+
+            &-title{
+              color: $site-clr-white !important;
+            }
+
+            &-detail > i[class*="icon"]{
+              @include svg-filter(0%, 1, 0, 100%);
+            }
+          }
+
+          .collapse{
+            &-content,
+            &-foot{
+              color: $site-clr-white !important;
+            }
+          }
+        }
+      }
+
     }
   }
 
