@@ -29,11 +29,17 @@ const socketPersistConfig = {
   blacklist: ["connected", "reason"],
 };
 
+const alarmPersistConfig = {
+  key: "alarm",
+  storage,
+  blacklist: ["isCreating", "isDeleting"],
+};
+
 const rootReducer = combineReducers({
   ui: persistReducer(UIPersistConfig, uiReducer),
   api: persistReducer(apiPersistConfig, apiReducer),
   user: userReducer,
-  alarm: alarmReducer,
+  alarm: persistReducer(alarmPersistConfig, alarmReducer),
   pair: pairReducer,
   socket: persistReducer(socketPersistConfig, socketReducer),
   assets: assetsReducer,
