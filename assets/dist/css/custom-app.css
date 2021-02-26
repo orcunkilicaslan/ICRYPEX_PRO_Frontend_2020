@@ -12794,7 +12794,7 @@ button:-moz-focusring,
 /* Window Full Screen Start */
 /* Window Full Screen End */
 .icon-sprtsmclrd {
-  background-image: url(../../../react-app/src/assets/images/icons/icons_spite_darksmalliconcolored.svg?v=u3d6af814);
+  background-image: url(../../../react-app/src/assets/images/icons/icons_spite_darksmalliconcolored.svg?v=u39124e65);
   background-repeat: no-repeat;
   background-position: 0 0;
   display: inline-block;
@@ -12872,7 +12872,7 @@ button:-moz-focusring,
         background-position: calc(-20px*3) -30px; }
 
 .icon-sprtlgclrd {
-  background-image: url(../../../react-app/src/assets/images/icons/icons_spite_darkbigiconcolored.svg?v=u3d6af814);
+  background-image: url(../../../react-app/src/assets/images/icons/icons_spite_darkbigiconcolored.svg?v=u39124e65);
   background-repeat: no-repeat;
   background-position: 0 0;
   display: inline-block;
@@ -14216,7 +14216,7 @@ html.themedark .sitetabs.nav-pills .nav-link {
   .header-left-logo {
     margin: 0 5px; }
     .header-left-logo .headlogo {
-      background-image: url(../../../react-app/src/assets/images/header/header_pro_logo.svg?v=u3d6af814);
+      background-image: url(../../../react-app/src/assets/images/header/header_pro_logo.svg?v=u39124e65);
       background-repeat: no-repeat;
       background-size: contain;
       background-position: left center;
@@ -16256,7 +16256,7 @@ body, #root {
       width: 100%; }
 
 .mainbox-openorders .openorders-dandw .depositandwithdraw .dandwtab-bank-tabs .banksprttablogos {
-  background-image: url(../../../react-app/src/assets/images/icons/icons_spite_banklogos.svg?v=u3d6af814);
+  background-image: url(../../../react-app/src/assets/images/icons/icons_spite_banklogos.svg?v=u39124e65);
   background-repeat: no-repeat;
   background-position: 0 0;
   display: inline-block;
@@ -16404,7 +16404,7 @@ body, #root {
         margin-bottom: 0; }
       .maincont .boxulinfolist > li::before {
         content: "";
-        background-image: url(../../../react-app/src/assets/images/icons/icons_spite_darksmalliconcolored.svg?v=u3d6af814);
+        background-image: url(../../../react-app/src/assets/images/icons/icons_spite_darksmalliconcolored.svg?v=u39124e65);
         background-repeat: no-repeat;
         background-position: 9999px 9999px;
         width: 16px;
