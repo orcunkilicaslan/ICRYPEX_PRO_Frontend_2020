@@ -11,8 +11,6 @@ import { enUS as en, tr } from "date-fns/locale";
 
 const locales = { en, tr };
 
-// by providing a default string of 'PP' or any of its variants for `formatStr`
-// it will format dates in whichever way is appropriate to the locale
 export const formatDistance = (
   fromDate,
   toDate,

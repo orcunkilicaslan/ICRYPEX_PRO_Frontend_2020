@@ -15,7 +15,7 @@ import {
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
-import { inRange } from "lodash";
+import { inRange, groupBy } from "lodash";
 
 import { ReactComponent as PerLineIcon } from "~/assets/images/icons/path_icon_pericon.svg";
 import { IconSet } from "../IconSet.jsx";
@@ -39,26 +39,22 @@ const spinnerMax = 999999999;
 const TopCoinBar = props => {
   const { t } = useTranslation(["coinbar", "common"]);
   const dispatch = useDispatch();
-  const {
-    all: allAlarms,
-    isCreating,
-    hideOthers,
-    byPair: byPairAlarms,
-    isDeleting,
-  } = useSelector(state => state.alarm);
+  const { all: allAlarms, isCreating, hideOthers, isDeleting } = useSelector(
+    state => state.alarm
+  );
   const {
     selected: currentPair,
     fiatCurrency: selectedFiatCurrency,
     cryptoCurrency: selectedCryptoCurrency,
   } = useSelector(state => state.pair);
-  const { prices: pricesData = [] } = useSelector(state => state.socket);
+  const pricesData = useSelector(state => state.socket.prices);
   const { accesstoken } = useSelector(state => state.api);
   const { openModal } = useSelector(state => state.ui);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [rangeAlarmPortfolio, setRangeAlarmPortfolio] = useState(
     rangeAlarmPercent[4]
   );
-
   const rangeAlarmPortfolioValPositive = rangeAlarmPortfolio;
   const rangeAlarmPortfolioValNegative = rangeAlarmPortfolio * -1;
 
@@ -75,12 +71,34 @@ const TopCoinBar = props => {
     percstepp100: rangeAlarmPortfolio === -100,
   });
 
-  const [amount, setAmount] = useState(0);
-  const [errorMessage, setErrorMessage] = useState("");
+  let selectedPriceData = pricesData?.find(
+    ({ symbol }) => symbol === currentPair?.symbol
+  );
+  const [amount, setAmount] = useState(selectedPriceData?.price);
+
+  useEffect(() => {
+    if (rangeAlarmPortfolio !== 0) {
+      const int = parseFloat(selectedPriceData?.price);
+      const adjusted = int + int * (rangeAlarmPortfolio / 100);
+      setAmount(adjusted);
+    } else {
+      setAmount(parseFloat(selectedPriceData?.price));
+    }
+  }, [rangeAlarmPortfolio, selectedPriceData]);
+
+  useEffect(() => {
+    if (accesstoken) dispatch(fetchPriceAlarms());
+  }, [dispatch, accesstoken]);
+
   const visibleAlarms = useMemo(() => {
-    if (!hideOthers) return allAlarms;
-    else return byPairAlarms[currentPair?.name] || [];
-  }, [allAlarms, byPairAlarms, currentPair, hideOthers]);
+    if (!hideOthers) {
+      return allAlarms;
+    } else {
+      const byPair = groupBy(allAlarms, ({ pairname }) => pairname);
+
+      return byPair[currentPair?.name] || [];
+    }
+  }, [allAlarms, currentPair, hideOthers]);
 
   let visiblePriceData = {
     bestBuy: "",
@@ -91,9 +109,7 @@ const TopCoinBar = props => {
     average24h: "",
     volume: "",
   };
-  let selectedPriceData = pricesData.find(
-    ({ symbol }) => symbol === currentPair?.symbol
-  );
+
   if (selectedPriceData) {
     const {
       high24hour,
@@ -118,19 +134,15 @@ const TopCoinBar = props => {
     };
   }
 
-  useEffect(() => {
-    if (accesstoken) dispatch(fetchPriceAlarms());
-  }, [dispatch, accesstoken]);
-
   const onAmount = arg => {
     let newAmount;
     if (Number.isInteger(arg)) {
-      newAmount = amount + arg;
+      newAmount = parseFloat(amount) + arg;
     } else {
       const event = arg;
       event.preventDefault();
       event.stopPropagation();
-      newAmount = parseInt(event.target.value, 10);
+      newAmount = parseFloat(event.target.value);
     }
 
     if (newAmount >= spinnerMin && newAmount <= spinnerMax) {
@@ -188,7 +200,7 @@ const TopCoinBar = props => {
               <div className="cryptostatsbar-biger">
                 <PerLineIcon className={`mdper mdper-${upOrDown}`} />
                 <span className={siteColorClass}>
-                  {selectedPriceData.price}
+                  {selectedPriceData?.price}
                 </span>
               </div>
             ) : null}
@@ -214,11 +226,7 @@ const TopCoinBar = props => {
                   onClick={openAlarmModal}
                 >
                   <div className="iconbtn-svg">
-                    <IconSet
-                      sprite="sprtsmclrd"
-                      size="16"
-                      name="bell"
-                    />
+                    <IconSet sprite="sprtsmclrd" size="16" name="bell" />
                   </div>
                   <div className="iconbtn-txt">
                     <span>{t("setAlarm")}</span>
@@ -362,7 +370,11 @@ const TopCoinBar = props => {
               </div>
             </Form>
           </div>
-          <div className={`modalcomp-setalarm-table ${!allAlarms?.length ? "d-none" : ""}`}>
+          <div
+            className={`modalcomp-setalarm-table ${
+              !allAlarms?.length ? "d-none" : ""
+            }`}
+          >
             <div className="headsmtitle">
               <div className="headsmtitle-col">
                 <h6>{hideOthers ? currentPair?.name : t("common:all")}</h6>

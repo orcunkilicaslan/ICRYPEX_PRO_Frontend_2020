@@ -12,8 +12,9 @@ import {
 import { debug } from "~/util";
 
 const isProd = process.env.NODE_ENV === "production";
-const fetch = retry(_fetch);
 let baseURL = process.env.REACT_APP_API_BASE;
+
+const fetch = retry(_fetch);
 const log = debug.extend("api");
 
 const instance = {
@@ -44,7 +45,7 @@ const instance = {
         }
 
         if (response.status === 200) {
-          const { data } = await getJSONData(response);
+          const { data } = await marshallJSONData(response);
 
           if (data?.status === 0) {
             log(`${uri} | ${data.type} | ${data.errormessage}`);
@@ -103,9 +104,9 @@ const instance = {
     merge(options.headers, headers);
 
     return fetch(`${baseURL}${uri}`, options).then(async response => {
-      log(`${response.status} | ${uri} %O`, response.data);
-
-      const { data } = await getJSONData(response);
+      const { data } = await marshallJSONData(response);
+      const status = Boolean(data?.status) ? response.status : data?.status;
+      log(`${status} | ${uri} %O`, data);
 
       if (data?.status) {
         return Promise.resolve(response);
@@ -122,9 +123,11 @@ const instance = {
 export * from "./requests";
 export default instance;
 
-async function getJSONData(response) {
+async function marshallJSONData(response) {
   if (!response.bodyUsed) {
-    response.data = await response.json();
+    try {
+      response.data = await response.json();
+    } catch {}
   }
 
   return response;

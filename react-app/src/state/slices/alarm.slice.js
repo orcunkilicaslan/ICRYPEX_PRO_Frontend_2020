@@ -130,7 +130,6 @@ export const deletePairPriceAlarms = createAsyncThunk(
 const initialState = {
   all: [],
   hideOthers: false,
-  byPair: {},
   isCreating: false,
   isDeleting: false,
 };
@@ -153,13 +152,10 @@ const alarmSlice = createSlice({
       const all = action?.payload?.description;
 
       state.all = mdperize(all);
-      state.byPair = groupBy(state.all, ({ pairname }) => pairname);
     },
     [fetchPairPriceAlarms.fulfilled]: (state, action) => {
       const alarms = mdperize(action?.payload?.description);
-      const groupedAlarms = groupBy(alarms, ({ pairname }) => pairname);
 
-      merge(state.byPair, groupedAlarms);
       state.all = uniqBy(state.all.concat(alarms), ({ id }) => id);
     },
     [createPairPriceAlarm.pending]: state => {

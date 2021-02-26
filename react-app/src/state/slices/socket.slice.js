@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { merge } from "lodash";
+import { merge, isEqual } from "lodash";
 
 const initialState = {
   connected: false,
@@ -22,7 +22,11 @@ const socketSlice = createSlice({
       state.reason = action?.payload;
     },
     setPrices: (state, action) => {
-      state.prices = action?.payload || [];
+      const payload = action?.payload;
+
+      if (payload && !isEqual(state.prices, payload)) {
+        state.prices = payload;
+      }
     },
     setOrderBook: {
       reducer: (state, action) => {
@@ -60,7 +64,7 @@ export const {
   reset,
   setPrices,
   setOrderBook,
-  setOrderHistory
+  setOrderHistory,
 } = socketSlice.actions;
 
 export default socketSlice.reducer;
