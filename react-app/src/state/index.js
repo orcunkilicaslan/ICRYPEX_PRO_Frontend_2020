@@ -14,8 +14,8 @@ import storage from "localforage";
 import rootReducer from "./rootReducer";
 import { createSocketMiddleware } from "./middleware";
 
-const SOCKET_BASE = process.env.REACT_APP_SOCKET_BASE;
-const isProd = process.env.NODE_ENV === "production";
+const { REACT_APP_SOCKET_BASE, NODE_ENV } = process.env;
+const isProd = NODE_ENV === "production";
 const persistConfig = {
   key: "root",
   storage,
@@ -23,8 +23,8 @@ const persistConfig = {
   blacklist: ["api", "ui", "socket"],
 };
 const socketIoOptions = {
-  url: SOCKET_BASE,
-  reconnectionAttempts: isProd ? Infinity : 30,
+  url: REACT_APP_SOCKET_BASE,
+  reconnectionAttempts: isProd ? Infinity : 3,
 };
 
 export let store;

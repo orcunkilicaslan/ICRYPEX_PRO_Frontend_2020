@@ -12,6 +12,7 @@ import {
 } from "../slices/socket.slice";
 
 const log = debug.extend("socket");
+log.data = log.extend("data");
 const defaults = {
   timeout: ms("30s"),
   reconnectionDelayMax: ms("3m"),
@@ -57,13 +58,13 @@ export default function createSocketMiddleware(options) {
 
     client.onAny((key, data) => {
       if (key.endsWith("orderbook")) {
-        log("%s: %d buytotal", key, data?.buytotal);
+        log.data("%s: %d buytotal", key, data?.buytotal);
         dispatch(setOrderBook(key, data));
       } else if (key === "prices") {
-        log("%s: %s pairs", key, data.length);
+        log.data("%s: %s pairs", key, data.length);
         dispatch(setPrices(data));
       } else if (key.endsWith("orderhistory")) {
-        log("%s: %d orders", key, data?.length);
+        log.data("%s: %d orders", key, data?.length);
         dispatch(setOrderHistory(key, data));
       }
     });

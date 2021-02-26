@@ -34,7 +34,7 @@ const OpenOrderAssetsAddressListTable = props => {
             scrollbar
             scrollbarstyles={{ height: `${tableHeight - 36}px` }}
           >
-            {addresses.map(({ id, address }) => {
+            {addresses?.map(({ id, address }) => {
               return (
                 <Table.Tr key={id}>
                   <Table.Td sizeauto className="ico">
