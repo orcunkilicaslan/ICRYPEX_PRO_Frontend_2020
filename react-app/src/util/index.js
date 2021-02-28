@@ -6,7 +6,7 @@ import {
   // saveCurrentDeviceId,
 } from "@binance/fingerprint";
 import _debug from "debug";
-import { formatDistanceStrict } from "date-fns";
+import { format, formatDistanceStrict } from "date-fns";
 import { enUS as en, tr } from "date-fns/locale";
 
 const locales = { en, tr };
