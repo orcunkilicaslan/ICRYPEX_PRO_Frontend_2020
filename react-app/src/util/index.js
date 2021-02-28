@@ -11,7 +11,17 @@ import { enUS as en, tr } from "date-fns/locale";
 
 const locales = { en, tr };
 
-export const formatDistance = (
+// https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
+export const formatDate = (
+  date,
+  pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSxxx",
+  { locale = "en" }
+) => {
+  return format(date, pattern, {
+    locale: locales[locale],
+  });
+};
+
   fromDate,
   toDate,
   { locale = "en", addSuffix = true }
