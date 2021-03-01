@@ -9,7 +9,12 @@ import _debug from "debug";
 import { format, formatDistanceStrict } from "date-fns";
 import { enUS as en, tr } from "date-fns/locale";
 
+import { name } from "../../package.json";
+
 const locales = { en, tr };
+export const debug = _debug(name); // isProd ? makeFakeDebug() : _debug("pro");
+const log = debug.extend("util");
+if (process.env.REACT_APP_DEBUG) _debug.enable(`${name}:*`);
 
 // https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
 export const formatDate = (
@@ -32,10 +37,6 @@ export const formatDateDistance = (
     addSuffix,
   });
 };
-
-export const debug = _debug("pro");
-const log = debug.extend("util");
-if (process.env.REACT_APP_DEBUG) _debug.enable("pro:*");
 
 let deviceuuid, localkey;
 export const makeLocalKey = async secret => {
