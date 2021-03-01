@@ -22,6 +22,7 @@ export const formatDate = (
   });
 };
 
+export const formatDateDistance = (
   fromDate,
   toDate,
   { locale = "en", addSuffix = true }

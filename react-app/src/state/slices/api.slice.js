@@ -203,7 +203,7 @@ const apiSlice = createSlice({
     [signoutUser.fulfilled]: state => {
       state.accesstoken = null;
     },
-    [signoutUser.rejected]: (state, action) => {
+    [signoutUser.rejected]: state => {
       state.accesstoken = null;
       state.prelogintoken = null;
     },

@@ -40,7 +40,7 @@ export const getStore = () => {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
         immutableCheck: {
-          warnAfter: 50,
+          warnAfter: 100,
         },
       }).concat(middleware),
     });

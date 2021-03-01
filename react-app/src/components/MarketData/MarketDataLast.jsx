@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useClientRect } from "~/state/hooks";
 import { useTranslation } from "react-i18next";
-import { formatDistance } from "~/util/";
+import { formatDateDistance } from "~/util/";
 
 import Table from "../Table.jsx";
 
@@ -52,7 +52,7 @@ const MarketDataLast = props => {
                 <Table.Tr key={`${created_at}_${idx}`}>
                   <Table.Td sizefixed className="time">
                     <span title={created_at}>
-                      {formatDistance(new Date(created_at), Date.now(), {
+                      {formatDateDistance(new Date(created_at), Date.now(), {
                         locale: lang,
                       })}
                     </span>
