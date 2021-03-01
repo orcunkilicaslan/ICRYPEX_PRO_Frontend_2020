@@ -1,43 +1,36 @@
-import { useReducer, useEffect } from "react";
 import { Col, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
 import { useTranslation } from "react-i18next";
+import ms from "ms";
 
 import { IconSet } from "../IconSet";
 import { Button } from "../Button";
+import NewsTicker from "../NewsTicker";
 
 const ITEMS = [
-  "Murat Alaçayır: 01 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
-  "Murat Alaçayır: 02 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
-  "Murat Alaçayır: 03 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
-  "Murat Alaçayır: 04 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
-  "Murat Alaçayır: 05 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
+  {
+    href: "#",
+    title: "Murat Alaçayır: 01 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
+  },
+  {
+    href: "#",
+    title: "Murat Alaçayır: 02 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
+  },
+  {
+    href: "#",
+    title: "Murat Alaçayır: 03 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
+  },
+  {
+    href: "#",
+    title: "Murat Alaçayır: 04 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
+  },
+  {
+    href: "#",
+    title: "Murat Alaçayır: 05 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
+  },
 ];
 
 const HeaderCenter = props => {
   const { t } = useTranslation(["app", "common"]);
-
-  const [{ item }, dispatch] = useReducer(
-    (state, action) => {
-      switch (action.type) {
-        case "NEXT":
-          return {
-            item: ITEMS[(state.idx + 1) % ITEMS.length],
-            idx: state.idx + 1,
-          };
-        default:
-          return state;
-      }
-    },
-    { item: ITEMS[0], idx: 0 }
-  );
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      dispatch({ type: "NEXT" });
-    }, 5000);
-
-    return () => clearInterval(intervalId);
-  }, []);
 
   return (
     <Col className="header-center">
@@ -48,11 +41,7 @@ const HeaderCenter = props => {
               {t("newsanalysis")}
             </InputGroupText>
           </InputGroupAddon>
-          <div className="newstickerbars-box form-control">
-            <a className="newstickerbars-item" href="#">
-              {item}
-            </a>
-          </div>
+          <NewsTicker items={ITEMS} interval={ms("7s")} />
           <InputGroupAddon addonType="append">
             <Button className="input-group-text newsallbtn">
               <span>{t("common:all")}</span>
