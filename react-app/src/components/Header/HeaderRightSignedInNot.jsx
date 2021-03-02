@@ -174,11 +174,9 @@ const HeaderRightSignedInNot = props => {
         <ModalHeader toggle={clearOpenModals}>
           {t("signin")}
           {isEnteringCode ? (
-              <Button
-                  className="toback"
-              >
-                <span aria-hidden="true" />
-              </Button>
+            <Button className="toback" onClick={() => setIsEnteringCode(false)}>
+              <span aria-hidden="true" />
+            </Button>
           ) : null}
         </ModalHeader>
         <ModalBody className="modalcomp modalcomp-sign">
@@ -222,24 +220,22 @@ const HeaderRightSignedInNot = props => {
                 >
                   {t("signin")}
                 </Button>
-                <Row form className="mt-2">
+                {/* <Row form className="mt-2">
                   <Col>
                     <Button
-                        variant="secondary"
-                        className="w-100"
+                      variant="secondary"
+                      className="w-100"
+                      onClick={() => setIsEnteringCode(false)}
                     >
-                      {t("toBackSign")}
+                      {t("common:goBack")}
                     </Button>
                   </Col>
                   <Col>
-                    <Button
-                        variant="secondary"
-                        className="w-100"
-                    >
+                    <Button variant="secondary" className="w-100">
                       {t("reSendCode")}
                     </Button>
                   </Col>
-                </Row>
+                </Row> */}
               </Form>
             </div>
           ) : (

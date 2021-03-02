@@ -38,6 +38,7 @@ const init = (initialLang = "en") => {
             time: "Time",
             approximately: "Approximately",
             and: "and",
+            goBack: "Go Back",
           },
           finance: {
             ask: "Ask",
@@ -80,8 +81,7 @@ const init = (initialLang = "en") => {
             verificationCode: "Verification Code",
             forgotPassword: "Forgot my password",
             sendCode: "Send verification code",
-            toBackSign: "Geri Dön",
-            reSendCode: "Kodu Tekrar Gönder",
+            reSendCode: "Resend Code",
             email: "E-Mail",
             password: "Password",
             verifyPassword: "Verify password",
@@ -91,7 +91,7 @@ const init = (initialLang = "en") => {
             oldEnough: "I declare that I am at least 18 years old",
             preliminary: "Preliminary information",
             termsOfService: "Terms of service",
-            readAndAgree: "read and agree"
+            readAndAgree: "read and agree",
           },
         },
         tr: {
@@ -124,6 +124,7 @@ const init = (initialLang = "en") => {
             time: "Zaman",
             approximately: "Yaklaşık",
             and: "ve",
+            goBack: "Geri Git",
           },
           finance: {
             ask: "Alış",
@@ -166,7 +167,6 @@ const init = (initialLang = "en") => {
             verificationCode: "Doğrulama kodu",
             forgotPassword: "Şifremi unuttum",
             sendCode: "Doğrulama kodu gönder",
-            toBackSign: "Geri Dön",
             reSendCode: "Kodu Tekrar Gönder",
             email: "E-Posta",
             password: "Şifre",
@@ -177,7 +177,7 @@ const init = (initialLang = "en") => {
             oldEnough: "En az 18 yaşında olduğumu beyan ederim",
             preliminary: "Ön bilgilendirme metni",
             termsOfService: "Kullanım sözleşmesini",
-            readAndAgree: "okudum ve onaylıyorum"
+            readAndAgree: "okudum ve onaylıyorum",
           },
         },
       },
