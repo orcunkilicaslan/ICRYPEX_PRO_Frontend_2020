@@ -172,13 +172,14 @@ const HeaderRightSignedInNot = props => {
         backdrop="static"
       >
         <ModalHeader toggle={clearOpenModals}>
-          {t("signin").toUpperCase()}
-          <Button
-              className="toback"
-              onClick={setIsEnteringCode(false)}
-          >
-            <span aria-hidden="true" />
-          </Button>
+          {t("signin")}
+          {isEnteringCode ? (
+              <Button
+                  className="toback"
+              >
+                <span aria-hidden="true" />
+              </Button>
+          ) : null}
         </ModalHeader>
         <ModalBody className="modalcomp modalcomp-sign">
           <div className="modalcomp-sign-icon">
@@ -226,9 +227,8 @@ const HeaderRightSignedInNot = props => {
                     <Button
                         variant="secondary"
                         className="w-100"
-                        onClick={setIsEnteringCode(false)}
                     >
-                      {t("toBackSign").toUpperCase()}
+                      {t("toBackSign")}
                     </Button>
                   </Col>
                   <Col>
@@ -236,7 +236,7 @@ const HeaderRightSignedInNot = props => {
                         variant="secondary"
                         className="w-100"
                     >
-                      {t("reSendCode").toUpperCase()}
+                      {t("reSendCode")}
                     </Button>
                   </Col>
                 </Row>
