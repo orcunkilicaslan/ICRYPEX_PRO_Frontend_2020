@@ -7,9 +7,9 @@ import {
   ModalHeader,
 } from "reactstrap";
 import { useState, Fragment } from "react";
-import { inRange } from "lodash";
+import { inRange, random } from "lodash";
 import { produce } from "immer";
-import { random } from "lodash";
+import uuid from "uuid";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
@@ -18,11 +18,12 @@ import { setOpenModal } from "~/state/slices/ui.slice";
 import { formatDate } from "~/util/";
 
 const NOTIFICATIONS = Array.from({ length: 25 }, () => ({
+  id: uuid(),
   title: "Gentle Reminder ：BTC Halving",
-  body:
+  message:
     "3NzYxpmhDGc6dhaXwZB4t2KUhUECy2 no’lu BTC adresine 0.19500000 BTC tutarında onaylanmamış giriş olmuştur.",
-  created_at: Date.now(),
-  isRead: random(1),
+  datetime: Date.now(),
+  isreaded: random(1),
 }));
 
 const HeaderRightIcons = props => {
@@ -33,7 +34,7 @@ const HeaderRightIcons = props => {
   const [openIdx, setOpenIdx] = useState(-1);
   const [{ data: notifs, unread: unreadCount }, setNotifs] = useState({
     data: NOTIFICATIONS,
-    unread: NOTIFICATIONS.filter(({ isRead }) => !isRead).length,
+    unread: NOTIFICATIONS.filter(({ isreaded }) => !isreaded).length,
   });
 
   const openNotificationsModal = () => {
@@ -48,9 +49,9 @@ const HeaderRightIcons = props => {
     if (inRange(idx, 0, notifs.length)) {
       setNotifs(prev => {
         const data = produce(prev.data, draft => {
-          draft[idx].isRead = true;
+          draft[idx].isreaded = true;
         });
-        const unread = data.filter(({ isRead }) => !isRead).length;
+        const unread = data.filter(({ isreaded }) => !isreaded).length;
 
         return { data, unread };
       });
@@ -61,7 +62,7 @@ const HeaderRightIcons = props => {
     setNotifs(prev => {
       const data = produce(prev.data, draft => {
         draft.forEach(item => {
-          item.isRead = true;
+          item.isreaded = true;
         });
       });
 
@@ -131,13 +132,14 @@ const HeaderRightIcons = props => {
           <div className="modalcomp-notif-wrp modalcomp-psright">
             <AccordionCollapse scrollbar className="modalcomp-notif-list">
               {notifs.map((notification, index) => {
-                const { title, body, created_at, isRead } = notification;
+                const { id, title, message, datetime, isreaded } = notification;
                 const isOpen = openIdx === index;
 
                 return (
                   <AccordionCollapse.Item
-                    className={isRead ? "notifread" : "notifnotread"}
+                    className={isreaded ? "notifread" : "notifnotread"}
                     open={index === 1}
+                    key={id}
                   >
                     <AccordionCollapse.Head
                       onClick={() => onClickItem(index)}
@@ -146,14 +148,14 @@ const HeaderRightIcons = props => {
                       {title}
                     </AccordionCollapse.Head>
                     <AccordionCollapse.Body isOpen={isOpen}>
-                      <p>{body}</p>
+                      <p>{message}</p>
                       <div className="collapsefoot">
                         <span className="collapsefoot-date">
-                          {formatDate(created_at, "dd MMM yyyy HH:mm", {
+                          {formatDate(datetime, "dd MMM yyyy HH:mm", {
                             locale,
                           })}
                         </span>
-                        {Boolean(isRead) ? null : (
+                        {Boolean(isreaded) ? null : (
                           <Button
                             className="collapsefoot-btn"
                             size="sm"
