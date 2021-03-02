@@ -1,7 +1,7 @@
 
 /* Dropzone - https://www.npmjs.com/package/dropzone */
 
-import Dropzone from 'dropzone';
+//import Dropzone from 'dropzone';
 
 // Prevent Dropzone from auto discovering this element:
 //Dropzone.options.myAwesomeDropzone = false;
@@ -9,4 +9,4 @@ import Dropzone from 'dropzone';
 // Dropzone programmatically later
 
 // Disable auto discover for all elements:
-Dropzone.autoDiscover = false;
+//Dropzone.autoDiscover = false;

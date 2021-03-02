@@ -1,6 +1,60 @@
 
 .modal{
 
+  .close,
+  .toback{
+    color: $site-clr-white;
+    width: 22px;
+    height: 22px;
+    display: block;
+    font-size: 1.5rem;
+    font-weight: $font-weight-normal;
+    line-height: 1;
+    background-color: $site-clr-darkblue-700;
+    border: 1px solid $site-brdr-dark;
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    text-shadow: none;
+    position: absolute;
+    @include border-radius(50%);
+
+    span{
+      display: block;
+      position: relative;
+      top: -3px;
+    }
+  }
+
+  .toback span{
+    text-indent: -9999px;
+
+    &::before,
+    &::after{
+      content: "";
+      position: absolute;
+    }
+
+    &::before{
+      background-color: $site-clr-white;
+      width: 10px;
+      height: 2px;
+      top: calc(50% + 3px);
+      left: calc(50% + 1px);
+      @include translate(-50%, -50%);
+    }
+
+    &::after{
+      width: 7px;
+      height: 7px;
+      border-bottom: 2px solid $site-clr-white;
+      border-left: 2px solid $site-clr-white;
+      top: calc(50% + 2px);
+      left: calc(50% - 6px);
+      @include transform-multiple(rotate(45deg) translateY(-50%));
+    }
+  }
+
   &-content{}
 
   &-close{
@@ -8,27 +62,13 @@
     position: relative;
 
     > .close{
-      color: $site-clr-white;
       background-color: $site-clr-blue;
-      width: 22px;
-      height: 22px;
-      display: block;
-      font-size: 1.5rem;
-      font-weight: $font-weight-normal;
-      padding: 0;
-      margin: 0;
-      opacity: 1;
-      text-shadow: none;
-      position: absolute;
+      border-color: $site-clr-blue;
       top: -11px;
       left: 50%;
       @include translateX(-50%);
-      @include border-radius(50%);
 
-      span{
-        position: relative;
-        top: -2px;
-      }
+      span{top: -2px;}
     }
   }
 
@@ -37,30 +77,14 @@
     background-color: $site-clr-darkblue-600;
     position: relative;
 
-    > .close{
-      color: $site-clr-white;
-      background-color: $site-clr-darkblue-700;
-      width: 22px;
-      height: 22px;
-      display: block;
-      font-size: 1.5rem;
-      font-weight: $font-weight-normal;
-      border: 1px solid $site-brdr-dark;
-      padding: 0;
-      margin: 0;
-      opacity: 1;
-      text-shadow: none;
-      position: absolute;
-      left: 0.5rem;
+    > .close,
+    > .toback{
       top: 50%;
       @include translateY(-50%);
-      @include border-radius(50%);
-
-      span{
-        position: relative;
-        top: -3px;
-      }
     }
+
+    > .close{left: 0.5rem;}
+    > .toback{right: 0.5rem;}
 
     .modal-title{
       color: $site-clr-white;
