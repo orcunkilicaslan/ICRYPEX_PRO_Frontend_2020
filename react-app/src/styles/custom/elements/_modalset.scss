@@ -91,6 +91,15 @@
       @include responsive-font-size($font-size-base);
       font-weight: $font-weight-bold;
       text-transform: uppercase;
+      width: 100%;
+      text-align: center;
+      position: relative;
+
+      > .toback{
+        position: absolute;
+        right: -$modal-header-padding-y*2.5;
+        top: -3px;
+      }
     }
   }
 
