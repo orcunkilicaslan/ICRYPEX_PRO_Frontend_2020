@@ -12,7 +12,7 @@ import { enUS as en, tr } from "date-fns/locale";
 import { name } from "../../package.json";
 
 const locales = { en, tr };
-export const debug = _debug(name); // isProd ? makeFakeDebug() : _debug("pro");
+export const debug = _debug(name);
 const log = debug.extend("util");
 if (process.env.REACT_APP_DEBUG) _debug.enable(`${name}:*`);
 
