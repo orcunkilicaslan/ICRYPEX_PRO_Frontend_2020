@@ -1,5 +1,7 @@
 import { useState, useRef } from "react";
 import {
+  Row,
+  Col,
   Form,
   FormGroup,
   Label,
@@ -171,6 +173,12 @@ const HeaderRightSignedInNot = props => {
       >
         <ModalHeader toggle={clearOpenModals}>
           {t("signin").toUpperCase()}
+          <Button
+              className="toback"
+              onClick={setIsEnteringCode(false)}
+          >
+            <span aria-hidden="true" />
+          </Button>
         </ModalHeader>
         <ModalBody className="modalcomp modalcomp-sign">
           <div className="modalcomp-sign-icon">
@@ -213,6 +221,25 @@ const HeaderRightSignedInNot = props => {
                 >
                   {t("signin")}
                 </Button>
+                <Row form className="mt-2">
+                  <Col>
+                    <Button
+                        variant="secondary"
+                        className="w-100"
+                        onClick={setIsEnteringCode(false)}
+                    >
+                      {t("toBackSign").toUpperCase()}
+                    </Button>
+                  </Col>
+                  <Col>
+                    <Button
+                        variant="secondary"
+                        className="w-100"
+                    >
+                      {t("reSendCode").toUpperCase()}
+                    </Button>
+                  </Col>
+                </Row>
               </Form>
             </div>
           ) : (
