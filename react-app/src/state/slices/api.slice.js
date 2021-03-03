@@ -157,12 +157,12 @@ const apiSlice = createSlice({
   initialState,
   reducers: {
     setLocalKey: (state, { payload }) => {
-      if (!state.localkey) {
+      if (state.localkey !== payload) {
         state.localkey = payload;
       }
     },
     setDeviceId: (state, { payload }) => {
-      if (!state.deviceuuid) {
+      if (state.deviceuuid !== payload) {
         state.deviceuuid = payload;
       }
     },
