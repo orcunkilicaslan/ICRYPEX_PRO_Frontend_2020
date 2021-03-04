@@ -2,7 +2,6 @@ import { useEffect, useReducer, useCallback } from "react";
 import { useTransition } from "react-spring";
 import ms from "ms";
 
-let intervalId;
 const types = {
   NEXT: 0,
   PREV: 1,
@@ -43,6 +42,8 @@ const useTicker = (props = {}) => {
   }, [dispatch]);
 
   useEffect(() => {
+    let intervalId;
+
     if (init) {
       intervalId = setInterval(() => {
         next();
