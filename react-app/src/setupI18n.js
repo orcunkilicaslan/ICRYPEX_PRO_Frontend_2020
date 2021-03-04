@@ -93,6 +93,11 @@ const init = (initialLang = "en") => {
             termsOfService: "Terms of service",
             readAndAgree: "read and agree",
           },
+          form: {
+            isRequired: "This field is required",
+            shouldBeMin: "Should be at least {{value}}",
+            shouldBeMax: "Should be at most {{value}}",
+          },
         },
         tr: {
           app: {
@@ -178,6 +183,11 @@ const init = (initialLang = "en") => {
             preliminary: "Ön bilgilendirme metni",
             termsOfService: "Kullanım sözleşmesini",
             readAndAgree: "okudum ve onaylıyorum",
+          },
+          form: {
+            isRequired: "Bu alanı doldurmalısınız",
+            shouldBeMin: "En az {{value}} olabilir",
+            shouldBeMax: "En çok {{value}} olabilir",
           },
         },
       },
