@@ -1,23 +1,42 @@
+import { useState } from "react";
 import { Form, Row, Col, InputGroup, InputGroupAddon, Input } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "~/components/Button.jsx";
 import { IconSet } from "~/components/IconSet.jsx";
+import { withdrawBankwire } from "~/state/slices/withdraw.slice";
 
 const banksSelect = ["Hesap Seçiniz", "Akbank", "Garanti", "Finansbank"];
-const TRANSACTION_FEE = 25;
 
 const OpenOrderDepoWithTabWithdrawBank = props => {
+  const dispatch = useDispatch();
   const { t } = useTranslation(["form"]);
-  const { register, handleSubmit, getValues, errors } = useForm({
+  const { isWithdrawingBank } = useSelector(state => state.withdraw);
+  const [apiError, setApiError] = useState("");
+  const { register, handleSubmit, errors, watch, clearErrors } = useForm({
     mode: "onChange",
     defaultValues: {
       // account: "Hesap seçiniz",
       amount: "",
     },
   });
-  const onSubmit = data => console.log({ data });
+
+  const onSubmit = async data => {
+    if (data?.amount > 0) {
+      setApiError("");
+      const { payload } = await dispatch(withdrawBankwire(data));
+      console.log({ payload, data });
+
+      if (!payload?.status) {
+        setApiError(payload?.errormessage);
+      } else {
+        clearErrors();
+        setApiError("");
+      }
+    }
+  };
 
   return (
     <div className="dandwtab-bank">
@@ -90,21 +109,22 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
               )}
             </div>
             <Row form className="form-group">
-              <Col>İşlem Ücreti</Col>
-              <Col xs="auto">{TRANSACTION_FEE?.toFixed(2)} TRY</Col>
-            </Row>
-            <Row form className="form-group">
               <Col>Hesaba Geçecek Miktar</Col>
               <Col xs="auto">
-                {Number.isNaN(getValues("amount"))
-                  ? null
-                  : getValues("amount") + TRANSACTION_FEE}{" "}
-                TRY
+                {Number.isNaN(watch("amount")) ? null : watch("amount")} TRY
               </Col>
             </Row>
           </div>
           <div className="formbttm">
-            <Button type="submit" variant="secondary" className="active">
+            {apiError && (
+              <span style={{ color: "red", fontSize: "1rem" }}>{apiError}</span>
+            )}
+            <Button
+              type="submit"
+              variant="secondary"
+              className="active"
+              disabled={isWithdrawingBank}
+            >
               ÇEKME İSTEĞİ GÖNDER
             </Button>
           </div>
