@@ -75,11 +75,11 @@ const OpenOrderAssetsChartList = props => {
       <Dropdown
         isOpen={isDropdownOpen}
         toggle={toggle}
-        direction="up"
-        style={{ position: "absolute", left: ".6rem" }}
+        direction="down"
+        style={{ position: "absolute", right: "10px" }}
       >
         <DropdownToggle caret>{selectedCurrency?.symbol}</DropdownToggle>
-        <DropdownMenu>
+        <DropdownMenu right>
           {/* <DropdownItem header>Header</DropdownItem> */}
           {currencies.map(currency => {
             const { symbol } = currency;
