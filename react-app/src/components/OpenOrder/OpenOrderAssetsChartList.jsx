@@ -13,6 +13,7 @@ import { fetchAssets } from "~/state/slices/assets.slice";
 import { IconSet } from "~/components/IconSet";
 import { Button } from "~/components/Button";
 import { openOrderContext } from "./OpenOrder";
+import { useCurrencies } from "~/state/hooks/";
 
 const assetchartlisttype = "Pie";
 const assetchartlistoptions = {
@@ -28,25 +29,11 @@ const OpenOrderAssetsChartList = props => {
   const dispatch = useDispatch();
   const { dispatch: _dispatch } = useContext(openOrderContext);
   const { t } = useTranslation("common");
-  const { settings } = useSelector(state => state.api);
   const { allAssets } = useSelector(state => state.assets);
-
-  const currencies = useMemo(() => {
-    const all = settings?.currencies;
-    const fiatCurrency = settings?.currencyTypes?.find(
-      ({ name }) => name === "Fiat"
-    );
-
-    return all.filter(currency => {
-      const { type } = currency;
-
-      return Number(type) === fiatCurrency.id;
-    });
-  }, [settings]);
+  const { fiatCurrencies: currencies } = useCurrencies();
 
   const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-
   const chartData = useMemo(() => {
     const labels = allAssets?.balances?.map?.(({ symbol }) => symbol);
     const series = allAssets?.balances?.map?.(
@@ -80,7 +67,6 @@ const OpenOrderAssetsChartList = props => {
       >
         <DropdownToggle caret>{selectedCurrency?.symbol}</DropdownToggle>
         <DropdownMenu right>
-          {/* <DropdownItem header>Header</DropdownItem> */}
           {currencies.map(currency => {
             const { symbol } = currency;
 
