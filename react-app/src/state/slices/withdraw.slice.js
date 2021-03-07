@@ -50,9 +50,37 @@ export const withdrawPapara = createAsyncThunk(
   }
 );
 
+export const withDrawCrypto = createAsyncThunk(
+  "withdraw/crypto",
+  async (
+    { currencyid, address, destinationtag, amount, read },
+    { getState, rejectWithValue }
+  ) => {
+    const {
+      api: { accesstoken },
+    } = getState();
+
+    try {
+      const response = await api.withdrawCrypto(
+        { currencyid, address, destinationtag, amount, read },
+        {
+          headers: {
+            "x-access-token": accesstoken,
+          },
+        }
+      );
+
+      return response.data;
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
+  }
+);
+
 const initialState = {
   isWithdrawingBank: false,
   isWithdrawingPapara: false,
+  isWithdrawingCrypto: false,
 };
 
 const withdrawSlice = createSlice({
@@ -83,6 +111,15 @@ const withdrawSlice = createSlice({
     },
     [withdrawPapara.rejected]: state => {
       state.isWithdrawingPapara = false;
+    },
+    [withDrawCrypto.pending]: state => {
+      state.isWithdrawingCrypto = true;
+    },
+    [withDrawCrypto.fulfilled]: (state, action) => {
+      state.isWithdrawingCrypto = false;
+    },
+    [withDrawCrypto.rejected]: state => {
+      state.isWithdrawingCrypto = false;
     },
   },
 });

@@ -98,6 +98,8 @@ const init = (initialLang = "en") => {
             shouldBeMin: "Should be at least {{value}}",
             shouldBeMax: "Should be at most {{value}}",
             withdrawAmount: "Withdraw Amount",
+            shouldBeMinLength: "Should be at least {{value}} characters",
+            shouldBeMaxLength: "Should be at most {{value}} characters",
           },
         },
         tr: {
@@ -190,6 +192,8 @@ const init = (initialLang = "en") => {
             shouldBeMin: "En az {{value}} olabilir",
             shouldBeMax: "En çok {{value}} olabilir",
             withdrawAmount: "Çekmek İstenilen Miktar",
+            shouldBeMinLength: "En az {{value}} hane olmalı",
+            shouldBeMaxLength: "En fazla {{value}} hane olmalı",
           },
         },
       },

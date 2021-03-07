@@ -28,6 +28,7 @@ export const fetchCryptoAddresses = buildRequest("/cryptoaddresses");
 export const forgotPassword = buildRequest("/forgotpassword");
 export const withdrawBankwire = buildRequest("/withdraw/bankwire");
 export const withdrawPapara = buildRequest("/withdraw/papara");
+export const withdrawCrypto = buildRequest("/withdraw/crypto");
 
 function buildRequest(uri) {
   return (args = {}, opts = {}) => {
