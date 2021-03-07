@@ -70,14 +70,11 @@ const OpenOrderAssetsChartList = props => {
           {currencies.map(currency => {
             const { symbol } = currency;
 
-            const onClick = item => {
-              if (["TRY", "USD", "EUR"].includes(item)) {
-                setSelectedCurrency(currency);
-              }
-            };
-
             return (
-              <DropdownItem key={symbol} onClick={() => onClick(symbol)}>
+              <DropdownItem
+                key={symbol}
+                onClick={() => setSelectedCurrency(currency)}
+              >
                 {symbol}
               </DropdownItem>
             );
