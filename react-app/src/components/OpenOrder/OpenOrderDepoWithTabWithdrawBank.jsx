@@ -8,7 +8,7 @@ import { Button } from "~/components/Button.jsx";
 import { IconSet } from "~/components/IconSet.jsx";
 import { withdrawBankwire } from "~/state/slices/withdraw.slice";
 
-const banksSelect = ["Hesap Seçiniz", "Akbank", "Garanti", "Finansbank"];
+const banksSelect = ["Akbank", "Garanti", "Finansbank"];
 
 const OpenOrderDepoWithTabWithdrawBank = props => {
   const dispatch = useDispatch();
@@ -18,16 +18,23 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
   const { register, handleSubmit, errors, watch, clearErrors } = useForm({
     mode: "onChange",
     defaultValues: {
-      // account: "Hesap seçiniz",
+      account: "",
       amount: "",
     },
   });
+
+  const getTotal = value => {
+    const amount = parseFloat(value);
+
+    if (Number.isNaN(amount) || amount <= 0) return null;
+
+    return amount?.toFixed(2);
+  };
 
   const onSubmit = async data => {
     if (data?.amount > 0) {
       setApiError("");
       const { payload } = await dispatch(withdrawBankwire(data));
-      console.log({ payload, data });
 
       if (!payload?.status) {
         setApiError(payload?.errormessage);
@@ -56,11 +63,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
                 innerRef={register({ required: t("isRequired") })}
               >
                 {banksSelect.map((el, idx) => {
-                  return (
-                    <option disabled={idx === 0} key={`${el}_${idx}`}>
-                      {el}
-                    </option>
-                  );
+                  return <option key={`${el}_${idx}`}>{el}</option>;
                 })}
               </Input>
               <InputGroupAddon addonType="append">
@@ -80,7 +83,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
               <Input
                 type="number"
                 name="amount"
-                placeholder="Çekmek İstenilen Miktar"
+                placeholder={t("withdrawAmount")}
                 innerRef={register({
                   valueAsNumber: true,
                   required: t("isRequired"),
@@ -110,9 +113,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
             </div>
             <Row form className="form-group">
               <Col>Hesaba Geçecek Miktar</Col>
-              <Col xs="auto">
-                {Number.isNaN(watch("amount")) ? null : watch("amount")} TRY
-              </Col>
+              <Col xs="auto">{getTotal(watch("amount"))} TRY</Col>
             </Row>
           </div>
           <div className="formbttm">

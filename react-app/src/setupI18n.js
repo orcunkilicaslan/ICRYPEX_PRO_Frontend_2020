@@ -97,6 +97,7 @@ const init = (initialLang = "en") => {
             isRequired: "This field is required",
             shouldBeMin: "Should be at least {{value}}",
             shouldBeMax: "Should be at most {{value}}",
+            withdrawAmount: "Withdraw Amount",
           },
         },
         tr: {
@@ -188,6 +189,7 @@ const init = (initialLang = "en") => {
             isRequired: "Bu alanı doldurmalısınız",
             shouldBeMin: "En az {{value}} olabilir",
             shouldBeMax: "En çok {{value}} olabilir",
+            withdrawAmount: "Çekmek İstenilen Miktar",
           },
         },
       },
