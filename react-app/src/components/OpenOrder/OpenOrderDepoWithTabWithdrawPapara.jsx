@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Form,
   Row,
@@ -21,33 +22,46 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["form"]);
   const { isWithdrawingPapara } = useSelector(state => state.withdraw);
-  const { register, handleSubmit, errors, watch } = useForm({
+  const [apiError, setApiError] = useState("");
+  const { register, handleSubmit, errors, watch, clearErrors } = useForm({
     mode: "onChange",
     defaultValues: {
-      // account: "Hesap seçiniz",
       amount: "",
     },
   });
 
   const getFee = amount => {
+    if (Number.isNaN(amount) || amount <= 0) return 0;
+
     const fee = (PAPARA_FEE_RATE / 100) * amount;
 
     return Math.min(PAPARA_FEE_LIMIT, fee);
   };
 
-  const onSubmit = async data => {
-    if (data?.amount > 0) {
-      const result = await dispatch(withdrawPapara(data));
-      console.log({ result, data });
-    }
-  };
-
   const getTotal = value => {
     const float = parseFloat(value);
+    const fee = getFee(value);
 
     if (Number.isNaN(float) || float <= 0) return null;
 
-    return float?.toFixed(2);
+    return (float - fee)?.toFixed(2);
+  };
+
+  const onSubmit = async data => {
+    const { paparaid, amount } = data;
+    const total = getTotal(amount);
+
+    if (total > 0) {
+      setApiError("");
+      const { payload } = await dispatch(withdrawPapara({ paparaid, amount }));
+
+      if (!payload?.status) {
+        setApiError(payload?.errormessage);
+      } else {
+        clearErrors();
+        setApiError("");
+      }
+    }
   };
 
   return (
@@ -81,13 +95,10 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
               )}
             </div>
             <InputGroup className="form-group">
-              {/* <InputGroupAddon addonType="prepend">
-                <InputGroupText>Çekmek İstediğiniz Miktar</InputGroupText>
-              </InputGroupAddon> */}
               <Input
                 type="number"
                 name="amount"
-                placeholder="Çekmek İstenilen Miktar"
+                placeholder={t("withdrawAmount")}
                 innerRef={register({
                   valueAsNumber: true,
                   required: t("isRequired"),
@@ -102,9 +113,19 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
                 <InputGroupText>TRY</InputGroupText>
               </InputGroupAddon>
             </InputGroup>
+            <div>
+              {errors.amount && (
+                <span style={{ color: "red", fontSize: "1rem" }}>
+                  {errors.amount?.message}
+                </span>
+              )}
+            </div>
             <Row form className="form-group">
-              <Col>Papara komisyonu ({`${PAPARA_FEE_RATE}%`} + KDV)</Col>
-              <Col xs="auto">{getFee(watch("amount"))}</Col>
+              <Col>
+                Papara komisyonu ({`${PAPARA_FEE_RATE}%`} [En fazla 250.00 TRY]
+                + KDV)
+              </Col>
+              <Col xs="auto">{getFee(watch("amount"))} TRY</Col>
             </Row>
             <Row form className="form-group">
               <Col>Hesaba Geçecek Miktar</Col>
@@ -112,6 +133,9 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
             </Row>
           </div>
           <div className="formbttm">
+            {apiError && (
+              <span style={{ color: "red", fontSize: "1rem" }}>{apiError}</span>
+            )}
             <Button
               type="submit"
               variant="secondary"
