@@ -33,6 +33,7 @@ const HeaderRightSignedInNot = props => {
     onSignin,
     onSigninSMS,
     onForgotPassword,
+    onSignin2FA,
   } = props;
   const { openModal, isSigningin, isSigningup, isVerifying } = useSelector(
     state => state.ui
@@ -111,8 +112,15 @@ const HeaderRightSignedInNot = props => {
     event.preventDefault();
     event.stopPropagation();
     setErrorMessage(null);
+    let result;
 
-    const { status, errormessage } = await onSigninSMS(verifyCode);
+    if (user?.logintype === 2) {
+      result = await onSignin2FA(verifyCode);
+    } else {
+      result = await onSigninSMS(verifyCode);
+    }
+
+    const { status, errormessage } = result;
 
     if (!status) {
       setErrorMessage(errormessage);

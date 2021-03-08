@@ -144,6 +144,7 @@ const initialState = {
   address: null,
   registrationdate: null,
   customerid: null,
+  logintype: null,
 };
 
 const userSlice = createSlice({
@@ -162,6 +163,7 @@ const userSlice = createSlice({
     },
     [signinUser.fulfilled]: (state, action) => {
       state.customerid = action?.payload?.description?.customerid;
+      state.logintype = action?.payload?.description?.logintype;
     },
     [signoutUser.fulfilled]: state => {
       state.customerid = null;

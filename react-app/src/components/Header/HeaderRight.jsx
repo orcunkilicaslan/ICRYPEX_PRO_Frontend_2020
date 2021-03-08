@@ -14,7 +14,7 @@ import {
   fetchUserInfo,
   forgotPassword,
 } from "~/state/slices/user.slice";
-import { signinWithSms } from "~/state/slices/api.slice";
+import { signinWithSms, signinWith2FA } from "~/state/slices/api.slice";
 
 const HeaderRight = props => {
   const { setLanguage } = props;
@@ -65,6 +65,15 @@ const HeaderRight = props => {
     [dispatch]
   );
 
+  const onSignin2FA = useCallback(
+    async code => {
+      const { payload } = await dispatch(signinWith2FA(code));
+
+      return payload;
+    },
+    [dispatch]
+  );
+
   const onSignout = useCallback(async () => {
     const { payload } = await dispatch(signoutUser());
 
@@ -84,6 +93,7 @@ const HeaderRight = props => {
           onSignup={onSignup}
           onSignin={onSignin}
           onSigninSMS={onSigninSMS}
+          onSignin2FA={onSignin2FA}
           onForgotPassword={onForgotPassword}
         />
       )}

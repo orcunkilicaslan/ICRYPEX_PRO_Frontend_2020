@@ -10,6 +10,7 @@ export const fetchServerDeviceKey = buildRequest("/getserverdevicekey");
 export const fetchPreloginToken = buildRequest("/getprelogintoken");
 export const fetchSettings = buildCachedRequest("/settings");
 export const signinWithSms = buildRequest("/signinwithsms");
+export const signinWith2FA = buildRequest("/signinwith2fa");
 export const signupUser = buildRequest("/signup");
 export const signinUser = buildRequest("/signin");
 export const signoutUser = buildRequest("/signout");
