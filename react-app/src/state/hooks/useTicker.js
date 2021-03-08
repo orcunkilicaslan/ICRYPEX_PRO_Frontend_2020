@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useCallback } from "react";
+import { useReducer, useCallback } from "react";
 import { useTransition } from "react-spring";
 import ms from "ms";
 
@@ -8,7 +8,7 @@ const types = {
 };
 
 const useTicker = (props = {}) => {
-  const { data = [], dt = ms("3s"), transition = {}, init = true } = props;
+  const { data = [], transition = {} } = props;
   const [state, dispatch] = useReducer(
     (state, action) => {
       switch (action.type) {
@@ -40,18 +40,6 @@ const useTicker = (props = {}) => {
   const previous = useCallback(() => {
     return dispatch({ type: types.PREV });
   }, [dispatch]);
-
-  useEffect(() => {
-    let intervalId;
-
-    if (init) {
-      intervalId = setInterval(() => {
-        next();
-      }, dt);
-
-      return () => clearInterval(intervalId);
-    }
-  }, [dt, init, next]);
 
   return { ...state, dispatch, transitions, next, previous };
 };
