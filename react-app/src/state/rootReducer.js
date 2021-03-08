@@ -42,12 +42,18 @@ const withdrawPersistConfig = {
   whitelist: [],
 };
 
+const pairPersistConfig = {
+  key: "pair",
+  storage,
+  blacklist: ["initialOrderBooks", "initialOrderHistories"],
+};
+
 const rootReducer = combineReducers({
   ui: persistReducer(UIPersistConfig, uiReducer),
   api: persistReducer(apiPersistConfig, apiReducer),
   user: userReducer,
   alarm: persistReducer(alarmPersistConfig, alarmReducer),
-  pair: pairReducer,
+  pair: persistReducer(pairPersistConfig, pairReducer),
   socket: persistReducer(socketPersistConfig, socketReducer),
   assets: assetsReducer,
   order: orderReducer,

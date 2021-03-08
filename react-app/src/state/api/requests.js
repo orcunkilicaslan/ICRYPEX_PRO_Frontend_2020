@@ -1,10 +1,11 @@
 import createCache from "keshi";
 import { stringify } from "querystring";
+import ms from "ms";
 
 import api from ".";
 
 const cache = createCache();
-const TTL = "30 mins";
+const TTL = ms("30m");
 
 export const fetchServerDeviceKey = buildRequest("/getserverdevicekey");
 export const fetchPreloginToken = buildRequest("/getprelogintoken");
@@ -30,6 +31,14 @@ export const forgotPassword = buildRequest("/forgotpassword");
 export const withdrawBankwire = buildRequest("/withdraw/bankwire");
 export const withdrawPapara = buildRequest("/withdraw/papara");
 export const withdrawCrypto = buildRequest("/withdraw/crypto");
+export const fetchInitialOrderBook = buildCachedRequest(
+  "/initialpairorderbook",
+  ms("5h")
+);
+export const fetchInitialOrderHistory = buildCachedRequest(
+  "/initialpairorderhistory",
+  ms("5h")
+);
 
 function buildRequest(uri) {
   return (args = {}, opts = {}) => {
@@ -39,8 +48,8 @@ function buildRequest(uri) {
   };
 }
 
-function buildCachedRequest(uri) {
-  return (args = {}, opts = {}, ttl = TTL) => {
+function buildCachedRequest(uri, ttl = TTL) {
+  return (args = {}, opts = {}) => {
     const body = stringify(args);
     const key = `${uri}?${body}`;
     const fn = () => api.post(uri, body, opts);

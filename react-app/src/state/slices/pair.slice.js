@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as api from "../api";
 import { fetchSettings } from "./api.slice";
-import { setPrices } from "./socket.slice";
+import { setPrices, setOrderBook, setOrderHistory } from "./socket.slice";
 import { getPairTuple } from "~/util/";
 
 export const fetchFavoritePairs = createAsyncThunk(
@@ -81,6 +81,70 @@ export const removeFavoritePair = createAsyncThunk(
   }
 );
 
+export const fetchInitialOrderBook = createAsyncThunk(
+  "pair/initialpairorderbook",
+  async (pairname, { getState, rejectWithValue, dispatch }) => {
+    const {
+      api: { accesstoken },
+    } = getState();
+
+    try {
+      const response = await api.fetchInitialOrderBook(
+        { pairname },
+        {
+          headers: {
+            "x-access-token": accesstoken,
+          },
+        }
+      );
+
+      const data = response?.data?.description;
+      const keyPrefix = getPairTuple(pairname).join("").toLowerCase(); // BTC / USD -> btcusd
+      const key = `${keyPrefix}orderbook`;
+
+      if (response?.status) {
+        dispatch(setOrderBook(key, data));
+      }
+
+      return { [keyPrefix]: data };
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
+  }
+);
+
+export const fetchInitialOrderHistory = createAsyncThunk(
+  "pair/initialpairorderhistory",
+  async (pairname, { getState, rejectWithValue, dispatch }) => {
+    const {
+      api: { accesstoken },
+    } = getState();
+
+    try {
+      const response = await api.fetchInitialOrderHistory(
+        { pairname },
+        {
+          headers: {
+            "x-access-token": accesstoken,
+          },
+        }
+      );
+
+      const data = response?.data?.description;
+      const keyPrefix = getPairTuple(pairname).join("").toLowerCase(); // BTC / USD -> btcusd
+      const key = `${keyPrefix}orderhistory`;
+
+      if (response?.status) {
+        dispatch(setOrderHistory(key, data));
+      }
+
+      return { [keyPrefix]: data };
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
+  }
+);
+
 const pairFilters = ["all", "starred", "TRY", "USD", "USDT"];
 const initialState = {
   selected: null,
@@ -91,6 +155,11 @@ const initialState = {
   pairFilter: pairFilters[0],
   cryptoCurrency: "",
   fiatCurrency: "",
+  // if pairkey exists, initial data was fetched
+  // i.e. if ["btctry"] no more requests for "btctry" data will be made
+  // and instead listen for socket emitted data
+  initialOrderBooks: [],
+  initialOrderHistories: [],
 };
 
 const pairSlice = createSlice({
@@ -159,6 +228,22 @@ const pairSlice = createSlice({
         state.visiblePairIDs = state.visiblePairIDs.filter(id =>
           favorites.includes(id)
         );
+      }
+    },
+    [fetchInitialOrderHistory.fulfilled]: (state, action) => {
+      const object = action?.payload;
+      const [key] = Object.keys(object);
+
+      if (!state.initialOrderHistories.includes(key)) {
+        state.initialOrderHistories.push(key);
+      }
+    },
+    [fetchInitialOrderBook.fulfilled]: (state, action) => {
+      const object = action?.payload;
+      const [key] = Object.keys(object);
+
+      if (!state.initialOrderBooks.includes(key)) {
+        state.initialOrderBooks.push(key);
       }
     },
     [setPrices]: state => {
