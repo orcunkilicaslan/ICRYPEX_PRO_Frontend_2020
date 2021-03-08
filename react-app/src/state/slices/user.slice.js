@@ -52,17 +52,14 @@ export const signupUser = createAsyncThunk(
 
 export const signinUser = createAsyncThunk(
   "user/signin",
-  async ({ email, password }, { getState, rejectWithValue }) => {
+  async ({ emailornationalid, password }, { getState, rejectWithValue }) => {
     const {
-      user,
       api: { prelogintoken },
     } = getState();
 
-    if (!email) email = user.email;
-
     try {
       const response = await api.signinUser(
-        { email, password },
+        { emailornationalid, password },
         {
           headers: {
             "x-access-token": prelogintoken,
