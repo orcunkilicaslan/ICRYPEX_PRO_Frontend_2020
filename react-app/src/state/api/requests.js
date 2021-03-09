@@ -39,6 +39,9 @@ export const fetchInitialOrderHistory = buildCachedRequest(
   "/initialpairorderhistory",
   ms("5h")
 );
+export const depositBankwire = buildRequest("/deposit/bankwire");
+export const depositPapara = buildRequest("/deposit/papara");
+export const depositCrypto = buildRequest("/deposit/crypto");
 
 function buildRequest(uri) {
   return (args = {}, opts = {}) => {
