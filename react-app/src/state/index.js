@@ -25,6 +25,7 @@ const persistConfig = {
 const socketIoOptions = {
   url: REACT_APP_SOCKET_BASE,
   reconnectionAttempts: isProd ? Infinity : 3,
+  transports: ["websocket"]
 };
 
 export let store;
