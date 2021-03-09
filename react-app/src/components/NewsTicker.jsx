@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { animated } from "react-spring";
 import ms from "ms";
 
@@ -5,9 +6,8 @@ import { useTicker } from "~/state/hooks/";
 
 const Ticker = props => {
   const { items, interval = ms("5s"), ...rest } = props;
-  const { item, transitions } = useTicker({
+  const { item, transitions, next } = useTicker({
     data: items,
-    dt: interval,
     transition: {
       // from: { position: "absolute", opacity: 0 },
       // enter: { opacity: 1 },
@@ -22,6 +22,14 @@ const Ticker = props => {
       // reverse: true,
     },
   });
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      next();
+    }, interval);
+
+    return () => clearInterval(intervalId);
+  }, [interval, next]);
 
   return (
     <div className="newstickerbars-box form-control" {...rest}>

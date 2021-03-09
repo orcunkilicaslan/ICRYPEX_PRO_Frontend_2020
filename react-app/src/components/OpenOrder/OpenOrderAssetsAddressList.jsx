@@ -2,7 +2,6 @@ import { useState, useEffect, useMemo } from "react";
 import { ButtonGroup } from "reactstrap";
 import classnames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
-import { groupBy } from "lodash";
 
 import { Button } from "../Button.jsx";
 import OpenOrderAssetsAddressListTable from "./OpenOrderAssetsAddressListTable.jsx";
@@ -10,13 +9,10 @@ import { fetchCryptoAddresses } from "~/state/slices/assets.slice";
 
 const OpenOrderAssetsAddressList = props => {
   const dispatch = useDispatch();
-  const { allCryptoAddresses } = useSelector(state => state.assets);
-  const { grouped: groupedAddresses, keys } = useMemo(() => {
-    const grouped = groupBy(allCryptoAddresses, ({ symbol }) => symbol);
-    const keys = Object.keys(grouped);
-
-    return { grouped, keys };
-  }, [allCryptoAddresses]);
+  const { groupedCryptoAddresses: groupedAddresses = {} } = useSelector(
+    state => state.assets
+  );
+  const keys = Object.keys(groupedAddresses);
   const [activeTab, setActiveTab] = useState(keys[0]);
 
   useEffect(() => {

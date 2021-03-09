@@ -10,6 +10,7 @@ import pairReducer from "./slices/pair.slice";
 import socketReducer from "./slices/socket.slice";
 import assetsReducer from "./slices/assets.slice";
 import orderReducer from "./slices/order.slice";
+import withdrawReducer from "./slices/withdraw.slice";
 
 const apiPersistConfig = {
   key: "api",
@@ -35,15 +36,28 @@ const alarmPersistConfig = {
   blacklist: ["isCreating", "isDeleting"],
 };
 
+const withdrawPersistConfig = {
+  key: "withdraw",
+  storage,
+  whitelist: [],
+};
+
+const pairPersistConfig = {
+  key: "pair",
+  storage,
+  blacklist: ["initialOrderBooks", "initialOrderHistories"],
+};
+
 const rootReducer = combineReducers({
   ui: persistReducer(UIPersistConfig, uiReducer),
   api: persistReducer(apiPersistConfig, apiReducer),
   user: userReducer,
   alarm: persistReducer(alarmPersistConfig, alarmReducer),
-  pair: pairReducer,
+  pair: persistReducer(pairPersistConfig, pairReducer),
   socket: persistReducer(socketPersistConfig, socketReducer),
   assets: assetsReducer,
   order: orderReducer,
+  withdraw: persistReducer(withdrawPersistConfig, withdrawReducer),
 });
 
 export default rootReducer;

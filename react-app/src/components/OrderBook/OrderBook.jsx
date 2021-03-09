@@ -1,10 +1,11 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import ChartistGraph from "react-chartist";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { merge } from "lodash";
 
 import Table from "../Table.jsx";
+import { fetchInitialOrderBook } from "~/state/slices/pair.slice";
 
 const orderbookcharttype = "Bar";
 const chartOptions = {
@@ -29,10 +30,15 @@ const chartOptions = {
 };
 
 const OrderBook = props => {
+  const dispatch = useDispatch();
   const { t } = useTranslation(["finance", "orderbook", "common"]);
-  const { selected, fiatCurrency, cryptoCurrency } = useSelector(
-    state => state.pair
-  );
+  const {
+    selected,
+    fiatCurrency,
+    cryptoCurrency,
+    initialOrderBooks,
+  } = useSelector(state => state.pair);
+  const { accesstoken } = useSelector(state => state.api);
   const symbol = selected?.symbol?.toLowerCase?.();
   const eventKey = `${symbol}orderbook`;
   const { [eventKey]: bookData = {} } = useSelector(
@@ -91,6 +97,16 @@ const OrderBook = props => {
 
     return { data: { series: [series] }, options };
   }, [sellorders]);
+
+  useEffect(() => {
+    const { name, symbol } = selected;
+
+    if (accesstoken) {
+      if (!initialOrderBooks.includes(symbol?.toLowerCase())) {
+        dispatch(fetchInitialOrderBook(name));
+      }
+    }
+  }, [accesstoken, selected, initialOrderBooks, dispatch]);
 
   return (
     <div className="mainbox mainbox-orderbook">

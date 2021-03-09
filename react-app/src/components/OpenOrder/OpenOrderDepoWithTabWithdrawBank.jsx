@@ -1,23 +1,49 @@
+import { useState } from "react";
 import { Form, Row, Col, InputGroup, InputGroupAddon, Input } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "~/components/Button.jsx";
 import { IconSet } from "~/components/IconSet.jsx";
+import { withdrawBankwire } from "~/state/slices/withdraw.slice";
 
-const banksSelect = ["Hesap Seçiniz", "Akbank", "Garanti", "Finansbank"];
-const TRANSACTION_FEE = 25;
+const banksSelect = ["Akbank", "Garanti", "Finansbank"];
 
 const OpenOrderDepoWithTabWithdrawBank = props => {
+  const dispatch = useDispatch();
   const { t } = useTranslation(["form"]);
-  const { register, handleSubmit, getValues, errors } = useForm({
+  const { isWithdrawingBank } = useSelector(state => state.withdraw);
+  const [apiError, setApiError] = useState("");
+  const { register, handleSubmit, errors, watch, clearErrors } = useForm({
     mode: "onChange",
     defaultValues: {
-      // account: "Hesap seçiniz",
+      account: "",
       amount: "",
     },
   });
-  const onSubmit = data => console.log({ data });
+
+  const getTotal = value => {
+    const amount = parseFloat(value);
+
+    if (Number.isNaN(amount) || amount <= 0) return null;
+
+    return amount?.toFixed(2);
+  };
+
+  const onSubmit = async data => {
+    if (data?.amount > 0) {
+      setApiError("");
+      const { payload } = await dispatch(withdrawBankwire(data));
+
+      if (!payload?.status) {
+        setApiError(payload?.errormessage);
+      } else {
+        clearErrors();
+        setApiError("");
+      }
+    }
+  };
 
   return (
     <div className="dandwtab-bank">
@@ -37,11 +63,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
                 innerRef={register({ required: t("isRequired") })}
               >
                 {banksSelect.map((el, idx) => {
-                  return (
-                    <option disabled={idx === 0} key={`${el}_${idx}`}>
-                      {el}
-                    </option>
-                  );
+                  return <option key={`${el}_${idx}`}>{el}</option>;
                 })}
               </Input>
               <InputGroupAddon addonType="append">
@@ -61,7 +83,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
               <Input
                 type="number"
                 name="amount"
-                placeholder="Çekmek İstenilen Miktar"
+                placeholder={t("withdrawAmount")}
                 innerRef={register({
                   valueAsNumber: true,
                   required: t("isRequired"),
@@ -90,21 +112,20 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
               )}
             </div>
             <Row form className="form-group">
-              <Col>İşlem Ücreti</Col>
-              <Col xs="auto">{TRANSACTION_FEE?.toFixed(2)} TRY</Col>
-            </Row>
-            <Row form className="form-group">
               <Col>Hesaba Geçecek Miktar</Col>
-              <Col xs="auto">
-                {Number.isNaN(getValues("amount"))
-                  ? null
-                  : getValues("amount") + TRANSACTION_FEE}{" "}
-                TRY
-              </Col>
+              <Col xs="auto">{getTotal(watch("amount"))} TRY</Col>
             </Row>
           </div>
           <div className="formbttm">
-            <Button type="submit" variant="secondary" className="active">
+            {apiError && (
+              <span style={{ color: "red", fontSize: "1rem" }}>{apiError}</span>
+            )}
+            <Button
+              type="submit"
+              variant="secondary"
+              className="active"
+              disabled={isWithdrawingBank}
+            >
               ÇEKME İSTEĞİ GÖNDER
             </Button>
           </div>

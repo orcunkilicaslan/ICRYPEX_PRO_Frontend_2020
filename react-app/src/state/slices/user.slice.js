@@ -52,17 +52,14 @@ export const signupUser = createAsyncThunk(
 
 export const signinUser = createAsyncThunk(
   "user/signin",
-  async ({ email, password }, { getState, rejectWithValue }) => {
+  async ({ emailornationalid, password }, { getState, rejectWithValue }) => {
     const {
-      user,
       api: { prelogintoken },
     } = getState();
 
-    if (!email) email = user.email;
-
     try {
       const response = await api.signinUser(
-        { email, password },
+        { emailornationalid, password },
         {
           headers: {
             "x-access-token": prelogintoken,
@@ -147,6 +144,7 @@ const initialState = {
   address: null,
   registrationdate: null,
   customerid: null,
+  logintype: null,
 };
 
 const userSlice = createSlice({
@@ -165,6 +163,7 @@ const userSlice = createSlice({
     },
     [signinUser.fulfilled]: (state, action) => {
       state.customerid = action?.payload?.description?.customerid;
+      state.logintype = action?.payload?.description?.logintype;
     },
     [signoutUser.fulfilled]: state => {
       state.customerid = null;

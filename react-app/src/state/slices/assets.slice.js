@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { groupBy } from "lodash";
 
 import * as api from "../api";
 
@@ -53,6 +54,7 @@ export const fetchCryptoAddresses = createAsyncThunk(
 const initialState = {
   allAssets: [],
   allCryptoAddresses: [],
+  groupedCryptoAddresses: {},
 };
 
 const assetsSlice = createSlice({
@@ -70,7 +72,10 @@ const assetsSlice = createSlice({
       state.allAssets = action?.payload?.description;
     },
     [fetchCryptoAddresses.fulfilled]: (state, action) => {
-      state.allCryptoAddresses = action?.payload?.description;
+      const all = action?.payload?.description;
+
+      state.allCryptoAddresses = all;
+      state.groupedCryptoAddresses = groupBy(all, ({ symbol }) => symbol);
     },
   },
 });
