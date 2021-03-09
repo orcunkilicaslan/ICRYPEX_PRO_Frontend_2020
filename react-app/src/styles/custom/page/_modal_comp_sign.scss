@@ -15,11 +15,18 @@
     }
 
     &-form{
+
       .recaptcha{
         @include flexbox-display-flex();
         @include flexbox-align-items(center);
         @include flexbox-justify-content(space-between);
         margin: $form-group-margin-bottom*2 0;
+
+        .btn-link{
+          color: $input-color;
+          padding: 0;
+          margin: 0;
+        }
       }
 
       .checkboxarea{

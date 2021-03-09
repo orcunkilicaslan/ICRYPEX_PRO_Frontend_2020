@@ -16,7 +16,7 @@ const initialState = {
   isSigningup: false,
   isVerifying: false,
 };
-const MODALS = ["none", "signin", "signup", "settings", "alarm", "notifications"];
+const MODALS = ["none", "signin", "forgotpassconfirm", "signup", "settings", "alarm", "notifications"];
 
 const uiSlice = createSlice({
   name: "ui",

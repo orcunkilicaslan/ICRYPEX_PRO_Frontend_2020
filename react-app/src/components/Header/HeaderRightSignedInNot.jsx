@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import {useState, useRef, Fragment} from "react";
 import {
   Row,
   Col,
@@ -9,7 +9,7 @@ import {
   InputGroupAddon,
   Modal,
   ModalHeader,
-  ModalBody,
+  ModalBody, ModalFooter,
 } from "reactstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch, useSelector } from "react-redux";
@@ -69,6 +69,10 @@ const HeaderRightSignedInNot = props => {
   const openSigninModal = () => {
     dispatch(setOpenModal("signin"));
     setErrorMessage(null);
+  };
+
+  const openForgotPassConfirmModal = () => {
+    dispatch(setOpenModal("forgotpassconfirm"));
   };
 
   const clearOpenModals = () => {
@@ -292,13 +296,12 @@ const HeaderRightSignedInNot = props => {
                     <Label>{t("notARobot")}</Label>
                   </div>
                   <div>
-                    <a
-                      className="text-muted"
-                      href="#"
-                      onClick={submitForgotPassword}
+                    <Button
+                        variant="link"
+                        onClick={openForgotPassConfirmModal}
                     >
                       {t("forgotPassword")}
-                    </a>
+                    </Button>
                   </div>
                 </div>
                 <Button
@@ -313,6 +316,78 @@ const HeaderRightSignedInNot = props => {
             </div>
           )}
         </ModalBody>
+      </Modal>
+      <Modal
+          wrapClassName=""
+          modalClassName=""
+          className="text-center"
+          size="sm"
+          isOpen={openModal === "forgotpassconfirm"}
+          toggle={clearOpenModals}
+          keyboard={false}
+          fade={false}
+          autoFocus={false}
+          backdrop="static"
+          centered
+      >
+        <div className="modal-close">
+          <Button className="close" onClick={clearOpenModals}>
+            <span aria-hidden="true">&times;</span>
+          </Button>
+        </div>
+
+        {openModal === "forgotpassconfirm" ? (
+            <Fragment>
+              <ModalBody className="modal-confirm">
+                <div className="animation-alert-icons">
+                  <div className="alert-icons alert-icons-warning">
+                    <div className="alert-icons-warning-body" />
+                    <div className="alert-icons-warning-dot" />
+                  </div>
+                </div>
+                <h4>Parola Sıfırlama</h4>
+                <p>Parolanızı sıfırlamak istediğinizden emin misiniz?</p>
+              </ModalBody>
+              <ModalFooter className="row">
+                <Button
+                    variant="secondary"
+                    className="active col"
+                    onClick={clearOpenModals}
+                >
+                  İPTAL ET
+                </Button>
+                <Button
+                    variant="success"
+                    className="active col"
+                    onClick={submitForgotPassword}
+                >
+                  ONAYLA
+                </Button>
+              </ModalFooter>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <ModalBody className="modal-confirm">
+                <div className="animation-alert-icons">
+                  <div className="alert-icons alert-icons-success">
+                    <div className="alert-icons-success-tip" />
+                    <div className="alert-icons-success-long" />
+                  </div>
+                </div>
+                <h4>Parolanız Sıfırlanmıştır</h4>
+                <p>Parolanız kayıtlı telefonunuza SMS olarak gönderilmiştir.</p>
+              </ModalBody>
+              <ModalFooter className="row">
+                <Button
+                    variant="success"
+                    className="col"
+                    onClick={openSigninModal}
+                >
+                  ÜYE GİRİŞİ
+                </Button>
+              </ModalFooter>
+            </Fragment>
+        )}
       </Modal>
       <Modal
         wrapClassName=""
