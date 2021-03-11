@@ -1,7 +1,5 @@
-import {useState, useRef, Fragment} from "react";
+import { useState, Fragment } from "react";
 import {
-  Row,
-  Col,
   Form,
   FormGroup,
   Label,
@@ -9,7 +7,8 @@ import {
   InputGroupAddon,
   Modal,
   ModalHeader,
-  ModalBody, ModalFooter,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +19,7 @@ import { IconSet } from "../IconSet.jsx";
 import { AlertResult } from "../AlertResult.jsx";
 import { LoginButtons } from "../LoginButtons";
 import { setOpenModal } from "~/state/slices/ui.slice";
+import { SigninModal, VerifyModal } from "../modals/";
 
 const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
 
@@ -50,12 +50,9 @@ const HeaderRightSignedInNot = props => {
     ecommerce: false,
   });
 
-  const passwordField = useRef();
-  const [userEmail, setUserEmail] = useState(user.email || "");
-
-  const [isEnteringCode, setIsEnteringCode] = useState(false);
-  const [verifyCode, setVerifyCode] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
+  const [signinError, setSigninError] = useState(null);
+  const [verifyError, setVerifyError] = useState(null);
 
   const countryPhoneCode = countryCodes?.map(
     ({ country_code }) => country_code
@@ -67,12 +64,17 @@ const HeaderRightSignedInNot = props => {
   };
 
   const openSigninModal = () => {
+    setSigninError(null);
     dispatch(setOpenModal("signin"));
-    setErrorMessage(null);
   };
 
   const openForgotPassConfirmModal = () => {
     dispatch(setOpenModal("forgotpassconfirm"));
+  };
+
+  const openVerifyModal = () => {
+    setVerifyError(null);
+    dispatch(setOpenModal("verify"));
   };
 
   const clearOpenModals = () => {
@@ -105,47 +107,41 @@ const HeaderRightSignedInNot = props => {
     });
 
     if (status) {
-      setIsEnteringCode(true);
+      // setIsEnteringCode(true);
       openSigninModal();
     } else {
       setErrorMessage(errormessage);
     }
   };
 
-  const submitSecret = async event => {
-    event.preventDefault();
-    event.stopPropagation();
-    setErrorMessage(null);
+  const submitVerify = async data => {
     let result;
+    const { code } = data;
+    setVerifyError(null);
 
     if (user?.logintype === 2) {
-      result = await onSignin2FA(verifyCode);
+      result = await onSignin2FA(code);
     } else {
-      result = await onSigninSMS(verifyCode);
+      result = await onSigninSMS(code);
     }
 
     const { status, errormessage } = result;
 
     if (!status) {
-      setErrorMessage(errormessage);
+      setVerifyError(errormessage);
     }
   };
 
-  const submitSignin = async event => {
-    event.preventDefault();
-    event.stopPropagation();
-    setErrorMessage(null);
+  const submitSignin = async data => {
+    setSigninError(null);
 
-    const { status, errormessage } = await onSignin({
-      emailornationalid: userEmail,
-      password: passwordField.current.value,
-    });
+    const { status, errormessage } = await onSignin(data);
 
     if (status) {
-      setIsEnteringCode(true);
-      setErrorMessage(null);
+      setSigninError(null);
+      openVerifyModal();
     } else {
-      setErrorMessage(errormessage);
+      setSigninError(errormessage);
     }
   };
 
@@ -155,7 +151,7 @@ const HeaderRightSignedInNot = props => {
     setErrorMessage(null);
 
     const { status, errormessage } = await onForgotPassword({
-      email: userEmail,
+      email: user?.email,
     });
 
     if (status) {
@@ -171,164 +167,34 @@ const HeaderRightSignedInNot = props => {
         openSigninModal={openSigninModal}
         openSignupModal={openSignupModal}
       />
-
+      <SigninModal
+        isOpen={openModal === "signin"}
+        submit={submitSignin}
+        userEmail={user?.email}
+        clearModals={clearOpenModals}
+        errorMessage={signinError}
+        isSigningin={isSigningin}
+        openForgotPassConfirmModal={openForgotPassConfirmModal}
+      />
+      <VerifyModal
+        isOpen={openModal === "verify"}
+        submit={submitVerify}
+        clearModals={clearOpenModals}
+        errorMessage={verifyError}
+        isVerifying={isVerifying}
+      />
       <Modal
         wrapClassName=""
-        modalClassName="modal-rightside"
+        modalClassName=""
+        className="text-center"
         size="sm"
-        isOpen={openModal === "signin"}
+        isOpen={openModal === "forgotpassconfirm"}
         toggle={clearOpenModals}
         keyboard={false}
         fade={false}
         autoFocus={false}
         backdrop="static"
-      >
-        <ModalHeader toggle={clearOpenModals}>
-          {t("signin")}
-          {isEnteringCode ? (
-            <Button className="toback" onClick={() => setIsEnteringCode(false)}>
-              <span aria-hidden="true" />
-            </Button>
-          ) : null}
-        </ModalHeader>
-        <ModalBody className="modalcomp modalcomp-sign">
-          <div className="modalcomp-sign-icon">
-            <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
-          </div>
-          {errorMessage ? (
-            <AlertResult error>{errorMessage}</AlertResult>
-          ) : null}
-          {isEnteringCode ? (
-            <div className="modalcomp-sign-form">
-              <div className="headsmtitle mb-1">
-                <h6 className="text-center w-100">{t("enterCode")}</h6>
-              </div>
-              <Form
-                className="siteformui"
-                autoComplete="off"
-                noValidate
-                tag="div"
-              >
-                <div className="labelfocustop">
-                  <FormGroup>
-                    <Input
-                      className="text-center"
-                      type="text"
-                      pattern=".{0}|.{1,}"
-                      required
-                      value={verifyCode}
-                      onChange={({ target }) => setVerifyCode(target.value)}
-                    />
-                    <Label className="text-center">
-                      {t("verificationCode")}
-                    </Label>
-                  </FormGroup>
-                </div>
-                <Button
-                  variant="success"
-                  className="w-100 mt-2"
-                  onClick={submitSecret}
-                  disabled={isVerifying}
-                >
-                  {t("signin")}
-                </Button>
-                {/* <Row form className="mt-2">
-                  <Col>
-                    <Button
-                      variant="secondary"
-                      className="w-100"
-                      onClick={() => setIsEnteringCode(false)}
-                    >
-                      {t("common:goBack")}
-                    </Button>
-                  </Col>
-                  <Col>
-                    <Button variant="secondary" className="w-100">
-                      {t("reSendCode")}
-                    </Button>
-                  </Col>
-                </Row> */}
-              </Form>
-            </div>
-          ) : (
-            <div className="modalcomp-sign-form">
-              <Form className="siteformui" autoComplete="off" noValidate>
-                <div className="labelfocustop">
-                  <FormGroup>
-                    <Input
-                      type="email"
-                      pattern=".{0}|.{1,}"
-                      required
-                      name="email"
-                      value={userEmail}
-                      onChange={({ target }) => setUserEmail(target.value)}
-                    />
-                    <Label>{t("email")}</Label>
-                  </FormGroup>
-                  <FormGroup>
-                    <Input
-                      className="signuppassword"
-                      type="password"
-                      pattern=".{0}|.{1,}"
-                      required
-                      name="password"
-                      innerRef={passwordField}
-                    />
-                    <Label>{t("password")}</Label>
-                    <Button
-                      className="showhidepass"
-                      data-toggle="showhidepassword"
-                      data-target=".signuppassword"
-                    >
-                      <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
-                    </Button>
-                  </FormGroup>
-                </div>
-                <div className="recaptcha">
-                  <div className="recaptcha-area">
-                    <div className="recaptcha-check">
-                      <ReCAPTCHA
-                        className="g-recaptcha"
-                        theme="dark"
-                        sitekey={RECAPTCHA_KEY}
-                      />
-                    </div>
-                    <Label>{t("notARobot")}</Label>
-                  </div>
-                  <div>
-                    <Button
-                        variant="link"
-                        onClick={openForgotPassConfirmModal}
-                    >
-                      {t("forgotPassword")}
-                    </Button>
-                  </div>
-                </div>
-                <Button
-                  variant="secondary"
-                  className="w-100 active"
-                  onClick={submitSignin}
-                  disabled={isSigningin}
-                >
-                  {t("sendCode").toUpperCase()}
-                </Button>
-              </Form>
-            </div>
-          )}
-        </ModalBody>
-      </Modal>
-      <Modal
-          wrapClassName=""
-          modalClassName=""
-          className="text-center"
-          size="sm"
-          isOpen={openModal === "forgotpassconfirm"}
-          toggle={clearOpenModals}
-          keyboard={false}
-          fade={false}
-          autoFocus={false}
-          backdrop="static"
-          centered
+        centered
       >
         <div className="modal-close">
           <Button className="close" onClick={clearOpenModals}>
@@ -337,56 +203,56 @@ const HeaderRightSignedInNot = props => {
         </div>
 
         {openModal === "forgotpassconfirm" ? (
-            <Fragment>
-              <ModalBody className="modal-confirm">
-                <div className="animation-alert-icons">
-                  <div className="alert-icons alert-icons-warning">
-                    <div className="alert-icons-warning-body" />
-                    <div className="alert-icons-warning-dot" />
-                  </div>
+          <Fragment>
+            <ModalBody className="modal-confirm">
+              <div className="animation-alert-icons">
+                <div className="alert-icons alert-icons-warning">
+                  <div className="alert-icons-warning-body" />
+                  <div className="alert-icons-warning-dot" />
                 </div>
-                <h4>Parola Sıfırlama</h4>
-                <p>Parolanızı sıfırlamak istediğinizden emin misiniz?</p>
-              </ModalBody>
-              <ModalFooter className="row">
-                <Button
-                    variant="secondary"
-                    className="active col"
-                    onClick={clearOpenModals}
-                >
-                  İPTAL ET
-                </Button>
-                <Button
-                    variant="success"
-                    className="active col"
-                    onClick={submitForgotPassword}
-                >
-                  ONAYLA
-                </Button>
-              </ModalFooter>
-            </Fragment>
-          ) : (
-            <Fragment>
-              <ModalBody className="modal-confirm">
-                <div className="animation-alert-icons">
-                  <div className="alert-icons alert-icons-success">
-                    <div className="alert-icons-success-tip" />
-                    <div className="alert-icons-success-long" />
-                  </div>
+              </div>
+              <h4>Parola Sıfırlama</h4>
+              <p>Parolanızı sıfırlamak istediğinizden emin misiniz?</p>
+            </ModalBody>
+            <ModalFooter className="row">
+              <Button
+                variant="secondary"
+                className="active col"
+                onClick={clearOpenModals}
+              >
+                İPTAL ET
+              </Button>
+              <Button
+                variant="success"
+                className="active col"
+                onClick={submitForgotPassword}
+              >
+                ONAYLA
+              </Button>
+            </ModalFooter>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <ModalBody className="modal-confirm">
+              <div className="animation-alert-icons">
+                <div className="alert-icons alert-icons-success">
+                  <div className="alert-icons-success-tip" />
+                  <div className="alert-icons-success-long" />
                 </div>
-                <h4>Parolanız Sıfırlanmıştır</h4>
-                <p>Parolanız kayıtlı telefonunuza SMS olarak gönderilmiştir.</p>
-              </ModalBody>
-              <ModalFooter className="row">
-                <Button
-                    variant="success"
-                    className="col"
-                    onClick={openSigninModal}
-                >
-                  ÜYE GİRİŞİ
-                </Button>
-              </ModalFooter>
-            </Fragment>
+              </div>
+              <h4>Parolanız Sıfırlanmıştır</h4>
+              <p>Parolanız kayıtlı telefonunuza SMS olarak gönderilmiştir.</p>
+            </ModalBody>
+            <ModalFooter className="row">
+              <Button
+                variant="success"
+                className="col"
+                onClick={openSigninModal}
+              >
+                ÜYE GİRİŞİ
+              </Button>
+            </ModalFooter>
+          </Fragment>
         )}
       </Modal>
       <Modal
