@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import i18n from "i18next";
 
 import { SUPPORTED_LANGUAGES } from "~/setupI18n";
-import { signinWithSms } from "~/state/slices/api.slice";
+import { signinWithSms, signinWith2FA } from "~/state/slices/api.slice";
 import {
   signinUser,
   signupUser,
@@ -15,6 +15,7 @@ const initialState = {
   isSigningin: false,
   isSigningup: false,
   isVerifying: false,
+  isResetingPassword: false,
 };
 const MODALS = [
   "none",
@@ -67,7 +68,7 @@ const uiSlice = createSlice({
     [signinUser.pending]: state => {
       state.isSigningin = true;
     },
-    [signinUser.fulfilled]: (state, action) => {
+    [signinUser.fulfilled]: state => {
       state.isSigningin = false;
     },
     [signinUser.rejected]: state => {
@@ -82,14 +83,23 @@ const uiSlice = createSlice({
     [signinWithSms.rejected]: state => {
       state.isVerifying = false;
     },
-    [forgotPassword.pending]: state => {
-      state.isSigningin = true;
+    [signinWith2FA.pending]: state => {
+      state.isVerifying = true;
     },
-    [forgotPassword.fulfilled]: (state, action) => {
-      state.isSigningin = false;
+    [signinWith2FA.fulfilled]: state => {
+      state.isVerifying = false;
+    },
+    [signinWith2FA.rejected]: state => {
+      state.isVerifying = false;
+    },
+    [forgotPassword.pending]: state => {
+      state.isResetingPassword = true;
+    },
+    [forgotPassword.fulfilled]: state => {
+      state.isResetingPassword = false;
     },
     [forgotPassword.rejected]: state => {
-      state.isSigningin = false;
+      state.isResetingPassword = false;
     },
   },
 });
