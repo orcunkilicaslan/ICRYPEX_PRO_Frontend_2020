@@ -15,23 +15,20 @@ import {
 } from "~/state/slices/alarm.slice";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import { AlarmModal } from "~/components/modals/";
+import { usePrices } from "~/state/hooks/";
 
 const TopCoinBar = props => {
   const { t } = useTranslation(["coinbar", "common"]);
   const dispatch = useDispatch();
   const {
-    selected: currentPair,
+    selectedPair: currentPair,
+    selectedPrice: selectedPriceData,
     fiatCurrency: selectedFiatCurrency,
     cryptoCurrency: selectedCryptoCurrency,
-  } = useSelector(state => state.pair);
-  const pricesData = useSelector(state => state.socket.prices);
+  } = usePrices();
   const { accesstoken } = useSelector(state => state.api);
   const { openModal } = useSelector(state => state.ui);
   const [alarmError, setAlarmError] = useState(null);
-
-  let selectedPriceData = pricesData?.find(
-    ({ symbol }) => symbol === currentPair?.symbol
-  );
 
   useEffect(() => {
     if (accesstoken) dispatch(fetchPriceAlarms());
