@@ -82,7 +82,7 @@ export const removeFavoritePair = createAsyncThunk(
 );
 
 export const fetchInitialOrderBook = createAsyncThunk(
-  "pair/initialpairorderbook",
+  "pair/initialorderbook",
   async (pairname, { getState, rejectWithValue, dispatch }) => {
     const {
       api: { accesstoken },
@@ -114,7 +114,7 @@ export const fetchInitialOrderBook = createAsyncThunk(
 );
 
 export const fetchInitialOrderHistory = createAsyncThunk(
-  "pair/initialpairorderhistory",
+  "pair/initialorderhistory",
   async (pairname, { getState, rejectWithValue, dispatch }) => {
     const {
       api: { accesstoken },

@@ -39,11 +39,11 @@ const OrderBook = props => {
     initialOrderBooks,
   } = useSelector(state => state.pair);
   const { accesstoken } = useSelector(state => state.api);
+  const orderbooks = useSelector(state => state.socket.orderbooks);
+
   const symbol = selected?.symbol?.toLowerCase?.();
   const eventKey = `${symbol}orderbook`;
-  const { [eventKey]: bookData = {} } = useSelector(
-    state => state.socket.orderbooks
-  );
+  const bookData = orderbooks?.[eventKey] || {}
   const {
     buytotal = "",
     buyhighestprice = "",
