@@ -1,14 +1,14 @@
 import { useCallback } from "react";
 import { NavLink as RRNavLink, Switch, Route } from "react-router-dom";
-import {Container, Nav, NavItem, NavLink, Row, TabPane} from "reactstrap";
+import { Container, Nav, NavItem, NavLink, Row } from "reactstrap";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 
 import MarketData from "~/components/MarketData/MarketData.jsx";
 import PrimaryMainCont from "~/components/PrimaryMainCont.jsx";
 import EasyBuySellFormBuy from "~/pages/EasyBuySell/EasyBuySellFormBuy.jsx";
 import EasyBuySellFormSell from "~/pages/EasyBuySell/EasyBuySellFormSell.jsx";
-import {useDispatch, useSelector} from "react-redux";
-import {setOpenModal} from "~/state/slices/ui.slice";
+import { setOpenModal } from "~/state/slices/ui.slice";
 import UserNotLoginBox from "~/pages/Sections/UserNotLoginBox";
 
 const EasyBuySellBody = props => {
@@ -73,22 +73,22 @@ const EasyBuySellBody = props => {
                     <Switch>
                       <Route exact path="/kolay-al">
                         {accesstoken ? (
-                            <EasyBuySellFormBuy />
+                          <EasyBuySellFormBuy />
                         ) : (
-                            <UserNotLoginBox
-                                openSigninModal={openSigninModal}
-                                openSignupModal={openSignupModal}
-                            />
+                          <UserNotLoginBox
+                            openSigninModal={openSigninModal}
+                            openSignupModal={openSignupModal}
+                          />
                         )}
                       </Route>
                       <Route exact path="/kolay-sat">
                         {accesstoken ? (
-                            <EasyBuySellFormSell />
+                          <EasyBuySellFormSell />
                         ) : (
-                            <UserNotLoginBox
-                                openSigninModal={openSigninModal}
-                                openSignupModal={openSignupModal}
-                            />
+                          <UserNotLoginBox
+                            openSigninModal={openSigninModal}
+                            openSignupModal={openSignupModal}
+                          />
                         )}
                       </Route>
                     </Switch>
