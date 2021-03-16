@@ -26,7 +26,7 @@ const HeaderRightSignedIn = props => {
           <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
         </div>
         <h3 className="useraccountarea-name">
-          {user.firstname} {String(user.lastname).toUpperCase()}
+          {user?.info?.displayname || null}
         </h3>
         <i className="siteiconsdropdown downdirection"></i>
       </Button>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Form, Row, Col, InputGroup, InputGroupAddon, Input } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -7,21 +7,44 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "~/components/Button.jsx";
 import { IconSet } from "~/components/IconSet.jsx";
 import { withdrawBankwire } from "~/state/slices/withdraw.slice";
-
-const banksSelect = ["Akbank", "Garanti", "Finansbank"];
+import { fetchBankAccounts } from "~/state/slices/user.slice";
+import { useCurrencies } from "~/state/hooks/";
 
 const OpenOrderDepoWithTabWithdrawBank = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["form"]);
   const { isWithdrawingBank } = useSelector(state => state.withdraw);
+  const { accesstoken } = useSelector(state => state.api);
+  const { accounts } = useSelector(state => state.user);
+  const { all: allCurrencies } = useCurrencies();
   const [apiError, setApiError] = useState("");
   const { register, handleSubmit, errors, watch, clearErrors } = useForm({
     mode: "onChange",
     defaultValues: {
-      account: "",
+      customerbankid: "",
       amount: "",
     },
   });
+  const { amount: watchedAmount, customerbankid: watchedId } = watch();
+
+  const userAccounts = useMemo(() => {
+    return accounts.map(account => {
+      const { currency_id } = account;
+      const currency = allCurrencies.find(
+        ({ id }) => currency_id === Number(id)
+      );
+
+      return { ...account, currency };
+    });
+  }, [accounts, allCurrencies]);
+
+  const selectedAccount = useMemo(() => {
+    return userAccounts.find(({ id }) => watchedId === id);
+  }, [watchedId, userAccounts]);
+  // console.log({ userAccounts, selectedAccount, allCurrencies, accounts });
+  useEffect(() => {
+    if (accesstoken) dispatch(fetchBankAccounts());
+  }, [dispatch, accesstoken]);
 
   const getTotal = value => {
     const amount = parseFloat(value);
@@ -59,11 +82,20 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
               <Input
                 className="custom-select"
                 type="select"
-                name="account"
-                innerRef={register({ required: t("isRequired") })}
+                name="customerbankid"
+                innerRef={register({
+                  valueAsNumber: true,
+                  required: t("isRequired"),
+                })}
               >
-                {banksSelect.map((el, idx) => {
-                  return <option key={`${el}_${idx}`}>{el}</option>;
+                {userAccounts.map(account => {
+                  const { iban, id, name } = account;
+
+                  return (
+                    <option value={id} key={id}>
+                      {`${name} - ${iban}`}
+                    </option>
+                  );
                 })}
               </Input>
               <InputGroupAddon addonType="append">
@@ -73,9 +105,9 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
               </InputGroupAddon>
             </InputGroup>
             <div>
-              {errors.account && (
+              {errors.customerbankid && (
                 <span style={{ color: "red", fontSize: "1rem" }}>
-                  {errors.account?.message}
+                  {errors.customerbankid?.message}
                 </span>
               )}
             </div>
@@ -96,7 +128,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
               />
               <div className="form-control totalbalance text-right">
                 <small>Bakiye</small>
-                999,999.00 TRY
+                999,999.00 {selectedAccount?.currency?.symbol}
               </div>
               <InputGroupAddon addonType="append">
                 <Button variant="secondary" className="active">
@@ -113,7 +145,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
             </div>
             <Row form className="form-group">
               <Col>Hesaba Geçecek Miktar</Col>
-              <Col xs="auto">{getTotal(watch("amount"))} TRY</Col>
+              <Col xs="auto">{getTotal(watchedAmount)} {selectedAccount?.currency?.symbol}</Col>
             </Row>
           </div>
           <div className="formbttm">

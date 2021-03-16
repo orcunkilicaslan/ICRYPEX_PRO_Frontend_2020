@@ -80,7 +80,7 @@ export default function SettingsModal(props) {
       {...rest}
     >
       <ModalHeader toggle={clearModals}>
-        {User?.firstname} {String(User?.lastname).toUpperCase()}
+        {User?.info?.displayname?.toUpperCase?.()}
       </ModalHeader>
       <ModalBody className="modalcomp modalcomp-usermenu">
         <Button variant="secondary" className="modalcomp-usermenu-notif w-100">

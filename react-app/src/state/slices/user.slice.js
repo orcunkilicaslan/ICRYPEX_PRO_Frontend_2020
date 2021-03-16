@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { merge } from "lodash";
 
 import * as api from "../api";
 
@@ -125,26 +126,35 @@ export const forgotPassword = createAsyncThunk(
   }
 );
 
+export const fetchBankAccounts = createAsyncThunk(
+  "user/fetchBankAccounts",
+  async (_, { getState, rejectWithValue }) => {
+    const {
+      api: { accesstoken },
+    } = getState();
+
+    try {
+      const response = await api.fetchBankAccounts(
+        {},
+        {
+          headers: {
+            "x-access-token": accesstoken,
+          },
+        }
+      );
+
+      return response.data;
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
+  }
+);
+
 const initialState = {
-  firstname: "",
-  lastname: "",
-  phone: "",
-  email: "",
-  displayname: "",
-  profilepicturefilename: null,
-  unreadednotificationcount: 0,
-  emailverified: false,
-  customergroupid: 1,
-  nationalid: null,
-  dateofbirth: null,
-  countryid: null,
-  cityid: null,
-  districtid: null,
-  regionid: null,
-  address: null,
-  registrationdate: null,
+  info: {},
   customerid: null,
   logintype: null,
+  accounts: [],
 };
 
 const userSlice = createSlice({
@@ -165,15 +175,15 @@ const userSlice = createSlice({
       state.customerid = action?.payload?.description?.customerid;
       state.logintype = action?.payload?.description?.logintype;
     },
-    [signoutUser.fulfilled]: state => {
-      state.customerid = null;
-    },
     [fetchUserInfo.fulfilled]: (state, action) => {
-      const description = action?.payload?.description || {};
+      const info = action?.payload?.description || {};
 
-      for (const [key, value] of Object.entries(description)) {
-        state[key] = value;
-      }
+      merge(state.info, info);
+    },
+    [fetchBankAccounts.fulfilled]: (state, action) => {
+      const accounts = action?.payload?.description;
+
+      if (accounts) state.accounts = accounts;
     },
   },
 });
