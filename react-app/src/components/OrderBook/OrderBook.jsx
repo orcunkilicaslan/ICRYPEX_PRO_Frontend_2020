@@ -6,6 +6,8 @@ import { merge } from "lodash";
 
 import Table from "../Table.jsx";
 import { fetchInitialOrderBook } from "~/state/slices/pair.slice";
+import { usePrices } from "~/state/hooks/";
+import { getPairPrefix } from "~/util/";
 
 const orderbookcharttype = "Bar";
 const chartOptions = {
@@ -32,18 +34,12 @@ const chartOptions = {
 const OrderBook = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["finance", "orderbook", "common"]);
-  const {
-    selected,
-    fiatCurrency,
-    cryptoCurrency,
-    initialOrderBooks,
-  } = useSelector(state => state.pair);
-  const { accesstoken } = useSelector(state => state.api);
+  const { selectedPair: selected, fiatCurrency, cryptoCurrency } = usePrices();
   const orderbooks = useSelector(state => state.socket.orderbooks);
 
-  const symbol = selected?.symbol?.toLowerCase?.();
-  const eventKey = `${symbol}orderbook`;
-  const bookData = orderbooks?.[eventKey] || {}
+  const prefix = getPairPrefix(selected?.name);
+  const eventKey = `${prefix}orderbook`;
+  const bookData = orderbooks?.[eventKey] || {};
   const {
     buytotal = "",
     buyhighestprice = "",
@@ -99,14 +95,12 @@ const OrderBook = props => {
   }, [sellorders]);
 
   useEffect(() => {
-    const { name, symbol } = selected;
+    const { name } = selected;
 
-    if (accesstoken) {
-      if (!initialOrderBooks.includes(symbol?.toLowerCase())) {
-        dispatch(fetchInitialOrderBook(name));
-      }
+    if (name) {
+      dispatch(fetchInitialOrderBook(name));
     }
-  }, [accesstoken, selected, initialOrderBooks, dispatch]);
+  }, [selected, dispatch]);
 
   return (
     <div className="mainbox mainbox-orderbook">

@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from "../api";
 import { fetchSettings } from "./api.slice";
 import { setPrices, setOrderBook, setOrderHistory } from "./socket.slice";
-import { getPairTuple } from "~/util/";
+import { getPairTuple, getPairPrefix } from "~/util/";
 
 export const fetchFavoritePairs = createAsyncThunk(
   "pair/fetchfavorites",
@@ -85,7 +85,7 @@ export const fetchInitialOrderBook = createAsyncThunk(
   "pair/initialorderbook",
   async (pairname, { getState, rejectWithValue, dispatch }) => {
     const {
-      api: { accesstoken },
+      api: { prelogintoken },
     } = getState();
 
     try {
@@ -93,13 +93,13 @@ export const fetchInitialOrderBook = createAsyncThunk(
         { pairname },
         {
           headers: {
-            "x-access-token": accesstoken,
+            "x-access-token": prelogintoken,
           },
         }
       );
 
       const data = response?.data?.description;
-      const keyPrefix = getPairTuple(pairname).join("").toLowerCase(); // BTC / USD -> btcusd
+      const keyPrefix = getPairPrefix(pairname);
       const key = `${keyPrefix}orderbook`;
 
       if (response?.status) {
@@ -110,6 +110,17 @@ export const fetchInitialOrderBook = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (pairname, { getState }) => {
+      const { pair } = getState();
+      const books = pair?.initialOrderBooks;
+      const prefix = getPairPrefix(pairname);
+
+      if (books?.includes(prefix)) return false;
+
+      return true;
+    },
   }
 );
 
@@ -117,7 +128,7 @@ export const fetchInitialOrderHistory = createAsyncThunk(
   "pair/initialorderhistory",
   async (pairname, { getState, rejectWithValue, dispatch }) => {
     const {
-      api: { accesstoken },
+      api: { prelogintoken },
     } = getState();
 
     try {
@@ -125,13 +136,13 @@ export const fetchInitialOrderHistory = createAsyncThunk(
         { pairname },
         {
           headers: {
-            "x-access-token": accesstoken,
+            "x-access-token": prelogintoken,
           },
         }
       );
 
       const data = response?.data?.description;
-      const keyPrefix = getPairTuple(pairname).join("").toLowerCase(); // BTC / USD -> btcusd
+      const keyPrefix = getPairPrefix(pairname);
       const key = `${keyPrefix}orderhistory`;
 
       if (response?.status) {
@@ -142,6 +153,17 @@ export const fetchInitialOrderHistory = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (pairname, { getState }) => {
+      const { pair } = getState();
+      const histories = pair?.initialOrderHistories;
+      const prefix = getPairPrefix(pairname);
+
+      if (histories?.includes(prefix)) return false;
+
+      return true;
+    },
   }
 );
 

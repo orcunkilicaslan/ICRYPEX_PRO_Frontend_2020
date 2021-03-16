@@ -1,21 +1,31 @@
-import { useSelector } from "react-redux";
-import { useClientRect } from "~/state/hooks";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { formatDateDistance } from "~/util/";
 
 import Table from "../Table.jsx";
+import { formatDateDistance, getPairPrefix } from "~/util/";
+import { useClientRect, usePrices } from "~/state/hooks/";
+import { fetchInitialOrderHistory } from "~/state/slices/pair.slice";
 
 const MarketDataLast = props => {
+  const dispatch = useDispatch();
   const { t } = useTranslation(["common"]);
-  const {
-    selected: currentPair,
-    fiatCurrency: selectedFiatCurrency,
-  } = useSelector(state => state.pair);
+  const { selectedPair, fiatCurrency: selectedFiatCurrency } = usePrices();
   const { lang } = useSelector(state => state.ui);
-  const pairKey = `${currentPair?.symbol?.toLowerCase()}orderhistory`;
-  const { orderhistories = {} } = useSelector(state => state.socket);
-  const { [pairKey]: historyData = [] } = orderhistories;
+
+  const prefix = getPairPrefix(selectedPair?.name);
+  const key = `${prefix}orderhistory`;
+  const orderhistories = useSelector(state => state.socket.orderhistories);
+  const historyData = orderhistories?.[key] || [];
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
+
+  useEffect(() => {
+    const { name } = selectedPair;
+
+    if (name) {
+      dispatch(fetchInitialOrderHistory(name));
+    }
+  }, [selectedPair, dispatch]);
 
   return (
     <div className="marketdata-last">
@@ -35,10 +45,10 @@ const MarketDataLast = props => {
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody
-              striped
-              hovered
-              scrollbar
-              scrollbarstyles={{ height: `${tableHeight - 25}px` }}
+            striped
+            hovered
+            scrollbar
+            scrollbarstyles={{ height: `${tableHeight - 25}px` }}
           >
             {historyData.map((transaction, idx) => {
               const {

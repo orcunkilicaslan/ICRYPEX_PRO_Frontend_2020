@@ -32,11 +32,11 @@ export const withdrawBankwire = buildRequest("/withdraw/bankwire");
 export const withdrawPapara = buildRequest("/withdraw/papara");
 export const withdrawCrypto = buildRequest("/withdraw/crypto");
 export const fetchInitialOrderBook = buildCachedRequest(
-  "/initialpairorderbook",
+  "/initialpairorderbookpro",
   ms("5h")
 );
 export const fetchInitialOrderHistory = buildCachedRequest(
-  "/initialpairorderhistory",
+  "/initialpairorderhistorypro",
   ms("5h")
 );
 export const depositBankwire = buildRequest("/deposit/bankwire");
