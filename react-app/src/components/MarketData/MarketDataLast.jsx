@@ -53,16 +53,16 @@ const MarketDataLast = props => {
             {historyData.map((transaction, idx) => {
               const {
                 order_side_id,
-                created_at,
+                updated_at = Date.now(),
                 amount,
                 market_price,
               } = transaction;
 
               return (
-                <Table.Tr key={`${created_at}_${idx}`}>
+                <Table.Tr key={`${updated_at}_${idx}`}>
                   <Table.Td sizefixed className="time">
-                    <span title={created_at}>
-                      {formatDateDistance(new Date(created_at), Date.now(), {
+                    <span title={updated_at}>
+                      {formatDateDistance(new Date(updated_at), Date.now(), {
                         locale: lang,
                       })}
                     </span>

@@ -40,6 +40,7 @@ export const getStore = () => {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
         immutableCheck: {
+          ignoredPaths: ["socket"],
           warnAfter: 100,
         },
       }).concat(middleware),

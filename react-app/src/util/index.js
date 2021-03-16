@@ -22,9 +22,13 @@ export const formatDate = (
   pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSxxx",
   { locale = "en" }
 ) => {
+  try {
   return format(date, pattern, {
     locale: locales[locale],
   });
+  } catch (err) {
+    log("%s: %O", err.message, { date, pattern, locale });
+  }
 };
 
 export const formatDateDistance = (
@@ -32,10 +36,14 @@ export const formatDateDistance = (
   toDate,
   { locale = "en", addSuffix = true }
 ) => {
+  try {
   return formatDistanceStrict(fromDate, toDate, {
     locale: locales[locale],
     addSuffix,
   });
+  } catch (err) {
+    log("%s: %O", err.message, { fromDate, toDate });
+  }
 };
 
 let deviceuuid, localkey;
