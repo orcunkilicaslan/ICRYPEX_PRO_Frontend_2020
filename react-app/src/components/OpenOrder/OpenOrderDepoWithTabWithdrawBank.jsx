@@ -15,7 +15,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
   const { t } = useTranslation(["form"]);
   const { isWithdrawingBank } = useSelector(state => state.withdraw);
   const { accesstoken } = useSelector(state => state.api);
-  const { accounts } = useSelector(state => state.user);
+  const { accounts = [] } = useSelector(state => state.user);
   const { all: allCurrencies } = useCurrencies();
   const [apiError, setApiError] = useState("");
   const { register, handleSubmit, errors, watch, clearErrors } = useForm({
@@ -41,7 +41,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
   const selectedAccount = useMemo(() => {
     return userAccounts.find(({ id }) => watchedId === id);
   }, [watchedId, userAccounts]);
-  // console.log({ userAccounts, selectedAccount, allCurrencies, accounts });
+
   useEffect(() => {
     if (accesstoken) dispatch(fetchBankAccounts());
   }, [dispatch, accesstoken]);
@@ -145,7 +145,9 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
             </div>
             <Row form className="form-group">
               <Col>Hesaba Geçecek Miktar</Col>
-              <Col xs="auto">{getTotal(watchedAmount)} {selectedAccount?.currency?.symbol}</Col>
+              <Col xs="auto">
+                {getTotal(watchedAmount)} {selectedAccount?.currency?.symbol}
+              </Col>
             </Row>
           </div>
           <div className="formbttm">
