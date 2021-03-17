@@ -10,7 +10,10 @@
       @include flexbox-flex(1);
     }
 
-    &-list{}
+    &-list{
+      height: 750px;
+      position: relative;
+    }
 
     .collapseacc{
 

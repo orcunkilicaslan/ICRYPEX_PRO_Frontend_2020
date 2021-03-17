@@ -1,31 +1,17 @@
-import { useState, useRef } from "react";
-import {
-  Row,
-  Col,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  InputGroupAddon,
-  Modal,
-  ModalHeader,
-  ModalBody,
-} from "reactstrap";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 
-import { Button } from "../Button.jsx";
-import { IconSet } from "../IconSet.jsx";
-import { AlertResult } from "../AlertResult.jsx";
 import { LoginButtons } from "../LoginButtons";
 import { setOpenModal } from "~/state/slices/ui.slice";
-
-const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
+import {
+  SigninModal,
+  VerifyModal,
+  ForgotPassModal,
+  SignupModal,
+} from "../modals/";
 
 const HeaderRightSignedInNot = props => {
   const dispatch = useDispatch();
-  const { t } = useTranslation(["login", "common"]);
   const {
     user,
     countryCodes,
@@ -35,129 +21,103 @@ const HeaderRightSignedInNot = props => {
     onForgotPassword,
     onSignin2FA,
   } = props;
-  const { openModal, isSigningin, isSigningup, isVerifying } = useSelector(
-    state => state.ui
-  );
-  const [signUpForm, setSignUpForm] = useState({
-    firstname: "",
-    lastname: "",
-    phone: "",
-    countrycode: "90",
-    email: "",
-    password: "",
-    confirm: "",
-    termsofuse: false,
-    ecommerce: false,
-  });
+  const {
+    openModal,
+    isSigningin,
+    isSigningup,
+    isVerifying,
+    isResetingPassword,
+  } = useSelector(state => state.ui);
 
-  const passwordField = useRef();
-  const [userEmail, setUserEmail] = useState(user.email || "");
-
-  const [isEnteringCode, setIsEnteringCode] = useState(false);
-  const [verifyCode, setVerifyCode] = useState("");
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [signinError, setSigninError] = useState(null);
+  const [verifyError, setVerifyError] = useState(null);
+  const [forgotPassError, setForgotPassError] = useState(null);
+  const [signupError, setSignupError] = useState(null);
 
   const countryPhoneCode = countryCodes?.map(
     ({ country_code }) => country_code
   );
 
   const openSignupModal = () => {
+    setSignupError(null);
     dispatch(setOpenModal("signup"));
-    setErrorMessage(null);
   };
 
   const openSigninModal = () => {
+    setSigninError(null);
     dispatch(setOpenModal("signin"));
-    setErrorMessage(null);
+  };
+
+  const openForgotPassConfirmModal = () => {
+    setForgotPassError(null);
+    dispatch(setOpenModal("forgotpassconfirm"));
+  };
+
+  const openVerifyModal = () => {
+    setVerifyError(null);
+    dispatch(setOpenModal("verify"));
   };
 
   const clearOpenModals = () => {
     dispatch(setOpenModal("none"));
   };
 
-  const onSignUpFormChange = ({ target }) => {
-    if (target.type === "checkbox") {
-      setSignUpForm(prev => ({
-        ...prev,
-        [target.name]: target.checked,
-      }));
-    } else {
-      setSignUpForm(prev => ({
-        ...prev,
-        [target.name]: target.value,
-      }));
-    }
-  };
-
-  const submitSignup = async event => {
-    event.preventDefault();
-    event.stopPropagation();
-    setErrorMessage(null);
-
-    const { phone, countrycode } = signUpForm;
+  const submitSignup = async data => {
+    setSignupError(null);
+    const { phoneno, countrycode, ...rest } = data;
     const { status, errormessage } = await onSignup({
-      ...signUpForm,
-      phone: `${countrycode}${phone}`,
+      ...rest,
+      phone: `${countrycode}${phoneno}`,
+      mediumid: 1,
     });
 
     if (status) {
-      setIsEnteringCode(true);
-      openSigninModal();
+      openVerifyModal();
     } else {
-      setErrorMessage(errormessage);
+      setSignupError(errormessage);
     }
   };
 
-  const submitSecret = async event => {
-    event.preventDefault();
-    event.stopPropagation();
-    setErrorMessage(null);
+  const submitVerify = async data => {
     let result;
+    const { code } = data;
+    setVerifyError(null);
 
     if (user?.logintype === 2) {
-      result = await onSignin2FA(verifyCode);
+      result = await onSignin2FA(code);
     } else {
-      result = await onSigninSMS(verifyCode);
+      result = await onSigninSMS(code);
     }
 
     const { status, errormessage } = result;
 
     if (!status) {
-      setErrorMessage(errormessage);
+      setVerifyError(errormessage);
     }
   };
 
-  const submitSignin = async event => {
-    event.preventDefault();
-    event.stopPropagation();
-    setErrorMessage(null);
+  const submitSignin = async data => {
+    setSigninError(null);
 
-    const { status, errormessage } = await onSignin({
-      emailornationalid: userEmail,
-      password: passwordField.current.value,
-    });
+    const { status, errormessage } = await onSignin(data);
 
     if (status) {
-      setIsEnteringCode(true);
-      setErrorMessage(null);
+      setSigninError(null);
+      openVerifyModal();
     } else {
-      setErrorMessage(errormessage);
+      setSigninError(errormessage);
     }
   };
 
-  const submitForgotPassword = async event => {
-    event.preventDefault();
-    event.stopPropagation();
-    setErrorMessage(null);
+  const submitForgotPassword = async email => {
+    setForgotPassError(null);
 
-    const { status, errormessage } = await onForgotPassword({
-      email: userEmail,
-    });
+    const { status, errormessage } = await onForgotPassword({ email });
 
     if (status) {
-      setErrorMessage(null);
+      setForgotPassError(null);
     } else {
-      setErrorMessage(errormessage);
+      setForgotPassError(errormessage);
     }
   };
 
@@ -167,346 +127,38 @@ const HeaderRightSignedInNot = props => {
         openSigninModal={openSigninModal}
         openSignupModal={openSignupModal}
       />
-
-      <Modal
-        wrapClassName=""
-        modalClassName="modal-rightside"
-        size="sm"
+      <SigninModal
         isOpen={openModal === "signin"}
-        toggle={clearOpenModals}
-        keyboard={false}
-        fade={false}
-        autoFocus={false}
-        backdrop="static"
-      >
-        <ModalHeader toggle={clearOpenModals}>
-          {t("signin")}
-          {isEnteringCode ? (
-            <Button className="toback" onClick={() => setIsEnteringCode(false)}>
-              <span aria-hidden="true" />
-            </Button>
-          ) : null}
-        </ModalHeader>
-        <ModalBody className="modalcomp modalcomp-sign">
-          <div className="modalcomp-sign-icon">
-            <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
-          </div>
-          {errorMessage ? (
-            <AlertResult error>{errorMessage}</AlertResult>
-          ) : null}
-          {isEnteringCode ? (
-            <div className="modalcomp-sign-form">
-              <div className="headsmtitle mb-1">
-                <h6 className="text-center w-100">{t("enterCode")}</h6>
-              </div>
-              <Form
-                className="siteformui"
-                autoComplete="off"
-                noValidate
-                tag="div"
-              >
-                <div className="labelfocustop">
-                  <FormGroup>
-                    <Input
-                      className="text-center"
-                      type="text"
-                      pattern=".{0}|.{1,}"
-                      required
-                      value={verifyCode}
-                      onChange={({ target }) => setVerifyCode(target.value)}
-                    />
-                    <Label className="text-center">
-                      {t("verificationCode")}
-                    </Label>
-                  </FormGroup>
-                </div>
-                <Button
-                  variant="success"
-                  className="w-100 mt-2"
-                  onClick={submitSecret}
-                  disabled={isVerifying}
-                >
-                  {t("signin")}
-                </Button>
-                {/* <Row form className="mt-2">
-                  <Col>
-                    <Button
-                      variant="secondary"
-                      className="w-100"
-                      onClick={() => setIsEnteringCode(false)}
-                    >
-                      {t("common:goBack")}
-                    </Button>
-                  </Col>
-                  <Col>
-                    <Button variant="secondary" className="w-100">
-                      {t("reSendCode")}
-                    </Button>
-                  </Col>
-                </Row> */}
-              </Form>
-            </div>
-          ) : (
-            <div className="modalcomp-sign-form">
-              <Form className="siteformui" autoComplete="off" noValidate>
-                <div className="labelfocustop">
-                  <FormGroup>
-                    <Input
-                      type="email"
-                      pattern=".{0}|.{1,}"
-                      required
-                      name="email"
-                      value={userEmail}
-                      onChange={({ target }) => setUserEmail(target.value)}
-                    />
-                    <Label>{t("email")}</Label>
-                  </FormGroup>
-                  <FormGroup>
-                    <Input
-                      className="signuppassword"
-                      type="password"
-                      pattern=".{0}|.{1,}"
-                      required
-                      name="password"
-                      innerRef={passwordField}
-                    />
-                    <Label>{t("password")}</Label>
-                    <Button
-                      className="showhidepass"
-                      data-toggle="showhidepassword"
-                      data-target=".signuppassword"
-                    >
-                      <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
-                    </Button>
-                  </FormGroup>
-                </div>
-                <div className="recaptcha">
-                  <div className="recaptcha-area">
-                    <div className="recaptcha-check">
-                      <ReCAPTCHA
-                        className="g-recaptcha"
-                        theme="dark"
-                        sitekey={RECAPTCHA_KEY}
-                      />
-                    </div>
-                    <Label>{t("notARobot")}</Label>
-                  </div>
-                  <div>
-                    <a
-                      className="text-muted"
-                      href="#"
-                      onClick={submitForgotPassword}
-                    >
-                      {t("forgotPassword")}
-                    </a>
-                  </div>
-                </div>
-                <Button
-                  variant="secondary"
-                  className="w-100 active"
-                  onClick={submitSignin}
-                  disabled={isSigningin}
-                >
-                  {t("sendCode").toUpperCase()}
-                </Button>
-              </Form>
-            </div>
-          )}
-        </ModalBody>
-      </Modal>
-      <Modal
-        wrapClassName=""
-        modalClassName="modal-rightside"
-        size="sm"
+        submit={submitSignin}
+        userEmail={user?.email}
+        clearModals={clearOpenModals}
+        errorMessage={signinError}
+        isSigningin={isSigningin}
+        openForgotPassConfirmModal={openForgotPassConfirmModal}
+      />
+      <VerifyModal
+        isOpen={openModal === "verify"}
+        submit={submitVerify}
+        clearModals={clearOpenModals}
+        errorMessage={verifyError}
+        isVerifying={isVerifying}
+      />
+      <ForgotPassModal
+        isOpen={openModal === "forgotpassconfirm"}
+        submit={submitForgotPassword}
+        clearModals={clearOpenModals}
+        errorMessage={forgotPassError}
+        isResetingPassword={isResetingPassword}
+        openSigninModal={openSigninModal}
+      />
+      <SignupModal
         isOpen={openModal === "signup"}
-        toggle={clearOpenModals}
-        keyboard={false}
-        fade={false}
-        autoFocus={false}
-        backdrop="static"
-      >
-        <ModalHeader toggle={clearOpenModals}>
-          {t("signup").toUpperCase()}
-        </ModalHeader>
-        <ModalBody className="modalcomp modalcomp-sign">
-          <div className="modalcomp-sign-icon">
-            <IconSet sprite="sprtlgclrd" size="50gray" name="newuser" />
-          </div>
-          {errorMessage ? (
-            <AlertResult error>{errorMessage}</AlertResult>
-          ) : null}
-          <div className="modalcomp-sign-form">
-            <Form className="siteformui" autoComplete="off" noValidate>
-              <div className="labelfocustop">
-                <FormGroup>
-                  <Input
-                    type="text"
-                    pattern=".{0}|.{1,}"
-                    required
-                    name="firstname"
-                    value={signUpForm.firstname}
-                    onChange={onSignUpFormChange}
-                  />
-                  <Label>{t("name")}</Label>
-                </FormGroup>
-                <FormGroup>
-                  <Input
-                    type="text"
-                    pattern=".{0}|.{1,}"
-                    required
-                    name="lastname"
-                    value={signUpForm.lastname}
-                    onChange={onSignUpFormChange}
-                  />
-                  <Label>{t("surname")}</Label>
-                </FormGroup>
-                <FormGroup className="input-group phonelabelgroup">
-                  <InputGroupAddon addonType="prepend">
-                    <Input
-                      className="custom-select"
-                      type="select"
-                      name="countrycode"
-                      value={signUpForm.countrycode}
-                      onChange={onSignUpFormChange}
-                    >
-                      {countryPhoneCode?.map((code, idx) => {
-                        return (
-                          <option value={code} key={`${code}_${idx}`}>
-                            {code}
-                          </option>
-                        );
-                      })}
-                    </Input>
-                  </InputGroupAddon>
-                  <Input
-                    className="text-left"
-                    type="text"
-                    pattern=".{0}|.{1,}"
-                    required
-                    name="phone"
-                    value={signUpForm.phone}
-                    onChange={onSignUpFormChange}
-                  />
-                  <Label>{t("phone")}</Label>
-                </FormGroup>
-                <FormGroup>
-                  <Input
-                    type="email"
-                    pattern=".{0}|.{1,}"
-                    required
-                    name="email"
-                    value={signUpForm.email}
-                    onChange={onSignUpFormChange}
-                  />
-                  <Label>{t("email")}</Label>
-                </FormGroup>
-                <FormGroup>
-                  <Input
-                    className="signuppassword"
-                    type="password"
-                    pattern=".{0}|.{1,}"
-                    required
-                    name="password"
-                    value={signUpForm.password}
-                    onChange={onSignUpFormChange}
-                  />
-                  <Label>{t("password")}</Label>
-                  <Button
-                    className="showhidepass"
-                    data-toggle="showhidepassword"
-                    data-target=".signuppassword"
-                  >
-                    <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
-                  </Button>
-                </FormGroup>
-                <FormGroup>
-                  <Input
-                    className="signuprepassword"
-                    type="password"
-                    pattern=".{0}|.{1,}"
-                    required
-                    name="confirm"
-                    value={signUpForm.confirm}
-                    onChange={onSignUpFormChange}
-                  />
-                  <Label>{t("verifyPassword")}</Label>
-                  <Button
-                    className="showhidepass"
-                    data-toggle="showhidepassword"
-                    data-target=".signuprepassword"
-                  >
-                    <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
-                  </Button>
-                </FormGroup>
-              </div>
-              <div className="recaptcha">
-                <div className="recaptcha-area">
-                  <div className="recaptcha-check">
-                    <ReCAPTCHA
-                      className="g-recaptcha"
-                      theme="dark"
-                      sitekey={RECAPTCHA_KEY}
-                    />
-                  </div>
-                  <Label>{t("notARobot")}</Label>
-                </div>
-              </div>
-              <div className="checkboxarea">
-                <div className="custom-control custom-checkbox">
-                  <Input
-                    className="custom-control-input"
-                    id="termsOfUseCheck"
-                    type="checkbox"
-                    name="termsofuse"
-                    value={signUpForm.termsofuse}
-                    onClick={onSignUpFormChange}
-                  />
-                  <Label
-                    className="custom-control-label"
-                    htmlFor="termsOfUseCheck"
-                    check
-                  >
-                    {t("oldEnough")}{" "}
-                    <a href="#" title="" rel="bookmark" target="_blank">
-                      <u>{t("preliminary")}</u>
-                    </a>{" "}
-                    {t("common:and")}{" "}
-                    <a href="#" title="" rel="bookmark" target="_blank">
-                      <u>{t("termsOfService")}</u>
-                    </a>{" "}
-                    {t("readAndAgree")}
-                  </Label>
-                </div>
-                <div className="custom-control custom-checkbox">
-                  <Input
-                    className="custom-control-input"
-                    id="announcementsCheck"
-                    type="checkbox"
-                    name="ecommerce"
-                    value={signUpForm.ecommerce}
-                    onChange={onSignUpFormChange}
-                  />
-                  <Label
-                    className="custom-control-label"
-                    htmlFor="announcementsCheck"
-                    check
-                  >
-                    {t("commercialConsent")}
-                  </Label>
-                </div>
-              </div>
-              <Button
-                variant="success"
-                className="w-100"
-                onClick={submitSignup}
-                disabled={isSigningup}
-              >
-                {t("signup").toUpperCase()}
-              </Button>
-            </Form>
-          </div>
-        </ModalBody>
-      </Modal>
+        submit={submitSignup}
+        clearModals={clearOpenModals}
+        errorMessage={signupError}
+        isSigningup={isSigningup}
+        countryPhoneCode={countryPhoneCode}
+      />
     </div>
   );
 };

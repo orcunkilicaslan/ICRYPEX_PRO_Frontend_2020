@@ -63,7 +63,7 @@ export const fetchSettings = createAsyncThunk(
     } = getState();
 
     try {
-      const response = await api.fetchSettings(
+      const initialResponse = await api.fetchSettings(
         { mediumid, versionno, settingno },
         {
           headers: {
@@ -72,6 +72,15 @@ export const fetchSettings = createAsyncThunk(
         }
       );
 
+      const latestsettingno = initialResponse?.data?.description?.settingno;
+      const response = await api.fetchSettings(
+        { mediumid, versionno, settingno: latestsettingno - 1 },
+        {
+          headers: {
+            "x-access-token": prelogintoken,
+          },
+        }
+      );
       return response.data;
     } catch ({ data }) {
       return rejectWithValue(data);
@@ -214,6 +223,7 @@ const apiSlice = createSlice({
       state.prelogintoken = action?.payload?.description;
     },
     [fetchSettings.fulfilled]: (state, action) => {
+      state.settingno = action?.payload?.description?.settingno;
       state.settings = action?.payload?.description?.settings;
     },
     [signinWithSms.fulfilled]: (state, action) => {

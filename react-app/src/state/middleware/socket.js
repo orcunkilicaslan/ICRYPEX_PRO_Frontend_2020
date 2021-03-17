@@ -22,13 +22,13 @@ export default function createSocketMiddleware(options) {
   const { url, ...clientOptions } = merge({}, defaults, options);
   const client = io(url, clientOptions);
 
-  return ({ dispatch, getState }) => {
-    client.on("connect", () => {
+  return ({ dispatch }) => {
+    client.on("connect", function onConnect() {
       log("connected");
       dispatch(connected());
     });
 
-    client.on("disconnect", reason => {
+    client.on("disconnect", function onDisconnect(reason) {
       log("disconnected %s", reason);
       dispatch(disconnected(reason));
       // if (reason === "io server disconnect") {
@@ -37,26 +37,9 @@ export default function createSocketMiddleware(options) {
       // }
     });
 
-    client.on("connect_error", error => log("connection error %O", error));
-    client.io.on("reconnect_attempt", attempt => {
-      log(`attempting reconnection no ${attempt}`);
-      // on reconnection, reset the transports option, as the Websocket
-      // connection may have failed (caused by proxy, firewall, browser, ...)
-      client.io.opts.transports = ["polling", "websocket"];
-    });
+    client.on("connect_error", onConnectError);
 
-    client.io.on("reconnect", attempt => {
-      log(`reconnected on attempt ${attempt}`);
-    });
-
-    client.io.on("reconnect_error", error => {
-      log("reconnection error %s", error.message);
-    });
-
-    client.io.on("reconnect_failed", () => log("reconnection failed"));
-    // client.io.on("ping", () => log("ping"));
-
-    client.onAny((key, data) => {
+    client.onAny(function onAny(key, data) {
       if (key.endsWith("orderbook")) {
         log.data("%s: %d buytotal", key, data?.buytotal);
         dispatch(setOrderBook(key, data));
@@ -68,6 +51,11 @@ export default function createSocketMiddleware(options) {
         dispatch(setOrderHistory(key, data));
       }
     });
+
+    client.io.on("reconnect_attempt", onReconnectAttempt(client));
+    client.io.on("reconnect", onReconnect);
+    client.io.on("reconnect_error", onReconnectError);
+    client.io.on("reconnect_failed", onReconnectFailed);
 
     return next => action => {
       // if (action.type === "socket/open") {
@@ -81,4 +69,29 @@ export default function createSocketMiddleware(options) {
       next(action);
     };
   };
+}
+
+function onConnectError(error) {
+  log("connection error %O", error);
+}
+
+function onReconnectAttempt(client) {
+  return attempt => {
+    log(`attempting reconnection no ${attempt}`);
+    // on reconnection, reset the transports option, as the Websocket
+    // connection may have failed (caused by proxy, firewall, browser, ...)
+    client.io.opts.transports = ["polling", "websocket"];
+  };
+}
+
+function onReconnect(attempt) {
+  log(`reconnected on attempt ${attempt}`);
+}
+
+function onReconnectError(error) {
+  log("reconnection error %s", error.message);
+}
+
+function onReconnectFailed() {
+  log("reconnection failed");
 }

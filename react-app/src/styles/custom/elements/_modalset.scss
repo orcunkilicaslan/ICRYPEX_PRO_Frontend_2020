@@ -123,6 +123,14 @@
       display: block;
     }
 
+    .animation-alert-icons{
+      @include flexbox-display-flex();
+      @include flexbox-align-items(center);
+      @include flexbox-justify-content(center);
+
+      .alert-icons-warning::before{left: 0;}
+    }
+
     h1,h2,h3,h4,h5,h6{
       color: $site-clr-white;
       @include responsive-font-size($font-size-base);
@@ -135,7 +143,14 @@
   &-sm{
 
     .modal-confirm{
+
       i.icon-sprtlgclrd{}
+
+      .animation-alert-icons{
+        @include scale(1.5);
+        padding: 15px 0 20px;
+      }
+
     }
 
   }
