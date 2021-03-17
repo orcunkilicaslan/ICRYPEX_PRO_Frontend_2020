@@ -1,207 +1,199 @@
 import { useState } from "react";
-import { Row, Col, Label, Input, ButtonGroup } from "reactstrap";
-import { useClientRect } from "~/state/hooks";
+import {
+  Row,
+  Col,
+  Label,
+  Input,
+  ButtonGroup,
+  Form,
+  FormGroup,
+} from "reactstrap";
 import classnames from "classnames";
+import { useTranslation } from "react-i18next";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
+import { useClientRect, useCurrencies } from "~/state/hooks/";
 
-const historytable = [
-  {
-    id: "01",
-    idnmbr: "MR-99999",
-    date: "21.02.2020",
-    time: "18:23",
-    pair: "BTC/TRY",
-    typetext: "Stop Limit",
-    typeresult1: "1",
-    typeresult2: "Alış",
-    average: "22,430 TRY",
-    price: "22,430 TRY",
-    transaction: "1,43004833 BTC",
-    amount: "1,43004833 BTC",
-    total: "50.98588353 TRY",
-    commission: "10.98 TRY",
-    statustype: "1",
-    statustext: "Onaylandı",
-  },
-  {
-    id: "02",
-    idnmbr: "MR-99999",
-    date: "21.02.2020",
-    time: "18:23",
-    pair: "BTC/ETH",
-    typetext: "Market Limit",
-    typeresult1: "1",
-    typeresult2: "Alış",
-    average: "35,120 TRY",
-    price: "35,120 TRY",
-    transaction: "1,47050968 BTC",
-    amount: "1,47050968 BTC",
-    total: "43,99958890 TRY",
-    commission: "9.99 TRY",
-    statustype: "1",
-    statustext: "Onaylandı",
-  },
-  {
-    id: "03",
-    idnmbr: "MR-99999",
-    date: "21.02.2020",
-    time: "18:23",
-    pair: "BTC/EOS",
-    typetext: "Stop Limit",
-    typeresult1: "0",
-    typeresult2: "Satış",
-    average: "3.469 TRY",
-    price: "3.469 TRY",
-    transaction: "1,28947736 BTC",
-    amount: "1,28947736 BTC",
-    total: "23,74630933 TRY",
-    commission: "3,74 TRY",
-    statustype: "1",
-    statustext: "Onaylandı",
-  },
-  {
-    id: "04",
-    idnmbr: "MR-99999",
-    date: "21.02.2020",
-    time: "18:23",
-    pair: "BTC/XRP",
-    typetext: "Market Limit",
-    typeresult1: "1",
-    typeresult2: "Satış",
-    average: "41,956 TRY",
-    price: "41,956 TRY",
-    transaction: "1,29846500 BTC",
-    amount: "1,29846500 BTC",
-    total: "65,84947640 TRY",
-    commission: "5,84 TRY",
-    statustype: "1",
-    statustext: "Onaylandı",
-  },
-  {
-    id: "05",
-    idnmbr: "MR-99999",
-    date: "21.02.2020",
-    time: "18:23",
-    pair: "BTC/XRP",
-    typetext: "Market Limit",
-    typeresult1: "1",
-    typeresult2: "Alış",
-    average: "1.029 TRY",
-    price: "1.029 TRY",
-    transaction: "1,75893923 BTC",
-    amount: "1,75893923 BTC",
-    total: "76,74638908 TRY",
-    commission: "7,74 TRY",
-    statustype: "1",
-    statustext: "Onaylandı",
-  },
+const orderBy = [
+  "Önce Yeni Tarihli",
+  "Önce Eski Tarihli",
+  "Önce Para Yatırma",
+  "Önce Para Çekme",
+  "Önce TRY",
+  "Önce USD",
+  "Önce Kripto Para",
+  "Önce Banka",
+  "Önce Papara",
 ];
+const transactionTypes = [
+  { label: "Yatırma", name: "isdeposit" },
+  { label: "Çekme", name: "iswithdraw" },
+  { label: "Tamamlandı", name: "isrealized" },
+  { label: "İptal", name: "iscanceled" },
+];
+const periodBy = ["1G", "1H", "2H", "1A", "3A"];
 
 const OpenOrderTransactionHistory = props => {
-
+  const dispatch = useDispatch();
+  const { t } = useTranslation(["form"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
+  const { all: allCurrencies } = useCurrencies();
+  const [apiError, setApiError] = useState("");
+  const { register, handleSubmit, errors, watch, reset, setValue } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      currencyids: [],
+      orderby: "",
+      isdeposit: true,
+      iswithdraw: true,
+      isrealized: true,
+      iscanceled: true,
+      periodby: "",
+    },
+  });
+  const { periodby: watchedPeriodby } = watch();
 
-  const [selected1, setSelected1] = useState("");
-  const [selected2, setSelected2] = useState("");
-  const [selected3, setSelected3] = useState("");
+  const onSubmit = data => {
+    const { currencyids } = data;
+    const toSubmit = { ...data, currencyids: currencyids.map(Number) };
+    console.log({ toSubmit });
+  };
 
   return (
     <div className="openorders-history">
-      <Row className="tabcont tabcont-filterbar siteformui">
-        <Col>
-          <Input
-            className="custom-select custom-select-sm"
-            type="select"
-            value={selected1}
-            onChange={({ target }) => {
-              setSelected1(target.value);
-            }}
-          >
-            {["Çift", "...", "..."].map((el, idx) => {
-              return <option key={`${el}_${idx}`}>{el}</option>;
-            })}
-          </Input>
-        </Col>
-        <Col>
-          <Input
-            className="custom-select custom-select-sm"
-            type="select"
-            value={selected2}
-            onChange={({ target }) => {
-              setSelected2(target.value);
-            }}
-          >
-            {["İşlem Tipi", "Stop Limit", "Market", "Limit"].map((el, idx) => {
-              return (
-                <option disabled={idx === 0} key={`${el}_${idx}`}>
-                  {el}
-                </option>
-              );
-            })}
-          </Input>
-        </Col>
-        <Col>
-          <Input
-            className="custom-select custom-select-sm"
-            type="select"
-            value={selected3}
-            onChange={({ target }) => {
-              setSelected3(target.value);
-            }}
-          >
-            {["Durum", "Gerçekleşti", "Beklemede"].map((el, idx) => {
-              return (
-                <option disabled={idx === 0} key={`${el}_${idx}`}>
-                  {el}
-                </option>
-              );
-            })}
-          </Input>
-        </Col>
-        <Col>
-          <ButtonGroup size="sm" className="w-100">
-            <Button type="button" size="sm" variant="secondary active">
-              1G
-            </Button>
-            <Button type="button" size="sm" variant="secondary">
-              1H
-            </Button>
-            <Button type="button" size="sm" variant="secondary">
-              1A
-            </Button>
-            <Button type="button" size="sm" variant="secondary">
-              3A
-            </Button>
-          </ButtonGroup>
-        </Col>
-        <Col xs="auto">
-          <Input
-            type="text"
-            bsSize="sm"
-            placeholder="Başlangıç - Bitiş Tarihi"
-          />
-        </Col>
-        <Col xs="auto">
-          <div className="custom-control custom-checkbox">
+      <Form
+        className="tabcont tabcont-filterbar siteformui"
+        autoComplete="off"
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <Row className="tabcont tabcont-filterbar">
+          <Col>
             <Input
-              className="custom-control-input"
-              type="checkbox"
-              id="ordersHideOtherPairs"
-              defaultChecked
-            />
-            <Label
-              className="custom-control-label"
-              htmlFor="ordersHideOtherPairs"
-              check
+              className="custom-select custom-select-sm"
+              type="select"
+              multiple
+              size={2}
+              name="currencyids"
+              innerRef={register({
+                required: t("isRequired"),
+              })}
             >
-              Diğer Çiftleri Gizle
-            </Label>
-          </div>
-        </Col>
-      </Row>
+              {allCurrencies.map(({ symbol, id }) => {
+                return (
+                  <option value={Number(id)} key={symbol}>
+                    {symbol}
+                  </option>
+                );
+              })}
+            </Input>
+            <div>
+              {errors.currencyids && (
+                <span style={{ color: "red", fontSize: "1rem" }}>
+                  {errors.currencyids?.message}
+                </span>
+              )}
+            </div>
+          </Col>
+          <Col>
+            <Input
+              className="custom-select custom-select-sm"
+              type="select"
+              name="orderby"
+              innerRef={register({
+                valueAsNumber: true,
+              })}
+            >
+              {orderBy.map((el, idx) => {
+                return (
+                  <option value={idx + 1} key={`${el}_${idx}`}>
+                    {el}
+                  </option>
+                );
+              })}
+            </Input>
+          </Col>
+          <Col>
+            <FormGroup check inline>
+              {transactionTypes.map(({ label, name }) => {
+                return (
+                  <Label key={name} check>
+                    <Input
+                      name={name}
+                      type="checkbox"
+                      innerRef={register({ valueAsNumber: true })}
+                    />
+                    {label}{" "}
+                  </Label>
+                );
+              })}
+            </FormGroup>
+          </Col>
+          <Col>
+            <Input
+              name="periodby"
+              innerRef={register({ valueAsNumber: true })}
+              style={{ display: "none" }}
+            />
+            <ButtonGroup size="sm" className="w-100">
+              {periodBy.map((el, idx) => {
+                const cls = classnames({ active: watchedPeriodby === idx + 1 });
+
+                return (
+                  <Button
+                    key={`${el}_${idx}`}
+                    type="button"
+                    size="sm"
+                    className={cls}
+                    variant="secondary"
+                    onClick={() =>
+                      setValue("periodby", idx + 1, { shouldValidate: true })
+                    }
+                  >
+                    {el}
+                  </Button>
+                );
+              })}
+            </ButtonGroup>
+          </Col>
+          <Col xs="auto">
+            <Input
+              type="text"
+              bsSize="sm"
+              placeholder="Başlangıç - Bitiş Tarihi"
+            />
+          </Col>
+          {/* <Col xs="auto">
+            <div className="custom-control custom-checkbox">
+              <Input
+                className="custom-control-input"
+                type="checkbox"
+                id="ordersHideOtherPairs"
+                defaultChecked
+              />
+              <Label
+                className="custom-control-label"
+                htmlFor="ordersHideOtherPairs"
+                check
+              >
+                Diğer Çiftleri Gizle
+              </Label>
+            </div>
+          </Col> */}
+        </Row>
+        <ButtonGroup>
+          <Button variant="secondary" className="w-100 active" type="submit">
+            Filtrele
+          </Button>
+          <Button variant="secondary" className="active" onClick={reset}>
+            Sıfırla
+          </Button>
+        </ButtonGroup>
+      </Form>
       <div className="ootransactionhistorytable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
           <Table.Thead scrollbar>
@@ -243,10 +235,10 @@ const OpenOrderTransactionHistory = props => {
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody
-              striped
-              hovered
-              scrollbar
-              scrollbarstyles={{ height: `${tableHeight - 36}px` }}
+            striped
+            hovered
+            scrollbar
+            scrollbarstyles={{ height: `${tableHeight - 36}px` }}
           >
             {historytable.map(
               ({

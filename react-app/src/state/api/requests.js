@@ -45,6 +45,14 @@ export const depositBankwire = buildRequest("/deposit/bankwire");
 export const depositPapara = buildRequest("/deposit/papara");
 export const depositCrypto = buildRequest("/deposit/crypto");
 export const fetchBankAccounts = buildCachedRequest("/bankaccounts", ms("1h"));
+export const fetchPendingTransactions = buildCachedRequest(
+  "/pendingtransactions",
+  ms("10m")
+);
+export const fetchTransactionHistories = buildCachedRequest(
+  "/transactionhistories",
+  ms("10m")
+);
 
 function buildRequest(uri) {
   return (args = {}, opts = {}) => {
