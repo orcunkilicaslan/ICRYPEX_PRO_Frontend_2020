@@ -17,7 +17,7 @@ import { depositCrypto } from "~/state/slices/deposit.slice";
 
 const OpenOrderDepoWithTabDepositCrypto = props => {
   const dispatch = useDispatch();
-  const { cryptoCurrencies = [] } = useCurrencies();
+  const { cryptoCurrencies = [], tokenCurrencies = [] } = useCurrencies();
   const { isDepositingCrypto } = useSelector(state => state.deposit);
   const { groupedCryptoAddresses = {} } = useSelector(state => state.assets);
   const [apiError, setApiError] = useState("");
@@ -27,6 +27,8 @@ const OpenOrderDepoWithTabDepositCrypto = props => {
       symbol: "",
     },
   });
+  const visibleCurrencies = cryptoCurrencies.concat(tokenCurrencies);
+
   const getAddress = () => {
     const watchedSymbol = watch("symbol");
 
@@ -39,7 +41,7 @@ const OpenOrderDepoWithTabDepositCrypto = props => {
 
   const onSubmit = async data => {
     const { symbol: _symbol } = data;
-    const currency = cryptoCurrencies.find(({ symbol }) => symbol === _symbol);
+    const currency = visibleCurrencies.find(({ symbol }) => symbol === _symbol);
     const currencyid = parseInt(currency?.id, 10);
 
     if (currencyid) {
@@ -73,7 +75,7 @@ const OpenOrderDepoWithTabDepositCrypto = props => {
                   name="symbol"
                   innerRef={register()}
                 >
-                  {cryptoCurrencies.map(({ symbol }) => {
+                  {visibleCurrencies.map(({ symbol }) => {
                     return (
                       <option key={symbol} value={symbol}>
                         {symbol}
