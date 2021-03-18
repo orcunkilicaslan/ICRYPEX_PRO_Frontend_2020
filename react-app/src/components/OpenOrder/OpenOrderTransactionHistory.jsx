@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   Row,
   Col,
@@ -11,12 +11,13 @@ import {
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
 import { useClientRect, useCurrencies } from "~/state/hooks/";
+import { fetchTransactionHistories } from "~/state/slices/transaction.slice";
 
 const historytable = [
   {
@@ -134,26 +135,68 @@ const OpenOrderTransactionHistory = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["form"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
-  const { all: allCurrencies } = useCurrencies();
+  const { activeCurrencies } = useCurrencies();
+  const { history } = useSelector(state => state.transaction);
+  const { accesstoken } = useSelector(state => state.api);
   const [apiError, setApiError] = useState("");
-  const { register, handleSubmit, errors, watch, reset, setValue } = useForm({
-    mode: "onChange",
-    defaultValues: {
-      currencyids: [],
-      orderby: "",
+
+  const validCurrencies = useMemo(
+    () => activeCurrencies.filter(({ symbol }) => symbol !== "EUR"),
+    [activeCurrencies]
+  );
+
+  const defaultValues = useMemo(() => {
+    const currencyids = validCurrencies
+      .map(({ id }) => Number(id))
+      .sort((a, b) => a - b);
+
+    return {
+      currencyids,
+      orderby: 1,
       isdeposit: true,
       iswithdraw: true,
       isrealized: true,
       iscanceled: true,
-      periodby: "",
-    },
+      periodby: 2,
+    };
+  }, [validCurrencies]);
+
+  const {
+    register,
+    handleSubmit,
+    errors,
+    watch,
+    reset,
+    setValue,
+    clearErrors,
+  } = useForm({
+    mode: "onChange",
+    defaultValues,
   });
   const { periodby: watchedPeriodby } = watch();
 
-  const onSubmit = data => {
+  useEffect(() => {
+    if (accesstoken) dispatch(fetchTransactionHistories(defaultValues));
+  }, [accesstoken, defaultValues, dispatch]);
+
+  const onSubmit = async data => {
+    setApiError("");
     const { currencyids } = data;
     const toSubmit = { ...data, currencyids: currencyids.map(Number) };
-    console.log({ toSubmit });
+
+    const { payload } = await dispatch(fetchTransactionHistories(toSubmit));
+
+    if (!payload?.status) {
+      setApiError(payload?.errormessage);
+    } else {
+      setApiError("");
+    }
+  };
+
+  const onReset = () => {
+    reset(defaultValues);
+    setApiError("");
+    clearErrors();
   };
 
   return (
@@ -170,13 +213,13 @@ const OpenOrderTransactionHistory = props => {
               className="custom-select custom-select-sm"
               type="select"
               multiple
-              size={2}
+              size={4}
               name="currencyids"
               innerRef={register({
                 required: t("isRequired"),
               })}
             >
-              {allCurrencies.map(({ symbol, id }) => {
+              {validCurrencies.map(({ symbol, id }) => {
                 return (
                   <option value={Number(id)} key={symbol}>
                     {symbol}
@@ -282,10 +325,13 @@ const OpenOrderTransactionHistory = props => {
           <Button variant="secondary" className="w-100 active" type="submit">
             Filtrele
           </Button>
-          <Button variant="secondary" className="active" onClick={reset}>
+          <Button variant="secondary" className="active" onClick={onReset}>
             Sıfırla
           </Button>
         </ButtonGroup>
+        {apiError && (
+          <span style={{ color: "coral", fontSize: "1rem" }}>{apiError}</span>
+        )}
       </Form>
       <div className="ootransactionhistorytable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>

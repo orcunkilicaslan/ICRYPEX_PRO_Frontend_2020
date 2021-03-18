@@ -12,6 +12,7 @@ import assetsReducer from "./slices/assets.slice";
 import orderReducer from "./slices/order.slice";
 import withdrawReducer from "./slices/withdraw.slice";
 import depositReducer from "./slices/deposit.slice";
+import transactionReducer from "./slices/transaction.slice";
 
 const apiPersistConfig = {
   key: "api",
@@ -62,6 +63,7 @@ const rootReducer = combineReducers({
   order: orderReducer,
   withdraw: withdrawReducer,
   deposit: depositReducer,
+  transaction: transactionReducer,
 });
 
 export default rootReducer;
