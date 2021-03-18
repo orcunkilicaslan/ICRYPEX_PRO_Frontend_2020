@@ -2,6 +2,8 @@ import { fetch as _fetch } from "whatwg-fetch";
 import retry from "@doruk/fetch-retry";
 import merge from "lodash/merge";
 import qs from "querystring";
+import { isFuture } from "date-fns";
+import ms from "ms";
 
 import { store } from "..";
 import {
@@ -18,19 +20,22 @@ const fetch = retry(_fetch);
 const log = debug.extend("api");
 
 const instance = {
-  post: (uri, body, opts = {}) => {
+  post: (uri, body, opts) => {
     const { ui } = store.getState();
-    const { headers } = opts;
+    const _headers = opts?.headers;
+    const defaults = {
+      Accept: "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
+      "x-culture-code": ui.lang || "tr",
+    };
+    const headers = merge({}, defaults, _headers);
+
     const options = {
       method: "POST",
       body,
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-culture-code": ui.lang || "tr",
-      },
+      headers,
       credentials: "include",
-      retries: 5 * (isProd ? 10 : 1),
+      retries: 5 * (isProd ? 2 : 1),
       retryDelay: (attempt, error, response) => {
         return Math.pow(2, attempt % 15) * 1000;
       },
@@ -50,36 +55,58 @@ const instance = {
           if (data?.status === 0) {
             log(`${uri} | ${data.type} | ${data.errormessage}`);
 
+            const { api } = store.getState();
+            const {
+              accesstoken,
+              prelogintoken,
+              accesstokenExpiresAt = Date.now(),
+              prelogintokenExpiresAt = Date.now(),
+            } = api;
+
             switch (data?.type) {
               case "prelogintoken": {
-                const { payload } = await store.dispatch(fetchPreloginToken());
+                let token;
 
-                return doRetry({
-                  headers: { "x-access-token": payload?.description },
-                });
+                if (isFuture(prelogintokenExpiresAt - ms("3s"))) {
+                  token = prelogintoken;
+                } else {
+                  const { payload } = await store.dispatch(
+                    fetchPreloginToken()
+                  );
+                  token = payload?.description;
+                }
+
+                if (!token) return false;
+
+                return doRetry({ headers: { "x-access-token": token } });
               }
               case "devicekey": {
                 const data = qs.parse(body);
                 const { payload } = await store.dispatch(
                   fetchServerDeviceKey()
                 );
+                const serverdevicekey = payload?.description;
+
+                if (!serverdevicekey) return false;
 
                 return doRetry({
                   body: qs.stringify({
                     ...data,
-                    serverdevicekey: payload?.description,
+                    serverdevicekey,
                   }),
                 });
               }
               case "accesstoken": {
-                const { payload } = await store.dispatch(refreshToken());
+                let token;
 
-                if (!payload.status) return false;
+                if (isFuture(accesstokenExpiresAt - ms("3s"))) {
+                  token = accesstoken;
+                } else {
+                  const { payload } = await store.dispatch(refreshToken());
+                  token = payload?.description;
+                }
 
-                return doRetry({
-                  headers: { "x-access-token": payload?.description },
-                  retries: isProd ? 10 : 5,
-                });
+                return doRetry({ headers: { "x-access-token": token } });
               }
               default:
                 return false;
@@ -91,17 +118,12 @@ const instance = {
 
         function doRetry(value) {
           log(
-            `${response?.status} | Retrying request to ${uri}. Attempt no ${
-              attempt + 1
-            }`,
-            response?.data
+            `${response?.status} | Retrying request to ${uri}. Attempt no ${attempt}`
           );
           return value || true;
         }
       },
     };
-
-    merge(options.headers, headers);
 
     return fetch(`${baseURL}${uri}`, options).then(async response => {
       const { data } = await marshallJSONData(response);

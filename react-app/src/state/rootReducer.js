@@ -16,7 +16,15 @@ import depositReducer from "./slices/deposit.slice";
 const apiPersistConfig = {
   key: "api",
   storage,
-  blacklist: ["settingno", "mediumid", "versionno"],
+  blacklist: [
+    "settingno",
+    "mediumid",
+    "versionno",
+    "isRefreshingAccessToken",
+    "isRefreshingPreloginToken",
+    "accesstokenExpiresAt",
+    "prelogintokenExpiresAt",
+  ],
 };
 
 const UIPersistConfig = {
