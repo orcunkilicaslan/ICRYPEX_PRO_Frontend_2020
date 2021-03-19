@@ -29,7 +29,7 @@ export default function SignupModal(props) {
     ...rest
   } = props;
   const { t } = useTranslation(["login", "form"]);
-  const { register, handleSubmit, errors, clearErrors } = useForm({
+  const { register, handleSubmit, errors, watch } = useForm({
     mode: "onChange",
     defaultValues: {
       firstname: "",
@@ -43,6 +43,8 @@ export default function SignupModal(props) {
       ecommerce: false,
     },
   });
+
+  const { countrycode: watchedCountrycode } = watch();
 
   const onSubmit = data => {
     submit(data);
@@ -115,7 +117,7 @@ export default function SignupModal(props) {
                     className="custom-select"
                     type="select"
                     name="countrycode"
-                    innerRef={register()}
+                    innerRef={register}
                   >
                     {countryPhoneCode?.map((code, idx) => {
                       return (
@@ -131,7 +133,20 @@ export default function SignupModal(props) {
                   type="text"
                   required
                   name="phoneno"
-                  innerRef={register({ required: t("form:isRequired") })}
+                  innerRef={register({
+                    required: t("form:isRequired"),
+                    validate: value => {
+                      const parsedCode = parseInt(watchedCountrycode, 10);
+
+                      if (parsedCode === 90) {
+                        if (value.length <= 10) return true;
+                        else return t("form:shouldBeMaxLength", { value: 10 });
+                      } else {
+                        if (value.length <= 20) return true;
+                        else return t("form:shouldBeMaxLength", { value: 20 });
+                      }
+                    },
+                  })}
                 />
                 <Label>{t("phone")}</Label>
                 <div>
