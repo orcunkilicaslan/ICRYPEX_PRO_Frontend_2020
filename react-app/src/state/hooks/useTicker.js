@@ -1,6 +1,5 @@
 import { useReducer, useCallback } from "react";
 import { useTransition } from "react-spring";
-import ms from "ms";
 
 const types = {
   NEXT: 0,

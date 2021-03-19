@@ -46,9 +46,11 @@ export const formatDateDistance = (
   }
 };
 
-let deviceuuid, localkey;
+let deviceuuid;
 export const makeLocalKey = async secret => {
-  if (!(deviceuuid && localkey)) {
+  let localkey;
+
+  if (!deviceuuid) {
     try {
       const { fingerprint } = await getFpInfo();
 

@@ -1,17 +1,20 @@
 import { useSelector } from "react-redux";
 
 const usePrices = (props = {}) => {
-  const { all, selected, fiatCurrency, cryptoCurrency } = useSelector(
-    state => state.pair
-  );
-  const pricesData = useSelector(state => state.socket.prices);
+  const {
+    all: allPairs,
+    selected: selectedPair,
+    fiatCurrency,
+    cryptoCurrency,
+  } = useSelector(state => state.pair);
+  const allPrices = useSelector(state => state.socket.prices);
 
   return {
-    allPrices: pricesData,
-    allPairs: all,
-    selectedPair: selected,
-    selectedPrice: pricesData?.find(
-      ({ symbol }) => symbol === selected?.symbol
+    allPrices,
+    allPairs,
+    selectedPair,
+    selectedPrice: allPrices?.find(
+      ({ symbol }) => symbol === selectedPair?.symbol
     ),
     fiatCurrency,
     cryptoCurrency,

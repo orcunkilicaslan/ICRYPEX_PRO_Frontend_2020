@@ -12,6 +12,7 @@ import assetsReducer from "./slices/assets.slice";
 import orderReducer from "./slices/order.slice";
 import withdrawReducer from "./slices/withdraw.slice";
 import depositReducer from "./slices/deposit.slice";
+import transactionReducer from "./slices/transaction.slice";
 import balanceReducer from "./slices/balance.slice";
 import easyBuyReducer from "./slices/easybuy.slice";
 import easySellReducer from "./slices/easysell.slice";
@@ -19,7 +20,15 @@ import easySellReducer from "./slices/easysell.slice";
 const apiPersistConfig = {
   key: "api",
   storage,
-  blacklist: ["settingno", "mediumid", "versionno"],
+  blacklist: [
+    "settingno",
+    "mediumid",
+    "versionno",
+    "isRefreshingAccessToken",
+    "isRefreshingPreloginToken",
+    "accesstokenExpiresAt",
+    "prelogintokenExpiresAt",
+  ],
 };
 
 const UIPersistConfig = {
@@ -60,6 +69,7 @@ const rootReducer = combineReducers({
   easySell: easySellReducer,
   withdraw: withdrawReducer,
   deposit: depositReducer,
+  transaction: transactionReducer,
 });
 
 export default rootReducer;

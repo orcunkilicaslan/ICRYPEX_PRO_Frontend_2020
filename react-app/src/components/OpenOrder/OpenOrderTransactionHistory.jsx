@@ -1,11 +1,23 @@
-import { useState } from "react";
-import { Row, Col, Label, Input, ButtonGroup } from "reactstrap";
-import { useClientRect } from "~/state/hooks";
+import { useState, useMemo, useEffect } from "react";
+import {
+  Row,
+  Col,
+  Label,
+  Input,
+  ButtonGroup,
+  Form,
+  FormGroup,
+} from "reactstrap";
 import classnames from "classnames";
+import { useTranslation } from "react-i18next";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
+import { useClientRect, useCurrencies } from "~/state/hooks/";
+import { fetchTransactionHistories } from "~/state/slices/transaction.slice";
 
 const historytable = [
   {
@@ -100,108 +112,227 @@ const historytable = [
   },
 ];
 
+const orderBy = [
+  "Önce Yeni Tarihli",
+  "Önce Eski Tarihli",
+  "Önce Para Yatırma",
+  "Önce Para Çekme",
+  "Önce TRY",
+  "Önce USD",
+  "Önce Kripto Para",
+  "Önce Banka",
+  "Önce Papara",
+];
+const transactionTypes = [
+  { label: "Yatırma", name: "isdeposit" },
+  { label: "Çekme", name: "iswithdraw" },
+  { label: "Tamamlandı", name: "isrealized" },
+  { label: "İptal", name: "iscanceled" },
+];
+const periodBy = ["1G", "1H", "2H", "1A", "3A"];
+
 const OpenOrderTransactionHistory = props => {
-
+  const dispatch = useDispatch();
+  const { t } = useTranslation(["form"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
+  const { activeCurrencies } = useCurrencies();
+  const { history } = useSelector(state => state.transaction);
+  const { accesstoken } = useSelector(state => state.api);
+  const [apiError, setApiError] = useState("");
 
-  const [selected1, setSelected1] = useState("");
-  const [selected2, setSelected2] = useState("");
-  const [selected3, setSelected3] = useState("");
+  const validCurrencies = useMemo(
+    () => activeCurrencies.filter(({ symbol }) => symbol !== "EUR"),
+    [activeCurrencies]
+  );
+
+  const defaultValues = useMemo(() => {
+    const currencyids = validCurrencies
+      .map(({ id }) => Number(id))
+      .sort((a, b) => a - b);
+
+    return {
+      currencyids,
+      orderby: 1,
+      isdeposit: true,
+      iswithdraw: true,
+      isrealized: true,
+      iscanceled: true,
+      periodby: 2,
+    };
+  }, [validCurrencies]);
+
+  const {
+    register,
+    handleSubmit,
+    errors,
+    watch,
+    reset,
+    setValue,
+    clearErrors,
+  } = useForm({
+    mode: "onChange",
+    defaultValues,
+  });
+  const { periodby: watchedPeriodby } = watch();
+
+  useEffect(() => {
+    if (accesstoken) dispatch(fetchTransactionHistories(defaultValues));
+  }, [accesstoken, defaultValues, dispatch]);
+
+  const onSubmit = async data => {
+    setApiError("");
+    const { currencyids } = data;
+    const toSubmit = { ...data, currencyids: currencyids.map(Number) };
+
+    const { payload } = await dispatch(fetchTransactionHistories(toSubmit));
+
+    if (!payload?.status) {
+      setApiError(payload?.errormessage);
+    } else {
+      setApiError("");
+    }
+  };
+
+  const onReset = () => {
+    reset(defaultValues);
+    setApiError("");
+    clearErrors();
+  };
 
   return (
     <div className="openorders-history">
-      <Row className="tabcont tabcont-filterbar siteformui">
-        <Col>
-          <Input
-            className="custom-select custom-select-sm"
-            type="select"
-            value={selected1}
-            onChange={({ target }) => {
-              setSelected1(target.value);
-            }}
-          >
-            {["Çift", "...", "..."].map((el, idx) => {
-              return <option key={`${el}_${idx}`}>{el}</option>;
-            })}
-          </Input>
-        </Col>
-        <Col>
-          <Input
-            className="custom-select custom-select-sm"
-            type="select"
-            value={selected2}
-            onChange={({ target }) => {
-              setSelected2(target.value);
-            }}
-          >
-            {["İşlem Tipi", "Stop Limit", "Market", "Limit"].map((el, idx) => {
-              return (
-                <option disabled={idx === 0} key={`${el}_${idx}`}>
-                  {el}
-                </option>
-              );
-            })}
-          </Input>
-        </Col>
-        <Col>
-          <Input
-            className="custom-select custom-select-sm"
-            type="select"
-            value={selected3}
-            onChange={({ target }) => {
-              setSelected3(target.value);
-            }}
-          >
-            {["Durum", "Gerçekleşti", "Beklemede"].map((el, idx) => {
-              return (
-                <option disabled={idx === 0} key={`${el}_${idx}`}>
-                  {el}
-                </option>
-              );
-            })}
-          </Input>
-        </Col>
-        <Col>
-          <ButtonGroup size="sm" className="w-100">
-            <Button type="button" size="sm" variant="secondary active">
-              1G
-            </Button>
-            <Button type="button" size="sm" variant="secondary">
-              1H
-            </Button>
-            <Button type="button" size="sm" variant="secondary">
-              1A
-            </Button>
-            <Button type="button" size="sm" variant="secondary">
-              3A
-            </Button>
-          </ButtonGroup>
-        </Col>
-        <Col xs="auto">
-          <Input
-            type="text"
-            bsSize="sm"
-            placeholder="Başlangıç - Bitiş Tarihi"
-          />
-        </Col>
-        <Col xs="auto">
-          <div className="custom-control custom-checkbox">
+      <Form
+        className="tabcont tabcont-filterbar siteformui"
+        autoComplete="off"
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <Row className="tabcont tabcont-filterbar">
+          <Col>
             <Input
-              className="custom-control-input"
-              type="checkbox"
-              id="ordersHideOtherPairs"
-              defaultChecked
-            />
-            <Label
-              className="custom-control-label"
-              htmlFor="ordersHideOtherPairs"
-              check
+              className="custom-select custom-select-sm"
+              type="select"
+              multiple
+              size={4}
+              name="currencyids"
+              innerRef={register({
+                required: t("isRequired"),
+              })}
             >
-              Diğer Çiftleri Gizle
-            </Label>
-          </div>
-        </Col>
-      </Row>
+              {validCurrencies.map(({ symbol, id }) => {
+                return (
+                  <option value={Number(id)} key={symbol}>
+                    {symbol}
+                  </option>
+                );
+              })}
+            </Input>
+            <div>
+              {errors.currencyids && (
+                <span style={{ color: "red", fontSize: "1rem" }}>
+                  {errors.currencyids?.message}
+                </span>
+              )}
+            </div>
+          </Col>
+          <Col>
+            <Input
+              className="custom-select custom-select-sm"
+              type="select"
+              name="orderby"
+              innerRef={register({
+                valueAsNumber: true,
+              })}
+            >
+              {orderBy.map((el, idx) => {
+                return (
+                  <option value={idx + 1} key={`${el}_${idx}`}>
+                    {el}
+                  </option>
+                );
+              })}
+            </Input>
+          </Col>
+          <Col>
+            <FormGroup check inline>
+              {transactionTypes.map(({ label, name }) => {
+                return (
+                  <Label key={name} check>
+                    <Input
+                      name={name}
+                      type="checkbox"
+                      innerRef={register({ valueAsNumber: true })}
+                    />
+                    {label}{" "}
+                  </Label>
+                );
+              })}
+            </FormGroup>
+          </Col>
+          <Col>
+            <Input
+              name="periodby"
+              innerRef={register({ valueAsNumber: true })}
+              style={{ display: "none" }}
+            />
+            <ButtonGroup size="sm" className="w-100">
+              {periodBy.map((el, idx) => {
+                const cls = classnames({ active: watchedPeriodby === idx + 1 });
+
+                return (
+                  <Button
+                    key={`${el}_${idx}`}
+                    type="button"
+                    size="sm"
+                    className={cls}
+                    variant="secondary"
+                    onClick={() =>
+                      setValue("periodby", idx + 1, { shouldValidate: true })
+                    }
+                  >
+                    {el}
+                  </Button>
+                );
+              })}
+            </ButtonGroup>
+          </Col>
+          <Col xs="auto">
+            <Input
+              type="text"
+              bsSize="sm"
+              placeholder="Başlangıç - Bitiş Tarihi"
+            />
+          </Col>
+          {/* <Col xs="auto">
+            <div className="custom-control custom-checkbox">
+              <Input
+                className="custom-control-input"
+                type="checkbox"
+                id="ordersHideOtherPairs"
+                defaultChecked
+              />
+              <Label
+                className="custom-control-label"
+                htmlFor="ordersHideOtherPairs"
+                check
+              >
+                Diğer Çiftleri Gizle
+              </Label>
+            </div>
+          </Col> */}
+        </Row>
+        <ButtonGroup>
+          <Button variant="secondary" className="w-100 active" type="submit">
+            Filtrele
+          </Button>
+          <Button variant="secondary" className="active" onClick={onReset}>
+            Sıfırla
+          </Button>
+        </ButtonGroup>
+        {apiError && (
+          <span style={{ color: "coral", fontSize: "1rem" }}>{apiError}</span>
+        )}
+      </Form>
       <div className="ootransactionhistorytable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
           <Table.Thead scrollbar>
@@ -243,10 +374,10 @@ const OpenOrderTransactionHistory = props => {
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody
-              striped
-              hovered
-              scrollbar
-              scrollbarstyles={{ height: `${tableHeight - 36}px` }}
+            striped
+            hovered
+            scrollbar
+            scrollbarstyles={{ height: `${tableHeight - 36}px` }}
           >
             {historytable.map(
               ({

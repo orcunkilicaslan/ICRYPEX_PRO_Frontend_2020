@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import ms from "ms";
 
 import * as api from "../api";
 import { signoutUser } from "./user.slice";
@@ -52,6 +53,13 @@ export const fetchPreloginToken = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const { isRefreshingPreloginToken } = getState();
+
+      return isRefreshingPreloginToken ? false : true;
+    },
   }
 );
 
@@ -171,6 +179,13 @@ export const refreshToken = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const { isRefreshingAccessToken } = getState();
+
+      return isRefreshingAccessToken ? false : true;
+    },
   }
 );
 
@@ -184,6 +199,10 @@ const initialState = {
   versionno: "1.0.0",
   settingno: 17,
   settings: {},
+  isRefreshingAccessToken: false,
+  isRefreshingPreloginToken: false,
+  accesstokenExpiresAt: null,
+  prelogintokenExpiresAt: null,
 };
 
 const apiSlice = createSlice({
@@ -191,14 +210,10 @@ const apiSlice = createSlice({
   initialState,
   reducers: {
     setLocalKey: (state, { payload }) => {
-      if (state.localkey !== payload) {
-        state.localkey = payload;
-      }
+      state.localkey = payload;
     },
     setDeviceId: (state, { payload }) => {
-      if (state.deviceuuid !== payload) {
-        state.deviceuuid = payload;
-      }
+      state.deviceuuid = payload;
     },
     setMediumId: (state, { payload }) => {
       state.mediumid = payload;
@@ -219,31 +234,57 @@ const apiSlice = createSlice({
     [fetchServerDeviceKey.fulfilled]: (state, action) => {
       state.serverdevicekey = action?.payload?.description;
     },
+    [fetchPreloginToken.pending]: state => {
+      state.isRefreshingPreloginToken = true;
+    },
     [fetchPreloginToken.fulfilled]: (state, action) => {
       state.prelogintoken = action?.payload?.description;
+      state.isRefreshingPreloginToken = false;
+      state.prelogintokenExpiresAt = Date.now() + ms("1h");
+    },
+    [fetchPreloginToken.rejected]: state => {
+      state.isRefreshingPreloginToken = false;
     },
     [fetchSettings.fulfilled]: (state, action) => {
       state.settingno = action?.payload?.description?.settingno;
       state.settings = action?.payload?.description?.settings;
     },
+    [signinWithSms.pending]: state => {
+      state.accesstoken = null;
+      state.accesstokenExpiresAt = null;
+    },
     [signinWithSms.fulfilled]: (state, action) => {
       state.accesstoken = action?.payload?.description;
+      state.accesstokenExpiresAt = Date.now() + ms("10m");
+    },
+    [signinWith2FA.pending]: state => {
+      state.accesstoken = null;
+      state.accesstokenExpiresAt = null;
     },
     [signinWith2FA.fulfilled]: (state, action) => {
       state.accesstoken = action?.payload?.description;
+      state.accesstokenExpiresAt = Date.now() + ms("10m");
+    },
+    [refreshToken.pending]: state => {
+      state.isRefreshingAccessToken = true;
     },
     [refreshToken.fulfilled]: (state, action) => {
       state.accesstoken = action?.payload?.description;
+      state.accesstokenExpiresAt = Date.now() + ms("10m");
+      state.isRefreshingAccessToken = false;
     },
     [refreshToken.rejected]: state => {
-      state.accesstoken = null;
+      state.isRefreshingAccessToken = false;
     },
     [signoutUser.fulfilled]: state => {
       state.accesstoken = null;
+      state.accesstokenExpiresAt = null;
     },
     [signoutUser.rejected]: state => {
       state.accesstoken = null;
       state.prelogintoken = null;
+      state.accesstokenExpiresAt = null;
+      state.prelogintokenExpiresAt = null;
     },
   },
 });

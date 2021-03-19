@@ -7,10 +7,7 @@ import api from ".";
 const cache = createCache();
 
 export const fetchServerDeviceKey = buildRequest("/getserverdevicekey");
-export const fetchPreloginToken = buildCachedRequest(
-  "/getprelogintoken",
-  ms("25m")
-);
+export const fetchPreloginToken = buildRequest("/getprelogintoken");
 export const fetchSettings = buildCachedRequest("/settings");
 export const signinWithSms = buildRequest("/signinwithsms");
 export const signinWith2FA = buildRequest("/signinwith2fa");
@@ -18,7 +15,7 @@ export const signupUser = buildRequest("/signup");
 export const signinUser = buildRequest("/signin");
 export const signoutUser = buildRequest("/signout");
 export const fetchUserInfo = buildCachedRequest("/userinfo");
-export const refreshToken = buildCachedRequest("/refreshtoken", ms("5m"));
+export const refreshToken = buildRequest("/refreshtoken");
 export const fetchPriceAlarms = buildRequest("/pricealarms");
 export const fetchPairPriceAlarms = buildRequest("/pairpricealarms");
 export const createPairPriceAlarm = buildRequest("/pairpricealarms/create");
@@ -37,17 +34,23 @@ export const withdrawBankwire = buildRequest("/withdraw/bankwire");
 export const withdrawPapara = buildRequest("/withdraw/papara");
 export const withdrawCrypto = buildRequest("/withdraw/crypto");
 export const fetchInitialOrderBook = buildCachedRequest(
-  "/initialpairorderbookpro",
-  ms("5h")
+  "/initialpairorderbookpro"
 );
 export const fetchInitialOrderHistory = buildCachedRequest(
-  "/initialpairorderhistorypro",
-  ms("5h")
+  "/initialpairorderhistorypro"
 );
 export const depositBankwire = buildRequest("/deposit/bankwire");
 export const depositPapara = buildRequest("/deposit/papara");
 export const depositCrypto = buildRequest("/deposit/crypto");
 export const fetchBankAccounts = buildCachedRequest("/bankaccounts", ms("1h"));
+export const fetchPendingTransactions = buildCachedRequest(
+  "/pendingtransactions",
+  ms("10m")
+);
+export const fetchTransactionHistories = buildCachedRequest(
+  "/transactionhistories",
+  ms("10m")
+);
 
 function buildRequest(uri) {
   return (args = {}, opts = {}) => {

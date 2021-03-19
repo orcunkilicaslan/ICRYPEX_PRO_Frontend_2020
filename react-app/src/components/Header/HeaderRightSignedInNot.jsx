@@ -130,7 +130,7 @@ const HeaderRightSignedInNot = props => {
       <SigninModal
         isOpen={openModal === "signin"}
         submit={submitSignin}
-        userEmail={user?.email}
+        userEmail={user?.info?.email}
         clearModals={clearOpenModals}
         errorMessage={signinError}
         isSigningin={isSigningin}

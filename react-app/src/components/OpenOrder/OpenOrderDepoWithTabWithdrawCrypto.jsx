@@ -26,7 +26,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
   const { t } = useTranslation(["form"]);
   const { isWithdrawingCrypto } = useSelector(state => state.withdraw);
   const { groupedCryptoAddresses = {} } = useSelector(state => state.assets);
-  const { cryptoCurrencies = [] } = useCurrencies();
+  const { cryptoCurrencies = [], tokenCurrencies = [] } = useCurrencies();
   const { register, handleSubmit, errors, watch, clearErrors } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -36,7 +36,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
     },
   });
   const [apiError, setApiError] = useState("");
-
+  const visibleCurrencies = cryptoCurrencies.concat(tokenCurrencies);
   const watchedSymbol = watch("symbol");
   const [cryptoAddress] = take(groupedCryptoAddresses[watchedSymbol]);
 
@@ -51,8 +51,9 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
 
   const onSubmit = async data => {
     const { symbol: _symbol, amount, address, destinationtag } = data;
-    const currencyid = cryptoCurrencies.find(({ symbol }) => symbol === _symbol)
-      ?.id;
+    const currencyid = visibleCurrencies.find(
+      ({ symbol }) => symbol === _symbol
+    )?.id;
     const total = getTotal(amount);
 
     if (total > 0) {
@@ -88,7 +89,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                   name="symbol"
                   innerRef={register()}
                 >
-                  {cryptoCurrencies.map(({ symbol }) => {
+                  {visibleCurrencies.map(({ symbol }) => {
                     return <option key={symbol}>{symbol}</option>;
                   })}
                 </Input>

@@ -27,7 +27,7 @@ export default function ForgotPassModal(props) {
 
   useEffect(() => {
     if (isResetSent) setIsResetSent(false);
-  }, [isOpen]);
+  }, [isOpen, isResetSent]);
 
   return (
     <Modal
