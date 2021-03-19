@@ -48,6 +48,9 @@ const init = (initialLang = "en") => {
             buywhat: "BUY {{item}}",
             sellwhat: "SELL {{item}}",
             portfolio: "Portfolio",
+            available: "Available",
+            amountToBeTaken: "Amount to be Taken",
+            amountToBeSold: "Amount to be Sold"
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -142,6 +145,8 @@ const init = (initialLang = "en") => {
             buywhat: "{{item}} AL",
             sellwhat: "{{item}} SAT",
             portfolio: "Portföy",
+            available: "Kullanılabilir",
+            amountToBeTaken: "Alınacak Miktar"
           },
           coinbar: {
             lastPrice: "Son Fiyat",

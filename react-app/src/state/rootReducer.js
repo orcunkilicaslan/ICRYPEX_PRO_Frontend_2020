@@ -12,6 +12,9 @@ import assetsReducer from "./slices/assets.slice";
 import orderReducer from "./slices/order.slice";
 import withdrawReducer from "./slices/withdraw.slice";
 import depositReducer from "./slices/deposit.slice";
+import balanceReducer from "./slices/balance.slice";
+import easyBuyReducer from "./slices/easybuy.slice";
+import easySellReducer from "./slices/easysell.slice";
 
 const apiPersistConfig = {
   key: "api",
@@ -52,6 +55,9 @@ const rootReducer = combineReducers({
   socket: persistReducer(socketPersistConfig, socketReducer),
   assets: assetsReducer,
   order: orderReducer,
+  balance: balanceReducer,
+  easyBuy: easyBuyReducer,
+  easySell: easySellReducer,
   withdraw: withdrawReducer,
   deposit: depositReducer,
 });

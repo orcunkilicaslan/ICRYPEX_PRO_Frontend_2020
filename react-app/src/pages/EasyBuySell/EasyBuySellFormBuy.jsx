@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import {
   Row,
   Form,
@@ -17,19 +17,44 @@ import { Button } from "~/components/Button.jsx";
 import { IconSet } from "~/components/IconSet.jsx";
 import Table from "~/components/Table.jsx";
 import { usePrices } from "~/state/hooks/";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchBalance} from "~/state/slices/balance.slice";
+import {fetchEasyBuy} from "~/state/slices/easybuy.slice";
 
 const EasyBuySellFormBuy = props => {
   const { t } = useTranslation(["form", "common", "finance"]);
+  const dispatch = useDispatch();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
-  const { fiatCurrency, cryptoCurrency, selectedPrice } = usePrices();
+  const { balance } = useSelector(state => state.balance);
+  const { easySell } = useSelector(state => state.easySell);
+  const [apiError, setApiError] = useState("");
+  const { fiatCurrency, cryptoCurrency, selectedPrice, selectedPair } = usePrices();
   const { register, handleSubmit, errors, setValue, reset } = useForm({
     mode: "onChange",
     defaultValues: {
       fiatAmount: "",
       cryptoAmount: "",
+
     },
   });
+  const [currencyBalance, setCurrencyBalance] = useState(0);
+  const [selectCurrency, setSelectCurrency] = useState(0);
+
+  useEffect(() => {
+    if (selectedPair) {
+      reset();
+      if(selectCurrency !== selectedPair.second_currency_id) {
+        setCurrencyBalance(0)
+      }
+      setSelectCurrency(selectedPair.second_currency_id)
+      dispatch(fetchBalance(selectedPair.second_currency_id));}
+  }, [dispatch, selectedPair]);
+
+  useEffect(() => {
+    setCurrencyBalance(parseFloat(balance).toFixed(2))
+  }, [dispatch, balance]);
+
 
   const onReset = event => {
     event.preventDefault();
@@ -45,8 +70,22 @@ const EasyBuySellFormBuy = props => {
     setIsConfirmed(true);
   };
 
-  const onSubmit = data => {
-    setIsSubmitted(true);
+  const onSubmit = async data => {
+
+    if (data?.fiatAmount > 0) {
+      setApiError("");
+      const  firstcurrencyid  = selectedPair.first_currency_id;
+      const  secondcurrencyid  = selectedPair.second_currency_id;
+      const amount  = data.fiatAmount;
+      const { payload } = await dispatch(fetchEasyBuy({ firstcurrencyid,secondcurrencyid,amount }));
+
+      if (!payload?.status) {
+        setApiError(payload?.errormessage);
+      } else {
+        setApiError("");
+        setIsSubmitted(true);
+      }
+    }
   };
 
   return (
@@ -60,14 +99,11 @@ const EasyBuySellFormBuy = props => {
         <Row className="easybuysell-form-inputs">
           <FormGroup className="col">
             <div className="formflexlabel">
-              <Label>MİKTAR {fiatCurrency}</Label>
+              <Label>{t("finance:amountToBeTaken")} - {fiatCurrency}</Label>
               <div className="labelassets">
                 <p>
-                  Kullanılabilir: <span>49,950,000.00 {fiatCurrency}</span>
+                  {t('finance:available')}: <span>{parseFloat(currencyBalance).toFixed(2)} {fiatCurrency}</span>
                 </p>
-                <Button type="button" className="ml-1">
-                  <IconSet sprite="sprtsmclrd" size="16" name="addbtn" />
-                </Button>
               </div>
             </div>
             <InputGroup>
@@ -83,8 +119,8 @@ const EasyBuySellFormBuy = props => {
                   required: t("isRequired"),
                   min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
                   max: {
-                    value: 999999,
-                    message: t("shouldBeMax", { value: 999999 }),
+                    value: parseFloat(currencyBalance).toFixed(2),
+                    message: t("shouldBeMax", { value: parseFloat(currencyBalance).toFixed(2) }),
                   },
                 })}
                 onChange={e => {
@@ -121,11 +157,11 @@ const EasyBuySellFormBuy = props => {
           </FormGroup>
           <FormGroup className="col">
             <div className="formflexlabel">
-              <Label>MİKTAR {cryptoCurrency}</Label>
+              <Label>{t("finance:amountToBeTaken")} - {cryptoCurrency}</Label>
               <div className="labelprice">
                 <p>
-                  Fiyat: <TildeSmIcon className="tildesm" />{" "}
-                  <span>66,238.89 {fiatCurrency}</span>
+                  {t('common:price')}: <TildeSmIcon className="tildesm" />{" "}
+                  <span>{selectedPrice?.price} {fiatCurrency}</span>
                 </p>
               </div>
             </div>
