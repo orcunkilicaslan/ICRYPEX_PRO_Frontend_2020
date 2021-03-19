@@ -1,5 +1,5 @@
 import createCache from "keshi";
-import { stringify } from "querystring";
+import { stringify } from "qs";
 import ms from "ms";
 
 import api from ".";

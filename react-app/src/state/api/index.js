@@ -1,7 +1,7 @@
 import { fetch as _fetch } from "whatwg-fetch";
 import retry from "@doruk/fetch-retry";
 import merge from "lodash/merge";
-import qs from "querystring";
+import { stringify, parse} from "qs";
 import { isFuture } from "date-fns";
 import ms from "ms";
 
@@ -81,7 +81,7 @@ const instance = {
                 return doRetry({ headers: { "x-access-token": token } });
               }
               case "devicekey": {
-                const data = qs.parse(body);
+                const data = parse(body);
                 const { payload } = await store.dispatch(
                   fetchServerDeviceKey()
                 );
@@ -90,7 +90,7 @@ const instance = {
                 if (!serverdevicekey) return false;
 
                 return doRetry({
-                  body: qs.stringify({
+                  body: stringify({
                     ...data,
                     serverdevicekey,
                   }),
