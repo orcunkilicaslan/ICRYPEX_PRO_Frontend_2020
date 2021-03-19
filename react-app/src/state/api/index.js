@@ -1,7 +1,7 @@
 import { fetch as _fetch } from "whatwg-fetch";
 import retry from "@doruk/fetch-retry";
 import merge from "lodash/merge";
-import { stringify, parse} from "qs";
+import { stringify, parse } from "qs";
 import { isFuture } from "date-fns";
 import ms from "ms";
 
@@ -105,6 +105,8 @@ const instance = {
                   const { payload } = await store.dispatch(refreshToken());
                   token = payload?.description;
                 }
+
+                if (!token) return false;
 
                 return doRetry({ headers: { "x-access-token": token } });
               }
