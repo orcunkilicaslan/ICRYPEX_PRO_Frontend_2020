@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   Form,
   Row,
@@ -12,7 +12,6 @@ import {
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { take } from "lodash";
 
 import { Button } from "~/components/Button.jsx";
 import { IconSet } from "~/components/IconSet";
@@ -27,18 +26,23 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
   const { isWithdrawingCrypto } = useSelector(state => state.withdraw);
   const { groupedCryptoAddresses = {} } = useSelector(state => state.assets);
   const { cryptoCurrencies = [], tokenCurrencies = [] } = useCurrencies();
+  const [apiError, setApiError] = useState("");
+  const visibleCurrencies = cryptoCurrencies.concat(tokenCurrencies);
+
   const { register, handleSubmit, errors, watch, clearErrors } = useForm({
     mode: "onChange",
     defaultValues: {
       symbol: cryptoCurrencies[0]?.symbol,
       amount: "",
       address: "",
+      destinationtag: "",
     },
   });
-  const [apiError, setApiError] = useState("");
-  const visibleCurrencies = cryptoCurrencies.concat(tokenCurrencies);
-  const watchedSymbol = watch("symbol");
-  const [cryptoAddress] = take(groupedCryptoAddresses[watchedSymbol]);
+  const { symbol: watchedSymbol } = watch();
+  const selectedAddress = useMemo(
+    () => groupedCryptoAddresses?.[watchedSymbol]?.[0],
+    [watchedSymbol, groupedCryptoAddresses]
+  );
 
   const getTotal = value => {
     const amount = parseFloat(value);
@@ -50,7 +54,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
   };
 
   const onSubmit = async data => {
-    const { symbol: _symbol, amount, address, destinationtag } = data;
+    const { symbol: _symbol, amount } = data;
     const currencyid = visibleCurrencies.find(
       ({ symbol }) => symbol === _symbol
     )?.id;
@@ -59,7 +63,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
     if (total > 0) {
       setApiError("");
       const { payload } = await dispatch(
-        withDrawCrypto({ currencyid, amount, address })
+        withDrawCrypto({ currencyid, ...data })
       );
 
       if (!payload?.status) {
@@ -125,7 +129,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
               <Input
                 type="text"
                 readOnly
-                value={cryptoAddress?.address || ""}
+                value={selectedAddress?.address || ""}
                 className="form-control"
                 name="address"
                 innerRef={register({
@@ -149,6 +153,21 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                 </span>
               )}
             </div>
+            <InputGroup className="form-group">
+              <Input
+                readOnly
+                value={selectedAddress.destination_tag || ""}
+                className="form-control d-none"
+                name="destinationtag"
+                innerRef={register({
+                  valueAsNumber: true,
+                  maxLength: {
+                    value: 10,
+                    message: t("shouldBeMaxLength", { value: 10 }),
+                  },
+                })}
+              />
+            </InputGroup>
             <Row form className="form-group">
               <Col>Transfer Ücreti</Col>
               <Col xs="auto">{FEE_RATE} TRY</Col>
