@@ -211,6 +211,11 @@
     }
   }
 
+  .inputresult{
+    &.resulterror{color: $site-clr-red;}
+    &.resultsuccess{color: $site-clr-green;}
+  }
+
   .recaptcha{
     &-area{
       @include flexbox-display-flex();

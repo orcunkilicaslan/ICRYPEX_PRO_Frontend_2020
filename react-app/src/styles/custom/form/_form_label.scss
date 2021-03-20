@@ -157,6 +157,23 @@
         //padding-left: $form-grid-gutter-width / 2;
       }
     }
+
+    .inputresult.inputintext{
+      margin: 0;
+      position: absolute;
+      top: 8px;
+      right: $input-padding-x;
+      z-index: -1;
+    }
+
+    .showhidepass ~ .inputintext{
+      right: $input-padding-x*2.5;
+    }
+
+    .form-control{
+      &:focus ~ .inputintext{display: block;}
+      &:valid ~ .inputintext{display: none;}
+    }
   }
 
 }
