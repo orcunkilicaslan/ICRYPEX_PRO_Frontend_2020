@@ -16,12 +16,13 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
   const { isWithdrawingBank } = useSelector(state => state.withdraw);
   const { accesstoken } = useSelector(state => state.api);
   const { accounts = [] } = useSelector(state => state.user);
+  const { allAssets } = useSelector(state => state.assets);
   const { all: allCurrencies } = useCurrencies();
   const [apiError, setApiError] = useState("");
   const { register, handleSubmit, errors, watch, clearErrors } = useForm({
     mode: "onChange",
     defaultValues: {
-      customerbankid: "",
+      customerbankid: accounts?.[0]?.id || "",
       amount: "",
     },
   });
@@ -38,9 +39,14 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
     });
   }, [accounts, allCurrencies]);
 
-  const selectedAccount = useMemo(() => {
-    return userAccounts.find(({ id }) => watchedId === id);
-  }, [watchedId, userAccounts]);
+  const { account: selectedAccount, balance: selectedBalance } = useMemo(() => {
+    const account = userAccounts.find(({ id }) => watchedId === id);
+    const balance = allAssets?.balances?.find?.(
+      ({ currency_id }) => currency_id === account?.currency_id
+    );
+
+    return { account, balance };
+  }, [watchedId, userAccounts, allAssets]);
 
   useEffect(() => {
     if (accesstoken) dispatch(fetchBankAccounts());
@@ -121,14 +127,20 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
                   required: t("isRequired"),
                   min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
                   max: {
-                    value: 999999,
-                    message: t("shouldBeMax", { value: 999999 }),
+                    value: selectedBalance?.balance
+                      ? selectedBalance.balance
+                      : 999999,
+                    message: t("shouldBeMax", {
+                      value: selectedBalance?.balance
+                        ? selectedBalance.balance
+                        : 999999,
+                    }),
                   },
                 })}
               />
               <div className="form-control totalbalance text-right">
                 <small>Bakiye</small>
-                999,999.00 {selectedAccount?.currency?.symbol}
+                {selectedBalance?.balance} {selectedAccount?.currency?.symbol}
               </div>
               <InputGroupAddon addonType="append">
                 <Button variant="secondary" className="active">
