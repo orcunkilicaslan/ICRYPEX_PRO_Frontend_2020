@@ -211,9 +211,27 @@
     }
   }
 
-  .inputresult{
-    &.resulterror{color: $site-clr-red;}
-    &.resultsuccess{color: $site-clr-green;}
+  .form-control.inputresult{
+
+    &.resulterror{
+      background-color: transparentize($site-clr-red, 0.95) !important;
+      border-color: transparentize($site-clr-red, 0.3) !important;
+    }
+    &.resultsuccess{
+      background-color: transparentize($site-clr-green, 0.95) !important;
+      border-color: transparentize($site-clr-green, 0.3) !important;
+    }
+    &:valid{
+      background-color: $input-bg !important;
+      border-color: $input-border-color !important;
+    }
+  }
+
+  .form-text.inputresult{
+    font-size: 100%;
+
+    &.resulterror{color: $site-clr-red !important;}
+    &.resultsuccess{color: $site-clr-green !important;}
   }
 
   .recaptcha{

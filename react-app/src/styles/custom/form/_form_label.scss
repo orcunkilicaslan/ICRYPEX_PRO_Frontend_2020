@@ -158,7 +158,7 @@
       }
     }
 
-    .inputresult.inputintext{
+    .form-text.inputresult.inputintext{
       margin: 0;
       position: absolute;
       top: 8px;
@@ -167,7 +167,7 @@
     }
 
     .showhidepass ~ .inputintext{
-      right: $input-padding-x*2.5;
+      right: $input-padding-x*2.5 !important;
     }
 
     .form-control{
