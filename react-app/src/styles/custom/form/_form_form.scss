@@ -217,11 +217,13 @@
     .input-group-append{margin-left: 0;}
 
     &.resulterror .form-control,
+    &.resulterror .custom-select,
     &.resulterror .input-group-text{
       background-color: transparentize($site-clr-red, 0.95) !important;
       border-color: transparentize($site-clr-red, 0.3) !important;
     }
     &.resultsuccess .form-control,
+    &.resultsuccess .custom-select,
     &.resultsuccess .input-group-text{
       background-color: transparentize($site-clr-green, 0.95) !important;
       border-color: transparentize($site-clr-green, 0.3) !important;

@@ -75,6 +75,23 @@
             }
           }
 
+          .form-control:disabled,
+          .form-control[readonly]{
+            color: $site-clr-text-soft-sec;
+            background-color: $input-bg;
+
+            &:focus{
+              border-color: $input-border-color;
+            }
+          }
+          .custom-select:disabled{
+            background-color: $custom-select-bg;
+          }
+
+          .input-group .form-control{
+            border-right-width: 0;
+          }
+
           &.col-auto{
             @include flexbox-display-flex();
             //@include flexbox-align-items(flex-end);
@@ -92,19 +109,6 @@
                 display: block;
               }
             }
-          }
-
-          .form-control:disabled,
-          .form-control[readonly]{
-            color: $site-clr-text-soft-sec;
-            background-color: $input-bg;
-
-            &:focus{
-              border-color: $input-border-color;
-            }
-          }
-          .custom-select:disabled{
-            background-color: $custom-select-bg;
           }
         }
       }
