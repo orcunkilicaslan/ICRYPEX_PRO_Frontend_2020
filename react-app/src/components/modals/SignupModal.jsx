@@ -11,6 +11,7 @@ import {
 import ReCAPTCHA from "react-google-recaptcha";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
@@ -45,6 +46,11 @@ export default function SignupModal(props) {
   });
 
   const { countrycode: watchedCountrycode } = watch();
+
+  const [passShow, setPassShow] = useState(false);
+  const toggleTypePass = () => {
+    setPassShow(passShow ? false : true);
+  };
 
   const onSubmit = data => {
     submit(data);
@@ -178,7 +184,7 @@ export default function SignupModal(props) {
               >
                 <Input
                   className="signuppassword"
-                  type="password"
+                  type={passShow ? "text" : "password"}
                   required
                   name="password"
                   innerRef={register({ required: t("form:isRequired") })}
@@ -186,8 +192,7 @@ export default function SignupModal(props) {
                 <Label>{t("password")}</Label>
                 <Button
                   className="showhidepass"
-                  data-toggle="showhidepassword"
-                  data-target=".signuppassword"
+                  onClick={toggleTypePass}
                 >
                   <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
                 </Button>
@@ -202,7 +207,7 @@ export default function SignupModal(props) {
               >
                 <Input
                   className="signuprepassword"
-                  type="password"
+                  type={passShow ? "text" : "password"}
                   required
                   name="confirm"
                   innerRef={register({ required: t("form:isRequired") })}
@@ -210,8 +215,7 @@ export default function SignupModal(props) {
                 <Label>{t("confirmPassword")}</Label>
                 <Button
                   className="showhidepass"
-                  data-toggle="showhidepassword"
-                  data-target=".signuprepassword"
+                  onClick={toggleTypePass}
                 >
                   <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
                 </Button>
