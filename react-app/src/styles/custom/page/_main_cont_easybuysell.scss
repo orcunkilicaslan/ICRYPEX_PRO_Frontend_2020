@@ -49,6 +49,7 @@
 
           .formflexlabel{
             margin-bottom: $form-group-margin-bottom*0.75;
+            height: $form-group-margin-bottom*2;
 
             label{
               color: $site-clr-white;
@@ -76,10 +77,13 @@
 
           &.col-auto{
             @include flexbox-display-flex();
-            @include flexbox-align-items(flex-end);
+            //@include flexbox-align-items(flex-end);
+            padding-top: $form-group-margin-bottom*2.5;
 
             .inputchangeicon{
               background-color: $site-clr-darkblue-400;
+              width: 28px;
+              height: 28px;
               padding: 6px;
               margin: 4px 6px;
               @include border-radius(50%);
