@@ -2,29 +2,25 @@ import { useState } from "react";
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
 
-import OpenOrderDepoWithTabDepositBankAkbank from "~/components/OpenOrder/OpenOrderDepoWithTabDepositBankAkbank.jsx";
+import BankAccountsForm from "~/components/OpenOrder/OpenOrderDepoWithTabDepositBankForm";
 import { useBanks } from "~/state/hooks/";
 
 const tabs = [
   {
     bankCode: "00046",
     titleIcon: "akbank",
-    component: OpenOrderDepoWithTabDepositBankAkbank,
   },
   {
     bankCode: "00010",
     titleIcon: "ziraat",
-    component: () => <div>ziraat</div>,
   },
   {
     bankCode: "00146",
     titleIcon: "odeabank",
-    component: () => <div>odeabank</div>,
   },
   {
     bankCode: "00015",
     titleIcon: "vakifbank",
-    component: () => <div>vakifbank</div>,
   },
 ];
 
@@ -60,7 +56,7 @@ const OpenOrderDepoWithTabDepositBank = props => {
 
           return (
             <TabPane key={bankCode} tabId={bankCode}>
-              <Comp accounts={accounts} />
+              <BankAccountsForm accounts={accounts} />
             </TabPane>
           );
         })}
