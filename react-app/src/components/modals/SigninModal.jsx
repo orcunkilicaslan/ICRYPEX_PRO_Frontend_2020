@@ -1,6 +1,7 @@
 import {
   Form,
   FormGroup,
+  FormText,
   Label,
   Input,
   Modal,
@@ -69,7 +70,9 @@ export default function SigninModal(props) {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="labelfocustop">
-              <FormGroup>
+              <FormGroup
+                  className={errors.emailornationalid && ("inputresult resulterror")}
+              >
                 <Input
                   type="email"
                   required
@@ -77,15 +80,15 @@ export default function SigninModal(props) {
                   innerRef={register({ required: t("form:isRequired") })}
                 />
                 <Label>{t("email")}</Label>
-                <div>
-                  {errors.emailornationalid && (
-                    <span style={{ color: "red", fontSize: "1rem" }}>
+                {errors.emailornationalid && (
+                    <FormText className="inputresult resulterror inputintext">
                       {errors.emailornationalid?.message}
-                    </span>
-                  )}
-                </div>
+                    </FormText>
+                )}
               </FormGroup>
-              <FormGroup>
+              <FormGroup
+                  className={errors.password && ("inputresult resulterror")}
+              >
                 <Input
                   className="signuppassword"
                   type="password"
@@ -101,13 +104,11 @@ export default function SigninModal(props) {
                 >
                   <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
                 </Button>
-                <div>
-                  {errors.password && (
-                    <span style={{ color: "red", fontSize: "1rem" }}>
+                {errors.password && (
+                    <FormText className="inputresult resulterror inputintext">
                       {errors.password?.message}
-                    </span>
-                  )}
-                </div>
+                    </FormText>
+                )}
               </FormGroup>
             </div>
             <div className="recaptcha">

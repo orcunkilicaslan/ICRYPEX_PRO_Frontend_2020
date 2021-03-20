@@ -158,6 +158,12 @@
       }
     }
 
+    .form-group.inputresult{
+      .form-control:invalid ~ label{
+        color: $site-clr-white;
+      }
+    }
+
     .form-text.inputresult.inputintext{
       margin: 0;
       position: absolute;
@@ -173,6 +179,10 @@
     .form-control[pattern]{
       //&:focus ~ .inputresult{display: block;}
       &:valid ~ .inputresult{display: none;}
+
+      ~ label{
+        color: $site-clr-white;
+      }
     }
   }
 
