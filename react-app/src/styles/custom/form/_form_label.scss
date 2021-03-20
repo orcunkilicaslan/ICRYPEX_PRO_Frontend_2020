@@ -170,9 +170,9 @@
       right: $input-padding-x*2.5 !important;
     }
 
-    .form-control{
-      &:focus ~ .inputintext{display: block;}
-      &:valid ~ .inputintext{display: none;}
+    .form-control[pattern]{
+      //&:focus ~ .inputresult{display: block;}
+      &:valid ~ .inputresult{display: none;}
     }
   }
 

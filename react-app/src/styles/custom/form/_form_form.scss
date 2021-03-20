@@ -211,20 +211,57 @@
     }
   }
 
-  .form-control.inputresult{
+  .form-group.inputresult{
 
-    &.resulterror{
+    &.resulterror .form-control{
       background-color: transparentize($site-clr-red, 0.95) !important;
       border-color: transparentize($site-clr-red, 0.3) !important;
     }
-    &.resultsuccess{
+    &.resultsuccess .form-control{
       background-color: transparentize($site-clr-green, 0.95) !important;
       border-color: transparentize($site-clr-green, 0.3) !important;
     }
-    &:valid{
+    .form-control[pattern]:valid{
       background-color: $input-bg !important;
       border-color: $input-border-color !important;
     }
+  }
+
+  .custom-checkbox.inputresult{
+
+    &.resulterror .custom-control-label{
+      color: $site-clr-red;
+
+      &::before{
+        background-color: transparentize($site-clr-red, 0.95) !important;
+        border-color: transparentize($site-clr-red, 0.3) !important;
+      }
+    }
+
+    &.resultsuccess .custom-control-label{
+      color: $site-clr-green;
+
+      &::before{
+        background-color: transparentize($site-clr-green, 0.95) !important;
+        border-color: transparentize($site-clr-green, 0.3) !important;
+      }
+    }
+
+    .custom-control-input:checked + .custom-control-label{
+      color: $site-clr-green !important;
+
+      &::before{
+        background-color: transparentize($site-clr-green, 0.95) !important;
+        border-color: transparentize($site-clr-green, 0.3) !important;
+      }
+    }
+
+    .custom-control-input:checked ~ .inputresult{
+      display: none;
+    }
+
+
+
   }
 
   .form-text.inputresult{
