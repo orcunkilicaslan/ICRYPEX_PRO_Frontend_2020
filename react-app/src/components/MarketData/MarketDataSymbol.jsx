@@ -124,9 +124,7 @@ const MarketDataSymbol = props => {
         <Table scrollbar>
           <Table.Thead scrollbar>
             <Table.Tr>
-              {accesstoken ? (
-                  <Table.Th sizeauto className="fav" />
-              ) : null}
+              {accesstoken ? <Table.Th sizeauto className="fav" /> : null}
               <Table.Th sizefixed className="sym">
                 {t("common:symbol")}
               </Table.Th>

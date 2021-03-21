@@ -68,11 +68,11 @@ const assetsSlice = createSlice({
     },
   },
   extraReducers: {
-    [fetchAssets.fulfilled]: (state, action) => {
-      state.allAssets = action?.payload?.description;
+    [fetchAssets.fulfilled]: (state, { payload }) => {
+      state.allAssets = payload?.description;
     },
-    [fetchCryptoAddresses.fulfilled]: (state, action) => {
-      const all = action?.payload?.description;
+    [fetchCryptoAddresses.fulfilled]: (state, { payload }) => {
+      const all = payload?.description;
 
       state.allCryptoAddresses = all;
       state.groupedCryptoAddresses = groupBy(all, ({ symbol }) => symbol);

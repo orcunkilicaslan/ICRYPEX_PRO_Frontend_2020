@@ -156,7 +156,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
             <InputGroup className="form-group">
               <Input
                 readOnly
-                value={selectedAddress.destination_tag || ""}
+                value={selectedAddress?.destination_tag || ""}
                 className="form-control d-none"
                 name="destinationtag"
                 innerRef={register({

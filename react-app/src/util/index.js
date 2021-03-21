@@ -70,11 +70,13 @@ export const makeLocalKey = async secret => {
 
 // "BTC / TRY" -> ["BTC", "TRY"]
 export const getPairTuple = pairname => {
-  return pairname?.split?.("/")?.map(string => string.trim());
+  return pairname?.split?.("/")?.map(string => string?.trim?.());
 };
 
 // "BTC / USD" -> "btcusd"
 export const getPairPrefix = pairname => {
-  return getPairTuple(pairname).join("").toLowerCase();
+  return getPairTuple(pairname)?.join("")?.toLowerCase?.();
+};
+
 };
 

@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { groupBy, uniqBy, merge } from "lodash";
+import { uniqBy } from "lodash";
 
 import * as api from "../api";
 
 export const fetchPriceAlarms = createAsyncThunk(
-  "alarm/all",
+  "alarm/fetchAll",
   async (_, { getState, rejectWithValue }) => {
     const {
       api: { accesstoken },
@@ -28,7 +28,7 @@ export const fetchPriceAlarms = createAsyncThunk(
 );
 
 export const fetchPairPriceAlarms = createAsyncThunk(
-  "alarm/byPair",
+  "alarm/fetchByPair",
   async (pairname, { getState, rejectWithValue }) => {
     const {
       api: { accesstoken },
