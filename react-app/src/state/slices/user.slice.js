@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { merge } from "lodash";
 
 import * as api from "../api";
+import { hasAccessToken, hasPreloginToken } from "~/util/";
 
 export const signoutUser = createAsyncThunk(
   "user/signout",
@@ -24,6 +25,13 @@ export const signoutUser = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 
@@ -48,6 +56,13 @@ export const signupUser = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasPreloginToken(state);
+    },
   }
 );
 
@@ -72,6 +87,13 @@ export const signinUser = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasPreloginToken(state);
+    },
   }
 );
 
@@ -96,6 +118,13 @@ export const fetchUserInfo = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 
@@ -123,6 +152,13 @@ export const forgotPassword = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasPreloginToken(state);
+    },
   }
 );
 
@@ -147,6 +183,13 @@ export const fetchBankAccounts = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 

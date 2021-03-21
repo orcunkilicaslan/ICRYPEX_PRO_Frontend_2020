@@ -30,18 +30,24 @@ const socketSlice = createSlice({
     },
     setOrderBook: {
       reducer: (state, action) => {
-        merge(state.orderbooks, action?.payload);
+        const { payload, key } = action;
+
+        // if (payload[key] && !isEqual(state.orderbooks[key], payload)) {
+        merge(state.orderbooks, payload);
+        // }
       },
       prepare: (key, data) => {
-        return { payload: { [key]: data } };
+        return { payload: { [key]: data }, key };
       },
     },
     setOrderHistory: {
       reducer: (state, action) => {
-        merge(state.orderhistories, action?.payload);
+        const { payload, key } = action;
+
+        merge(state.orderhistories, payload);
       },
       prepare: (key, data) => {
-        return { payload: { [key]: data } };
+        return { payload: { [key]: data }, key };
       },
     },
     mergeData: {

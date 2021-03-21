@@ -137,7 +137,6 @@ const OpenOrderTransactionHistory = props => {
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
   const { activeCurrencies } = useCurrencies();
   const { history } = useSelector(state => state.transaction);
-  const { accesstoken } = useSelector(state => state.api);
   const [apiError, setApiError] = useState("");
 
   const validCurrencies = useMemo(
@@ -176,8 +175,8 @@ const OpenOrderTransactionHistory = props => {
   const { periodby: watchedPeriodby } = watch();
 
   useEffect(() => {
-    if (accesstoken) dispatch(fetchTransactionHistories(defaultValues));
-  }, [accesstoken, defaultValues, dispatch]);
+    dispatch(fetchTransactionHistories(defaultValues));
+  }, [defaultValues, dispatch]);
 
   const onSubmit = async data => {
     setApiError("");

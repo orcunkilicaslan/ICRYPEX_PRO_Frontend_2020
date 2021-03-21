@@ -14,7 +14,6 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["form"]);
   const { isWithdrawingBank } = useSelector(state => state.withdraw);
-  const { accesstoken } = useSelector(state => state.api);
   const { accounts = [] } = useSelector(state => state.user);
   const { allAssets } = useSelector(state => state.assets);
   const { all: allCurrencies } = useCurrencies();
@@ -49,8 +48,8 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
   }, [watchedId, userAccounts, allAssets]);
 
   useEffect(() => {
-    if (accesstoken) dispatch(fetchBankAccounts());
-  }, [dispatch, accesstoken]);
+    dispatch(fetchBankAccounts());
+  }, [dispatch]);
 
   const getTotal = value => {
     const amount = parseFloat(value);

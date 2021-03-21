@@ -78,5 +78,13 @@ export const getPairPrefix = pairname => {
   return getPairTuple(pairname)?.join("")?.toLowerCase?.();
 };
 
+export const hasAccessToken = ({ api }) => {
+  return api?.accesstoken ? true : false;
+};
+
+export const hasPreloginToken = ({ api }) => {
+  return api?.prelogintoken ? true : false;
+};
+
 };
 

@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { groupBy } from "lodash";
 
 import * as api from "../api";
+import { hasAccessToken } from "~/util/";
 
 export const fetchAssets = createAsyncThunk(
   "assets/fetchAll",
@@ -24,6 +25,13 @@ export const fetchAssets = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 
@@ -48,6 +56,13 @@ export const fetchCryptoAddresses = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 
