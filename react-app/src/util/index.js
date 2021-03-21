@@ -8,11 +8,13 @@ import {
 import _debug from "debug";
 import { format, formatDistanceStrict } from "date-fns";
 import { enUS as en, tr } from "date-fns/locale";
+import ms from "ms";
 
 import { name } from "../../package.json";
 
 const locales = { en, tr };
-export const debug = _debug(name);
+const isProd = process.env.NODE_ENV === "production";
+export const debug = _debug(name); // isProd ? makeFakeDebug() : _debug("pro");
 const log = debug.extend("util");
 if (process.env.REACT_APP_DEBUG) _debug.enable(`${name}:*`);
 
@@ -23,9 +25,9 @@ export const formatDate = (
   { locale = "en" }
 ) => {
   try {
-  return format(date, pattern, {
-    locale: locales[locale],
-  });
+    return format(date, pattern, {
+      locale: locales[locale],
+    });
   } catch (err) {
     log("%s: %O", err.message, { date, pattern, locale });
   }
@@ -37,10 +39,10 @@ export const formatDateDistance = (
   { locale = "en", addSuffix = true }
 ) => {
   try {
-  return formatDistanceStrict(fromDate, toDate, {
-    locale: locales[locale],
-    addSuffix,
-  });
+    return formatDistanceStrict(fromDate, toDate, {
+      locale: locales[locale],
+      addSuffix,
+    });
   } catch (err) {
     log("%s: %O", err.message, { fromDate, toDate });
   }
@@ -85,6 +87,3 @@ export const hasAccessToken = ({ api }) => {
 export const hasPreloginToken = ({ api }) => {
   return api?.prelogintoken ? true : false;
 };
-
-};
-
