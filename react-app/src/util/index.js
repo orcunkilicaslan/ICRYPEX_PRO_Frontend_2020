@@ -22,7 +22,7 @@ if (process.env.REACT_APP_DEBUG) _debug.enable(`${name}:*`);
 export const formatDate = (
   date,
   pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSxxx",
-  { locale = "en" }
+  { locale = "en" } = {}
 ) => {
   try {
     return format(date, pattern, {
@@ -36,7 +36,7 @@ export const formatDate = (
 export const formatDateDistance = (
   fromDate,
   toDate,
-  { locale = "en", addSuffix = true }
+  { locale = "en", addSuffix = true } = {}
 ) => {
   try {
     return formatDistanceStrict(fromDate, toDate, {

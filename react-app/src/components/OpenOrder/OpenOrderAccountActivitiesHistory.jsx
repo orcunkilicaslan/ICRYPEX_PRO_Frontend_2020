@@ -1,140 +1,255 @@
-import { useState } from "react";
-import { Col, Input, Row } from "reactstrap";
-import { format } from "date-fns";
-import { useClientRect } from "~/state/hooks";
+import { useState, useMemo, useEffect } from "react";
+import {
+  Row,
+  Col,
+  Label,
+  Input,
+  ButtonGroup,
+  Form,
+  FormGroup,
+} from "reactstrap";
 import classnames from "classnames";
+import { useTranslation } from "react-i18next";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { sub } from "date-fns";
 
 import { Button } from "../Button.jsx";
 import Table from "../Table.jsx";
+import { useClientRect, useCurrencies } from "~/state/hooks/";
+import { fetchTransactionHistories } from "~/state/slices/transaction.slice";
+import { formatDate, formatDateDistance } from "~/util/";
 
-const activityTypes = ["İşlem Tipi", "Stop Limit", "Market", "Limit"];
-const paymentMethods = ["Yöntem", "Havale-EFT", "Papara", "Kripto"];
-const activityStates = ["Durum", "Gerçekleşti", "Beklemede"];
-const activityCurrencies = ["Para Birimi", "TRY", "USD"];
-const historytable = [
-  {
-    transactionno: "MR-99999",
-    transactiondate: "21.02.2020",
-    transactiontime: "18:23",
-    transactiontypeid: "2",
-    transactiontypetxt: "Çekme",
-    transactionmethod: "Havale-EFT",
-    transactionbank: "Vakıfbank",
-    transactionamount: "23,456,865.56 TRY",
-    transactionstatusid: "2",
-    transactiontxid: "-",
-    transactionstatustxt: "İptal Edildi",
-  },
+const orderBy = [
+  "Önce Yeni Tarihli",
+  "Önce Eski Tarihli",
+  "Önce Para Yatırma",
+  "Önce Para Çekme",
+  "Önce TRY",
+  "Önce USD",
+  "Önce Kripto Para",
+  "Önce Banka",
+  "Önce Papara",
 ];
+const transactionTypes = [
+  { label: "Yatırma", name: "isdeposit" },
+  { label: "Çekme", name: "iswithdraw" },
+  { label: "Tamamlandı", name: "isrealized" },
+  { label: "İptal", name: "iscanceled" },
+];
+const periodBy = ["1G", "1H", "2H", "1A", "3A"];
 
 const OpenOrderAccountActivitiesHistory = props => {
-
+  const dispatch = useDispatch();
+  const { t } = useTranslation(["form"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
+  const { activeCurrencies } = useCurrencies();
+  const { histories = [] } = useSelector(state => state.transaction);
+  const { lang } = useSelector(state => state.ui);
+  const [apiError, setApiError] = useState("");
 
-  const today = format(new Date(), "yyyy-MM-dd");
-  const [activityType, setActivityType] = useState(activityTypes[0]);
-  const [paymentMethod, setPaymentMethod] = useState(paymentMethods[0]);
-  const [activityState, setActivityState] = useState(activityStates[0]);
-  const [activityCurrency, setActivityCurrency] = useState(
-    activityCurrencies[0]
-  );
-  const [selectedDate, setSelectedDate] = useState(today);
+  const [validCurrencies, defaultValues] = useMemo(() => {
+    const today = formatDate(new Date(), "yyyy-MM-dd", { locale: lang });
+    const threeMonthsAgo = formatDate(
+      sub(new Date(), { months: 3 }),
+      "yyyy-MM-dd",
+      { locale: lang }
+    );
+    const currencies = activeCurrencies.filter(
+      ({ symbol }) => symbol !== "EUR"
+    );
+    const currencyids = currencies.map(({ id }) => Number(id));
+
+    const defaults = {
+      currencyids,
+      orderby: 1,
+      isdeposit: true,
+      iswithdraw: true,
+      isrealized: true,
+      iscanceled: true,
+      periodby: 5,
+      startdate: threeMonthsAgo,
+      enddate: today,
+    };
+
+    return [currencies, defaults];
+  }, [activeCurrencies, lang]);
+
+  const {
+    register,
+    handleSubmit,
+    errors,
+    watch,
+    reset,
+    setValue,
+    clearErrors,
+  } = useForm({
+    mode: "onChange",
+    defaultValues,
+  });
+  const { periodby: watchedPeriodby } = watch();
+
+  useEffect(() => {
+    const currencyids = JSON.stringify(defaultValues?.currencyids);
+    const toSubmit = { ...defaultValues, currencyids };
+
+    dispatch(fetchTransactionHistories(toSubmit));
+  }, [defaultValues, dispatch]);
+
+  const onSubmit = async data => {
+    setApiError("");
+    const currencyids = JSON.stringify(data?.currencyids);
+    const startdate = formatDate(data?.startdate, "yyyy-MM-dd", {
+      locale: lang,
+    });
+    const enddate = formatDate(data?.enddate, "yyyy-MM-dd", { locale: lang });
+    const toSubmit = { ...data, currencyids, startdate, enddate };
+
+    const { payload } = await dispatch(fetchTransactionHistories(toSubmit));
+
+    if (!payload?.status) {
+      setApiError(payload?.errormessage);
+    } else {
+      setApiError("");
+    }
+  };
+
+  const onReset = () => {
+    reset(defaultValues);
+    setApiError("");
+    clearErrors();
+  };
 
   return (
     <div className="activities-history">
-      <Row className="tabcont tabcont-filterbar siteformui">
-        <Col>
-          <Input
-            className="custom-select custom-select-sm"
-            type="select"
-            value={activityType}
-            onChange={({ target }) => {
-              setActivityType(target.value);
-            }}
-          >
-            {activityTypes.map((el, idx) => {
-              return (
-                <option disabled={idx === 0} key={`${el}_${idx}`}>
-                  {el}
-                </option>
-              );
-            })}
-          </Input>
-        </Col>
-        <Col>
-          <Input
-            className="custom-select custom-select-sm"
-            type="select"
-            value={paymentMethod}
-            onChange={({ target }) => {
-              setPaymentMethod(target.value);
-            }}
-          >
-            {paymentMethods.map((el, idx) => {
-              return (
-                <option disabled={idx === 0} key={`${el}_${idx}`}>
-                  {el}
-                </option>
-              );
-            })}
-          </Input>
-        </Col>
-        <Col>
-          <Input
-            className="custom-select custom-select-sm"
-            type="select"
-            value={activityState}
-            onChange={({ target }) => {
-              setActivityState(target.value);
-            }}
-          >
-            {activityStates.map((el, idx) => {
-              return (
-                <option disabled={idx === 0} key={`${el}_${idx}`}>
-                  {el}
-                </option>
-              );
-            })}
-          </Input>
-        </Col>
-        <Col>
-          <Input
-            className="custom-select custom-select-sm"
-            type="select"
-            value={activityCurrency}
-            onChange={({ target }) => {
-              setActivityCurrency(target.value);
-            }}
-          >
-            {activityCurrencies.map((el, idx) => {
-              return (
-                <option disabled={idx === 0} key={`${el}_${idx}`}>
-                  {el}
-                </option>
-              );
-            })}
-          </Input>
-        </Col>
-        <Col xs="auto">
-          <Input
-            type="date"
-            bsSize="sm"
-            value={selectedDate}
-            onChange={({ target }) => setSelectedDate(target.value)}
-            placeholder="Başlangıç - Bitiş Tarihi"
-          />
-        </Col>
-        <Col xs="auto">
-          <Button type="button" size="sm" variant="outline-primary">
+      <Form
+        className="siteformui"
+        autoComplete="off"
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <Row className="tabcont tabcont-filterbar">
+          <Col>
+            <Input
+              className="custom-select custom-select-sm"
+              type="select"
+              multiple
+              size={2}
+              name="currencyids"
+              innerRef={register({
+                required: t("isRequired"),
+              })}
+            >
+              {validCurrencies.map(({ symbol, id }) => {
+                return (
+                  <option value={Number(id)} key={symbol}>
+                    {symbol}
+                  </option>
+                );
+              })}
+            </Input>
+            <div>
+              {errors.currencyids && (
+                <span style={{ color: "red", fontSize: "1rem" }}>
+                  {errors.currencyids?.message}
+                </span>
+              )}
+            </div>
+          </Col>
+          <Col>
+            <Input
+              className="custom-select custom-select-sm"
+              type="select"
+              name="orderby"
+              innerRef={register({
+                valueAsNumber: true,
+              })}
+            >
+              {orderBy.map((el, idx) => {
+                return (
+                  <option value={idx + 1} key={`${el}_${idx}`}>
+                    {el}
+                  </option>
+                );
+              })}
+            </Input>
+          </Col>
+          <Col>
+            <FormGroup check inline>
+              {transactionTypes.map(({ label, name }) => {
+                return (
+                  <Label key={name} check>
+                    <Input
+                      name={name}
+                      type="checkbox"
+                      innerRef={register({ valueAsNumber: true })}
+                    />
+                    {label}{" "}
+                  </Label>
+                );
+              })}
+            </FormGroup>
+          </Col>
+          <Col>
+            <Input
+              name="periodby"
+              innerRef={register({ valueAsNumber: true })}
+              className="d-none"
+            />
+            <ButtonGroup size="sm" className="w-100">
+              {periodBy.map((el, idx) => {
+                const cls = classnames({ active: watchedPeriodby === idx + 1 });
+
+                return (
+                  <Button
+                    key={`${el}_${idx}`}
+                    type="button"
+                    size="sm"
+                    className={cls}
+                    variant="secondary"
+                    onClick={() =>
+                      setValue("periodby", idx + 1, { shouldValidate: true })
+                    }
+                  >
+                    {el}
+                  </Button>
+                );
+              })}
+            </ButtonGroup>
+          </Col>
+          <Col xs="auto">
+            <Input
+              type="date"
+              bsSize="sm"
+              title="Start Date"
+              name="startdate"
+              innerRef={register({
+                valueAsDate: true,
+              })}
+            />
+            <Input
+              type="date"
+              bsSize="sm"
+              name="enddate"
+              title="End Date"
+              innerRef={register({
+                valueAsDate: true,
+              })}
+            />
+          </Col>
+        </Row>
+        <ButtonGroup xs="auto">
+          <Button type="submit" size="sm" variant="outline-primary">
             Filtrele
           </Button>
-        </Col>
-        <Col xs="auto">
-          <Button type="button" size="sm" variant="outline-danger">
+          <Button size="sm" variant="outline-danger" onClick={onReset}>
             Sıfırla
           </Button>
-        </Col>
-      </Row>
+        </ButtonGroup>
+        {apiError && (
+          <span style={{ color: "coral", fontSize: "1rem" }}>{apiError}</span>
+        )}
+      </Form>
       <div className="activitieshistorytable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
           <Table.Thead scrollbar>
@@ -166,60 +281,62 @@ const OpenOrderAccountActivitiesHistory = props => {
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody
-              striped
-              hovered
-              scrollbar
-              scrollbarstyles={{ height: `${tableHeight - 36}px` }}
+            striped
+            hovered
+            scrollbar
+            scrollbarstyles={{ height: `${tableHeight - 36}px` }}
           >
-            {historytable.map(
+            {histories.map(
               ({
-                transactionno,
-                transactiondate,
-                transactiontime,
-                transactiontypeid,
-                transactiontypetxt,
-                transactionmethod,
-                transactionbank,
-                transactionamount,
-                transactionstatusid,
-                transactiontxid,
-                transactionstatustxt,
+                amount,
+                currencysymbol,
+                datetime,
+                id,
+                request_type_id,
+                requesttype,
+                requst_method_id,
+                requstmethod,
+                status,
               }) => {
                 const typecls = classnames({
-                  sitecolorgreen: transactiontypeid === "1",
-                  sitecolorred: transactiontypeid === "2",
+                  sitecolorgreen: request_type_id === 1,
+                  sitecolorred: request_type_id === 2,
                 });
 
                 const statuscls = classnames({
-                  sitecolorgreen: transactionstatusid === "1",
-                  sitecolorred: transactionstatusid === "2",
+                  sitecolorgreen: status === 4,
+                  sitecolorred: status === 5,
                 });
 
                 return (
-                  <Table.Tr key={transactionno}>
+                  <Table.Tr key={id}>
                     <Table.Td sizeauto className="nmbr">
-                      {transactionno}
+                      {id}
                     </Table.Td>
                     <Table.Td sizeauto className="date">
-                      {transactiondate} - {transactiontime}
+                      <span title={datetime}>
+                        {formatDateDistance(new Date(datetime), Date.now(), {
+                          locale: lang,
+                        })}
+                      </span>
                     </Table.Td>
                     <Table.Td sizeauto className="type">
-                      <span className={typecls}>{transactiontypetxt}</span>
+                      <span className={typecls}>{requesttype}</span>
                     </Table.Td>
                     <Table.Td sizeauto className="mthd">
-                      {transactionmethod}
+                      {requstmethod}
                     </Table.Td>
                     <Table.Td sizeauto className="bank">
-                      {transactionbank}
+                      ---
                     </Table.Td>
                     <Table.Td sizefixed className="amnt">
-                      {transactionamount}
+                      {amount} {currencysymbol}
                     </Table.Td>
                     <Table.Td sizeauto className="txid">
-                      {transactiontxid}
+                      ---
                     </Table.Td>
                     <Table.Td sizeauto className="stts">
-                      <span className={statuscls}>{transactionstatustxt}</span>
+                      <span className={statuscls}>{status}</span>
                     </Table.Td>
                   </Table.Tr>
                 );

@@ -112,7 +112,7 @@ export const fetchPendingTransactions = createAsyncThunk(
 );
 
 const initialState = {
-  history: [],
+  histories: [],
   pending: [],
 };
 
@@ -128,7 +128,7 @@ const transactionSlice = createSlice({
   },
   extraReducers: {
     [fetchTransactionHistories.fulfilled]: (state, action) => {
-      state.history = action?.payload?.description || [];
+      state.histories = action?.payload?.description || [];
     },
     [fetchPendingTransactions.fulfilled]: (state, action) => {
       state.pending = action?.payload?.description || [];
