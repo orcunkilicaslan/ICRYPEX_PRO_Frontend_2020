@@ -48,6 +48,7 @@ export const fetchTransactionHistories = buildCachedRequest(
   "/transactionhistories",
   ms("10m")
 );
+export const fetchOrderHistory = buildRequest("/orderhistory")
 
 function buildRequest(uri) {
   return (args = {}, opts = {}) => {

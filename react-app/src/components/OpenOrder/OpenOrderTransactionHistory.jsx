@@ -12,122 +12,27 @@ import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { sub } from "date-fns";
+import { omit, merge } from "lodash";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
-import { useClientRect, useCurrencies } from "~/state/hooks/";
-import { fetchTransactionHistories } from "~/state/slices/transaction.slice";
-
-const historytable = [
-  {
-    id: "01",
-    idnmbr: "MR-99999",
-    date: "21.02.2020",
-    time: "18:23",
-    pair: "BTC/TRY",
-    typetext: "Stop Limit",
-    typeresult1: "1",
-    typeresult2: "Alış",
-    average: "22,430 TRY",
-    price: "22,430 TRY",
-    transaction: "1,43004833 BTC",
-    amount: "1,43004833 BTC",
-    total: "50.98588353 TRY",
-    commission: "10.98 TRY",
-    statustype: "1",
-    statustext: "Onaylandı",
-  },
-  {
-    id: "02",
-    idnmbr: "MR-99999",
-    date: "21.02.2020",
-    time: "18:23",
-    pair: "BTC/ETH",
-    typetext: "Market Limit",
-    typeresult1: "1",
-    typeresult2: "Alış",
-    average: "35,120 TRY",
-    price: "35,120 TRY",
-    transaction: "1,47050968 BTC",
-    amount: "1,47050968 BTC",
-    total: "43,99958890 TRY",
-    commission: "9.99 TRY",
-    statustype: "1",
-    statustext: "Onaylandı",
-  },
-  {
-    id: "03",
-    idnmbr: "MR-99999",
-    date: "21.02.2020",
-    time: "18:23",
-    pair: "BTC/EOS",
-    typetext: "Stop Limit",
-    typeresult1: "0",
-    typeresult2: "Satış",
-    average: "3.469 TRY",
-    price: "3.469 TRY",
-    transaction: "1,28947736 BTC",
-    amount: "1,28947736 BTC",
-    total: "23,74630933 TRY",
-    commission: "3,74 TRY",
-    statustype: "1",
-    statustext: "Onaylandı",
-  },
-  {
-    id: "04",
-    idnmbr: "MR-99999",
-    date: "21.02.2020",
-    time: "18:23",
-    pair: "BTC/XRP",
-    typetext: "Market Limit",
-    typeresult1: "1",
-    typeresult2: "Satış",
-    average: "41,956 TRY",
-    price: "41,956 TRY",
-    transaction: "1,29846500 BTC",
-    amount: "1,29846500 BTC",
-    total: "65,84947640 TRY",
-    commission: "5,84 TRY",
-    statustype: "1",
-    statustext: "Onaylandı",
-  },
-  {
-    id: "05",
-    idnmbr: "MR-99999",
-    date: "21.02.2020",
-    time: "18:23",
-    pair: "BTC/XRP",
-    typetext: "Market Limit",
-    typeresult1: "1",
-    typeresult2: "Alış",
-    average: "1.029 TRY",
-    price: "1.029 TRY",
-    transaction: "1,75893923 BTC",
-    amount: "1,75893923 BTC",
-    total: "76,74638908 TRY",
-    commission: "7,74 TRY",
-    statustype: "1",
-    statustext: "Onaylandı",
-  },
-];
+import { useClientRect, usePrices } from "~/state/hooks/";
+import { fetchOrderHistory } from "~/state/slices/order.slice";
+import { formatDate, formatDateDistance } from "~/util/";
 
 const orderBy = [
   "Önce Yeni Tarihli",
   "Önce Eski Tarihli",
-  "Önce Para Yatırma",
-  "Önce Para Çekme",
-  "Önce TRY",
-  "Önce USD",
-  "Önce Kripto Para",
-  "Önce Banka",
-  "Önce Papara",
+  "Önce Alış",
+  "Önce Satış",
 ];
 const transactionTypes = [
-  { label: "Yatırma", name: "isdeposit" },
-  { label: "Çekme", name: "iswithdraw" },
-  { label: "Tamamlandı", name: "isrealized" },
-  { label: "İptal", name: "iscanceled" },
+  { label: "Alış", name: "isbuyorders" },
+  { label: "Satış", name: "issellorders" },
+  { label: "Tamamlandı", name: "isfilledorders" },
+  { label: "İptal", name: "iscanceledorders" },
 ];
 const periodBy = ["1G", "1H", "2H", "1A", "3A"];
 
@@ -135,30 +40,34 @@ const OpenOrderTransactionHistory = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["form"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
-  const { activeCurrencies } = useCurrencies();
-  const { history } = useSelector(state => state.transaction);
   const [apiError, setApiError] = useState("");
-
-  const validCurrencies = useMemo(
-    () => activeCurrencies.filter(({ symbol }) => symbol !== "EUR"),
-    [activeCurrencies]
-  );
+  const { lang } = useSelector(state => state.ui);
+  const { allPairs } = usePrices();
+  const orderSlice = useSelector(state => state.order);
+  const orderHistory = orderSlice?.history || [];
 
   const defaultValues = useMemo(() => {
-    const currencyids = validCurrencies
-      .map(({ id }) => Number(id))
-      .sort((a, b) => a - b);
+    const today = formatDate(new Date(), "yyyy-MM-dd", { locale: lang });
+    const threeMonthsAgo = formatDate(
+      sub(new Date(), { months: 3 }),
+      "yyyy-MM-dd",
+      { locale: lang }
+    );
 
     return {
-      currencyids,
+      pairids: allPairs.map(({ id }) => Number(id)),
       orderby: 1,
-      isdeposit: true,
-      iswithdraw: true,
-      isrealized: true,
-      iscanceled: true,
-      periodby: 2,
+      isbuyorders: true,
+      issellorders: true,
+      isfilledorders: true,
+      iscanceledorders: true,
+      periodby: 5,
+      startdate: threeMonthsAgo,
+      enddate: today,
+      // startfrom: 0,
+      // takecount: 20
     };
-  }, [validCurrencies]);
+  }, [allPairs, lang]);
 
   const {
     register,
@@ -175,15 +84,36 @@ const OpenOrderTransactionHistory = props => {
   const { periodby: watchedPeriodby } = watch();
 
   useEffect(() => {
-    dispatch(fetchTransactionHistories(defaultValues));
+    const { pairids, enddate, startdate, ...rest } = defaultValues;
+    const toSubmit = {
+      ...rest,
+      pairids: JSON.stringify(pairids),
+    };
+
+    dispatch(fetchOrderHistory(toSubmit));
   }, [defaultValues, dispatch]);
 
   const onSubmit = async data => {
     setApiError("");
-    const { currencyids } = data;
-    const toSubmit = { ...data, currencyids: currencyids.map(Number) };
+    const { pairids, periodby } = data;
+    let toSubmit = { pairids: JSON.stringify(pairids?.map?.(Number)) };
 
-    const { payload } = await dispatch(fetchTransactionHistories(toSubmit));
+    if (periodby) {
+      merge(toSubmit, omit(data, ["pairids", "startdate", "enddate"]));
+    } else {
+      const startdate = formatDate(data?.startdate, "yyyy-MM-dd", {
+        locale: lang,
+      });
+      const enddate = formatDate(data?.enddate, "yyyy-MM-dd", { locale: lang });
+
+      merge(
+        toSubmit,
+        omit(data, ["pairids", "periodby", "startdate", "enddate"]),
+        { startdate, enddate }
+      );
+    }
+
+    const { payload } = await dispatch(fetchOrderHistory(toSubmit));
 
     if (!payload?.status) {
       setApiError(payload?.errormessage);
@@ -212,24 +142,24 @@ const OpenOrderTransactionHistory = props => {
               className="custom-select custom-select-sm"
               type="select"
               multiple
-              size={4}
-              name="currencyids"
+              size={3}
+              name="pairids"
               innerRef={register({
                 required: t("isRequired"),
               })}
             >
-              {validCurrencies.map(({ symbol, id }) => {
+              {allPairs.map(({ id, name, symbol }) => {
                 return (
-                  <option value={Number(id)} key={symbol}>
-                    {symbol}
+                  <option value={id} key={symbol}>
+                    {name}
                   </option>
                 );
               })}
             </Input>
             <div>
-              {errors.currencyids && (
+              {errors.pairids && (
                 <span style={{ color: "red", fontSize: "1rem" }}>
-                  {errors.currencyids?.message}
+                  {errors.pairids?.message}
                 </span>
               )}
             </div>
@@ -297,12 +227,25 @@ const OpenOrderTransactionHistory = props => {
           </Col>
           <Col xs="auto">
             <Input
-              type="text"
+              type="date"
               bsSize="sm"
-              placeholder="Başlangıç - Bitiş Tarihi"
+              title="Start Date"
+              name="startdate"
+              innerRef={register({
+                valueAsDate: true,
+              })}
+            />
+            <Input
+              type="date"
+              bsSize="sm"
+              name="enddate"
+              title="End Date"
+              innerRef={register({
+                valueAsDate: true,
+              })}
             />
           </Col>
-          {/* <Col xs="auto">
+          <Col xs="auto">
             <div className="custom-control custom-checkbox">
               <Input
                 className="custom-control-input"
@@ -318,7 +261,7 @@ const OpenOrderTransactionHistory = props => {
                 Diğer Çiftleri Gizle
               </Label>
             </div>
-          </Col> */}
+          </Col>
         </Row>
         <ButtonGroup>
           <Button variant="secondary" className="w-100 active" type="submit">
@@ -378,33 +321,41 @@ const OpenOrderTransactionHistory = props => {
             scrollbar
             scrollbarstyles={{ height: `${tableHeight - 36}px` }}
           >
-            {historytable.map(
+            {orderHistory.map(
               ({
-                id,
-                idnmbr,
-                date,
-                time,
-                pair,
-                typetext,
-                typeresult1,
-                typeresult2,
-                average,
-                price,
-                transaction,
-                amount,
-                total,
+                buying_amount,
+                buying_currency_id,
+                buyingcurrency,
                 commission,
-                statustype,
-                statustext,
+                created_at,
+                customer_group_id,
+                id,
+                market_price,
+                order_side_id,
+                order_status_id,
+                order_type_id,
+                orderside,
+                orderstatus,
+                ordertype,
+                pairname,
+                price,
+                selling_amount,
+                selling_currency_id,
+                sellingcurrency,
+                status,
+                stop_price,
+                updated_amount,
+                updated_at,
+                updated_commission,
               }) => {
                 const cls1 = classnames({
-                  sitecolorgreen: typeresult1 === "1",
-                  sitecolorred: typeresult1 !== "1",
+                  sitecolorgreen: order_side_id === 1,
+                  sitecolorred: order_side_id !== 1,
                 });
 
                 const cls2 = classnames({
-                  sitecolorgreen: statustype === "1",
-                  sitecolorred: statustype !== "1",
+                  sitecolorgreen: order_status_id === 1,
+                  sitecolorred: order_status_id !== 1,
                 });
 
                 return (
@@ -420,37 +371,45 @@ const OpenOrderTransactionHistory = props => {
                         </a>
                       </Table.Td>
                       <Table.Td sizeauto className="nmbr">
-                        {idnmbr}
+                        {id}
                       </Table.Td>
                       <Table.Td sizeauto className="date">
-                        {date} - {time}
+                        <span title={updated_at}>
+                          {formatDateDistance(
+                            new Date(updated_at),
+                            Date.now(),
+                            {
+                              locale: lang,
+                            }
+                          )}
+                        </span>
                       </Table.Td>
                       <Table.Td sizeauto className="symb">
-                        {pair}
+                        {pairname}
                       </Table.Td>
                       <Table.Td sizeauto className="type">
-                        {typetext} - <span className={cls1}>{typeresult2}</span>
+                        {ordertype} - <span className={cls1}>{orderside}</span>
                       </Table.Td>
                       <Table.Td sizefixed className="avrg">
-                        {average}
+                        ----
                       </Table.Td>
                       <Table.Td sizefixed className="pric">
-                        {price}
+                        {price} {sellingcurrency}
                       </Table.Td>
                       <Table.Td sizefixed className="hppn">
-                        {transaction}
+                        {buying_amount} {buyingcurrency}
                       </Table.Td>
                       <Table.Td sizefixed className="amnt">
-                        {amount}
+                        {buying_amount} {buyingcurrency}
                       </Table.Td>
                       <Table.Td sizefixed className="totl">
-                        {total}
+                        ---
                       </Table.Td>
                       <Table.Td sizeauto className="comm">
-                        {commission}
+                        {commission} {sellingcurrency}
                       </Table.Td>
                       <Table.Td sizeauto className="stts">
-                        <span className={cls2}>{statustext}</span>
+                        <span className={cls2}>{orderstatus}</span>
                       </Table.Td>
                     </Table.Tr>
                     <div className="hsttblbrwstbl">
