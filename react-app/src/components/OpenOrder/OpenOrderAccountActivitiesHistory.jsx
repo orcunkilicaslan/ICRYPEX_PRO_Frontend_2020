@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { sub } from "date-fns";
+import { omit, merge } from "lodash";
 
 import { Button } from "../Button.jsx";
 import Table from "../Table.jsx";
@@ -90,20 +91,34 @@ const OpenOrderAccountActivitiesHistory = props => {
   const { periodby: watchedPeriodby } = watch();
 
   useEffect(() => {
-    const currencyids = JSON.stringify(defaultValues?.currencyids);
-    const toSubmit = { ...defaultValues, currencyids };
+    const { currencyids, enddate, startdate, ...rest } = defaultValues;
+    const toSubmit = {
+      ...rest,
+      currencyids: JSON.stringify(currencyids),
+    };
 
     dispatch(fetchTransactionHistories(toSubmit));
   }, [defaultValues, dispatch]);
 
   const onSubmit = async data => {
     setApiError("");
-    const currencyids = JSON.stringify(data?.currencyids);
-    const startdate = formatDate(data?.startdate, "yyyy-MM-dd", {
-      locale: lang,
-    });
-    const enddate = formatDate(data?.enddate, "yyyy-MM-dd", { locale: lang });
-    const toSubmit = { ...data, currencyids, startdate, enddate };
+    const { currencyids, periodby } = data;
+    let toSubmit = { currencyids: JSON.stringify(currencyids) };
+
+    if (periodby) {
+      merge(toSubmit, omit(data, ["currencyids", "startdate", "enddate"]));
+    } else {
+      const startdate = formatDate(data?.startdate, "yyyy-MM-dd", {
+        locale: lang,
+      });
+      const enddate = formatDate(data?.enddate, "yyyy-MM-dd", { locale: lang });
+
+      merge(
+        toSubmit,
+        omit(data, ["currencyids", "periodby", "startdate", "enddate"]),
+        { startdate, enddate }
+      );
+    }
 
     const { payload } = await dispatch(fetchTransactionHistories(toSubmit));
 
