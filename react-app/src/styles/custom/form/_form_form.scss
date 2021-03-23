@@ -112,6 +112,42 @@
 
   }
 
+  .checkradioboxed{
+    @include flexbox-display-flex();
+    @include flexbox-flex-wrap(wrap);
+    margin-right: -$form-grid-gutter-width/2;
+    margin-left: -$form-grid-gutter-width/2;
+
+    .custom-checkbox{
+      padding-left: 0;
+      margin-right: $form-group-margin-bottom/1.5;
+
+      .custom-control-input{}
+      .custom-control-label{
+        width: 100%;
+        user-select: none;
+
+        &::before,
+        &::after{display: none;}
+      }
+
+      .custom-control-input:checked ~ .custom-control-label{
+        background-color: $bootstrap-primary;
+        border-color: $bootstrap-primary;
+      }
+    }
+
+    .custom-control-inline{
+      @include flexbox-flex(0 0 auto);
+      width: auto;
+      max-width: 100%;
+      padding-right: $form-grid-gutter-width/2;
+      padding-left: $form-grid-gutter-width/2;
+      margin-right: 0;
+      margin-bottom: $form-grid-gutter-width !important;
+    }
+  }
+
   .input-group{
 
     &-text{
