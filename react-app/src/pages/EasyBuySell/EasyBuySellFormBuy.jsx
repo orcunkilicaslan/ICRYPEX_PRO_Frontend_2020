@@ -60,7 +60,7 @@ const EasyBuySellFormBuy = props => {
       >
         <Row className="easybuysell-form-inputs">
           <FormGroup
-              className={`col ${errors.fiatAmount && ("inputresult resulterror")}`}
+            className={`col ${errors.fiatAmount && "inputresult resulterror"}`}
           >
             <div className="formflexlabel">
               <Label>MİKTAR {fiatCurrency}</Label>
@@ -97,8 +97,9 @@ const EasyBuySellFormBuy = props => {
 
                   if (!Number.isNaN(value)) {
                     const parsed = parseFloat(value);
-                    const { price } = selectedPrice;
+                    const price = selectedPrice?.price;
                     const cryptoAmount = Number(parsed / price).toFixed(8);
+
                     setValue("cryptoAmount", cryptoAmount, {
                       shouldValidate: true,
                     });
@@ -110,9 +111,9 @@ const EasyBuySellFormBuy = props => {
               </InputGroupAddon>
             </InputGroup>
             {errors.fiatAmount && (
-                <FormText className="inputresult resulterror">
-                  {errors.fiatAmount?.message}
-                </FormText>
+              <FormText className="inputresult resulterror">
+                {errors.fiatAmount?.message}
+              </FormText>
             )}
           </FormGroup>
           <FormGroup className="col-auto">
@@ -121,7 +122,9 @@ const EasyBuySellFormBuy = props => {
             </div>
           </FormGroup>
           <FormGroup
-              className={`col ${errors.cryptoAmount && ("inputresult resulterror")}`}
+            className={`col ${
+              errors.cryptoAmount && "inputresult resulterror"
+            }`}
           >
             <div className="formflexlabel">
               <Label>MİKTAR {cryptoCurrency}</Label>
@@ -156,8 +159,9 @@ const EasyBuySellFormBuy = props => {
 
                   if (!Number.isNaN(value)) {
                     const parsed = parseFloat(value);
-                    const { price } = selectedPrice;
+                    const price = selectedPrice?.price;
                     const fiatAmount = Number(price * parsed).toFixed(2);
+
                     setValue("fiatAmount", fiatAmount, {
                       shouldValidate: true,
                     });
@@ -169,9 +173,9 @@ const EasyBuySellFormBuy = props => {
               </InputGroupAddon>
             </InputGroup>
             {errors.cryptoAmount && (
-                <FormText className="inputresult resulterror">
-                  {errors.cryptoAmount?.message}
-                </FormText>
+              <FormText className="inputresult resulterror">
+                {errors.cryptoAmount?.message}
+              </FormText>
             )}
           </FormGroup>
         </Row>

@@ -27,8 +27,8 @@ export const fetchTransactionHistories = createAsyncThunk(
       const response = await api.fetchTransactionHistories(
         {
           currencyids,
-          // startdate,
-          // enddate,
+          startdate,
+          enddate,
           periodby,
           isdeposit,
           iswithdraw,
