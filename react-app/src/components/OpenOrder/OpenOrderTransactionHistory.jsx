@@ -27,6 +27,7 @@ const orderBy = [
   "Önce Eski Tarihli",
   "Önce Alış",
   "Önce Satış",
+  "Alfabetik",
 ];
 const transactionTypes = [
   { label: "Alış", name: "isbuyorders" },
@@ -45,6 +46,7 @@ const OpenOrderTransactionHistory = props => {
   const { allPairs } = usePrices();
   const orderSlice = useSelector(state => state.order);
   const orderHistory = orderSlice?.history || [];
+  const isFetching = orderSlice?.isFetchingHistory;
 
   const defaultValues = useMemo(() => {
     const today = formatDate(new Date(), "yyyy-MM-dd", { locale: lang });
@@ -131,7 +133,7 @@ const OpenOrderTransactionHistory = props => {
   return (
     <div className="openorders-history">
       <Form
-        className="tabcont tabcont-filterbar siteformui"
+        className="siteformui"
         autoComplete="off"
         noValidate
         onSubmit={handleSubmit(onSubmit)}
@@ -202,7 +204,7 @@ const OpenOrderTransactionHistory = props => {
             <Input
               name="periodby"
               innerRef={register({ valueAsNumber: true })}
-              style={{ display: "none" }}
+              className="d-none"
             />
             <ButtonGroup size="sm" className="w-100">
               {periodBy.map((el, idx) => {
@@ -264,7 +266,12 @@ const OpenOrderTransactionHistory = props => {
           </Col>
         </Row>
         <ButtonGroup>
-          <Button variant="secondary" className="w-100 active" type="submit">
+          <Button
+            variant="secondary"
+            className="w-100 active"
+            type="submit"
+            disabled={isFetching}
+          >
             Filtrele
           </Button>
           <Button variant="secondary" className="active" onClick={onReset}>
