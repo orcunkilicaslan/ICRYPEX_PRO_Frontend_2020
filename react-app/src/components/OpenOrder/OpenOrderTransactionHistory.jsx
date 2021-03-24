@@ -156,7 +156,8 @@ const OpenOrderTransactionHistory = props => {
         noValidate
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Row className="tabcont tabcont-filterbar">
+
+        <Row className="tabcont tabcont-filterbar d-none">
           <Col>
             <Input
               className="custom-select custom-select-sm"
@@ -282,19 +283,109 @@ const OpenOrderTransactionHistory = props => {
             </div>
           </Col>
         </Row>
-        <ButtonGroup>
-          <Button
-            variant="secondary"
-            className="w-100 active"
-            type="submit"
-            disabled={isFetching}
-          >
-            Filtrele
-          </Button>
-          <Button variant="secondary" className="active" onClick={onReset}>
-            Sıfırla
-          </Button>
-        </ButtonGroup>
+
+        <Row className="tabcont tabcont-filterbar">
+          <Col xs="auto">
+            <Button
+                variant="secondary"
+                size="sm"
+            >
+              İşlem Çiftleri
+            </Button>
+          </Col>
+          <Col>
+            <Input
+                name="periodby"
+                innerRef={register({ valueAsNumber: true })}
+                className="d-none"
+            />
+            <ButtonGroup size="sm" className="w-100">
+              {periodBy.map((el, idx) => {
+                const cls = classnames({ active: watchedPeriodby === idx + 1 });
+
+                return (
+                    <Button
+                        key={`${el}_${idx}`}
+                        type="button"
+                        size="sm"
+                        className={cls}
+                        variant="secondary"
+                        onClick={() =>
+                            setValue("periodby", idx + 1, { shouldValidate: true })
+                        }
+                    >
+                      {el}
+                    </Button>
+                );
+              })}
+            </ButtonGroup>
+          </Col>
+          <Col>
+            <Input
+                className="custom-select custom-select-sm"
+                type="select"
+            >
+              {["İşlem Tipi", "Yatırma", "Çekme"].map((el, idx) => {
+                return (
+                    <option value={idx + 1} key={`${el}_${idx}`}>
+                      {el}
+                    </option>
+                );
+              })}
+            </Input>
+          </Col>
+          <Col>
+            <Input
+                className="custom-select custom-select-sm"
+                type="select"
+            >
+              {["Durumu", "Tamamlandı", "İptal"].map((el, idx) => {
+                return (
+                    <option value={idx + 1} key={`${el}_${idx}`}>
+                      {el}
+                    </option>
+                );
+              })}
+            </Input>
+          </Col>
+          <Col xs="auto">
+            <div className="custom-control custom-checkbox mb-0">
+              <Input
+                  className="custom-control-input"
+                  type="checkbox"
+                  id="ordersHistoryHideOtherPairs"
+                  checked={hideOthers}
+                  onChange={onToggleHideOthers}
+              />
+              <Label
+                  className="custom-control-label"
+                  htmlFor="ordersHistoryHideOtherPairs"
+                  check
+              >
+                {t("coinbar:hidePairs")}
+              </Label>
+            </div>
+          </Col>
+          <Col xs="auto" className="d-none">
+            <ButtonGroup>
+              <Button
+                  variant="outline-primary"
+                  size="sm"
+                  type="submit"
+                  disabled={isFetching}
+              >
+                Filtrele
+              </Button>
+              <Button
+                  variant="outline-danger"
+                  size="sm"
+                  onClick={onReset}
+              >
+                Sıfırla
+              </Button>
+            </ButtonGroup>
+          </Col>
+        </Row>
         {apiError && (
           <span style={{ color: "coral", fontSize: "1rem" }}>{apiError}</span>
         )}
