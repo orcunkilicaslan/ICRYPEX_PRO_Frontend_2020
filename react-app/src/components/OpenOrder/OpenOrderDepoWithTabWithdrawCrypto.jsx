@@ -7,7 +7,7 @@ import {
   InputGroupAddon,
   InputGroupText,
   Input,
-  FormGroup,
+  FormGroup, Label,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -17,6 +17,8 @@ import { Button } from "~/components/Button.jsx";
 import { IconSet } from "~/components/IconSet";
 import { useCurrencies } from "~/state/hooks/";
 import { withDrawCrypto } from "~/state/slices/withdraw.slice";
+import { setOpenModal } from "~/state/slices/ui.slice";
+import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal.jsx";
 
 const FEE_RATE = 15;
 
@@ -73,6 +75,16 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
         setApiError("");
       }
     }
+  };
+
+  const { openModal } = useSelector(state => state.ui);
+
+  const openTermsModal = () => {
+    dispatch(setOpenModal("depositwithdrawalterms"));
+  };
+
+  const clearOpenModals = () => {
+    dispatch(setOpenModal("none"));
   };
 
   return (
@@ -177,6 +189,27 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
               <Col xs="auto">{getTotal(watch("amount"))} TRY</Col>
             </Row>
           </div>
+          <div className="confirmcheckbox">
+            <div className="custom-control custom-checkbox">
+              <Input
+                  className="custom-control-input"
+                  id="withdrawTabIhaveRead"
+                  type="checkbox"
+                  defaultChecked
+              />
+              <Label
+                  className="custom-control-label"
+                  htmlFor="withdrawTabIhaveRead"
+              >
+                <Button
+                    onClick={openTermsModal}
+                >
+                  Kural ve Şartları
+                </Button>{" "}
+                okudum onaylıyorum.
+              </Label>
+            </div>
+          </div>
           <div className="formbttm">
             {apiError && (
               <span style={{ color: "red", fontSize: "1rem" }}>{apiError}</span>
@@ -191,6 +224,10 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
             </Button>
           </div>
         </Form>
+        <DepositWithdrawalTermsModal
+            isOpen={openModal === "depositwithdrawalterms"}
+            clearModals={clearOpenModals}
+        />
       </div>
     </div>
   );

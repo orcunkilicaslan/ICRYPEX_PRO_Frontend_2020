@@ -1,7 +1,5 @@
 import { useState, useContext, useEffect } from "react";
 import {
-  Input,
-  Label,
   Nav,
   NavItem,
   NavLink,
@@ -68,25 +66,6 @@ const OpenOrderDepoWithTabWithdraw = props => {
               );
             })}
           </Nav>
-          <div className="confirmcheckbox siteformui">
-            <div className="custom-control custom-checkbox">
-              <Input
-                className="custom-control-input"
-                id="withdrawTabIhaveRead"
-                type="checkbox"
-                defaultChecked
-              />
-              <Label
-                className="custom-control-label"
-                htmlFor="withdrawTabIhaveRead"
-              >
-                <a href="#" title="" rel="bookmark" target="_blank">
-                  Kural ve Şartları
-                </a>{" "}
-                okudum onaylıyorum.
-              </Label>
-            </div>
-          </div>
         </div>
         <div className="dandwtab-wrp-cont tabareaflexflow">
           <TabContent className="sitetabs" activeTab={activeTab}>

@@ -138,6 +138,10 @@
       margin: 0;
     }
 
+    .dottedlist{
+      @extend %extcontullistdotted;
+    }
+
   }
 
   &-sm{

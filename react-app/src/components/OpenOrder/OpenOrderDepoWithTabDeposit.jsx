@@ -68,25 +68,6 @@ const OpenOrderDepoWithTabDeposit = props => {
               );
             })}
           </Nav>
-          <div className="confirmcheckbox siteformui">
-            <div className="custom-control custom-checkbox">
-              <Input
-                className="custom-control-input"
-                id="depositTabIhaveRead"
-                type="checkbox"
-                defaultChecked
-              />
-              <Label
-                className="custom-control-label"
-                htmlFor="depositTabIhaveRead"
-              >
-                <a href="#" title="" rel="bookmark" target="_blank">
-                  Kural ve Şartları
-                </a>{" "}
-                okudum onaylıyorum.
-              </Label>
-            </div>
-          </div>
         </div>
         <div className="dandwtab-wrp-cont tabareaflexflow">
           <TabContent className="sitetabs" activeTab={activeTab}>
