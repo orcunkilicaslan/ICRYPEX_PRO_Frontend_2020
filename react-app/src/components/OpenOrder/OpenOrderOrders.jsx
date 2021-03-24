@@ -12,12 +12,16 @@ import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { groupBy } from "lodash";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
 import { useClientRect, usePrices } from "~/state/hooks";
-import { fetchOpenOrders } from "~/state/slices/order.slice";
+import {
+  fetchOpenOrders,
+  toggleHideOthersOpen,
+} from "~/state/slices/order.slice";
 import { formatDateDistance } from "~/util/";
 
 const orderBy = [
@@ -34,14 +38,15 @@ const transactionTypes = [
 
 const OpenOrderOrders = props => {
   const dispatch = useDispatch();
-  const { t } = useTranslation(["form"]);
+  const { t } = useTranslation(["form", "coinbar"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
   const [apiError, setApiError] = useState("");
   const { lang } = useSelector(state => state.ui);
-  const { allPairs } = usePrices();
+  const { allPairs, selectedPair } = usePrices();
   const orderSlice = useSelector(state => state.order);
   const openOrders = orderSlice?.open || [];
   const isFetching = orderSlice?.isFetchingOpen;
+  const hideOthers = orderSlice?.hideOthersOpen;
 
   const defaultValues = useMemo(() => {
     return {
@@ -53,6 +58,16 @@ const OpenOrderOrders = props => {
       // takecount: 20
     };
   }, [allPairs]);
+
+  const visibleOrders = useMemo(() => {
+    if (!hideOthers) {
+      return openOrders;
+    } else {
+      const byPair = groupBy(openOrders, ({ pairname }) => pairname);
+
+      return byPair[selectedPair?.name] || [];
+    }
+  }, [hideOthers, openOrders, selectedPair]);
 
   const { register, handleSubmit, errors, reset, clearErrors } = useForm({
     mode: "onChange",
@@ -88,6 +103,10 @@ const OpenOrderOrders = props => {
     reset(defaultValues);
     setApiError("");
     clearErrors();
+  };
+
+  const onToggleHideOthers = () => {
+    dispatch(toggleHideOthersOpen());
   };
 
   return (
@@ -165,15 +184,16 @@ const OpenOrderOrders = props => {
               <Input
                 className="custom-control-input"
                 type="checkbox"
-                id="ordersHideOtherPairs"
-                defaultChecked
+                id="ordersOpenHideOtherPairs"
+                checked={hideOthers}
+                onChange={onToggleHideOthers}
               />
               <Label
                 className="custom-control-label"
-                htmlFor="ordersHideOtherPairs"
+                htmlFor="ordersOpenHideOtherPairs"
                 check
               >
-                Diğer Çiftleri Gizle
+                {t("coinbar:hidePairs")}
               </Label>
             </div>
           </Col>
@@ -226,7 +246,7 @@ const OpenOrderOrders = props => {
             scrollbar
             scrollbarstyles={{ height: `${tableHeight - 36}px` }}
           >
-            {openOrders.map(
+            {visibleOrders.map(
               ({
                 buying_amount,
                 buying_currency_id,

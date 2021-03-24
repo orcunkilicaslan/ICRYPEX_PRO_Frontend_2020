@@ -13,13 +13,16 @@ import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { sub } from "date-fns";
-import { omit, merge } from "lodash";
+import { omit, merge, groupBy } from "lodash";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
 import { useClientRect, usePrices } from "~/state/hooks/";
-import { fetchOrderHistory } from "~/state/slices/order.slice";
+import {
+  fetchOrderHistory,
+  toggleHideOthersHistory,
+} from "~/state/slices/order.slice";
 import { formatDate, formatDateDistance } from "~/util/";
 
 const orderBy = [
@@ -39,14 +42,15 @@ const periodBy = ["1G", "1H", "2H", "1A", "3A"];
 
 const OpenOrderTransactionHistory = props => {
   const dispatch = useDispatch();
-  const { t } = useTranslation(["form"]);
+  const { t } = useTranslation(["form", "coinbar"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
   const [apiError, setApiError] = useState("");
   const { lang } = useSelector(state => state.ui);
-  const { allPairs } = usePrices();
+  const { allPairs, selectedPair } = usePrices();
   const orderSlice = useSelector(state => state.order);
   const orderHistory = orderSlice?.history || [];
   const isFetching = orderSlice?.isFetchingHistory;
+  const hideOthers = orderSlice?.hideOthersHistory;
 
   const defaultValues = useMemo(() => {
     const today = formatDate(new Date(), "yyyy-MM-dd", { locale: lang });
@@ -70,6 +74,16 @@ const OpenOrderTransactionHistory = props => {
       // takecount: 20
     };
   }, [allPairs, lang]);
+
+  const visibleOrders = useMemo(() => {
+    if (!hideOthers) {
+      return orderHistory;
+    } else {
+      const byPair = groupBy(orderHistory, ({ pairname }) => pairname);
+
+      return byPair[selectedPair?.name] || [];
+    }
+  }, [hideOthers, orderHistory, selectedPair]);
 
   const {
     register,
@@ -128,6 +142,10 @@ const OpenOrderTransactionHistory = props => {
     reset(defaultValues);
     setApiError("");
     clearErrors();
+  };
+
+  const onToggleHideOthers = () => {
+    dispatch(toggleHideOthersHistory());
   };
 
   return (
@@ -252,15 +270,16 @@ const OpenOrderTransactionHistory = props => {
               <Input
                 className="custom-control-input"
                 type="checkbox"
-                id="ordersHideOtherPairs"
-                defaultChecked
+                id="ordersHistoryHideOtherPairs"
+                checked={hideOthers}
+                onChange={onToggleHideOthers}
               />
               <Label
                 className="custom-control-label"
-                htmlFor="ordersHideOtherPairs"
+                htmlFor="ordersHistoryHideOtherPairs"
                 check
               >
-                Diğer Çiftleri Gizle
+                {t("coinbar:hidePairs")}
               </Label>
             </div>
           </Col>
@@ -328,7 +347,7 @@ const OpenOrderTransactionHistory = props => {
             scrollbar
             scrollbarstyles={{ height: `${tableHeight - 36}px` }}
           >
-            {orderHistory.map(
+            {visibleOrders.map(
               ({
                 buying_amount,
                 buying_currency_id,

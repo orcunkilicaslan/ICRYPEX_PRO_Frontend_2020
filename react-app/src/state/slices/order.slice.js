@@ -111,6 +111,8 @@ const initialState = {
   isFetchingHistory: false,
   open: [],
   isFetchingOpen: false,
+  hideOthersOpen: false,
+  hideOthersHistory: false,
 };
 
 const orderSlice = createSlice({
@@ -119,6 +121,12 @@ const orderSlice = createSlice({
   reducers: {
     setTabIndex: (state, { payload }) => {
       state.tabIndex = payload;
+    },
+    toggleHideOthersOpen: state => {
+      state.hideOthersOpen = !state.hideOthersOpen;
+    },
+    toggleHideOthersHistory: state => {
+      state.hideOthersHistory = !state.hideOthersHistory;
     },
     reset: state => {
       for (const [key, value] of Object.entries(initialState)) {
@@ -150,6 +158,11 @@ const orderSlice = createSlice({
   },
 });
 
-export const { setTabIndex, reset } = orderSlice.actions;
+export const {
+  toggleHideOthersOpen,
+  toggleHideOthersHistory,
+  setTabIndex,
+  reset,
+} = orderSlice.actions;
 
 export default orderSlice.reducer;
