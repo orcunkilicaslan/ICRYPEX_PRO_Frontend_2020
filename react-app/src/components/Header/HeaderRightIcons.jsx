@@ -1,11 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  UncontrolledTooltip,
-  Badge,
-  Modal,
-  ModalBody,
-  ModalHeader,
-} from "reactstrap";
+import { UncontrolledTooltip, Badge } from "reactstrap";
 import { useState, Fragment } from "react";
 import { inRange, random } from "lodash";
 import { produce } from "immer";
@@ -13,9 +7,8 @@ import uuid from "uuid";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
-import AccordionCollapse from "~/components/AccordionCollapse.jsx";
+import { NotifModal } from "~/components/modals";
 import { setOpenModal } from "~/state/slices/ui.slice";
-import { formatDate } from "~/util/";
 
 const NOTIFICATIONS = Array.from({ length: 25 }, () => ({
   id: uuid(),
@@ -30,8 +23,7 @@ const HeaderRightIcons = props => {
   const dispatch = useDispatch();
   const { accesstoken } = useSelector(state => state.api);
   const { openModal } = useSelector(state => state.ui);
-  const { lang: locale } = useSelector(state => state.ui);
-  const [openIdx, setOpenIdx] = useState(-1);
+
   const [{ data: notifs, unread: unreadCount }, setNotifs] = useState({
     data: NOTIFICATIONS,
     unread: NOTIFICATIONS.filter(({ isreaded }) => !isreaded).length,
@@ -70,11 +62,6 @@ const HeaderRightIcons = props => {
     });
   };
 
-  const onClickItem = idx => {
-    if (idx === openIdx) setOpenIdx(-1);
-    else setOpenIdx(idx);
-  };
-
   return (
     <div className="header-right-icons">
       <Button
@@ -94,11 +81,9 @@ const HeaderRightIcons = props => {
           >
             <span id="headTooltipNotif">
               <IconSet sprite="sprtsmclrd" size="20" name="notif">
-                {Boolean(unreadCount) ? (
-                  <Badge color="danger" pill>
-                    {unreadCount}
-                  </Badge>
-                ) : null}
+                <Badge color={unreadCount ? "danger" : "secondary"} pill>
+                  {unreadCount || 0}
+                </Badge>
               </IconSet>
             </span>
             {Boolean(unreadCount) ? (
@@ -109,81 +94,14 @@ const HeaderRightIcons = props => {
           </Button>
         </Fragment>
       ) : null}
-      <Modal
-        wrapClassName=""
-        modalClassName="modal-rightside"
-        size="sm"
+      <NotifModal
+        notifications={notifs}
+        unread={unreadCount}
         isOpen={openModal === "notifications"}
-        toggle={clearOpenModals}
-        keyboard={false}
-        fade={false}
-        autoFocus={false}
-        backdrop="static"
-      >
-        <ModalHeader toggle={clearOpenModals}>BİLDİRİMLER</ModalHeader>
-        <ModalBody className="modalcomp modalcomp-notif">
-          {unreadCount ? (
-            <div className="headsmtitle">
-              <div className="headsmtitle-col">
-                <h6>{unreadCount} Okunmamış Mesaj</h6>
-              </div>
-            </div>
-          ) : null}
-          <div className="modalcomp-notif-wrp modalcomp-psright">
-            <AccordionCollapse scrollbar className="modalcomp-notif-list">
-              {notifs.map((notification, index) => {
-                const { id, title, message, datetime, isreaded } = notification;
-                const isOpen = openIdx === index;
-
-                return (
-                  <AccordionCollapse.Item
-                    className={isreaded ? "notifread" : "notifnotread"}
-                    open={index === 1}
-                    key={id}
-                  >
-                    <AccordionCollapse.Head
-                      onClick={() => onClickItem(index)}
-                      aria-expanded={isOpen ? "true" : "false"}
-                    >
-                      {title}
-                    </AccordionCollapse.Head>
-                    <AccordionCollapse.Body isOpen={isOpen}>
-                      <p>{message}</p>
-                      <div className="collapsefoot">
-                        <span className="collapsefoot-date">
-                          {formatDate(datetime, "dd MMM yyyy HH:mm", {
-                            locale,
-                          })}
-                        </span>
-                        {Boolean(isreaded) ? null : (
-                          <Button
-                            className="collapsefoot-btn"
-                            size="sm"
-                            onClick={() => onMarkRead(index)}
-                          >
-                            Okundu Olarak İşaretle
-                          </Button>
-                        )}
-                      </div>
-                    </AccordionCollapse.Body>
-                  </AccordionCollapse.Item>
-                );
-              })}
-            </AccordionCollapse>
-          </div>
-          <div className="footbtns">
-            {Boolean(unreadCount) ? (
-              <Button
-                variant="danger"
-                className="w-100"
-                onClick={onMarkAllRead}
-              >
-                TÜMÜNÜ OKUNDU OLARAK İŞARETLE
-              </Button>
-            ) : null}
-          </div>
-        </ModalBody>
-      </Modal>
+        clearModals={clearOpenModals}
+        onMarkRead={onMarkRead}
+        onMarkAllRead={onMarkAllRead}
+      />
     </div>
   );
 };

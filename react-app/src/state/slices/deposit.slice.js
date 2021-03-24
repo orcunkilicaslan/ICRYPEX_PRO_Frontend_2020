@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as api from "../api";
+import { hasAccessToken } from "~/util/";
 
 export const depositBankwire = createAsyncThunk(
   "deposit/bank",
@@ -26,6 +27,13 @@ export const depositBankwire = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 
@@ -50,6 +58,13 @@ export const depositPapara = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 
@@ -74,6 +89,13 @@ export const depositCrypto = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 

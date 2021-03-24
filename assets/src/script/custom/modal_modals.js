@@ -11,4 +11,5 @@ import Modal from "bootstrap.native/dist/components/modal-native";
 //var myNewModalForgotPass = new Modal('#modalHeadForgotPass', { backdrop: true }).show();
 //var myNewModalNewsAll = new Modal('#modalHeadNewsAll', { backdrop: true }).show();
 //var myNewModalUserMenu = new Modal('#modalHeadUserMenu', { backdrop: true }).show();
+//var myNewModalOrderHistoryFilter = new Modal('#modalOrderHistoryFilter', { backdrop: true }).show();
 /* Modal */

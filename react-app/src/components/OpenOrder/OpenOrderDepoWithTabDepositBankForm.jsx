@@ -43,7 +43,7 @@ const OpenOrderDepoWithTabDepositBankAkbank = props => {
               className="custom-select"
               type="select"
               name="symbol"
-              innerRef={register()}
+              innerRef={register}
             >
               {bankCurrencies.map(symbol => {
                 return <option key={symbol}>{symbol}</option>;

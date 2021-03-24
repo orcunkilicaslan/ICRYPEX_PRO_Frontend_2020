@@ -24,10 +24,8 @@ const HeaderRight = props => {
   const { lang: currentLanguage } = useSelector(state => state.ui);
 
   useEffect(() => {
-    if (accesstoken) {
-      dispatch(fetchUserInfo());
-    }
-  }, [dispatch, accesstoken]);
+    dispatch(fetchUserInfo());
+  }, [dispatch]);
 
   const onForgotPassword = useCallback(
     async data => {

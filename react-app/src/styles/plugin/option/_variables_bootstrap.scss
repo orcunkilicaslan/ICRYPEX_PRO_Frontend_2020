@@ -295,7 +295,7 @@ $bootstrap-input-height-border:                   $bootstrap-input-border-width 
 //$bootstrap-input-height-sm:                       add($bootstrap-input-line-height-sm * 1em, add($bootstrap-input-padding-y-sm * 2, $bootstrap-input-height-border, false));
 //$bootstrap-input-height-lg:                       add($bootstrap-input-line-height-lg * 1em, add($bootstrap-input-padding-y-lg * 2, $bootstrap-input-height-border, false));
 $bootstrap-input-transition:                      border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-$bootstrap-form-text-margin-top:                  .25rem;
+$bootstrap-form-text-margin-top:                  $var-custom-form-text-margin-top;
 $bootstrap-form-check-input-gutter:               1.25rem;
 $bootstrap-form-check-input-margin-y:             .3rem;
 $bootstrap-form-check-input-margin-x:             .25rem;

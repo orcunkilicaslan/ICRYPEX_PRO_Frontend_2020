@@ -11,10 +11,9 @@ const TradingViewBig = props => {
             <div className="tradingviewbig">
                 <div className="tradingview-widget-container">
                     <TradingViewWidget
-                        //symbol={currentPair.symbol}
-                        symbol={currentPair.symbol === "LINKUSD" ? "KRAKEN:LINKUSD" : currentPair.symbol}
+                        symbol={currentPair?.symbol === "LINKUSD" ? "KRAKEN:LINKUSD" : currentPair.symbol}
                         theme={"Dark"}
-                        locale={currentLanguage.toUpperCase()}
+                        locale={currentLanguage?.toUpperCase?.x()}
                         timezone={"Europe/Istanbul"}
                         interval={"3"}
                         style={"1"}

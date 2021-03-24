@@ -31,8 +31,8 @@ const TopCoinBar = props => {
   const [alarmError, setAlarmError] = useState(null);
 
   useEffect(() => {
-    if (accesstoken) dispatch(fetchPriceAlarms());
-  }, [dispatch, accesstoken]);
+    dispatch(fetchPriceAlarms());
+  }, [dispatch]);
 
   let visiblePriceData = {
     bestBuy: "",

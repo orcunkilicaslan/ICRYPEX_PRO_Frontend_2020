@@ -8,11 +8,13 @@ import {
 import _debug from "debug";
 import { format, formatDistanceStrict } from "date-fns";
 import { enUS as en, tr } from "date-fns/locale";
+import ms from "ms";
 
 import { name } from "../../package.json";
 
 const locales = { en, tr };
-export const debug = _debug(name);
+const isProd = process.env.NODE_ENV === "production";
+export const debug = _debug(name); // isProd ? makeFakeDebug() : _debug("pro");
 const log = debug.extend("util");
 if (process.env.REACT_APP_DEBUG) _debug.enable(`${name}:*`);
 
@@ -20,12 +22,12 @@ if (process.env.REACT_APP_DEBUG) _debug.enable(`${name}:*`);
 export const formatDate = (
   date,
   pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSxxx",
-  { locale = "en" }
+  { locale = "en" } = {}
 ) => {
   try {
-  return format(date, pattern, {
-    locale: locales[locale],
-  });
+    return format(date, pattern, {
+      locale: locales[locale],
+    });
   } catch (err) {
     log("%s: %O", err.message, { date, pattern, locale });
   }
@@ -34,13 +36,13 @@ export const formatDate = (
 export const formatDateDistance = (
   fromDate,
   toDate,
-  { locale = "en", addSuffix = true }
+  { locale = "en", addSuffix = true } = {}
 ) => {
   try {
-  return formatDistanceStrict(fromDate, toDate, {
-    locale: locales[locale],
-    addSuffix,
-  });
+    return formatDistanceStrict(fromDate, toDate, {
+      locale: locales[locale],
+      addSuffix,
+    });
   } catch (err) {
     log("%s: %O", err.message, { fromDate, toDate });
   }
@@ -70,11 +72,18 @@ export const makeLocalKey = async secret => {
 
 // "BTC / TRY" -> ["BTC", "TRY"]
 export const getPairTuple = pairname => {
-  return pairname?.split?.("/")?.map(string => string.trim());
+  return pairname?.split?.("/")?.map(string => string?.trim?.());
 };
 
 // "BTC / USD" -> "btcusd"
 export const getPairPrefix = pairname => {
-  return getPairTuple(pairname).join("").toLowerCase();
+  return getPairTuple(pairname)?.join("")?.toLowerCase?.();
 };
 
+export const hasAccessToken = ({ api }) => {
+  return api?.accesstoken ? true : false;
+};
+
+export const hasPreloginToken = ({ api }) => {
+  return api?.prelogintoken ? true : false;
+};

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as api from "../api";
+import { hasAccessToken } from "~/util/";
 
 export const fetchTransactionHistories = createAsyncThunk(
   "transaction/fetchHistories",
@@ -26,8 +27,8 @@ export const fetchTransactionHistories = createAsyncThunk(
       const response = await api.fetchTransactionHistories(
         {
           currencyids,
-          // startdate,
-          // enddate,
+          startdate,
+          enddate,
           periodby,
           isdeposit,
           iswithdraw,
@@ -48,6 +49,13 @@ export const fetchTransactionHistories = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 
@@ -93,11 +101,18 @@ export const fetchPendingTransactions = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 
 const initialState = {
-  history: [],
+  histories: [],
   pending: [],
 };
 
@@ -113,7 +128,7 @@ const transactionSlice = createSlice({
   },
   extraReducers: {
     [fetchTransactionHistories.fulfilled]: (state, action) => {
-      state.history = action?.payload?.description || [];
+      state.histories = action?.payload?.description || [];
     },
     [fetchPendingTransactions.fulfilled]: (state, action) => {
       state.pending = action?.payload?.description || [];

@@ -65,7 +65,6 @@ const OpenOrderAccountActivitiesPending = props => {
   );
   const { lang } = useSelector(state => state.ui);
   const [apiError, setApiError] = useState("");
-  const { accesstoken } = useSelector(state => state.api);
   const { register, handleSubmit, errors, watch, reset, clearErrors } = useForm(
     {
       mode: "onChange",
@@ -74,10 +73,8 @@ const OpenOrderAccountActivitiesPending = props => {
   );
 
   useEffect(() => {
-    if (accesstoken) {
-      dispatch(fetchPendingTransactions(defaultValues));
-    }
-  }, [accesstoken, dispatch]);
+    dispatch(fetchPendingTransactions(defaultValues));
+  }, [dispatch]);
 
   const onSubmit = async data => {
     setApiError("");

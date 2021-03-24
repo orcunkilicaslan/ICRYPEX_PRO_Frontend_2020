@@ -3,6 +3,7 @@ import {
   Row,
   Form,
   FormGroup,
+  FormText,
   Label,
   Input,
   InputGroup,
@@ -89,7 +90,9 @@ const EasyBuySellFormSell = props => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <Row className="easybuysell-form-inputs">
-          <FormGroup className="col">
+          <FormGroup
+              className={`col ${errors.cryptoAmount && ("inputresult resulterror")}`}
+          >
             <div className="formflexlabel">
               <Label>{t("finance:amountToBeSold")} - {cryptoCurrency}</Label>
               <div className="labelassets">
@@ -134,20 +137,20 @@ const EasyBuySellFormSell = props => {
                 <InputGroupText>{cryptoCurrency}</InputGroupText>
               </InputGroupAddon>
             </InputGroup>
-            <div>
-              {errors.cryptoAmount && (
-                <span style={{ color: "red", fontSize: "1rem" }}>
+            {errors.cryptoAmount && (
+                <FormText className="inputresult resulterror">
                   {errors.cryptoAmount?.message}
-                </span>
-              )}
-            </div>
+                </FormText>
+            )}
           </FormGroup>
           <FormGroup className="col-auto">
             <div className="inputchangeicon">
               <IconSet sprite="sprtsmclrd" size="16" name="change" />
             </div>
           </FormGroup>
-          <FormGroup className="col">
+          <FormGroup
+              className={`col ${errors.fiatAmount && ("inputresult resulterror")}`}
+          >
             <div className="formflexlabel">
               <Label>{t("finance:amountToBeSold")} - {fiatCurrency}</Label>
               <div className="labelprice">
@@ -193,13 +196,11 @@ const EasyBuySellFormSell = props => {
                 <InputGroupText>{fiatCurrency}</InputGroupText>
               </InputGroupAddon>
             </InputGroup>
-            <div>
-              {errors.fiatAmount && (
-                <span style={{ color: "red", fontSize: "1rem" }}>
+            {errors.fiatAmount && (
+                <FormText className="inputresult resulterror">
                   {errors.fiatAmount?.message}
-                </span>
-              )}
-            </div>
+                </FormText>
+            )}
           </FormGroup>
         </Row>
         <div className="easybuysell-form-btns">

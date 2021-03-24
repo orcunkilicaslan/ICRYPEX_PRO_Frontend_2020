@@ -1,6 +1,7 @@
 import {
   Form,
   FormGroup,
+  FormText,
   Label,
   Input,
   Modal,
@@ -10,6 +11,7 @@ import {
 import ReCAPTCHA from "react-google-recaptcha";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
@@ -36,6 +38,11 @@ export default function SigninModal(props) {
       password: "",
     },
   });
+
+  const [passShow, setPassShow] = useState(false);
+  const toggleTypePass = () => {
+    setPassShow(passShow ? false : true);
+  };
 
   const onSubmit = data => {
     clearErrors();
@@ -69,7 +76,9 @@ export default function SigninModal(props) {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="labelfocustop">
-              <FormGroup>
+              <FormGroup
+                  className={errors.emailornationalid && ("inputresult resulterror")}
+              >
                 <Input
                   type="email"
                   required
@@ -77,18 +86,18 @@ export default function SigninModal(props) {
                   innerRef={register({ required: t("form:isRequired") })}
                 />
                 <Label>{t("email")}</Label>
-                <div>
-                  {errors.emailornationalid && (
-                    <span style={{ color: "red", fontSize: "1rem" }}>
+                {errors.emailornationalid && (
+                    <FormText className="inputresult resulterror inputintext">
                       {errors.emailornationalid?.message}
-                    </span>
-                  )}
-                </div>
+                    </FormText>
+                )}
               </FormGroup>
-              <FormGroup>
+              <FormGroup
+                  className={errors.password && ("inputresult resulterror")}
+              >
                 <Input
                   className="signuppassword"
-                  type="password"
+                  type={passShow ? "text" : "password"}
                   required
                   name="password"
                   innerRef={register({ required: t("form:isRequired") })}
@@ -96,18 +105,15 @@ export default function SigninModal(props) {
                 <Label>{t("password")}</Label>
                 <Button
                   className="showhidepass"
-                  data-toggle="showhidepassword"
-                  data-target=".signuppassword"
+                  onClick={toggleTypePass}
                 >
                   <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
                 </Button>
-                <div>
-                  {errors.password && (
-                    <span style={{ color: "red", fontSize: "1rem" }}>
+                {errors.password && (
+                    <FormText className="inputresult resulterror inputintext">
                       {errors.password?.message}
-                    </span>
-                  )}
-                </div>
+                    </FormText>
+                )}
               </FormGroup>
             </div>
             <div className="recaptcha">

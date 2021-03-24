@@ -3,7 +3,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from "../api";
 import { fetchSettings } from "./api.slice";
 import { setPrices, setOrderBook, setOrderHistory } from "./socket.slice";
-import { getPairTuple, getPairPrefix } from "~/util/";
+import {
+  getPairTuple,
+  getPairPrefix,
+  hasAccessToken,
+  hasPreloginToken,
+} from "~/util/";
 
 export const fetchFavoritePairs = createAsyncThunk(
   "pair/fetchfavorites",
@@ -26,6 +31,13 @@ export const fetchFavoritePairs = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 
@@ -52,6 +64,13 @@ export const addFavoritePair = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 
@@ -78,6 +97,13 @@ export const removeFavoritePair = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 
@@ -113,10 +139,11 @@ export const fetchInitialOrderBook = createAsyncThunk(
   },
   {
     condition: (pairname, { getState }) => {
-      const { pair } = getState();
-      const books = pair?.initialOrderBooks;
+      const state = getState();
+      const books = state.pair?.initialOrderBooks;
       const prefix = getPairPrefix(pairname);
 
+      if (!hasPreloginToken(state)) return false;
       if (books?.includes(prefix)) return false;
 
       return true;
@@ -156,10 +183,11 @@ export const fetchInitialOrderHistory = createAsyncThunk(
   },
   {
     condition: (pairname, { getState }) => {
-      const { pair } = getState();
-      const histories = pair?.initialOrderHistories;
+      const state = getState();
+      const histories = state.pair?.initialOrderHistories;
       const prefix = getPairPrefix(pairname);
 
+      if (!hasPreloginToken(state)) return false;
       if (histories?.includes(prefix)) return false;
 
       return true;

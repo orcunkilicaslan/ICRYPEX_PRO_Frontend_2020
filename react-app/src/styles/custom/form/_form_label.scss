@@ -157,6 +157,33 @@
         //padding-left: $form-grid-gutter-width / 2;
       }
     }
+
+    .form-group.inputresult{
+      .form-control:invalid ~ label{
+        color: $site-clr-white;
+      }
+    }
+
+    .form-text.inputresult.inputintext{
+      margin: 0;
+      position: absolute;
+      top: 8px;
+      right: $input-padding-x;
+      z-index: -1;
+    }
+
+    .showhidepass ~ .inputintext{
+      right: $input-padding-x*2.5 !important;
+    }
+
+    .form-control[pattern]{
+      //&:focus ~ .inputresult{display: block;}
+      &:valid ~ .inputresult{display: none;}
+
+      ~ label{
+        color: $site-clr-white;
+      }
+    }
   }
 
 }

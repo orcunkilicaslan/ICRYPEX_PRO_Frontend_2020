@@ -2299,8 +2299,8 @@
                                 <div id="oo_thistory" class="tab-pane fade" role="tabpanel">
                                     <div class="openorders-history">
 
-                                        <!-- Filter -->
-                                        <div class="tabcont tabcont-filterbar siteformui row">
+                                        <!-- Filter Old -->
+                                        <div class="tabcont tabcont-filterbar siteformui row d-none">
                                             <div class="col">
                                                 <select class="custom-select custom-select-sm">
                                                     <option value="1">Çift</option>
@@ -2334,12 +2334,81 @@
                                             </div>
                                             <div class="col-auto">
                                                 <div class="custom-control custom-checkbox">
+                                                    <input id="historyHideOtherPairsx" class="custom-control-input" type="checkbox" value="" checked />
+                                                    <label for="historyHideOtherPairsx" class="custom-control-label">Diğer Çiftleri Gizle</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Filter Old -->
+                                        <!-- Filter New -->
+                                        <div class="tabcont tabcont-filterbar siteformui row">
+                                            <div class="col-auto">
+                                                <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalOrderHistoryFilter">İşlem Çiftleri</button>
+                                            </div>
+                                            <div class="col">
+                                                <input name="periodby" type="text" class="form-control" style="display: none;" />
+                                                <div role="group" class="w-100 btn-group-sm btn-group">
+                                                    <button class="btn btn-sm btn-secondary" type="button">1G</button>
+                                                    <button class="btn active btn-sm btn-secondary" type="button">1H</button>
+                                                    <button class="btn btn-sm btn-secondary" type="button">2H</button>
+                                                    <button class="btn btn-sm btn-secondary" type="button">1A</button>
+                                                    <button class="btn btn-sm btn-secondary" type="button">3A</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <select class="custom-select custom-select-sm form-control">
+                                                    <option selected disabled>İşlem Tipi</option>
+                                                    <option value="isdeposit">Yatırma</option>
+                                                    <option value="iswithdraw">Çekme</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-auto">
+                                                <select class="custom-select custom-select-sm form-control">
+                                                    <option selected disabled>Durumu</option>
+                                                    <option value="isrealized">Tamamlandı</option>
+                                                    <option value="iscanceled">İptal</option>
+                                                </select>
+                                            </div>
+                                            <div class="col d-none">
+                                                <select name="orderby" class="custom-select custom-select-sm form-control">
+                                                    <option value="1">Önce Yeni Tarihli</option>
+                                                    <option value="2">Önce Eski Tarihli</option>
+                                                    <option value="3">Önce Para Yatırma</option>
+                                                    <option value="4">Önce Para Çekme</option>
+                                                    <option value="5">Önce TRY</option>
+                                                    <option value="6">Önce USD</option>
+                                                    <option value="7">Önce Kripto Para</option>
+                                                    <option value="8">Önce Banka</option>
+                                                    <option value="9">Önce Papara</option>
+                                                </select>
+                                            </div>
+                                            <div class="col d-none">
+                                                <select multiple="" size="4" name="currencyids" class="custom-select custom-select-sm form-control">
+                                                    <option value="1">TRY</option>
+                                                    <option value="2">USD</option>
+                                                    <option value="4">BTC</option>
+                                                    <option value="5">LTC</option>
+                                                    <option value="6">ETH</option>
+                                                    <option value="7">XRP</option>
+                                                    <option value="10">XLM</option>
+                                                    <option value="14">AVAX</option>
+                                                    <option value="15">ALGO</option>
+                                                    <option value="8">MPAY</option>
+                                                    <option value="9">BAT</option>
+                                                    <option value="11">TRYB</option>
+                                                    <option value="12">USDT</option>
+                                                    <option value="13">LINK</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="custom-control custom-checkbox">
                                                     <input id="historyHideOtherPairs" class="custom-control-input" type="checkbox" value="" checked />
                                                     <label for="historyHideOtherPairs" class="custom-control-label">Diğer Çiftleri Gizle</label>
                                                 </div>
                                             </div>
+
                                         </div>
-                                        <!-- Filter -->
+                                        <!-- Filter New -->
                                         <!-- Table -->
                                         <div class="ootransactionhistorytable scrollbar">
                                             <div class="scrollbar-horizontal">
@@ -5933,6 +6002,97 @@
     </div>
 </div>
 <!-- Modal Set Alarm -->
+
+<!-- Modal Order History Filter -->
+<div class="modal modal-rightside fade" id="modalOrderHistoryFilter" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">İŞLEM GEÇMİŞİ FİLTRE</h4>
+            </div>
+            <div class="modal-body modalcomp modalcomp-filters">
+                <form class="modalfiltersform siteformui" autocomplete="off" novalidate>
+                    <fieldset>
+                        <legend>İşlem Çiftleri</legend>
+                        <div class="form-group checkradioboxed">
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input id="filterPairBTCUSD" class="custom-control-input" type="checkbox" value="" />
+                                <label for="filterPairBTCUSD" class="custom-control-label btn btn-sm btn-secondary">BTC/USD</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input id="filterPairETHUSD" class="custom-control-input" type="checkbox" value="" />
+                                <label for="filterPairETHUSD" class="custom-control-label btn btn-sm btn-secondary">ETH/USD</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input id="filterPairLTCUSD" class="custom-control-input" type="checkbox" value="" />
+                                <label for="filterPairLTCUSD" class="custom-control-label btn btn-sm btn-secondary">LTC/USD</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input id="filterPairXRPUSD" class="custom-control-input" type="checkbox" value="" />
+                                <label for="filterPairXRPUSD" class="custom-control-label btn btn-sm btn-secondary">XRP/USD</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input id="filterPairXLMUSD" class="custom-control-input" type="checkbox" value="" />
+                                <label for="filterPairXLMUSD" class="custom-control-label btn btn-sm btn-secondary">XLM/USD</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input id="filterPairAVAXUSD" class="custom-control-input" type="checkbox" value="" />
+                                <label for="filterPairAVAXUSD" class="custom-control-label btn btn-sm btn-secondary">AVAX/USD</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input id="filterPairALGOUSD" class="custom-control-input" type="checkbox" value="" />
+                                <label for="filterPairALGOUSD" class="custom-control-label btn btn-sm btn-secondary">ALGO/USD</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input id="filterPairMPAYUSD" class="custom-control-input" type="checkbox" value="" />
+                                <label for="filterPairMPAYUSD" class="custom-control-label btn btn-sm btn-secondary">MPAY/USD</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input id="filterPairBATUSD" class="custom-control-input" type="checkbox" value="" />
+                                <label for="filterPairBATUSD" class="custom-control-label btn btn-sm btn-secondary">BAT/USD</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input id="filterPairLINKUSD" class="custom-control-input" type="checkbox" value="" />
+                                <label for="filterPairLINKUSD" class="custom-control-label btn btn-sm btn-secondary">LINK/USD</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Tarih Aralığı</legend>
+                        <div class="form-group">
+                            <input placeholder="Başlangıç - Bitiş Tarihi" type="text" class="form-control text-center">
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>İşlem Tipi</legend>
+                        <div class="form-group">
+                            <select class="custom-select form-control">
+                                <option selected="" disabled="">İşlem Tipi</option>
+                                <option value="isdeposit">Yatırma</option>
+                                <option value="iswithdraw">Çekme</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>İşlem Durumu</legend>
+                        <div class="form-group">
+                            <select class="custom-select form-control">
+                                <option selected="" disabled="">Durumu</option>
+                                <option value="isrealized">Tamamlandı</option>
+                                <option value="iscanceled">İptal</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <button type="button" class="btn btn-primary w-100">İŞLEMLERİ FİLTRELE</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Order History Filter -->
 
 <!-- Toast Copy Text to Clipboard -->
 <div class="toast toast-success toast-sideright fade hide" id="toastCopyToClipboard" role="alert" aria-live="assertive" aria-atomic="true" data-animation="fade" data-delay="3000">

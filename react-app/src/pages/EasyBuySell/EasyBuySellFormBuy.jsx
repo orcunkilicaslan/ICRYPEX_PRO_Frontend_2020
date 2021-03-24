@@ -3,6 +3,7 @@ import {
   Row,
   Form,
   FormGroup,
+  FormText,
   Label,
   Input,
   InputGroup,
@@ -97,7 +98,9 @@ const EasyBuySellFormBuy = props => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <Row className="easybuysell-form-inputs">
-          <FormGroup className="col">
+          <FormGroup
+            className={`col ${errors.fiatAmount && "inputresult resulterror"}`}
+          >
             <div className="formflexlabel">
               <Label>{t("finance:amountToBeTaken")} - {fiatCurrency}</Label>
               <div className="labelassets">
@@ -130,8 +133,9 @@ const EasyBuySellFormBuy = props => {
 
                   if (!Number.isNaN(value)) {
                     const parsed = parseFloat(value);
-                    const { price } = selectedPrice;
+                    const price = selectedPrice?.price;
                     const cryptoAmount = Number(parsed / price).toFixed(8);
+
                     setValue("cryptoAmount", cryptoAmount, {
                       shouldValidate: true,
                     });
@@ -142,20 +146,22 @@ const EasyBuySellFormBuy = props => {
                 <InputGroupText>{fiatCurrency}</InputGroupText>
               </InputGroupAddon>
             </InputGroup>
-            <div>
-              {errors.fiatAmount && (
-                <span style={{ color: "red", fontSize: "1rem" }}>
-                  {errors.fiatAmount?.message}
-                </span>
-              )}
-            </div>
+            {errors.fiatAmount && (
+              <FormText className="inputresult resulterror">
+                {errors.fiatAmount?.message}
+              </FormText>
+            )}
           </FormGroup>
           <FormGroup className="col-auto">
             <div className="inputchangeicon">
               <IconSet sprite="sprtsmclrd" size="16" name="change" />
             </div>
           </FormGroup>
-          <FormGroup className="col">
+          <FormGroup
+            className={`col ${
+              errors.cryptoAmount && "inputresult resulterror"
+            }`}
+          >
             <div className="formflexlabel">
               <Label>{t("finance:amountToBeTaken")} - {cryptoCurrency}</Label>
               <div className="labelprice">
@@ -189,8 +195,9 @@ const EasyBuySellFormBuy = props => {
 
                   if (!Number.isNaN(value)) {
                     const parsed = parseFloat(value);
-                    const { price } = selectedPrice;
+                    const price = selectedPrice?.price;
                     const fiatAmount = Number(price * parsed).toFixed(2);
+
                     setValue("fiatAmount", fiatAmount, {
                       shouldValidate: true,
                     });
@@ -201,13 +208,11 @@ const EasyBuySellFormBuy = props => {
                 <InputGroupText>{cryptoCurrency}</InputGroupText>
               </InputGroupAddon>
             </InputGroup>
-            <div>
-              {errors.cryptoAmount && (
-                <span style={{ color: "red", fontSize: "1rem" }}>
-                  {errors.cryptoAmount?.message}
-                </span>
-              )}
-            </div>
+            {errors.cryptoAmount && (
+              <FormText className="inputresult resulterror">
+                {errors.cryptoAmount?.message}
+              </FormText>
+            )}
           </FormGroup>
         </Row>
         <div className="easybuysell-form-btns">

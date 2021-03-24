@@ -49,8 +49,8 @@ const MarketDataSymbol = props => {
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
 
   useEffect(() => {
-    if (accesstoken) dispatch(fetchFavoritePairs());
-  }, [dispatch, accesstoken]);
+    dispatch(fetchFavoritePairs());
+  }, [dispatch]);
 
   const onPairFilter = filter => {
     resetSearch();
@@ -124,9 +124,7 @@ const MarketDataSymbol = props => {
         <Table scrollbar>
           <Table.Thead scrollbar>
             <Table.Tr>
-              {accesstoken ? (
-                  <Table.Th sizeauto className="fav" />
-              ) : null}
+              {accesstoken ? <Table.Th sizeauto className="fav" /> : null}
               <Table.Th sizefixed className="sym">
                 {t("common:symbol")}
               </Table.Th>
@@ -172,14 +170,14 @@ const MarketDataSymbol = props => {
               return (
                 <Table.Tr key={symbol} onClick={() => onSelectPair(symbol)}>
                   {accesstoken ? (
-                  <Table.Td sizeauto className="fav">
+                    <Table.Td sizeauto className="fav">
                       <Button
                         className={`tablefavico ${isFavorite ? "faved" : null}`}
                         onClick={onClick}
                       >
                         <MdTableFavIcon />
                       </Button>
-                  </Table.Td>
+                    </Table.Td>
                   ) : null}
                   <Table.Td sizefixed className="sym">
                     {name.replace(/\s/g, "")}

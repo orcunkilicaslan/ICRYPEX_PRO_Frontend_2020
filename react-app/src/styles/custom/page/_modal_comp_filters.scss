@@ -1,0 +1,31 @@
+
+.modalcomp{
+
+  &-filters{
+    @include flexbox-display-flex();
+    @include flexbox-flex-flow(column);
+    height: 100%;
+
+    .modalfiltersform{
+
+      fieldset{
+        margin-top: $form-group-margin-bottom;
+
+        &:first-child{margin-top: 0;}
+
+        legend{
+          //color: $site-clr-white;
+          margin-bottom: $form-group-margin-bottom;
+        }
+
+        .checkradioboxed .custom-control-inline{
+          @include flexbox-flex(0 0 calc(100% / 4));
+          max-width: calc(100% / 4);
+        }
+      }
+
+    }
+
+  }
+
+}

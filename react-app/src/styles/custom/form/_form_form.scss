@@ -112,6 +112,42 @@
 
   }
 
+  .checkradioboxed{
+    @include flexbox-display-flex();
+    @include flexbox-flex-wrap(wrap);
+    margin-right: -$form-grid-gutter-width/2;
+    margin-left: -$form-grid-gutter-width/2;
+
+    .custom-checkbox{
+      padding-left: 0;
+      margin-right: $form-group-margin-bottom/1.5;
+
+      .custom-control-input{}
+      .custom-control-label{
+        width: 100%;
+        user-select: none;
+
+        &::before,
+        &::after{display: none;}
+      }
+
+      .custom-control-input:checked ~ .custom-control-label{
+        background-color: $bootstrap-primary;
+        border-color: $bootstrap-primary;
+      }
+    }
+
+    .custom-control-inline{
+      @include flexbox-flex(0 0 auto);
+      width: auto;
+      max-width: 100%;
+      padding-right: $form-grid-gutter-width/2;
+      padding-left: $form-grid-gutter-width/2;
+      margin-right: 0;
+      margin-bottom: $form-grid-gutter-width !important;
+    }
+  }
+
   .input-group{
 
     &-text{
@@ -209,6 +245,71 @@
         margin-top: $form-group-margin-bottom/2;
       }
     }
+  }
+
+  .form-group.inputresult{
+
+    .input-group-prepend{margin-right: 0;}
+    .input-group-append{margin-left: 0;}
+
+    &.resulterror .form-control,
+    &.resulterror .custom-select,
+    &.resulterror .input-group-text{
+      background-color: transparentize($site-clr-red, 0.95) !important;
+      border-color: transparentize($site-clr-red, 0.3) !important;
+    }
+    &.resultsuccess .form-control,
+    &.resultsuccess .custom-select,
+    &.resultsuccess .input-group-text{
+      background-color: transparentize($site-clr-green, 0.95) !important;
+      border-color: transparentize($site-clr-green, 0.3) !important;
+    }
+    .form-control[pattern]:valid{
+      background-color: $input-bg !important;
+      border-color: $input-border-color !important;
+    }
+  }
+
+  .custom-checkbox.inputresult{
+
+    &.resulterror .custom-control-label{
+      color: $site-clr-red;
+
+      &::before{
+        background-color: transparentize($site-clr-red, 0.95) !important;
+        border-color: transparentize($site-clr-red, 0.3) !important;
+      }
+    }
+
+    &.resultsuccess .custom-control-label{
+      color: $site-clr-green;
+
+      &::before{
+        background-color: transparentize($site-clr-green, 0.95) !important;
+        border-color: transparentize($site-clr-green, 0.3) !important;
+      }
+    }
+
+    .custom-control-input:checked + .custom-control-label{
+      color: $site-clr-green !important;
+
+      &::before{
+        background-color: transparentize($site-clr-green, 0.95) !important;
+        border-color: transparentize($site-clr-green, 0.3) !important;
+      }
+    }
+
+    .custom-control-input:checked ~ .inputresult{
+      display: none;
+    }
+
+  }
+
+  .form-text.inputresult{
+    font-size: 100%;
+
+    &.resulterror{color: $site-clr-red !important;}
+    &.resultsuccess{color: $site-clr-green !important;}
   }
 
   .recaptcha{

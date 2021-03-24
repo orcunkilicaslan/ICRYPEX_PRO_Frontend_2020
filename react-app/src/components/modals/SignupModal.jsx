@@ -6,11 +6,12 @@ import {
   InputGroupAddon,
   Modal,
   ModalHeader,
-  ModalBody,
+  ModalBody, FormText,
 } from "reactstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
@@ -46,6 +47,11 @@ export default function SignupModal(props) {
 
   const { countrycode: watchedCountrycode } = watch();
 
+  const [passShow, setPassShow] = useState(false);
+  const toggleTypePass = () => {
+    setPassShow(passShow ? false : true);
+  };
+
   const onSubmit = data => {
     submit(data);
   };
@@ -79,7 +85,9 @@ export default function SignupModal(props) {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="labelfocustop">
-              <FormGroup>
+              <FormGroup
+                  className={errors.firstname && ("inputresult resulterror")}
+              >
                 <Input
                   type="text"
                   required
@@ -87,15 +95,15 @@ export default function SignupModal(props) {
                   innerRef={register({ required: t("form:isRequired") })}
                 />
                 <Label>{t("firstname")}</Label>
-                <div>
-                  {errors.firstname && (
-                    <span style={{ color: "red", fontSize: "1rem" }}>
+                {errors.firstname && (
+                    <FormText className="inputresult resulterror inputintext">
                       {errors.firstname?.message}
-                    </span>
-                  )}
-                </div>
+                    </FormText>
+                )}
               </FormGroup>
-              <FormGroup>
+              <FormGroup
+                  className={errors.lastname && ("inputresult resulterror")}
+              >
                 <Input
                   type="text"
                   required
@@ -103,15 +111,15 @@ export default function SignupModal(props) {
                   innerRef={register({ required: t("form:isRequired") })}
                 />
                 <Label>{t("surname")}</Label>
-                <div>
-                  {errors.lastname && (
-                    <span style={{ color: "red", fontSize: "1rem" }}>
+                {errors.lastname && (
+                    <FormText className="inputresult resulterror inputintext">
                       {errors.lastname?.message}
-                    </span>
-                  )}
-                </div>
+                    </FormText>
+                )}
               </FormGroup>
-              <FormGroup className="input-group phonelabelgroup">
+              <FormGroup
+                  className={`input-group phonelabelgroup ${errors.phoneno && ("inputresult resulterror")}`}
+              >
                 <InputGroupAddon addonType="prepend">
                   <Input
                     className="custom-select"
@@ -149,15 +157,15 @@ export default function SignupModal(props) {
                   })}
                 />
                 <Label>{t("phone")}</Label>
-                <div>
-                  {errors.phoneno && (
-                    <span style={{ color: "red", fontSize: "1rem" }}>
+                {errors.phoneno && (
+                    <FormText className="inputresult resulterror inputintext">
                       {errors.phoneno?.message}
-                    </span>
-                  )}
-                </div>
+                    </FormText>
+                )}
               </FormGroup>
-              <FormGroup>
+              <FormGroup
+                  className={errors.email && ("inputresult resulterror")}
+              >
                 <Input
                   type="email"
                   required
@@ -165,18 +173,18 @@ export default function SignupModal(props) {
                   innerRef={register({ required: t("form:isRequired") })}
                 />
                 <Label>{t("email")}</Label>
-                <div>
-                  {errors.email && (
-                    <span style={{ color: "red", fontSize: "1rem" }}>
+                {errors.email && (
+                    <FormText className="inputresult resulterror inputintext">
                       {errors.email?.message}
-                    </span>
-                  )}
-                </div>
+                    </FormText>
+                )}
               </FormGroup>
-              <FormGroup>
+              <FormGroup
+                  className={errors.password && ("inputresult resulterror")}
+              >
                 <Input
                   className="signuppassword"
-                  type="password"
+                  type={passShow ? "text" : "password"}
                   required
                   name="password"
                   innerRef={register({ required: t("form:isRequired") })}
@@ -184,23 +192,22 @@ export default function SignupModal(props) {
                 <Label>{t("password")}</Label>
                 <Button
                   className="showhidepass"
-                  data-toggle="showhidepassword"
-                  data-target=".signuppassword"
+                  onClick={toggleTypePass}
                 >
                   <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
                 </Button>
-                <div>
-                  {errors.password && (
-                    <span style={{ color: "red", fontSize: "1rem" }}>
+                {errors.password && (
+                    <FormText className="inputresult resulterror inputintext">
                       {errors.password?.message}
-                    </span>
-                  )}
-                </div>
+                    </FormText>
+                )}
               </FormGroup>
-              <FormGroup>
+              <FormGroup
+                  className={errors.confirm && ("inputresult resulterror")}
+              >
                 <Input
                   className="signuprepassword"
-                  type="password"
+                  type={passShow ? "text" : "password"}
                   required
                   name="confirm"
                   innerRef={register({ required: t("form:isRequired") })}
@@ -208,18 +215,15 @@ export default function SignupModal(props) {
                 <Label>{t("confirmPassword")}</Label>
                 <Button
                   className="showhidepass"
-                  data-toggle="showhidepassword"
-                  data-target=".signuprepassword"
+                  onClick={toggleTypePass}
                 >
                   <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
                 </Button>
-                <div>
-                  {errors.confirm && (
-                    <span style={{ color: "red", fontSize: "1rem" }}>
+                {errors.confirm && (
+                    <FormText className="inputresult resulterror inputintext">
                       {errors.confirm?.message}
-                    </span>
-                  )}
-                </div>
+                    </FormText>
+                )}
               </FormGroup>
             </div>
             <div className="recaptcha">
@@ -235,7 +239,9 @@ export default function SignupModal(props) {
               </div>
             </div>
             <div className="checkboxarea">
-              <div className="custom-control custom-checkbox">
+              <div
+                  className={`custom-control custom-checkbox ${errors.termsofuse && ("inputresult resulterror")}`}
+              >
                 <Input
                   className="custom-control-input"
                   id="termsOfUseCheck"
@@ -258,15 +264,15 @@ export default function SignupModal(props) {
                   </a>{" "}
                   {t("readAndAgree")}
                 </Label>
-                <div>
-                  {errors.termsofuse && (
-                    <span style={{ color: "red", fontSize: "1rem" }}>
+                {errors.termsofuse && (
+                    <FormText className="inputresult resulterror">
                       {errors.termsofuse?.message}
-                    </span>
-                  )}
-                </div>
+                    </FormText>
+                )}
               </div>
-              <div className="custom-control custom-checkbox">
+              <div
+                  className={`custom-control custom-checkbox ${errors.ecommerce && ("inputresult resulterror")}`}
+              >
                 <Input
                   className="custom-control-input"
                   id="announcementsCheck"
@@ -281,13 +287,11 @@ export default function SignupModal(props) {
                 >
                   {t("commercialConsent")}
                 </Label>
-                <div>
-                  {errors.ecommerce && (
-                    <span style={{ color: "red", fontSize: "1rem" }}>
+                {errors.ecommerce && (
+                    <FormText className="inputresult resulterror">
                       {errors.ecommerce?.message}
-                    </span>
-                  )}
-                </div>
+                    </FormText>
+                )}
               </div>
             </div>
             <Button

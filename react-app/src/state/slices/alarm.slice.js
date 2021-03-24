@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { groupBy, uniqBy, merge } from "lodash";
+import { uniqBy } from "lodash";
 
 import * as api from "../api";
+import { hasAccessToken } from "~/util/";
 
 export const fetchPriceAlarms = createAsyncThunk(
-  "alarm/all",
+  "alarm/fetchAll",
   async (_, { getState, rejectWithValue }) => {
     const {
       api: { accesstoken },
@@ -24,11 +25,18 @@ export const fetchPriceAlarms = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 
 export const fetchPairPriceAlarms = createAsyncThunk(
-  "alarm/byPair",
+  "alarm/fetchByPair",
   async (pairname, { getState, rejectWithValue }) => {
     const {
       api: { accesstoken },
@@ -48,6 +56,13 @@ export const fetchPairPriceAlarms = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 
@@ -72,6 +87,13 @@ export const createPairPriceAlarm = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 
@@ -98,6 +120,13 @@ export const deletePairPriceAlarm = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 
@@ -124,6 +153,13 @@ export const deletePairPriceAlarms = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
   }
 );
 

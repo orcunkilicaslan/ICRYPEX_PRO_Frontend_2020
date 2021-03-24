@@ -2,7 +2,7 @@ import { useMemo, useEffect } from "react";
 import ChartistGraph from "react-chartist";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { merge } from "lodash";
+import { merge, take } from "lodash";
 
 import Table from "../Table.jsx";
 import { fetchInitialOrderBook } from "~/state/slices/pair.slice";
@@ -50,14 +50,17 @@ const OrderBook = props => {
     sellorders = [],
   } = bookData;
 
+  const visibleSellOrders = take(sellorders, 12);
+  const visibleBuyOrders = take(buyorders, 12);
+
   const { data: buyChartData, options: buyChartOptions } = useMemo(() => {
     const getTotal = arr => {
       return arr.reduce((acc, current) => {
         return acc + current?.amount || 0;
       }, 0);
     };
-    const total = getTotal(buyorders);
-    const series = buyorders.map((order, idx, array) => {
+    const total = getTotal(visibleBuyOrders);
+    const series = visibleBuyOrders.map((order, idx, array) => {
       const arr = array.slice(0, idx + 1);
       const cumulative = getTotal(arr);
 
@@ -65,12 +68,14 @@ const OrderBook = props => {
     });
     const options = merge(
       { reverseData: false },
-      buyorders.length ? { height: `${buyorders.length * 16}px` } : {},
+      visibleBuyOrders.length
+        ? { height: `${visibleBuyOrders.length * 16}px` }
+        : {},
       chartOptions
     );
 
     return { data: { series: [series] }, options };
-  }, [buyorders]);
+  }, [visibleBuyOrders]);
 
   const { data: sellChartData, options: sellChartOptions } = useMemo(() => {
     const getTotal = arr => {
@@ -78,8 +83,8 @@ const OrderBook = props => {
         return acc + current?.total || 0;
       }, 0);
     };
-    const total = getTotal(sellorders);
-    const series = sellorders.map((order, idx, array) => {
+    const total = getTotal(visibleSellOrders);
+    const series = visibleSellOrders.map((order, idx, array) => {
       const arr = array.slice(0, idx + 1);
       const cumulative = getTotal(arr);
 
@@ -87,12 +92,14 @@ const OrderBook = props => {
     });
     const options = merge(
       { reverseData: true },
-      sellorders.length ? { height: `${sellorders.length * 16}px` } : {},
+      visibleSellOrders.length
+        ? { height: `${visibleSellOrders.length * 16}px` }
+        : {},
       chartOptions
     );
 
     return { data: { series: [series] }, options };
-  }, [sellorders]);
+  }, [visibleSellOrders]);
 
   useEffect(() => {
     const { name } = selected;
@@ -161,7 +168,7 @@ const OrderBook = props => {
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {buyorders.map(({ total, amount, price }, idx) => {
+                    {visibleBuyOrders.map(({ total, amount, price }, idx) => {
                       return (
                         <Table.Tr key={`${amount}_${idx}`}>
                           <Table.Td sizefixed className="totl">
@@ -207,7 +214,7 @@ const OrderBook = props => {
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {sellorders.map(({ total, amount, price }, idx) => {
+                    {visibleSellOrders.map(({ total, amount, price }, idx) => {
                       return (
                         <Table.Tr key={`${amount}_${idx}`}>
                           <Table.Td sizefixed className="pric">

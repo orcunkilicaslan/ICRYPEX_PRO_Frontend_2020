@@ -3,6 +3,7 @@ import ms from "ms";
 
 import * as api from "../api";
 import { signoutUser } from "./user.slice";
+import { hasAccessToken, hasPreloginToken } from "~/util/";
 
 let refreshPromise;
 let preLoginPromise;
@@ -56,9 +57,9 @@ export const fetchPreloginToken = createAsyncThunk(
   },
   {
     condition: (_, { getState }) => {
-      const { isRefreshingPreloginToken } = getState();
+      const state = getState();
 
-      return isRefreshingPreloginToken ? false : true;
+      return state.api?.isRefreshingPreloginToken ? false : true;
     },
   }
 );
@@ -93,6 +94,13 @@ export const fetchSettings = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasPreloginToken(state);
+    },
   }
 );
 
@@ -118,6 +126,13 @@ export const signinWithSms = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasPreloginToken(state);
+    },
   }
 );
 
@@ -143,6 +158,13 @@ export const signinWith2FA = createAsyncThunk(
     } catch ({ data }) {
       return rejectWithValue(data);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasPreloginToken(state);
+    },
   }
 );
 
@@ -182,9 +204,13 @@ export const refreshToken = createAsyncThunk(
   },
   {
     condition: (_, { getState }) => {
-      const { isRefreshingAccessToken } = getState();
+      const state = getState();
 
-      return isRefreshingAccessToken ? false : true;
+      return (
+        !Boolean(state.api?.isRefreshingAccessToken) ||
+        hasAccessToken(state) ||
+        hasPreloginToken(state)
+      );
     },
   }
 );
@@ -275,6 +301,7 @@ const apiSlice = createSlice({
     },
     [refreshToken.rejected]: state => {
       state.isRefreshingAccessToken = false;
+      state.accesstoken = null;
     },
     [signoutUser.fulfilled]: state => {
       state.accesstoken = null;
