@@ -5,7 +5,7 @@ import {
   Input,
   Modal,
   ModalHeader,
-  ModalBody,
+  ModalBody, FormText, Col,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -81,13 +81,11 @@ export default function VerifyModal(props) {
                   })}
                 />
                 <Label className="text-center">{t("verificationCode")}</Label>
-                <div>
-                  {errors.code && (
-                    <span style={{ color: "red", fontSize: "1rem" }}>
+                {errors.code && (
+                    <FormText className="inputresult resulterror">
                       {errors.code?.message}
-                    </span>
-                  )}
-                </div>
+                    </FormText>
+                )}
               </FormGroup>
             </div>
             <Button

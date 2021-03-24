@@ -7,7 +7,7 @@ import {
   InputGroupAddon,
   InputGroupText,
   Input,
-  FormGroup, Label,
+  FormGroup, Label, FormText,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -129,13 +129,11 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                   <InputGroupText>{watchedSymbol}</InputGroupText>
                 </InputGroupAddon>
               </InputGroup>
-              <div>
-                {errors.amount && (
-                  <span style={{ color: "red", fontSize: "1rem" }}>
+              {errors.amount && (
+                  <FormText className="inputresult resulterror">
                     {errors.amount?.message}
-                  </span>
-                )}
-              </div>
+                  </FormText>
+              )}
             </Row>
             <InputGroup className="form-group">
               <Input
@@ -158,13 +156,11 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                 </Button>
               </InputGroupAddon>
             </InputGroup>
-            <div>
-              {errors.address && (
-                <span style={{ color: "red", fontSize: "1rem" }}>
+            {errors.address && (
+                <FormText className="inputresult resulterror">
                   {errors.address?.message}
-                </span>
-              )}
-            </div>
+                </FormText>
+            )}
             <InputGroup className="form-group">
               <Input
                 readOnly

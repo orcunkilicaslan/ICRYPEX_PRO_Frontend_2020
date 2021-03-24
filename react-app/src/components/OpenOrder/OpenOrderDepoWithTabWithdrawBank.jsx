@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import {Form, Row, Col, InputGroup, InputGroupAddon, Input, Label} from "reactstrap";
+import {Form, Row, Col, InputGroup, InputGroupAddon, Input, Label, FormText} from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -121,13 +121,11 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
                 </Button>
               </InputGroupAddon>
             </InputGroup>
-            <div>
-              {errors.customerbankid && (
-                <span style={{ color: "red", fontSize: "1rem" }}>
+            {errors.customerbankid && (
+                <FormText className="inputresult resulterror">
                   {errors.customerbankid?.message}
-                </span>
-              )}
-            </div>
+                </FormText>
+            )}
             <InputGroup className="form-group col">
               <Input
                 type="number"
@@ -159,13 +157,11 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
                 </Button>
               </InputGroupAddon>
             </InputGroup>
-            <div>
-              {errors.amount && (
-                <span style={{ color: "red", fontSize: "1rem" }}>
+            {errors.amount && (
+                <FormText className="inputresult resulterror">
                   {errors.amount?.message}
-                </span>
-              )}
-            </div>
+                </FormText>
+            )}
             <Row form className="form-group">
               <Col>Hesaba Geçecek Miktar</Col>
               <Col xs="auto">

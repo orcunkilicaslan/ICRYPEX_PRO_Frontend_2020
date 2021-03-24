@@ -6,7 +6,7 @@ import {
   Input,
   ButtonGroup,
   Form,
-  FormGroup,
+  FormGroup, FormText,
 } from "reactstrap";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
@@ -163,13 +163,11 @@ const OpenOrderAccountActivitiesHistory = props => {
                 );
               })}
             </Input>
-            <div>
-              {errors.currencyids && (
-                <span style={{ color: "red", fontSize: "1rem" }}>
+            {errors.currencyids && (
+                <FormText className="inputresult resulterror">
                   {errors.currencyids?.message}
-                </span>
-              )}
-            </div>
+                </FormText>
+            )}
           </Col>
           <Col>
             <Input

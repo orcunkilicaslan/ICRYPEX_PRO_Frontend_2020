@@ -6,7 +6,7 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Input, Label,
+  Input, Label, FormText,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -108,13 +108,11 @@ const OpenOrderDepoWithTabDepositPapara = props => {
                 <InputGroupText>TRY</InputGroupText>
               </InputGroupAddon>
             </InputGroup>
-            <div>
-              {errors.amount && (
-                <span style={{ color: "red", fontSize: "1rem" }}>
+            {errors.amount && (
+                <FormText className="inputresult resulterror">
                   {errors.amount?.message}
-                </span>
-              )}
-            </div>
+                </FormText>
+            )}
             <Row form className="form-group">
               <Col>
                 Papara komisyonu ({`${PAPARA_FEE_RATE}%`} [En fazla 250.00 TRY]

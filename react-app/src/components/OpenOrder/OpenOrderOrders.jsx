@@ -6,7 +6,7 @@ import {
   Input,
   ButtonGroup,
   Form,
-  FormGroup,
+  FormGroup, FormText,
 } from "reactstrap";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
@@ -137,13 +137,11 @@ const OpenOrderOrders = props => {
                 );
               })}
             </Input>
-            <div>
-              {errors.pairids && (
-                <span style={{ color: "red", fontSize: "1rem" }}>
+            {errors.pairids && (
+                <FormText className="inputresult resulterror">
                   {errors.pairids?.message}
-                </span>
-              )}
-            </div>
+                </FormText>
+            )}
           </Col>
           <Col>
             <Input
