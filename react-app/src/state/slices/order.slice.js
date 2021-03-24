@@ -59,11 +59,58 @@ export const fetchOrderHistory = createAsyncThunk(
   }
 );
 
+export const fetchOpenOrders = createAsyncThunk(
+  "order/fetchOpenOrders",
+  async (data, { getState, rejectWithValue }) => {
+    const {
+      pairids = [],
+      isbuyorders,
+      issellorders,
+      orderby,
+      startfrom,
+      takecount,
+    } = data;
+    const {
+      api: { accesstoken },
+    } = getState();
+
+    try {
+      const response = await api.fetchOpenOrders(
+        {
+          pairids,
+          isbuyorders,
+          issellorders,
+          orderby,
+          // startfrom,
+          // takecount,
+        },
+        {
+          headers: {
+            "x-access-token": accesstoken,
+          },
+        }
+      );
+
+      return response.data;
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
+  }
+);
 
 const initialState = {
   tabIndex: 0,
   history: [],
   isFetchingHistory: false,
+  open: [],
+  isFetchingOpen: false,
 };
 
 const orderSlice = createSlice({
@@ -89,6 +136,16 @@ const orderSlice = createSlice({
     },
     [fetchOrderHistory.rejected]: state => {
       state.isFetchingHistory = false;
+    },
+    [fetchOpenOrders.pending]: state => {
+      state.isFetchingOpen = true;
+    },
+    [fetchOpenOrders.fulfilled]: (state, { payload }) => {
+      state.isFetchingOpen = false;
+      state.open = payload?.description;
+    },
+    [fetchOpenOrders.rejected]: state => {
+      state.isFetchingOpen = false;
     },
   },
 });
