@@ -1959,7 +1959,7 @@
                             <div class="sitetabs tab-content">
 
                                 <!-- Open Orders -->
-                                <div id="oo_oorders" class="tab-pane fade show active" role="tabpanel">
+                                <div id="oo_oorders" class="tab-pane fade" role="tabpanel">
                                     <div class="openorders-orders">
 
                                         <!-- Filter -->
@@ -3487,7 +3487,7 @@
                                 </div>
                                 <!-- Assets -->
                                 <!-- Deposit/Withdrawal -->
-                                <div id="oo_depoandwith" class="tab-pane fade" role="tabpanel">
+                                <div id="oo_depoandwith" class="tab-pane fade show active" role="tabpanel">
                                     <div class="openorders-dandw openorders-dandw-tabs tabareaflexflow">
 
                                         <!-- Head -->
@@ -3519,12 +3519,6 @@
                                                                     <li class="nav-item"><a class="nav-link" href="#deposit_papara" data-toggle="tab" role="tab" aria-selected="false">Papara</a></li>
                                                                     <li class="nav-item"><a class="nav-link" href="#deposit_crypto" data-toggle="tab" role="tab" aria-selected="false">Kripto</a></li>
                                                                 </ul>
-                                                                <div class="confirmcheckbox siteformui">
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input id="depositTabIhaveRead" class="custom-control-input" type="checkbox" value="" checked="">
-                                                                        <label for="depositTabIhaveRead" class="custom-control-label"><a href="#">Kural ve Şartları</a> okudum onaylıyorum.</label>
-                                                                    </div>
-                                                                </div>
                                                             </div>
                                                             <div class="dandwtab-wrp-cont tabareaflexflow">
                                                                 <div class="sitetabs tab-content">
@@ -3565,6 +3559,12 @@
                                                                                                 <div class="form-control textoverflowellipsis dandwakbankholder">Icrpex Bilişim A.Ş.</div>
                                                                                                 <div class="input-group-append">
                                                                                                     <button class="btn btn-secondary active" type="button" data-toggle="copytoclipboard" data-target=".dandwakbankholder"><i class="icon-sprtsmclrd icon-16 icon-copybtn"></i></button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="confirmcheckbox">
+                                                                                                <div class="custom-control custom-checkbox">
+                                                                                                    <input id="depositTabBankIhaveRead" class="custom-control-input" type="checkbox" value="" checked="">
+                                                                                                    <label for="depositTabBankIhaveRead" class="custom-control-label"><button class="btn" type="button" data-toggle="modal" data-target="#modalIhaveRead">Kural ve Şartları</button> okudum onaylıyorum.</label>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </form>
@@ -3701,6 +3701,12 @@
                                                                                             <div class="col-auto">999,999.00 TRY</div>
                                                                                         </div>
                                                                                     </div>
+                                                                                    <div class="confirmcheckbox">
+                                                                                        <div class="custom-control custom-checkbox">
+                                                                                            <input id="depositTabPaparaIhaveRead" class="custom-control-input" type="checkbox" value="" checked="">
+                                                                                            <label for="depositTabPaparaIhaveRead" class="custom-control-label"><button class="btn" type="button" data-toggle="modal" data-target="#modalIhaveRead">Kural ve Şartları</button> okudum onaylıyorum.</label>
+                                                                                        </div>
+                                                                                    </div>
                                                                                     <div class="formbttm">
                                                                                         <button type="button" class="btn btn-secondary active">PAPARA İLE YATIR</button>
                                                                                     </div>
@@ -3731,6 +3737,12 @@
                                                                                         </div>
                                                                                         <p class="sitecolorred">Bu adrese sadece BTC gönderin. Farklı bir coin göndermek yatırdıklarınızın kaybolmasına neden olur.</p>
                                                                                     </div>
+                                                                                    <div class="confirmcheckbox">
+                                                                                        <div class="custom-control custom-checkbox">
+                                                                                            <input id="depositTabCryptoIhaveRead" class="custom-control-input" type="checkbox" value="" checked="">
+                                                                                            <label for="depositTabCryptoIhaveRead" class="custom-control-label"><button class="btn" type="button" data-toggle="modal" data-target="#modalIhaveRead">Kural ve Şartları</button> okudum onaylıyorum.</label>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
                                                                                 <div class="bttminfolist">
                                                                                     <ul>
@@ -3758,12 +3770,6 @@
                                                                     <li class="nav-item"><a class="nav-link" href="#withdraw_papara" data-toggle="tab" role="tab" aria-selected="false">Papara</a></li>
                                                                     <li class="nav-item"><a class="nav-link" href="#withdraw_crypto" data-toggle="tab" role="tab" aria-selected="false">Kripto</a></li>
                                                                 </ul>
-                                                                <div class="confirmcheckbox siteformui">
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input id="withdrawTabIhaveRead" class="custom-control-input" type="checkbox" value="" checked="">
-                                                                        <label for="withdrawTabIhaveRead" class="custom-control-label"><a href="#">Kural ve Şartları</a> okudum onaylıyorum.</label>
-                                                                    </div>
-                                                                </div>
                                                             </div>
                                                             <div class="dandwtab-wrp-cont tabareaflexflow">
                                                                 <div class="sitetabs tab-content">
@@ -3797,6 +3803,12 @@
                                                                                         <div class="form-row form-group">
                                                                                             <div class="col">Hesaba Geçecek Miktar</div>
                                                                                             <div class="col-auto">999,999.00 TRY</div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="confirmcheckbox">
+                                                                                        <div class="custom-control custom-checkbox">
+                                                                                            <input id="withdrawTabBankIhaveRead" class="custom-control-input" type="checkbox" value="" checked="">
+                                                                                            <label for="withdrawTabBankIhaveRead" class="custom-control-label"><button class="btn" type="button" data-toggle="modal" data-target="#modalIhaveRead">Kural ve Şartları</button> okudum onaylıyorum.</label>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="formbttm">
@@ -3872,6 +3884,12 @@
                                                                                             <div class="col-auto">999,999.00 TRY</div>
                                                                                         </div>
                                                                                     </div>
+                                                                                    <div class="confirmcheckbox">
+                                                                                        <div class="custom-control custom-checkbox">
+                                                                                            <input id="withdrawTabPaparaIhaveRead" class="custom-control-input" type="checkbox" value="" checked="">
+                                                                                            <label for="withdrawTabPaparaIhaveRead" class="custom-control-label"><button class="btn" type="button" data-toggle="modal" data-target="#modalIhaveRead">Kural ve Şartları</button> okudum onaylıyorum.</label>
+                                                                                        </div>
+                                                                                    </div>
                                                                                     <div class="formbttm">
                                                                                         <button type="button" class="btn btn-secondary active">PAPARA İLE ÇEK</button>
                                                                                     </div>
@@ -3922,6 +3940,12 @@
                                                                                             <div class="col-auto">999,999.00 TRY</div>
                                                                                         </div>
                                                                                     </div>
+                                                                                    <div class="confirmcheckbox">
+                                                                                        <div class="custom-control custom-checkbox">
+                                                                                            <input id="withdrawTabCryptoIhaveRead" class="custom-control-input" type="checkbox" value="" checked="">
+                                                                                            <label for="withdrawTabCryptoIhaveRead" class="custom-control-label"><button class="btn" type="button" data-toggle="modal" data-target="#modalIhaveRead">Kural ve Şartları</button> okudum onaylıyorum.</label>
+                                                                                        </div>
+                                                                                    </div>
                                                                                     <div class="formbttm">
                                                                                         <button type="button" class="btn btn-secondary active">ONAY E-POSTA GÖNDER</button>
                                                                                     </div>
@@ -3966,6 +3990,27 @@
                                                     </div>
                                                 </div>
                                                 <!-- Withdrawal -->
+                                                <!-- Modal I Have Read -->
+                                                <div class="modal fade" id="modalIhaveRead" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal-dialog modal-md modal-dialog-centered">
+                                                        <div class="modal-content text-center">
+                                                            <div class="modal-close">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            </div>
+                                                            <div class="modal-body modal-confirm">
+                                                                <h4>İşlemlerinizi Tamamlamak İçin Lütfen Dikkatle Okuyup Onaylayınız</h4>
+                                                                <div class="bttminfolist text-left mt-2 mb-2">
+                                                                    <ul>
+                                                                        <li>TL yatırma işlemi gerçekleştirebilmek için, yatırmak istediğiniz tutarı girerek <strong>TALEP OLUŞTUR</strong> butonuna tıklayın ve işleminize özel <strong>açıklama kodunu</strong> oluşturunuz.</li>
+                                                                        <li>TL yatırma işlemlerinde yalnızca sistemimize kayıt olduğunuz isim, soy isim ve T.C. Kimlik Numarası’na ait banka hesaplarından gelen tutarlar kabul edilmektedir.</li>
+                                                                        <li>24 saat içinde gönderilmeyen talepler otomatik olarak iptal edilir.</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Modal I Have Read -->
 
                                             </div>
                                         </div>
