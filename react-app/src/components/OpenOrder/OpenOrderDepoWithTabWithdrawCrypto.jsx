@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext, useEffect } from "react";
 import {
   Form,
   Row,
@@ -21,6 +21,7 @@ import { useCurrencies } from "~/state/hooks/";
 import { withDrawCrypto } from "~/state/slices/withdraw.slice";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal.jsx";
+import { openOrderContext } from "./OpenOrder";
 
 const FEE_RATE = 15;
 
@@ -29,11 +30,16 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
   const { t } = useTranslation(["form"]);
   const { isWithdrawingCrypto } = useSelector(state => state.withdraw);
   const { groupedCryptoAddresses = {} } = useSelector(state => state.assets);
-  const { cryptoCurrencies = [], tokenCurrencies = [] } = useCurrencies();
   const [apiError, setApiError] = useState("");
-  const visibleCurrencies = cryptoCurrencies.concat(tokenCurrencies);
-
-  const { register, handleSubmit, errors, watch, clearErrors } = useForm({
+  const { cryptoCurrencies = [], tokenCurrencies = [] } = useCurrencies();
+  const {
+    register,
+    handleSubmit,
+    errors,
+    watch,
+    clearErrors,
+    setValue,
+  } = useForm({
     mode: "onChange",
     defaultValues: {
       symbol: cryptoCurrencies[0]?.symbol,
@@ -43,11 +49,29 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
       read: false,
     },
   });
+
+  const [visibleCurrencies, visibleSymbols] = useMemo(() => {
+    const currencies = cryptoCurrencies.concat(tokenCurrencies);
+    const symbols = currencies.map(({ symbol }) => symbol);
+
+    return [currencies, symbols];
+  }, [cryptoCurrencies, tokenCurrencies]);
+
   const { symbol: watchedSymbol } = watch();
+  const { state: orderContext } = useContext(openOrderContext);
+
   const selectedAddress = useMemo(
     () => groupedCryptoAddresses?.[watchedSymbol]?.[0],
     [watchedSymbol, groupedCryptoAddresses]
   );
+
+  useEffect(() => {
+    const { symbol, mode } = orderContext;
+
+    if (mode === "withdraw" && symbol && visibleSymbols.includes(symbol)) {
+      setValue("symbol", symbol);
+    }
+  }, [orderContext, setValue, visibleSymbols]);
 
   const getTotal = value => {
     const amount = parseFloat(value);

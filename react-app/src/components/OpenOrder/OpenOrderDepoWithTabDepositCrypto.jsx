@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext, useEffect, useMemo } from "react";
 import {
   Row,
   Form,
@@ -17,25 +17,48 @@ import { Button } from "~/components/Button.jsx";
 import { IconSet } from "~/components/IconSet.jsx";
 import { useCurrencies } from "~/state/hooks/";
 import { depositCrypto } from "~/state/slices/deposit.slice";
-
 import { setOpenModal } from "~/state/slices/ui.slice";
 import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal.jsx";
+import { openOrderContext } from "./OpenOrder";
 
 const OpenOrderDepoWithTabDepositCrypto = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["form"]);
-  const { cryptoCurrencies = [], tokenCurrencies = [] } = useCurrencies();
+  const [apiError, setApiError] = useState("");
   const { isDepositingCrypto } = useSelector(state => state.deposit);
   const { groupedCryptoAddresses = {} } = useSelector(state => state.assets);
-  const [apiError, setApiError] = useState("");
-  const { register, handleSubmit, watch, clearErrors, errors } = useForm({
+  const { cryptoCurrencies = [], tokenCurrencies = [] } = useCurrencies();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    clearErrors,
+    errors,
+    setValue,
+  } = useForm({
     mode: "onChange",
     defaultValues: {
       symbol: cryptoCurrencies?.[0]?.symbol,
       read: false,
     },
   });
-  const visibleCurrencies = cryptoCurrencies.concat(tokenCurrencies);
+
+  const [visibleCurrencies, visibleSymbols] = useMemo(() => {
+    const currencies = cryptoCurrencies.concat(tokenCurrencies);
+    const symbols = currencies.map(({ symbol }) => symbol);
+
+    return [currencies, symbols];
+  }, [cryptoCurrencies, tokenCurrencies]);
+
+  const { state: orderContext } = useContext(openOrderContext);
+
+  useEffect(() => {
+    const { symbol, mode } = orderContext;
+
+    if (mode === "deposit" && symbol && visibleSymbols.includes(symbol)) {
+      setValue("symbol", symbol);
+    }
+  }, [orderContext, setValue, visibleSymbols]);
 
   const getAddress = () => {
     const watchedSymbol = watch("symbol");
