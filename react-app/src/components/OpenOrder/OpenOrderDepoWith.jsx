@@ -30,7 +30,12 @@ const OpenOrderDepoWith = props => {
 
   useEffect(() => {
     if (TRANSACTION_MODES.includes(mode)) {
-      const activeTab = mode === "deposit" ? tabs[0].title : tabs[1].title;
+      const isDeposit = mode === "deposit";
+      let activeTab;
+
+      if (isDeposit) activeTab = tabs[0].title;
+      else activeTab = tabs[1].title;
+
       setActiveTab(activeTab);
     }
   }, [mode]);
