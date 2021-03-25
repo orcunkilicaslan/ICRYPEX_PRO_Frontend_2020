@@ -7,8 +7,8 @@ import { hasAccessToken, hasPreloginToken } from "~/util/";
 
 let refreshPromise;
 let preLoginPromise;
-export const PRELOGIN_TOKEN_EXPIRATION = ms("2m");
-export const ACCESS_TOKEN_EXPIRATION = ms("1m");
+export const PRELOGIN_TOKEN_EXPIRATION = ms("1h");
+export const ACCESS_TOKEN_EXPIRATION = ms("10m");
 
 export const fetchServerDeviceKey = createAsyncThunk(
   "api/serverdevicekey",
@@ -268,7 +268,7 @@ const apiSlice = createSlice({
     [fetchPreloginToken.fulfilled]: (state, action) => {
       state.prelogintoken = action?.payload?.description;
       state.isRefreshingPreloginToken = false;
-      state.prelogintokenExpiresAt = Date.now() + PRELOGIN_TOKEN_EXPIRATION
+      state.prelogintokenExpiresAt = Date.now() + PRELOGIN_TOKEN_EXPIRATION;
     },
     [fetchPreloginToken.rejected]: state => {
       state.isRefreshingPreloginToken = false;
@@ -283,7 +283,7 @@ const apiSlice = createSlice({
     },
     [signinWithSms.fulfilled]: (state, action) => {
       state.accesstoken = action?.payload?.description;
-      state.accesstokenExpiresAt = Date.now() + ACCESS_TOKEN_EXPIRATION
+      state.accesstokenExpiresAt = Date.now() + ACCESS_TOKEN_EXPIRATION;
     },
     [signinWith2FA.pending]: state => {
       state.accesstoken = null;
@@ -291,14 +291,14 @@ const apiSlice = createSlice({
     },
     [signinWith2FA.fulfilled]: (state, action) => {
       state.accesstoken = action?.payload?.description;
-      state.accesstokenExpiresAt = Date.now() + ACCESS_TOKEN_EXPIRATION
+      state.accesstokenExpiresAt = Date.now() + ACCESS_TOKEN_EXPIRATION;
     },
     [refreshToken.pending]: state => {
       state.isRefreshingAccessToken = true;
     },
     [refreshToken.fulfilled]: (state, action) => {
       state.accesstoken = action?.payload?.description;
-      state.accesstokenExpiresAt = Date.now() + ACCESS_TOKEN_EXPIRATION
+      state.accesstokenExpiresAt = Date.now() + ACCESS_TOKEN_EXPIRATION;
       state.isRefreshingAccessToken = false;
     },
     [refreshToken.rejected]: state => {
