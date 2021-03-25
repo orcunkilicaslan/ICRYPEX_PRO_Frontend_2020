@@ -25,6 +25,10 @@ import {
 } from "~/state/slices/order.slice";
 import { formatDate, formatDateDistance } from "~/util/";
 
+import { setOpenModal } from "~/state/slices/ui.slice";
+import OrderHistoryFilter from "~/components/modals/OrderHistoryFilter.jsx";
+import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal";
+
 const orderBy = [
   "Önce Yeni Tarihli",
   "Önce Eski Tarihli",
@@ -146,6 +150,16 @@ const OpenOrderTransactionHistory = props => {
 
   const onToggleHideOthers = () => {
     dispatch(toggleHideOthersHistory());
+  };
+
+  const { openModal } = useSelector(state => state.ui);
+
+  const openFiltersModal = () => {
+    dispatch(setOpenModal("orderhistoryfilter"));
+  };
+
+  const clearOpenModals = () => {
+    dispatch(setOpenModal("none"));
   };
 
   return (
@@ -289,6 +303,7 @@ const OpenOrderTransactionHistory = props => {
             <Button
                 variant="secondary"
                 size="sm"
+                onClick={openFiltersModal}
             >
               İşlem Çiftleri
             </Button>
@@ -325,7 +340,7 @@ const OpenOrderTransactionHistory = props => {
                 className="custom-select custom-select-sm"
                 type="select"
             >
-              {["İşlem Tipi", "Yatırma", "Çekme"].map((el, idx) => {
+              {["İşlem Tipi", "Alış", "Satış"].map((el, idx) => {
                 return (
                     <option value={idx + 1} key={`${el}_${idx}`}>
                       {el}
@@ -390,6 +405,10 @@ const OpenOrderTransactionHistory = props => {
           <span style={{ color: "coral", fontSize: "1rem" }}>{apiError}</span>
         )}
       </Form>
+      <OrderHistoryFilter
+          isOpen={openModal === "orderhistoryfilter"}
+          clearModals={clearOpenModals}
+      />
       <div className="ootransactionhistorytable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
           <Table.Thead scrollbar>
