@@ -6,7 +6,9 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Input, Label, FormText, FormGroup,
+  Input,
+  Label,
+  FormText,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -29,6 +31,7 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
     mode: "onChange",
     defaultValues: {
       amount: "",
+      read: false,
     },
   });
 
@@ -50,12 +53,14 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
   };
 
   const onSubmit = async data => {
-    const { paparaid, amount } = data;
+    const { paparaid, amount, read } = data;
     const total = getTotal(amount);
 
     if (total > 0) {
       setApiError("");
-      const { payload } = await dispatch(withdrawPapara({ paparaid, amount }));
+      const { payload } = await dispatch(
+        withdrawPapara({ paparaid, amount, read: JSON.stringify(read) })
+      );
 
       if (!payload?.status) {
         setApiError(payload?.errormessage);
@@ -100,9 +105,9 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
               />
             </InputGroup>
             {errors.paparaid && (
-                <FormText className="inputresult resulterror">
-                  {errors.paparaid?.message}
-                </FormText>
+              <FormText className="inputresult resulterror">
+                {errors.paparaid?.message}
+              </FormText>
             )}
             <InputGroup className="form-group">
               <Input
@@ -124,9 +129,9 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
               </InputGroupAddon>
             </InputGroup>
             {errors.amount && (
-                <FormText className="inputresult resulterror">
-                  {errors.amount?.message}
-                </FormText>
+              <FormText className="inputresult resulterror">
+                {errors.amount?.message}
+              </FormText>
             )}
             <Row form className="form-group">
               <Col>
@@ -141,22 +146,24 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
             </Row>
           </div>
           <div className="confirmcheckbox">
+            {errors.read && (
+              <FormText className="inputresult resulterror">
+                {errors.read?.message}
+              </FormText>
+            )}
             <div className="custom-control custom-checkbox">
               <Input
-                  className="custom-control-input"
-                  id="withdrawTabIhaveRead"
-                  type="checkbox"
-                  defaultChecked
+                className="custom-control-input"
+                id="withdrawPaparaTabIhaveRead"
+                type="checkbox"
+                name="read"
+                innerRef={register({ required: t("form:isRequired") })}
               />
               <Label
-                  className="custom-control-label"
-                  htmlFor="withdrawTabIhaveRead"
+                className="custom-control-label"
+                htmlFor="withdrawPaparaTabIhaveRead"
               >
-                <Button
-                    onClick={openTermsModal}
-                >
-                  Kural ve Şartları
-                </Button>{" "}
+                <Button onClick={openTermsModal}>Kural ve Şartları</Button>{" "}
                 okudum onaylıyorum.
               </Label>
             </div>
@@ -176,8 +183,8 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
           </div>
         </Form>
         <DepositWithdrawalTermsModal
-            isOpen={openModal === "depositwithdrawalterms"}
-            clearModals={clearOpenModals}
+          isOpen={openModal === "depositwithdrawalterms"}
+          clearModals={clearOpenModals}
         />
       </div>
     </div>

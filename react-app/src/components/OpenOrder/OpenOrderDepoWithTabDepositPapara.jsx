@@ -6,7 +6,9 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Input, Label, FormText,
+  Input,
+  Label,
+  FormText,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -29,6 +31,7 @@ const OpenOrderDepoWithTabDepositPapara = props => {
     mode: "onChange",
     defaultValues: {
       amount: "",
+      read: false,
     },
   });
 
@@ -50,12 +53,14 @@ const OpenOrderDepoWithTabDepositPapara = props => {
   };
 
   const onSubmit = async data => {
-    const { amount } = data;
+    const { amount, read } = data;
     const total = getTotal(amount);
 
     if (total > 0) {
       setApiError("");
-      const { payload } = await dispatch(depositPapara({ amount }));
+      const { payload } = await dispatch(
+        depositPapara({ amount, read: JSON.stringify(read) })
+      );
 
       if (!payload?.status) {
         setApiError(payload?.errormessage);
@@ -109,9 +114,9 @@ const OpenOrderDepoWithTabDepositPapara = props => {
               </InputGroupAddon>
             </InputGroup>
             {errors.amount && (
-                <FormText className="inputresult resulterror">
-                  {errors.amount?.message}
-                </FormText>
+              <FormText className="inputresult resulterror">
+                {errors.amount?.message}
+              </FormText>
             )}
             <Row form className="form-group">
               <Col>
@@ -126,22 +131,24 @@ const OpenOrderDepoWithTabDepositPapara = props => {
             </Row>
           </div>
           <div className="confirmcheckbox">
+            {errors.read && (
+              <FormText className="inputresult resulterror">
+                {errors.read?.message}
+              </FormText>
+            )}
             <div className="custom-control custom-checkbox">
               <Input
-                  className="custom-control-input"
-                  id="depositTabIhaveRead"
-                  type="checkbox"
-                  defaultChecked
+                className="custom-control-input"
+                id="depositPaparaTabIhaveRead"
+                type="checkbox"
+                name="read"
+                innerRef={register({ required: t("form:isRequired") })}
               />
               <Label
-                  className="custom-control-label"
-                  htmlFor="depositTabIhaveRead"
+                className="custom-control-label"
+                htmlFor="depositPaparaTabIhaveRead"
               >
-                <Button
-                    onClick={openTermsModal}
-                >
-                  Kural ve Şartları
-                </Button>{" "}
+                <Button onClick={openTermsModal}>Kural ve Şartları</Button>{" "}
                 okudum onaylıyorum.
               </Label>
             </div>
@@ -161,8 +168,8 @@ const OpenOrderDepoWithTabDepositPapara = props => {
           </div>
         </Form>
         <DepositWithdrawalTermsModal
-            isOpen={openModal === "depositwithdrawalterms"}
-            clearModals={clearOpenModals}
+          isOpen={openModal === "depositwithdrawalterms"}
+          clearModals={clearOpenModals}
         />
       </div>
     </div>

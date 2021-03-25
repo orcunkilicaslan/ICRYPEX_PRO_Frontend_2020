@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import {
   Row,
@@ -6,10 +5,13 @@ import {
   FormGroup,
   InputGroup,
   InputGroupAddon,
-  Input, Label,
+  Input,
+  Label,
+  FormText,
 } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "~/components/Button.jsx";
 import { IconSet } from "~/components/IconSet.jsx";
@@ -21,14 +23,16 @@ import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTe
 
 const OpenOrderDepoWithTabDepositCrypto = props => {
   const dispatch = useDispatch();
+  const { t } = useTranslation(["form"]);
   const { cryptoCurrencies = [], tokenCurrencies = [] } = useCurrencies();
   const { isDepositingCrypto } = useSelector(state => state.deposit);
   const { groupedCryptoAddresses = {} } = useSelector(state => state.assets);
   const [apiError, setApiError] = useState("");
-  const { register, handleSubmit, watch, clearErrors } = useForm({
+  const { register, handleSubmit, watch, clearErrors, errors } = useForm({
     mode: "onChange",
     defaultValues: {
-      symbol: "",
+      symbol: cryptoCurrencies?.[0]?.symbol,
+      read: false,
     },
   });
   const visibleCurrencies = cryptoCurrencies.concat(tokenCurrencies);
@@ -44,13 +48,15 @@ const OpenOrderDepoWithTabDepositCrypto = props => {
   };
 
   const onSubmit = async data => {
-    const { symbol: _symbol } = data;
+    const { symbol: _symbol, read } = data;
     const currency = visibleCurrencies.find(({ symbol }) => symbol === _symbol);
     const currencyid = parseInt(currency?.id, 10);
 
     if (currencyid) {
       setApiError("");
-      const { payload } = await dispatch(depositCrypto({ currencyid }));
+      const { payload } = await dispatch(
+        depositCrypto({ currencyid, read: JSON.stringify(read) })
+      );
 
       if (!payload?.status) {
         setApiError(payload?.errormessage);
@@ -87,7 +93,7 @@ const OpenOrderDepoWithTabDepositCrypto = props => {
                   className="custom-select"
                   type="select"
                   name="symbol"
-                  innerRef={register()}
+                  innerRef={register}
                 >
                   {visibleCurrencies.map(({ symbol }) => {
                     return (
@@ -118,22 +124,24 @@ const OpenOrderDepoWithTabDepositCrypto = props => {
             </p>
           </div>
           <div className="confirmcheckbox">
+            {errors.read && (
+              <FormText className="inputresult resulterror">
+                {errors.read?.message}
+              </FormText>
+            )}
             <div className="custom-control custom-checkbox">
               <Input
-                  className="custom-control-input"
-                  id="depositTabIhaveRead"
-                  type="checkbox"
-                  defaultChecked
+                className="custom-control-input"
+                id="depositCryptoTabIhaveRead"
+                type="checkbox"
+                name="read"
+                innerRef={register({ required: t("form:isRequired") })}
               />
               <Label
-                  className="custom-control-label"
-                  htmlFor="depositTabIhaveRead"
+                className="custom-control-label"
+                htmlFor="depositCryptoTabIhaveRead"
               >
-                <Button
-                    onClick={openTermsModal}
-                >
-                  Kural ve Şartları
-                </Button>{" "}
+                <Button onClick={openTermsModal}>Kural ve Şartları</Button>{" "}
                 okudum onaylıyorum.
               </Label>
             </div>
@@ -153,8 +161,8 @@ const OpenOrderDepoWithTabDepositCrypto = props => {
           </div>
         </Form>
         <DepositWithdrawalTermsModal
-            isOpen={openModal === "depositwithdrawalterms"}
-            clearModals={clearOpenModals}
+          isOpen={openModal === "depositwithdrawalterms"}
+          clearModals={clearOpenModals}
         />
         <div className="bttminfolist">
           <ul>

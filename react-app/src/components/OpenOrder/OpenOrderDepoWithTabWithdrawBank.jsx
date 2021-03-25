@@ -1,5 +1,14 @@
 import { useState, useEffect, useMemo } from "react";
-import {Form, Row, Col, InputGroup, InputGroupAddon, Input, Label, FormText} from "reactstrap";
+import {
+  Form,
+  Row,
+  Col,
+  InputGroup,
+  InputGroupAddon,
+  Input,
+  Label,
+  FormText,
+} from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,6 +34,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
     defaultValues: {
       customerbankid: accounts?.[0]?.id || "",
       amount: "",
+      read: false,
     },
   });
   const { amount: watchedAmount, customerbankid: watchedId } = watch();
@@ -62,9 +72,13 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
   };
 
   const onSubmit = async data => {
-    if (data?.amount > 0) {
+    const { customerbankid, amount, read } = data;
+
+    if (amount > 0) {
       setApiError("");
-      const { payload } = await dispatch(withdrawBankwire(data));
+      const { payload } = await dispatch(
+        withdrawBankwire({ customerbankid, amount, read: JSON.stringify(read) })
+      );
 
       if (!payload?.status) {
         setApiError(payload?.errormessage);
@@ -122,9 +136,9 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
               </InputGroupAddon>
             </InputGroup>
             {errors.customerbankid && (
-                <FormText className="inputresult resulterror">
-                  {errors.customerbankid?.message}
-                </FormText>
+              <FormText className="inputresult resulterror">
+                {errors.customerbankid?.message}
+              </FormText>
             )}
             <InputGroup className="form-group col">
               <Input
@@ -158,9 +172,9 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
               </InputGroupAddon>
             </InputGroup>
             {errors.amount && (
-                <FormText className="inputresult resulterror">
-                  {errors.amount?.message}
-                </FormText>
+              <FormText className="inputresult resulterror">
+                {errors.amount?.message}
+              </FormText>
             )}
             <Row form className="form-group">
               <Col>Hesaba Geçecek Miktar</Col>
@@ -170,22 +184,24 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
             </Row>
           </div>
           <div className="confirmcheckbox">
+            {errors.read && (
+              <FormText className="inputresult resulterror">
+                {errors.read?.message}
+              </FormText>
+            )}
             <div className="custom-control custom-checkbox">
               <Input
-                  className="custom-control-input"
-                  id="withdrawTabIhaveRead"
-                  type="checkbox"
-                  defaultChecked
+                className="custom-control-input"
+                id="withdrawBankTabIhaveRead"
+                type="checkbox"
+                name="read"
+                innerRef={register({ required: t("form:isRequired") })}
               />
               <Label
-                  className="custom-control-label"
-                  htmlFor="withdrawTabIhaveRead"
+                className="custom-control-label"
+                htmlFor="withdrawBankTabIhaveRead"
               >
-                <Button
-                    onClick={openTermsModal}
-                >
-                  Kural ve Şartları
-                </Button>{" "}
+                <Button onClick={openTermsModal}>Kural ve Şartları</Button>{" "}
                 okudum onaylıyorum.
               </Label>
             </div>
@@ -205,8 +221,8 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
           </div>
         </Form>
         <DepositWithdrawalTermsModal
-            isOpen={openModal === "depositwithdrawalterms"}
-            clearModals={clearOpenModals}
+          isOpen={openModal === "depositwithdrawalterms"}
+          clearModals={clearOpenModals}
         />
       </div>
     </div>

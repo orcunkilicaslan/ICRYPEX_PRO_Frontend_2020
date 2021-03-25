@@ -7,7 +7,9 @@ import {
   InputGroupAddon,
   InputGroupText,
   Input,
-  FormGroup, Label, FormText,
+  FormGroup,
+  Label,
+  FormText,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -38,6 +40,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
       amount: "",
       address: "",
       destinationtag: "",
+      read: false,
     },
   });
   const { symbol: watchedSymbol } = watch();
@@ -56,7 +59,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
   };
 
   const onSubmit = async data => {
-    const { symbol: _symbol, amount } = data;
+    const { symbol: _symbol, amount, read, address, destinationtag } = data;
     const currencyid = visibleCurrencies.find(
       ({ symbol }) => symbol === _symbol
     )?.id;
@@ -65,7 +68,13 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
     if (total > 0) {
       setApiError("");
       const { payload } = await dispatch(
-        withDrawCrypto({ currencyid, ...data })
+        withDrawCrypto({
+          currencyid,
+          address,
+          destinationtag,
+          amount,
+          read: JSON.stringify(read),
+        })
       );
 
       if (!payload?.status) {
@@ -130,9 +139,9 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                 </InputGroupAddon>
               </InputGroup>
               {errors.amount && (
-                  <FormText className="inputresult resulterror">
-                    {errors.amount?.message}
-                  </FormText>
+                <FormText className="inputresult resulterror">
+                  {errors.amount?.message}
+                </FormText>
               )}
             </Row>
             <InputGroup className="form-group">
@@ -157,9 +166,9 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
               </InputGroupAddon>
             </InputGroup>
             {errors.address && (
-                <FormText className="inputresult resulterror">
-                  {errors.address?.message}
-                </FormText>
+              <FormText className="inputresult resulterror">
+                {errors.address?.message}
+              </FormText>
             )}
             <InputGroup className="form-group">
               <Input
@@ -186,22 +195,24 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
             </Row>
           </div>
           <div className="confirmcheckbox">
+            {errors.read && (
+              <FormText className="inputresult resulterror">
+                {errors.read?.message}
+              </FormText>
+            )}
             <div className="custom-control custom-checkbox">
               <Input
-                  className="custom-control-input"
-                  id="withdrawTabIhaveRead"
-                  type="checkbox"
-                  defaultChecked
+                className="custom-control-input"
+                id="withdrawCryptoTabIhaveRead"
+                type="checkbox"
+                name="read"
+                innerRef={register({ required: t("form:isRequired") })}
               />
               <Label
-                  className="custom-control-label"
-                  htmlFor="withdrawTabIhaveRead"
+                className="custom-control-label"
+                htmlFor="withdrawCryptoTabIhaveRead"
               >
-                <Button
-                    onClick={openTermsModal}
-                >
-                  Kural ve Şartları
-                </Button>{" "}
+                <Button onClick={openTermsModal}>Kural ve Şartları</Button>{" "}
                 okudum onaylıyorum.
               </Label>
             </div>
@@ -221,8 +232,8 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
           </div>
         </Form>
         <DepositWithdrawalTermsModal
-            isOpen={openModal === "depositwithdrawalterms"}
-            clearModals={clearOpenModals}
+          isOpen={openModal === "depositwithdrawalterms"}
+          clearModals={clearOpenModals}
         />
       </div>
     </div>
