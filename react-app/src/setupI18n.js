@@ -39,6 +39,9 @@ const init = (initialLang = "en") => {
             approximately: "Approximately",
             and: "and",
             goBack: "Go Back",
+            support: "Support",
+            orders: "Orders",
+            day: "Days",
           },
           finance: {
             ask: "Ask",
@@ -50,7 +53,11 @@ const init = (initialLang = "en") => {
             portfolio: "Portfolio",
             available: "Available",
             amountToBeTaken: "Amount to be Taken",
-            amountToBeSold: "Amount to be Sold"
+            amountToBeSold: "Amount to be Sold",
+            market: "Market",
+            transactionCommission:"Transaction Commision",
+            marketMaker : "Market Maker",
+            marketTaker : "Market Taker",
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -136,6 +143,11 @@ const init = (initialLang = "en") => {
             approximately: "Yaklaşık",
             and: "ve",
             goBack: "Geri Git",
+            support: "Destek",
+            orders: "Emirler",
+            maker: "Yapıcı",
+            taker: "Alıcı",
+            day: "Gün",
           },
           finance: {
             ask: "Alış",
@@ -146,7 +158,11 @@ const init = (initialLang = "en") => {
             sellwhat: "{{item}} SAT",
             portfolio: "Portföy",
             available: "Kullanılabilir",
-            amountToBeTaken: "Alınacak Miktar"
+            amountToBeTaken: "Alınacak Miktar",
+            market: "Piyasa",
+            transactionCommission:"İşlem Komisyonu",
+            marketMaker : "Piyasa Yapıcı",
+            marketTaker : "Piyasa Alıcı",
           },
           coinbar: {
             lastPrice: "Son Fiyat",

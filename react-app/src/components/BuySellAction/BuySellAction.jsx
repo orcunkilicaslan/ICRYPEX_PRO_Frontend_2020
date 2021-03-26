@@ -19,6 +19,7 @@ import BuySellActionLimit from "./BuySellActionLimit.jsx";
 import BuySellActionStopLimit from "./BuySellActionStopLimit.jsx";
 import UserNotLoginBox from "~/pages/Sections/UserNotLoginBox.jsx";
 import { setOpenModal } from "~/state/slices/ui.slice";
+import {useTranslation} from "react-i18next";
 
 const tabs = [
   {
@@ -55,6 +56,7 @@ const commissiontable = [
 
 const BuySellAction = props => {
   const dispatch = useDispatch();
+  const { t } = useTranslation(["common", "finance"]);
   const [activeTab, setActiveTab] = useState(tabs[0].title);
   const { accesstoken } = useSelector(state => state.api);
 
@@ -91,8 +93,8 @@ const BuySellAction = props => {
             </Nav>
           </div>
           <div className="buysellaction-head-col cominfo">
-            <h6>İşlem Komisyonu</h6>
-            <p>Piyasa Yapıcı 0.25% - Piyasa Alıcı 0.35%</p>
+            <h6>{t("finance:transactionCommission")}</h6>
+            <p>{t("finance:marketMaker")} 0.25% - {t("finance:marketTaker")} 0.35%</p>
             <Button id="buysellactionPopover" className="popoverbtn">
               <IconSet sprite="sprtsmclrd" size="16" name="info infoiconbox" />
             </Button>
@@ -103,9 +105,9 @@ const BuySellAction = props => {
             >
               <PopoverBody className="tooltipbox">
                 <div className="tooltipbox-head">
-                  <div className="tooltipbox-head-col">VIP UCRET</div>
+                  <div className="tooltipbox-head-col">{t("finance:transactionCommission").toUpperCase()}</div>
                   <div className="tooltipbox-head-col">
-                    DESTEK 0850 255 1079
+                    {t("common:support").toUpperCase()} 0850 255 1079
                   </div>
                 </div>
                 <div className="tooltipbox-body">
@@ -113,20 +115,20 @@ const BuySellAction = props => {
                     <Table.Thead>
                       <Table.Tr>
                         <Table.Th sizeauto className="txt">
-                          TRY Hacim /
+                          TRY {t("common:volume")} /
                           <br />
-                          30 Gün
+                          30 {t("common:day")}
                         </Table.Th>
                         <Table.Th sizefixed className="mkr">
-                          Piyasa Yapıcı Emirler
+                          {t("finance:marketMaker")} {t("common:orders")}
                           <br />
-                          [MAKER]
+                          [{t("common:maker").toUpperCase()}]
                         </Table.Th>
                         <Table.Th sizeauto className="spc" />
                         <Table.Th sizefixed className="tkr">
-                          Piyasa Alıcı Emirler
+                          {t("finance:marketTaker")} {t("common:orders")}
                           <br />
-                          [TAKER]
+                          [{t("common:taker").toUpperCase()}]
                         </Table.Th>
                       </Table.Tr>
                     </Table.Thead>

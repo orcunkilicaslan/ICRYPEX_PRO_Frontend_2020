@@ -4,8 +4,8 @@ import { groupBy } from "lodash";
 import * as api from "../api";
 
 export const fetchBalance = createAsyncThunk(
-    "balance/fetchAll",
-    async (currencyid, { getState, rejectWithValue }) => {
+    "balance/fetchOne",
+    async ({currencyid,isFiat}, { getState, rejectWithValue }) => {
       const {
         api: { accesstoken },
       } = getState();
@@ -29,7 +29,10 @@ export const fetchBalance = createAsyncThunk(
 
 
 const initialState = {
-  balance: 0
+    history: {},
+    fiatBalance: 0,
+    cryptoBalance: 0,
+
 };
 
 const balanceSlice = createSlice({
@@ -44,8 +47,16 @@ const balanceSlice = createSlice({
   },
   extraReducers: {
     [fetchBalance.fulfilled]: (state, action) => {
-      state.balance = action?.payload?.description;
-    },
+          if(action.meta.arg.isFiat) {
+              state.fiatBalance = action?.payload?.description;
+          }else {
+              state.cryptoBalance = action?.payload?.description;
+          }
+      },
+      [fetchBalance.pending]: (state, action) => {
+          state.fiatBalance = 0
+          state.cryptoBalance = 0
+      },
   },
 });
 

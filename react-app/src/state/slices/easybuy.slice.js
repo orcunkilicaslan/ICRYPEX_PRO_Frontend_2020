@@ -4,14 +4,14 @@ import * as api from "../api";
 
 export const fetchEasyBuy = createAsyncThunk(
     "easybuy/fetchAll",
-    async (buysellData, { getState, rejectWithValue }) => {
+    async (easyBuyData, { getState, rejectWithValue }) => {
       const {
         api: { accesstoken },
       } = getState();
 
       try {
         const response = await api.easyBuy(
-            {...buysellData},
+            {...easyBuyData},
             {
               headers: {
                 "x-access-token": accesstoken,

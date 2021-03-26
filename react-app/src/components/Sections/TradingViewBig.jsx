@@ -13,7 +13,7 @@ const TradingViewBig = props => {
                     <TradingViewWidget
                         symbol={currentPair?.symbol === "LINKUSD" ? "KRAKEN:LINKUSD" : currentPair.symbol}
                         theme={"Dark"}
-                        locale={currentLanguage?.toUpperCase?.x()}
+                        locale={currentLanguage?.toUpperCase}
                         timezone={"Europe/Istanbul"}
                         interval={"3"}
                         style={"1"}

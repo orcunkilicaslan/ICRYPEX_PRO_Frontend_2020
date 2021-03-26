@@ -27,7 +27,7 @@ const EasyBuySellFormBuy = props => {
   const dispatch = useDispatch();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
-  const { balance } = useSelector(state => state.balance);
+  const { fiatBalance } = useSelector(state => state.balance);
   const { easySell } = useSelector(state => state.easySell);
   const [apiError, setApiError] = useState("");
   const { fiatCurrency, cryptoCurrency, selectedPrice, selectedPair } = usePrices();
@@ -48,13 +48,13 @@ const EasyBuySellFormBuy = props => {
       if(selectCurrency !== selectedPair.second_currency_id) {
         setCurrencyBalance(0)
       }
-      setSelectCurrency(selectedPair.second_currency_id)
-      dispatch(fetchBalance(selectedPair.second_currency_id));}
+      setSelectCurrency(selectedPair?.second_currency_id)
+      dispatch(fetchBalance({currencyid: selectedPair?.second_currency_id, isFiat: true}));}
   }, [dispatch, selectedPair]);
 
   useEffect(() => {
-    setCurrencyBalance(parseFloat(balance).toFixed(2))
-  }, [dispatch, balance]);
+    setCurrencyBalance(parseFloat(fiatBalance).toFixed(2))
+  }, [dispatch, fiatBalance]);
 
 
   const onReset = event => {

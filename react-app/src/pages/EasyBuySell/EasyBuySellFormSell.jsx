@@ -34,7 +34,7 @@ const EasyBuySellFormSell = props => {
       cryptoAmount: "",
     },
   });
-  const {balance}  = useSelector(state => state.balance);
+  const {cryptoBalance}  = useSelector(state => state.balance);
   const [currencyBalance, setCurrencyBalance] = useState(0);
   const [apiError, setApiError] = useState("");
 
@@ -42,13 +42,13 @@ const EasyBuySellFormSell = props => {
     setCurrencyBalance(0)
     if (selectedPair) {
       reset();
-      dispatch(fetchBalance(selectedPair.first_currency_id));
+     dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false}));
     }
   }, [dispatch, selectedPair]);
 
   useEffect(() => {
-    setCurrencyBalance(parseFloat(balance).toFixed(8))
-  }, [dispatch, balance]);
+    setCurrencyBalance(parseFloat(cryptoBalance).toFixed(8))
+  }, [dispatch, cryptoBalance]);
 
   const onReset = event => {
     event.preventDefault();

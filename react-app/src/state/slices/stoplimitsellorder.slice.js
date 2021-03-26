@@ -2,16 +2,16 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as api from "../api";
 
-export const fetchEasySell = createAsyncThunk(
-    "easysell/fetchAll",
-    async (easySellData, { getState, rejectWithValue }) => {
+export const fetchStopLimitSellOrder = createAsyncThunk(
+    "stoplimitsellorder",
+    async (stopLimitSellOrderData, { getState, rejectWithValue }) => {
       const {
         api: { accesstoken },
       } = getState();
 
       try {
-        const response = await api.easySell(
-            {...easySellData},
+        const response = await api.stopLimitSellOrder(
+            {...stopLimitSellOrderData},
             {
               headers: {
                 "x-access-token": accesstoken,
@@ -28,11 +28,11 @@ export const fetchEasySell = createAsyncThunk(
 
 
 const initialState = {
-  easySell: {}
+    stopLimitSellOrder: {}
 };
 
-const easySellSlice = createSlice({
-  name: "easySell",
+const stopLimitSellOrderSlice = createSlice({
+  name: "stopLimitSellOrder",
   initialState,
   reducers: {
     reset: state => {
@@ -42,12 +42,12 @@ const easySellSlice = createSlice({
     },
   },
   extraReducers: {
-    [fetchEasySell.fulfilled]: (state, action) => {
-      state.easySell = action?.payload?.description;
+    [fetchStopLimitSellOrder.fulfilled]: (state, action) => {
+      state.stopLimitSellOrder = action?.payload?.description;
     },
   },
 });
 
-export const { reset } = easySellSlice.actions;
+export const { reset } = stopLimitSellOrderSlice.actions;
 
-export default easySellSlice.reducer;
+export default stopLimitSellOrderSlice.reducer;

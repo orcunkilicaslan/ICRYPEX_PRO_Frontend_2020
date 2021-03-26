@@ -81,9 +81,17 @@ export const getPairPrefix = pairname => {
 };
 
 export const hasAccessToken = ({ api }) => {
-  return api?.accesstoken ? true : false;
+  return !!api?.accesstoken;
 };
 
 export const hasPreloginToken = ({ api }) => {
-  return api?.prelogintoken ? true : false;
+  return !!api?.prelogintoken;
 };
+
+export const getFormattedPrice = (price, digit) => {
+  if (price !== 0) {
+    return  parseFloat(price).toFixed(digit)
+  } else {
+  return ""
+  }
+}

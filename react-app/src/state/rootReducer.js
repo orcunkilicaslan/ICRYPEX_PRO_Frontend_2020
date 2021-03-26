@@ -16,6 +16,10 @@ import transactionReducer from "./slices/transaction.slice";
 import balanceReducer from "./slices/balance.slice";
 import easyBuyReducer from "./slices/easybuy.slice";
 import easySellReducer from "./slices/easysell.slice";
+import limitBuyOrderReducer from "./slices/limitbuyorder.slice";
+import limitSellOrderReducer from "./slices/limitsellorder.slice";
+import stopLimitBuyOrderReducer from "./slices/stoplimitbuyorder.slice";
+import stopLimitSellOrderReducer from "./slices/stoplimitsellorder.slice";
 
 const apiPersistConfig = {
   key: "api",
@@ -67,6 +71,10 @@ const rootReducer = combineReducers({
   balance: balanceReducer,
   easyBuy: easyBuyReducer,
   easySell: easySellReducer,
+  limitBuyOrder: limitBuyOrderReducer,
+  limitSellOrder: limitSellOrderReducer,
+  stopLimitBuyOrder: stopLimitBuyOrderReducer,
+  stopLimitSellOrder: stopLimitSellOrderReducer,
   withdraw: withdrawReducer,
   deposit: depositReducer,
   transaction: transactionReducer,
