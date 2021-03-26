@@ -95,14 +95,13 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>Papara No</InputGroupText>
               </InputGroupAddon>
-              <Input
-                type="text"
-                readOnly
-                value={"1773547589"}
-                className="form-control"
-                name="paparaid"
-                innerRef={register({ minLength: 10 })}
-              />
+              <div
+                  className="form-control"
+                  name="paparaid"
+                  innerRef={register({ minLength: 10 })}
+              >
+                {"1773547589"}
+              </div>
             </InputGroup>
             {errors.paparaid && (
               <FormText className="inputresult resulterror">

@@ -24,6 +24,7 @@ const MODALS = [
   "signup",
   "settings",
   "alarm",
+  "buysellconfirm",
   "depositwithdrawalterms",
   "orderhistoryfilter",
   "notifications",

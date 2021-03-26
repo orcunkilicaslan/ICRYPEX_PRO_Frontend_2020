@@ -24,6 +24,9 @@ import {usePrices} from "~/state/hooks";
 import { getFormattedPrice } from "~/util/";
 import {fetchEasyBuy} from "~/state/slices/easybuy.slice";
 import {fetchEasySell} from "~/state/slices/easysell.slice";
+import {setOpenModal} from "~/state/slices/ui.slice";
+import BuySellConfirmModal from "~/components/modals/BuySellConfirmModal.jsx";
+import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal";
 
 const buySellRangePercent = [0, 25, 50, 75, 100];
 
@@ -126,6 +129,16 @@ const BuySellActionMarket = props => {
     }
   };
 
+  const { openModal } = useSelector(state => state.ui);
+
+  const openConfirmModal = () => {
+    dispatch(setOpenModal("buysellconfirm"));
+  };
+
+  const clearOpenModals = () => {
+    dispatch(setOpenModal("none"));
+  };
+
   return (
     <div className="buysellaction-market">
       <Row className="buysellaction-formarea">
@@ -151,11 +164,12 @@ const BuySellActionMarket = props => {
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>{t("common:price")}</InputGroupText>
                   </InputGroupAddon>
-                  <Input
-                         type="text"
-                         name="fiatBuyAmount"
-                         readOnly={true}
-                        value={t("finance:market")}/>
+                  <div
+                      className="form-control"
+                      name="fiatBuyAmount"
+                  >
+                    {t("finance:market")}
+                  </div>
                   <InputGroupAddon addonType="append">
                     <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>
@@ -254,9 +268,12 @@ const BuySellActionMarket = props => {
               </Row>
             </div>
             <div className="formbttm">
-              <Button variant="success"
-                      type="submit"
-                      disabled={isSubmitted} >
+              <Button
+                  variant="success"
+                  type="submit"
+                  disabled={isSubmitted}
+                  onClick={openConfirmModal}
+              >
                 {t("finance:buywhat", { item: cryptoCurrency })}
               </Button>
             </div>
@@ -284,10 +301,12 @@ const BuySellActionMarket = props => {
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>{t("common:price")}</InputGroupText>
                   </InputGroupAddon>
-                  <Input type="text"
-                         name="fiatSellAmount"
-                         readOnly={true}
-                         value={t("finance:market")}/>
+                  <div
+                      className="form-control"
+                      name="fiatSellAmount"
+                  >
+                    {t("finance:market")}
+                  </div>
                   <InputGroupAddon addonType="append">
                     <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>
@@ -394,6 +413,10 @@ const BuySellActionMarket = props => {
           </Form>
         </Col>
       </Row>
+      <BuySellConfirmModal
+          isOpen={openModal === "buysellconfirm"}
+          clearModals={clearOpenModals}
+      />
     </div>
   );
 };
