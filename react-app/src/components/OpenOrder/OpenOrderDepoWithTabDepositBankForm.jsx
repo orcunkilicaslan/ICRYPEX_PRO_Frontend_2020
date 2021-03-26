@@ -7,15 +7,19 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
+  Label,
 } from "reactstrap";
 import { uniq, groupBy } from "lodash";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 
 import { IconSet } from "~/components/IconSet.jsx";
 import { Button } from "~/components/Button.jsx";
+import { setOpenModal } from "~/state/slices/ui.slice";
+import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal.jsx";
 
-const OpenOrderDepoWithTabDepositBankAkbank = props => {
-  const { accounts } = props;
+const OpenOrderDepoWithTabDepositBankForm = props => {
+  const { accounts, bankCode } = props;
   const [bankCurrencies, accountsBySymbol] = useMemo(() => {
     const currencies = uniq(accounts.map(({ currency }) => currency?.symbol));
     const grouped = groupBy(accounts, ({ currency }) => currency?.symbol);
@@ -29,6 +33,18 @@ const OpenOrderDepoWithTabDepositBankAkbank = props => {
     },
   });
   const [account] = accountsBySymbol[watch("symbol")];
+
+  const { openModal } = useSelector(state => state.ui);
+
+  const dispatch = useDispatch();
+
+  const openTermsModal = () => {
+    dispatch(setOpenModal("depositwithdrawalterms"));
+  };
+
+  const clearOpenModals = () => {
+    dispatch(setOpenModal("none"));
+  };
 
   return (
     <div className="dandwtab-form">
@@ -77,9 +93,30 @@ const OpenOrderDepoWithTabDepositBankAkbank = props => {
             </Button>
           </InputGroupAddon>
         </InputGroup>
+        <div className="confirmcheckbox">
+          <div className="custom-control custom-checkbox">
+            <Input
+              className="custom-control-input"
+              id={`${bankCode}_depositBankTabIhaveRead`}
+              type="checkbox"
+              defaultChecked
+            />
+            <Label
+              className="custom-control-label"
+              htmlFor={`${bankCode}_depositBankTabIhaveRead`}
+            >
+              <Button onClick={openTermsModal}>Kural ve Şartları</Button> okudum
+              onaylıyorum.
+            </Label>
+          </div>
+        </div>
       </Form>
+      <DepositWithdrawalTermsModal
+        isOpen={openModal === "depositwithdrawalterms"}
+        clearModals={clearOpenModals}
+      />
     </div>
   );
 };
 
-export default OpenOrderDepoWithTabDepositBankAkbank;
+export default OpenOrderDepoWithTabDepositBankForm;

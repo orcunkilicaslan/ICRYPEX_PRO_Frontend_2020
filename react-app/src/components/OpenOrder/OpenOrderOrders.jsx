@@ -1,159 +1,218 @@
-import { useState } from "react";
-import { Row, Col, Label, Input, ButtonGroup } from "reactstrap";
-import { useClientRect } from "~/state/hooks";
+import { useState, useMemo, useEffect } from "react";
+import {
+  Row,
+  Col,
+  Label,
+  Input,
+  ButtonGroup,
+  Form,
+  FormGroup, FormText,
+} from "reactstrap";
 import classnames from "classnames";
+import { useTranslation } from "react-i18next";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { groupBy } from "lodash";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
+import { useClientRect, usePrices } from "~/state/hooks";
+import {
+  fetchOpenOrders,
+  toggleHideOthersOpen,
+} from "~/state/slices/order.slice";
+import { formatDateDistance } from "~/util/";
 
-
-const orderstable = [
-  {
-    id: "01",
-    pair: "BTC/TRY",
-    date: "10.06.2020",
-    time: "21:54:57",
-    typetext: "Stop Limit",
-    typeresult1: "1",
-    typeresult2: "Alış",
-    price: "32464.25 TRY",
-    amount: "22,430.124 TRY",
-    transaction: "1,43004833 BTC",
-  },
-  {
-    id: "02",
-    pair: "ETH/TRY",
-    date: "08.06.2020",
-    time: "18:23:12",
-    typetext: "Market",
-    typeresult1: "1",
-    typeresult2: "Alış",
-    price: "45.505931 TRY",
-    amount: "35,120.985 TRY",
-    transaction: "2.3000000 BTC",
-  },
-  {
-    id: "03",
-    pair: "MPAY/TRY",
-    date: "02.06.2020",
-    time: "12:45:52",
-    typetext: "Limit",
-    typeresult1: "0",
-    typeresult2: "Satış",
-    price: "27.87390 TRY",
-    amount: "27.87390 TRY",
-    transaction: "0.8000000 BTC",
-  },
-  {
-    id: "04",
-    pair: "BAB/USD",
-    date: "29.05.2020",
-    time: "13:21:19",
-    typetext: "Market",
-    typeresult1: "0",
-    typeresult2: "Satış",
-    price: "12.4647833 TRY",
-    amount: "12.4647833 TRY",
-    transaction: "1.70000000 BTC",
-  },
-  {
-    id: "05",
-    pair: "XRP/USDT",
-    date: "18.05.2020",
-    time: "10:18:43",
-    typetext: "Market",
-    typeresult1: "1",
-    typeresult2: "Alış",
-    price: "23.4938 TRY",
-    amount: "23.4938 TRY",
-    transaction: "6.45000000 BTC",
-  },
+const orderBy = [
+  "Önce Yeni Tarihli",
+  "Önce Eski Tarihli",
+  "Önce Alış",
+  "Önce Satış",
+  "Alfabetik",
+];
+const transactionTypes = [
+  { label: "Alış", name: "isbuyorders" },
+  { label: "Satış", name: "issellorders" },
 ];
 
 const OpenOrderOrders = props => {
-
+  const dispatch = useDispatch();
+  const { t } = useTranslation(["form", "coinbar"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
+  const [apiError, setApiError] = useState("");
+  const { lang } = useSelector(state => state.ui);
+  const { allPairs, selectedPair } = usePrices();
+  const orderSlice = useSelector(state => state.order);
+  const openOrders = orderSlice?.open || [];
+  const isFetching = orderSlice?.isFetchingOpen;
+  const hideOthers = orderSlice?.hideOthersOpen;
 
-  const [selected1, setSelected1] = useState("");
-  const [selected2, setSelected2] = useState("");
+  const defaultValues = useMemo(() => {
+    return {
+      pairids: allPairs.map(({ id }) => Number(id)),
+      orderby: 1,
+      isbuyorders: true,
+      issellorders: true,
+      // startfrom: 0,
+      // takecount: 20
+    };
+  }, [allPairs]);
+
+  const visibleOrders = useMemo(() => {
+    if (!hideOthers) {
+      return openOrders;
+    } else {
+      const byPair = groupBy(openOrders, ({ pairname }) => pairname);
+
+      return byPair[selectedPair?.name] || [];
+    }
+  }, [hideOthers, openOrders, selectedPair]);
+
+  const { register, handleSubmit, errors, reset, clearErrors } = useForm({
+    mode: "onChange",
+    defaultValues,
+  });
+
+  useEffect(() => {
+    const toSubmit = {
+      ...defaultValues,
+      pairids: JSON.stringify(defaultValues?.pairids?.map?.(Number)),
+    };
+
+    dispatch(fetchOpenOrders(toSubmit));
+  }, [defaultValues, dispatch]);
+
+  const onSubmit = async data => {
+    setApiError("");
+    const toSubmit = {
+      ...data,
+      pairids: JSON.stringify(data?.pairids?.map?.(Number)),
+    };
+
+    const { payload } = await dispatch(fetchOpenOrders(toSubmit));
+
+    if (!payload?.status) {
+      setApiError(payload?.errormessage);
+    } else {
+      setApiError("");
+    }
+  };
+
+  const onReset = () => {
+    reset(defaultValues);
+    setApiError("");
+    clearErrors();
+  };
+
+  const onToggleHideOthers = () => {
+    dispatch(toggleHideOthersOpen());
+  };
 
   return (
     <div className="openorders-orders">
-      <Row className="tabcont tabcont-filterbar siteformui">
-        <Col xs="auto">
-          <Input
-            className="custom-select custom-select-sm"
-            type="select"
-            value={selected1}
-            onChange={({ target }) => {
-              setSelected1(target.value);
-            }}
-          >
-            {["Çift", "...", "..."].map((el, idx) => {
-              return <option key={`${el}_${idx}`}>{el}</option>;
-            })}
-          </Input>
-        </Col>
-        <Col xs="auto">
-          <Input
-            className="custom-select custom-select-sm"
-            type="select"
-            value={selected2}
-            onChange={({ target }) => {
-              setSelected2(target.value);
-            }}
-          >
-            {["İşlem Tipi", "Stop Limit", "Market", "Limit"].map((el, idx) => {
-              return (
-                <option disabled={idx === 0} key={`${el}_${idx}`}>
-                  {el}
-                </option>
-              );
-            })}
-          </Input>
-        </Col>
-        <Col>
-          <ButtonGroup size="sm" className="w-100">
-            <Button type="button" size="sm" variant="secondary active">
-              1G
-            </Button>
-            <Button type="button" size="sm" variant="secondary">
-              1H
-            </Button>
-            <Button type="button" size="sm" variant="secondary">
-              1A
-            </Button>
-            <Button type="button" size="sm" variant="secondary">
-              3A
-            </Button>
-          </ButtonGroup>
-        </Col>
-        <Col xs="auto">
-          <Input
-            type="text"
-            bsSize="sm"
-            placeholder="Başlangıç - Bitiş Tarihi"
-          />
-        </Col>
-        <Col xs="auto">
-          <div className="custom-control custom-checkbox">
+      <Form
+        className="siteformui"
+        autoComplete="off"
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <Row className="tabcont tabcont-filterbar">
+          <Col>
             <Input
-              className="custom-control-input"
-              type="checkbox"
-              id="ordersHideOtherPairs"
-              defaultChecked
-            />
-            <Label
-              className="custom-control-label"
-              htmlFor="ordersHideOtherPairs"
-              check
+              className="custom-select custom-select-sm"
+              type="select"
+              multiple
+              size={3}
+              name="pairids"
+              innerRef={register({
+                required: t("isRequired"),
+              })}
             >
-              Diğer Çiftleri Gizle
-            </Label>
-          </div>
-        </Col>
-      </Row>
+              {allPairs.map(({ id, name, symbol }) => {
+                return (
+                  <option value={id} key={symbol}>
+                    {name}
+                  </option>
+                );
+              })}
+            </Input>
+            {errors.pairids && (
+                <FormText className="inputresult resulterror">
+                  {errors.pairids?.message}
+                </FormText>
+            )}
+          </Col>
+          <Col>
+            <Input
+              className="custom-select custom-select-sm"
+              type="select"
+              name="orderby"
+              innerRef={register({
+                valueAsNumber: true,
+              })}
+            >
+              {orderBy.map((el, idx) => {
+                return (
+                  <option value={idx + 1} key={`${el}_${idx}`}>
+                    {el}
+                  </option>
+                );
+              })}
+            </Input>
+          </Col>
+          <Col>
+            <FormGroup check inline>
+              {transactionTypes.map(({ label, name }) => {
+                return (
+                  <Label key={name} check>
+                    <Input
+                      name={name}
+                      type="checkbox"
+                      innerRef={register({ valueAsNumber: true })}
+                    />
+                    {label}{" "}
+                  </Label>
+                );
+              })}
+            </FormGroup>
+          </Col>
+          <Col xs="auto">
+            <div className="custom-control custom-checkbox">
+              <Input
+                className="custom-control-input"
+                type="checkbox"
+                id="ordersOpenHideOtherPairs"
+                checked={hideOthers}
+                onChange={onToggleHideOthers}
+              />
+              <Label
+                className="custom-control-label"
+                htmlFor="ordersOpenHideOtherPairs"
+                check
+              >
+                {t("coinbar:hidePairs")}
+              </Label>
+            </div>
+          </Col>
+        </Row>
+        <ButtonGroup>
+          <Button
+            variant="secondary"
+            className="w-100 active"
+            type="submit"
+            disabled={isFetching}
+          >
+            Filtrele
+          </Button>
+          <Button variant="secondary" className="active" onClick={onReset}>
+            Sıfırla
+          </Button>
+        </ButtonGroup>
+        {apiError && (
+          <span style={{ color: "coral", fontSize: "1rem" }}>{apiError}</span>
+        )}
+      </Form>
       <div className="ooopenorderstable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
           <Table.Thead scrollbar>
@@ -180,48 +239,64 @@ const OpenOrderOrders = props => {
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody
-              striped
-              hovered
-              scrollbar
-              scrollbarstyles={{ height: `${tableHeight - 36}px` }}
+            striped
+            hovered
+            scrollbar
+            scrollbarstyles={{ height: `${tableHeight - 36}px` }}
           >
-            {orderstable.map(
+            {visibleOrders.map(
               ({
+                buying_amount,
+                buying_currency_id,
+                buyingcurrency,
+                commission,
+                created_at,
+                customer_group_id,
                 id,
-                pair,
-                date,
-                time,
-                typetext,
-                typeresult1,
-                typeresult2,
+                market_price,
+                order_side_id,
+                order_type_id,
+                orderside,
+                ordertype,
+                pairname,
                 price,
-                amount,
-                transaction,
+                selling_amount,
+                selling_currency_id,
+                sellingcurrency,
+                status,
+                stop_price,
+                updated_amount,
+                updated_at,
+                updated_commission,
               }) => {
                 const cls = classnames({
-                  sitecolorgreen: typeresult1 === "1",
-                  sitecolorred: typeresult1 !== "1",
+                  sitecolorgreen: order_side_id === 1,
+                  sitecolorred: order_side_id !== 1,
                 });
 
                 return (
                   <Table.Tr key={id}>
                     <Table.Td sizeauto className="symb">
-                      {pair}
+                      {pairname}
                     </Table.Td>
                     <Table.Td sizeauto className="date">
-                      {date} - {time}
+                      <span title={updated_at}>
+                        {formatDateDistance(new Date(updated_at), Date.now(), {
+                          locale: lang,
+                        })}
+                      </span>
                     </Table.Td>
                     <Table.Td sizefixed className="type">
-                      {typetext} - <span className={cls}>{typeresult2}</span>
+                      {ordertype} - <span className={cls}>{orderside}</span>
                     </Table.Td>
                     <Table.Td sizefixed className="pric">
-                      {price}
+                      {price} {buyingcurrency}
                     </Table.Td>
                     <Table.Td sizefixed className="amnt">
-                      {amount}
+                      {buying_amount} {buyingcurrency}
                     </Table.Td>
                     <Table.Td sizefixed className="hppn">
-                      {transaction}
+                      {selling_amount} {sellingcurrency}
                     </Table.Td>
                     <Table.Td sizeauto className="bttn">
                       <Button type="button">

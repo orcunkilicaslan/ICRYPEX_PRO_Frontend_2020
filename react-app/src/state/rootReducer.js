@@ -59,6 +59,12 @@ const pairPersistConfig = {
   blacklist: ["initialOrderBooks", "initialOrderHistories"],
 };
 
+const orderPersistConfig = {
+  key: "pair",
+  storage,
+  blacklist: ["isFetchingHistory", "isFetchingOpen"],
+};
+
 const rootReducer = combineReducers({
   ui: persistReducer(UIPersistConfig, uiReducer),
   api: persistReducer(apiPersistConfig, apiReducer),
@@ -67,6 +73,7 @@ const rootReducer = combineReducers({
   pair: persistReducer(pairPersistConfig, pairReducer),
   socket: persistReducer(socketPersistConfig, socketReducer),
   assets: assetsReducer,
+  order: persistReducer(orderPersistConfig, orderReducer),
   order: orderReducer,
   balance: balanceReducer,
   easyBuy: easyBuyReducer,

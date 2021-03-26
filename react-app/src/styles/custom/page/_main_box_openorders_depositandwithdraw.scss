@@ -56,6 +56,32 @@
             @include flexbox-flex-grow(1);
             max-width: 100%;
             padding-left: 10px;
+
+            .confirmcheckbox{
+              width: 170px;
+              position: absolute;
+              left: 13px;
+              bottom: 18px;
+
+              .custom-checkbox{
+                margin: 0;
+
+                .custom-control-label{
+                  line-height: 1;
+
+                  .btn{
+                    color: $site-clr-white;
+                    font-weight: $font-weight-normal;
+                    font-size: 100%;
+                    padding: 0;
+                    margin: 0;
+                    line-height: inherit;
+                    vertical-align: inherit;
+                    border: none;
+                  }
+                }
+              }
+            }
           }
         }
 

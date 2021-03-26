@@ -7,10 +7,14 @@ import {
   InputGroupAddon,
   InputGroupText,
   Input,
+  Label,
+  FormText,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { setOpenModal } from "~/state/slices/ui.slice";
+import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal.jsx";
 
 import { Button } from "~/components/Button.jsx";
 import { withdrawPapara } from "~/state/slices/withdraw.slice";
@@ -27,6 +31,7 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
     mode: "onChange",
     defaultValues: {
       amount: "",
+      read: false,
     },
   });
 
@@ -48,12 +53,14 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
   };
 
   const onSubmit = async data => {
-    const { paparaid, amount } = data;
+    const { paparaid, amount, read } = data;
     const total = getTotal(amount);
 
     if (total > 0) {
       setApiError("");
-      const { payload } = await dispatch(withdrawPapara({ paparaid, amount }));
+      const { payload } = await dispatch(
+        withdrawPapara({ paparaid, amount, read: JSON.stringify(read) })
+      );
 
       if (!payload?.status) {
         setApiError(payload?.errormessage);
@@ -62,6 +69,16 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
         setApiError("");
       }
     }
+  };
+
+  const { openModal } = useSelector(state => state.ui);
+
+  const openTermsModal = () => {
+    dispatch(setOpenModal("depositwithdrawalterms"));
+  };
+
+  const clearOpenModals = () => {
+    dispatch(setOpenModal("none"));
   };
 
   return (
@@ -87,13 +104,11 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
                 innerRef={register({ minLength: 10 })}
               />
             </InputGroup>
-            <div>
-              {errors.paparaid && (
-                <span style={{ color: "red", fontSize: "1rem" }}>
-                  {errors.paparaid?.message}
-                </span>
-              )}
-            </div>
+            {errors.paparaid && (
+              <FormText className="inputresult resulterror">
+                {errors.paparaid?.message}
+              </FormText>
+            )}
             <InputGroup className="form-group">
               <Input
                 type="number"
@@ -113,13 +128,11 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
                 <InputGroupText>TRY</InputGroupText>
               </InputGroupAddon>
             </InputGroup>
-            <div>
-              {errors.amount && (
-                <span style={{ color: "red", fontSize: "1rem" }}>
-                  {errors.amount?.message}
-                </span>
-              )}
-            </div>
+            {errors.amount && (
+              <FormText className="inputresult resulterror">
+                {errors.amount?.message}
+              </FormText>
+            )}
             <Row form className="form-group">
               <Col>
                 Papara komisyonu ({`${PAPARA_FEE_RATE}%`} [En fazla 250.00 TRY]
@@ -131,6 +144,29 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
               <Col>Hesaba Geçecek Miktar</Col>
               <Col xs="auto">{getTotal(watch("amount"))} TRY</Col>
             </Row>
+          </div>
+          <div className="confirmcheckbox">
+            {errors.read && (
+              <FormText className="inputresult resulterror">
+                {errors.read?.message}
+              </FormText>
+            )}
+            <div className="custom-control custom-checkbox">
+              <Input
+                className="custom-control-input"
+                id="withdrawPaparaTabIhaveRead"
+                type="checkbox"
+                name="read"
+                innerRef={register({ required: t("form:isRequired") })}
+              />
+              <Label
+                className="custom-control-label"
+                htmlFor="withdrawPaparaTabIhaveRead"
+              >
+                <Button onClick={openTermsModal}>Kural ve Şartları</Button>{" "}
+                okudum onaylıyorum.
+              </Label>
+            </div>
           </div>
           <div className="formbttm">
             {apiError && (
@@ -146,6 +182,10 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
             </Button>
           </div>
         </Form>
+        <DepositWithdrawalTermsModal
+          isOpen={openModal === "depositwithdrawalterms"}
+          clearModals={clearOpenModals}
+        />
       </div>
     </div>
   );

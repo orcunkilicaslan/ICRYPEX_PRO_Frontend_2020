@@ -56,7 +56,7 @@ const OpenOrderDepoWithTabDepositBank = props => {
 
           return (
             <TabPane key={bankCode} tabId={bankCode}>
-              <BankAccountsForm accounts={accounts} />
+              <BankAccountsForm bankCode={bankCode} accounts={accounts} />
             </TabPane>
           );
         })}

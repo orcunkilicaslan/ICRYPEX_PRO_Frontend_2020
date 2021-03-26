@@ -1,5 +1,14 @@
 import { useState, useEffect, useMemo } from "react";
-import { Form, Row, Col, InputGroup, InputGroupAddon, Input } from "reactstrap";
+import {
+  Form,
+  Row,
+  Col,
+  InputGroup,
+  InputGroupAddon,
+  Input,
+  Label,
+  FormText,
+} from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +18,8 @@ import { IconSet } from "~/components/IconSet.jsx";
 import { withdrawBankwire } from "~/state/slices/withdraw.slice";
 import { fetchBankAccounts } from "~/state/slices/user.slice";
 import { useCurrencies } from "~/state/hooks/";
+import { setOpenModal } from "~/state/slices/ui.slice";
+import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal.jsx";
 
 const OpenOrderDepoWithTabWithdrawBank = props => {
   const dispatch = useDispatch();
@@ -23,6 +34,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
     defaultValues: {
       customerbankid: accounts?.[0]?.id || "",
       amount: "",
+      read: false,
     },
   });
   const { amount: watchedAmount, customerbankid: watchedId } = watch();
@@ -60,9 +72,13 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
   };
 
   const onSubmit = async data => {
-    if (data?.amount > 0) {
+    const { customerbankid, amount, read } = data;
+
+    if (amount > 0) {
       setApiError("");
-      const { payload } = await dispatch(withdrawBankwire(data));
+      const { payload } = await dispatch(
+        withdrawBankwire({ customerbankid, amount, read: JSON.stringify(read) })
+      );
 
       if (!payload?.status) {
         setApiError(payload?.errormessage);
@@ -71,6 +87,16 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
         setApiError("");
       }
     }
+  };
+
+  const { openModal } = useSelector(state => state.ui);
+
+  const openTermsModal = () => {
+    dispatch(setOpenModal("depositwithdrawalterms"));
+  };
+
+  const clearOpenModals = () => {
+    dispatch(setOpenModal("none"));
   };
 
   return (
@@ -109,13 +135,11 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
                 </Button>
               </InputGroupAddon>
             </InputGroup>
-            <div>
-              {errors.customerbankid && (
-                <span style={{ color: "red", fontSize: "1rem" }}>
-                  {errors.customerbankid?.message}
-                </span>
-              )}
-            </div>
+            {errors.customerbankid && (
+              <FormText className="inputresult resulterror">
+                {errors.customerbankid?.message}
+              </FormText>
+            )}
             <InputGroup className="form-group col">
               <Input
                 type="number"
@@ -147,19 +171,40 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
                 </Button>
               </InputGroupAddon>
             </InputGroup>
-            <div>
-              {errors.amount && (
-                <span style={{ color: "red", fontSize: "1rem" }}>
-                  {errors.amount?.message}
-                </span>
-              )}
-            </div>
+            {errors.amount && (
+              <FormText className="inputresult resulterror">
+                {errors.amount?.message}
+              </FormText>
+            )}
             <Row form className="form-group">
               <Col>Hesaba Geçecek Miktar</Col>
               <Col xs="auto">
                 {getTotal(watchedAmount)} {selectedAccount?.currency?.symbol}
               </Col>
             </Row>
+          </div>
+          <div className="confirmcheckbox">
+            {errors.read && (
+              <FormText className="inputresult resulterror">
+                {errors.read?.message}
+              </FormText>
+            )}
+            <div className="custom-control custom-checkbox">
+              <Input
+                className="custom-control-input"
+                id="withdrawBankTabIhaveRead"
+                type="checkbox"
+                name="read"
+                innerRef={register({ required: t("form:isRequired") })}
+              />
+              <Label
+                className="custom-control-label"
+                htmlFor="withdrawBankTabIhaveRead"
+              >
+                <Button onClick={openTermsModal}>Kural ve Şartları</Button>{" "}
+                okudum onaylıyorum.
+              </Label>
+            </div>
           </div>
           <div className="formbttm">
             {apiError && (
@@ -175,6 +220,10 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
             </Button>
           </div>
         </Form>
+        <DepositWithdrawalTermsModal
+          isOpen={openModal === "depositwithdrawalterms"}
+          clearModals={clearOpenModals}
+        />
       </div>
     </div>
   );

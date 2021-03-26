@@ -37,9 +37,7 @@ export const forgotPassword = buildRequest("/forgotpassword");
 export const withdrawBankwire = buildRequest("/withdraw/bankwire");
 export const withdrawPapara = buildRequest("/withdraw/papara");
 export const withdrawCrypto = buildRequest("/withdraw/crypto");
-export const fetchInitialOrderBook = buildRequest(
-  "/initialpairorderbookpro"
-);
+export const fetchInitialOrderBook = buildRequest("/initialpairorderbookpro");
 export const fetchInitialOrderHistory = buildRequest(
   "/initialpairorderhistorypro"
 );
@@ -55,7 +53,8 @@ export const fetchTransactionHistories = buildCachedRequest(
   "/transactionhistories",
   ms("10m")
 );
-export const fetchOrderHistory = buildRequest("/orderhistory")
+export const fetchOrderHistory = buildRequest("/orderhistory");
+export const fetchOpenOrders = buildRequest("/openorders");
 
 function buildRequest(uri) {
   return (args = {}, opts = {}) => {

@@ -49,19 +49,20 @@ const OpenOrder = props => {
   const initialState = {
     mode: TRANSACTION_MODES[0],
     method: TRANSACTION_METHODS[0],
+    symbol: "",
   };
   const [state, _dispatch] = useReducer((state, action) => {
     const { type, payload } = action;
 
     switch (type) {
       case "depo_or_with": {
-        const { tabIndex, mode, method } = payload;
+        const { tabIndex, mode, method, symbol } = payload;
 
         if (inRange(tabIndex, 0, tabs.length)) {
           dispatch(setTabIndex(tabIndex));
         }
 
-        const override = {};
+        const override = { symbol };
         if (TRANSACTION_MODES.includes(mode)) {
           override.mode = mode;
         }

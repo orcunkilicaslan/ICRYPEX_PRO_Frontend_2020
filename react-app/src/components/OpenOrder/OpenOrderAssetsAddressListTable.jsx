@@ -11,10 +11,10 @@ const OpenOrderAssetsAddressListTable = props => {
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
   const { dispatch } = useContext(openOrderContext);
 
-  const onClick = mode => {
+  const onClick = (mode, symbol) => {
     dispatch({
       type: "depo_or_with",
-      payload: { tabIndex: 3, method: "crypto", mode },
+      payload: { tabIndex: 3, method: "crypto", mode, symbol },
     });
   };
 
@@ -34,7 +34,7 @@ const OpenOrderAssetsAddressListTable = props => {
             scrollbar
             scrollbarstyles={{ height: `${tableHeight - 36}px` }}
           >
-            {addresses?.map(({ id, address }) => {
+            {addresses?.map(({ id, address, symbol }) => {
               return (
                 <Table.Tr key={id}>
                   <Table.Td sizeauto className="ico">
@@ -53,7 +53,7 @@ const OpenOrderAssetsAddressListTable = props => {
                       type="button"
                       size="sm"
                       variant="outline-success"
-                      onClick={() => onClick("deposit")}
+                      onClick={() => onClick("deposit", symbol)}
                     >
                       Yatır
                     </Button>
@@ -61,7 +61,7 @@ const OpenOrderAssetsAddressListTable = props => {
                       type="button"
                       size="sm"
                       variant="outline-danger"
-                      onClick={() => onClick("withdraw")}
+                      onClick={() => onClick("withdraw", symbol)}
                     >
                       Çek
                     </Button>
