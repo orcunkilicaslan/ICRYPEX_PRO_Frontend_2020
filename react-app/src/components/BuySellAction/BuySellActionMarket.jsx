@@ -151,11 +151,12 @@ const BuySellActionMarket = props => {
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>{t("common:price")}</InputGroupText>
                   </InputGroupAddon>
-                  <Input
-                         type="text"
-                         name="fiatBuyAmount"
-                         readOnly={true}
-                        value={t("finance:market")}/>
+                  <div
+                      className="form-control"
+                      name="fiatBuyAmount"
+                  >
+                    {t("finance:market")}
+                  </div>
                   <InputGroupAddon addonType="append">
                     <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>
@@ -284,10 +285,12 @@ const BuySellActionMarket = props => {
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>{t("common:price")}</InputGroupText>
                   </InputGroupAddon>
-                  <Input type="text"
-                         name="fiatSellAmount"
-                         readOnly={true}
-                         value={t("finance:market")}/>
+                  <div
+                      className="form-control"
+                      name="fiatSellAmount"
+                  >
+                    {t("finance:market")}
+                  </div>
                   <InputGroupAddon addonType="append">
                     <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>

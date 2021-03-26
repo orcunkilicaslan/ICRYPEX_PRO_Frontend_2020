@@ -1455,12 +1455,9 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Fiyat</span>
                                                             </div>
-                                                            <input type="text" class="form-control" value="12000.00">
+                                                            <div class="form-control">Piyasa</div>
                                                             <div class="input-group-append">
-                                                                <select class="custom-select">
-                                                                    <option value="TRY">TRY</option>
-                                                                    <option value="USD">USD</option>
-                                                                </select>
+                                                                <span class="input-group-text">TRY</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group input-group">
@@ -1469,10 +1466,7 @@
                                                             </div>
                                                             <input type="text" class="form-control" value="1.842145">
                                                             <div class="input-group-append">
-                                                                <select class="custom-select">
-                                                                    <option value="BTC">BTC</option>
-                                                                    <option value="ETH">ETH</option>
-                                                                </select>
+                                                                <span class="input-group-text">BTC</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1505,70 +1499,6 @@
                                                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#buysellModalConfirm">BTC AL</button>
                                                     </div>
                                                 </form>
-                                                <!-- Modal Add BuySell Transaction Confirmation -->
-                                                <div class="modal fade" id="buysellModalConfirm" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
-                                                    <div class="modal-dialog modal-sm modal-dialog-centered">
-                                                        <div class="modal-content text-center">
-                                                            <div class="modal-close">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                            </div>
-                                                            <div class="modal-body modal-confirm">
-                                                                <h4>İşlem Onayı</h4>
-                                                                <div class="sitetablediv mt-2">
-                                                                    <div class="tbl-tbody tbl-striped">
-                                                                        <div class="tbl-tr">
-                                                                            <div class="tbl-td fxd text-left">İşlem Tipi</div>
-                                                                            <div class="tbl-td fxd text-right">Market - <span class="sitecolorgreen">Alış</span></div>
-                                                                        </div>
-                                                                        <div class="tbl-tr">
-                                                                            <div class="tbl-td fxd text-left">Miktar - TRY</div>
-                                                                            <div class="tbl-td fxd text-right">999,999.99 TRY</div>
-                                                                        </div>
-                                                                        <div class="tbl-tr">
-                                                                            <div class="tbl-td fxd text-left">Miktar - BTC</div>
-                                                                            <div class="tbl-td fxd text-right">1.44804233 BTC</div>
-                                                                        </div>
-                                                                        <div class="tbl-tr">
-                                                                            <div class="tbl-td fxd text-left">Komisyon</div>
-                                                                            <div class="tbl-td fxd text-right">(0.18%) 1.32 TRY</div>
-                                                                        </div>
-                                                                        <div class="tbl-tr">
-                                                                            <div class="tbl-td fxd text-left">Toplam</div>
-                                                                            <div class="tbl-td fxd text-right">999,999.99 TRY</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-body modal-confirm d-none">
-                                                                <i class="icon-sprtlgclrd icon-50gray icon-check"></i>
-                                                                <h4>İşlem Onayı</h4>
-                                                                <p>İşleminiz Başarıyla Gerçekleştirildi.</p>
-                                                            </div>
-                                                            <div class="modal-footer row">
-                                                                <button type="button" class="btn btn-secondary active col" data-dismiss="modal">İPTAL ET</button>
-                                                                <button type="button" class="btn btn-primary col" data-toggle="modal" data-target="#buysellModalConfirmSuccess">ONAYLA</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal fade" id="buysellModalConfirmSuccess" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
-                                                    <div class="modal-dialog modal-sm modal-dialog-centered">
-                                                        <div class="modal-content text-center">
-                                                            <div class="modal-close">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                            </div>
-                                                            <div class="modal-body modal-confirm">
-                                                                <i class="icon-sprtlgclrd icon-50gray icon-check"></i>
-                                                                <h4>İşlem Onayı</h4>
-                                                                <p>İşleminiz Başarıyla Gerçekleştirildi.</p>
-                                                            </div>
-                                                            <div class="modal-footer row">
-                                                                <button type="button" class="btn btn-secondary active col" data-dismiss="modal">KAPAT</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Modal Add BuySell Transaction Confirmation -->
                                             </div>
                                             <div class="col sellcol">
                                                 <form class="buysellaction-form siteformui" autocomplete="off" novalidate>
@@ -1584,12 +1514,11 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Fiyat</span>
                                                             </div>
-                                                            <input type="text" class="form-control" value="12000.00">
+                                                            <div class="form-control">Piyasa</div>
                                                             <div class="input-group-append">
-                                                                <select class="custom-select">
-                                                                    <option value="TRY">TRY</option>
-                                                                    <option value="USD">USD</option>
-                                                                </select>
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text">TRY</span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="form-group input-group">
@@ -1598,10 +1527,9 @@
                                                             </div>
                                                             <input type="text" class="form-control" value="1.842145">
                                                             <div class="input-group-append">
-                                                                <select class="custom-select">
-                                                                    <option value="BTC">BTC</option>
-                                                                    <option value="ETH">ETH</option>
-                                                                </select>
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text">BTC</span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1936,6 +1864,70 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Modal Add BuySell Transaction Confirmation -->
+                        <div class="modal fade" id="buysellModalConfirm" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-sm modal-dialog-centered">
+                                <div class="modal-content text-center">
+                                    <div class="modal-close">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    </div>
+                                    <div class="modal-body modal-confirm">
+                                        <h4>İşlem Onayı</h4>
+                                        <div class="sitetablediv mt-2">
+                                            <div class="tbl-tbody tbl-striped">
+                                                <div class="tbl-tr">
+                                                    <div class="tbl-td fxd text-left">İşlem Tipi</div>
+                                                    <div class="tbl-td fxd text-right">Market - <span class="sitecolorgreen">Alış</span></div>
+                                                </div>
+                                                <div class="tbl-tr">
+                                                    <div class="tbl-td fxd text-left">Miktar - TRY</div>
+                                                    <div class="tbl-td fxd text-right">999,999.99 TRY</div>
+                                                </div>
+                                                <div class="tbl-tr">
+                                                    <div class="tbl-td fxd text-left">Miktar - BTC</div>
+                                                    <div class="tbl-td fxd text-right">1.44804233 BTC</div>
+                                                </div>
+                                                <div class="tbl-tr">
+                                                    <div class="tbl-td fxd text-left">Komisyon</div>
+                                                    <div class="tbl-td fxd text-right">(0.18%) 1.32 TRY</div>
+                                                </div>
+                                                <div class="tbl-tr">
+                                                    <div class="tbl-td fxd text-left">Toplam</div>
+                                                    <div class="tbl-td fxd text-right">999,999.99 TRY</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-body modal-confirm d-none">
+                                        <i class="icon-sprtlgclrd icon-50gray icon-check"></i>
+                                        <h4>İşlem Onayı</h4>
+                                        <p>İşleminiz Başarıyla Gerçekleştirildi.</p>
+                                    </div>
+                                    <div class="modal-footer row">
+                                        <button type="button" class="btn btn-secondary active col" data-dismiss="modal">İPTAL ET</button>
+                                        <button type="button" class="btn btn-primary col" data-toggle="modal" data-target="#buysellModalConfirmSuccess">ONAYLA</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="buysellModalConfirmSuccess" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-sm modal-dialog-centered">
+                                <div class="modal-content text-center">
+                                    <div class="modal-close">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    </div>
+                                    <div class="modal-body modal-confirm">
+                                        <i class="icon-sprtlgclrd icon-50gray icon-check"></i>
+                                        <h4>İşlem Onayı</h4>
+                                        <p>İşleminiz Başarıyla Gerçekleştirildi.</p>
+                                    </div>
+                                    <div class="modal-footer row">
+                                        <button type="button" class="btn btn-secondary active col" data-dismiss="modal">KAPAT</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal Add BuySell Transaction Confirmation -->
                     </div>
                 </div>
                 <!-- Buy/Sell Action -->
