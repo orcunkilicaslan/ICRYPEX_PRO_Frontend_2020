@@ -74,7 +74,6 @@ const rootReducer = combineReducers({
   socket: persistReducer(socketPersistConfig, socketReducer),
   assets: assetsReducer,
   order: persistReducer(orderPersistConfig, orderReducer),
-  order: orderReducer,
   balance: balanceReducer,
   easyBuy: easyBuyReducer,
   easySell: easySellReducer,
