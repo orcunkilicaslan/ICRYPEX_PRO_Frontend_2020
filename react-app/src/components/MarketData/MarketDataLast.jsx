@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
@@ -83,4 +83,4 @@ const MarketDataLast = props => {
   );
 };
 
-export default MarketDataLast;
+export default memo(MarketDataLast);

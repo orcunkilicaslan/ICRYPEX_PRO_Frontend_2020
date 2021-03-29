@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, memo } from "react";
 import ChartistGraph from "react-chartist";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -240,4 +240,4 @@ const OrderBook = props => {
   );
 };
 
-export default OrderBook;
+export default memo(OrderBook);

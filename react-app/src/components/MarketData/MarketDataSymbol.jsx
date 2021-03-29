@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useFuzzy } from "react-use-fuzzy";
 import { useTranslation } from "react-i18next";
@@ -207,4 +207,4 @@ const MarketDataSymbol = props => {
   );
 };
 
-export default MarketDataSymbol;
+export default memo(MarketDataSymbol);
