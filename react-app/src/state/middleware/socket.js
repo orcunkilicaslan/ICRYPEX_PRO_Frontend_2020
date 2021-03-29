@@ -15,7 +15,8 @@ const log = debug.extend("socket");
 log.data = log.extend("data");
 const defaults = {
   timeout: ms("30s"),
-  reconnectionDelayMax: ms("3m"),
+  reconnectionDelay: ms("5s"),
+  // requestTimeout: ms("2s"),
 };
 
 export default function createSocketMiddleware(options) {
@@ -52,7 +53,7 @@ export default function createSocketMiddleware(options) {
       }
     });
 
-    client.io.on("reconnect_attempt", onReconnectAttempt(client));
+    client.io.on("reconnect_attempt", onReconnectAttempt);
     client.io.on("reconnect", onReconnect);
     client.io.on("reconnect_error", onReconnectError);
     client.io.on("reconnect_failed", onReconnectFailed);
@@ -75,13 +76,8 @@ function onConnectError(error) {
   log("connection error %O", error);
 }
 
-function onReconnectAttempt(client) {
-  return attempt => {
-    log(`attempting reconnection no ${attempt}`);
-    // on reconnection, reset the transports option, as the Websocket
-    // connection may have failed (caused by proxy, firewall, browser, ...)
-    client.io.opts.transports = ["polling", "websocket"];
-  };
+function onReconnectAttempt(attempt) {
+  log(`attempting reconnection no ${attempt}`);
 }
 
 function onReconnect(attempt) {
