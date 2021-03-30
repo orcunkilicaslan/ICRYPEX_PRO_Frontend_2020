@@ -27,7 +27,6 @@ import { formatDate, formatDateDistance } from "~/util/";
 
 import { setOpenModal } from "~/state/slices/ui.slice";
 import OrderHistoryFilter from "~/components/modals/OrderHistoryFilter.jsx";
-import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal";
 
 const orderBy = [
   "Önce Yeni Tarihli",

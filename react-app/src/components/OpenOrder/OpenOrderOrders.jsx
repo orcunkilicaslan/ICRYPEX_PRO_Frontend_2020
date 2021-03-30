@@ -23,6 +23,8 @@ import {
   toggleHideOthersOpen,
 } from "~/state/slices/order.slice";
 import { formatDateDistance } from "~/util/";
+import { setOpenModal } from "~/state/slices/ui.slice";
+import OrderOpenOrdersFilter from "~/components/modals/OrderOpenOrdersFilter.jsx";
 
 const orderBy = [
   "Önce Yeni Tarihli",
@@ -109,6 +111,16 @@ const OpenOrderOrders = props => {
     dispatch(toggleHideOthersOpen());
   };
 
+  const { openModal } = useSelector(state => state.ui);
+
+  const openFiltersModal = () => {
+    dispatch(setOpenModal("orderopenordersfilter"));
+  };
+
+  const clearOpenModals = () => {
+    dispatch(setOpenModal("none"));
+  };
+
   return (
     <div className="openorders-orders">
       <Form
@@ -117,7 +129,8 @@ const OpenOrderOrders = props => {
         noValidate
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Row className="tabcont tabcont-filterbar">
+
+        <Row className="tabcont tabcont-filterbar d-none">
           <Col>
             <Input
               className="custom-select custom-select-sm"
@@ -178,6 +191,21 @@ const OpenOrderOrders = props => {
             </FormGroup>
           </Col>
           <Col xs="auto">
+            <ButtonGroup>
+              <Button
+                  variant="secondary"
+                  className="w-100 active"
+                  type="submit"
+                  disabled={isFetching}
+              >
+                Filtrele
+              </Button>
+              <Button variant="secondary" className="active" onClick={onReset}>
+                Sıfırla
+              </Button>
+            </ButtonGroup>
+          </Col>
+          <Col xs="auto">
             <div className="custom-control custom-checkbox">
               <Input
                 className="custom-control-input"
@@ -196,23 +224,94 @@ const OpenOrderOrders = props => {
             </div>
           </Col>
         </Row>
-        <ButtonGroup>
-          <Button
-            variant="secondary"
-            className="w-100 active"
-            type="submit"
-            disabled={isFetching}
-          >
-            Filtrele
-          </Button>
-          <Button variant="secondary" className="active" onClick={onReset}>
-            Sıfırla
-          </Button>
-        </ButtonGroup>
+        <Row className="tabcont tabcont-filterbar">
+          <Col xs="auto">
+            <Button
+                variant="secondary"
+                size="sm"
+                onClick={openFiltersModal}
+            >
+              İşlem Çiftleri
+            </Button>
+          </Col>
+          <Col>
+            <Input
+                className="custom-select custom-select-sm"
+                type="select"
+            >
+              {["İşlem Tipi", "Alış", "Satış"].map((el, idx) => {
+                return (
+                    <option value={idx + 1} key={`${el}_${idx}`}>
+                      {el}
+                    </option>
+                );
+              })}
+            </Input>
+          </Col>
+          <Col>
+            <Input
+                className="custom-select custom-select-sm"
+                type="select"
+            >
+              {["Durumu", "Tamamlandı", "İptal"].map((el, idx) => {
+                return (
+                    <option value={idx + 1} key={`${el}_${idx}`}>
+                      {el}
+                    </option>
+                );
+              })}
+            </Input>
+          </Col>
+          <Col xs="auto">
+            <div className="custom-control custom-checkbox mb-0">
+              <Input
+                  className="custom-control-input"
+                  type="checkbox"
+                  id="ordersOpenHideOtherPairs"
+                  checked={hideOthers}
+                  onChange={onToggleHideOthers}
+              />
+              <Label
+                  className="custom-control-label"
+                  htmlFor="ordersOpenHideOtherPairs"
+                  check
+              >
+                {t("coinbar:hidePairs")}
+              </Label>
+            </div>
+          </Col>
+          <Col xs="auto" className="d-none">
+            <ButtonGroup>
+              <Button
+                  variant="secondary"
+                  size="sm"
+                  className="w-100 active"
+                  type="submit"
+                  disabled={isFetching}
+              >
+                Filtrele
+              </Button>
+              <Button
+                  variant="secondary"
+                  size="sm"
+                  className="active"
+                  onClick={onReset}
+              >
+                Sıfırla
+              </Button>
+            </ButtonGroup>
+          </Col>
+        </Row>
+
         {apiError && (
           <span style={{ color: "coral", fontSize: "1rem" }}>{apiError}</span>
         )}
+
       </Form>
+      <OrderOpenOrdersFilter
+          isOpen={openModal === "orderopenordersfilter"}
+          clearModals={clearOpenModals}
+      />
       <div className="ooopenorderstable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
           <Table.Thead scrollbar>
