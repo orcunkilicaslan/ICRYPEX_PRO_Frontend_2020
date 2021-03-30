@@ -1,3 +1,4 @@
+import "./wdyr.js";
 import "core-js/features/promise";
 import "yet-another-abortcontroller-polyfill";
 import "event-target-polyfill";
