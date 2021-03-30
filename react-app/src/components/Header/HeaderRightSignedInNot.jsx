@@ -6,9 +6,9 @@ import { setOpenModal } from "~/state/slices/ui.slice";
 import {
   SigninModal,
   VerifyModal,
-  ForgotPassModal,
   SignupModal,
-} from "../modals/";
+  ForgotPasswordModal,
+} from "~/components/modals/";
 
 const HeaderRightSignedInNot = props => {
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ const HeaderRightSignedInNot = props => {
 
   const openForgotPassConfirmModal = () => {
     setForgotPassError(null);
-    dispatch(setOpenModal("forgotpassconfirm"));
+    dispatch(setOpenModal("forgotpassword"));
   };
 
   const openVerifyModal = () => {
@@ -143,8 +143,8 @@ const HeaderRightSignedInNot = props => {
         errorMessage={verifyError}
         isVerifying={isVerifying}
       />
-      <ForgotPassModal
-        isOpen={openModal === "forgotpassconfirm"}
+      <ForgotPasswordModal
+        isOpen={openModal === "forgotpassword"}
         submit={submitForgotPassword}
         clearModals={clearOpenModals}
         errorMessage={forgotPassError}

@@ -26,7 +26,6 @@ import {fetchEasyBuy} from "~/state/slices/easybuy.slice";
 import {fetchEasySell} from "~/state/slices/easysell.slice";
 import {setOpenModal} from "~/state/slices/ui.slice";
 import BuySellConfirmModal from "~/components/modals/BuySellConfirmModal.jsx";
-import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal";
 
 const buySellRangePercent = [0, 25, 50, 75, 100];
 

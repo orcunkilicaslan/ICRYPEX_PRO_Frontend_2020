@@ -55,6 +55,10 @@
       }
     }
 
+    &.modal-confirm{
+      @include flexbox-flex(0);
+    }
+
   }
 
 }

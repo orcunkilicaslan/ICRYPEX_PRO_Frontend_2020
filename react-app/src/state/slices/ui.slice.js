@@ -20,8 +20,9 @@ const initialState = {
 const MODALS = [
   "none",
   "signin",
-  "forgotpassconfirm",
   "signup",
+  "forgotpassconfirm",
+  "forgotpassword",
   "settings",
   "alarm",
   "buysellconfirm",
