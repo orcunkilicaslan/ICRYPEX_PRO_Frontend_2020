@@ -62,12 +62,9 @@ const BuySellActionMarket = props => {
       cryptoSellAmount: "",
     },
   });
-  
-  
 
   useEffect(() => {
     if (selectedPair) {
-      console.log({selectedPair})
       resetBuy();
       resetSell();
       dispatch(fetchBalance({currencyid: selectedPair?.second_currency_id, isFiat: true}));
@@ -111,7 +108,6 @@ const BuySellActionMarket = props => {
 
   const onSellSubmit = async data => {
 
-    console.log({data})
     if (data?.cryptoSellAmount > 0) {
       setApiError("");
       const  firstcurrencyid  = selectedPair.first_currency_id;
@@ -200,7 +196,7 @@ const BuySellActionMarket = props => {
                               const parsed = parseFloat(value);
                               const price = selectedPrice?.price;
                               setTotalBuy(Number(price * parsed).toFixed(2))
-                              setRangeBuyPortfolio(Number( (parsed * 100) / fiatBalance) .toFixed(0));
+                              setRangeBuyPortfolio(Number( (parsed * 100) / fiatBalance).toFixed(0));
                             }else {  setTotalBuy(Number(0).toFixed(8))}
                           }}
                   />
@@ -337,7 +333,7 @@ const BuySellActionMarket = props => {
                               const parsed = parseFloat(value);
                               const price = selectedPrice?.price;
                               setTotalSell(Number(price * parsed).toFixed(2))
-                              setRangeSellPortfolio(Number( (parsed * 100) / cryptoBalance) .toFixed(0));
+                              setRangeSellPortfolio(Number( (parsed * 100) / cryptoBalance).toFixed(0));
                             }else {  setTotalSell(Number(0).toFixed(2))}
                           }}
                   />

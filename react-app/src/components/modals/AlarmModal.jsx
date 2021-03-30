@@ -42,7 +42,7 @@ export default function AlarmModal(props) {
     onToggleHideOthers,
     ...rest
   } = props;
-  const { t } = useTranslation(["coinbar", "common"]);
+  const { t } = useTranslation(["coinbar", "common", "form"]);
   const { all: allAlarms, isCreating, hideOthers, isDeleting } = useSelector(
     state => state.alarm
   );
@@ -171,11 +171,11 @@ export default function AlarmModal(props) {
                   name="amount"
                   innerRef={register({
                     valueAsNumber: true,
-                    required: t("isRequired"),
-                    min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
+                    required: t("form:isRequired"),
+                    min: { value: 0, message: t("form:shouldBeMin", { value: 0 }) },
                     max: {
                       value: 999999,
-                      message: t("shouldBeMax", { value: 999999 }),
+                      message: t("form:shouldBeMax", { value: 999999 }),
                     },
                   })}
                 />

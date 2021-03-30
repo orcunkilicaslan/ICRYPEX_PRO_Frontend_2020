@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { groupBy } from "lodash";
 
 import * as api from "../api";
 
 export const fetchBalance = createAsyncThunk(
     "balance/fetchOne",
-    async ({currencyid,isFiat}, { getState, rejectWithValue }) => {
+    async ({currencyid}, { getState, rejectWithValue }) => {
       const {
         api: { accesstoken },
       } = getState();
@@ -29,7 +28,6 @@ export const fetchBalance = createAsyncThunk(
 
 
 const initialState = {
-    history: {},
     fiatBalance: 0,
     cryptoBalance: 0,
 
@@ -53,7 +51,7 @@ const balanceSlice = createSlice({
               state.cryptoBalance = action?.payload?.description;
           }
       },
-      [fetchBalance.pending]: (state, action) => {
+      [fetchBalance.pending]: state => {
           state.fiatBalance = 0
           state.cryptoBalance = 0
       },
