@@ -95,6 +95,84 @@
       &#{$iconclassname}-close{background-position: calc(-50px*1) -50px;}
     }
   }
+
+  &-sprtsmcurrency{
+    background-image: url(#{$path-img-url-icons}/icons_spite_currencysmallicon.svg#{$cache-busting});
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    display: inline-block;
+    position: relative;
+
+    &#{$iconclassname}-16{
+      width: 16px;
+      height: 16px;
+
+      &#{$iconclassname}-try{
+        background-color: $site-clr-curr-try;
+        background-position: calc(-16px*0) 0;
+      }
+      &#{$iconclassname}-usd{
+        background-color: $site-clr-curr-usd;
+        background-position: calc(-16px*1) 0;
+      }
+      &#{$iconclassname}-tryb{
+        background-color: $site-clr-curr-tryb;
+        background-position: calc(-16px*2) 0;
+      }
+      &#{$iconclassname}-usdt{
+        background-color: $site-clr-curr-usdt;
+        background-position: calc(-16px*3) 0;
+      }
+      &#{$iconclassname}-btc{
+        background-color: $site-clr-curr-btc;
+        background-position: calc(-16px*4) 0;
+      }
+      &#{$iconclassname}-eth{
+        background-color: $site-clr-curr-eth;
+        background-position: calc(-16px*5) 0;
+      }
+      &#{$iconclassname}-xrp{
+        background-color: $site-clr-curr-xrp;
+        background-position: calc(-16px*6) 0;
+      }
+      &#{$iconclassname}-ltc{
+        background-color: $site-clr-curr-ltc;
+        background-position: calc(-16px*7) 0;
+      }
+      &#{$iconclassname}-xlm{
+        background-color: $site-clr-curr-xlm;
+        background-position: calc(-16px*8) 0;
+      }
+      &#{$iconclassname}-link{
+        background-color: $site-clr-curr-link;
+        background-position: calc(-16px*9) 0;
+      }
+      &#{$iconclassname}-dot{
+        background-color: $site-clr-curr-dot;
+        background-position: calc(-16px*10) 0;
+      }
+      &#{$iconclassname}-bat{
+        background-color: $site-clr-curr-bat;
+        background-position: calc(-16px*11) 0;
+      }
+      &#{$iconclassname}-algo{
+        background-color: $site-clr-curr-algo;
+        background-position: calc(-16px*12) 0;
+      }
+      &#{$iconclassname}-ftm{
+        background-color: $site-clr-curr-ftm;
+        background-position: calc(-16px*13) 0;
+      }
+      &#{$iconclassname}-avax{
+        background-color: $site-clr-curr-avax;
+        background-position: calc(-16px*14) 0;
+      }
+      &#{$iconclassname}-mpay{
+        background-color: $site-clr-curr-mpay;
+        background-position: calc(-16px*15) 0;
+      }
+    }
+  }
 }
 
 .siteicons{
