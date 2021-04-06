@@ -152,7 +152,8 @@ const OpenOrderAssetsChartList = props => {
                     key={symbol}
                   >
                     <div className="circle">
-                      <i />
+                      <IconSet sprite="sprtsmcurrency" size="16" name={symbol?.toLowerCase?.()} />
+                      <i className="centercirc" />
                     </div>
                     <div className="info">
                       <h6>{symbol}</h6>
