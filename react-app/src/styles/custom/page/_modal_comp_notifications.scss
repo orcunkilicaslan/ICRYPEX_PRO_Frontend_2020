@@ -47,8 +47,8 @@
         }
 
         &.notifnotread{
-          background-color: transparentize($site-clr-red, 0.95) !important;
-          border-color: transparentize($site-clr-red, 0.3) !important;
+          background-color: $site-result-dark-error-bg !important;
+          border-color: $site-result-dark-error-brdr !important;
 
           .heading{
 

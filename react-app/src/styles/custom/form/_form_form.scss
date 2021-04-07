@@ -162,7 +162,10 @@
     select,
     .form-control{
       &:focus{
+        border-color: $input-border-color;
         border-right-color: transparent;
+
+        + .input-group-append{z-index: 3;}
       }
 
       @include transition-multiple(border-right-color 0s ease-in-out);
@@ -190,6 +193,7 @@
 
     &-append{
       position: relative;
+      //z-index: 3;
 
       .input-group-text,
       select{
@@ -249,20 +253,20 @@
 
   .form-group.inputresult{
 
-    .input-group-prepend{margin-right: 0;}
-    .input-group-append{margin-left: 0;}
+    //.input-group-prepend{margin-right: 0;}
+    //.input-group-append{margin-left: 0;}
 
     &.resulterror .form-control,
     &.resulterror .custom-select,
     &.resulterror .input-group-text{
-      background-color: transparentize($site-clr-red, 0.95) !important;
-      border-color: transparentize($site-clr-red, 0.3) !important;
+      background-color: $site-result-dark-error-bg !important;
+      border-color: $site-result-dark-error-brdr !important;
     }
     &.resultsuccess .form-control,
     &.resultsuccess .custom-select,
     &.resultsuccess .input-group-text{
-      background-color: transparentize($site-clr-green, 0.95) !important;
-      border-color: transparentize($site-clr-green, 0.3) !important;
+      background-color: $site-result-dark-success-bg !important;
+      border-color: $site-result-dark-success-brdr !important;
     }
     .form-control[pattern]:valid{
       background-color: $input-bg !important;
@@ -276,8 +280,8 @@
       color: $site-clr-red;
 
       &::before{
-        background-color: transparentize($site-clr-red, 0.95) !important;
-        border-color: transparentize($site-clr-red, 0.3) !important;
+        background-color: $site-result-dark-error-bg !important;
+        border-color: $site-result-dark-error-brdr !important;
       }
     }
 
@@ -285,8 +289,8 @@
       color: $site-clr-green;
 
       &::before{
-        background-color: transparentize($site-clr-green, 0.95) !important;
-        border-color: transparentize($site-clr-green, 0.3) !important;
+        background-color: $site-result-dark-success-bg !important;
+        border-color: $site-result-dark-success-brdr !important;
       }
     }
 
@@ -294,8 +298,8 @@
       color: $site-clr-green !important;
 
       &::before{
-        background-color: transparentize($site-clr-green, 0.95) !important;
-        border-color: transparentize($site-clr-green, 0.3) !important;
+        background-color: $site-result-dark-success-bg !important;
+        border-color: $site-result-dark-success-brdr !important;
       }
     }
 
