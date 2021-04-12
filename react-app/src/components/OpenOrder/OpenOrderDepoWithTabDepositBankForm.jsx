@@ -21,7 +21,9 @@ import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTe
 const OpenOrderDepoWithTabDepositBankForm = props => {
   const { accounts, bankCode } = props;
   const [bankCurrencies, accountsBySymbol] = useMemo(() => {
-    const currencies = uniq(accounts.map(({ currency }) => currency?.symbol));
+    const currencies = uniq(
+      accounts?.map?.(({ currency }) => currency?.symbol)
+    );
     const grouped = groupBy(accounts, ({ currency }) => currency?.symbol);
 
     return [currencies, grouped];
@@ -32,7 +34,8 @@ const OpenOrderDepoWithTabDepositBankForm = props => {
       symbol: bankCurrencies[0],
     },
   });
-  const [account] = accountsBySymbol[watch("symbol")];
+  const bankAccounts = accountsBySymbol[watch("symbol")];
+  const account = bankAccounts?.[0];
 
   const { openModal } = useSelector(state => state.ui);
 
