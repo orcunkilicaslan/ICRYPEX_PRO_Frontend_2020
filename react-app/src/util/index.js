@@ -16,7 +16,7 @@ const locales = { en, tr };
 const isProd = process.env.NODE_ENV === "production";
 export const debug = _debug(name); // isProd ? makeFakeDebug() : _debug("pro");
 const log = debug.extend("util");
-if (process.env.REACT_APP_DEBUG) _debug.enable(`${name}:*`);
+// if (process.env.REACT_APP_DEBUG) _debug.enable(`${name}:*`);
 
 // https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
 export const formatDate = (

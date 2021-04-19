@@ -60,7 +60,7 @@ const pairPersistConfig = {
 };
 
 const orderPersistConfig = {
-  key: "pair",
+  key: "order",
   storage,
   blacklist: ["isFetchingHistory", "isFetchingOpen"],
 };

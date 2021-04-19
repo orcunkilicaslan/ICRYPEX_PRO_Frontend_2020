@@ -77,7 +77,9 @@ export default function SigninModal(props) {
           >
             <div className="labelfocustop">
               <FormGroup
-                  className={errors.emailornationalid && ("inputresult resulterror")}
+                className={
+                  errors.emailornationalid && "inputresult resulterror"
+                }
               >
                 <Input
                   type="email"
@@ -87,13 +89,13 @@ export default function SigninModal(props) {
                 />
                 <Label>{t("email")}</Label>
                 {errors.emailornationalid && (
-                    <FormText className="inputresult resulterror inputintext">
-                      {errors.emailornationalid?.message}
-                    </FormText>
+                  <FormText className="inputresult resulterror inputintext">
+                    {errors.emailornationalid?.message}
+                  </FormText>
                 )}
               </FormGroup>
               <FormGroup
-                  className={errors.password && ("inputresult resulterror")}
+                className={errors.password && "inputresult resulterror"}
               >
                 <Input
                   className="signuppassword"
@@ -103,16 +105,13 @@ export default function SigninModal(props) {
                   innerRef={register({ required: t("form:isRequired") })}
                 />
                 <Label>{t("password")}</Label>
-                <Button
-                  className="showhidepass"
-                  onClick={toggleTypePass}
-                >
+                <Button className="showhidepass" onClick={toggleTypePass}>
                   <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
                 </Button>
                 {errors.password && (
-                    <FormText className="inputresult resulterror inputintext">
-                      {errors.password?.message}
-                    </FormText>
+                  <FormText className="inputresult resulterror inputintext">
+                    {errors.password?.message}
+                  </FormText>
                 )}
               </FormGroup>
             </div>
