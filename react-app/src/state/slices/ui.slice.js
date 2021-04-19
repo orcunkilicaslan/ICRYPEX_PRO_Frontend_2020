@@ -21,7 +21,6 @@ const MODALS = [
   "none",
   "signin",
   "signup",
-  "forgotpassconfirm",
   "forgotpassword",
   "settings",
   "alarm",

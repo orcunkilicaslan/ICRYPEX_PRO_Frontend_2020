@@ -130,23 +130,17 @@ export const fetchUserInfo = createAsyncThunk(
 
 export const forgotPassword = createAsyncThunk(
   "user/forgotPassword",
-  async ({ email }, { getState, rejectWithValue }) => {
+  async (data, { getState, rejectWithValue }) => {
     const {
-      user,
       api: { prelogintoken },
     } = getState();
 
-    if (!email) email = user.email;
-
     try {
-      const response = await api.forgotPassword(
-        { email },
-        {
-          headers: {
-            "x-access-token": prelogintoken,
-          },
-        }
-      );
+      const response = await api.forgotPassword(data, {
+        headers: {
+          "x-access-token": prelogintoken,
+        },
+      });
 
       return response.data;
     } catch ({ data }) {
