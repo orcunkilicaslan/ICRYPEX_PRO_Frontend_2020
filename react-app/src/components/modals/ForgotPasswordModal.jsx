@@ -1,4 +1,4 @@
-import {Fragment} from "react";
+import { Fragment, useState } from "react";
 import {
   Form,
   FormGroup,
@@ -7,7 +7,8 @@ import {
   Input,
   Modal,
   ModalHeader,
-  ModalBody, ModalFooter,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useTranslation } from "react-i18next";
@@ -27,19 +28,24 @@ export default function ForgotPasswordModal(props) {
     userEmail = "",
     errorMessage,
     submit,
+    isResetingPassword,
     ...rest
   } = props;
   const { t } = useTranslation(["login", "form"]);
+  const [isResetSent, setIsResetSent] = useState(false);
   const { register, handleSubmit, errors, clearErrors } = useForm({
     mode: "onChange",
     defaultValues: {
-      emailornationalid: userEmail,
+      email: userEmail,
     },
   });
 
   const onSubmit = data => {
     clearErrors();
-    submit(data);
+    try {
+      submit(data);
+      setIsResetSent(true);
+    } catch {}
   };
 
   return (
@@ -56,85 +62,81 @@ export default function ForgotPasswordModal(props) {
       {...rest}
     >
       <ModalHeader toggle={clearModals}>{t("forgotPassword")}</ModalHeader>
-
-      { 0 === 0 ? (
-          <Fragment>
-            <ModalBody className="modalcomp modalcomp-sign">
-              <div className="modalcomp-sign-icon">
-                <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
-              </div>
-              {errorMessage ? <AlertResult error>{errorMessage}</AlertResult> : null}
-              <div className="modalcomp-sign-form">
-                <div className="headsmtitle mb-1">
-                  <h6 className="text-center w-100">Üye Bilgilerininizi Girin</h6>
-                </div>
-                <Form
-                    className="siteformui"
-                    autoComplete="off"
-                    noValidate
-                    onSubmit={handleSubmit(onSubmit)}
+      {!isResetSent ? (
+        <ModalBody className="modalcomp modalcomp-sign">
+          <div className="modalcomp-sign-icon">
+            <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
+          </div>
+          {errorMessage ? (
+            <AlertResult error>{errorMessage}</AlertResult>
+          ) : null}
+          <div className="modalcomp-sign-form">
+            <Form
+              className="siteformui"
+              autoComplete="off"
+              noValidate
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <div className="labelfocustop">
+                <FormGroup
+                  className={errors.email ? "inputresult resulterror" : ""}
                 >
-                  <div className="labelfocustop">
-                    <FormGroup
-                        className={errors.emailornationalid && ("inputresult resulterror")}
-                    >
-                      <Input
-                          type="email"
-                          required
-                          name="emailornationalid"
-                          innerRef={register({ required: t("form:isRequired") })}
-                      />
-                      <Label>{t("email")}</Label>
-                      {errors.emailornationalid && (
-                          <FormText className="inputresult resulterror inputintext">
-                            {errors.emailornationalid?.message}
-                          </FormText>
-                      )}
-                    </FormGroup>
-                  </div>
-                  <div className="recaptcha">
-                    <div className="recaptcha-area">
-                      <div className="recaptcha-check">
-                        <ReCAPTCHA
-                            className="g-recaptcha"
-                            theme="dark"
-                            sitekey={RECAPTCHA_KEY}
-                        />
-                      </div>
-                      <Label>{t("notARobot")}</Label>
-                    </div>
-                  </div>
-                  <Button
-                      variant="success"
-                      className="w-100 active"
-                      type="submit"
-                  >
-                    ŞİFREMİ SIFIRLA
-                  </Button>
-                </Form>
+                  <Input
+                    type="email"
+                    required
+                    name="email"
+                    innerRef={register({ required: t("form:isRequired") })}
+                  />
+                  <Label>{t("email")}</Label>
+                  {errors.email && (
+                    <FormText className="inputresult resulterror inputintext">
+                      {errors.email?.message}
+                    </FormText>
+                  )}
+                </FormGroup>
               </div>
-            </ModalBody>
-          </Fragment>
-      ) : (
-          <Fragment>
-            <ModalBody className="modalcomp-sign modal-confirm text-center">
-              <div className="animation-alert-icons">
-                <div className="alert-icons alert-icons-success">
-                  <div className="alert-icons-success-tip" />
-                  <div className="alert-icons-success-long" />
+              <div className="recaptcha">
+                <div className="recaptcha-area">
+                  <div className="recaptcha-check">
+                    <ReCAPTCHA
+                      className="g-recaptcha"
+                      theme="dark"
+                      sitekey={RECAPTCHA_KEY}
+                    />
+                  </div>
+                  <Label>{t("notARobot")}</Label>
                 </div>
               </div>
-              <h4>Parolanız Sıfırlanmıştır</h4>
-              <p>Parola sıfırlama isteğiniz e-posta adresinize gönderilmiştir.</p>
-            </ModalBody>
-            <ModalFooter className="row">
-              <Button variant="success" className="col" onClick={openSigninModal}>
-                {t("signin")}
+              <Button
+                variant="success"
+                className="w-100 active"
+                type="submit"
+                disabled={isResetingPassword}
+              >
+                ŞİFREMİ SIFIRLA
               </Button>
-            </ModalFooter>
-          </Fragment>
+            </Form>
+          </div>
+        </ModalBody>
+      ) : (
+        <Fragment>
+          <ModalBody className="modalcomp-sign modal-confirm text-center">
+            <div className="animation-alert-icons">
+              <div className="alert-icons alert-icons-success">
+                <div className="alert-icons-success-tip" />
+                <div className="alert-icons-success-long" />
+              </div>
+            </div>
+            <h4>Parolanız Sıfırlanmıştır</h4>
+            <p>Parola sıfırlama isteğiniz e-posta adresinize gönderilmiştir.</p>
+          </ModalBody>
+          <ModalFooter className="row">
+            <Button variant="success" className="col" onClick={openSigninModal}>
+              {t("signin")}
+            </Button>
+          </ModalFooter>
+        </Fragment>
       )}
-
     </Modal>
   );
 }
