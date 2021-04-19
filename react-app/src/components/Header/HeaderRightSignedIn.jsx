@@ -1,10 +1,11 @@
-import React from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import { SettingsModal } from "../modals/";
+import { fetchUserInfo } from "~/state/slices/user.slice";
 
 const HeaderRightSignedIn = props => {
   const { user, onSignout } = props;
@@ -18,6 +19,10 @@ const HeaderRightSignedIn = props => {
   const clearOpenModals = () => {
     dispatch(setOpenModal("none"));
   };
+
+  useEffect(() => {
+    dispatch(fetchUserInfo());
+  }, [dispatch]);
 
   return (
     <div className="header-right-signedin pr-2">

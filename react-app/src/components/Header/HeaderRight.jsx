@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Col } from "reactstrap";
 
@@ -11,7 +11,6 @@ import {
   signupUser,
   signinUser,
   signoutUser,
-  fetchUserInfo,
   forgotPassword,
 } from "~/state/slices/user.slice";
 import { signinWithSms, signinWith2FA } from "~/state/slices/api.slice";
@@ -22,10 +21,6 @@ const HeaderRight = props => {
   const User = useSelector(state => state.user);
   const { settings: Settings, accesstoken } = useSelector(state => state.api);
   const { lang: currentLanguage } = useSelector(state => state.ui);
-
-  useEffect(() => {
-    dispatch(fetchUserInfo());
-  }, [dispatch]);
 
   const onForgotPassword = useCallback(
     async data => {
