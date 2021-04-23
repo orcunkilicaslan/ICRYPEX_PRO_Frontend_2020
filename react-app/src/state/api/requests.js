@@ -1,10 +1,13 @@
 import createCache from "keshi";
 import { stringify } from "qs";
 import ms from "ms";
+import { get, set, keys, del, clear } from "idb-keyval";
 
 import api from ".";
 
-const cache = createCache();
+const customStorage = { get, set, keys, del, clear };
+customStorage.clear(); // clear cache on page refresh
+export const cache = createCache({ customStorage });
 
 export const fetchServerDeviceKey = buildRequest("/getserverdevicekey");
 export const fetchPreloginToken = buildRequest("/getprelogintoken");

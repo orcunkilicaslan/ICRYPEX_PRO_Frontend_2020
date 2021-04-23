@@ -16,6 +16,7 @@
     "event-target-polyfill": "0.0.2",
     "fuse.js": "^6.4.6",
     "i18next": "^19.8.4",
+    "idb-keyval": "^5.0.4",
     "keshi": "^2.0.4",
     "localforage": "^1.9.0",
     "lodash": "^4.17.20",
