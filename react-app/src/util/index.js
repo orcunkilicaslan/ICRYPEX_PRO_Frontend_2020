@@ -95,3 +95,19 @@ export const getFormattedPrice = (price, digit) => {
     return "";
   }
 };
+
+//return MASK with bit ("0" or "1") at idx flipped
+export const toggleBit = (MASK, idx) => {
+  if (MASK?.length && idx > MASK?.length) return;
+
+  const flip = bit => {
+    if (parseInt(bit, 10)) return "0";
+    else return "1";
+  };
+
+  return MASK.substr(0, idx) + flip(MASK[idx]) + MASK.substr(idx + 1);
+};
+
+// if bit is "0" -> false "1+" -> true
+export const isBitOn = (MASK, idx) => Boolean(parseInt(MASK?.[idx], 10));
+

@@ -57,7 +57,8 @@ export const fetchTransactionHistories = buildCachedRequest(
   ms("10m")
 );
 export const fetchOrderHistory = buildRequest("/orderhistory");
-export const fetchOpenOrders = buildRequest("/openorders");
+export const fetchOpenOrders = buildCachedRequest("/openorders", ms("5m"));
+export const deleteOpenOrder = buildRequest("/deleteopenorder");
 
 function buildRequest(uri) {
   return (args = {}, opts = {}) => {
@@ -68,11 +69,14 @@ function buildRequest(uri) {
 }
 
 function buildCachedRequest(uri, ttl = ms("3h")) {
-  return (args = {}, opts = {}) => {
+  const request = (args = {}, opts = {}) => {
     const body = stringify(args);
     const key = `${uri}?${body}`;
     const fn = () => api.post(uri, body, opts);
 
     return cache.resolve(key, fn, ttl);
   };
+
+  request.uri = uri;
+  return request;
 }

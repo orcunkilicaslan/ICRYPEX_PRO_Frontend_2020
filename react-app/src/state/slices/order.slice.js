@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as api from "../api";
 import { hasAccessToken } from "~/util/";
+import { bustCache } from "~/state/slices/api.slice";
 
 export const fetchOrderHistory = createAsyncThunk(
   "order/fetchHistory",
@@ -23,29 +24,24 @@ export const fetchOrderHistory = createAsyncThunk(
       api: { accesstoken },
     } = getState();
 
+    const toSend = {
+      pairids,
+      startdate,
+      enddate,
+      isbuyorders,
+      issellorders,
+      isfilledorders,
+      iscanceledorders,
+      orderby,
+    };
     try {
-      const response = await api.fetchOrderHistory(
-        {
-          pairids,
-          // startdate,
-          // enddate,
-          periodby,
-          isbuyorders,
-          issellorders,
-          isfilledorders,
-          iscanceledorders,
-          orderby,
-          // startfrom,
-          // takecount,
+      const response = await api.fetchOrderHistory(toSend, {
+        headers: {
+          "x-access-token": accesstoken,
         },
-        {
-          headers: {
-            "x-access-token": accesstoken,
-          },
-        }
-      );
+      });
 
-      return response.data;
+      return { data: response.data, filterData: toSend };
     } catch ({ data }) {
       return rejectWithValue(data);
     }
@@ -74,22 +70,53 @@ export const fetchOpenOrders = createAsyncThunk(
       api: { accesstoken },
     } = getState();
 
+    const toSend = { pairids, isbuyorders, issellorders, orderby };
     try {
-      const response = await api.fetchOpenOrders(
-        {
-          pairids,
-          isbuyorders,
-          issellorders,
-          orderby,
-          // startfrom,
-          // takecount,
+      const response = await api.fetchOpenOrders(toSend, {
+        headers: {
+          "x-access-token": accesstoken,
         },
+      });
+
+      return { data: response.data, filterData: toSend };
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
+  }
+);
+
+export const deleteOpenOrder = createAsyncThunk(
+  "order/deleteOpenOrder",
+  async (orderid, { getState, rejectWithValue, dispatch }) => {
+    const {
+      api: { accesstoken },
+      order: { openOrdersFilter },
+    } = getState();
+
+    try {
+      const response = await api.deleteOpenOrder(
+        { orderid },
         {
           headers: {
             "x-access-token": accesstoken,
           },
         }
       );
+
+      // cache'lenmiş veriyi invalidate etmek gerek çünkü bayat veri
+      // kalmış olabilir.  "uri" ile başlayan cache satırlarını silip bir
+      // önceki form datasıyla güncel listeyi alıyoruz
+      if (openOrdersFilter) {
+        await dispatch(bustCache(api.fetchOpenOrders.uri));
+        dispatch(fetchOpenOrders(openOrdersFilter));
+      }
 
       return response.data;
     } catch ({ data }) {
@@ -113,6 +140,8 @@ const initialState = {
   isFetchingOpen: false,
   hideOthersOpen: false,
   hideOthersHistory: false,
+  openOrdersFilter: null,
+  orderHistoryFilter: null,
 };
 
 const orderSlice = createSlice({
@@ -140,7 +169,8 @@ const orderSlice = createSlice({
     },
     [fetchOrderHistory.fulfilled]: (state, { payload }) => {
       state.isFetchingHistory = false;
-      state.history = payload?.description;
+      state.history = payload?.data?.description;
+      state.orderHistoryFilter = payload?.filterData;
     },
     [fetchOrderHistory.rejected]: state => {
       state.isFetchingHistory = false;
@@ -150,7 +180,8 @@ const orderSlice = createSlice({
     },
     [fetchOpenOrders.fulfilled]: (state, { payload }) => {
       state.isFetchingOpen = false;
-      state.open = payload?.description;
+      state.open = payload?.data?.description;
+      state.openOrdersFilter = payload?.filterData;
     },
     [fetchOpenOrders.rejected]: state => {
       state.isFetchingOpen = false;

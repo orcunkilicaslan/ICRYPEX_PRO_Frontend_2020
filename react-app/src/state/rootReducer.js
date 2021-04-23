@@ -62,7 +62,13 @@ const pairPersistConfig = {
 const orderPersistConfig = {
   key: "order",
   storage,
-  blacklist: ["isFetchingHistory", "isFetchingOpen"],
+  whitelist: [
+    "tabIndex",
+    "history",
+    "open",
+    "hideOthersOpen",
+    "hideOtherHistory",
+  ],
 };
 
 const rootReducer = combineReducers({
@@ -74,7 +80,6 @@ const rootReducer = combineReducers({
   socket: persistReducer(socketPersistConfig, socketReducer),
   assets: assetsReducer,
   order: persistReducer(orderPersistConfig, orderReducer),
-  order: orderReducer,
   balance: balanceReducer,
   easyBuy: easyBuyReducer,
   easySell: easySellReducer,
