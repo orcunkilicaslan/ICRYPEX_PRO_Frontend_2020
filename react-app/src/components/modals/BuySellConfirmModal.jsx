@@ -6,6 +6,7 @@ import Table from "~/components/Table";
 export default function BuySellConfirmModal(props) {
   const {
     isOpen,
+      isSuccess,
     clearModals,
     ...rest
   } = props;
@@ -31,7 +32,7 @@ export default function BuySellConfirmModal(props) {
           </Button>
         </div>
 
-        { 0 === 0 ? (
+        { !isSuccess ? (
             <Fragment>
               <ModalBody className="modal-confirm">
                 <h4>İşlem Onayı</h4>

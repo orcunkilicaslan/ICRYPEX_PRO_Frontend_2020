@@ -5,7 +5,7 @@ import * as api from "../api";
 
 export const fetchBalance = createAsyncThunk(
     "balance/fetchOne",
-    async ({currencyid,isFiat}, { getState, rejectWithValue }) => {
+    async ({currencyid,isFiat, isPending}, { getState, rejectWithValue }) => {
       const {
         api: { accesstoken },
       } = getState();
@@ -54,8 +54,10 @@ const balanceSlice = createSlice({
           }
       },
       [fetchBalance.pending]: (state, action) => {
-          state.fiatBalance = 0
-          state.cryptoBalance = 0
+          if(action.meta.arg.isPending) {
+              state.fiatBalance = 0
+              state.cryptoBalance = 0
+          }
       },
   },
 });

@@ -71,8 +71,8 @@ const BuySellActionMarket = props => {
       console.log({selectedPair})
       resetBuy();
       resetSell();
-      dispatch(fetchBalance({currencyid: selectedPair?.second_currency_id, isFiat: true}));
-     dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false}));}
+      dispatch(fetchBalance({currencyid: selectedPair?.second_currency_id, isFiat: true,isPadding: true}));
+     dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false, isPending: true}));}
   }, [dispatch, selectedPair]);
 
 
@@ -112,7 +112,6 @@ const BuySellActionMarket = props => {
 
   const onSellSubmit = async data => {
 
-    console.log({data})
     if (data?.cryptoSellAmount > 0) {
       setApiError("");
       const  firstcurrencyid  = selectedPair.first_currency_id;
@@ -164,10 +163,7 @@ const BuySellActionMarket = props => {
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>{t("common:price")}</InputGroupText>
                   </InputGroupAddon>
-                  <div
-                      className="form-control"
-                      name="fiatBuyAmount"
-                  >
+                  <div className="form-control">
                     {t("finance:market")}
                   </div>
                   <InputGroupAddon addonType="append">
@@ -301,10 +297,7 @@ const BuySellActionMarket = props => {
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>{t("common:price")}</InputGroupText>
                   </InputGroupAddon>
-                  <div
-                      className="form-control"
-                      name="fiatSellAmount"
-                  >
+                  <div className="form-control">
                     {t("finance:market")}
                   </div>
                   <InputGroupAddon addonType="append">
@@ -415,6 +408,7 @@ const BuySellActionMarket = props => {
       </Row>
       <BuySellConfirmModal
           isOpen={openModal === "buysellconfirm"}
+          isSuccess={true}
           clearModals={clearOpenModals}
       />
     </div>

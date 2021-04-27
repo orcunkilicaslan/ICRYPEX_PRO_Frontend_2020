@@ -36,10 +36,12 @@ const BuySellActionLimit = props => {
   const [rangeSellPortfolio, setRangeSellPortfolio] = useState(buySellRangePercent[0]);
   const { fiatBalance, cryptoBalance } = useSelector(state => state.balance);
   const [totalBuy, setTotalBuy] = useState("0.00");
+  const [fiatBuyPrice, setFiatBuyPrice] = useState("");
   const [totalSell, setTotalSell] = useState("0.00");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const { register: registerBuy, handleSubmit: handleSubmitBuy, errors: errorsBuy, setValue: setValueBuy, reset: resetBuy } = useForm({
+  const { register: registerBuy, handleSubmit: handleSubmitBuy, errors: errorsBuy, setValue: setValueBuy,
+    reset: resetBuy, getValues: getBuyValues } = useForm({
     mode: "onChange",
     defaultValues: {
       fiatBuyPrice: "",
@@ -47,7 +49,8 @@ const BuySellActionLimit = props => {
     },
   });
 
-  const { register :registerSell, handleSubmit: handleSubmitSell,errors: errorsSell, setValue: setValueSell, reset: resetSell } = useForm({
+  const { register :registerSell, handleSubmit: handleSubmitSell,errors: errorsSell,
+    setValue: setValueSell, reset: resetSell , getValues : getSellValues  } = useForm({
     mode: "onChange",
     defaultValues: {
       fiatSellPrice: "",
@@ -59,8 +62,8 @@ const BuySellActionLimit = props => {
     if (selectedPair) {
       resetBuy();
       resetSell();
-      dispatch(fetchBalance({currencyid: selectedPair?.second_currency_id, isFiat: true}));
-      dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false}));}
+      dispatch(fetchBalance({currencyid: selectedPair?.second_currency_id, isFiat: true,isPadding: true}));
+      dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false,isPadding: true}));}
   }, [dispatch, selectedPair]);
 
   const buyRangeCircleCls = classnames({
@@ -127,15 +130,17 @@ const BuySellActionLimit = props => {
 
                         if (!Number.isNaN(value) && value !== "") {
                           const parsed = parseFloat(value);
-                          const price = selectedPrice?.price;
-                          setTotalBuy(Number(parsed).toFixed(2))
-                          setRangeBuyPortfolio(Number( (parsed * 100) / fiatBalance) .toFixed(0));
-                        }else {  setTotalBuy(Number(0).toFixed(8))}
+                          setFiatBuyPrice(parsed)}
                       }}/>
                   <InputGroupAddon addonType="append">
                     <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>
                 </InputGroup>
+                {errorsBuy.fiatBuyPrice && (
+                    <FormText className="inputresult resulterror">
+                      {errorsBuy.fiatBuyPrice?.message}
+                    </FormText>
+                )}
               </FormGroup>
               <FormGroup className={`${errorsBuy.cryptoBuyAmount && "inputresult resulterror"}`}>
                 <InputGroup>
@@ -151,20 +156,21 @@ const BuySellActionLimit = props => {
                         required: t("isRequired"),
                         min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
                         max: {
-                          value:  Number(fiatBalance / selectedPrice?.price ).toFixed(2),
-                          message: t("shouldBeMax", { value: Number(fiatBalance / selectedPrice?.price ).toFixed(2) }),
+                          value:  Number(fiatBalance / fiatBuyPrice ).toFixed(8),
+                          message: t("shouldBeMax", { value: Number(fiatBalance / fiatBuyPrice ).toFixed(8) }),
                         },
                       })}
                       onChange={e => {
                         e.preventDefault();
                         e.stopPropagation();
                         const { value } = e.target;
-
                         if (!Number.isNaN(value) && value !== "") {
                           const parsed = parseFloat(value);
-                          const price = selectedPrice?.price;
-                          setTotalBuy(Number(price * parsed).toFixed(2))
-                          setRangeBuyPortfolio(Number( (parsed * 100) / fiatBalance) .toFixed(0));
+                          const fiatBuyPrice = getBuyValues("fiatBuyPrice")
+                          if(!Number.isNaN(fiatBuyPrice) && fiatBuyPrice !== "") {
+                            setTotalBuy(Number(fiatBuyPrice * parsed).toFixed(2))
+                            setRangeBuyPortfolio(Number( (parsed * 100) / fiatBalance) .toFixed(0));
+                          }
                         }else {  setTotalBuy(Number(0).toFixed(8))}
                       }} />
                   <InputGroupAddon addonType="append">
@@ -211,8 +217,16 @@ const BuySellActionLimit = props => {
                         step={1}
                         value={rangeBuyPortfolio}
                         onChange={({ target }) => {
+                          const fiatBuyPrice = getBuyValues("fiatBuyPrice")
+                          if(!Number.isNaN(fiatBuyPrice) && fiatBuyPrice !== "") {
+                            setValueBuy("cryptoBuyAmount",  Number(((fiatBalance / fiatBuyPrice)/100) * target.value ).toFixed(8), { shouldValidate: true });
+                            setTotalBuy(Number((fiatBalance / 100) * target.value).toFixed(2))
+
+                          }
                           setRangeBuyPortfolio(target.value);
+
                         }}
+
                     />
                   </div>
                 </Col>
@@ -227,7 +241,9 @@ const BuySellActionLimit = props => {
               </Row>
             </div>
             <div className="formbttm">
-              <Button variant="success">
+              <Button variant="success"
+                      type="submit"
+                      disabled={isSubmitted}>
                 {t("finance:buywhat", { item: cryptoCurrency })}
               </Button>
             </div>
@@ -247,7 +263,7 @@ const BuySellActionLimit = props => {
               </h4>
               <div className="formhead-curr">
                 <IconSet sprite="sprtsmclrd" size="16" name="wallet" />
-                <p>49,950,000.00 {fiatCurrency}</p>
+                <p>{getFormattedPrice(cryptoBalance, 8)} {cryptoCurrency}</p>
               </div>
             </div>
             <div className="formfieldset">
@@ -256,14 +272,36 @@ const BuySellActionLimit = props => {
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>{t("common:price")}</InputGroupText>
                   </InputGroupAddon>
-                  <Input type="text"
-                         name="fiatSellAmount"
-                         readOnly={true}
-                         value={t("finance:market")}/>
+                  <Input  type="text"
+                          name="fiatSellPrice"
+                          readOnly={isSubmitted}
+                          innerRef={registerSell({
+                            valueAsNumber: true,
+                            required: t("isRequired"),
+                            min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
+                          })}
+                          onChange={e => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const { value } = e.target;
+
+                            if (!Number.isNaN(value) && value !== "") {
+                              const parsed = parseFloat(value);
+                              const cryptoSellAmount = getSellValues("cryptoSellAmount")
+                              if (!Number.isNaN(cryptoSellAmount) && cryptoSellAmount !== "") {
+                                setTotalSell(Number(cryptoSellAmount * parsed).toFixed(2))
+                              }
+                            }else { setTotalSell("")}
+                          }}/>
                   <InputGroupAddon addonType="append">
                     <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>
                 </InputGroup>
+                {errorsSell.fiatSellPrice && (
+                    <FormText className="inputresult resulterror">
+                      {errorsSell.fiatSellPrice?.message}
+                    </FormText>
+                )}
               </FormGroup>
               <FormGroup>
                 <InputGroup>
@@ -290,8 +328,8 @@ const BuySellActionLimit = props => {
 
                         if (!Number.isNaN(value) && value !== "") {
                           const parsed = parseFloat(value);
-                          const price = selectedPrice?.price;
-                          setTotalSell(Number(price * parsed).toFixed(2))
+                          const fiatSellPrice  = getSellValues("fiatSellPrice")
+                          setTotalSell(Number(fiatSellPrice * parsed).toFixed(2))
                           setRangeSellPortfolio(Number( (parsed * 100) / cryptoBalance) .toFixed(0));
                         }else {  setTotalSell(Number(0).toFixed(2))}
                       }}
@@ -340,6 +378,11 @@ const BuySellActionLimit = props => {
                         step={1}
                         value={rangeSellPortfolio}
                         onChange={({ target }) => {
+                          const fiatSellPrice  = getSellValues("fiatSellPrice")
+                          if (!Number.isNaN(fiatSellPrice) && fiatSellPrice !== "") {
+                            setValueSell("cryptoSellAmount",  Number((cryptoBalance / 100) * target.value ).toFixed(8), { shouldValidate: true });
+                            setTotalSell(Number(((cryptoBalance / 100) * target.value) * parseFloat(fiatSellPrice)).toFixed(2))
+                          }
                           setRangeSellPortfolio(target.value);
                         }}
                     />

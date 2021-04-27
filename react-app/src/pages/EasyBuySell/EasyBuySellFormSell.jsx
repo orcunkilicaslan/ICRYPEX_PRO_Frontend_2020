@@ -42,7 +42,7 @@ const EasyBuySellFormSell = props => {
     setCurrencyBalance(0)
     if (selectedPair) {
       reset();
-     dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false}));
+     dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false, isPadding: true}));
     }
   }, [dispatch, selectedPair]);
 
@@ -58,15 +58,10 @@ const EasyBuySellFormSell = props => {
     reset();
   };
 
-  const onConfirm = event => {
-    event.preventDefault();
-    event.stopPropagation();
-    setIsConfirmed(true);
-  };
-
   const onSubmit = async data => {
     if (data?.cryptoAmount > 0) {
       setApiError("");
+      setIsSubmitted(true);
       const  firstcurrencyid  = selectedPair.first_currency_id;
       const  secondcurrencyid  = selectedPair.second_currency_id;
       const buyingamount  = data.fiatAmount;
@@ -76,7 +71,8 @@ const EasyBuySellFormSell = props => {
         setApiError(payload?.errormessage);
       } else {
         setApiError("");
-        setIsSubmitted(true);
+        await  dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false, isPadding: false}));
+        setIsConfirmed(true);
       }
     }
   };
@@ -223,7 +219,7 @@ const EasyBuySellFormSell = props => {
                 İŞLEMİNİZ BAŞARIYLA GERÇEKLEŞTİ
               </h4>
               <p>
-                Bitcoin satış işleminiz başarıyla tamamlanmıştır.{" "}
+                {cryptoCurrency} satış işleminiz başarıyla tamamlanmıştır.{" "}
                 <a className="urllink" href="#">
                   <u>İşlem Geçmişi</u>
                 </a>{" "}
@@ -234,125 +230,11 @@ const EasyBuySellFormSell = props => {
                 bölümünden kontrol edebilirsiniz.
               </p>
             </div>
-            <div className="easybuysell-confirm-table">
-              <Table>
-                <Table.Thead>
-                  <Table.Tr>
-                    <Table.Th sizeauto className="type">
-                      İşlem Tipi
-                    </Table.Th>
-                    <Table.Th sizeauto className="symb">
-                      Çift
-                    </Table.Th>
-                    <Table.Th sizefixed className="amtc">
-                      Miktar <span>TRY</span>
-                    </Table.Th>
-                    <Table.Th sizefixed className="amts">
-                      Miktar <span>BTC</span>
-                    </Table.Th>
-                    <Table.Th sizeauto className="comm">
-                      Komisyon
-                    </Table.Th>
-                    <Table.Th sizefixed className="totl">
-                      Toplam Tutar
-                    </Table.Th>
-                  </Table.Tr>
-                </Table.Thead>
-                <Table.Tbody striped>
-                  <Table.Tr>
-                    <Table.Td sizeauto className="type">
-                      Stop Limit - <span className="sitecolorred">Satış</span>
-                    </Table.Td>
-                    <Table.Td sizeauto className="symb">
-                      BTC/TRY
-                    </Table.Td>
-                    <Table.Td sizefixed className="amtc">
-                      999,999.99 TRY
-                    </Table.Td>
-                    <Table.Td sizefixed className="amts">
-                      1.48000000 BTC
-                    </Table.Td>
-                    <Table.Td sizeauto className="comm">
-                      999.99 TRY
-                    </Table.Td>
-                    <Table.Td sizefixed className="totl">
-                      449.887546 TRY
-                    </Table.Td>
-                  </Table.Tr>
-                </Table.Tbody>
-              </Table>
-            </div>
             <Button variant="secondary" className="active" onClick={onReset}>
               RESET
             </Button>
           </div>
-        ) : (
-          <div className="easybuysell-confirm">
-            <div className="easybuysell-confirm-title">
-              <h4>İŞLEM ONAYI</h4>
-            </div>
-            <div className="easybuysell-confirm-table">
-              <Table>
-                <Table.Thead>
-                  <Table.Tr>
-                    <Table.Th sizeauto className="type">
-                      İşlem Tipi
-                    </Table.Th>
-                    <Table.Th sizeauto className="symb">
-                      Çift
-                    </Table.Th>
-                    <Table.Th sizefixed className="amtc">
-                      Miktar <span>TRY</span>
-                    </Table.Th>
-                    <Table.Th sizefixed className="amts">
-                      Miktar <span>BTC</span>
-                    </Table.Th>
-                    <Table.Th sizeauto className="comm">
-                      Komisyon
-                    </Table.Th>
-                    <Table.Th sizefixed className="totl">
-                      Toplam Tutar
-                    </Table.Th>
-                  </Table.Tr>
-                </Table.Thead>
-                <Table.Tbody striped>
-                  <Table.Tr>
-                    <Table.Td sizeauto className="type">
-                      Stop Limit - <span className="sitecolorred">Satış</span>
-                    </Table.Td>
-                    <Table.Td sizeauto className="symb">
-                      BTC/TRY
-                    </Table.Td>
-                    <Table.Td sizefixed className="amtc">
-                      999,999.99 TRY
-                    </Table.Td>
-                    <Table.Td sizefixed className="amts">
-                      1.48000000 BTC
-                    </Table.Td>
-                    <Table.Td sizeauto className="comm">
-                      999.99 TRY
-                    </Table.Td>
-                    <Table.Td sizefixed className="totl">
-                      449.887546 TRY
-                    </Table.Td>
-                  </Table.Tr>
-                </Table.Tbody>
-              </Table>
-            </div>
-            <div className="easybuysell-confirm-btns">
-              <Button
-                variant="secondary"
-                className="active"
-                onClick={() => setIsSubmitted(false)}
-              >
-                İPTAL ET
-              </Button>
-              <Button variant="success" onClick={onConfirm}>
-                İŞLEMİ ONAYLA
-              </Button>
-            </div>
-          </div>
-        )
+        ) : null
       ) : null}
     </div>
   );
