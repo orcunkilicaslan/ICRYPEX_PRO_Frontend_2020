@@ -101,7 +101,7 @@ export default function OrderHistoryFilter(props) {
         >
           <FormGroup tag="fieldset">
             <legend>İşlem Çiftleri</legend>
-            <FormGroup className="checkradioboxed" check inline>
+            <FormGroup className="checkradioboxed">
               {allPairs?.map?.((pair, idx) => {
                 const id = nanoid();
 
@@ -118,10 +118,10 @@ export default function OrderHistoryFilter(props) {
                       innerRef={register}
                     />
                     <Label
-                      className="custom-control-label btn btn-sm btn-primary active"
+                      className="custom-control-label btn btn-sm btn-secondary"
                       htmlFor={id}
                     >
-                      {pair?.name}
+                      {pair?.name.replace(/\s/g, "")}
                     </Label>
                   </div>
                 );
@@ -130,7 +130,7 @@ export default function OrderHistoryFilter(props) {
           </FormGroup>
           <FormGroup tag="fieldset">
             <legend>İşlem Tipi</legend>
-            <FormGroup className="checkradioboxed" check inline>
+            <FormGroup className="checkradioboxed">
               {orderSides?.map?.(({ id, name: _name }) => {
                 const inputId = nanoid();
                 const name = id === 1 ? "isbuyorders" : "issellorders";
@@ -148,7 +148,7 @@ export default function OrderHistoryFilter(props) {
                       innerRef={register}
                     />
                     <Label
-                      className="custom-control-label btn btn-md btn-primary active"
+                      className="custom-control-label btn btn-sm btn-secondary"
                       htmlFor={inputId}
                     >
                       {t(`common:${_name?.toLowerCase?.()}`)}
@@ -160,7 +160,7 @@ export default function OrderHistoryFilter(props) {
           </FormGroup>
           <FormGroup tag="fieldset">
             <legend>İşlem Durumu</legend>
-            <FormGroup className="checkradioboxed" check inline>
+            <FormGroup className="checkradioboxed">
               {orderStatuses
                 ?.filter(({ id }) => id === 2 || id === 3)
                 ?.map?.(({ id, name: _name }) => {
@@ -180,7 +180,7 @@ export default function OrderHistoryFilter(props) {
                         innerRef={register}
                       />
                       <Label
-                        className="custom-control-label btn btn-md btn-primary active"
+                        className="custom-control-label btn btn-sm btn-secondary"
                         htmlFor={inputId}
                       >
                         {t(`app:${_name?.toLowerCase?.()}`)}
@@ -219,7 +219,7 @@ export default function OrderHistoryFilter(props) {
             <legend>Sıralama</legend>
             <FormGroup>
               <Input
-                className="custom-select custom-select-sm"
+                className="custom-select"
                 type="select"
                 name="orderby"
                 innerRef={register({
