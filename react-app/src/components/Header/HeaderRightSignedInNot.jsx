@@ -6,9 +6,9 @@ import { setOpenModal } from "~/state/slices/ui.slice";
 import {
   SigninModal,
   VerifyModal,
-  ForgotPassModal,
   SignupModal,
-} from "../modals/";
+  ForgotPasswordModal,
+} from "~/components/modals/";
 
 const HeaderRightSignedInNot = props => {
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ const HeaderRightSignedInNot = props => {
 
   const openForgotPassConfirmModal = () => {
     setForgotPassError(null);
-    dispatch(setOpenModal("forgotpassconfirm"));
+    dispatch(setOpenModal("forgotpassword"));
   };
 
   const openVerifyModal = () => {
@@ -65,59 +65,55 @@ const HeaderRightSignedInNot = props => {
   const submitSignup = async data => {
     setSignupError(null);
     const { phoneno, countrycode, ...rest } = data;
-    const { status, errormessage } = await onSignup({
+    const payload = await onSignup({
       ...rest,
       phone: `${countrycode}${phoneno}`,
       mediumid: 1,
     });
 
-    if (status) {
+    if (payload?.status) {
       openVerifyModal();
     } else {
-      setSignupError(errormessage);
+      setSignupError(payload?.errormessage);
     }
   };
 
   const submitVerify = async data => {
-    let result;
+    let payload;
     const { code } = data;
     setVerifyError(null);
 
     if (user?.logintype === 2) {
-      result = await onSignin2FA(code);
+      payload = await onSignin2FA(code);
     } else {
-      result = await onSigninSMS(code);
+      payload = await onSigninSMS(code);
     }
 
-    const { status, errormessage } = result;
-
-    if (!status) {
-      setVerifyError(errormessage);
+    if (!payload?.status) {
+      setVerifyError(payload?.errormessage);
     }
   };
 
   const submitSignin = async data => {
     setSigninError(null);
+    const payload = await onSignin(data);
 
-    const { status, errormessage } = await onSignin(data);
-
-    if (status) {
+    if (payload?.status) {
       setSigninError(null);
       openVerifyModal();
     } else {
-      setSigninError(errormessage);
+      setSigninError(payload?.errormessage);
     }
   };
 
-  const submitForgotPassword = async email => {
+  const submitForgotPassword = async data => {
     setForgotPassError(null);
+    const payload = await onForgotPassword(data);
 
-    const { status, errormessage } = await onForgotPassword({ email });
-
-    if (status) {
+    if (payload?.status) {
       setForgotPassError(null);
     } else {
-      setForgotPassError(errormessage);
+      setForgotPassError(payload?.errormessage);
     }
   };
 
@@ -143,13 +139,14 @@ const HeaderRightSignedInNot = props => {
         errorMessage={verifyError}
         isVerifying={isVerifying}
       />
-      <ForgotPassModal
-        isOpen={openModal === "forgotpassconfirm"}
+      <ForgotPasswordModal
+        isOpen={openModal === "forgotpassword"}
         submit={submitForgotPassword}
         clearModals={clearOpenModals}
         errorMessage={forgotPassError}
         isResetingPassword={isResetingPassword}
         openSigninModal={openSigninModal}
+        userEmail={user?.info?.email}
       />
       <SignupModal
         isOpen={openModal === "signup"}

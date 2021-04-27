@@ -117,6 +117,11 @@
                 }
               }
             }
+
+            &:hover ~ .assetchartarea-list .asssetalllist li .circle .icon-sprtsmcurrency{
+              opacity: 1;
+              @include scale(1.15);
+            }
           }
 
           &-list{
@@ -130,6 +135,9 @@
               @include responsive-font-size($font-size-base);
               font-weight: $font-weight-normal;
               margin: 0;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              overflow: hidden;
             }
 
             .asssetalllist{
@@ -151,14 +159,26 @@
                   margin-right: 6px;
                   border: 2px solid $site-clr-darkblue-400;
                   @include border-radius(100%);
+                  position: relative;
 
-                  > i{
+                  > i.centercirc{
                     background-color: $site-clr-darkblue-400;
                     width: 10px;
                     height: 10px;
-                    border: 1px solid lighten($site-clr-darkblue-400, 20%);
+                    //border: 1px solid lighten($site-clr-darkblue-400, 20%);
+                    @include box-shadow(0 0 0 1px lighten($site-clr-darkblue-400, 20%));
                     @include border-radius(100%);
                     display: block;
+                  }
+
+                  > i.icon-sprtsmcurrency{
+                    position: absolute;
+                    left: 1px;
+                    top: 1px;
+                    @include border-radius(50%);
+                    @include scale(0.75);
+                    opacity: 0;
+                    @include transition-multiple(opacity 0.15s ease-in-out, transform 0.15s ease-in-out);
                   }
                 }
 
@@ -167,6 +187,14 @@
                   @include flexbox-flex-grow(1);
                   max-width: 100%;
                   padding-right: 10px;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                }
+
+                &:hover i.icon-sprtsmcurrency{
+                  opacity: 1;
+                  @include scale(1.15);
                 }
               }
             }

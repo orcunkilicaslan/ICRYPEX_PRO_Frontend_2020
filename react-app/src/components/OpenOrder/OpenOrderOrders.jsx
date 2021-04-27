@@ -1,52 +1,37 @@
-import { useState, useMemo, useEffect } from "react";
-import {
-  Row,
-  Col,
-  Label,
-  Input,
-  ButtonGroup,
-  Form,
-  FormGroup, FormText,
-} from "reactstrap";
+import { useState, useCallback, useMemo, useEffect, memo } from "react";
+import { Row, Col, Label, Input, Form } from "reactstrap";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
-import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { groupBy } from "lodash";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
-import { useClientRect, usePrices } from "~/state/hooks";
+import { useClientRect, usePrices } from "~/state/hooks/";
 import {
   fetchOpenOrders,
   toggleHideOthersOpen,
+  deleteOpenOrder,
 } from "~/state/slices/order.slice";
-import { formatDateDistance } from "~/util/";
-
-const orderBy = [
-  "Önce Yeni Tarihli",
-  "Önce Eski Tarihli",
-  "Önce Alış",
-  "Önce Satış",
-  "Alfabetik",
-];
-const transactionTypes = [
-  { label: "Alış", name: "isbuyorders" },
-  { label: "Satış", name: "issellorders" },
-];
+import { formatDateDistance, isBitOn } from "~/util/";
+import { setOpenModal } from "~/state/slices/ui.slice";
+import { OrderOpenOrdersFilter } from "~/components/modals/";
+import ButtonGroupCheckbox from "~/components/ButtonGroupCheckbox";
 
 const OpenOrderOrders = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["form", "coinbar"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
-  const [apiError, setApiError] = useState("");
-  const { lang } = useSelector(state => state.ui);
-  const { allPairs, selectedPair } = usePrices();
+  const { lang, openModal } = useSelector(state => state.ui);
+  const orderSides = useSelector(state => state.api.settings?.orderSides);
   const orderSlice = useSelector(state => state.order);
-  const openOrders = orderSlice?.open || [];
+  const { allPairs, selectedPair } = usePrices();
+  const [ordersideMask, setOrdersideMask] = useState(null);
+
   const isFetching = orderSlice?.isFetchingOpen;
   const hideOthers = orderSlice?.hideOthersOpen;
+  const openOrders = useMemo(() => orderSlice?.open || [], [orderSlice]);
 
   const defaultValues = useMemo(() => {
     return {
@@ -60,19 +45,33 @@ const OpenOrderOrders = props => {
   }, [allPairs]);
 
   const visibleOrders = useMemo(() => {
+    let orders = openOrders;
+
+    if (ordersideMask) {
+      // 0th index is buyorders - 1st index is sellorders
+      const isBuyOn = isBitOn(ordersideMask, 0);
+      const isSellOn = isBitOn(ordersideMask, 1);
+
+      orders = openOrders.filter(({ order_side_id }) => {
+        switch (order_side_id) {
+          case 1:
+            return isBuyOn;
+          case 2:
+            return isSellOn;
+          default:
+            return true;
+        }
+      });
+    }
+
     if (!hideOthers) {
-      return openOrders;
+      return orders;
     } else {
-      const byPair = groupBy(openOrders, ({ pairname }) => pairname);
+      const byPair = groupBy(orders, ({ pairname }) => pairname);
 
       return byPair[selectedPair?.name] || [];
     }
-  }, [hideOthers, openOrders, selectedPair]);
-
-  const { register, handleSubmit, errors, reset, clearErrors } = useForm({
-    mode: "onChange",
-    defaultValues,
-  });
+  }, [hideOthers, openOrders, selectedPair, ordersideMask]);
 
   useEffect(() => {
     const toSubmit = {
@@ -83,102 +82,38 @@ const OpenOrderOrders = props => {
     dispatch(fetchOpenOrders(toSubmit));
   }, [defaultValues, dispatch]);
 
-  const onSubmit = async data => {
-    setApiError("");
-    const toSubmit = {
-      ...data,
-      pairids: JSON.stringify(data?.pairids?.map?.(Number)),
-    };
-
-    const { payload } = await dispatch(fetchOpenOrders(toSubmit));
-
-    if (!payload?.status) {
-      setApiError(payload?.errormessage);
-    } else {
-      setApiError("");
-    }
-  };
-
-  const onReset = () => {
-    reset(defaultValues);
-    setApiError("");
-    clearErrors();
-  };
-
-  const onToggleHideOthers = () => {
+  const onToggleHideOthers = useCallback(() => {
     dispatch(toggleHideOthersOpen());
-  };
+  }, [dispatch]);
+
+  const onDelete = useCallback(id => dispatch(deleteOpenOrder(id)), [dispatch]);
+
+  const openFiltersModal = useCallback(() => {
+    dispatch(setOpenModal("orderopenordersfilter"));
+  }, [dispatch]);
+
+  const clearOpenModals = useCallback(() => {
+    dispatch(setOpenModal("none"));
+  }, [dispatch]);
 
   return (
     <div className="openorders-orders">
-      <Form
-        className="siteformui"
-        autoComplete="off"
-        noValidate
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <Form className="siteformui" autoComplete="off" noValidate>
         <Row className="tabcont tabcont-filterbar">
-          <Col>
-            <Input
-              className="custom-select custom-select-sm"
-              type="select"
-              multiple
-              size={3}
-              name="pairids"
-              innerRef={register({
-                required: t("isRequired"),
-              })}
-            >
-              {allPairs.map(({ id, name, symbol }) => {
-                return (
-                  <option value={id} key={symbol}>
-                    {name}
-                  </option>
-                );
-              })}
-            </Input>
-            {errors.pairids && (
-                <FormText className="inputresult resulterror">
-                  {errors.pairids?.message}
-                </FormText>
-            )}
-          </Col>
-          <Col>
-            <Input
-              className="custom-select custom-select-sm"
-              type="select"
-              name="orderby"
-              innerRef={register({
-                valueAsNumber: true,
-              })}
-            >
-              {orderBy.map((el, idx) => {
-                return (
-                  <option value={idx + 1} key={`${el}_${idx}`}>
-                    {el}
-                  </option>
-                );
-              })}
-            </Input>
-          </Col>
-          <Col>
-            <FormGroup check inline>
-              {transactionTypes.map(({ label, name }) => {
-                return (
-                  <Label key={name} check>
-                    <Input
-                      name={name}
-                      type="checkbox"
-                      innerRef={register({ valueAsNumber: true })}
-                    />
-                    {label}{" "}
-                  </Label>
-                );
-              })}
-            </FormGroup>
-          </Col>
           <Col xs="auto">
-            <div className="custom-control custom-checkbox">
+            <Button variant="secondary" size="sm" onClick={openFiltersModal}>
+              İşlem Çiftleri
+            </Button>
+          </Col>
+          <Col sm="2">
+            <ButtonGroupCheckbox
+              list={orderSides}
+              mask={ordersideMask}
+              setMask={setOrdersideMask}
+            />
+          </Col>
+          <Col xs="auto" style={{ marginLeft: "auto" }}>
+            <div className="custom-control custom-checkbox mb-0">
               <Input
                 className="custom-control-input"
                 type="checkbox"
@@ -196,22 +131,6 @@ const OpenOrderOrders = props => {
             </div>
           </Col>
         </Row>
-        <ButtonGroup>
-          <Button
-            variant="secondary"
-            className="w-100 active"
-            type="submit"
-            disabled={isFetching}
-          >
-            Filtrele
-          </Button>
-          <Button variant="secondary" className="active" onClick={onReset}>
-            Sıfırla
-          </Button>
-        </ButtonGroup>
-        {apiError && (
-          <span style={{ color: "coral", fontSize: "1rem" }}>{apiError}</span>
-        )}
       </Form>
       <div className="ooopenorderstable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
@@ -299,10 +218,10 @@ const OpenOrderOrders = props => {
                       {selling_amount} {sellingcurrency}
                     </Table.Td>
                     <Table.Td sizeauto className="bttn">
-                      <Button type="button">
+                      <Button>
                         <IconSet sprite="sprtsmclrd" size="14" name="edit" />
                       </Button>
-                      <Button type="button">
+                      <Button onClick={() => onDelete(id)}>
                         <IconSet
                           sprite="sprtsmclrd"
                           size="14"
@@ -319,8 +238,14 @@ const OpenOrderOrders = props => {
           </Table.Tbody>
         </Table>
       </div>
+      <OrderOpenOrdersFilter
+        isOpen={openModal === "orderopenordersfilter"}
+        clearModals={clearOpenModals}
+        defaultValues={defaultValues}
+        isFetching={isFetching}
+      />
     </div>
   );
 };
 
-export default OpenOrderOrders;
+export default memo(OpenOrderOrders);

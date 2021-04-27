@@ -129,7 +129,7 @@ const OpenOrderDepoWithTabDepositCrypto = props => {
               </FormGroup>
               <InputGroup className="form-group col">
                 <div className="form-control textoverflowellipsis text-right">
-                  {getAddress()?.address || null}
+                  {getAddress?.address || null}
                 </div>
                 <InputGroupAddon addonType="append">
                   <Button variant="secondary" className="active">

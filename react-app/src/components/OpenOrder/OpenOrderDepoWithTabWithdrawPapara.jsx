@@ -21,6 +21,7 @@ import { withdrawPapara } from "~/state/slices/withdraw.slice";
 
 const PAPARA_FEE_RATE = 2;
 const PAPARA_FEE_LIMIT = 250;
+const PAPARA_ID = "1111111111";
 
 const OpenOrderDepoWithTabWithdrawPapara = props => {
   const dispatch = useDispatch();
@@ -53,13 +54,17 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
   };
 
   const onSubmit = async data => {
-    const { paparaid, amount, read } = data;
+    const { amount, read } = data;
     const total = getTotal(amount);
 
     if (total > 0) {
       setApiError("");
       const { payload } = await dispatch(
-        withdrawPapara({ paparaid, amount, read: JSON.stringify(read) })
+        withdrawPapara({
+          paparaid: PAPARA_ID,
+          amount,
+          read: JSON.stringify(read),
+        })
       );
 
       if (!payload?.status) {
@@ -95,19 +100,8 @@ const OpenOrderDepoWithTabWithdrawPapara = props => {
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>Papara No</InputGroupText>
               </InputGroupAddon>
-              <div
-                  className="form-control"
-                  name="paparaid"
-                  innerRef={register({ minLength: 10 })}
-              >
-                {"1773547589"}
-              </div>
+              <div className="form-control">{PAPARA_ID}</div>
             </InputGroup>
-            {errors.paparaid && (
-              <FormText className="inputresult resulterror">
-                {errors.paparaid?.message}
-              </FormText>
-            )}
             <InputGroup className="form-group">
               <Input
                 type="number"

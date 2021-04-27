@@ -217,6 +217,24 @@ export const refreshToken = createAsyncThunk(
   }
 );
 
+export const bustCache = createAsyncThunk(
+  "api/bustCache",
+  async (key, { rejectWithValue }) => {
+    const cache = api.cache;
+    const keys = await cache.keys();
+
+    try {
+      await Promise.map(keys, async k => {
+        if (k?.startsWith?.(key)) await cache.del(key);
+      });
+
+      return key;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
 const initialState = {
   prelogintoken: null,
   accesstoken: null,

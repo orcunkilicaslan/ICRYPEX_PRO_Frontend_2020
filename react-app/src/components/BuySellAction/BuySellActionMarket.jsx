@@ -26,7 +26,6 @@ import {fetchEasyBuy} from "~/state/slices/easybuy.slice";
 import {fetchEasySell} from "~/state/slices/easysell.slice";
 import {setOpenModal} from "~/state/slices/ui.slice";
 import BuySellConfirmModal from "~/components/modals/BuySellConfirmModal.jsx";
-import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal";
 
 const buySellRangePercent = [0, 25, 50, 75, 100];
 
@@ -63,12 +62,9 @@ const BuySellActionMarket = props => {
       cryptoSellAmount: "",
     },
   });
-  
-  
 
   useEffect(() => {
     if (selectedPair) {
-      console.log({selectedPair})
       resetBuy();
       resetSell();
       dispatch(fetchBalance({currencyid: selectedPair?.second_currency_id, isFiat: true,isPadding: true}));
@@ -197,7 +193,7 @@ const BuySellActionMarket = props => {
                               const parsed = parseFloat(value);
                               const price = selectedPrice?.price;
                               setTotalBuy(Number(price * parsed).toFixed(2))
-                              setRangeBuyPortfolio(Number( (parsed * 100) / fiatBalance) .toFixed(0));
+                              setRangeBuyPortfolio(Number( (parsed * 100) / fiatBalance).toFixed(0));
                             }else {  setTotalBuy(Number(0).toFixed(8))}
                           }}
                   />
@@ -331,7 +327,7 @@ const BuySellActionMarket = props => {
                               const parsed = parseFloat(value);
                               const price = selectedPrice?.price;
                               setTotalSell(Number(price * parsed).toFixed(2))
-                              setRangeSellPortfolio(Number( (parsed * 100) / cryptoBalance) .toFixed(0));
+                              setRangeSellPortfolio(Number( (parsed * 100) / cryptoBalance).toFixed(0));
                             }else {  setTotalSell(Number(0).toFixed(2))}
                           }}
                   />

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  Col,
   Form,
   FormGroup,
   Input,
@@ -10,15 +9,13 @@ import {
   ModalHeader,
 } from "reactstrap";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { nanoid } from "nanoid";
-import { useTranslation } from "react-i18next";
 
 import { Button } from "../Button.jsx";
 import { AlertResult } from "../AlertResult.jsx";
 import { usePrices } from "~/state/hooks";
-import { fetchOrderHistory } from "~/state/slices/order.slice";
-import { formatDate } from "~/util/";
+import { fetchOpenOrders } from "~/state/slices/order.slice";
 
 const orderBy = [
   "Önce Yeni Tarihli",
@@ -28,14 +25,15 @@ const orderBy = [
   "Alfabetik",
 ];
 
-export default function OrderHistoryFilter(props) {
+const orderTypes = [
+  { label: "Alış", name: "isbuyorders" },
+  { label: "Satış", name: "issellorders" },
+];
+
+const OrderOpenOrdersFilter = props => {
   const { isOpen, clearModals, defaultValues, isFetching, ...rest } = props;
-  const { t } = useTranslation(["app", "finance"]);
   const dispatch = useDispatch();
   const [apiError, setApiError] = useState("");
-  const { lang } = useSelector(state => state.ui);
-  const orderSides = useSelector(state => state.api.settings?.orderSides);
-  const orderStatuses = useSelector(state => state.api.settings?.orderStatuses);
   const { allPairs } = usePrices();
   const { register, handleSubmit, reset, clearErrors } = useForm({
     mode: "onChange",
@@ -46,23 +44,15 @@ export default function OrderHistoryFilter(props) {
     setApiError("");
     const pairids = [];
 
-    data.pairids?.forEach?.((bool, idx) => {
+    data?.pairids?.forEach?.((bool, idx) => {
       if (bool) pairids.push(allPairs?.[idx]?.id);
     });
-
-    const startdate = formatDate(data.startdate, "yyyy-MM-dd", {
-      locale: lang,
-    });
-    const enddate = formatDate(data.enddate, "yyyy-MM-dd", { locale: lang });
 
     const toSubmit = {
       ...data,
       pairids: JSON.stringify(pairids),
-      startdate,
-      enddate,
     };
-
-    const { payload } = await dispatch(fetchOrderHistory(toSubmit));
+    const { payload } = await dispatch(fetchOpenOrders(toSubmit));
 
     if (!payload?.status) {
       setApiError(payload?.errormessage);
@@ -90,7 +80,7 @@ export default function OrderHistoryFilter(props) {
       backdrop="static"
       {...rest}
     >
-      <ModalHeader toggle={clearModals}>İŞLEM GEÇMİŞİ FİLTRE</ModalHeader>
+      <ModalHeader toggle={clearModals}>AÇIK EMİRLER FİLTRE</ModalHeader>
       <ModalBody className="modalcomp modalcomp-filters">
         {apiError && <AlertResult error>{apiError}</AlertResult>}
         <Form
@@ -103,8 +93,6 @@ export default function OrderHistoryFilter(props) {
             <legend>İşlem Çiftleri</legend>
             <FormGroup className="checkradioboxed" check inline>
               {allPairs?.map?.((pair, idx) => {
-                const id = nanoid();
-
                 return (
                   <div
                     key={pair?.symbol}
@@ -113,13 +101,13 @@ export default function OrderHistoryFilter(props) {
                     <Input
                       className="custom-control-input"
                       type="checkbox"
-                      id={id}
+                      id={`filterPair${pair?.symbol}`}
                       name={`pairids.${idx}`}
                       innerRef={register}
                     />
                     <Label
                       className="custom-control-label btn btn-sm btn-primary active"
-                      htmlFor={id}
+                      htmlFor={`filterPair${pair?.symbol}`}
                     >
                       {pair?.name}
                     </Label>
@@ -131,9 +119,8 @@ export default function OrderHistoryFilter(props) {
           <FormGroup tag="fieldset">
             <legend>İşlem Tipi</legend>
             <FormGroup className="checkradioboxed" check inline>
-              {orderSides?.map?.(({ id, name: _name }) => {
+              {orderTypes.map(({ label, name }) => {
                 const inputId = nanoid();
-                const name = id === 1 ? "isbuyorders" : "issellorders";
 
                 return (
                   <div
@@ -151,68 +138,11 @@ export default function OrderHistoryFilter(props) {
                       className="custom-control-label btn btn-md btn-primary active"
                       htmlFor={inputId}
                     >
-                      {t(`common:${_name?.toLowerCase?.()}`)}
+                      {label}
                     </Label>
                   </div>
                 );
               })}
-            </FormGroup>
-          </FormGroup>
-          <FormGroup tag="fieldset">
-            <legend>İşlem Durumu</legend>
-            <FormGroup className="checkradioboxed" check inline>
-              {orderStatuses
-                ?.filter(({ id }) => id === 2 || id === 3)
-                ?.map?.(({ id, name: _name }) => {
-                  const inputId = nanoid();
-                  const name = id === 2 ? "isfilledorders" : "iscanceledorders";
-
-                  return (
-                    <div
-                      key={name}
-                      className="custom-control custom-checkbox custom-control-inline"
-                    >
-                      <Input
-                        className="custom-control-input"
-                        type="checkbox"
-                        id={inputId}
-                        name={name}
-                        innerRef={register}
-                      />
-                      <Label
-                        className="custom-control-label btn btn-md btn-primary active"
-                        htmlFor={inputId}
-                      >
-                        {t(`app:${_name?.toLowerCase?.()}`)}
-                      </Label>
-                    </div>
-                  );
-                })}
-            </FormGroup>
-          </FormGroup>
-          <FormGroup tag="fieldset">
-            <legend>Tarih Aralığı</legend>
-            <FormGroup row>
-              <Col>
-                <Input
-                  type="date"
-                  title="Start Date"
-                  name="startdate"
-                  innerRef={register({
-                    valueAsDate: true,
-                  })}
-                />
-              </Col>
-              <Col>
-                <Input
-                  type="date"
-                  name="enddate"
-                  title="End Date"
-                  innerRef={register({
-                    valueAsDate: true,
-                  })}
-                />{" "}
-              </Col>
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
@@ -240,14 +170,24 @@ export default function OrderHistoryFilter(props) {
             <Button
               variant="primary"
               className="w-100"
-              type="submit"
               disabled={isFetching}
+              type="submit"
             >
               İŞLEMLERİ FİLTRELE
             </Button>
+            {/* <Button
+                variant="secondary"
+                size="sm"
+                className="active"
+                onClick={onReset}
+              >
+                Sıfırla
+              </Button> */}
           </FormGroup>
         </Form>
       </ModalBody>
     </Modal>
   );
-}
+};
+
+export default OrderOpenOrdersFilter;

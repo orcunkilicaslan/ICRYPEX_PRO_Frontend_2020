@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
@@ -164,4 +164,4 @@ const TopCoinBar = props => {
   );
 };
 
-export default TopCoinBar;
+export default memo(TopCoinBar);

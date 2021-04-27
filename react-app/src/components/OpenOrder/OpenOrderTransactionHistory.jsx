@@ -1,19 +1,10 @@
 import { useState, useMemo, useEffect } from "react";
-import {
-  Row,
-  Col,
-  Label,
-  Input,
-  ButtonGroup,
-  Form,
-  FormGroup, FormText,
-} from "reactstrap";
+import { Row, Col, Label, Input, Form } from "reactstrap";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
-import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { sub } from "date-fns";
-import { omit, merge, groupBy } from "lodash";
+import { sub, isWithinInterval } from "date-fns";
+import { groupBy } from "lodash";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
@@ -23,36 +14,34 @@ import {
   fetchOrderHistory,
   toggleHideOthersHistory,
 } from "~/state/slices/order.slice";
-import { formatDate, formatDateDistance } from "~/util/";
-
 import { setOpenModal } from "~/state/slices/ui.slice";
 import OrderHistoryFilter from "~/components/modals/OrderHistoryFilter.jsx";
-import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal";
+import { formatDate, formatDateDistance, isBitOn } from "~/util/";
+import ButtonGroupRadio from "~/components/ButtonGroupRadio";
+import ButtonGroupCheckbox from "~/components/ButtonGroupCheckbox";
+import CustomSelect from "~/components/CustomSelect";
 
-const orderBy = [
-  "Önce Yeni Tarihli",
-  "Önce Eski Tarihli",
-  "Önce Alış",
-  "Önce Satış",
-  "Alfabetik",
+const periodBy = [
+  { name: "1G", duration: { days: 1 } },
+  { name: "1H", duration: { weeks: 1 } },
+  { name: "2H", duration: { weeks: 2 } },
+  { name: "1A", duration: { months: 1 } },
+  { name: "3A", duration: { months: 3 } },
 ];
-const transactionTypes = [
-  { label: "Alış", name: "isbuyorders" },
-  { label: "Satış", name: "issellorders" },
-  { label: "Tamamlandı", name: "isfilledorders" },
-  { label: "İptal", name: "iscanceledorders" },
-];
-const periodBy = ["1G", "1H", "2H", "1A", "3A"];
 
 const OpenOrderTransactionHistory = props => {
   const dispatch = useDispatch();
-  const { t } = useTranslation(["form", "coinbar"]);
+  const { t } = useTranslation(["form", "coinbar", "finance", "app"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
-  const [apiError, setApiError] = useState("");
   const { lang } = useSelector(state => state.ui);
   const { allPairs, selectedPair } = usePrices();
+  const orderSides = useSelector(state => state.api.settings?.orderSides);
+  const orderStatuses = useSelector(state => state.api.settings?.orderStatuses);
   const orderSlice = useSelector(state => state.order);
-  const orderHistory = orderSlice?.history || [];
+  const [ordersideMask, setOrdersideMask] = useState(null);
+  const [orderStatusIdx, setOrderStatusIdx] = useState(-1);
+
+  const orderHistory = orderSlice?.history;
   const isFetching = orderSlice?.isFetchingHistory;
   const hideOthers = orderSlice?.hideOthersHistory;
 
@@ -78,30 +67,62 @@ const OpenOrderTransactionHistory = props => {
       // takecount: 20
     };
   }, [allPairs, lang]);
+  const [periodbyIndex, setPeriodbyIndex] = useState(
+    defaultValues.periodby - 1
+  );
 
   const visibleOrders = useMemo(() => {
+    let orders = orderHistory;
+    const interval = periodBy[periodbyIndex]?.duration;
+    const statusIdx = parseInt(orderStatusIdx, 10);
+
+    if (statusIdx !== -1) {
+      orders = orders?.filter?.(
+        ({ order_status_id }) => order_status_id === statusIdx
+      );
+    }
+
+    if (ordersideMask) {
+      // 0th index is buyorders - 1st index is sellorders
+      const isBuyOn = isBitOn(ordersideMask, 0);
+      const isSellOn = isBitOn(ordersideMask, 1);
+
+      orders = orders?.filter?.(({ order_side_id }) => {
+        switch (order_side_id) {
+          case 1:
+            return isBuyOn;
+          case 2:
+            return isSellOn;
+          default:
+            return true;
+        }
+      });
+    }
+
+    if (interval) {
+      orders = orders?.filter?.(({ updated_at }) => {
+        return isWithinInterval(new Date(updated_at), {
+          start: sub(new Date(), interval),
+          end: new Date(),
+        });
+      });
+    }
+
     if (!hideOthers) {
-      return orderHistory;
+      return orders;
     } else {
-      const byPair = groupBy(orderHistory, ({ pairname }) => pairname);
+      const byPair = groupBy(orders, ({ pairname }) => pairname);
 
       return byPair[selectedPair?.name] || [];
     }
-  }, [hideOthers, orderHistory, selectedPair]);
-
-  const {
-    register,
-    handleSubmit,
-    errors,
-    watch,
-    reset,
-    setValue,
-    clearErrors,
-  } = useForm({
-    mode: "onChange",
-    defaultValues,
-  });
-  const { periodby: watchedPeriodby } = watch();
+  }, [
+    hideOthers,
+    orderHistory,
+    selectedPair,
+    periodbyIndex,
+    ordersideMask,
+    orderStatusIdx,
+  ]);
 
   useEffect(() => {
     const { pairids, enddate, startdate, ...rest } = defaultValues;
@@ -112,41 +133,6 @@ const OpenOrderTransactionHistory = props => {
 
     dispatch(fetchOrderHistory(toSubmit));
   }, [defaultValues, dispatch]);
-
-  const onSubmit = async data => {
-    setApiError("");
-    const { pairids, periodby } = data;
-    let toSubmit = { pairids: JSON.stringify(pairids?.map?.(Number)) };
-
-    if (periodby) {
-      merge(toSubmit, omit(data, ["pairids", "startdate", "enddate"]));
-    } else {
-      const startdate = formatDate(data?.startdate, "yyyy-MM-dd", {
-        locale: lang,
-      });
-      const enddate = formatDate(data?.enddate, "yyyy-MM-dd", { locale: lang });
-
-      merge(
-        toSubmit,
-        omit(data, ["pairids", "periodby", "startdate", "enddate"]),
-        { startdate, enddate }
-      );
-    }
-
-    const { payload } = await dispatch(fetchOrderHistory(toSubmit));
-
-    if (!payload?.status) {
-      setApiError(payload?.errormessage);
-    } else {
-      setApiError("");
-    }
-  };
-
-  const onReset = () => {
-    reset(defaultValues);
-    setApiError("");
-    clearErrors();
-  };
 
   const onToggleHideOthers = () => {
     dispatch(toggleHideOthersHistory());
@@ -164,122 +150,38 @@ const OpenOrderTransactionHistory = props => {
 
   return (
     <div className="openorders-history">
-      <Form
-        className="siteformui"
-        autoComplete="off"
-        noValidate
-        onSubmit={handleSubmit(onSubmit)}
-      >
-
-        <Row className="tabcont tabcont-filterbar d-none">
-          <Col>
-            <Input
-              className="custom-select custom-select-sm"
-              type="select"
-              multiple
-              size={3}
-              name="pairids"
-              innerRef={register({
-                required: t("isRequired"),
-              })}
-            >
-              {allPairs.map(({ id, name, symbol }) => {
-                return (
-                  <option value={id} key={symbol}>
-                    {name}
-                  </option>
-                );
-              })}
-            </Input>
-            {errors.pairids && (
-                <FormText className="inputresult resulterror">
-                  {errors.pairids?.message}
-                </FormText>
-            )}
-          </Col>
-          <Col>
-            <Input
-              className="custom-select custom-select-sm"
-              type="select"
-              name="orderby"
-              innerRef={register({
-                valueAsNumber: true,
-              })}
-            >
-              {orderBy.map((el, idx) => {
-                return (
-                  <option value={idx + 1} key={`${el}_${idx}`}>
-                    {el}
-                  </option>
-                );
-              })}
-            </Input>
-          </Col>
-          <Col>
-            <FormGroup check inline>
-              {transactionTypes.map(({ label, name }) => {
-                return (
-                  <Label key={name} check>
-                    <Input
-                      name={name}
-                      type="checkbox"
-                      innerRef={register({ valueAsNumber: true })}
-                    />
-                    {label}{" "}
-                  </Label>
-                );
-              })}
-            </FormGroup>
-          </Col>
-          <Col>
-            <Input
-              name="periodby"
-              innerRef={register({ valueAsNumber: true })}
-              className="d-none"
-            />
-            <ButtonGroup size="sm" className="w-100">
-              {periodBy.map((el, idx) => {
-                const cls = classnames({ active: watchedPeriodby === idx + 1 });
-
-                return (
-                  <Button
-                    key={`${el}_${idx}`}
-                    type="button"
-                    size="sm"
-                    className={cls}
-                    variant="secondary"
-                    onClick={() =>
-                      setValue("periodby", idx + 1, { shouldValidate: true })
-                    }
-                  >
-                    {el}
-                  </Button>
-                );
-              })}
-            </ButtonGroup>
-          </Col>
+      <Form className="siteformui" autoComplete="off" noValidate>
+        <Row className="tabcont tabcont-filterbar">
           <Col xs="auto">
-            <Input
-              type="date"
-              bsSize="sm"
-              title="Start Date"
-              name="startdate"
-              innerRef={register({
-                valueAsDate: true,
-              })}
-            />
-            <Input
-              type="date"
-              bsSize="sm"
-              name="enddate"
-              title="End Date"
-              innerRef={register({
-                valueAsDate: true,
-              })}
+            <Button variant="secondary" size="sm" onClick={openFiltersModal}>
+              İşlem Çiftleri
+            </Button>
+          </Col>
+          <Col sm="2">
+            <ButtonGroupCheckbox
+              list={orderSides}
+              mask={ordersideMask}
+              setMask={setOrdersideMask}
             />
           </Col>
-          <Col xs="auto">
-            <div className="custom-control custom-checkbox">
+          <Col>
+            <ButtonGroupRadio
+              list={periodBy}
+              index={periodbyIndex}
+              setIndex={setPeriodbyIndex}
+            />
+          </Col>
+          <Col>
+            <CustomSelect
+              list={orderStatuses}
+              namespace="app"
+              title={t("app:orderStatus")}
+              index={orderStatusIdx}
+              setIndex={setOrderStatusIdx}
+            />
+          </Col>
+          <Col xs="auto" style={{ marginLeft: "auto" }}>
+            <div className="custom-control custom-checkbox mb-0">
               <Input
                 className="custom-control-input"
                 type="checkbox"
@@ -297,118 +199,7 @@ const OpenOrderTransactionHistory = props => {
             </div>
           </Col>
         </Row>
-
-        <Row className="tabcont tabcont-filterbar">
-          <Col xs="auto">
-            <Button
-                variant="secondary"
-                size="sm"
-                onClick={openFiltersModal}
-            >
-              İşlem Çiftleri
-            </Button>
-          </Col>
-          <Col>
-            <Input
-                name="periodby"
-                innerRef={register({ valueAsNumber: true })}
-                className="d-none"
-            />
-            <ButtonGroup size="sm" className="w-100">
-              {periodBy.map((el, idx) => {
-                const cls = classnames({ active: watchedPeriodby === idx + 1 });
-
-                return (
-                    <Button
-                        key={`${el}_${idx}`}
-                        type="button"
-                        size="sm"
-                        className={cls}
-                        variant="secondary"
-                        onClick={() =>
-                            setValue("periodby", idx + 1, { shouldValidate: true })
-                        }
-                    >
-                      {el}
-                    </Button>
-                );
-              })}
-            </ButtonGroup>
-          </Col>
-          <Col>
-            <Input
-                className="custom-select custom-select-sm"
-                type="select"
-            >
-              {["İşlem Tipi", "Alış", "Satış"].map((el, idx) => {
-                return (
-                    <option value={idx + 1} key={`${el}_${idx}`}>
-                      {el}
-                    </option>
-                );
-              })}
-            </Input>
-          </Col>
-          <Col>
-            <Input
-                className="custom-select custom-select-sm"
-                type="select"
-            >
-              {["Durumu", "Tamamlandı", "İptal"].map((el, idx) => {
-                return (
-                    <option value={idx + 1} key={`${el}_${idx}`}>
-                      {el}
-                    </option>
-                );
-              })}
-            </Input>
-          </Col>
-          <Col xs="auto">
-            <div className="custom-control custom-checkbox mb-0">
-              <Input
-                  className="custom-control-input"
-                  type="checkbox"
-                  id="ordersHistoryHideOtherPairs"
-                  checked={hideOthers}
-                  onChange={onToggleHideOthers}
-              />
-              <Label
-                  className="custom-control-label"
-                  htmlFor="ordersHistoryHideOtherPairs"
-                  check
-              >
-                {t("coinbar:hidePairs")}
-              </Label>
-            </div>
-          </Col>
-          <Col xs="auto" className="d-none">
-            <ButtonGroup>
-              <Button
-                  variant="outline-primary"
-                  size="sm"
-                  type="submit"
-                  disabled={isFetching}
-              >
-                Filtrele
-              </Button>
-              <Button
-                  variant="outline-danger"
-                  size="sm"
-                  onClick={onReset}
-              >
-                Sıfırla
-              </Button>
-            </ButtonGroup>
-          </Col>
-        </Row>
-        {apiError && (
-          <span style={{ color: "coral", fontSize: "1rem" }}>{apiError}</span>
-        )}
       </Form>
-      <OrderHistoryFilter
-          isOpen={openModal === "orderhistoryfilter"}
-          clearModals={clearOpenModals}
-      />
       <div className="ootransactionhistorytable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
           <Table.Thead scrollbar>
@@ -595,6 +386,12 @@ const OpenOrderTransactionHistory = props => {
           </Table.Tbody>
         </Table>
       </div>
+      <OrderHistoryFilter
+        isOpen={openModal === "orderhistoryfilter"}
+        clearModals={clearOpenModals}
+        defaultValues={defaultValues}
+        isFetching={isFetching}
+      />
     </div>
   );
 };

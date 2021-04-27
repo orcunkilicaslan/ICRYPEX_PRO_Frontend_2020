@@ -11,13 +11,18 @@ const {
 const webpack = require("webpack");
 const GitRevisionPlugin = require("git-revision-webpack-plugin");
 const gitRevisionPlugin = new GitRevisionPlugin();
+const presetReact = require("@babel/preset-react").default;
+const presetCRA = require("babel-preset-react-app");
 
 const { SUPPORTED_LANGUAGES } = require("./src/setupI18n");
+
+const isProd = process.env.NODE_ENV === "production";
 
 module.exports = {
   webpack: {
     alias: {
       "~": path.resolve(__dirname, "src"),
+      "react-redux": isProd ? "react-redux" : "react-redux/lib",
     },
     plugins: {
       add: [
@@ -32,6 +37,44 @@ module.exports = {
       moduleNameMapper: {
         "^~(.*)$": "<rootDir>/src$1",
       },
+    },
+  },
+  babel: {
+    loaderOptions: babelLoaderOptions => {
+      const origBabelPresetCRAIndex = babelLoaderOptions.presets.findIndex(
+        preset => {
+          return preset[0].includes("babel-preset-react-app");
+        }
+      );
+
+      const origBabelPresetCRA =
+        babelLoaderOptions.presets[origBabelPresetCRAIndex];
+
+      babelLoaderOptions.presets[
+        origBabelPresetCRAIndex
+      ] = function overridenPresetCRA(api, opts, env) {
+        const babelPresetCRAResult = require(origBabelPresetCRA[0])(
+          api,
+          origBabelPresetCRA[1],
+          env
+        );
+
+        babelPresetCRAResult.presets.forEach(preset => {
+          // detect @babel/preset-react with {development: true, runtime: 'automatic'}
+          const isReactPreset =
+            preset &&
+            preset[1] &&
+            preset[1].runtime === "automatic" &&
+            preset[1].development === true;
+          if (isReactPreset) {
+            preset[1].importSource = "@welldone-software/why-did-you-render";
+          }
+        });
+
+        return babelPresetCRAResult;
+      };
+
+      return babelLoaderOptions;
     },
   },
   // babel: {

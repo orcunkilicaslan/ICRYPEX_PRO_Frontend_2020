@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
@@ -69,4 +69,4 @@ const MarketData = props => {
   );
 };
 
-export default MarketData;
+export default memo(MarketData);
