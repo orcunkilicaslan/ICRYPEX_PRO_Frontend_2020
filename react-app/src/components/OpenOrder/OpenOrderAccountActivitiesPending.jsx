@@ -1,51 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo, memo } from "react";
 import classnames from "classnames";
-import {
-  Row,
-  Col,
-  Label,
-  Input,
-  ButtonGroup,
-  Form,
-  FormGroup,
-} from "reactstrap";
+import { Row, Col, Form } from "reactstrap";
 import { useTranslation } from "react-i18next";
-import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
 import { useClientRect } from "~/state/hooks";
-import { fetchPendingTransactions } from "~/state/slices/transaction.slice";
-import { formatDateDistance } from "~/util/";
+import { formatDateDistance, isBitOn } from "~/util/";
+import { setOpenModal } from "~/state/slices/ui.slice";
+import {
+  fetchPendingTransactions,
+  cancelPendingTransaction,
+} from "~/state/slices/transaction.slice";
+import { ActivitiesPendingFilter } from "~/components/modals";
+import ButtonGroupCheckbox from "~/components/ButtonGroupCheckbox";
 
-const transactionTypes = [
-  { label: "Yatırma", name: "isdeposit" },
-  { label: "Çekme", name: "iswithdraw" },
+export const requestMethods = [
+  { name: "Banka", fieldName: "isbank" },
+  { name: "Papara", fieldName: "ispapara" },
 ];
-
-const transactionMethods = [
-  { label: "Havale/EFT", name: "isbank" },
-  { label: "Papara", name: "ispapara" },
-];
-
-const transactionCurrencies = [
-  { label: "TRY", name: "istry" },
-  { label: "USD", name: "isusd" },
-];
-
-const orderBy = [
-  "Önce Yeni Tarihli",
-  "Önce Eski Tarihli",
-  "Önce Para Yatırma",
-  "Önce Para Çekme",
-  "Önce TRY",
-  "Önce USD",
-  "Önce Banka",
-  "Önce Papara",
-];
-
+export const requestCurrencies = ["TRY", "USD"];
 const defaultValues = {
   isdeposit: true,
   iswithdraw: true,
@@ -58,40 +34,99 @@ const defaultValues = {
 
 const OpenOrderAccountActivitiesPending = props => {
   const dispatch = useDispatch();
-  const { t } = useTranslation(["form"]);
+  const { t } = useTranslation(["form", "app"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
-  const { pending: pendingTransactions } = useSelector(
-    state => state.transaction
+  const { lang, openModal } = useSelector(state => state.ui);
+  const pendingTransactions = useSelector(state => state.transaction?.pending);
+  const isFetching = useSelector(state => state.transaction?.isFetchingPending);
+  const requestTypes = useSelector(
+    state => state.api.settings?.moneyRequestTypes
   );
-  const { lang } = useSelector(state => state.ui);
-  const [apiError, setApiError] = useState("");
-  const { register, handleSubmit, errors, watch, reset, clearErrors } = useForm(
-    {
-      mode: "onChange",
-      defaultValues,
+  const orderStatuses = useSelector(state => state.api.settings?.orderStatuses);
+  const [requestTypeMask, setRequestTypeMask] = useState(null);
+  const [requestMethodMask, setRequestMethodMask] = useState(null);
+  const [requestCurrenciesMask, setRequestCurrenciesMask] = useState(null);
+
+  const visibleTransactions = useMemo(() => {
+    let transactions = pendingTransactions;
+
+    if (requestTypeMask) {
+      const isDepositOn = isBitOn(requestTypeMask, 0);
+      const isWithdrawOn = isBitOn(requestTypeMask, 1);
+
+      transactions = transactions.filter(({ request_type_id }) => {
+        switch (request_type_id) {
+          case 1:
+            return isDepositOn;
+          case 2:
+            return isWithdrawOn;
+          default:
+            return true;
+        }
+      });
     }
-  );
+
+    if (requestMethodMask) {
+      const isBankOn = isBitOn(requestMethodMask, 0);
+      const isPaparaOn = isBitOn(requestMethodMask, 1);
+
+      transactions = transactions.filter(({ requst_method_id }) => {
+        switch (requst_method_id) {
+          case 1:
+            return isBankOn;
+          case 2:
+            return isPaparaOn;
+          default:
+            return true;
+        }
+      });
+    }
+
+    if (requestCurrenciesMask) {
+      const isTRYOn = isBitOn(requestCurrenciesMask, 0);
+      const isUSDOn = isBitOn(requestCurrenciesMask, 1);
+
+      transactions = transactions.filter(({ currencysymbol }) => {
+        switch (currencysymbol) {
+          case "TRY":
+            return isTRYOn;
+          case "USD":
+            return isUSDOn;
+          default:
+            return true;
+        }
+      });
+    }
+
+    return transactions;
+  }, [
+    pendingTransactions,
+    requestCurrenciesMask,
+    requestMethodMask,
+    requestTypeMask,
+  ]);
+
+  const onCancel = useCallback(id => dispatch(cancelPendingTransaction(id)), [
+    dispatch,
+  ]);
+
+  const clearOpenModals = useCallback(() => {
+    dispatch(setOpenModal("none"));
+  }, [dispatch]);
+
+  const openFiltersModal = useCallback(() => {
+    dispatch(setOpenModal("activitiespendingfilter"));
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchPendingTransactions(defaultValues));
   }, [dispatch]);
 
-  const onSubmit = async data => {
-    setApiError("");
+  const getOrderStatusText = (statusId = 1) => {
+    const status = orderStatuses?.find?.(({ id }) => id === statusId);
+    const key = status?.name?.toLowerCase?.();
 
-    const { payload } = await dispatch(fetchPendingTransactions(data));
-
-    if (!payload?.status) {
-      setApiError(payload?.errormessage);
-    } else {
-      setApiError("");
-    }
-  };
-
-  const onReset = () => {
-    reset(defaultValues);
-    setApiError("");
-    clearErrors();
+    return t(`app:${key}`);
   };
 
   return (
@@ -100,87 +135,37 @@ const OpenOrderAccountActivitiesPending = props => {
         className="tabcont tabcont-filterbar siteformui"
         autoComplete="off"
         noValidate
-        onSubmit={handleSubmit(onSubmit)}
       >
         <Row className="tabcont tabcont-filterbar">
-          <Col>
-            <Input
-              className="custom-select custom-select-sm"
-              type="select"
-              name="orderby"
-              innerRef={register({
-                valueAsNumber: true,
-              })}
-            >
-              {orderBy.map((el, idx) => {
-                return (
-                  <option value={idx + 1} key={`${el}_${idx}`}>
-                    {el}
-                  </option>
-                );
-              })}
-            </Input>
+          <Col xs="auto">
+            <Button variant="secondary" size="sm" onClick={openFiltersModal}>
+              Filtre
+            </Button>
           </Col>
-          <Col>
-            <FormGroup check inline>
-              {transactionTypes.map(({ label, name }) => {
-                return (
-                  <Label key={name} check>
-                    <Input
-                      name={name}
-                      type="checkbox"
-                      innerRef={register({ valueAsNumber: true })}
-                    />
-                    {label}{" "}
-                  </Label>
-                );
-              })}
-            </FormGroup>
+          <Col sm="2">
+            <ButtonGroupCheckbox
+              list={requestTypes}
+              mask={requestTypeMask}
+              setMask={setRequestTypeMask}
+              namespace="finance"
+            />
           </Col>
-          <Col>
-            <FormGroup check inline>
-              {transactionMethods.map(({ label, name }) => {
-                return (
-                  <Label key={name} check>
-                    <Input
-                      name={name}
-                      type="checkbox"
-                      innerRef={register({ valueAsNumber: true })}
-                    />
-                    {label}{" "}
-                  </Label>
-                );
-              })}
-            </FormGroup>
+          <Col sm="2">
+            <ButtonGroupCheckbox
+              list={requestMethods}
+              mask={requestMethodMask}
+              setMask={setRequestMethodMask}
+              namespace="finance"
+            />
           </Col>
-          <Col>
-            <FormGroup check inline>
-              {transactionCurrencies.map(({ label, name }) => {
-                return (
-                  <Label key={name} check>
-                    <Input
-                      name={name}
-                      type="checkbox"
-                      innerRef={register({ valueAsNumber: true })}
-                    />
-                    {label}{" "}
-                  </Label>
-                );
-              })}
-            </FormGroup>
+          <Col sm="2">
+            <ButtonGroupCheckbox
+              list={requestCurrencies}
+              mask={requestCurrenciesMask}
+              setMask={setRequestCurrenciesMask}
+            />
           </Col>
         </Row>
-        <ButtonGroup>
-          <Button variant="secondary" className="w-100 active" type="submit">
-            Filtrele
-          </Button>
-          <Button variant="secondary" className="active" onClick={onReset}>
-            Sıfırla
-          </Button>
-        </ButtonGroup>
-        {apiError && (
-          <span style={{ color: "coral", fontSize: "1rem" }}>{apiError}</span>
-        )}
       </Form>
       <div className="activitiespendingtable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
@@ -199,7 +184,7 @@ const OpenOrderAccountActivitiesPending = props => {
                 Yöntem
               </Table.Th>
               <Table.Th sizeauto className="bank">
-                Banka
+                Birim
               </Table.Th>
               <Table.Th sizefixed className="amnt">
                 Miktar
@@ -216,7 +201,7 @@ const OpenOrderAccountActivitiesPending = props => {
             scrollbar
             scrollbarstyles={{ height: `${tableHeight - 36}px` }}
           >
-            {pendingTransactions.map(
+            {visibleTransactions.map(
               ({
                 id,
                 datetime,
@@ -229,14 +214,14 @@ const OpenOrderAccountActivitiesPending = props => {
                 status,
               }) => {
                 const typecls = classnames({
-                  sitecolorgreen: request_type_id === "1",
-                  sitecolorred: request_type_id === "2",
+                  sitecolorgreen: request_type_id === 1,
+                  sitecolorred: request_type_id === 2,
                 });
 
                 const statuscls = classnames({
-                  sitecoloryellow: status === "1",
-                  sitecolorgreen: status === "2",
-                  sitecolorred: status === "3",
+                  sitecoloryellow: status === 1,
+                  sitecolorgreen: status === 2,
+                  sitecolorred: status > 2,
                 });
 
                 return (
@@ -264,10 +249,12 @@ const OpenOrderAccountActivitiesPending = props => {
                       {amount}
                     </Table.Td>
                     <Table.Td sizeauto className="stts">
-                      <span className={statuscls}>----</span>
+                      <span className={statuscls}>
+                        {getOrderStatusText(status)}
+                      </span>
                     </Table.Td>
                     <Table.Td sizeauto className="bttn">
-                      <Button type="button">
+                      <Button onClick={() => onCancel(id)}>
                         <IconSet sprite="sprtsmclrd" size="14" name="delete" />
                       </Button>
                     </Table.Td>
@@ -278,8 +265,14 @@ const OpenOrderAccountActivitiesPending = props => {
           </Table.Tbody>
         </Table>
       </div>
+      <ActivitiesPendingFilter
+        isOpen={openModal === "activitiespendingfilter"}
+        clearModals={clearOpenModals}
+        defaultValues={defaultValues}
+        isFetching={isFetching}
+      />
     </div>
   );
 };
 
-export default OpenOrderAccountActivitiesPending;
+export default memo(OpenOrderAccountActivitiesPending);

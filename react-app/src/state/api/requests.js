@@ -52,6 +52,9 @@ export const fetchPendingTransactions = buildCachedRequest(
   "/pendingtransactions",
   ms("10m")
 );
+export const cancelPendingTransaction = buildRequest(
+  "/pendingtransactions/cancel"
+);
 export const fetchTransactionHistories = buildCachedRequest(
   "/transactionhistories",
   ms("10m")

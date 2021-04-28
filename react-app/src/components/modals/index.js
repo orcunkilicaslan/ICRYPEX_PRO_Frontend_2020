@@ -9,3 +9,4 @@ export { default as BuySellConfirmModal } from "./BuySellConfirmModal";
 export { default as DepositWithdrawalTermsModal } from "./DepositWithdrawalTermsModal";
 export { default as OrderHistoryFilter } from "./OrderHistoryFilter";
 export { default as OrderOpenOrdersFilter } from "./OrderOpenOrdersFilter";
+export { default as ActivitiesPendingFilter } from "./ActivitiesPendingFilter";

@@ -2,6 +2,47 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as api from "../api";
 import { hasAccessToken } from "~/util/";
+import { bustCache } from "~/state/slices/api.slice";
+
+
+export const cancelPendingTransaction = createAsyncThunk(
+  "transaction/cancel",
+  async (transactionid, { getState, rejectWithValue, dispatch }) => {
+    const {
+      api: { accesstoken },
+      transaction: { pendingFilter },
+    } = getState();
+
+    try {
+      const response = await api.cancelPendingTransaction(
+        { transactionid },
+        {
+          headers: {
+            "x-access-token": accesstoken,
+          },
+        }
+      );
+
+      if (pendingFilter) {
+        await dispatch(
+          bustCache({ key: api.fetchPendingTransactions.uri, matchStart: true })
+        );
+        dispatch(fetchPendingTransactions(pendingFilter));
+      }
+
+      return response.data;
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
+  }
+);
 
 export const fetchTransactionHistories = createAsyncThunk(
   "transaction/fetchHistories",
@@ -77,27 +118,25 @@ export const fetchPendingTransactions = createAsyncThunk(
       api: { accesstoken },
     } = getState();
 
+    const toSend = {
+      isdeposit,
+      iswithdraw,
+      istry,
+      isusd,
+      isbank,
+      ispapara,
+      orderby,
+      startfrom,
+      takecount,
+    };
     try {
-      const response = await api.fetchPendingTransactions(
-        {
-          isdeposit,
-          iswithdraw,
-          istry,
-          isusd,
-          isbank,
-          ispapara,
-          orderby,
-          startfrom,
-          takecount,
+      const response = await api.fetchPendingTransactions(toSend, {
+        headers: {
+          "x-access-token": accesstoken,
         },
-        {
-          headers: {
-            "x-access-token": accesstoken,
-          },
-        }
-      );
+      });
 
-      return response.data;
+      return { data: response.data, filterData: toSend };
     } catch ({ data }) {
       return rejectWithValue(data);
     }
@@ -114,6 +153,8 @@ export const fetchPendingTransactions = createAsyncThunk(
 const initialState = {
   histories: [],
   pending: [],
+  isFetchingPending: false,
+  pendingFilter: null,
 };
 
 const transactionSlice = createSlice({
@@ -130,8 +171,16 @@ const transactionSlice = createSlice({
     [fetchTransactionHistories.fulfilled]: (state, action) => {
       state.histories = action?.payload?.description || [];
     },
-    [fetchPendingTransactions.fulfilled]: (state, action) => {
-      state.pending = action?.payload?.description || [];
+    [fetchPendingTransactions.pending]: state => {
+      state.isFetchingPending = true;
+    },
+    [fetchPendingTransactions.fulfilled]: (state, { payload }) => {
+      state.isFetchingPending = false;
+      state.pending = payload?.data?.description;
+      state.pendingFilter = payload?.filterData;
+    },
+    [fetchPendingTransactions.rejected]: state => {
+      state.isFetchingPending = false;
     },
   },
 });

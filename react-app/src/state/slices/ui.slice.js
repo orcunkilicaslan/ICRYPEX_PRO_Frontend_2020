@@ -28,6 +28,7 @@ const MODALS = [
   "depositwithdrawalterms",
   "orderopenordersfilter",
   "orderhistoryfilter",
+  "activitiespendingfilter",
   "notifications",
   "verify",
 ];

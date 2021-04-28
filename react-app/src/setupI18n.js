@@ -72,6 +72,10 @@ const init = (initialLang = "en") => {
             transactionCommission: "Transaction Commission",
             marketMaker: "Market Maker",
             marketTaker: "Market Taker",
+            yatırma: "Deposit",
+            çekme: "Withdraw",
+            banka: "Bank",
+            papara: "Papara",
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -191,6 +195,10 @@ const init = (initialLang = "en") => {
             transactionCommission: "İşlem Komisyonu",
             marketMaker: "Piyasa Yapıcı",
             marketTaker: "Piyasa Alıcı",
+            yatırma: "Yatırma",
+            çekme: "Çekme",
+            banka: "Banka",
+            papara: "Papara",
           },
           coinbar: {
             lastPrice: "Son Fiyat",
