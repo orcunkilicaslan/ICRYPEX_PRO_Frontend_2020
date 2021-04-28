@@ -219,14 +219,11 @@ export const refreshToken = createAsyncThunk(
 
 export const bustCache = createAsyncThunk(
   "api/bustCache",
-  async (key, { rejectWithValue }) => {
-    const cache = api.cache;
-    const keys = await cache.keys();
+  async ({ key, matchStart = false }, { rejectWithValue }) => {
+    const { cache } = api;
 
     try {
-      await Promise.map(keys, async k => {
-        if (k?.startsWith?.(key)) await cache.del(key);
-      });
+      await cache.del(key, matchStart);
 
       return key;
     } catch (err) {

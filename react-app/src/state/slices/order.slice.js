@@ -114,7 +114,9 @@ export const deleteOpenOrder = createAsyncThunk(
       // kalmış olabilir.  "uri" ile başlayan cache satırlarını silip bir
       // önceki form datasıyla güncel listeyi alıyoruz
       if (openOrdersFilter) {
-        await dispatch(bustCache(api.fetchOpenOrders.uri));
+        await dispatch(
+          bustCache({ key: api.fetchOpenOrders.uri, matchStart: true })
+        );
         dispatch(fetchOpenOrders(openOrdersFilter));
       }
 
