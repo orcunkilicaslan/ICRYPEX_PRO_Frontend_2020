@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import {
   Row,
   Form,
@@ -29,6 +29,9 @@ const OpenOrderDepoWithTabDepositBankForm = props => {
     return [currencies, grouped];
   }, [accounts]);
 
+  const ibanInputRef = useRef(null);
+  const accountNameRef = useRef(null);
+
   const { register, watch } = useForm({
     defaultValues: {
       symbol: bankCurrencies[0],
@@ -47,6 +50,16 @@ const OpenOrderDepoWithTabDepositBankForm = props => {
 
   const clearOpenModals = () => {
     dispatch(setOpenModal("none"));
+  };
+
+
+  const  copyToClipboard = ref => () => {
+    switch(ref) {
+
+      case "ibanInputRef":   return navigator.clipboard.writeText(ibanInputRef.current.innerText).then(r => {});
+      case "accountNameRef":   return navigator.clipboard.writeText(accountNameRef.current.innerText).then(r => {});
+      default:      return ""
+    }
   };
 
   return (
@@ -73,11 +86,11 @@ const OpenOrderDepoWithTabDepositBankForm = props => {
             <InputGroupAddon addonType="prepend">
               <InputGroupText>IBAN</InputGroupText>
             </InputGroupAddon>
-            <div className="form-control textoverflowellipsis">
+            <div className="form-control textoverflowellipsis" ref={ibanInputRef}>
               {account?.iban || null}
             </div>
             <InputGroupAddon addonType="append">
-              <Button variant="secondary" className="active">
+              <Button variant="secondary" className="active" type="button" onClick={copyToClipboard('ibanInputRef')}>
                 <IconSet sprite="sprtsmclrd" size="16" name="copybtn" />
               </Button>
             </InputGroupAddon>
@@ -87,11 +100,11 @@ const OpenOrderDepoWithTabDepositBankForm = props => {
           <InputGroupAddon addonType="prepend">
             <InputGroupText>Hesap Sahibi</InputGroupText>
           </InputGroupAddon>
-          <div className="form-control textoverflowellipsis">
+          <div className="form-control textoverflowellipsis"  ref={accountNameRef}>
             {account?.name || null}
           </div>
           <InputGroupAddon addonType="append">
-            <Button variant="secondary" className="active">
+            <Button variant="secondary" className="active" type="button" onClick={copyToClipboard('accountNameRef')}>
               <IconSet sprite="sprtsmclrd" size="16" name="copybtn" />
             </Button>
           </InputGroupAddon>
