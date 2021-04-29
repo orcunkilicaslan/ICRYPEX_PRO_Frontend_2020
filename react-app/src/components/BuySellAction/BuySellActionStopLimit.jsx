@@ -22,6 +22,11 @@ import {usePrices} from "~/state/hooks";
 import {useForm} from "react-hook-form";
 import {fetchBalance} from "~/state/slices/balance.slice";
 import {getFormattedPrice} from "~/util";
+import {fetchStopLimitBuyOrder} from "~/state/slices/stoplimitbuyorder.slice";
+import {fetchStopLimitSellOrder} from "~/state/slices/stoplimitsellorder.slice";
+import {setOpenModal} from "~/state/slices/ui.slice";
+import {fetchLimitSellOrder} from "~/state/slices/limitsellorder.slice";
+
 
 const buySellRangePercent = [0, 25, 50, 75, 100];
 
@@ -37,6 +42,7 @@ const BuySellActionStopLimit = props => {
   const [fiatBuyPrice, setFiatBuyPrice] = useState("");
   const [totalSell, setTotalSell] = useState("0.00");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [apiError, setApiError] = useState("");
 
   const { register: registerBuy, handleSubmit: handleSubmitBuy, errors: errorsBuy, setValue: setValueBuy,
     reset: resetBuy, getValues: getBuyValues } = useForm({
@@ -80,11 +86,56 @@ const BuySellActionStopLimit = props => {
     percstepa100: inRange(rangeSellPortfolio, 100, 101),
   });
   const onBuySubmit = async data => {
+    if (data?.cryptoBuyAmount > 0) {
+      setApiError("");
+      const  firstcurrencyid  = selectedPair.first_currency_id;
+      const  secondcurrencyid  = selectedPair.second_currency_id;
+      const amount  = data.cryptoBuyAmount;
+      const price  = data.fiatBuyPrice;
+      const stopprice  = data.stopBuyPrice;
 
+      const { payload } = await dispatch(fetchStopLimitBuyOrder({ firstcurrencyid,secondcurrencyid,amount,price,stopprice }));
+
+      if (!payload?.status) {
+        setApiError(payload?.errormessage);
+      } else {
+        setApiError("");
+        resetBuy();
+        resetSell();
+        setTotalBuy(Number(0).toFixed(2))
+        setTotalSell(Number(0).toFixed(2))
+        setIsSubmitted(false);
+        await  dispatch(fetchBalance({currencyid: selectedPair?.second_currency_id, isFiat: true, isPadding: false}));
+        dispatch(setOpenModal("buysellconfirm"));
+      }
+    }
   };
 
   const onSellSubmit = async data => {
+    if (data?.cryptoSellAmount > 0) {
+      setApiError("");
+      setIsSubmitted(true);
+      const  firstcurrencyid  = selectedPair.first_currency_id;
+      const  secondcurrencyid  = selectedPair.second_currency_id;
 
+      const amount  = data.cryptoSellAmount;
+      const price  = data.fiatSellPrice;
+      const stopprice  = data.stopSellPrice;
+      const { payload } = await dispatch(fetchLimitSellOrder({ firstcurrencyid,secondcurrencyid,amount, price,stopprice }));
+      if (payload?.status !== 1) {
+        setApiError(payload?.errormessage);
+        setIsSubmitted(false);
+      } else {
+        setApiError("");
+        resetBuy();
+        resetSell();
+        setTotalBuy(Number(0).toFixed(2))
+        setTotalSell(Number(0).toFixed(2))
+        setIsSubmitted(false);
+        await  dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false, isPadding: false}));
+        dispatch(setOpenModal("buysellconfirm"));
+      }
+    }
   };
 
   return (
@@ -145,7 +196,24 @@ const BuySellActionStopLimit = props => {
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>Limit</InputGroupText>
                   </InputGroupAddon>
-                  <Input type="text" />
+                  <Input
+                      type="text"
+                            name="stopBuyPrice"
+                            readOnly={isSubmitted}
+                            innerRef={registerBuy({
+                              valueAsNumber: true,
+                              required: t("isRequired"),
+                              min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
+                            })}
+                            onChange={e => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              const { value } = e.target;
+
+                              if (!Number.isNaN(value) && value !== "") {
+                                const parsed = parseFloat(value);
+                                }
+                            }}/>
                   <InputGroupAddon addonType="append">
                     <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>
@@ -308,7 +376,23 @@ const BuySellActionStopLimit = props => {
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>Limit</InputGroupText>
                   </InputGroupAddon>
-                  <Input type="text" />
+                  <Input type="text"
+                         name="stopSellPrice"
+                         readOnly={isSubmitted}
+                         innerRef={registerSell({
+                           valueAsNumber: true,
+                           required: t("isRequired"),
+                           min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
+                         })}
+                         onChange={e => {
+                           e.preventDefault();
+                           e.stopPropagation();
+                           const { value } = e.target;
+
+                           if (!Number.isNaN(value) && value !== "") {
+                             const parsed = parseFloat(value);
+                           }
+                         }}/>
                   <InputGroupAddon addonType="append">
                     <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>

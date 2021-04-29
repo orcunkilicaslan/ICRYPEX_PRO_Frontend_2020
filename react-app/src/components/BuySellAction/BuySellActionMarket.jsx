@@ -92,16 +92,24 @@ const BuySellActionMarket = props => {
 
     if (data?.cryptoBuyAmount > 0) {
       setApiError("");
+      setIsSubmitted(true);
       const  firstcurrencyid  = selectedPair.first_currency_id;
       const  secondcurrencyid  = selectedPair.second_currency_id;
       const amount  = totalBuy;
       const { payload } = await dispatch(fetchEasyBuy({ firstcurrencyid,secondcurrencyid,amount }));
 
-      if (!payload?.status) {
+      if (payload?.status !== 1) {
         setApiError(payload?.errormessage);
+        setIsSubmitted(false);
       } else {
         setApiError("");
-        setIsSubmitted(true);
+        resetBuy();
+        resetSell();
+        setTotalBuy(Number(0).toFixed(2))
+        setTotalSell(Number(0).toFixed(2))
+        setIsSubmitted(false);
+        await  dispatch(fetchBalance({currencyid: selectedPair?.second_currency_id, isFiat: true, isPadding: false}));
+        dispatch(setOpenModal("buysellconfirm"));
       }
     }
   };
@@ -110,25 +118,30 @@ const BuySellActionMarket = props => {
 
     if (data?.cryptoSellAmount > 0) {
       setApiError("");
+      setIsSubmitted(true);
       const  firstcurrencyid  = selectedPair.first_currency_id;
       const  secondcurrencyid  = selectedPair.second_currency_id;
       const sellingamount  = data.cryptoSellAmount;
       const buyingamount   = totalSell;
       const { payload } = await dispatch(fetchEasySell({ firstcurrencyid,secondcurrencyid,buyingamount,sellingamount }));
-      if (!payload?.status) {
+      if (payload?.status !== 1) {
         setApiError(payload?.errormessage);
+        setIsSubmitted(false);
       } else {
         setApiError("");
-        setIsSubmitted(true);
+        resetBuy();
+        resetSell();
+        setTotalBuy(Number(0).toFixed(2))
+        setTotalSell(Number(0).toFixed(2))
+        setIsSubmitted(false);
+        await  dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false, isPadding: false}));
+        dispatch(setOpenModal("buysellconfirm"));
       }
     }
   };
 
   const { openModal } = useSelector(state => state.ui);
 
-  const openConfirmModal = () => {
-    dispatch(setOpenModal("buysellconfirm"));
-  };
 
   const clearOpenModals = () => {
     dispatch(setOpenModal("none"));
@@ -264,7 +277,6 @@ const BuySellActionMarket = props => {
                   variant="success"
                   type="submit"
                   disabled={isSubmitted}
-                  onClick={openConfirmModal}
               >
                 {t("finance:buywhat", { item: cryptoCurrency })}
               </Button>

@@ -24,6 +24,9 @@ import {usePrices} from "~/state/hooks";
 import {fetchEasyBuy} from "~/state/slices/easybuy.slice";
 import {fetchEasySell} from "~/state/slices/easysell.slice";
 import {getFormattedPrice} from "~/util";
+import {setOpenModal} from "~/state/slices/ui.slice";
+import {fetchLimitBuyOrder} from "~/state/slices/limitbuyorder.slice";
+import {fetchLimitSellOrder} from "~/state/slices/limitsellorder.slice";
 
 const buySellRangePercent = [0, 25, 50, 75, 100];
 
@@ -39,6 +42,8 @@ const BuySellActionLimit = props => {
   const [fiatBuyPrice, setFiatBuyPrice] = useState("");
   const [totalSell, setTotalSell] = useState("0.00");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [apiError, setApiError] = useState("");
+
 
   const { register: registerBuy, handleSubmit: handleSubmitBuy, errors: errorsBuy, setValue: setValueBuy,
     reset: resetBuy, getValues: getBuyValues } = useForm({
@@ -82,11 +87,56 @@ const BuySellActionLimit = props => {
     percstepa100: inRange(rangeSellPortfolio, 100, 101),
   });
   const onBuySubmit = async data => {
+    if (data?.cryptoBuyAmount > 0) {
+      setApiError("");
+      setIsSubmitted(true);
+      const  firstcurrencyid  = selectedPair.first_currency_id;
+      const  secondcurrencyid  = selectedPair.second_currency_id;
+      const amount  = data.cryptoBuyAmount;
+      const price  = data.fiatBuyPrice;
+      const { payload } = await dispatch(fetchLimitBuyOrder({ firstcurrencyid,secondcurrencyid,amount,price }));
+
+      if (payload?.status !== 1) {
+        setApiError(payload?.errormessage);
+        setIsSubmitted(false);
+      } else {
+        setApiError("");
+        resetBuy();
+        resetSell();
+        setTotalBuy(Number(0).toFixed(2))
+        setTotalSell(Number(0).toFixed(2))
+        setIsSubmitted(false);
+        await  dispatch(fetchBalance({currencyid: selectedPair?.second_currency_id, isFiat: true, isPadding: false}));
+        dispatch(setOpenModal("buysellconfirm"));
+      }
+    }
 
   };
 
   const onSellSubmit = async data => {
+    if (data?.cryptoSellAmount > 0) {
+      setApiError("");
+      setIsSubmitted(true);
+      const  firstcurrencyid  = selectedPair.first_currency_id;
+      const  secondcurrencyid  = selectedPair.second_currency_id;
 
+      const amount  = data.cryptoSellAmount;
+      const price  = data.fiatSellPrice;
+      const { payload } = await dispatch(fetchLimitSellOrder({ firstcurrencyid,secondcurrencyid,amount, price }));
+      if (payload?.status !== 1) {
+        setApiError(payload?.errormessage);
+        setIsSubmitted(false);
+      } else {
+        setApiError("");
+        resetBuy();
+        resetSell();
+        setTotalBuy(Number(0).toFixed(2))
+        setTotalSell(Number(0).toFixed(2))
+        setIsSubmitted(false);
+        await  dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false, isPadding: false}));
+        dispatch(setOpenModal("buysellconfirm"));
+      }
+    }
   };
 
   return (
