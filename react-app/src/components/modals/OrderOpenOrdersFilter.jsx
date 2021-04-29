@@ -91,7 +91,7 @@ const OrderOpenOrdersFilter = props => {
         >
           <FormGroup tag="fieldset">
             <legend>İşlem Çiftleri</legend>
-            <FormGroup className="checkradioboxed" check inline>
+            <FormGroup className="checkradioboxed">
               {allPairs?.map?.((pair, idx) => {
                 return (
                   <div
@@ -106,10 +106,10 @@ const OrderOpenOrdersFilter = props => {
                       innerRef={register}
                     />
                     <Label
-                      className="custom-control-label btn btn-sm btn-primary active"
+                      className="custom-control-label btn btn-sm btn-secondary"
                       htmlFor={`filterPair${pair?.symbol}`}
                     >
-                      {pair?.name}
+                      {pair?.name.replace(/\s/g, "")}
                     </Label>
                   </div>
                 );
@@ -118,10 +118,9 @@ const OrderOpenOrdersFilter = props => {
           </FormGroup>
           <FormGroup tag="fieldset">
             <legend>İşlem Tipi</legend>
-            <FormGroup className="checkradioboxed" check inline>
+            <FormGroup className="checkradioboxed">
               {orderTypes.map(({ label, name }) => {
                 const inputId = nanoid();
-
                 return (
                   <div
                     key={name}
@@ -135,7 +134,7 @@ const OrderOpenOrdersFilter = props => {
                       innerRef={register}
                     />
                     <Label
-                      className="custom-control-label btn btn-md btn-primary active"
+                      className="custom-control-label btn btn-sm btn-secondary"
                       htmlFor={inputId}
                     >
                       {label}
@@ -149,7 +148,7 @@ const OrderOpenOrdersFilter = props => {
             <legend>Sıralama</legend>
             <FormGroup>
               <Input
-                className="custom-select custom-select-sm"
+                className="custom-select"
                 type="select"
                 name="orderby"
                 innerRef={register({
