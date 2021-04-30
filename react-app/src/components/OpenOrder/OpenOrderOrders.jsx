@@ -210,7 +210,7 @@ const OpenOrderOrders = props => {
                       {selling_amount} {sellingcurrency}
                     </Table.Td>
                     <Table.Td sizeauto className="bttn">
-                      <Button>
+                      <Button className="d-none">
                         <IconSet sprite="sprtsmclrd" size="14" name="edit" />
                       </Button>
                       <Button onClick={() => onDelete(id)}>
