@@ -4,46 +4,6 @@ import * as api from "../api";
 import { hasAccessToken } from "~/util/";
 import { bustCache } from "~/state/slices/api.slice";
 
-
-export const cancelPendingTransaction = createAsyncThunk(
-  "transaction/cancel",
-  async (transactionid, { getState, rejectWithValue, dispatch }) => {
-    const {
-      api: { accesstoken },
-      transaction: { pendingFilter },
-    } = getState();
-
-    try {
-      const response = await api.cancelPendingTransaction(
-        { transactionid },
-        {
-          headers: {
-            "x-access-token": accesstoken,
-          },
-        }
-      );
-
-      if (pendingFilter) {
-        await dispatch(
-          bustCache({ key: api.fetchPendingTransactions.uri, matchStart: true })
-        );
-        dispatch(fetchPendingTransactions(pendingFilter));
-      }
-
-      return response.data;
-    } catch ({ data }) {
-      return rejectWithValue(data);
-    }
-  },
-  {
-    condition: (_, { getState }) => {
-      const state = getState();
-
-      return hasAccessToken(state);
-    },
-  }
-);
-
 export const fetchTransactionHistories = createAsyncThunk(
   "transaction/fetchHistories",
   async (data, { getState, rejectWithValue }) => {
@@ -137,6 +97,45 @@ export const fetchPendingTransactions = createAsyncThunk(
       });
 
       return { data: response.data, filterData: toSend };
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
+  }
+);
+
+export const cancelPendingTransaction = createAsyncThunk(
+  "transaction/cancel",
+  async (transactionid, { getState, rejectWithValue, dispatch }) => {
+    const {
+      api: { accesstoken },
+      transaction: { pendingFilter },
+    } = getState();
+
+    try {
+      const response = await api.cancelPendingTransaction(
+        { transactionid },
+        {
+          headers: {
+            "x-access-token": accesstoken,
+          },
+        }
+      );
+
+      if (pendingFilter) {
+        await dispatch(
+          bustCache({ key: api.fetchPendingTransactions.uri, matchStart: true })
+        );
+        dispatch(fetchPendingTransactions(pendingFilter));
+      }
+
+      return response.data;
     } catch ({ data }) {
       return rejectWithValue(data);
     }

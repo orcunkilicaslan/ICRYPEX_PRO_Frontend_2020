@@ -8,19 +8,15 @@ import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
 import { useClientRect } from "~/state/hooks";
-import { formatDateDistance, isBitOn } from "~/util/";
+import { formatDateDistance } from "~/util/";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import {
   fetchPendingTransactions,
   cancelPendingTransaction,
 } from "~/state/slices/transaction.slice";
 import { ActivitiesPendingFilter } from "~/components/modals";
-import ButtonGroupCheckbox from "~/components/ButtonGroupCheckbox";
+import CustomSelect from "~/components/CustomSelect";
 
-export const requestMethods = [
-  { name: "Banka", fieldName: "isbank" },
-  { name: "Papara", fieldName: "ispapara" },
-];
 export const requestCurrencies = ["TRY", "USD"];
 const defaultValues = {
   isdeposit: true,
@@ -43,68 +39,30 @@ const OpenOrderAccountActivitiesPending = props => {
     state => state.api.settings?.moneyRequestTypes
   );
   const orderStatuses = useSelector(state => state.api.settings?.orderStatuses);
-  const [requestTypeMask, setRequestTypeMask] = useState(null);
-  const [requestMethodMask, setRequestMethodMask] = useState(null);
-  const [requestCurrenciesMask, setRequestCurrenciesMask] = useState(null);
+  const [requestTypeIdx, setRequestTypeIdx] = useState(-1);
+  const [requestCurrenciesIdx, setrequestCurrenciesIdx] = useState(-1);
 
   const visibleTransactions = useMemo(() => {
     let transactions = pendingTransactions;
+    const typeIdx = parseInt(requestTypeIdx, 10);
+    const currenciesIdx = parseInt(requestCurrenciesIdx, 10);
 
-    if (requestTypeMask) {
-      const isDepositOn = isBitOn(requestTypeMask, 0);
-      const isWithdrawOn = isBitOn(requestTypeMask, 1);
-
-      transactions = transactions.filter(({ request_type_id }) => {
-        switch (request_type_id) {
-          case 1:
-            return isDepositOn;
-          case 2:
-            return isWithdrawOn;
-          default:
-            return true;
-        }
-      });
+    if (typeIdx !== -1) {
+      transactions = transactions?.filter?.(
+        ({ request_type_id }) => request_type_id === typeIdx
+      );
     }
 
-    if (requestMethodMask) {
-      const isBankOn = isBitOn(requestMethodMask, 0);
-      const isPaparaOn = isBitOn(requestMethodMask, 1);
+    if (currenciesIdx !== -1) {
+      const currency = requestCurrencies[currenciesIdx];
 
-      transactions = transactions.filter(({ requst_method_id }) => {
-        switch (requst_method_id) {
-          case 1:
-            return isBankOn;
-          case 2:
-            return isPaparaOn;
-          default:
-            return true;
-        }
-      });
-    }
-
-    if (requestCurrenciesMask) {
-      const isTRYOn = isBitOn(requestCurrenciesMask, 0);
-      const isUSDOn = isBitOn(requestCurrenciesMask, 1);
-
-      transactions = transactions.filter(({ currencysymbol }) => {
-        switch (currencysymbol) {
-          case "TRY":
-            return isTRYOn;
-          case "USD":
-            return isUSDOn;
-          default:
-            return true;
-        }
-      });
+      transactions = transactions.filter(
+        ({ currencysymbol }) => currency === currencysymbol
+      );
     }
 
     return transactions;
-  }, [
-    pendingTransactions,
-    requestCurrenciesMask,
-    requestMethodMask,
-    requestTypeMask,
-  ]);
+  }, [pendingTransactions, requestCurrenciesIdx, requestTypeIdx]);
 
   const onCancel = useCallback(id => dispatch(cancelPendingTransaction(id)), [
     dispatch,
@@ -143,26 +101,20 @@ const OpenOrderAccountActivitiesPending = props => {
             </Button>
           </Col>
           <Col sm="2">
-            <ButtonGroupCheckbox
+            <CustomSelect
               list={requestTypes}
-              mask={requestTypeMask}
-              setMask={setRequestTypeMask}
+              title={"İşlem Tipi"}
+              index={requestTypeIdx}
+              setIndex={setRequestTypeIdx}
               namespace="finance"
             />
           </Col>
           <Col sm="2">
-            <ButtonGroupCheckbox
-              list={requestMethods}
-              mask={requestMethodMask}
-              setMask={setRequestMethodMask}
-              namespace="finance"
-            />
-          </Col>
-          <Col sm="2">
-            <ButtonGroupCheckbox
+            <CustomSelect
               list={requestCurrencies}
-              mask={requestCurrenciesMask}
-              setMask={setRequestCurrenciesMask}
+              title={"Para Birimleri"}
+              index={requestCurrenciesIdx}
+              setIndex={setrequestCurrenciesIdx}
             />
           </Col>
         </Row>

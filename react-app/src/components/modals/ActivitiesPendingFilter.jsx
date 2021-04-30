@@ -16,10 +16,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "../Button.jsx";
 import { AlertResult } from "../AlertResult.jsx";
 import { fetchPendingTransactions } from "~/state/slices/transaction.slice";
-import {
-  requestMethods,
-  requestCurrencies,
-} from "~/components/OpenOrder/OpenOrderAccountActivitiesPending";
+import { requestCurrencies } from "~/components/OpenOrder/OpenOrderAccountActivitiesPending";
 
 const orderBy = [
   "Önce Yeni Tarihli",
@@ -85,35 +82,6 @@ const ActivitiesPendingFilter = props => {
               {requestTypes.map(({ name, id }) => {
                 const inputId = nanoid();
                 const fieldName = id === 1 ? "isdeposit" : "iswithdraw";
-
-                return (
-                  <div
-                    key={name}
-                    className="custom-control custom-checkbox custom-control-inline"
-                  >
-                    <Input
-                      className="custom-control-input"
-                      type="checkbox"
-                      id={inputId}
-                      name={fieldName}
-                      innerRef={register}
-                    />
-                    <Label
-                      className="custom-control-label btn btn-md btn-primary active"
-                      htmlFor={inputId}
-                    >
-                      {t(`finance:${name?.toLowerCase?.()}`)}
-                    </Label>
-                  </div>
-                );
-              })}
-            </FormGroup>
-          </FormGroup>
-          <FormGroup tag="fieldset">
-            <legend>İşlem Metodu</legend>
-            <FormGroup className="checkradioboxed" check inline>
-              {requestMethods.map(({ name, fieldName }) => {
-                const inputId = nanoid();
 
                 return (
                   <div
