@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, memo } from "react";
 import { Row, Col, Label, Input, Form } from "reactstrap";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
@@ -16,9 +16,8 @@ import {
 } from "~/state/slices/order.slice";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import OrderHistoryFilter from "~/components/modals/OrderHistoryFilter.jsx";
-import { formatDate, formatDateDistance, isBitOn } from "~/util/";
+import { formatDate, formatDateDistance } from "~/util/";
 import ButtonGroupRadio from "~/components/ButtonGroupRadio";
-import ButtonGroupCheckbox from "~/components/ButtonGroupCheckbox";
 import CustomSelect from "~/components/CustomSelect";
 
 const periodBy = [
@@ -35,11 +34,12 @@ const OpenOrderTransactionHistory = props => {
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
   const { lang } = useSelector(state => state.ui);
   const { allPairs, selectedPair } = usePrices();
+  const { openModal } = useSelector(state => state.ui);
   const orderSides = useSelector(state => state.api.settings?.orderSides);
   const orderStatuses = useSelector(state => state.api.settings?.orderStatuses);
   const orderSlice = useSelector(state => state.order);
-  const [ordersideMask, setOrdersideMask] = useState(null);
   const [orderStatusIdx, setOrderStatusIdx] = useState(-1);
+  const [ordersideIdx, setOrdersideIdx] = useState(-1);
 
   const orderHistory = orderSlice?.history;
   const isFetching = orderSlice?.isFetchingHistory;
@@ -54,27 +54,25 @@ const OpenOrderTransactionHistory = props => {
     );
 
     return {
-      pairids: allPairs.map(({ id }) => Number(id)),
+      pairids: [],
       orderby: 1,
       isbuyorders: true,
       issellorders: true,
       isfilledorders: true,
       iscanceledorders: true,
-      periodby: 5,
       startdate: threeMonthsAgo,
       enddate: today,
       // startfrom: 0,
       // takecount: 20
     };
-  }, [allPairs, lang]);
-  const [periodbyIndex, setPeriodbyIndex] = useState(
-    defaultValues.periodby - 1
-  );
+  }, [lang]);
+  const [periodbyIndex, setPeriodbyIndex] = useState(0);
 
   const visibleOrders = useMemo(() => {
     let orders = orderHistory;
     const interval = periodBy[periodbyIndex]?.duration;
     const statusIdx = parseInt(orderStatusIdx, 10);
+    const sideIdx = parseInt(ordersideIdx, 10);
 
     if (statusIdx !== -1) {
       orders = orders?.filter?.(
@@ -82,21 +80,10 @@ const OpenOrderTransactionHistory = props => {
       );
     }
 
-    if (ordersideMask) {
-      // 0th index is buyorders - 1st index is sellorders
-      const isBuyOn = isBitOn(ordersideMask, 0);
-      const isSellOn = isBitOn(ordersideMask, 1);
-
-      orders = orders?.filter?.(({ order_side_id }) => {
-        switch (order_side_id) {
-          case 1:
-            return isBuyOn;
-          case 2:
-            return isSellOn;
-          default:
-            return true;
-        }
-      });
+    if (sideIdx !== -1) {
+      orders = orders?.filter?.(
+        ({ order_side_id }) => order_side_id === sideIdx
+      );
     }
 
     if (interval) {
@@ -116,29 +103,27 @@ const OpenOrderTransactionHistory = props => {
       return byPair[selectedPair?.name] || [];
     }
   }, [
-    hideOthers,
     orderHistory,
-    selectedPair,
     periodbyIndex,
-    ordersideMask,
     orderStatusIdx,
+    ordersideIdx,
+    hideOthers,
+    selectedPair,
   ]);
 
   useEffect(() => {
-    const { pairids, enddate, startdate, ...rest } = defaultValues;
+    const pairids = allPairs.map(({ id }) => Number(id));
     const toSubmit = {
-      ...rest,
+      ...defaultValues,
       pairids: JSON.stringify(pairids),
     };
 
     dispatch(fetchOrderHistory(toSubmit));
-  }, [defaultValues, dispatch]);
+  }, [allPairs, defaultValues, dispatch]);
 
   const onToggleHideOthers = () => {
     dispatch(toggleHideOthersHistory());
   };
-
-  const { openModal } = useSelector(state => state.ui);
 
   const openFiltersModal = () => {
     dispatch(setOpenModal("orderhistoryfilter"));
@@ -158,10 +143,11 @@ const OpenOrderTransactionHistory = props => {
             </Button>
           </Col>
           <Col sm="2">
-            <ButtonGroupCheckbox
+            <CustomSelect
               list={orderSides}
-              mask={ordersideMask}
-              setMask={setOrdersideMask}
+              title={"İşlem Tipi"}
+              index={ordersideIdx}
+              setIndex={setOrdersideIdx}
             />
           </Col>
           <Col>
@@ -396,4 +382,4 @@ const OpenOrderTransactionHistory = props => {
   );
 };
 
-export default OpenOrderTransactionHistory;
+export default memo(OpenOrderTransactionHistory);

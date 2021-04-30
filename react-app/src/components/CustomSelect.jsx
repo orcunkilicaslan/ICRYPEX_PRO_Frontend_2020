@@ -1,5 +1,7 @@
 import { Input } from "reactstrap";
 import { useTranslation } from "react-i18next";
+import { nanoid } from "@reduxjs/toolkit";
+import { isObject } from "lodash";
 
 const CustomSelect = props => {
   const {
@@ -24,10 +26,10 @@ const CustomSelect = props => {
       {...rest}
     >
       {title && <option value={-1}>{title}</option>}
-      {list?.map?.(({ id, name }) => {
+      {list?.map?.((item, idx) => {
         return (
-          <option value={id} key={name}>
-            {t(name?.toLowerCase?.())}
+          <option value={item?.id ? item.id : idx} key={nanoid()}>
+            {isObject(item) ? t(item?.name?.toLowerCase?.()) : item}
           </option>
         );
       })}

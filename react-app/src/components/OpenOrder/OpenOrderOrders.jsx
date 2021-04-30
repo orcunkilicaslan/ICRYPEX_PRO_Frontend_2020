@@ -14,10 +14,10 @@ import {
   toggleHideOthersOpen,
   deleteOpenOrder,
 } from "~/state/slices/order.slice";
-import { formatDateDistance, isBitOn } from "~/util/";
+import { formatDateDistance } from "~/util/";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import { OrderOpenOrdersFilter } from "~/components/modals/";
-import ButtonGroupCheckbox from "~/components/ButtonGroupCheckbox";
+import CustomSelect from "~/components/CustomSelect";
 
 const OpenOrderOrders = props => {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const OpenOrderOrders = props => {
   const orderSides = useSelector(state => state.api.settings?.orderSides);
   const orderSlice = useSelector(state => state.order);
   const { allPairs, selectedPair } = usePrices();
-  const [ordersideMask, setOrdersideMask] = useState(null);
+  const [ordersideIdx, setOrdersideIdx] = useState(-1);
 
   const isFetching = orderSlice?.isFetchingOpen;
   const hideOthers = orderSlice?.hideOthersOpen;
@@ -35,33 +35,23 @@ const OpenOrderOrders = props => {
 
   const defaultValues = useMemo(() => {
     return {
-      pairids: allPairs.map(({ id }) => Number(id)),
+      pairids: [],
       orderby: 1,
       isbuyorders: true,
       issellorders: true,
       // startfrom: 0,
       // takecount: 20
     };
-  }, [allPairs]);
+  }, []);
 
   const visibleOrders = useMemo(() => {
     let orders = openOrders;
+    const sideIdx = parseInt(ordersideIdx, 10);
 
-    if (ordersideMask) {
-      // 0th index is buyorders - 1st index is sellorders
-      const isBuyOn = isBitOn(ordersideMask, 0);
-      const isSellOn = isBitOn(ordersideMask, 1);
-
-      orders = openOrders.filter(({ order_side_id }) => {
-        switch (order_side_id) {
-          case 1:
-            return isBuyOn;
-          case 2:
-            return isSellOn;
-          default:
-            return true;
-        }
-      });
+    if (sideIdx !== -1) {
+      orders = orders?.filter?.(
+        ({ order_side_id }) => order_side_id === sideIdx
+      );
     }
 
     if (!hideOthers) {
@@ -71,16 +61,17 @@ const OpenOrderOrders = props => {
 
       return byPair[selectedPair?.name] || [];
     }
-  }, [hideOthers, openOrders, selectedPair, ordersideMask]);
+  }, [openOrders, ordersideIdx, hideOthers, selectedPair?.name]);
 
   useEffect(() => {
+    const pairids = allPairs.map(({ id }) => Number(id));
     const toSubmit = {
       ...defaultValues,
-      pairids: JSON.stringify(defaultValues?.pairids?.map?.(Number)),
+      pairids: JSON.stringify(pairids),
     };
 
     dispatch(fetchOpenOrders(toSubmit));
-  }, [defaultValues, dispatch]);
+  }, [allPairs, defaultValues, dispatch]);
 
   const onToggleHideOthers = useCallback(() => {
     dispatch(toggleHideOthersOpen());
@@ -106,10 +97,11 @@ const OpenOrderOrders = props => {
             </Button>
           </Col>
           <Col sm="2">
-            <ButtonGroupCheckbox
+            <CustomSelect
               list={orderSides}
-              mask={ordersideMask}
-              setMask={setOrdersideMask}
+              title={"İşlem Tipi"}
+              index={ordersideIdx}
+              setIndex={setOrdersideIdx}
             />
           </Col>
           <Col xs="auto" style={{ marginLeft: "auto" }}>
