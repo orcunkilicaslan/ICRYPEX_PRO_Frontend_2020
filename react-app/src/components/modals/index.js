@@ -10,3 +10,4 @@ export { default as DepositWithdrawalTermsModal } from "./DepositWithdrawalTerms
 export { default as OrderHistoryFilter } from "./OrderHistoryFilter";
 export { default as OrderOpenOrdersFilter } from "./OrderOpenOrdersFilter";
 export { default as ActivitiesPendingFilter } from "./ActivitiesPendingFilter";
+export { default as ActivitiesHistoryFilter } from "./ActivitiesHistoryFilter";

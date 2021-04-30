@@ -11,14 +11,14 @@ export const fetchTransactionHistories = createAsyncThunk(
       currencyids = [],
       startdate,
       enddate,
-      periodby,
+      // periodby,
       isdeposit,
       iswithdraw,
       isrealized,
       iscanceled,
       orderby,
-      startfrom,
-      takecount,
+      // startfrom,
+      // takecount,
     } = data;
     const {
       api: { accesstoken },
@@ -30,7 +30,7 @@ export const fetchTransactionHistories = createAsyncThunk(
           currencyids,
           startdate,
           enddate,
-          periodby,
+          // periodby,
           isdeposit,
           iswithdraw,
           isrealized,
@@ -47,8 +47,9 @@ export const fetchTransactionHistories = createAsyncThunk(
       );
 
       return response.data;
-    } catch ({ data }) {
-      return rejectWithValue(data);
+    } catch (err) {
+      const value = err?.data || err?.message;
+      return rejectWithValue(value);
     }
   },
   {
@@ -89,6 +90,7 @@ export const fetchPendingTransactions = createAsyncThunk(
       startfrom,
       takecount,
     };
+
     try {
       const response = await api.fetchPendingTransactions(toSend, {
         headers: {
@@ -97,8 +99,9 @@ export const fetchPendingTransactions = createAsyncThunk(
       });
 
       return { data: response.data, filterData: toSend };
-    } catch ({ data }) {
-      return rejectWithValue(data);
+    } catch (err) {
+      const value = err?.data || err?.message;
+      return rejectWithValue(value);
     }
   },
   {
@@ -136,8 +139,9 @@ export const cancelPendingTransaction = createAsyncThunk(
       }
 
       return response.data;
-    } catch ({ data }) {
-      return rejectWithValue(data);
+    } catch (err) {
+      const value = err?.data || err?.message;
+      return rejectWithValue(value);
     }
   },
   {
@@ -154,6 +158,7 @@ const initialState = {
   pending: [],
   isFetchingPending: false,
   pendingFilter: null,
+  isFetchingHistories: false,
 };
 
 const transactionSlice = createSlice({
@@ -167,8 +172,15 @@ const transactionSlice = createSlice({
     },
   },
   extraReducers: {
+    [fetchTransactionHistories.pending]: state => {
+      state.isFetchingHistories = true;
+    },
     [fetchTransactionHistories.fulfilled]: (state, action) => {
+      state.isFetchingHistories = false;
       state.histories = action?.payload?.description || [];
+    },
+    [fetchTransactionHistories.rejected]: state => {
+      state.isFetchingHistories = false;
     },
     [fetchPendingTransactions.pending]: state => {
       state.isFetchingPending = true;

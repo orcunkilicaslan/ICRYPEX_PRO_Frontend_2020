@@ -1,267 +1,156 @@
-import { useState, useMemo, useEffect } from "react";
-import {
-  Row,
-  Col,
-  Label,
-  Input,
-  ButtonGroup,
-  Form,
-  FormGroup, FormText,
-} from "reactstrap";
+import { useState, useMemo, useEffect, memo } from "react";
+import { Row, Col, Form } from "reactstrap";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
-import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { sub } from "date-fns";
-import { omit, merge } from "lodash";
+import { sub, isWithinInterval } from "date-fns";
 
 import { Button } from "../Button.jsx";
 import Table from "../Table.jsx";
 import { useClientRect, useCurrencies } from "~/state/hooks/";
 import { fetchTransactionHistories } from "~/state/slices/transaction.slice";
 import { formatDate, formatDateDistance } from "~/util/";
+import { ActivitiesHistoryFilter } from "~/components/modals/";
+import { setOpenModal } from "~/state/slices/ui.slice";
+import ButtonGroupRadio from "~/components/ButtonGroupRadio";
+import CustomSelect from "~/components/CustomSelect";
 
-const orderBy = [
-  "Önce Yeni Tarihli",
-  "Önce Eski Tarihli",
-  "Önce Para Yatırma",
-  "Önce Para Çekme",
-  "Önce TRY",
-  "Önce USD",
-  "Önce Kripto Para",
-  "Önce Banka",
-  "Önce Papara",
+const periodBy = [
+  { name: "1G", duration: { days: 1 } },
+  { name: "1H", duration: { weeks: 1 } },
+  { name: "2H", duration: { weeks: 2 } },
+  { name: "1A", duration: { months: 1 } },
+  { name: "3A", duration: { months: 3 } },
 ];
-const transactionTypes = [
-  { label: "Yatırma", name: "isdeposit" },
-  { label: "Çekme", name: "iswithdraw" },
-  { label: "Tamamlandı", name: "isrealized" },
-  { label: "İptal", name: "iscanceled" },
-];
-const periodBy = ["1G", "1H", "2H", "1A", "3A"];
 
 const OpenOrderAccountActivitiesHistory = props => {
   const dispatch = useDispatch();
-  const { t } = useTranslation(["form"]);
+  const { t } = useTranslation(["form", "app"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
   const { activeCurrencies } = useCurrencies();
-  const { histories = [] } = useSelector(state => state.transaction);
-  const { lang } = useSelector(state => state.ui);
-  const [apiError, setApiError] = useState("");
+  const { lang, openModal } = useSelector(state => state.ui);
+  const accountHistory = useSelector(state => state.transaction.histories);
+  const isFetching = useSelector(
+    state => state.transaction.isFetchingHistories
+  );
+  const requestTypes = useSelector(
+    state => state.api.settings?.moneyRequestTypes
+  );
+  const orderStatuses = useSelector(state => state.api.settings?.orderStatuses);
+  const [periodbyIndex, setPeriodbyIndex] = useState(0);
+  const [requestTypeIdx, setRequestTypeIdx] = useState(-1);
+  const [orderStatusIdx, setOrderStatusIdx] = useState(-1);
 
-  const [validCurrencies, defaultValues] = useMemo(() => {
+  const defaultValues = useMemo(() => {
     const today = formatDate(new Date(), "yyyy-MM-dd", { locale: lang });
     const threeMonthsAgo = formatDate(
       sub(new Date(), { months: 3 }),
       "yyyy-MM-dd",
       { locale: lang }
     );
-    const currencies = activeCurrencies.filter(
-      ({ symbol }) => symbol !== "EUR"
-    );
-    const currencyids = currencies.map(({ id }) => Number(id));
 
-    const defaults = {
-      currencyids,
+    return {
+      currencyids: [],
       orderby: 1,
       isdeposit: true,
       iswithdraw: true,
       isrealized: true,
       iscanceled: true,
-      periodby: 5,
       startdate: threeMonthsAgo,
       enddate: today,
     };
+  }, [lang]);
 
-    return [currencies, defaults];
-  }, [activeCurrencies, lang]);
+  const visibleHistories = useMemo(() => {
+    let histories = accountHistory;
+    const interval = periodBy[periodbyIndex]?.duration;
+    const typeIdx = parseInt(requestTypeIdx, 10);
+    const statusIdx = parseInt(orderStatusIdx, 10);
 
-  const {
-    register,
-    handleSubmit,
-    errors,
-    watch,
-    reset,
-    setValue,
-    clearErrors,
-  } = useForm({
-    mode: "onChange",
-    defaultValues,
-  });
-  const { periodby: watchedPeriodby } = watch();
+    if (typeIdx !== -1) {
+      histories = histories?.filter?.(
+        ({ request_type_id }) => request_type_id === typeIdx
+      );
+    }
+
+    if (statusIdx !== -1) {
+      histories = histories?.filter?.(({ status }) => status === statusIdx);
+    }
+
+    if (interval) {
+      histories = histories?.filter?.(({ datetime }) => {
+        return isWithinInterval(new Date(datetime), {
+          start: sub(new Date(), interval),
+          end: new Date(),
+        });
+      });
+    }
+
+    return histories;
+  }, [accountHistory, orderStatusIdx, periodbyIndex, requestTypeIdx]);
 
   useEffect(() => {
-    const { currencyids, enddate, startdate, ...rest } = defaultValues;
+    const currencyids = activeCurrencies
+      .filter(({ symbol }) => symbol !== "EUR")
+      .map(({ id }) => Number(id));
     const toSubmit = {
-      ...rest,
+      ...defaultValues,
       currencyids: JSON.stringify(currencyids),
     };
 
     dispatch(fetchTransactionHistories(toSubmit));
-  }, [defaultValues, dispatch]);
+  }, [activeCurrencies, defaultValues, dispatch]);
 
-  const onSubmit = async data => {
-    setApiError("");
-    const { currencyids, periodby } = data;
-    let toSubmit = { currencyids: JSON.stringify(currencyids) };
-
-    if (periodby) {
-      merge(toSubmit, omit(data, ["currencyids", "startdate", "enddate"]));
-    } else {
-      const startdate = formatDate(data?.startdate, "yyyy-MM-dd", {
-        locale: lang,
-      });
-      const enddate = formatDate(data?.enddate, "yyyy-MM-dd", { locale: lang });
-
-      merge(
-        toSubmit,
-        omit(data, ["currencyids", "periodby", "startdate", "enddate"]),
-        { startdate, enddate }
-      );
-    }
-
-    const { payload } = await dispatch(fetchTransactionHistories(toSubmit));
-
-    if (!payload?.status) {
-      setApiError(payload?.errormessage);
-    } else {
-      setApiError("");
-    }
+  const openFiltersModal = () => {
+    dispatch(setOpenModal("activitieshistoryfilter"));
   };
 
-  const onReset = () => {
-    reset(defaultValues);
-    setApiError("");
-    clearErrors();
+  const clearOpenModals = () => {
+    dispatch(setOpenModal("none"));
+  };
+
+  const getOrderStatusText = (statusId = 1) => {
+    const status = orderStatuses?.find?.(({ id }) => id === statusId);
+    const key = status?.name?.toLowerCase?.();
+
+    return t(`app:${key}`);
   };
 
   return (
     <div className="activities-history">
-      <Form
-        className="siteformui"
-        autoComplete="off"
-        noValidate
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <Form className="siteformui" autoComplete="off" noValidate>
         <Row className="tabcont tabcont-filterbar">
-          <Col>
-            <Input
-              className="custom-select custom-select-sm"
-              type="select"
-              multiple
-              size={2}
-              name="currencyids"
-              innerRef={register({
-                required: t("isRequired"),
-              })}
-            >
-              {validCurrencies.map(({ symbol, id }) => {
-                return (
-                  <option value={Number(id)} key={symbol}>
-                    {symbol}
-                  </option>
-                );
-              })}
-            </Input>
-            {errors.currencyids && (
-                <FormText className="inputresult resulterror">
-                  {errors.currencyids?.message}
-                </FormText>
-            )}
-          </Col>
-          <Col>
-            <Input
-              className="custom-select custom-select-sm"
-              type="select"
-              name="orderby"
-              innerRef={register({
-                valueAsNumber: true,
-              })}
-            >
-              {orderBy.map((el, idx) => {
-                return (
-                  <option value={idx + 1} key={`${el}_${idx}`}>
-                    {el}
-                  </option>
-                );
-              })}
-            </Input>
-          </Col>
-          <Col>
-            <FormGroup check inline>
-              {transactionTypes.map(({ label, name }) => {
-                return (
-                  <Label key={name} check>
-                    <Input
-                      name={name}
-                      type="checkbox"
-                      innerRef={register({ valueAsNumber: true })}
-                    />
-                    {label}{" "}
-                  </Label>
-                );
-              })}
-            </FormGroup>
-          </Col>
-          <Col>
-            <Input
-              name="periodby"
-              innerRef={register({ valueAsNumber: true })}
-              className="d-none"
-            />
-            <ButtonGroup size="sm" className="w-100">
-              {periodBy.map((el, idx) => {
-                const cls = classnames({ active: watchedPeriodby === idx + 1 });
-
-                return (
-                  <Button
-                    key={`${el}_${idx}`}
-                    type="button"
-                    size="sm"
-                    className={cls}
-                    variant="secondary"
-                    onClick={() =>
-                      setValue("periodby", idx + 1, { shouldValidate: true })
-                    }
-                  >
-                    {el}
-                  </Button>
-                );
-              })}
-            </ButtonGroup>
-          </Col>
           <Col xs="auto">
-            <Input
-              type="date"
-              bsSize="sm"
-              title="Start Date"
-              name="startdate"
-              innerRef={register({
-                valueAsDate: true,
-              })}
+            <Button variant="secondary" size="sm" onClick={openFiltersModal}>
+              Filtre
+            </Button>
+          </Col>
+          <Col>
+            <CustomSelect
+              list={requestTypes}
+              title={"İşlem Tipi"}
+              index={requestTypeIdx}
+              setIndex={setRequestTypeIdx}
+              namespace="finance"
             />
-            <Input
-              type="date"
-              bsSize="sm"
-              name="enddate"
-              title="End Date"
-              innerRef={register({
-                valueAsDate: true,
-              })}
+          </Col>
+          <Col>
+            <CustomSelect
+              list={orderStatuses}
+              namespace="app"
+              title={"İşlem Durumu"}
+              index={orderStatusIdx}
+              setIndex={setOrderStatusIdx}
+            />
+          </Col>
+          <Col>
+            <ButtonGroupRadio
+              list={periodBy}
+              index={periodbyIndex}
+              setIndex={setPeriodbyIndex}
             />
           </Col>
         </Row>
-        <ButtonGroup xs="auto">
-          <Button type="submit" size="sm" variant="outline-primary">
-            Filtrele
-          </Button>
-          <Button size="sm" variant="outline-danger" onClick={onReset}>
-            Sıfırla
-          </Button>
-        </ButtonGroup>
-        {apiError && (
-          <span style={{ color: "coral", fontSize: "1rem" }}>{apiError}</span>
-        )}
       </Form>
       <div className="activitieshistorytable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
@@ -299,7 +188,7 @@ const OpenOrderAccountActivitiesHistory = props => {
             scrollbar
             scrollbarstyles={{ height: `${tableHeight - 36}px` }}
           >
-            {histories.map(
+            {visibleHistories.map(
               ({
                 amount,
                 currencysymbol,
@@ -349,7 +238,9 @@ const OpenOrderAccountActivitiesHistory = props => {
                       ---
                     </Table.Td>
                     <Table.Td sizeauto className="stts">
-                      <span className={statuscls}>{status}</span>
+                      <span className={statuscls}>
+                        {getOrderStatusText(status)}
+                      </span>
                     </Table.Td>
                   </Table.Tr>
                 );
@@ -358,8 +249,14 @@ const OpenOrderAccountActivitiesHistory = props => {
           </Table.Tbody>
         </Table>
       </div>
+      <ActivitiesHistoryFilter
+        isOpen={openModal === "activitieshistoryfilter"}
+        clearModals={clearOpenModals}
+        defaultValues={defaultValues}
+        isFetching={isFetching}
+      />
     </div>
   );
 };
 
-export default OpenOrderAccountActivitiesHistory;
+export default memo(OpenOrderAccountActivitiesHistory);

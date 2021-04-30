@@ -29,6 +29,7 @@ const MODALS = [
   "orderopenordersfilter",
   "orderhistoryfilter",
   "activitiespendingfilter",
+  "activitieshistoryfilter",
   "notifications",
   "verify",
 ];
