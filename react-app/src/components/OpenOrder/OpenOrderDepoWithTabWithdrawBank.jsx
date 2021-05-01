@@ -20,6 +20,7 @@ import { fetchBankAccounts } from "~/state/slices/user.slice";
 import { useCurrencies } from "~/state/hooks/";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal.jsx";
+import AddBankAccountModal from "~/components/modals/AddBankAccountModal";
 
 const OpenOrderDepoWithTabWithdrawBank = props => {
   const dispatch = useDispatch();
@@ -95,6 +96,10 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
     dispatch(setOpenModal("depositwithdrawalterms"));
   };
 
+  const openAddBankAccModal = () => {
+    dispatch(setOpenModal("addbankaccount"));
+  };
+
   const clearOpenModals = () => {
     dispatch(setOpenModal("none"));
   };
@@ -130,7 +135,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
                 })}
               </Input>
               <InputGroupAddon addonType="append">
-                <Button variant="secondary" className="active">
+                <Button variant="secondary" className="active" onClick={openAddBankAccModal}>
                   <IconSet sprite="sprtsmclrd" size="16" name="addbtn" />
                 </Button>
               </InputGroupAddon>
@@ -223,6 +228,10 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
         <DepositWithdrawalTermsModal
           isOpen={openModal === "depositwithdrawalterms"}
           clearModals={clearOpenModals}
+        />
+        <AddBankAccountModal
+            isOpen={openModal === "addbankaccount"}
+            clearModals={clearOpenModals}
         />
       </div>
     </div>
