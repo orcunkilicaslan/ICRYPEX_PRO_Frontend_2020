@@ -4109,6 +4109,49 @@
                                                 <div id="activities_pending" class="tab-pane fade show active" role="tabpanel">
                                                     <div class="activities-pending">
 
+                                                        <!-- Filter -->
+                                                        <div class="tabcont tabcont-filterbar siteformui row">
+                                                            <div class="col">
+                                                                <select class="custom-select custom-select-sm">
+                                                                    <option selected disabled>İşlem Tipi</option>
+                                                                    <option value="1">Stop Limit</option>
+                                                                    <option value="2">Market</option>
+                                                                    <option value="3">Limit</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col">
+                                                                <select class="custom-select custom-select-sm">
+                                                                    <option selected disabled>Yöntem</option>
+                                                                    <option value="1">Havale-EFT</option>
+                                                                    <option value="2">Papara</option>
+                                                                    <option value="3">Kripto</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col">
+                                                                <select class="custom-select custom-select-sm">
+                                                                    <option selected disabled>Durum</option>
+                                                                    <option value="1">Gerçekleşti</option>
+                                                                    <option value="2">Beklemede</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col">
+                                                                <select class="custom-select custom-select-sm">
+                                                                    <option selected disabled>Para Birimi</option>
+                                                                    <option value="TRY">TRY</option>
+                                                                    <option value="USD">USD</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <input type="text" class="form-control form-control-sm" value="" placeholder="Başlangıç - Bitiş Tarihi" />
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <button type="button" class="btn btn-sm btn-outline-primary">Filitrele</button>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <button type="button" class="btn btn-sm btn-outline-danger">Sıfırla</button>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Filter -->
                                                         <!-- Table -->
                                                         <div class="activitiespendingtable scrollbar">
                                                             <div class="sitetablediv scrollbar-tbl">
