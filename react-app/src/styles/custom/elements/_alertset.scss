@@ -45,26 +45,56 @@ $alert-border-color:  $site-brdr-dark;
     color: $alert-text-color;
   }
 
-
   &-sweet{
+
+    &#{$alertclassname}-success{
+      background-color: $site-result-dark-success-bg;
+      border-color: $site-result-dark-success-brdr;
+    }
+
+    &#{$alertclassname}-warning{
+      background-color: $site-result-dark-warning-bg;
+      border-color: $site-result-dark-warning-brdr;
+    }
+
+    &#{$alertclassname}-danger{
+      background-color: $site-result-dark-error-bg;
+      border-color: $site-result-dark-error-brdr;
+    }
 
     #{$alertclassname}-flex{
       @include flexbox-display-flex();
       @include flexbox-align-items(center);
+
+      #{$alertclassname}-icon{
+        @include flexbox-flex(0 0 auto);
+        width: auto;
+        max-width: 100%;
+        padding-right: $alert-padding-y;
+
+      }
+      #{$alertclassname}-desc{
+        @include flexbox-flex-basis(0);
+        @include flexbox-flex-grow(1);
+        max-width: 100%;
+      }
     }
 
-    #{$alertclassname}-icon{
-      @include flexbox-flex(0 0 auto);
-      width: auto;
-      max-width: 100%;
-      padding-right: $alert-padding-y;
+    #{$alertclassname}-center{
+      padding: $alert-padding-y;
 
+      #{$alertclassname}-icon{
+        padding-bottom: $alert-padding-y;
+
+        .alert-icons{
+          margin: 0 auto;
+        }
+      }
+      #{$alertclassname}-desc{
+        text-align: center;
+      }
     }
-    #{$alertclassname}-desc{
-      @include flexbox-flex-basis(0);
-      @include flexbox-flex-grow(1);
-      max-width: 100%;
-    }
+
 
     #{$alertclassname}-heading{text-transform: uppercase;}
 

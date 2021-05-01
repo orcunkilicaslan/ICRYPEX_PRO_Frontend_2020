@@ -20,6 +20,7 @@ import { usePrices } from "~/state/hooks/";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchBalance} from "~/state/slices/balance.slice";
 import {fetchEasyBuy} from "~/state/slices/easybuy.slice";
+import {AlertResult} from "~/components/AlertResult";
 
 const EasyBuySellFormBuy = props => {
   const { t } = useTranslation(["form", "common", "finance"]);
@@ -86,6 +87,9 @@ const EasyBuySellFormBuy = props => {
 
   return (
     <div className="easybuysell-cont">
+      { 0 === 1 ? (
+          <AlertResult error center>Hata Mesajı Buraya Gelecek...</AlertResult>
+      ) : null}
       <Form
         className="siteformui"
         autoComplete="off"

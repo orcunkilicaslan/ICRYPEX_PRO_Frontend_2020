@@ -1,13 +1,16 @@
 import { useTranslation } from "react-i18next";
 import { Alert } from "reactstrap";
 import classNames from "classnames";
+import Table from "~/components/Table";
 
 export function AlertResult(props) {
   const { t } = useTranslation("alertResult");
 
-  const { className, error, warning, success, children, ...rest } = props;
+  const { className, error, warning, success, flex, center, children, ...rest } = props;
 
   const alertResultClass = classNames("alert-sweet", className, {
+    "alert-flex": Boolean(flex),
+    "alert-center": Boolean(center),
     "alert-danger": Boolean(error),
     "alert-warning": Boolean(warning),
     "alert-success": Boolean(success),
@@ -15,7 +18,7 @@ export function AlertResult(props) {
 
   const alertResult = (
     <Alert className={alertResultClass} {...rest}>
-      <div className="alert-flex">
+      <div className={center ? "alert-center" : "alert-flex"}>
         {error ? (
           <div className="alert-icon">
             <div className="animation-alert-icons">

@@ -20,6 +20,7 @@ import Table from "~/components/Table.jsx";
 import { usePrices } from "~/state/hooks/";
 import {fetchBalance} from "~/state/slices/balance.slice";
 import {fetchEasySell} from "~/state/slices/easysell.slice";
+import {AlertResult} from "~/components/AlertResult";
 
 const EasyBuySellFormSell = props => {
   const { t } = useTranslation(["form", "common", "finance"]);
@@ -79,6 +80,9 @@ const EasyBuySellFormSell = props => {
 
   return (
     <div className="easybuysell-cont">
+      { 0 === 1 ? (
+          <AlertResult error center>Hata Mesajı Buraya Gelecek...</AlertResult>
+      ) : null}
       <Form
         className="siteformui"
         autoComplete="off"
