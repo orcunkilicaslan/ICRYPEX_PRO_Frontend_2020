@@ -121,11 +121,6 @@ const OpenOrderAccountActivitiesHistory = props => {
       <Form className="siteformui" autoComplete="off" noValidate>
         <Row className="tabcont tabcont-filterbar">
           <Col xs="auto">
-            <Button variant="secondary" size="sm" onClick={openFiltersModal}>
-              Filtre
-            </Button>
-          </Col>
-          <Col>
             <CustomSelect
               list={requestTypes}
               title={"İşlem Tipi"}
@@ -134,21 +129,26 @@ const OpenOrderAccountActivitiesHistory = props => {
               namespace="finance"
             />
           </Col>
-          <Col>
+          <Col xs="auto">
             <CustomSelect
-              list={orderStatuses}
-              namespace="app"
-              title={"İşlem Durumu"}
-              index={orderStatusIdx}
-              setIndex={setOrderStatusIdx}
+                list={orderStatuses}
+                namespace="app"
+                title={"İşlem Durumu"}
+                index={orderStatusIdx}
+                setIndex={setOrderStatusIdx}
             />
           </Col>
-          <Col>
+          <Col xs="auto">
             <ButtonGroupRadio
-              list={periodBy}
-              index={periodbyIndex}
-              setIndex={setPeriodbyIndex}
+                list={periodBy}
+                index={periodbyIndex}
+                setIndex={setPeriodbyIndex}
             />
+          </Col>
+          <Col xs="auto">
+            <Button variant="secondary" size="sm" onClick={openFiltersModal}>
+              Detaylı Filtreleme
+            </Button>
           </Col>
         </Row>
       </Form>

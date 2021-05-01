@@ -108,7 +108,7 @@ const ActivitiesHistoryFilter = props => {
         >
           <FormGroup tag="fieldset">
             <legend>Para Birimleri</legend>
-            <FormGroup className="checkradioboxed" check inline>
+            <FormGroup className="checkradioboxed">
               {validCurrencies?.map?.(({ symbol }, idx) => {
                 const inputId = nanoid();
 
@@ -125,7 +125,7 @@ const ActivitiesHistoryFilter = props => {
                       innerRef={register}
                     />
                     <Label
-                      className="custom-control-label btn btn-md btn-primary active"
+                      className="custom-control-label btn btn-sm btn-primary"
                       htmlFor={inputId}
                     >
                       {symbol}
@@ -137,7 +137,7 @@ const ActivitiesHistoryFilter = props => {
           </FormGroup>
           <FormGroup tag="fieldset">
             <legend>İşlem Tipi</legend>
-            <FormGroup className="checkradioboxed" check inline>
+            <FormGroup className="checkradioboxed">
               {requestTypes.map(({ name, id }) => {
                 const inputId = nanoid();
                 const fieldName = id === 1 ? "isdeposit" : "iswithdraw";
@@ -155,7 +155,7 @@ const ActivitiesHistoryFilter = props => {
                       innerRef={register}
                     />
                     <Label
-                      className="custom-control-label btn btn-md btn-primary active"
+                      className="custom-control-label btn btn-sm btn-primary"
                       htmlFor={inputId}
                     >
                       {t(`finance:${name?.toLowerCase?.()}`)}
@@ -167,7 +167,7 @@ const ActivitiesHistoryFilter = props => {
           </FormGroup>
           <FormGroup tag="fieldset">
             <legend>İşlem Durumu</legend>
-            <FormGroup className="checkradioboxed" check inline>
+            <FormGroup className="checkradioboxed">
               {activityStatuses.map(({ label, name }) => {
                 const inputId = nanoid();
 
@@ -184,7 +184,7 @@ const ActivitiesHistoryFilter = props => {
                       innerRef={register}
                     />
                     <Label
-                      className="custom-control-label btn btn-md btn-primary active"
+                      className="custom-control-label btn btn-sm btn-primary"
                       htmlFor={inputId}
                     >
                       {t(`finance:${label?.toLowerCase?.()}`)}
@@ -223,7 +223,7 @@ const ActivitiesHistoryFilter = props => {
             <legend>Sıralama</legend>
             <FormGroup>
               <Input
-                className="custom-select custom-select-sm"
+                className="custom-select"
                 type="select"
                 name="orderby"
                 innerRef={register({

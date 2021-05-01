@@ -78,7 +78,7 @@ const ActivitiesPendingFilter = props => {
         >
           <FormGroup tag="fieldset">
             <legend>İşlem Tipi</legend>
-            <FormGroup className="checkradioboxed" check inline>
+            <FormGroup className="checkradioboxed">
               {requestTypes.map(({ name, id }) => {
                 const inputId = nanoid();
                 const fieldName = id === 1 ? "isdeposit" : "iswithdraw";
@@ -96,7 +96,7 @@ const ActivitiesPendingFilter = props => {
                       innerRef={register}
                     />
                     <Label
-                      className="custom-control-label btn btn-md btn-primary active"
+                      className="custom-control-label btn btn-sm btn-primary"
                       htmlFor={inputId}
                     >
                       {t(`finance:${name?.toLowerCase?.()}`)}
@@ -108,7 +108,7 @@ const ActivitiesPendingFilter = props => {
           </FormGroup>
           <FormGroup tag="fieldset">
             <legend>Para Birimi</legend>
-            <FormGroup className="checkradioboxed" check inline>
+            <FormGroup className="checkradioboxed">
               {requestCurrencies.map(currency => {
                 const inputId = nanoid();
 
@@ -125,7 +125,7 @@ const ActivitiesPendingFilter = props => {
                       innerRef={register}
                     />
                     <Label
-                      className="custom-control-label btn btn-md btn-primary active"
+                      className="custom-control-label btn btn-sm btn-primary"
                       htmlFor={inputId}
                     >
                       {currency}
@@ -139,7 +139,7 @@ const ActivitiesPendingFilter = props => {
             <legend>Sıralama</legend>
             <FormGroup>
               <Input
-                className="custom-select custom-select-sm"
+                className="custom-select"
                 type="select"
                 name="orderby"
                 innerRef={register({

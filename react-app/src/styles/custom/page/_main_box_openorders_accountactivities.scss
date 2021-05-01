@@ -26,26 +26,29 @@
 
     .activities{
 
+      &-pending,
+      &-history{
+
+        .tabcont-filterbar{
+          padding-bottom: 5px;
+        }
+
+        .sitetablediv.scrollbar-tbl{
+          > .scrollbar-tbl-tb{
+            height: 120px !important;
+          }
+        }
+
+      }
+    }
+
+    .activities{
+
       &-tabs{}
 
       &-pending{
 
         .activitiespendingtable{
-          .sitetablediv.scrollbar-tbl{
-
-            > .scrollbar-tbl-th .tbl-thead{
-              border-top-width: 0;
-
-              .tbl-th{
-                padding-top: 0;
-              }
-            }
-
-            > .scrollbar-tbl-tb{
-              height: 160px;
-            }
-          }
-
           .sitetablediv{
             .nmbr[class*="tbl"]{width: 60px;}
             .date[class*="tbl"]{width: 90px;}
@@ -67,24 +70,11 @@
             }
           }
         }
-
       }
 
       &-history{
 
-        .tabcont-filterbar{
-          padding-bottom: 5px;
-        }
-
         .activitieshistorytable{
-
-          .sitetablediv.scrollbar-tbl{
-
-            > .scrollbar-tbl-tb{
-              height: 120px !important;
-            }
-          }
-
           .sitetablediv{
             .nmbr[class*="tbl"]{width: 60px;}
             .date[class*="tbl"]{width: 85px;}

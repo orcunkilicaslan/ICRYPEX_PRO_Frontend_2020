@@ -90,34 +90,32 @@ const OpenOrderAccountActivitiesPending = props => {
   return (
     <div className="activities-pending">
       <Form
-        className="tabcont tabcont-filterbar siteformui"
+        className="tabcont tabcont-filterbar siteformui row"
         autoComplete="off"
         noValidate
       >
-        <Row className="tabcont tabcont-filterbar">
-          <Col xs="auto">
-            <Button variant="secondary" size="sm" onClick={openFiltersModal}>
-              Filtre
-            </Button>
-          </Col>
-          <Col sm="2">
-            <CustomSelect
+        <Col xs="auto">
+          <CustomSelect
               list={requestTypes}
               title={"İşlem Tipi"}
               index={requestTypeIdx}
               setIndex={setRequestTypeIdx}
               namespace="finance"
-            />
-          </Col>
-          <Col sm="2">
-            <CustomSelect
+          />
+        </Col>
+        <Col xs="auto">
+          <CustomSelect
               list={requestCurrencies}
               title={"Para Birimleri"}
               index={requestCurrenciesIdx}
               setIndex={setrequestCurrenciesIdx}
-            />
-          </Col>
-        </Row>
+          />
+        </Col>
+        <Col xs="auto">
+          <Button variant="secondary" size="sm" onClick={openFiltersModal}>
+            Detaylı Filtreleme
+          </Button>
+        </Col>
       </Form>
       <div className="activitiespendingtable scrollbar" ref={tableCanvasRef}>
         <Table scrollbar>
