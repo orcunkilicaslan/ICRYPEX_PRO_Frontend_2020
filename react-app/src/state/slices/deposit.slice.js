@@ -37,37 +37,6 @@ export const depositBankwire = createAsyncThunk(
   }
 );
 
-export const depositPapara = createAsyncThunk(
-  "deposit/papara",
-  async ({ amount, read }, { getState, rejectWithValue }) => {
-    const {
-      api: { accesstoken },
-    } = getState();
-
-    try {
-      const response = await api.depositPapara(
-        { amount, read },
-        {
-          headers: {
-            "x-access-token": accesstoken,
-          },
-        }
-      );
-
-      return response.data;
-    } catch ({ data }) {
-      return rejectWithValue(data);
-    }
-  },
-  {
-    condition: (_, { getState }) => {
-      const state = getState();
-
-      return hasAccessToken(state);
-    },
-  }
-);
-
 export const depositCrypto = createAsyncThunk(
   "deposit/crypto",
   async ({ currencyid, read }, { getState, rejectWithValue }) => {
@@ -101,7 +70,6 @@ export const depositCrypto = createAsyncThunk(
 
 const initialState = {
   isDepositingBank: false,
-  isDepositingPapara: false,
   isDepositingCrypto: false,
 };
 
@@ -124,15 +92,6 @@ const depositSlice = createSlice({
     },
     [depositBankwire.rejected]: state => {
       state.isDepositingBank = false;
-    },
-    [depositPapara.pending]: state => {
-      state.isDepositingPapara = true;
-    },
-    [depositPapara.fulfilled]: (state, action) => {
-      state.isDepositingPapara = false;
-    },
-    [depositPapara.rejected]: state => {
-      state.isDepositingPapara = false;
     },
     [depositCrypto.pending]: state => {
       state.isDepositingCrypto = true;

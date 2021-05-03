@@ -104,15 +104,6 @@ const OpenOrderAssetsChartList = props => {
                 size="sm"
                 variant="secondary"
                 onClick={() => {
-                  onClick("papara");
-                }}
-              >
-                Papara
-              </Button>
-              <Button
-                size="sm"
-                variant="secondary"
-                onClick={() => {
                   onClick("crypto");
                 }}
               >
@@ -152,7 +143,11 @@ const OpenOrderAssetsChartList = props => {
                     key={symbol}
                   >
                     <div className="circle">
-                      <IconSet sprite="sprtsmcurrency" size="16" name={symbol?.toLowerCase?.()} />
+                      <IconSet
+                        sprite="sprtsmcurrency"
+                        size="16"
+                        name={symbol?.toLowerCase?.()}
+                      />
                       <i className="centercirc" />
                     </div>
                     <div className="info">

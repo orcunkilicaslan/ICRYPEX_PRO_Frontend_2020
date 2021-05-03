@@ -24,7 +24,6 @@ const defaultValues = {
   istry: true,
   isusd: true,
   isbank: true,
-  ispapara: true,
   orderby: 1,
 };
 

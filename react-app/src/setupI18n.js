@@ -75,7 +75,6 @@ const init = (initialLang = "en") => {
             yatırma: "Deposit",
             çekme: "Withdraw",
             banka: "Bank",
-            papara: "Papara",
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -198,7 +197,6 @@ const init = (initialLang = "en") => {
             yatırma: "Yatırma",
             çekme: "Çekme",
             banka: "Banka",
-            papara: "Papara",
           },
           coinbar: {
             lastPrice: "Son Fiyat",
