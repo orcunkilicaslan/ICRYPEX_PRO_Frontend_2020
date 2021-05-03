@@ -1,9 +1,10 @@
+import { forwardRef } from "react";
 import { Input } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { nanoid } from "@reduxjs/toolkit";
 import { isObject } from "lodash";
 
-const CustomSelect = props => {
+const CustomSelect = forwardRef((props, ref) => {
   const {
     children,
     className,
@@ -21,8 +22,9 @@ const CustomSelect = props => {
     <Input
       className="custom-select custom-select-sm"
       type="select"
-      onChange={evt => setIndex(parseInt(evt?.target?.value, 10))}
+      onChange={evt => setIndex && setIndex(parseInt(evt?.target?.value, 10))}
       value={index}
+      innerRef={ref}
       {...rest}
     >
       {title && <option value={-1}>{title}</option>}
@@ -35,6 +37,6 @@ const CustomSelect = props => {
       })}
     </Input>
   );
-};
+});
 
 export default CustomSelect;

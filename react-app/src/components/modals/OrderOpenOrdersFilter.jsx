@@ -9,13 +9,14 @@ import {
   ModalHeader,
 } from "reactstrap";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { nanoid } from "nanoid";
+import { useDispatch, useSelector } from "react-redux";
+import { merge } from "lodash";
 
 import { Button } from "../Button.jsx";
 import { AlertResult } from "../AlertResult.jsx";
 import { usePrices } from "~/state/hooks";
 import { fetchOpenOrders } from "~/state/slices/order.slice";
+import CustomSelect from "~/components/CustomSelect";
 
 const orderBy = [
   "Önce Yeni Tarihli",
@@ -25,33 +26,40 @@ const orderBy = [
   "Alfabetik",
 ];
 
-const orderTypes = [
-  { label: "Alış", name: "isbuyorders" },
-  { label: "Satış", name: "issellorders" },
-];
-
 const OrderOpenOrdersFilter = props => {
   const { isOpen, clearModals, defaultValues, isFetching, ...rest } = props;
   const dispatch = useDispatch();
   const [apiError, setApiError] = useState("");
   const { allPairs } = usePrices();
-  const { register, handleSubmit, reset, clearErrors } = useForm({
+  const orderSides = useSelector(state => state.api.settings?.orderSides);
+  const { register, handleSubmit, watch, setValue } = useForm({
     mode: "onChange",
     defaultValues,
   });
 
   const onSubmit = async data => {
     setApiError("");
-    const pairids = [];
-
-    data?.pairids?.forEach?.((bool, idx) => {
-      if (bool) pairids.push(allPairs?.[idx]?.id);
-    });
-
+    const { typeID, pairids, ...rest } = data;
+    const typeIdx = parseInt(typeID, 10);
     const toSubmit = {
-      ...data,
-      pairids: JSON.stringify(pairids),
+      ...rest,
+      isbuyorders: true,
+      issellorders: true,
     };
+
+    const _pairids = [];
+    pairids?.forEach?.((bool, idx) => {
+      if (bool) _pairids.push(allPairs?.[idx]?.id);
+    });
+    merge(toSubmit, { pairids: JSON.stringify(_pairids) });
+
+    if (typeIdx !== -1) {
+      merge(toSubmit, {
+        isbuyorders: typeIdx === 1,
+        issellorders: typeIdx === 2,
+      });
+    }
+
     const { payload } = await dispatch(fetchOpenOrders(toSubmit));
 
     if (!payload?.status) {
@@ -118,31 +126,16 @@ const OrderOpenOrdersFilter = props => {
           </FormGroup>
           <FormGroup tag="fieldset">
             <legend>İşlem Tipi</legend>
-            <FormGroup className="checkradioboxed">
-              {orderTypes.map(({ label, name }) => {
-                const inputId = nanoid();
-                return (
-                  <div
-                    key={name}
-                    className="custom-control custom-checkbox custom-control-inline"
-                  >
-                    <Input
-                      className="custom-control-input"
-                      type="checkbox"
-                      id={inputId}
-                      name={name}
-                      innerRef={register}
-                    />
-                    <Label
-                      className="custom-control-label btn btn-sm btn-secondary"
-                      htmlFor={inputId}
-                    >
-                      {label}
-                    </Label>
-                  </div>
-                );
-              })}
-            </FormGroup>
+            <FormGroup>
+              <CustomSelect
+                list={orderSides}
+                title={"İşlem Tipi"}
+                name="typeID"
+                index={watch("typeID")}
+                setIndex={id => setValue("typeID", id)}
+                ref={register}
+              />
+            </FormGroup>{" "}
           </FormGroup>
           <FormGroup tag="fieldset">
             <legend>Sıralama</legend>

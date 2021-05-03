@@ -12,13 +12,14 @@ import {
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
-import { useTranslation } from "react-i18next";
+import { merge } from "lodash";
 
 import { Button } from "../Button.jsx";
 import { AlertResult } from "../AlertResult.jsx";
 import { fetchTransactionHistories } from "~/state/slices/transaction.slice";
 import { useCurrencies } from "~/state/hooks/";
 import { formatDate } from "~/util/";
+import CustomSelect from "~/components/CustomSelect";
 
 const orderBy = [
   "Önce Yeni Tarihli",
@@ -28,29 +29,26 @@ const orderBy = [
   "Önce TRY",
   "Önce USD",
   "Önce Kripto Para",
-  "Önce Banka",
-  "Önce Papara",
-];
-
-const activityStatuses = [
-  { label: "Realized", name: "isrealized" },
-  { label: "Canceled", name: "iscanceled" },
 ];
 
 const ActivitiesHistoryFilter = props => {
   const { isOpen, clearModals, defaultValues, isFetching, ...rest } = props;
   const dispatch = useDispatch();
-  const { t } = useTranslation(["form", "finance"]);
   const [apiError, setApiError] = useState("");
   const { lang } = useSelector(state => state.ui);
   const requestTypes = useSelector(
     state => state.api.settings?.moneyRequestTypes
   );
+  const orderStatuses = useSelector(state => state.api.settings?.orderStatuses);
   const { activeCurrencies } = useCurrencies();
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, watch, setValue } = useForm({
     mode: "onChange",
     defaultValues,
   });
+
+  const validStatuses = useMemo(() => {
+    return orderStatuses.filter(({ id }) => id === 2 || id === 3);
+  }, [orderStatuses]);
 
   const validCurrencies = useMemo(() => {
     return activeCurrencies.filter(({ symbol }) => symbol !== "EUR");
@@ -58,22 +56,51 @@ const ActivitiesHistoryFilter = props => {
 
   const onSubmit = async data => {
     setApiError("");
-    const currencyids = [];
-
-    data?.currencyids?.forEach?.((bool, idx) => {
-      if (bool) currencyids.push(validCurrencies?.[idx]?.id);
-    });
-
-    const startdate = formatDate(data?.startdate, "yyyy-MM-dd", {
-      locale: lang,
-    });
-    const enddate = formatDate(data?.enddate, "yyyy-MM-dd", { locale: lang });
+    const {
+      typeID,
+      statusID,
+      currencyids,
+      startdate: sd,
+      enddate: ed,
+      ...rest
+    } = data;
+    const typeIdx = parseInt(typeID, 10);
+    const statusIdx = parseInt(statusID, 10);
     const toSubmit = {
-      ...data,
-      currencyids: JSON.stringify(currencyids),
-      startdate,
-      enddate,
+      ...rest,
+      isdeposit: true,
+      iswithdraw: true,
+      isrealized: true,
+      iscanceled: true,
     };
+
+    const _currencyids = [];
+    currencyids?.forEach?.((bool, idx) => {
+      if (bool) _currencyids.push(validCurrencies?.[idx]?.id);
+    });
+    merge(toSubmit, { currencyids: JSON.stringify(_currencyids) });
+
+    if (typeIdx !== -1) {
+      merge(toSubmit, {
+        isdeposit: typeIdx === 1,
+        iswithdraw: typeIdx === 2,
+      });
+    }
+
+    if (statusIdx !== -1) {
+      merge(toSubmit, {
+        isrealized: statusIdx === 0,
+        iscanceled: statusIdx === 1,
+      });
+    }
+
+    if (sd && ed) {
+      const startdate = formatDate(sd, "yyyy-MM-dd", {
+        locale: lang,
+      });
+      const enddate = formatDate(ed, "yyyy-MM-dd", { locale: lang });
+      merge(toSubmit, { startdate, enddate });
+    }
 
     const { payload } = await dispatch(fetchTransactionHistories(toSubmit));
 
@@ -137,61 +164,30 @@ const ActivitiesHistoryFilter = props => {
           </FormGroup>
           <FormGroup tag="fieldset">
             <legend>İşlem Tipi</legend>
-            <FormGroup className="checkradioboxed">
-              {requestTypes.map(({ name, id }) => {
-                const inputId = nanoid();
-                const fieldName = id === 1 ? "isdeposit" : "iswithdraw";
-
-                return (
-                  <div
-                    key={name}
-                    className="custom-control custom-checkbox custom-control-inline"
-                  >
-                    <Input
-                      className="custom-control-input"
-                      type="checkbox"
-                      id={inputId}
-                      name={fieldName}
-                      innerRef={register}
-                    />
-                    <Label
-                      className="custom-control-label btn btn-sm btn-primary"
-                      htmlFor={inputId}
-                    >
-                      {t(`finance:${name?.toLowerCase?.()}`)}
-                    </Label>
-                  </div>
-                );
-              })}
+            <FormGroup>
+              <CustomSelect
+                list={requestTypes}
+                title={"İşlem Tipi"}
+                name="typeID"
+                index={watch("typeID")}
+                setIndex={id => setValue("typeID", id)}
+                ref={register}
+                namespace="finance"
+              />
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
             <legend>İşlem Durumu</legend>
-            <FormGroup className="checkradioboxed">
-              {activityStatuses.map(({ label, name }) => {
-                const inputId = nanoid();
-
-                return (
-                  <div
-                    key={name}
-                    className="custom-control custom-checkbox custom-control-inline"
-                  >
-                    <Input
-                      className="custom-control-input"
-                      type="checkbox"
-                      id={inputId}
-                      name={name}
-                      innerRef={register}
-                    />
-                    <Label
-                      className="custom-control-label btn btn-sm btn-primary"
-                      htmlFor={inputId}
-                    >
-                      {t(`finance:${label?.toLowerCase?.()}`)}
-                    </Label>
-                  </div>
-                );
-              })}
+            <FormGroup>
+              <CustomSelect
+                list={validStatuses}
+                title={"İşlem Durumu"}
+                name="statusID"
+                index={watch("statusID")}
+                setIndex={id => setValue("statusID", id)}
+                ref={register}
+                namespace="app"
+              />
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
