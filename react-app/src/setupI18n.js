@@ -56,6 +56,11 @@ const init = (initialLang = "en") => {
             "2h": "2W",
             "1a": "1M",
             "3a": "3M",
+            turkishLira: "Turkish Lira",
+            usDollar: "Us Dollar",
+            failed : "Failed",
+            success: "Success",
+            close: "CLOSE"
           },
           finance: {
             ask: "Ask",
@@ -78,6 +83,11 @@ const init = (initialLang = "en") => {
             papara: "Papara",
             realized: "Realized",
             canceled: "Cancelled",
+            addBankAccount:"Add New Bank Account",
+            selectBank: "Select A Bank",
+            addAccount: "Add Account",
+
+
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -182,6 +192,11 @@ const init = (initialLang = "en") => {
             "2h": "2H",
             "1a": "1A",
             "3a": "3A",
+            turkishLira: "Türk Lirası",
+            usDollar: "ABD Doları",
+            success: "Başarılı",
+            close: "KAPAT",
+            failed : "İşlem Başarısız",
           },
           finance: {
             ask: "Alış",
@@ -203,6 +218,9 @@ const init = (initialLang = "en") => {
             papara: "Papara",
             realized: "Tamamlandı",
             canceled: "İptal",
+            addBankAccount:"Yeni Banka Hesabı Ekle",
+            selectBank: "Banka Seçiniz",
+            addAccount: "Hesap Ekle"
           },
           coinbar: {
             lastPrice: "Son Fiyat",

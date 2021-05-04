@@ -1,21 +1,67 @@
-import {Fragment} from "react";
+import {Fragment, useState} from "react";
 import {Col, Form, FormGroup, Input, Label, CustomInput, Modal, ModalBody, ModalFooter} from "reactstrap";
 import { Button } from "../Button.jsx";
+import {useTranslation} from "react-i18next";
+import { useBanks } from "~/state/hooks/";
+import { useForm } from "react-hook-form";
+import {useDispatch} from "react-redux";
+import {createBankAccount} from "~/state/slices/bankaccount.slice";
+import {setOpenModal} from "~/state/slices/ui.slice";
 
 export default function AddBankAccountModal(props) {
   const {
     isOpen,
-    isSuccess,
-    clearModals,
     ...rest
   } = props;
 
+  const [isSuccess, setIsSuccess] = useState(props.isSuccess);
+  const [isError, setIsError] = useState(props.isError);
+  const [description, setDescription] = useState("");
+
+  const { banks } = useBanks();
+  const { t } = useTranslation(["form", "common", "finance"]);
+  const dispatch = useDispatch();
+
+  const { register, handleSubmit,setValue } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      bankid: -1,
+      ibanno: "",
+      currencyid: "",
+    },
+  });
+
+  const onSubmit = async data => {
+    if(data.bankid !== -1) {
+      const { payload } = await  dispatch(createBankAccount(data))
+      if (payload?.status !== 1) {
+        setDescription(payload?.errormessage)
+        setIsError(true)
+      }else {
+        setDescription(payload?.description)
+        setIsSuccess(true)
+      }
+    }
+  }
+
+  const clearOpenModals = async () => {
+    await dispatch(setOpenModal("none"));
+    setTimeout(() => setIsError(false), 1000)
+    setTimeout(() => setIsSuccess(false), 1000)
+  };
+
+  const   handleChange = e => {
+    const { name, value } = e.target;
+    setValue(name, value, {
+      shouldValidate: true,
+    });
+  };
   return (
       <Modal
           wrapClassName=""
           modalClassName=""
           isOpen={isOpen}
-          toggle={clearModals}
+          toggle={clearOpenModals}
           keyboard={false}
           fade={false}
           autoFocus={false}
@@ -24,42 +70,73 @@ export default function AddBankAccountModal(props) {
           {...rest}
       >
         <div className="modal-close">
-          <Button className="close" onClick={clearModals}>
+          <Button className="close" onClick={clearOpenModals}>
             <span aria-hidden="true">&times;</span>
           </Button>
         </div>
-
-        { 0 === 0 ? (
+        { !isError ? (!isSuccess ? (
             <Fragment>
               <ModalBody>
                 <Form
                     className="siteformui"
                     autoComplete="off"
                     noValidate
+                    onSubmit={handleSubmit(onSubmit)}
                 >
-                  <h4 className="text-center">Yeni Banka Hesabı Ekle</h4>
+                  <h4 className="text-center">{t("finance:addBankAccount")}</h4>
                   <div className="labelfocustop mt-3">
                     <FormGroup>
                       <Input
-                          type="text"
-                          required
-                      />
-                      <Label>Hesap İsmi</Label>
+                          className="custom-select"
+                          type="select"
+                          name="bankid"
+                          innerRef={register({
+                            valueAsNumber: true,
+                            required: t("isRequired"),
+                          })}
+                      >
+                        <option value="-1">
+                          {t("finance:selectBank")}
+                        </option>
+                        {banks.map(account => {
+                          const { id, name } = account;
+
+                          return (
+                              <option value={id} key={id}>
+                                {name}
+                              </option>
+                          );
+                        })}
+                      </Input>
+                      <Label>{t("finance:selectBank")}</Label>
                     </FormGroup>
                     <FormGroup>
                       <Input
                           type="text"
-                          required
+                          name="ibanno"
+                          placeholder="IBAN"
+                          innerRef={register({
+                            required: t("isRequired"),
+                          })}
                       />
                       <Label>IBAN</Label>
                     </FormGroup>
                   </div>
                   <FormGroup className="mt-3 text-center">
                     <FormGroup check inline>
-                      <CustomInput id="AddBankCurrTRY" type="radio" name="customRadio" label="Türk Lirası - TRY" />
+                      <CustomInput id="AddBankCurrTRY" type="radio" name="currencyid"  value="1"
+                                   innerRef={register({
+                                     required: t("isRequired"),
+                                   })}
+                                   label={`${t("common:turkishLira")} - TRY`}
+                                   onChange={handleChange} />
                     </FormGroup>
                     <FormGroup check inline>
-                      <CustomInput id="AddBankCurrUSD" type="radio" name="customRadio" label="ABD Doları - USD" />
+                      <CustomInput id="AddBankCurrUSD" type="radio"
+                                   innerRef={register({
+                                    required: t("isRequired"),
+                                  })}
+                                   name="currencyid" value="2" label={`${t("common:usDollar")} - USD`} />
                     </FormGroup>
                   </FormGroup>
                   <Button
@@ -67,7 +144,7 @@ export default function AddBankAccountModal(props) {
                       className="w-100 mt-2"
                       type="submit"
                   >
-                    HESAP EKLE
+                    {t("finance:addAccount")}
                   </Button>
                 </Form>
               </ModalBody>
@@ -81,16 +158,40 @@ export default function AddBankAccountModal(props) {
                     <div className="alert-icons-success-long" />
                   </div>
                 </div>
-                <h4>Başarılı</h4>
-                <p>Yeni Banka Başarıyla Eklendi.</p>
+                <h4>{t("common:success")}</h4>
+                <p>{description}</p>
               </ModalBody>
               <ModalFooter className="row">
                 <Button
                     variant="secondary"
                     className="active col"
-                    onClick={clearModals}
+                    onClick={clearOpenModals}
                 >
-                  KAPAT
+                  {t("common:close")}
+                </Button>
+              </ModalFooter>
+            </Fragment>
+        )) : (
+            <Fragment>
+              <ModalBody className="modal-confirm text-center">
+                <div className="animation-alert-icons">
+                  <div className="alert-icons alert-icons-error">
+                    <div className="alert-icons-error-x">
+                      <div className="alert-icons-error-x-left"></div>
+                      <div className="alert-icons-error-x-right"></div>
+                    </div>
+                  </div>
+                </div>
+                <h4>{t("common:failed")}</h4>
+                <p>{description}</p>
+              </ModalBody>
+              <ModalFooter className="row">
+                <Button
+                    variant="secondary"
+                    className="active col"
+                    onClick={clearOpenModals}
+                >
+                  {t("common:close")}
                 </Button>
               </ModalFooter>
             </Fragment>

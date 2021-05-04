@@ -62,6 +62,7 @@ export const fetchTransactionHistories = buildCachedRequest(
 export const fetchOrderHistory = buildRequest("/orderhistory");
 export const fetchOpenOrders = buildCachedRequest("/openorders", ms("5m"));
 export const deleteOpenOrder = buildRequest("/deleteopenorder");
+export const createBankAccount = buildRequest("/bankaccounts/create");
 
 function buildRequest(uri) {
   return (args = {}, opts = {}) => {

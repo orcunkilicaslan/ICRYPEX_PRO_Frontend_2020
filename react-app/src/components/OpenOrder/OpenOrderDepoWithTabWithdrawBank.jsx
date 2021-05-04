@@ -231,6 +231,8 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
         />
         <AddBankAccountModal
             isOpen={openModal === "addbankaccount"}
+            isSuccess={false}
+            isError={false}
             clearModals={clearOpenModals}
         />
       </div>
