@@ -1,5 +1,6 @@
 require = require("esm")(module);
 const path = require("path");
+const fs = require("fs");
 const {
   when,
   whenDev,
@@ -10,12 +11,15 @@ const {
 } = require("@craco/craco");
 const webpack = require("webpack");
 const GitRevisionPlugin = require("git-revision-webpack-plugin");
-const gitRevisionPlugin = new GitRevisionPlugin();
 const presetReact = require("@babel/preset-react").default;
 const presetCRA = require("babel-preset-react-app");
 
 const { SUPPORTED_LANGUAGES } = require("./src/setupI18n");
 
+let gitRevisionPlugin;
+if (fs.existsSync(path.resolve(".git"))) {
+  gitRevisionPlugin = new GitRevisionPlugin();
+}
 const isProd = process.env.NODE_ENV === "production";
 
 module.exports = {
@@ -27,7 +31,7 @@ module.exports = {
     plugins: {
       add: [
         new webpack.DefinePlugin({
-          "__env.HEAD": JSON.stringify(gitRevisionPlugin.commithash()),
+          "__env.HEAD": JSON.stringify(gitRevisionPlugin?.commithash()),
         }),
       ],
     },
