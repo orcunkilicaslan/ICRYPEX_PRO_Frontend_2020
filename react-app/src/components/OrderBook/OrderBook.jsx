@@ -102,7 +102,7 @@ const OrderBook = props => {
   }, [visibleSellOrders]);
 
   useEffect(() => {
-    const { name } = selected;
+    const name = selected?.name;
 
     if (name) {
       dispatch(fetchInitialOrderBook(name));
