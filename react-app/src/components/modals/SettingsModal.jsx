@@ -8,6 +8,7 @@ import {
 } from "reactstrap";
 
 import { Button } from "../Button.jsx";
+import { useLocaleUpperCase } from "~/state/hooks/";
 
 const usermenulistaccount = [
   {
@@ -65,6 +66,7 @@ const usermenulistsecurity = [
 
 export default function SettingsModal(props) {
   const { isOpen, User, clearModals, onSignout, ...rest } = props;
+  const toUpperCase = useLocaleUpperCase();
 
   return (
     <Modal
@@ -80,7 +82,7 @@ export default function SettingsModal(props) {
       {...rest}
     >
       <ModalHeader toggle={clearModals}>
-        {User?.info?.displayname?.toUpperCase?.()}
+        {toUpperCase(User?.info?.displayname)}
       </ModalHeader>
       <ModalBody className="modalcomp modalcomp-usermenu">
         <Button variant="secondary" className="modalcomp-usermenu-notif w-100">
