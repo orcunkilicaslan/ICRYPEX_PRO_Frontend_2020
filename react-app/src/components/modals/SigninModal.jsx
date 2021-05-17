@@ -61,7 +61,7 @@ export default function SigninModal(props) {
       keyboard={false}
       fade={false}
       autoFocus={false}
-      backdrop="static"
+      returnFocusAfterClose={false}
       {...rest}
     >
       <ModalHeader toggle={clearModals}>{toUpperCase(t("signin"))}</ModalHeader>
