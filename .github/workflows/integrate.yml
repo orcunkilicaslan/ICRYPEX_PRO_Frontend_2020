@@ -17,8 +17,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
-          # ref: react
-          path: ./react-app
+          ref: react
       - name: setup node
         uses: actions/setup-node@v2
         with:
@@ -26,6 +25,7 @@ jobs:
           check-latest: true
       - name: install & build
         run: |
+          cd react-app
           yarn
           yarn build
         env:
