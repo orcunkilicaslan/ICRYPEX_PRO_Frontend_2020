@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, memo } from "react";
 import classnames from "classnames";
-import { Row, Col, Form } from "reactstrap";
+import { Col, Form } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -24,7 +24,6 @@ const defaultValues = {
   istry: true,
   isusd: true,
   isbank: true,
-  ispapara: true,
   orderby: 1,
 };
 

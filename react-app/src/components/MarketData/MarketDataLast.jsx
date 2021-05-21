@@ -20,7 +20,7 @@ const MarketDataLast = props => {
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
 
   useEffect(() => {
-    const { name } = selectedPair;
+    const name = selectedPair?.name;
 
     if (name) {
       dispatch(fetchInitialOrderHistory(name));

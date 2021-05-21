@@ -38,14 +38,12 @@ export const stopLimitSellOrder = buildRequest("/stoplimitsellorder");
 export const fetchCryptoAddresses = buildRequest("/cryptoaddresses");
 export const forgotPassword = buildRequest("/forgotpassword");
 export const withdrawBankwire = buildRequest("/withdraw/bankwire");
-export const withdrawPapara = buildRequest("/withdraw/papara");
 export const withdrawCrypto = buildRequest("/withdraw/crypto");
 export const fetchInitialOrderBook = buildRequest("/initialpairorderbookpro");
 export const fetchInitialOrderHistory = buildRequest(
   "/initialpairorderhistorypro"
 );
 export const depositBankwire = buildRequest("/deposit/bankwire");
-export const depositPapara = buildRequest("/deposit/papara");
 export const depositCrypto = buildRequest("/deposit/crypto");
 export const fetchBankAccounts = buildCachedRequest("/bankaccounts", ms("1h"));
 export const fetchPendingTransactions = buildCachedRequest(

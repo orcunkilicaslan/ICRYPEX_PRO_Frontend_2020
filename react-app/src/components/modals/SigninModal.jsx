@@ -16,6 +16,7 @@ import { useState } from "react";
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import { AlertResult } from "../AlertResult.jsx";
+import { useLocaleUpperCase } from "~/state/hooks/";
 
 const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
 
@@ -31,6 +32,7 @@ export default function SigninModal(props) {
     ...rest
   } = props;
   const { t } = useTranslation(["login", "form"]);
+  const toUpperCase = useLocaleUpperCase();
   const { register, handleSubmit, errors, clearErrors } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -59,10 +61,10 @@ export default function SigninModal(props) {
       keyboard={false}
       fade={false}
       autoFocus={false}
-      backdrop="static"
+      returnFocusAfterClose={false}
       {...rest}
     >
-      <ModalHeader toggle={clearModals}>{t("signin")}</ModalHeader>
+      <ModalHeader toggle={clearModals}>{toUpperCase(t("signin"))}</ModalHeader>
       <ModalBody className="modalcomp modalcomp-sign">
         <div className="modalcomp-sign-icon">
           <IconSet sprite="sprtlgclrd" size="50gray" name="user" />

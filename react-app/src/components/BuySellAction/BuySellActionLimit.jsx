@@ -441,7 +441,7 @@ const BuySellActionLimit = props => {
               </Row>
               <Row className="aligncenter">
                 <Col xs="auto">
-                  <Label>{t("total")}</Label>
+                  <Label>{t("common:total")}</Label>
                 </Col>
                 <Col className="text-right">
                   <span>{totalSell} {fiatCurrency}</span>

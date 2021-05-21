@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.scss";
@@ -10,15 +11,18 @@ const App = props => {
     <Router>
       <Header />
       <Switch>
-        <Route exact path={["/", "/pro-gorunum"]}>
+        <Route exact path="/pro-gorunum">
           <ProTrading />
         </Route>
         <Route exact path={["/kolay-al", "/kolay-sat"]}>
           <EasyBuySell />
+        </Route>
+        <Route path="/">
+          <ProTrading />
         </Route>
       </Switch>
     </Router>
   );
 };
 
-export default App;
+export default memo(App);

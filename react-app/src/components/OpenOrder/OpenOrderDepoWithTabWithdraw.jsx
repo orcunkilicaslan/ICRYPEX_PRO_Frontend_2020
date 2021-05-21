@@ -1,15 +1,8 @@
 import { useState, useContext, useEffect } from "react";
-import {
-  Nav,
-  NavItem,
-  NavLink,
-  TabContent,
-  TabPane,
-} from "reactstrap";
+import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
 
 import OpenOrderDepoWithTabWithdrawBank from "~/components/OpenOrder/OpenOrderDepoWithTabWithdrawBank.jsx";
-import OpenOrderDepoWithTabWithdrawPapara from "~/components/OpenOrder/OpenOrderDepoWithTabWithdrawPapara.jsx";
 import OpenOrderDepoWithTabWithdrawCrypto from "~/components/OpenOrder/OpenOrderDepoWithTabWithdrawCrypto.jsx";
 import { openOrderContext, TRANSACTION_METHODS } from "./OpenOrder";
 
@@ -18,11 +11,6 @@ const tabs = [
     title: "Banka",
     component: OpenOrderDepoWithTabWithdrawBank,
     method: "bank",
-  },
-  {
-    title: "Papara",
-    component: OpenOrderDepoWithTabWithdrawPapara,
-    method: "papara",
   },
   {
     title: "Kripto",

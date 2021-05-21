@@ -65,8 +65,10 @@ const MarketDataSymbol = props => {
     dispatch(removeFavoritePair(pairname));
   };
 
-  const onSelectPair = symbol => {
-    dispatch(setSelectedPair(symbol));
+  const onSelectPair = (symbol, target) => {
+    if (target?.nodeName === "DIV") {
+      dispatch(setSelectedPair(symbol));
+    }
   };
 
   return (
@@ -168,7 +170,10 @@ const MarketDataSymbol = props => {
               };
 
               return (
-                <Table.Tr key={symbol} onClick={() => onSelectPair(symbol)}>
+                <Table.Tr
+                  key={symbol}
+                  onClick={evt => onSelectPair(symbol, evt?.target)}
+                >
                   {accesstoken ? (
                     <Table.Td sizeauto className="fav">
                       <Button

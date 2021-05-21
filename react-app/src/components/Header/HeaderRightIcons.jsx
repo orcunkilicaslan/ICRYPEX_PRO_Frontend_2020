@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { UncontrolledTooltip, Badge } from "reactstrap";
 import { useState, Fragment } from "react";
@@ -106,4 +107,4 @@ const HeaderRightIcons = props => {
   );
 };
 
-export default HeaderRightIcons;
+export default memo(HeaderRightIcons);

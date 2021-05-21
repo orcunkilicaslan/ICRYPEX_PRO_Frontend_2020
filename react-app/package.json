@@ -45,6 +45,9 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "serve": "serve -s build --ssl-cert ./keys/localhost.crt --ssl-key ./keys/localhost.key",
+    "build:serve": "yarn build && yarn serve",
+    "build:profile": "yarn build --profile && yarn serve",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
@@ -74,7 +77,8 @@
     "esm": "^3.2.25",
     "git-revision-webpack-plugin": "^3.0.6",
     "node-sass": "4.14.1",
-    "react-scripts": "4.0.1"
+    "react-scripts": "4.0.1",
+    "serve": "^11.3.2"
   },
   "proxy": "https://mobile.guvenlibtc.com:443"
 }

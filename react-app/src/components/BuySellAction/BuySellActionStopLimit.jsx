@@ -338,7 +338,7 @@ const BuySellActionStopLimit = props => {
               <FormGroup>
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">
-                    <InputGroupText>{t("price")}</InputGroupText>
+                    <InputGroupText>{t("common:price")}</InputGroupText>
                   </InputGroupAddon>
                   <Input  type="text"
                           name="fiatSellPrice"
@@ -481,7 +481,7 @@ const BuySellActionStopLimit = props => {
               </Row>
               <Row className="aligncenter">
                 <Col xs="auto">
-                  <Label>{t("total")}</Label>
+                  <Label>{t("common:total")}</Label>
                 </Col>
                 <Col className="text-right">
                   <span>{totalSell} {fiatCurrency}</span>

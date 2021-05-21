@@ -15,7 +15,7 @@ import { setTabIndex } from "~/state/slices/order.slice";
 
 export const openOrderContext = createContext();
 export const TRANSACTION_MODES = ["deposit", "withdraw"];
-export const TRANSACTION_METHODS = ["bank", "papara", "crypto"];
+export const TRANSACTION_METHODS = ["bank", "crypto"];
 
 const tabs = [
   {

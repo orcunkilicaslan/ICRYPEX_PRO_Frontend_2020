@@ -71,6 +71,12 @@ const orderPersistConfig = {
   ],
 };
 
+const transactionPersistConfig = {
+  key: "transaction",
+  storage,
+  whitelist: ["histories", "pending"],
+};
+
 const rootReducer = combineReducers({
   ui: persistReducer(UIPersistConfig, uiReducer),
   api: persistReducer(apiPersistConfig, apiReducer),
@@ -89,7 +95,7 @@ const rootReducer = combineReducers({
   stopLimitSellOrder: stopLimitSellOrderReducer,
   withdraw: withdrawReducer,
   deposit: depositReducer,
-  transaction: transactionReducer,
+  transaction: persistReducer(transactionPersistConfig, transactionReducer),
 });
 
 export default rootReducer;
