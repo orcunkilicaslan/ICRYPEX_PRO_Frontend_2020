@@ -2,8 +2,9 @@ import {Fragment, useState} from "react";
 import {Col, Form, FormGroup, Input, Label, CustomInput, Modal, ModalBody, ModalFooter} from "reactstrap";
 import { Button } from "../Button.jsx";
 import {useTranslation} from "react-i18next";
+import InputMask from "react-input-mask";
 import { useBanks } from "~/state/hooks/";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import {useDispatch} from "react-redux";
 import {createBankAccount} from "~/state/slices/bankaccount.slice";
 import {setOpenModal} from "~/state/slices/ui.slice";
@@ -22,7 +23,7 @@ export default function AddBankAccountModal(props) {
   const { t } = useTranslation(["form", "common", "finance"]);
   const dispatch = useDispatch();
 
-  const { register, handleSubmit,setValue } = useForm({
+  const { register, handleSubmit,setValue ,control } = useForm({
     mode: "onChange",
     defaultValues: {
       bankid: -1,
@@ -111,13 +112,17 @@ export default function AddBankAccountModal(props) {
                       <Label>{t("finance:selectBank")}</Label>
                     </FormGroup>
                     <FormGroup>
-                      <Input
-                          type="text"
+                      <Controller
+                          className="form-control"
+                          as={InputMask}
+                          control={control}
+                          mask="TR99 9999 9999 9999 9999 99"
                           name="ibanno"
                           placeholder="IBAN"
-                          innerRef={register({
+                          ref={register({
                             required: t("isRequired"),
                           })}
+
                       />
                       <Label>IBAN</Label>
                     </FormGroup>
