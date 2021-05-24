@@ -24,18 +24,20 @@ const HeaderRightIcons = props => {
   const dispatch = useDispatch();
   const { accesstoken } = useSelector(state => state.api);
   const { openModal } = useSelector(state => state.ui);
+  const isModalOpen = openModal === "notifications";
 
   const [{ data: notifs, unread: unreadCount }, setNotifs] = useState({
     data: NOTIFICATIONS,
     unread: NOTIFICATIONS.filter(({ isreaded }) => !isreaded).length,
   });
 
-  const openNotificationsModal = () => {
-    dispatch(setOpenModal("notifications"));
-  };
-
   const clearOpenModals = () => {
     dispatch(setOpenModal("none"));
+  };
+
+  const toggleNotificationsModal = () => {
+    if (isModalOpen) clearOpenModals();
+    else dispatch(setOpenModal("notifications"));
   };
 
   const onMarkRead = idx => {
@@ -78,7 +80,7 @@ const HeaderRightIcons = props => {
           </Button>
           <Button
             className="headsignedinicon notif"
-            onClick={openNotificationsModal}
+            onClick={toggleNotificationsModal}
           >
             <span id="headTooltipNotif">
               <IconSet sprite="sprtsmclrd" size="20" name="notif">
@@ -98,7 +100,7 @@ const HeaderRightIcons = props => {
       <NotifModal
         notifications={notifs}
         unread={unreadCount}
-        isOpen={openModal === "notifications"}
+        isOpen={isModalOpen}
         clearModals={clearOpenModals}
         onMarkRead={onMarkRead}
         onMarkAllRead={onMarkAllRead}
