@@ -43,10 +43,13 @@ export default function AlarmModal(props) {
     ...rest
   } = props;
   const { t } = useTranslation(["coinbar", "common", "form"]);
-  const { all: allAlarms, isCreating, hideOthers, isDeleting } = useSelector(
-    state => state.alarm
-  );
-  const { register, handleSubmit, errors, setValue, getValues } = useForm({
+  const {
+    all: allAlarms,
+    isCreating,
+    hideOthers,
+    isDeleting,
+  } = useSelector(state => state.alarm);
+  const { register, handleSubmit, setValue, getValues } = useForm({
     mode: "onChange",
     defaultValues: {
       amount: selectedPriceData?.price,
@@ -130,14 +133,14 @@ export default function AlarmModal(props) {
         {selectedPriceData ? (
           <div className="modalcomp-setalarm-data">
             <div className="databigger">
-              <PerLineIcon className="mdper mdper-up" />
-              <span className="sitecolorgreen">{selectedPriceData.price}</span>
+              <PerLineIcon className={`mdper mdper-${upOrDown}`} />
+              <span className={siteColorClass}>{selectedPriceData.price}</span>
             </div>
             <div className="datasmall">
               <span>{selectedPriceData.pricechange}</span>
               <span className={siteColorClass}>
                 {upOrDown === "up" ? "+" : "-"}
-                {selectedPriceData.changepercent}
+                {selectedPriceData.changepercent}%
               </span>
             </div>
           </div>
@@ -171,7 +174,10 @@ export default function AlarmModal(props) {
                   innerRef={register({
                     valueAsNumber: true,
                     required: t("form:isRequired"),
-                    min: { value: 0, message: t("form:shouldBeMin", { value: 0 }) },
+                    min: {
+                      value: 0,
+                      message: t("form:shouldBeMin", { value: 0 }),
+                    },
                     max: {
                       value: 999999,
                       message: t("form:shouldBeMax", { value: 999999 }),

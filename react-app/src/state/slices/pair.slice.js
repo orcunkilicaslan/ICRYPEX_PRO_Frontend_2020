@@ -284,7 +284,7 @@ const pairSlice = createSlice({
       const object = action?.payload;
       const [key] = Object.keys(object);
 
-      if (!state.initialOrderHistories.includes(key)) {
+      if (!state.initialOrderHistories?.includes?.(key)) {
         state.initialOrderHistories.push(key);
       }
     },
@@ -292,7 +292,7 @@ const pairSlice = createSlice({
       const object = action?.payload;
       const [key] = Object.keys(object);
 
-      if (!state.initialOrderBooks.includes(key)) {
+      if (!state.initialOrderBooks?.includes?.(key)) {
         state.initialOrderBooks.push(key);
       }
     },
