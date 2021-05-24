@@ -76,7 +76,10 @@ const ActivitiesHistoryFilter = props => {
 
     const _currencyids = [];
     currencyids?.forEach?.((bool, idx) => {
-      if (bool) _currencyids.push(validCurrencies?.[idx]?.id);
+      if (bool) {
+        const id = validCurrencies?.[idx]?.id;
+        _currencyids.push(parseInt(id, 10));
+      }
     });
     merge(toSubmit, { currencyids: JSON.stringify(_currencyids) });
 
@@ -89,8 +92,8 @@ const ActivitiesHistoryFilter = props => {
 
     if (statusIdx !== -1) {
       merge(toSubmit, {
-        isrealized: statusIdx === 0,
-        iscanceled: statusIdx === 1,
+        isrealized: statusIdx === 2,
+        iscanceled: statusIdx === 3,
       });
     }
 
@@ -108,6 +111,7 @@ const ActivitiesHistoryFilter = props => {
       setApiError(payload?.errormessage);
     } else {
       setApiError("");
+      clearModals();
     }
   };
 
@@ -121,6 +125,7 @@ const ActivitiesHistoryFilter = props => {
       keyboard={false}
       fade={false}
       autoFocus={false}
+      returnFocusAfterClose={false}
       {...rest}
     >
       <ModalHeader toggle={clearModals}>TRANSFER GEÇMİŞİ FİLTRE</ModalHeader>

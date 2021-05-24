@@ -97,10 +97,11 @@ export default function OrderHistoryFilter(props) {
 
     const { payload } = await dispatch(fetchOrderHistory(toSubmit));
 
-    if (!payload?.status) {
+    if (!payload?.data?.status) {
       setApiError(payload?.errormessage);
     } else {
       setApiError("");
+      clearModals();
     }
   };
 
@@ -120,6 +121,7 @@ export default function OrderHistoryFilter(props) {
       keyboard={false}
       fade={false}
       autoFocus={false}
+      returnFocusAfterClose={false}
       {...rest}
     >
       <ModalHeader toggle={clearModals}>İŞLEM GEÇMİŞİ FİLTRE</ModalHeader>

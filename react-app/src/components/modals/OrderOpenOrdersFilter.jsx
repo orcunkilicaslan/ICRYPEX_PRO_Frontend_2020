@@ -62,10 +62,11 @@ const OrderOpenOrdersFilter = props => {
 
     const { payload } = await dispatch(fetchOpenOrders(toSubmit));
 
-    if (!payload?.status) {
+    if (!payload?.data?.status) {
       setApiError(payload?.errormessage);
     } else {
       setApiError("");
+      clearModals();
     }
   };
 
@@ -85,6 +86,7 @@ const OrderOpenOrdersFilter = props => {
       keyboard={false}
       fade={false}
       autoFocus={false}
+      returnFocusAfterClose={false}
       {...rest}
     >
       <ModalHeader toggle={clearModals}>AÇIK EMİRLER FİLTRE</ModalHeader>
