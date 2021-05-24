@@ -15,10 +15,6 @@ const tabs = [
     titleIcon: "ziraat",
   },
   {
-    bankCode: "00146",
-    titleIcon: "odeabank",
-  },
-  {
     bankCode: "00015",
     titleIcon: "vakifbank",
   },
