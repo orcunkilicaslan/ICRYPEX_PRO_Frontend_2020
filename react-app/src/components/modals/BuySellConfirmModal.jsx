@@ -22,7 +22,6 @@ export default function BuySellConfirmModal(props) {
           keyboard={false}
           fade={false}
           autoFocus={false}
-          backdrop="static"
           centered
           {...rest}
       >

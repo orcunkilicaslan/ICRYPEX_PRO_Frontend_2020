@@ -20,7 +20,6 @@ export default function ResultSweetModal(props) {
           keyboard={false}
           fade={false}
           autoFocus={false}
-          backdrop="static"
           centered
           {...rest}
       >

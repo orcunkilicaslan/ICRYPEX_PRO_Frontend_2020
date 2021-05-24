@@ -123,7 +123,6 @@ export default function AlarmModal(props) {
       keyboard={false}
       fade={false}
       autoFocus={false}
-      backdrop="static"
       {...rest}
     >
       <ModalHeader toggle={clearModals}>{t("setAlarm")}</ModalHeader>

@@ -120,7 +120,6 @@ export default function OrderHistoryFilter(props) {
       keyboard={false}
       fade={false}
       autoFocus={false}
-      backdrop="static"
       {...rest}
     >
       <ModalHeader toggle={clearModals}>İŞLEM GEÇMİŞİ FİLTRE</ModalHeader>

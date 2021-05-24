@@ -34,7 +34,6 @@ export default function NotifModal(props) {
       keyboard={false}
       fade={false}
       autoFocus={false}
-      backdrop="static"
       {...rest}
     >
       <ModalHeader toggle={clearModals}>BİLDİRİMLER</ModalHeader>

@@ -66,7 +66,6 @@ export default function AddBankAccountModal(props) {
           keyboard={false}
           fade={false}
           autoFocus={false}
-          backdrop="static"
           centered
           {...rest}
       >
