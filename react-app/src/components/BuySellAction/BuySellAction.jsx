@@ -57,7 +57,7 @@ const commissiontable = [
 const BuySellAction = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["common", "finance"]);
-  const [activeTab, setActiveTab] = useState(tabs[0].title);
+  const [activeTab, setActiveTab] = useState(tabs[1].title);
   const { accesstoken } = useSelector(state => state.api);
 
   const openSigninModal = useCallback(() => {

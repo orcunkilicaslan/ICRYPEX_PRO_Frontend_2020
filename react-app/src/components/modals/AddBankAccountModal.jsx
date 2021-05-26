@@ -34,7 +34,12 @@ export default function AddBankAccountModal(props) {
 
   const onSubmit = async data => {
     if(data.bankid !== -1) {
-      const { payload } = await  dispatch(createBankAccount(data))
+      let sendData = {
+        bankid : data.bankid,
+        currencyid: data.currencyid,
+        ibanno : data.ibanno.replace(/ /g,'')
+      }
+      const { payload } = await  dispatch(createBankAccount(sendData))
       if (payload?.status !== 1) {
         setDescription(payload?.errormessage)
         setIsError(true)
@@ -53,7 +58,7 @@ export default function AddBankAccountModal(props) {
 
   const   handleChange = e => {
     const { name, value } = e.target;
-    setValue(name, value, {
+    setValue(name, value.trim(), {
       shouldValidate: true,
     });
   };
@@ -116,7 +121,7 @@ export default function AddBankAccountModal(props) {
                           className="form-control"
                           as={InputMask}
                           control={control}
-                          mask="TR99 9999 9999 9999 9999 99"
+                          mask="TR99 9999 9999 9999 9999 9999 99"
                           name="ibanno"
                           placeholder="IBAN"
                           ref={register({
