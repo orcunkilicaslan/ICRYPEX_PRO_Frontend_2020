@@ -27,4 +27,4 @@ jobs:
         run: |
           cd react-app
           yarn
-          NODE_ENV=production SKIP_PREFLIGHT_CHECK=true yarn build
+          CI=false yarn build

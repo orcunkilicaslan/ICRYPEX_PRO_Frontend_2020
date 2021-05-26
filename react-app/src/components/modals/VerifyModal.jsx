@@ -5,7 +5,8 @@ import {
   Input,
   Modal,
   ModalHeader,
-  ModalBody, FormText, Col,
+  ModalBody,
+  FormText,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -15,14 +16,8 @@ import { IconSet } from "../IconSet.jsx";
 import { AlertResult } from "../AlertResult.jsx";
 
 export default function VerifyModal(props) {
-  const {
-    isOpen,
-    clearModals,
-    errorMessage,
-    submit,
-    isVerifying,
-    ...rest
-  } = props;
+  const { isOpen, clearModals, errorMessage, submit, isVerifying, ...rest } =
+    props;
   const { t } = useTranslation(["login", "form"]);
   const { register, handleSubmit, errors, clearErrors } = useForm({
     mode: "onChange",
@@ -46,7 +41,6 @@ export default function VerifyModal(props) {
       keyboard={false}
       fade={false}
       autoFocus={false}
-      backdrop="static"
       {...rest}
     >
       <ModalHeader toggle={clearModals}>{t("verificationCode")}</ModalHeader>
@@ -82,9 +76,9 @@ export default function VerifyModal(props) {
                 />
                 <Label className="text-center">{t("verificationCode")}</Label>
                 {errors.code && (
-                    <FormText className="inputresult resulterror">
-                      {errors.code?.message}
-                    </FormText>
+                  <FormText className="inputresult resulterror">
+                    {errors.code?.message}
+                  </FormText>
                 )}
               </FormGroup>
             </div>

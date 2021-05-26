@@ -67,10 +67,11 @@ const ActivitiesPendingFilter = props => {
 
     const { payload } = await dispatch(fetchPendingTransactions(toSubmit));
 
-    if (!payload?.status) {
+    if (!payload?.data?.status) {
       setApiError(payload?.errormessage);
     } else {
       setApiError("");
+      clearModals();
     }
   };
 
@@ -84,7 +85,7 @@ const ActivitiesPendingFilter = props => {
       keyboard={false}
       fade={false}
       autoFocus={false}
-      backdrop="static"
+      returnFocusAfterClose={false}
       {...rest}
     >
       <ModalHeader toggle={clearModals}>BEKLEMEDEKİLER FİLTRE</ModalHeader>

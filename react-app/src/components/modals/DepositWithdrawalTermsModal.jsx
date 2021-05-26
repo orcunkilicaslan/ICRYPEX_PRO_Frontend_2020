@@ -22,7 +22,6 @@ export default function DepositWithdrawalTermsModal(props) {
       keyboard={false}
       fade={false}
       autoFocus={false}
-      backdrop="static"
       {...rest}
     >
       <div className="modal-close">
