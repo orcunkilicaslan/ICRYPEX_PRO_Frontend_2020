@@ -35,7 +35,7 @@ export default function SignupModal(props) {
     defaultValues: {
       firstname: "",
       lastname: "",
-      countrycode: countryPhoneCode?.[0] || "",
+      countrycode: countryPhoneCode?.[0] || "90",
       phoneno: "",
       email: "",
       password: "",

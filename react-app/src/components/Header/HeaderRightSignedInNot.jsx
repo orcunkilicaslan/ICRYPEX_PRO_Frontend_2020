@@ -37,6 +37,9 @@ const HeaderRightSignedInNot = props => {
   const countryPhoneCode = countryCodes?.map(
     ({ country_code }) => country_code
   );
+  // moving code "90" to the front of the array
+  const index = countryPhoneCode.findIndex(el => el === "90");
+  countryPhoneCode.unshift(countryPhoneCode.splice(index, 1)[0]);
 
   const openSignupModal = () => {
     setSignupError(null);
