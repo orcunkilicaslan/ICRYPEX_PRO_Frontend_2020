@@ -1,6 +1,5 @@
 require = require("esm")(module);
 const path = require("path");
-const fs = require("fs");
 const {
   when,
   whenDev,
@@ -16,11 +15,11 @@ const presetCRA = require("babel-preset-react-app");
 
 const { SUPPORTED_LANGUAGES } = require("./src/setupI18n");
 
-let gitRevisionPlugin;
-if (fs.existsSync(path.resolve(".git"))) {
-  gitRevisionPlugin = new GitRevisionPlugin();
-}
 const isProd = process.env.NODE_ENV === "production";
+let gitRevisionPlugin;
+try {
+  gitRevisionPlugin = new GitRevisionPlugin();
+} catch {}
 
 module.exports = {
   webpack: {
@@ -31,7 +30,9 @@ module.exports = {
     plugins: {
       add: [
         new webpack.DefinePlugin({
-          "__env.HEAD": JSON.stringify(gitRevisionPlugin?.commithash()),
+          "__env.HEAD": gitRevisionPlugin
+            ? JSON.stringify(gitRevisionPlugin?.commithash())
+            : "",
         }),
       ],
     },
