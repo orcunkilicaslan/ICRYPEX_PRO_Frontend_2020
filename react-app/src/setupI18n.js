@@ -140,6 +140,7 @@ const init = (initialLang = "en") => {
             withdrawAmount: "Withdraw Amount",
             shouldBeMinLength: "Should be at least {{value}} characters",
             shouldBeMaxLength: "Should be at most {{value}} characters",
+            passwordNotMatch: "Passwords do not match"
           },
         },
         tr: {
@@ -273,6 +274,7 @@ const init = (initialLang = "en") => {
             withdrawAmount: "Çekmek İstenilen Miktar",
             shouldBeMinLength: "En az {{value}} hane olmalı",
             shouldBeMaxLength: "En fazla {{value}} hane olmalı",
+            passwordNotMatch: "Şifreler eşleşmiyor"
           },
         },
       },

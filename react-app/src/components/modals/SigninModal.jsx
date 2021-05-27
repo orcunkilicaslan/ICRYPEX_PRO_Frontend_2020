@@ -17,6 +17,8 @@ import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import { AlertResult } from "../AlertResult.jsx";
 import { useLocaleUpperCase } from "~/state/hooks/";
+import { setUserEmail } from "~/state/slices/user.slice";
+import { verifyCaptcha } from "~/util/";
 
 const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
 
@@ -33,11 +35,12 @@ export default function SigninModal(props) {
   } = props;
   const { t } = useTranslation(["login", "form"]);
   const toUpperCase = useLocaleUpperCase();
-  const { register, handleSubmit, errors, clearErrors } = useForm({
+  const { register, handleSubmit, errors, clearErrors, setValue } = useForm({
     mode: "onChange",
     defaultValues: {
       emailornationalid: userEmail,
       password: "",
+      recaptcha: "",
     },
   });
 
@@ -47,8 +50,21 @@ export default function SigninModal(props) {
   };
 
   const onSubmit = data => {
+    const { recaptcha, ...rest } = data;
+
     clearErrors();
-    submit(data);
+    if (recaptcha) submit(rest);
+  };
+
+  const onCaptcha = async value => {
+    if (value === null) {
+      setValue("recaptcha", ""); // captcha expired
+    } else {
+      if (await verifyCaptcha(value)) {
+        clearErrors("recaptcha");
+        setValue("recaptcha", "valid");
+      }
+    }
   };
 
   return (
@@ -76,6 +92,7 @@ export default function SigninModal(props) {
             autoComplete="off"
             noValidate
             onSubmit={handleSubmit(onSubmit)}
+            // TODO: setUserEmail
           >
             <div className="labelfocustop">
               <FormGroup
@@ -104,7 +121,17 @@ export default function SigninModal(props) {
                   type={passShow ? "text" : "password"}
                   required
                   name="password"
-                  innerRef={register({ required: t("form:isRequired") })}
+                  innerRef={register({
+                    required: t("form:isRequired"),
+                    minLength: {
+                      value: 8,
+                      message: t("form:shouldBeMinLength", { value: 8 }),
+                    },
+                    maxLength: {
+                      value: 30,
+                      message: t("form:shouldBeMaxLength", { value: 30 }),
+                    },
+                  })}
                 />
                 <Label>{t("password")}</Label>
                 <Button className="showhidepass" onClick={toggleTypePass}>
@@ -124,9 +151,20 @@ export default function SigninModal(props) {
                     className="g-recaptcha"
                     theme="dark"
                     sitekey={RECAPTCHA_KEY}
+                    onChange={onCaptcha}
                   />
                 </div>
+                <Input
+                  className="d-none"
+                  name="recaptcha"
+                  innerRef={register({ required: t("form:isRequired") })}
+                />
                 <Label>{t("notARobot")}</Label>
+                {errors.recaptcha && (
+                  <FormText className="inputresult resulterror inputintext">
+                    {errors.recaptcha?.message}
+                  </FormText>
+                )}
               </div>
               <div>
                 <Button variant="link" onClick={openForgotPassConfirmModal}>

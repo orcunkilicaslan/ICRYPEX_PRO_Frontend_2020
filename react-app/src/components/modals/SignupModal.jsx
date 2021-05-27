@@ -6,7 +6,8 @@ import {
   InputGroupAddon,
   Modal,
   ModalHeader,
-  ModalBody, FormText,
+  ModalBody,
+  FormText,
 } from "reactstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useTranslation } from "react-i18next";
@@ -16,6 +17,7 @@ import { useState } from "react";
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import { AlertResult } from "../AlertResult.jsx";
+import { verifyCaptcha } from "~/util/";
 
 const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
 
@@ -30,22 +32,25 @@ export default function SignupModal(props) {
     ...rest
   } = props;
   const { t } = useTranslation(["login", "form"]);
-  const { register, handleSubmit, errors, watch } = useForm({
-    mode: "onChange",
-    defaultValues: {
-      firstname: "",
-      lastname: "",
-      countrycode: countryPhoneCode?.[0] || "90",
-      phoneno: "",
-      email: "",
-      password: "",
-      confirm: "",
-      termsofuse: false,
-      ecommerce: false,
-    },
-  });
+  const { register, handleSubmit, errors, watch, clearErrors, setValue } =
+    useForm({
+      mode: "onChange",
+      defaultValues: {
+        firstname: "",
+        lastname: "",
+        countrycode: countryPhoneCode?.[0] || "90",
+        phoneno: "",
+        email: "",
+        password: "",
+        confirm: "",
+        termsofuse: false,
+        ecommerce: false,
+        recaptcha: "",
+      },
+    });
 
-  const { countrycode: watchedCountrycode } = watch();
+  const { countrycode: watchedCountrycode, password: watchedPassword } =
+    watch();
 
   const [passShow, setPassShow] = useState(false);
   const toggleTypePass = () => {
@@ -53,7 +58,21 @@ export default function SignupModal(props) {
   };
 
   const onSubmit = data => {
-    submit(data);
+    const { recaptcha, ...rest } = data;
+
+    clearErrors();
+    if (recaptcha) submit(rest);
+  };
+
+  const onCaptcha = async value => {
+    if (value === null) {
+      setValue("recaptcha", ""); // captcha expired
+    } else {
+      if (await verifyCaptcha(value)) {
+        clearErrors("recaptcha");
+        setValue("recaptcha", "valid");
+      }
+    }
   };
 
   return (
@@ -67,6 +86,7 @@ export default function SignupModal(props) {
       fade={false}
       autoFocus={false}
       returnFocusAfterClose={false}
+      backdrop="static"
       {...rest}
     >
       <ModalHeader toggle={clearModals}>
@@ -86,7 +106,7 @@ export default function SignupModal(props) {
           >
             <div className="labelfocustop">
               <FormGroup
-                  className={errors.firstname && ("inputresult resulterror")}
+                className={errors.firstname && "inputresult resulterror"}
               >
                 <Input
                   type="text"
@@ -96,13 +116,13 @@ export default function SignupModal(props) {
                 />
                 <Label>{t("firstname")}</Label>
                 {errors.firstname && (
-                    <FormText className="inputresult resulterror inputintext">
-                      {errors.firstname?.message}
-                    </FormText>
+                  <FormText className="inputresult resulterror inputintext">
+                    {errors.firstname?.message}
+                  </FormText>
                 )}
               </FormGroup>
               <FormGroup
-                  className={errors.lastname && ("inputresult resulterror")}
+                className={errors.lastname && "inputresult resulterror"}
               >
                 <Input
                   type="text"
@@ -112,13 +132,15 @@ export default function SignupModal(props) {
                 />
                 <Label>{t("surname")}</Label>
                 {errors.lastname && (
-                    <FormText className="inputresult resulterror inputintext">
-                      {errors.lastname?.message}
-                    </FormText>
+                  <FormText className="inputresult resulterror inputintext">
+                    {errors.lastname?.message}
+                  </FormText>
                 )}
               </FormGroup>
               <FormGroup
-                  className={`input-group phonelabelgroup ${errors.phoneno && ("inputresult resulterror")}`}
+                className={`input-group phonelabelgroup ${
+                  errors.phoneno && "inputresult resulterror"
+                }`}
               >
                 <InputGroupAddon addonType="prepend">
                   <Input
@@ -158,14 +180,12 @@ export default function SignupModal(props) {
                 />
                 <Label>{t("phone")}</Label>
                 {errors.phoneno && (
-                    <FormText className="inputresult resulterror inputintext">
-                      {errors.phoneno?.message}
-                    </FormText>
+                  <FormText className="inputresult resulterror inputintext">
+                    {errors.phoneno?.message}
+                  </FormText>
                 )}
               </FormGroup>
-              <FormGroup
-                  className={errors.email && ("inputresult resulterror")}
-              >
+              <FormGroup className={errors.email && "inputresult resulterror"}>
                 <Input
                   type="email"
                   required
@@ -174,55 +194,68 @@ export default function SignupModal(props) {
                 />
                 <Label>{t("email")}</Label>
                 {errors.email && (
-                    <FormText className="inputresult resulterror inputintext">
-                      {errors.email?.message}
-                    </FormText>
+                  <FormText className="inputresult resulterror inputintext">
+                    {errors.email?.message}
+                  </FormText>
                 )}
               </FormGroup>
               <FormGroup
-                  className={errors.password && ("inputresult resulterror")}
+                className={errors.password && "inputresult resulterror"}
               >
                 <Input
                   className="signuppassword"
                   type={passShow ? "text" : "password"}
                   required
                   name="password"
-                  innerRef={register({ required: t("form:isRequired") })}
+                  innerRef={register({
+                    required: t("form:isRequired"),
+                    minLength: {
+                      value: 8,
+                      message: t("form:shouldBeMinLength", { value: 8 }),
+                    },
+                    maxLength: {
+                      value: 30,
+                      message: t("form:shouldBeMaxLength", { value: 30 }),
+                    },
+                  })}
                 />
                 <Label>{t("password")}</Label>
-                <Button
-                  className="showhidepass"
-                  onClick={toggleTypePass}
-                >
+                <Button className="showhidepass" onClick={toggleTypePass}>
                   <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
                 </Button>
                 {errors.password && (
-                    <FormText className="inputresult resulterror inputintext">
-                      {errors.password?.message}
-                    </FormText>
+                  <FormText className="inputresult resulterror inputintext">
+                    {errors.password?.message}
+                  </FormText>
                 )}
               </FormGroup>
               <FormGroup
-                  className={errors.confirm && ("inputresult resulterror")}
+                className={errors.confirm && "inputresult resulterror"}
               >
                 <Input
                   className="signuprepassword"
                   type={passShow ? "text" : "password"}
                   required
                   name="confirm"
-                  innerRef={register({ required: t("form:isRequired") })}
+                  innerRef={register({
+                    required: t("form:isRequired"),
+                    validate: value => {
+                      if (watchedPassword !== value) {
+                        return t("form:passwordNotMatch");
+                      }
+
+                      return true;
+                    },
+                  })}
                 />
                 <Label>{t("confirmPassword")}</Label>
-                <Button
-                  className="showhidepass"
-                  onClick={toggleTypePass}
-                >
+                <Button className="showhidepass" onClick={toggleTypePass}>
                   <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
                 </Button>
                 {errors.confirm && (
-                    <FormText className="inputresult resulterror inputintext">
-                      {errors.confirm?.message}
-                    </FormText>
+                  <FormText className="inputresult resulterror inputintext">
+                    {errors.confirm?.message}
+                  </FormText>
                 )}
               </FormGroup>
             </div>
@@ -233,14 +266,27 @@ export default function SignupModal(props) {
                     className="g-recaptcha"
                     theme="dark"
                     sitekey={RECAPTCHA_KEY}
+                    onChange={onCaptcha}
                   />
                 </div>
+                <Input
+                  className="d-none"
+                  name="recaptcha"
+                  innerRef={register({ required: t("form:isRequired") })}
+                />
                 <Label>{t("notARobot")}</Label>
+                {errors.recaptcha && (
+                  <FormText className="inputresult resulterror inputintext">
+                    {errors.recaptcha?.message}
+                  </FormText>
+                )}
               </div>
             </div>
             <div className="checkboxarea">
               <div
-                  className={`custom-control custom-checkbox ${errors.termsofuse && ("inputresult resulterror")}`}
+                className={`custom-control custom-checkbox ${
+                  errors.termsofuse && "inputresult resulterror"
+                }`}
               >
                 <Input
                   className="custom-control-input"
@@ -265,13 +311,15 @@ export default function SignupModal(props) {
                   {t("readAndAgree")}
                 </Label>
                 {errors.termsofuse && (
-                    <FormText className="inputresult resulterror">
-                      {errors.termsofuse?.message}
-                    </FormText>
+                  <FormText className="inputresult resulterror">
+                    {errors.termsofuse?.message}
+                  </FormText>
                 )}
               </div>
               <div
-                  className={`custom-control custom-checkbox ${errors.ecommerce && ("inputresult resulterror")}`}
+                className={`custom-control custom-checkbox ${
+                  errors.ecommerce && "inputresult resulterror"
+                }`}
               >
                 <Input
                   className="custom-control-input"
@@ -288,9 +336,9 @@ export default function SignupModal(props) {
                   {t("commercialConsent")}
                 </Label>
                 {errors.ecommerce && (
-                    <FormText className="inputresult resulterror">
-                      {errors.ecommerce?.message}
-                    </FormText>
+                  <FormText className="inputresult resulterror">
+                    {errors.ecommerce?.message}
+                  </FormText>
                 )}
               </div>
             </div>
