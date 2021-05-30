@@ -26,7 +26,6 @@ const MarketDataSymbol = props => {
   const { t } = useTranslation(["finance", "common"]);
   const filters = [
     { label: "TRY", filter: "TRY" },
-    { label: "USD", filter: "USD" },
     { label: "USDT", filter: "USDT" },
     { label: t("common:all"), filter: "all" },
   ];

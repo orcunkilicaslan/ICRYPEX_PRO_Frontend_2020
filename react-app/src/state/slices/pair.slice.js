@@ -195,7 +195,7 @@ export const fetchInitialOrderHistory = createAsyncThunk(
   }
 );
 
-const pairFilters = ["all", "starred", "TRY", "USD", "USDT"];
+const pairFilters = ["all", "starred", "TRY", "USDT"];
 const initialState = {
   selected: null,
   all: [],
