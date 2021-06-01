@@ -8,16 +8,25 @@ import { groupBy } from "lodash";
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
-import { useClientRect, usePrices } from "~/state/hooks/";
+import { useClientRect, usePrices, useCurrencies } from "~/state/hooks/";
 import {
   fetchOpenOrders,
   toggleHideOthersOpen,
   deleteOpenOrder,
 } from "~/state/slices/order.slice";
-import { formatDateDistance } from "~/util/";
+import { formatDateDistance, getFormattedPrice } from "~/util/";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import { OrderOpenOrdersFilter } from "~/components/modals/";
 import CustomSelect from "~/components/CustomSelect";
+
+const defaultValues = {
+  pairids: [],
+  orderby: 1,
+  isbuyorders: true,
+  issellorders: true,
+  // startfrom: 0,
+  // takecount: 20
+};
 
 const OpenOrderOrders = props => {
   const dispatch = useDispatch();
@@ -27,22 +36,12 @@ const OpenOrderOrders = props => {
   const orderSides = useSelector(state => state.api.settings?.orderSides);
   const orderSlice = useSelector(state => state.order);
   const { allPairs, selectedPair } = usePrices();
+  const { findCurrencyBySymbol } = useCurrencies();
   const [ordersideIdx, setOrdersideIdx] = useState(-1);
 
   const isFetching = orderSlice?.isFetchingOpen;
   const hideOthers = orderSlice?.hideOthersOpen;
   const openOrders = useMemo(() => orderSlice?.open || [], [orderSlice]);
-
-  const defaultValues = useMemo(() => {
-    return {
-      pairids: [],
-      orderby: 1,
-      isbuyorders: true,
-      issellorders: true,
-      // startfrom: 0,
-      // takecount: 20
-    };
-  }, []);
 
   const visibleOrders = useMemo(() => {
     let orders = openOrders;
@@ -71,7 +70,7 @@ const OpenOrderOrders = props => {
     };
 
     dispatch(fetchOpenOrders(toSubmit));
-  }, [allPairs, defaultValues, dispatch]);
+  }, [allPairs, dispatch]);
 
   const onToggleHideOthers = useCallback(() => {
     dispatch(toggleHideOthersOpen());
@@ -180,10 +179,13 @@ const OpenOrderOrders = props => {
                 updated_at,
                 updated_commission,
               }) => {
+                const isBuyOrder = order_side_id === 1;
                 const cls = classnames({
-                  sitecolorgreen: order_side_id === 1,
-                  sitecolorred: order_side_id !== 1,
+                  sitecolorgreen: isBuyOrder,
+                  sitecolorred: !isBuyOrder,
                 });
+                const buyCurrency = findCurrencyBySymbol(buyingcurrency);
+                const sellCurrency = findCurrencyBySymbol(sellingcurrency);
 
                 return (
                   <Table.Tr key={id}>
@@ -200,14 +202,42 @@ const OpenOrderOrders = props => {
                     <Table.Td sizefixed className="type">
                       {ordertype} - <span className={cls}>{orderside}</span>
                     </Table.Td>
-                    <Table.Td sizefixed className="pric">
-                      {price} {buyingcurrency}
+                    <Table.Td sizefixed className="pric" title={price}>
+                      {getFormattedPrice(
+                        price,
+                        isBuyOrder ? sellCurrency?.digit : buyCurrency?.digit
+                      )}{" "}
+                      {isBuyOrder ? sellingcurrency : buyingcurrency}
                     </Table.Td>
-                    <Table.Td sizefixed className="amnt">
-                      {buying_amount} {buyingcurrency}
+                    <Table.Td
+                      sizefixed
+                      className="amnt"
+                      title={isBuyOrder ? buying_amount : selling_amount}
+                    >
+                      {isBuyOrder
+                        ? `${getFormattedPrice(
+                            buying_amount,
+                            buyCurrency?.digit
+                          )} ${buyingcurrency}`
+                        : `${getFormattedPrice(
+                            selling_amount,
+                            sellCurrency?.digit
+                          )} ${sellingcurrency}`}
                     </Table.Td>
-                    <Table.Td sizefixed className="hppn">
-                      {selling_amount} {sellingcurrency}
+                    <Table.Td
+                      sizefixed
+                      className="hppn"
+                      title={isBuyOrder ? selling_amount : buying_amount}
+                    >
+                      {isBuyOrder
+                        ? `${getFormattedPrice(
+                            selling_amount,
+                            sellCurrency?.digit
+                          )} ${sellingcurrency}`
+                        : `${getFormattedPrice(
+                            buying_amount,
+                            buyCurrency?.digit
+                          )} ${buyingcurrency}`}
                     </Table.Td>
                     <Table.Td sizeauto className="bttn">
                       <Button className="d-none">

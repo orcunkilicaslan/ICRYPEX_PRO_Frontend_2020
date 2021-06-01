@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useContext } from "react";
+import { useEffect, useMemo, useState, useContext, memo } from "react";
 import ChartistGraph from "react-chartist";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -14,6 +14,7 @@ import { IconSet } from "~/components/IconSet";
 import { Button } from "~/components/Button";
 import { openOrderContext } from "./OpenOrder";
 import { useCurrencies } from "~/state/hooks/";
+import { getFormattedPrice } from "~/util/";
 
 const assetchartlisttype = "Pie";
 const assetchartlistoptions = {
@@ -30,9 +31,9 @@ const OpenOrderAssetsChartList = props => {
   const { dispatch: _dispatch } = useContext(openOrderContext);
   const { t } = useTranslation("common");
   const { allAssets } = useSelector(state => state.assets);
-  const { fiatCurrencies: currencies } = useCurrencies();
+  const { fiatCurrencies } = useCurrencies();
 
-  const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
+  const [selectedCurrency, setSelectedCurrency] = useState(fiatCurrencies[0]);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const chartData = useMemo(() => {
     const labels = allAssets?.balances?.map?.(({ symbol }) => symbol);
@@ -67,7 +68,7 @@ const OpenOrderAssetsChartList = props => {
       >
         <DropdownToggle caret>{selectedCurrency?.symbol}</DropdownToggle>
         <DropdownMenu right>
-          {currencies.map(currency => {
+          {fiatCurrencies.map(currency => {
             const { symbol } = currency;
 
             return (
@@ -130,13 +131,13 @@ const OpenOrderAssetsChartList = props => {
                   )}{" "}
                   {selectedCurrency?.symbol}
                 </p>
-                <p>0.0028200 BTC</p>
+                <p>{getFormattedPrice(allAssets?.total_BTC, 8)} BTC</p>
               </div>
             </div>
           </div>
           <div className="assetchartarea-list">
             <ul className="asssetalllist">
-              {allAssets?.balances?.map?.(({ symbol, balance }) => {
+              {allAssets?.balances?.map?.(({ symbol, balance, digit }) => {
                 return (
                   <li
                     className={`asssetcurr-${symbol?.toLowerCase?.()}`}
@@ -152,11 +153,7 @@ const OpenOrderAssetsChartList = props => {
                     </div>
                     <div className="info">
                       <h6>{symbol}</h6>
-                      <p>
-                        {currencies.includes(symbol)
-                          ? balance.toFixed?.(2)
-                          : balance}
-                      </p>
+                      <p>{getFormattedPrice(balance, digit)}</p>
                     </div>
                   </li>
                 );
@@ -169,4 +166,4 @@ const OpenOrderAssetsChartList = props => {
   );
 };
 
-export default OpenOrderAssetsChartList;
+export default memo(OpenOrderAssetsChartList);
