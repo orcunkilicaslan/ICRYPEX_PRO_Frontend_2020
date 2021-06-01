@@ -50,6 +50,7 @@ const BuySellActionStopLimit = props => {
     defaultValues: {
       fiatBuyPrice: "",
       cryptoBuyAmount: "",
+      stopBuyPrice: "",
     },
   });
 
@@ -59,13 +60,22 @@ const BuySellActionStopLimit = props => {
     defaultValues: {
       fiatSellPrice: "",
       cryptoSellAmount: "",
+      stopSellPrice: "",
     },
   });
 
   useEffect(() => {
     if (selectedPair) {
-      resetBuy();
-      resetSell();
+      setValueBuy("fiatBuyPrice", selectedPrice.price, { shouldValidate: true });
+      setValueBuy("cryptoBuyAmount", "");
+      setValueBuy("stopBuyPrice", "");
+      setValueSell("fiatSellPrice", selectedPrice.price, { shouldValidate: true });
+      setValueSell("cryptoSellAmount", "");
+      setValueSell("stopSellPrice", "");
+      setTotalBuy("")
+      setTotalSell("")
+      setRangeSellPortfolio(buySellRangePercent[0])
+      setRangeBuyPortfolio(buySellRangePercent[0])
       dispatch(fetchBalance({currencyid: selectedPair?.second_currency_id, isFiat: true,isPadding: true}));
       dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false,isPadding: true}));}
   }, [dispatch, selectedPair]);
@@ -100,10 +110,16 @@ const BuySellActionStopLimit = props => {
         setApiError(payload?.errormessage);
       } else {
         setApiError("");
-        resetBuy();
-        resetSell();
-        setTotalBuy(Number(0).toFixed(2))
-        setTotalSell(Number(0).toFixed(2))
+        setValueBuy("fiatBuyPrice", selectedPrice.price, { shouldValidate: true });
+        setValueBuy("cryptoBuyAmount", "");
+        setValueBuy("stopBuyPrice", "");
+        setValueSell("fiatSellPrice", selectedPrice.price, { shouldValidate: true });
+        setValueSell("cryptoSellAmount", "");
+        setValueSell("stopSellPrice", "");
+        setTotalBuy("")
+        setTotalSell("")
+        setRangeSellPortfolio(buySellRangePercent[0])
+        setRangeBuyPortfolio(buySellRangePercent[0])
         setIsSubmitted(false);
         await  dispatch(fetchBalance({currencyid: selectedPair?.second_currency_id, isFiat: true, isPadding: false}));
         dispatch(setOpenModal("buysellconfirm"));
@@ -127,10 +143,16 @@ const BuySellActionStopLimit = props => {
         setIsSubmitted(false);
       } else {
         setApiError("");
-        resetBuy();
-        resetSell();
-        setTotalBuy(Number(0).toFixed(2))
-        setTotalSell(Number(0).toFixed(2))
+        setValueBuy("fiatBuyPrice", selectedPrice.price, { shouldValidate: true });
+        setValueBuy("cryptoBuyAmount", "");
+        setValueBuy("stopBuyPrice", "");
+        setValueSell("fiatSellPrice", selectedPrice.price, { shouldValidate: true });
+        setValueSell("cryptoSellAmount", "");
+        setValueSell("stopSellPrice", "");
+        setTotalBuy("")
+        setTotalSell("")
+        setRangeSellPortfolio(buySellRangePercent[0])
+        setRangeBuyPortfolio(buySellRangePercent[0])
         setIsSubmitted(false);
         await  dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false, isPadding: false}));
         dispatch(setOpenModal("buysellconfirm"));
