@@ -91,6 +91,8 @@ export const hasPreloginToken = ({ api }) => {
 };
 
 export const getFormattedPrice = (price, digit) => {
+  if (!digit) return price;
+
   if (price !== 0) {
     return parseFloat(price).toFixed(digit);
   } else {

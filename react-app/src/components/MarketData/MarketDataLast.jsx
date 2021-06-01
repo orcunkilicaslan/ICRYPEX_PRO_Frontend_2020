@@ -3,14 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import Table from "../Table.jsx";
-import { formatDateDistance, getPairPrefix } from "~/util/";
-import { useClientRect, usePrices } from "~/state/hooks/";
+import { formatDateDistance, getPairPrefix, getFormattedPrice } from "~/util/";
+import { useClientRect, usePrices, useCurrencies } from "~/state/hooks/";
 import { fetchInitialOrderHistory } from "~/state/slices/pair.slice";
 
 const MarketDataLast = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["common"]);
-  const { selectedPair, fiatCurrency: selectedFiatCurrency } = usePrices();
+  const { selectedPair } = usePrices();
+  const { selectedFiatCurrency, selectedCryptoCurrency } = useCurrencies();
   const { lang } = useSelector(state => state.ui);
 
   const prefix = getPairPrefix(selectedPair?.name);
@@ -40,7 +41,7 @@ const MarketDataLast = props => {
                 {t("amount")}
               </Table.Th>
               <Table.Th sizefixed className="pric">
-                {`${t("price")} ${selectedFiatCurrency}`}
+                {`${t("price")} ${selectedFiatCurrency?.symbol}`}
               </Table.Th>
             </Table.Tr>
           </Table.Thead>
@@ -67,11 +68,14 @@ const MarketDataLast = props => {
                       })}
                     </span>
                   </Table.Td>
-                  <Table.Td sizefixed className="amnt">
-                    {amount}
+                  <Table.Td sizefixed className="amnt" title={amount}>
+                    {getFormattedPrice(amount, selectedCryptoCurrency?.digit)}
                   </Table.Td>
-                  <Table.Td sizefixed className="pric">
-                    {market_price}
+                  <Table.Td sizefixed className="pric" title={market_price}>
+                    {getFormattedPrice(
+                      market_price,
+                      selectedFiatCurrency?.digit
+                    )}
                   </Table.Td>
                 </Table.Tr>
               );

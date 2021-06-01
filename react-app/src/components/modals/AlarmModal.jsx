@@ -22,6 +22,8 @@ import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import { AlertResult } from "../AlertResult.jsx";
 import Table from "../Table";
+import { getFormattedPrice, getPairTuple } from "~/util/";
+import { useCurrencies } from "~/state/hooks/";
 
 const rangeAlarmPercent = [-100, -75, -50, -25, 0, 25, 50, 75, 100];
 const spinnerStep = 10;
@@ -43,12 +45,9 @@ export default function AlarmModal(props) {
     ...rest
   } = props;
   const { t } = useTranslation(["coinbar", "common", "form"]);
-  const {
-    all: allAlarms,
-    isCreating,
-    hideOthers,
-    isDeleting,
-  } = useSelector(state => state.alarm);
+  const { all: allAlarms, isCreating, hideOthers, isDeleting } = useSelector(
+    state => state.alarm
+  );
   const { register, handleSubmit, setValue, getValues } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -67,6 +66,7 @@ export default function AlarmModal(props) {
       return byPair[currentPair?.name] || [];
     }
   }, [allAlarms, currentPair, hideOthers]);
+  const { activeCurrencies } = useCurrencies();
 
   const upOrDown = selectedPriceData?.changepercent > 0 ? "up" : "down";
   const siteColorClass = `sitecolor${upOrDown === "up" ? "green" : "red"}`;
@@ -134,13 +134,23 @@ export default function AlarmModal(props) {
           <div className="modalcomp-setalarm-data">
             <div className="databigger">
               <PerLineIcon className={`mdper mdper-${upOrDown}`} />
-              <span className={siteColorClass}>{selectedPriceData.price}</span>
+              <span className={siteColorClass} title={selectedPriceData?.price}>
+                {getFormattedPrice(
+                  selectedPriceData?.price,
+                  selectedFiatCurrency?.digit
+                )}
+              </span>
             </div>
             <div className="datasmall">
-              <span>{selectedPriceData.pricechange}</span>
+              <span title={selectedPriceData?.pricechange}>
+                {getFormattedPrice(
+                  selectedPriceData?.pricechange,
+                  selectedFiatCurrency?.digit
+                )}
+              </span>
               <span className={siteColorClass}>
                 {upOrDown === "up" ? "+" : "-"}
-                {selectedPriceData.changepercent}%
+                {selectedPriceData?.changepercent?.toFixed?.(2)}%
               </span>
             </div>
           </div>
@@ -185,7 +195,9 @@ export default function AlarmModal(props) {
                   })}
                 />
                 <InputGroupAddon addonType="append">
-                  <InputGroupText>{selectedFiatCurrency}</InputGroupText>
+                  <InputGroupText>
+                    {selectedFiatCurrency?.symbol}
+                  </InputGroupText>
                 </InputGroupAddon>
                 <InputGroupAddon addonType="append">
                   <Button
@@ -306,13 +318,20 @@ export default function AlarmModal(props) {
               </Table.Thead>
               <Table.Tbody striped hovered scrollbar>
                 {visibleAlarms.map(({ id, pairname, price, mdper }) => {
+                  const [_, fiatCurrencySymbol] = getPairTuple(pairname);
+                  const fiatCurrency = activeCurrencies?.find?.(
+                    ({ symbol }) => symbol === fiatCurrencySymbol
+                  );
+
                   return (
                     <Table.Tr key={id}>
                       <Table.Td sizeauto className="symb">
                         {pairname}
                       </Table.Td>
                       <Table.Td sizefixed className="amnt">
-                        <span>{price}</span>
+                        <span title={price}>
+                          {getFormattedPrice(price, fiatCurrency?.digit)}
+                        </span>
                         <PerLineIcon className={`mdper mdper-${mdper}`} />
                       </Table.Td>
                       <Table.Td sizeauto className="adlt">

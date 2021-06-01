@@ -9,7 +9,6 @@ import { ReactComponent as MdTableFavIcon } from "~/assets/images/icons/path_ico
 import { ReactComponent as MdTableSearchIcon } from "~/assets/images/icons/path_icon_mdtable_symbolfilter_search.svg";
 import { ReactComponent as MdTableCloseIcon } from "~/assets/images/icons/path_icon_mdtable_symbolfilter_close.svg";
 import { ReactComponent as PerLineIcon } from "~/assets/images/icons/path_icon_pericon.svg";
-import { useClientRect } from "~/state/hooks/";
 
 import { Button } from "../Button";
 import Table from "../Table.jsx";
@@ -20,6 +19,7 @@ import {
   setSelectedPair,
   setPairFilter,
 } from "~/state/slices/pair.slice";
+import { useClientRect, usePrices } from "~/state/hooks/";
 
 const MarketDataSymbol = props => {
   const dispatch = useDispatch();
@@ -35,16 +35,21 @@ const MarketDataSymbol = props => {
     visiblePairIDs,
   } = useSelector(state => state.pair);
   const { accesstoken } = useSelector(state => state.api);
-  const { prices: pricesData = [] } = useSelector(state => state.socket);
+  const { allPrices: pricesData = [], formatPrice } = usePrices();
   const { result, keyword, search, resetSearch } = useFuzzy(pricesData, {
     keys: ["symbol"],
     findAllMatches: true,
   });
-  const visiblePrices = useMemo(() => {
-    if (keyword) return result.map(({ item }) => item);
+  const [rawPricesData, formattedPricesData] = useMemo(() => {
+    let prices;
 
-    return pricesData.filter(({ id }) => visiblePairIDs.includes(id));
-  }, [visiblePairIDs, pricesData, keyword, result]);
+    if (keyword) prices = result.map(({ item }) => item);
+    else prices = pricesData.filter(({ id }) => visiblePairIDs.includes(id));
+
+    const formatted = prices?.map?.(formatPrice);
+
+    return [prices, formatted];
+  }, [keyword, result, pricesData, formatPrice, visiblePairIDs]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
 
   useEffect(() => {
@@ -150,16 +155,17 @@ const MarketDataSymbol = props => {
             scrollbar
             scrollbarstyles={{ height: `${tableHeight - 25}px` }}
           >
-            {visiblePrices.map((data = {}) => {
+            {formattedPricesData.map((data = {}, idx) => {
               const {
                 id,
                 name,
-                ask: buy,
-                bid: sell,
+                ask,
+                bid,
                 volume,
                 changepercent,
                 symbol,
               } = data;
+              const rawData = rawPricesData?.[idx];
               const mdper = changepercent > 0 ? "up" : "down";
               const isFavorite = favoritePairIDs.includes(id);
 
@@ -186,17 +192,21 @@ const MarketDataSymbol = props => {
                   <Table.Td sizefixed className="sym">
                     {name.replace(/\s/g, "")}
                   </Table.Td>
-                  <Table.Td sizefixed className="buy">
-                    {buy}
+                  <Table.Td sizefixed className="buy" title={rawData?.ask}>
+                    {ask}
                   </Table.Td>
-                  <Table.Td sizefixed className="sll">
-                    {sell}
+                  <Table.Td sizefixed className="sll" title={rawData?.bid}>
+                    {bid}
                   </Table.Td>
                   <Table.Td sizefixed className="vol">
                     {volume}
                   </Table.Td>
-                  <Table.Td sizefixed className="chg">
-                    {changepercent}
+                  <Table.Td
+                    sizefixed
+                    className="chg"
+                    title={rawData?.changepercent}
+                  >
+                    {changepercent && `${changepercent}%`}
                   </Table.Td>
                   <Table.Td sizeauto className="per">
                     <PerLineIcon className={`mdper mdper-${mdper}`} />

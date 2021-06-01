@@ -3,11 +3,12 @@ import ChartistGraph from "react-chartist";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { merge, take } from "lodash";
+import { nanoid } from "nanoid";
 
 import Table from "../Table.jsx";
 import { fetchInitialOrderBook } from "~/state/slices/pair.slice";
-import { usePrices } from "~/state/hooks/";
-import { getPairPrefix } from "~/util/";
+import { usePrices, useCurrencies } from "~/state/hooks/";
+import { getPairPrefix, getFormattedPrice } from "~/util/";
 
 const orderbookcharttype = "Bar";
 const chartOptions = {
@@ -34,10 +35,11 @@ const chartOptions = {
 const OrderBook = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["finance", "orderbook", "common"]);
-  const { selectedPair: selected, fiatCurrency, cryptoCurrency } = usePrices();
+  const { selectedPair } = usePrices();
+  const { selectedFiatCurrency, selectedCryptoCurrency } = useCurrencies();
   const orderbooks = useSelector(state => state.socket.orderbooks);
 
-  const prefix = getPairPrefix(selected?.name);
+  const prefix = getPairPrefix(selectedPair?.name);
   const eventKey = `${prefix}orderbook`;
   const bookData = orderbooks?.[eventKey] || {};
   const {
@@ -102,12 +104,12 @@ const OrderBook = props => {
   }, [visibleSellOrders]);
 
   useEffect(() => {
-    const name = selected?.name;
+    const name = selectedPair?.name;
 
     if (name) {
       dispatch(fetchInitialOrderBook(name));
     }
-  }, [selected, dispatch]);
+  }, [selectedPair, dispatch]);
 
   return (
     <div className="mainbox mainbox-orderbook">
@@ -117,19 +119,32 @@ const OrderBook = props => {
             <h4>{t("buyOrders")}</h4>
             <p>
               {t("common:total")}:{" "}
-              <span className="sitecolorgreen">{`${buytotal} ${cryptoCurrency}`}</span>
+              <span className="sitecolorgreen" title={buytotal}>
+                {getFormattedPrice(buytotal, selectedCryptoCurrency?.digit)}{" "}
+                {selectedCryptoCurrency?.symbol}
+              </span>
             </p>
           </div>
           <div className="orderbook-head-col spreadside">
             <div className="spreadside-lr text-right">
-              <p className="sitecolorgreen">{buyhighestprice}</p>
+              <p className="sitecolorgreen">
+                {getFormattedPrice(
+                  buyhighestprice,
+                  selectedFiatCurrency?.digit
+                )}
+              </p>
               <p>{t("common:high")}</p>
             </div>
             <div className="spreadside-df text-center">
               <p>{(buyhighestprice + selllowestprice) / 2}</p>
             </div>
             <div className="spreadside-lr text-left">
-              <p className="sitecolorred">{selllowestprice}</p>
+              <p className="sitecolorred">
+                {getFormattedPrice(
+                  selllowestprice,
+                  selectedFiatCurrency?.digit
+                )}
+              </p>
               <p>{t("common:low")}</p>
             </div>
           </div>
@@ -137,7 +152,10 @@ const OrderBook = props => {
             <h4>{t("sellOrders")}</h4>
             <p>
               {t("common:total")}:{" "}
-              <span className="sitecolorred">{`${selltotal} ${fiatCurrency}`}</span>
+              <span className="sitecolorred" title={selltotal}>
+                {getFormattedPrice(selltotal, selectedFiatCurrency?.digit)}{" "}
+                {selectedFiatCurrency?.symbol}
+              </span>
             </p>
           </div>
         </div>
@@ -168,17 +186,26 @@ const OrderBook = props => {
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {visibleBuyOrders.map(({ total, amount, price }, idx) => {
+                    {visibleBuyOrders.map(({ total, amount, price }) => {
                       return (
-                        <Table.Tr key={`${amount}_${idx}`}>
-                          <Table.Td sizefixed className="totl">
-                            {total}
+                        <Table.Tr key={nanoid()}>
+                          <Table.Td sizefixed className="totl" title={total}>
+                            {getFormattedPrice(
+                              total,
+                              selectedFiatCurrency?.digit
+                            )}
                           </Table.Td>
-                          <Table.Td sizefixed className="amnt">
-                            {amount?.toFixed?.(8)}
+                          <Table.Td sizefixed className="amnt" title={amount}>
+                            {getFormattedPrice(
+                              amount,
+                              selectedCryptoCurrency?.digit
+                            )}
                           </Table.Td>
-                          <Table.Td sizefixed className="pric">
-                            {price?.toFixed?.(2)}
+                          <Table.Td sizefixed className="pric" title={price}>
+                            {getFormattedPrice(
+                              price,
+                              selectedFiatCurrency?.digit
+                            )}
                           </Table.Td>
                         </Table.Tr>
                       );
@@ -214,17 +241,26 @@ const OrderBook = props => {
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {visibleSellOrders.map(({ total, amount, price }, idx) => {
+                    {visibleSellOrders.map(({ total, amount, price }) => {
                       return (
-                        <Table.Tr key={`${amount}_${idx}`}>
-                          <Table.Td sizefixed className="pric">
-                            {price}
+                        <Table.Tr key={nanoid()}>
+                          <Table.Td sizefixed className="pric" title={price}>
+                            {getFormattedPrice(
+                              price,
+                              selectedFiatCurrency?.digit
+                            )}
                           </Table.Td>
-                          <Table.Td sizefixed className="amnt">
-                            {amount?.toFixed?.(8)}
+                          <Table.Td sizefixed className="amnt" title={amount}>
+                            {getFormattedPrice(
+                              amount,
+                              selectedCryptoCurrency?.digit
+                            )}
                           </Table.Td>
-                          <Table.Td sizefixed className="totl">
-                            {total?.toFixed?.(2)}
+                          <Table.Td sizefixed className="totl" title={total}>
+                            {getFormattedPrice(
+                              total,
+                              selectedFiatCurrency?.digit
+                            )}
                           </Table.Td>
                         </Table.Tr>
                       );

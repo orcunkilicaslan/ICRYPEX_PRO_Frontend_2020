@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, memo, useMemo } from "react";
 import { InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,7 +15,8 @@ import {
 } from "~/state/slices/alarm.slice";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import { AlarmModal } from "~/components/modals/";
-import { usePrices } from "~/state/hooks/";
+import { usePrices, useCurrencies } from "~/state/hooks/";
+import { getFormattedPrice } from "~/util/";
 
 const TopCoinBar = props => {
   const { t } = useTranslation(["coinbar", "common"]);
@@ -23,9 +24,8 @@ const TopCoinBar = props => {
   const {
     selectedPair: currentPair,
     selectedPrice: selectedPriceData,
-    fiatCurrency: selectedFiatCurrency,
-    cryptoCurrency: selectedCryptoCurrency,
   } = usePrices();
+  const { selectedFiatCurrency, selectedCryptoCurrency } = useCurrencies();
   const { accesstoken } = useSelector(state => state.api);
   const { openModal } = useSelector(state => state.ui);
   const [alarmError, setAlarmError] = useState(null);
@@ -34,39 +34,58 @@ const TopCoinBar = props => {
     dispatch(fetchPriceAlarms());
   }, [dispatch]);
 
-  let visiblePriceData = {
-    bestBuy: "",
-    bestSell: "",
-    change24h: "",
-    high24h: "",
-    low24h: "",
-    average24h: "",
-    volume: "",
-  };
+  const visiblePriceData = useMemo(() => {
+    if (selectedPriceData) {
+      const {
+        high24hour,
+        low24hour,
+        avarage24hour,
+        volume,
+        bid,
+        ask,
+        changepercent,
+      } = selectedPriceData;
+      const fiatSymbol = selectedFiatCurrency?.symbol || "";
+      const cryptoSymbol = selectedCryptoCurrency?.symbol || "";
 
-  if (selectedPriceData) {
-    const {
-      high24hour,
-      low24hour,
-      avarage24hour,
-      volume,
-      bid,
-      ask,
-      changepercent,
-    } = selectedPriceData;
-
-    visiblePriceData = {
-      bestBuy: `${bid} ${selectedFiatCurrency}`,
-      bestSell: `${ask} ${selectedFiatCurrency}`,
-      change24h: `${changepercent}%`,
-      high24h: `${high24hour} ${selectedFiatCurrency}`,
-      low24h: `${low24hour} ${selectedFiatCurrency}`,
-      average24h: `${avarage24hour} ${selectedFiatCurrency}`,
-      volume: `${volume} ${selectedCryptoCurrency}`,
-      // lastPrice: 9999,
-      // excavating: 55555,
-    };
-  }
+      return {
+        bestBuy: `${getFormattedPrice(
+          bid,
+          selectedFiatCurrency?.digit
+        )} ${fiatSymbol}`,
+        bestSell: `${getFormattedPrice(
+          ask,
+          selectedFiatCurrency?.digit
+        )} ${fiatSymbol}`,
+        change24h: `${changepercent?.toFixed?.(2)}%`,
+        high24h: `${getFormattedPrice(
+          high24hour,
+          selectedFiatCurrency?.digit
+        )} ${fiatSymbol}`,
+        low24h: `${getFormattedPrice(
+          low24hour,
+          selectedFiatCurrency?.digit
+        )} ${fiatSymbol}`,
+        average24h: `${getFormattedPrice(
+          avarage24hour,
+          selectedFiatCurrency?.digit
+        )} ${fiatSymbol}`,
+        volume: `${volume} ${cryptoSymbol}`,
+        // lastPrice: 9999,
+        // excavating: 55555,
+      };
+    } else {
+      return {
+        bestBuy: "",
+        bestSell: "",
+        change24h: "",
+        high24h: "",
+        low24h: "",
+        average24h: "",
+        volume: "",
+      };
+    }
+  }, [selectedCryptoCurrency, selectedFiatCurrency, selectedPriceData]);
 
   const createAlarm = async data => {
     setAlarmError(null);
@@ -112,7 +131,10 @@ const TopCoinBar = props => {
               <div className="cryptostatsbar-biger">
                 <PerLineIcon className={`mdper mdper-${upOrDown}`} />
                 <span className={siteColorClass}>
-                  {selectedPriceData?.price}
+                  {getFormattedPrice(
+                    selectedPriceData?.price,
+                    selectedFiatCurrency?.digit
+                  )}
                 </span>
               </div>
             ) : null}
@@ -158,6 +180,7 @@ const TopCoinBar = props => {
         onToggleHideOthers={onToggleHideOthers}
         errorMessage={alarmError}
         selectedPriceData={selectedPriceData}
+        selectedFiatCurrency={selectedFiatCurrency}
         currentPair={currentPair}
       />
     </section>
