@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useSelector } from "react-redux";
 
 import { useCurrencies } from "~/state/hooks/";
@@ -13,25 +14,28 @@ const usePrices = (props = {}) => {
   const allPrices = useSelector(state => state.socket.prices);
   const { activeCurrencies } = useCurrencies();
 
-  const formatPrice = price => {
-    const [_, fiatCurrencySymbol] = getPairTuple(price?.name);
-    const fiatCurrency = activeCurrencies?.find?.(
-      ({ symbol }) => symbol === fiatCurrencySymbol
-    );
-    const clone = { ...price };
+  const formatPrice = useCallback(
+    price => {
+      const [_, fiatCurrencySymbol] = getPairTuple(price?.name);
+      const fiatCurrency = activeCurrencies?.find?.(
+        ({ symbol }) => symbol === fiatCurrencySymbol
+      );
+      const clone = { ...price };
 
-    for (const [key, value] of Object.entries(clone)) {
-      if (key === "id" || key.includes("volume")) continue;
+      for (const [key, value] of Object.entries(clone)) {
+        if (key === "id" || key.includes("volume")) continue;
 
-      if (key.includes("percent")) {
-        clone[key] = getFormattedPrice(value, 2);
-      } else if (typeof value === "number") {
-        clone[key] = getFormattedPrice(value, fiatCurrency?.digit);
+        if (key.includes("percent")) {
+          clone[key] = getFormattedPrice(value, 2);
+        } else if (typeof value === "number") {
+          clone[key] = getFormattedPrice(value, fiatCurrency?.digit);
+        }
       }
-    }
 
-    return clone;
-  };
+      return clone;
+    },
+    [activeCurrencies]
+  );
 
   return {
     allPrices,

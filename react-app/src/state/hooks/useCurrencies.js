@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { useSelector } from "react-redux";
 
 const ACTIVE_FIAT_IDS = [1, 2, 3];
@@ -43,6 +43,11 @@ const useCurrencies = (props = {}) => {
     [all, cryptoCurrency]
   );
 
+  const findCurrencyBySymbol = useCallback(
+    symbol => activeCurrencies?.find?.(currency => currency.symbol === symbol),
+    [activeCurrencies]
+  );
+
   return {
     all,
     types,
@@ -52,6 +57,7 @@ const useCurrencies = (props = {}) => {
     activeCurrencies,
     selectedFiatCurrency,
     selectedCryptoCurrency,
+    findCurrencyBySymbol,
   };
 };
 

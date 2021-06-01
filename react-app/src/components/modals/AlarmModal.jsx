@@ -66,7 +66,7 @@ export default function AlarmModal(props) {
       return byPair[currentPair?.name] || [];
     }
   }, [allAlarms, currentPair, hideOthers]);
-  const { activeCurrencies } = useCurrencies();
+  const { findCurrencyBySymbol } = useCurrencies();
 
   const upOrDown = selectedPriceData?.changepercent > 0 ? "up" : "down";
   const siteColorClass = `sitecolor${upOrDown === "up" ? "green" : "red"}`;
@@ -319,9 +319,7 @@ export default function AlarmModal(props) {
               <Table.Tbody striped hovered scrollbar>
                 {visibleAlarms.map(({ id, pairname, price, mdper }) => {
                   const [_, fiatCurrencySymbol] = getPairTuple(pairname);
-                  const fiatCurrency = activeCurrencies?.find?.(
-                    ({ symbol }) => symbol === fiatCurrencySymbol
-                  );
+                  const fiatCurrency = findCurrencyBySymbol(fiatCurrencySymbol);
 
                   return (
                     <Table.Tr key={id}>
