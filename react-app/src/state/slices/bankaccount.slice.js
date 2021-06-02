@@ -2,10 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as api from "../api";
 import { hasAccessToken } from "~/util/";
+import { fetchBankAccounts } from "~/state/slices/user.slice";
 
 export const createBankAccount = createAsyncThunk(
     "bankaccounts/create",
-    async (bankAccountData, { getState, rejectWithValue }) => {
+    async (bankAccountData, { getState, rejectWithValue,dispatch }) => {
         const {
             api: { accesstoken },
         } = getState();
@@ -20,6 +21,7 @@ export const createBankAccount = createAsyncThunk(
                 }
             );
 
+            dispatch(fetchBankAccounts())
             return response.data;
         } catch ({ data }) {
             return rejectWithValue(data);

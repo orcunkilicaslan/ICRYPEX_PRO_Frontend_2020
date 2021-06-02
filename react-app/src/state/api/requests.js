@@ -45,7 +45,7 @@ export const fetchInitialOrderHistory = buildRequest(
 );
 export const depositBankwire = buildRequest("/deposit/bankwire");
 export const depositCrypto = buildRequest("/deposit/crypto");
-export const fetchBankAccounts = buildCachedRequest("/bankaccounts", ms("1h"));
+export const fetchBankAccounts = buildRequest("/bankaccounts");
 export const fetchPendingTransactions = buildCachedRequest(
   "/pendingtransactions",
   ms("10m")
