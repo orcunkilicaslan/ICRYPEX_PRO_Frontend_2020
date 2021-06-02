@@ -11,7 +11,8 @@ import {
 import ReCAPTCHA from "react-google-recaptcha";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, Fragment, useEffect } from "react";
+import ms from "ms";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
@@ -19,6 +20,7 @@ import { AlertResult } from "../AlertResult.jsx";
 import { useLocaleUpperCase } from "~/state/hooks/";
 import { setUserEmail } from "~/state/slices/user.slice";
 import { verifyCaptcha } from "~/util/";
+import { ProgressRing } from "../ProgressRing.jsx";
 
 const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
 
@@ -27,15 +29,24 @@ export default function SigninModal(props) {
     isOpen,
     clearModals,
     userEmail = "",
-    errorMessage,
-    submit,
+    signinError,
+    verifyError,
+    handleSignin,
+    handleVerify,
     isSigningin,
+    isVerifying,
     openForgotPassConfirmModal,
     ...rest
   } = props;
   const { t } = useTranslation(["login", "form"]);
   const toUpperCase = useLocaleUpperCase();
-  const { register, handleSubmit, errors, clearErrors, setValue } = useForm({
+  const {
+    register: registerSignin,
+    handleSubmit: submitSignin,
+    errors: errorsSignin,
+    clearErrors: clearErrorsSignin,
+    setValue: setValueSignin,
+  } = useForm({
     mode: "onChange",
     defaultValues: {
       emailornationalid: userEmail,
@@ -43,26 +54,60 @@ export default function SigninModal(props) {
       recaptcha: "",
     },
   });
-
+  const {
+    register: registerVerify,
+    handleSubmit: submitVerify,
+    errors: errorsVerify,
+    clearErrors: clearErrorsVerify,
+  } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      code: "",
+    },
+  });
   const [passShow, setPassShow] = useState(false);
+  const [onSigninStep, setOnSigninStep] = useState(true);
+  const [progress, setProgress] = useState(100);
+
+  useEffect(() => {
+    const expiresIn = ms("3m");
+    let id;
+
+    if (!onSigninStep) {
+      id = setInterval(() => {
+        setProgress(progress => progress - 100 / expiresIn);
+      }, ms("1s"));
+    }
+
+    return () => clearInterval(id);
+  }, [onSigninStep]);
+
   const toggleTypePass = () => {
     setPassShow(passShow ? false : true);
   };
 
-  const onSubmit = data => {
+  const onSubmitSignin = data => {
     const { recaptcha, ...rest } = data;
 
-    clearErrors();
-    if (recaptcha) submit(rest);
+    clearErrorsSignin();
+    if (recaptcha) {
+      handleSignin(rest);
+      setOnSigninStep(false);
+    }
+  };
+
+  const onSubmitVerify = data => {
+    clearErrorsVerify();
+    handleVerify(data);
   };
 
   const onCaptcha = async value => {
     if (value === null) {
-      setValue("recaptcha", ""); // captcha expired
+      setValueSignin("recaptcha", ""); // captcha expired
     } else {
       if (await verifyCaptcha(value)) {
-        clearErrors("recaptcha");
-        setValue("recaptcha", "valid");
+        clearErrorsSignin("recaptcha");
+        setValueSignin("recaptcha", "valid");
       }
     }
   };
@@ -85,43 +130,51 @@ export default function SigninModal(props) {
         <div className="modalcomp-sign-icon">
           <IconSet sprite="sprtlgclrd" size="50gray" name="user" />
         </div>
-        {errorMessage ? <AlertResult error>{errorMessage}</AlertResult> : null}
+        {onSigninStep ? (
+          signinError ? (
+            <AlertResult error>{signinError}</AlertResult>
+          ) : null
+        ) : verifyError ? (
+          <AlertResult error>{verifyError}</AlertResult>
+        ) : null}
         <div className="modalcomp-sign-form">
           <Form
             className="siteformui"
             autoComplete="off"
             noValidate
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={submitSignin(onSubmitSignin)}
             // TODO: setUserEmail
           >
             <div className="labelfocustop">
               <FormGroup
                 className={
-                  errors.emailornationalid && "inputresult resulterror"
+                  errorsSignin.emailornationalid && "inputresult resulterror"
                 }
               >
                 <Input
                   type="email"
                   required
                   name="emailornationalid"
-                  innerRef={register({ required: t("form:isRequired") })}
+                  innerRef={registerSignin({
+                    required: t("form:isRequired"),
+                  })}
                 />
                 <Label>{t("email")}</Label>
-                {errors.emailornationalid && (
+                {errorsSignin.emailornationalid && (
                   <FormText className="inputresult resulterror inputintext">
-                    {errors.emailornationalid?.message}
+                    {errorsSignin.emailornationalid?.message}
                   </FormText>
                 )}
               </FormGroup>
               <FormGroup
-                className={errors.password && "inputresult resulterror"}
+                className={errorsSignin.password && "inputresult resulterror"}
               >
                 <Input
                   className="signuppassword"
                   type={passShow ? "text" : "password"}
                   required
                   name="password"
-                  innerRef={register({
+                  innerRef={registerSignin({
                     required: t("form:isRequired"),
                     minLength: {
                       value: 8,
@@ -137,9 +190,9 @@ export default function SigninModal(props) {
                 <Button className="showhidepass" onClick={toggleTypePass}>
                   <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
                 </Button>
-                {errors.password && (
+                {errorsSignin.password && (
                   <FormText className="inputresult resulterror inputintext">
-                    {errors.password?.message}
+                    {errorsSignin.password?.message}
                   </FormText>
                 )}
               </FormGroup>
@@ -157,12 +210,14 @@ export default function SigninModal(props) {
                 <Input
                   className="d-none"
                   name="recaptcha"
-                  innerRef={register({ required: t("form:isRequired") })}
+                  innerRef={registerSignin({
+                    required: t("form:isRequired"),
+                  })}
                 />
                 <Label>{t("notARobot")}</Label>
-                {errors.recaptcha && (
+                {errorsSignin.recaptcha && (
                   <FormText className="inputresult resulterror inputintext">
-                    {errors.recaptcha?.message}
+                    {errorsSignin.recaptcha?.message}
                   </FormText>
                 )}
               </div>
@@ -173,14 +228,67 @@ export default function SigninModal(props) {
               </div>
             </div>
             <Button
-              variant="secondary"
+              variant={onSigninStep ? "success" : "secondary"}
               className="w-100 active"
               type="submit"
-              disabled={isSigningin}
+              disabled={isSigningin || !onSigninStep}
             >
               {t("sendCode").toUpperCase()}
             </Button>
           </Form>
+
+          {!onSigninStep && (
+            <Fragment>
+              <hr />
+              <ProgressRing
+                radius={35}
+                strokeWidth={4}
+                stroke="#e84a55"
+                progress={progress}
+              />
+              <Form
+                className="siteformui"
+                autoComplete="off"
+                noValidate
+                onSubmit={submitVerify(onSubmitVerify)}
+              >
+                <span>Tekrar gönder</span>
+                <div className="labelfocustop">
+                  <FormGroup>
+                    <Input
+                      className="text-center"
+                      type="text"
+                      name="code"
+                      required
+                      innerRef={registerVerify({
+                        required: t("form:isRequired"),
+                        maxLength: {
+                          value: 6,
+                          message: t("form:shouldBeMaxLength", { value: 6 }),
+                        },
+                      })}
+                    />
+                    <Label className="text-center">
+                      {t("verificationCode")}
+                    </Label>
+                    {errorsVerify.code && (
+                      <FormText className="inputresult resulterror">
+                        {errorsVerify.code?.message}
+                      </FormText>
+                    )}
+                  </FormGroup>
+                </div>
+                <Button
+                  type="submit"
+                  variant="success"
+                  className="w-100 mt-2"
+                  disabled={isVerifying}
+                >
+                  {t("signin")}
+                </Button>
+              </Form>
+            </Fragment>
+          )}
         </div>
       </ModalBody>
     </Modal>

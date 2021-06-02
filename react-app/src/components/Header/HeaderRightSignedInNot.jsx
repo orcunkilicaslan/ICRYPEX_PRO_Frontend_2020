@@ -128,19 +128,15 @@ const HeaderRightSignedInNot = props => {
       />
       <SigninModal
         isOpen={openModal === "signin"}
-        submit={submitSignin}
+        handleSignin={submitSignin}
+        handleVerify={submitVerify}
         userEmail={user?.info?.email}
         clearModals={clearOpenModals}
-        errorMessage={signinError}
+        signinError={signinError}
+        verifyError={verifyError}
         isSigningin={isSigningin}
-        openForgotPassConfirmModal={openForgotPassConfirmModal}
-      />
-      <VerifyModal
-        isOpen={openModal === "verify"}
-        submit={submitVerify}
-        clearModals={clearOpenModals}
-        errorMessage={verifyError}
         isVerifying={isVerifying}
+        openForgotPassConfirmModal={openForgotPassConfirmModal}
       />
       <ForgotPasswordModal
         isOpen={openModal === "forgotpassword"}
