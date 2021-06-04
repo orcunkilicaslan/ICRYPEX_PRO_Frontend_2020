@@ -1,13 +1,14 @@
 import { useEffect, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import NumberFormat from "react-number-format";
 
 import Table from "../Table.jsx";
-import { formatDateDistance, getPairPrefix, getFormattedPrice } from "~/util/";
+import { formatDateDistance, getPairPrefix } from "~/util/";
 import { useClientRect, usePrices, useCurrencies } from "~/state/hooks/";
 import { fetchInitialOrderHistory } from "~/state/slices/pair.slice";
 
-const MarketDataLast = props => {
+const MarketDataLast = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["common"]);
   const { selectedPair } = usePrices();
@@ -38,7 +39,7 @@ const MarketDataLast = props => {
                 {t("time")}
               </Table.Th>
               <Table.Th sizefixed className="amnt">
-                {t("amount")}
+                {`${t("amount")} ${selectedCryptoCurrency?.symbol}`}
               </Table.Th>
               <Table.Th sizefixed className="pric">
                 {`${t("price")} ${selectedFiatCurrency?.symbol}`}
@@ -53,7 +54,7 @@ const MarketDataLast = props => {
           >
             {historyData.map((transaction, idx) => {
               const {
-                order_side_id,
+                // order_side_id,
                 updated_at = Date.now(),
                 amount,
                 market_price,
@@ -69,13 +70,22 @@ const MarketDataLast = props => {
                     </span>
                   </Table.Td>
                   <Table.Td sizefixed className="amnt" title={amount}>
-                    {getFormattedPrice(amount, selectedCryptoCurrency?.digit)}
+                    <NumberFormat
+                      value={amount}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      decimalScale={selectedCryptoCurrency?.digit}
+                      fixedDecimalScale
+                    />
                   </Table.Td>
                   <Table.Td sizefixed className="pric" title={market_price}>
-                    {getFormattedPrice(
-                      market_price,
-                      selectedFiatCurrency?.digit
-                    )}
+                    <NumberFormat
+                      value={market_price}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      decimalScale={selectedFiatCurrency?.digit}
+                      fixedDecimalScale
+                    />
                   </Table.Td>
                 </Table.Tr>
               );
