@@ -38,6 +38,7 @@ const BuySellActionStopLimit = props => {
   const [rangeBuyPortfolio, setRangeBuyPortfolio] = useState(buySellRangePercent[0]);
   const [rangeSellPortfolio, setRangeSellPortfolio] = useState(buySellRangePercent[0]);
   const { fiatBalance, cryptoBalance } = useSelector(state => state.balance);
+  const { selectedBuyOrder,selectedSellOrder } = useSelector(state => state.order);
   const [totalBuy, setTotalBuy] = useState("0.00");
   const [fiatBuyPrice, setFiatBuyPrice] = useState("");
   const [totalSell, setTotalSell] = useState("0.00");
@@ -63,6 +64,32 @@ const BuySellActionStopLimit = props => {
       stopSellPrice: "",
     },
   });
+
+  useEffect(()=> {
+    if(selectedBuyOrder.minprice) {
+      setValueBuy("fiatBuyPrice", selectedBuyOrder.minprice, { shouldValidate: false });
+      setValueSell("fiatSellPrice", selectedBuyOrder.minprice, { shouldValidate: false });
+
+      setValueSell("cryptoSellAmount", selectedBuyOrder.sumAmount);
+      setTotalSell(selectedBuyOrder.sumAmount * selectedBuyOrder.minprice)
+      if(cryptoBalance) {
+        setRangeSellPortfolio(Number( (selectedBuyOrder.sumAmount * 100) / cryptoBalance) .toFixed(0));
+      }else {setRangeSellPortfolio(100)}
+    }
+  },[dispatch, selectedBuyOrder])
+
+  useEffect(()=> {
+    if(selectedSellOrder.minprice) {
+      setValueSell("fiatSellPrice", selectedSellOrder.minprice, { shouldValidate: false });
+      setValueBuy("fiatBuyPrice", selectedSellOrder.minprice, { shouldValidate: false });
+
+      setValueBuy("cryptoBuyAmount", selectedSellOrder.sumAmount);
+      setTotalBuy(selectedSellOrder.sumAmount * selectedSellOrder.minprice)
+      if(fiatBalance > 0 ) {
+        setRangeBuyPortfolio(Number( (selectedSellOrder.sumAmount * 100) / fiatBalance) .toFixed(0));
+      }else {setRangeBuyPortfolio(100)}
+    }
+  },[dispatch, selectedSellOrder])
 
   useEffect(() => {
     if (selectedPair) {
@@ -316,6 +343,12 @@ const BuySellActionStopLimit = props => {
                         step={1}
                         value={rangeBuyPortfolio}
                         onChange={({ target }) => {
+                          const fiatBuyPrice = getBuyValues("fiatBuyPrice")
+                          if(!Number.isNaN(fiatBuyPrice) && fiatBuyPrice !== "") {
+                            setValueBuy("cryptoBuyAmount",  Number(((fiatBalance / fiatBuyPrice)/100) * target.value ).toFixed(8), { shouldValidate: true });
+                            setTotalBuy(Number((fiatBalance / 100) * target.value).toFixed(2))
+
+                          }
                           setRangeBuyPortfolio(target.value);
                         }}
                     />
@@ -495,6 +528,11 @@ const BuySellActionStopLimit = props => {
                         step={1}
                         value={rangeSellPortfolio}
                         onChange={({ target }) => {
+                          const fiatSellPrice  = getSellValues("fiatSellPrice")
+                          if (!Number.isNaN(fiatSellPrice) && fiatSellPrice !== "") {
+                            setValueSell("cryptoSellAmount",  Number((cryptoBalance / 100) * target.value ).toFixed(8), { shouldValidate: true });
+                            setTotalSell(Number(((cryptoBalance / 100) * target.value) * parseFloat(fiatSellPrice)).toFixed(2))
+                          }
                           setRangeSellPortfolio(target.value);
                         }}
                     />

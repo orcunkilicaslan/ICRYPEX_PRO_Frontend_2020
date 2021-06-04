@@ -144,12 +144,28 @@ const initialState = {
   hideOthersHistory: false,
   openOrdersFilter: null,
   orderHistoryFilter: null,
+  selectedBuyOrder:{minprice: null,sumAmount: null},
+  selectedSellOrder:{minprice: null,sumAmount: null},
 };
 
 const orderSlice = createSlice({
   name: "order",
   initialState,
   reducers: {
+    setSelectedOrder: {
+      reducer: (state, action) => {
+        let sumAmount =  action?.payload.data.reduce(function(prev, current) {
+          return prev + +current.amount
+        }, 0);
+            if(action?.payload.type === 'buy') {
+              state.selectedBuyOrder.minprice  =  action?.payload.data[action?.payload.data.length-1].price
+              state.selectedBuyOrder.sumAmount =sumAmount
+            }else {
+              state.selectedSellOrder.minprice  =  action?.payload.data[action?.payload.data.length-1].price
+              state.selectedSellOrder.sumAmount =sumAmount
+            }
+        },
+    },
     setTabIndex: (state, { payload }) => {
       state.tabIndex = payload;
     },
@@ -196,6 +212,7 @@ export const {
   toggleHideOthersHistory,
   setTabIndex,
   reset,
+  setSelectedOrder,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;

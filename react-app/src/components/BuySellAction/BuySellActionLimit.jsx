@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import {useState, useEffect, useRef} from "react";
 import {
   Row,
   Col,
@@ -32,12 +32,14 @@ const buySellRangePercent = [0, 25, 50, 75, 100];
 
 const BuySellActionLimit = props => {
 
+  // const targetRef = useRef()
   const { t } = useTranslation(["form","common", "finance"]);
   const dispatch = useDispatch();
   const { fiatCurrency, cryptoCurrency, selectedPrice, selectedPair } = usePrices();
   const [rangeBuyPortfolio, setRangeBuyPortfolio] = useState(buySellRangePercent[0]);
   const [rangeSellPortfolio, setRangeSellPortfolio] = useState(buySellRangePercent[0]);
   const { fiatBalance, cryptoBalance } = useSelector(state => state.balance);
+  const { selectedBuyOrder,selectedSellOrder } = useSelector(state => state.order);
   const [totalBuy, setTotalBuy] = useState("0.00");
   const [fiatBuyPrice, setFiatBuyPrice] = useState("");
   const [totalSell, setTotalSell] = useState("0.00");
@@ -75,6 +77,32 @@ const BuySellActionLimit = props => {
       dispatch(fetchBalance({currencyid: selectedPair?.second_currency_id, isFiat: true,isPadding: true}));
       dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false,isPadding: true}));}
   }, [dispatch, selectedPair]);
+
+  useEffect(()=> {
+    if(selectedBuyOrder.minprice) {
+      setValueBuy("fiatBuyPrice", selectedBuyOrder.minprice, { shouldValidate: false });
+      setValueSell("fiatSellPrice", selectedBuyOrder.minprice, { shouldValidate: false });
+
+      setValueSell("cryptoSellAmount", selectedBuyOrder.sumAmount);
+      setTotalSell(selectedBuyOrder.sumAmount * selectedBuyOrder.minprice)
+      if(cryptoBalance) {
+        setRangeSellPortfolio(Number( (selectedBuyOrder.sumAmount * 100) / cryptoBalance) .toFixed(0));
+      }else {setRangeSellPortfolio(100)}
+    }
+  },[dispatch, selectedBuyOrder])
+
+  useEffect(()=> {
+    if(selectedSellOrder.minprice) {
+      setValueSell("fiatSellPrice", selectedSellOrder.minprice, { shouldValidate: false });
+      setValueBuy("fiatBuyPrice", selectedSellOrder.minprice, { shouldValidate: false });
+
+      setValueBuy("cryptoBuyAmount", selectedSellOrder.sumAmount);
+      setTotalBuy(selectedSellOrder.sumAmount * selectedSellOrder.minprice)
+      if(fiatBalance > 0 ) {
+        setRangeBuyPortfolio(Number( (selectedSellOrder.sumAmount * 100) / fiatBalance) .toFixed(0));
+      }else {setRangeBuyPortfolio(100)}
+    }
+  },[dispatch, selectedSellOrder])
 
   const buyRangeCircleCls = classnames({
     percstepa00: inRange(rangeBuyPortfolio, 0, 25),

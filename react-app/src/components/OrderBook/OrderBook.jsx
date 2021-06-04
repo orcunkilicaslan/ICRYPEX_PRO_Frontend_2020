@@ -6,6 +6,7 @@ import { merge, take } from "lodash";
 
 import Table from "../Table.jsx";
 import { fetchInitialOrderBook } from "~/state/slices/pair.slice";
+import { setSelectedOrder } from "~/state/slices/order.slice";
 import { usePrices } from "~/state/hooks/";
 import { getPairPrefix } from "~/util/";
 
@@ -109,6 +110,10 @@ const OrderBook = props => {
     }
   }, [selected, dispatch]);
 
+  const onSelectOrder = (data) => {
+    dispatch(setSelectedOrder(data))
+  };
+
   return (
     <div className="mainbox mainbox-orderbook">
       <div className="orderbook">
@@ -167,10 +172,11 @@ const OrderBook = props => {
                       </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
-                  <Table.Tbody>
+                  <Table.Tbody     striped
+                                   hovered>
                     {visibleBuyOrders.map(({ total, amount, price }, idx) => {
                       return (
-                        <Table.Tr key={`${amount}_${idx}`}>
+                        <Table.Tr key={`${amount}_${idx}`} onClick={() => onSelectOrder({type: 'buy', data: visibleBuyOrders.slice(0, idx + 1)})}>
                           <Table.Td sizefixed className="totl">
                             {total}
                           </Table.Td>
@@ -216,7 +222,7 @@ const OrderBook = props => {
                   <Table.Tbody>
                     {visibleSellOrders.map(({ total, amount, price }, idx) => {
                       return (
-                        <Table.Tr key={`${amount}_${idx}`}>
+                        <Table.Tr key={`${amount}_${idx}`} onClick={() => onSelectOrder({type: 'sell', data: visibleSellOrders.slice(0, idx + 1)})}>
                           <Table.Td sizefixed className="pric">
                             {price}
                           </Table.Td>
