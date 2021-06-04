@@ -9,14 +9,14 @@ import { groupBy } from "lodash";
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
-import { useClientRect, usePrices } from "~/state/hooks/";
+import { useClientRect, usePrices, useCurrencies } from "~/state/hooks/";
 import {
   fetchOrderHistory,
   toggleHideOthersHistory,
 } from "~/state/slices/order.slice";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import OrderHistoryFilter from "~/components/modals/OrderHistoryFilter.jsx";
-import { formatDate, formatDateDistance } from "~/util/";
+import { formatDate, formatDateDistance, getFormattedPrice } from "~/util/";
 import ButtonGroupRadio from "~/components/ButtonGroupRadio";
 import CustomSelect from "~/components/CustomSelect";
 
@@ -34,6 +34,7 @@ const OpenOrderTransactionHistory = props => {
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
   const { lang } = useSelector(state => state.ui);
   const { allPairs, selectedPair } = usePrices();
+  const { findCurrencyBySymbol } = useCurrencies();
   const { openModal } = useSelector(state => state.ui);
   const orderSides = useSelector(state => state.api.settings?.orderSides);
   const orderStatuses = useSelector(state => state.api.settings?.orderStatuses);
@@ -67,7 +68,6 @@ const OpenOrderTransactionHistory = props => {
     };
   }, [lang]);
   const [periodbyIndex, setPeriodbyIndex] = useState(0);
-
   const visibleOrders = useMemo(() => {
     let orders = orderHistory;
     const interval = periodBy[periodbyIndex]?.duration;
@@ -259,15 +259,17 @@ const OpenOrderTransactionHistory = props => {
                 updated_at,
                 updated_commission,
               }) => {
+                const isBuyOrder = order_side_id === 1;
                 const cls1 = classnames({
-                  sitecolorgreen: order_side_id === 1,
-                  sitecolorred: order_side_id !== 1,
+                  sitecolorgreen: isBuyOrder,
+                  sitecolorred: !isBuyOrder,
                 });
-
                 const cls2 = classnames({
                   sitecolorgreen: order_status_id === 1,
                   sitecolorred: order_status_id !== 1,
                 });
+                const buyCurrency = findCurrencyBySymbol(buyingcurrency);
+                const sellCurrency = findCurrencyBySymbol(sellingcurrency);
 
                 return (
                   <div className="hsttblbrwswrp" key={id}>
@@ -289,9 +291,7 @@ const OpenOrderTransactionHistory = props => {
                           {formatDateDistance(
                             new Date(updated_at),
                             Date.now(),
-                            {
-                              locale: lang,
-                            }
+                            { locale: lang }
                           )}
                         </span>
                       </Table.Td>
@@ -304,20 +304,51 @@ const OpenOrderTransactionHistory = props => {
                       <Table.Td sizefixed className="avrg">
                         ----
                       </Table.Td>
-                      <Table.Td sizefixed className="pric">
-                        {price} {sellingcurrency}
+                      <Table.Td sizefixed className="pric" title={price}>
+                        {getFormattedPrice(
+                          price,
+                          isBuyOrder ? sellCurrency?.digit : buyCurrency?.digit
+                        )}{" "}
+                        {isBuyOrder ? sellingcurrency : buyingcurrency}
                       </Table.Td>
-                      <Table.Td sizefixed className="hppn">
-                        {buying_amount} {buyingcurrency}
+                      <Table.Td
+                        sizefixed
+                        className="hppn"
+                        title={isBuyOrder ? selling_amount : buying_amount}
+                      >
+                        {isBuyOrder
+                          ? `${getFormattedPrice(
+                              selling_amount,
+                              sellCurrency?.digit
+                            )} ${sellingcurrency}`
+                          : `${getFormattedPrice(
+                              buying_amount,
+                              buyCurrency?.digit
+                            )} ${buyingcurrency}`}
                       </Table.Td>
-                      <Table.Td sizefixed className="amnt">
-                        {buying_amount} {buyingcurrency}
+                      <Table.Td
+                        sizefixed
+                        className="amnt"
+                        title={isBuyOrder ? buying_amount : selling_amount}
+                      >
+                        {isBuyOrder
+                          ? `${getFormattedPrice(
+                              buying_amount,
+                              buyCurrency?.digit
+                            )} ${buyingcurrency}`
+                          : `${getFormattedPrice(
+                              selling_amount,
+                              sellCurrency?.digit
+                            )} ${sellingcurrency}`}
                       </Table.Td>
                       <Table.Td sizefixed className="totl">
                         ---
                       </Table.Td>
-                      <Table.Td sizeauto className="comm">
-                        {commission} {sellingcurrency}
+                      <Table.Td sizeauto className="comm" title={commission}>
+                        {`${getFormattedPrice(
+                          commission,
+                          isBuyOrder ? sellCurrency?.digit : buyCurrency?.digit
+                        )} ${isBuyOrder ? sellingcurrency : buyingcurrency}`}
                       </Table.Td>
                       <Table.Td sizeauto className="stts">
                         <span className={cls2}>{orderstatus}</span>
