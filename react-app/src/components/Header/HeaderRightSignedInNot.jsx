@@ -162,7 +162,7 @@ const HeaderRightSignedInNot = props => {
         errorMessage={forgotPassError}
         isResetingPassword={isResetingPassword}
         openSigninModal={openSigninModal}
-        userEmail={user?.info?.email}
+        user={user}
       />
       <SignupModal
         isOpen={openModal === "signup"}
