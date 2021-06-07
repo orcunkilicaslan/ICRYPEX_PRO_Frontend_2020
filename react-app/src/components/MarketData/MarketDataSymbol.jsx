@@ -4,6 +4,7 @@ import { useFuzzy } from "react-use-fuzzy";
 import { useTranslation } from "react-i18next";
 import { ButtonGroup, Input } from "reactstrap";
 import classnames from "classnames";
+import NumberFormat from "react-number-format";
 
 import { ReactComponent as MdTableFavIcon } from "~/assets/images/icons/path_icon_mdtable_fav.svg";
 import { ReactComponent as MdTableSearchIcon } from "~/assets/images/icons/path_icon_mdtable_symbolfilter_search.svg";
@@ -19,7 +20,8 @@ import {
   setSelectedPair,
   setPairFilter,
 } from "~/state/slices/pair.slice";
-import { useClientRect, usePrices } from "~/state/hooks/";
+import { useClientRect, usePrices, useCurrencies } from "~/state/hooks/";
+import { getPairTuple } from "~/util/";
 
 const MarketDataSymbol = props => {
   const dispatch = useDispatch();
@@ -35,22 +37,21 @@ const MarketDataSymbol = props => {
     visiblePairIDs,
   } = useSelector(state => state.pair);
   const { accesstoken } = useSelector(state => state.api);
-  const { allPrices: pricesData = [], formatPrice } = usePrices();
+  const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
+  const { allPrices: pricesData = [] } = usePrices();
+  const { findCurrencyBySymbol } = useCurrencies();
   const { result, keyword, search, resetSearch } = useFuzzy(pricesData, {
     keys: ["symbol"],
     findAllMatches: true,
   });
-  const [rawPricesData, formattedPricesData] = useMemo(() => {
+  const visiblePrices = useMemo(() => {
     let prices;
 
     if (keyword) prices = result.map(({ item }) => item);
     else prices = pricesData.filter(({ id }) => visiblePairIDs.includes(id));
 
-    const formatted = prices?.map?.(formatPrice);
-
-    return [prices, formatted];
-  }, [keyword, result, pricesData, formatPrice, visiblePairIDs]);
-  const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
+    return prices;
+  }, [keyword, result, pricesData, visiblePairIDs]);
 
   useEffect(() => {
     dispatch(fetchFavoritePairs());
@@ -155,7 +156,7 @@ const MarketDataSymbol = props => {
             scrollbar
             scrollbarstyles={{ height: `${tableHeight - 25}px` }}
           >
-            {formattedPricesData.map((data = {}, idx) => {
+            {visiblePrices.map((data = {}) => {
               const {
                 id,
                 name,
@@ -165,9 +166,10 @@ const MarketDataSymbol = props => {
                 changepercent,
                 symbol,
               } = data;
-              const rawData = rawPricesData?.[idx];
               const mdper = changepercent > 0 ? "up" : "down";
               const isFavorite = favoritePairIDs.includes(id);
+              const [_, fiatCurrencySymbol] = getPairTuple(name);
+              const fiatCurrency = findCurrencyBySymbol(fiatCurrencySymbol);
 
               const onClick = () => {
                 if (isFavorite) onRemoveFavorite(name);
@@ -192,21 +194,39 @@ const MarketDataSymbol = props => {
                   <Table.Td sizefixed className="sym">
                     {name.replace(/\s/g, "")}
                   </Table.Td>
-                  <Table.Td sizefixed className="buy" title={rawData?.ask}>
-                    {ask}
+                  <Table.Td sizefixed className="buy" title={ask}>
+                    <NumberFormat
+                      value={ask}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      decimalScale={fiatCurrency?.digit}
+                      fixedDecimalScale
+                    />
                   </Table.Td>
-                  <Table.Td sizefixed className="sll" title={rawData?.bid}>
-                    {bid}
+                  <Table.Td sizefixed className="sll" title={bid}>
+                    <NumberFormat
+                      value={bid}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      decimalScale={fiatCurrency?.digit}
+                      fixedDecimalScale
+                    />
                   </Table.Td>
-                  <Table.Td sizefixed className="vol">
-                    {volume}
+                  <Table.Td sizefixed className="vol" title={volume}>
+                    <NumberFormat
+                      value={volume}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                    />
                   </Table.Td>
-                  <Table.Td
-                    sizefixed
-                    className="chg"
-                    title={rawData?.changepercent}
-                  >
-                    {changepercent && `${changepercent}%`}
+                  <Table.Td sizefixed className="chg" title={changepercent}>
+                    <NumberFormat
+                      value={changepercent}
+                      displayType={"text"}
+                      thousandSeparator={false}
+                      decimalScale={2}
+                      suffix="%"
+                    />
                   </Table.Td>
                   <Table.Td sizeauto className="per">
                     <PerLineIcon className={`mdper mdper-${mdper}`} />

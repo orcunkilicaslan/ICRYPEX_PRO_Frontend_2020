@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import classnames from "classnames";
 import { inRange, groupBy } from "lodash";
+import NumberFormat from "react-number-format";
 
 import { ReactComponent as PerLineIcon } from "~/assets/images/icons/path_icon_pericon.svg";
 import { Button } from "../Button.jsx";
@@ -130,31 +131,41 @@ export default function AlarmModal(props) {
     >
       <ModalHeader toggle={clearModals}>{t("setAlarm")}</ModalHeader>
       <ModalBody className="modalcomp modalcomp-setalarm">
-        {selectedPriceData ? (
-          <div className="modalcomp-setalarm-data">
-            <div className="databigger">
-              <PerLineIcon className={`mdper mdper-${upOrDown}`} />
-              <span className={siteColorClass} title={selectedPriceData?.price}>
-                {getFormattedPrice(
-                  selectedPriceData?.price,
-                  selectedFiatCurrency?.digit
-                )}
-              </span>
-            </div>
-            <div className="datasmall">
-              <span title={selectedPriceData?.pricechange}>
-                {getFormattedPrice(
-                  selectedPriceData?.pricechange,
-                  selectedFiatCurrency?.digit
-                )}
-              </span>
-              <span className={siteColorClass}>
-                {upOrDown === "up" ? "+" : "-"}
-                {selectedPriceData?.changepercent?.toFixed?.(2)}%
-              </span>
-            </div>
+        <div className="modalcomp-setalarm-data">
+          <div className="databigger">
+            <PerLineIcon className={`mdper mdper-${upOrDown}`} />
+            <span className={siteColorClass}>
+              <NumberFormat
+                value={selectedPriceData?.price}
+                displayType={"text"}
+                thousandSeparator={true}
+                decimalScale={selectedFiatCurrency?.digit}
+                fixedDecimalScale
+              />
+            </span>
           </div>
-        ) : null}
+          <div className="datasmall">
+            <span>
+              <NumberFormat
+                value={selectedPriceData?.pricechange}
+                displayType={"text"}
+                thousandSeparator={true}
+                decimalScale={selectedFiatCurrency?.digit}
+                fixedDecimalScale
+              />
+            </span>
+            <span className={siteColorClass}>
+              {upOrDown === "up" ? "+" : "-"}
+              <NumberFormat
+                value={selectedPriceData?.changepercent}
+                displayType={"text"}
+                thousandSeparator={false}
+                decimalScale={2}
+                suffix="%"
+              />
+            </span>
+          </div>
+        </div>
 
         <div className="modalcomp-setalarm-form">
           {errorMessage ? (
