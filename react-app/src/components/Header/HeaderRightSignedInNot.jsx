@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { LoginButtons } from "../LoginButtons";
 import { setOpenModal } from "~/state/slices/ui.slice";
+import { setUserEmail } from "~/state/slices/user.slice";
 import {
   SigninModal,
-  VerifyModal,
   SignupModal,
   ForgotPasswordModal,
 } from "~/components/modals/";
@@ -30,7 +30,7 @@ const HeaderRightSignedInNot = props => {
   } = useSelector(state => state.ui);
 
   const [signinError, setSigninError] = useState(null);
-  const [verifyError, setVerifyError] = useState(null);
+  const [hasSentCode, setHasSentCode] = useState(false);
   const [forgotPassError, setForgotPassError] = useState(null);
   const [signupError, setSignupError] = useState(null);
 
@@ -38,87 +38,102 @@ const HeaderRightSignedInNot = props => {
     ({ country_code }) => country_code
   );
   // moving code "90" to the front of the array
-  const index = countryPhoneCode.findIndex(el => el === "90");
-  countryPhoneCode.unshift(countryPhoneCode.splice(index, 1)[0]);
+  const index = countryPhoneCode?.findIndex?.(el => el === "90");
+  countryPhoneCode?.unshift?.(countryPhoneCode?.splice?.(index, 1)[0]);
 
-  const openSignupModal = () => {
+  const openSignupModal = useCallback(() => {
     setSignupError(null);
     dispatch(setOpenModal("signup"));
-  };
+  }, [dispatch]);
 
-  const openSigninModal = () => {
+  const openSigninModal = useCallback(() => {
     setSigninError(null);
     dispatch(setOpenModal("signin"));
-  };
+  }, [dispatch]);
 
-  const openForgotPassConfirmModal = () => {
+  const openForgotPassConfirmModal = useCallback(() => {
     setForgotPassError(null);
     dispatch(setOpenModal("forgotpassword"));
-  };
+  }, [dispatch]);
 
-  const openVerifyModal = () => {
-    setVerifyError(null);
-    dispatch(setOpenModal("verify"));
-  };
-
-  const clearOpenModals = () => {
+  const clearOpenModals = useCallback(() => {
     dispatch(setOpenModal("none"));
-  };
+  }, [dispatch]);
 
-  const submitSignup = async data => {
-    setSignupError(null);
-    const { phoneno, countrycode, ...rest } = data;
-    const payload = await onSignup({
-      ...rest,
-      phone: `${countrycode}${phoneno}`,
-      mediumid: 1,
-    });
+  const setEmail = useCallback(
+    email => {
+      dispatch(setUserEmail(email));
+    },
+    [dispatch]
+  );
 
-    if (payload?.status) {
-      openVerifyModal();
-    } else {
-      setSignupError(payload?.errormessage);
-    }
-  };
+  const submitSignup = useCallback(
+    async data => {
+      const { phoneno, countrycode, ...rest } = data;
+      const payload = await onSignup({
+        ...rest,
+        phone: `${countrycode}${phoneno}`,
+        mediumid: 1,
+      });
 
-  const submitVerify = async data => {
-    let payload;
-    const { code } = data;
-    setVerifyError(null);
+      setSignupError(null);
 
-    if (user?.logintype === 2) {
-      payload = await onSignin2FA(code);
-    } else {
-      payload = await onSigninSMS(code);
-    }
+      if (payload?.status) {
+        openSigninModal();
+        setHasSentCode(true);
+      } else {
+        setSignupError(payload?.errormessage);
+      }
+    },
+    [onSignup, openSigninModal]
+  );
 
-    if (!payload?.status) {
-      setVerifyError(payload?.errormessage);
-    }
-  };
-
-  const submitSignin = async data => {
-    setSigninError(null);
-    const payload = await onSignin(data);
-
-    if (payload?.status) {
+  const submitVerify = useCallback(
+    async data => {
+      let payload;
+      const { code } = data;
       setSigninError(null);
-      openVerifyModal();
-    } else {
-      setSigninError(payload?.errormessage);
-    }
-  };
 
-  const submitForgotPassword = async data => {
-    setForgotPassError(null);
-    const payload = await onForgotPassword(data);
+      if (user.loginType === 2) {
+        payload = await onSignin2FA(code);
+      } else {
+        payload = await onSigninSMS(code);
+      }
 
-    if (payload?.status) {
+      if (!payload?.status) {
+        setSigninError(payload?.errormessage);
+      }
+    },
+    [onSignin2FA, onSigninSMS, user]
+  );
+
+  const submitSignin = useCallback(
+    async data => {
+      const payload = await onSignin(data);
+      setSigninError(null);
+
+      if (payload?.status) {
+        setHasSentCode(true);
+      } else {
+        setSigninError(payload?.errormessage);
+      }
+
+      return payload;
+    },
+    [onSignin]
+  );
+
+  const submitForgotPassword = useCallback(
+    async data => {
+      const payload = await onForgotPassword(data);
       setForgotPassError(null);
-    } else {
-      setForgotPassError(payload?.errormessage);
-    }
-  };
+
+      if (!payload?.status) {
+        setForgotPassError(payload?.errormessage);
+      }
+    },
+    [onForgotPassword]
+  );
 
   return (
     <div className="header-right-notsignedin">
@@ -130,13 +145,15 @@ const HeaderRightSignedInNot = props => {
         isOpen={openModal === "signin"}
         handleSignin={submitSignin}
         handleVerify={submitVerify}
-        userEmail={user?.info?.email}
+        user={user}
         clearModals={clearOpenModals}
-        signinError={signinError}
-        verifyError={verifyError}
+        errorMessage={signinError}
         isSigningin={isSigningin}
         isVerifying={isVerifying}
         openForgotPassConfirmModal={openForgotPassConfirmModal}
+        hasSentCode={hasSentCode}
+        setEmail={setEmail}
+        setHasSentCode={setHasSentCode}
       />
       <ForgotPasswordModal
         isOpen={openModal === "forgotpassword"}

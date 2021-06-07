@@ -198,6 +198,9 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setUserEmail: (state, { payload }) => {
+      state.info.email = payload;
+    },
     reset: state => {
       for (const [key, value] of Object.entries(initialState)) {
         state[key] = value;
@@ -215,6 +218,7 @@ const userSlice = createSlice({
     [fetchUserInfo.fulfilled]: (state, action) => {
       const info = action?.payload?.description || {};
 
+      state.email = info?.email;
       merge(state.info, info);
     },
     [fetchBankAccounts.fulfilled]: (state, action) => {
@@ -225,6 +229,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { reset } = userSlice.actions;
+export const { reset, setUserEmail } = userSlice.actions;
 
 export default userSlice.reducer;

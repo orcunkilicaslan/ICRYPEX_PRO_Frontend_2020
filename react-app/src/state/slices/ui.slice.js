@@ -33,7 +33,6 @@ const MODALS = [
   "activitiespendingfilter",
   "activitieshistoryfilter",
   "notifications",
-  "verify",
 ];
 
 const uiSlice = createSlice({
