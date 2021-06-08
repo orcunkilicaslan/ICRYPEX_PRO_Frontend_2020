@@ -55,16 +55,16 @@ const MarketDataLast = () => {
             {historyData.map((transaction, idx) => {
               const {
                 // order_side_id,
-                updated_at = Date.now(),
+                created_at,
                 amount,
                 market_price,
               } = transaction;
 
               return (
-                <Table.Tr key={`${updated_at}_${idx}`}>
+                <Table.Tr key={`${created_at}_${idx}`}>
                   <Table.Td sizefixed className="time">
-                    <span title={updated_at}>
-                      {formatDateDistance(new Date(updated_at), Date.now(), {
+                    <span title={created_at}>
+                      {formatDateDistance(new Date(created_at), Date.now(), {
                         locale: lang,
                       })}
                     </span>

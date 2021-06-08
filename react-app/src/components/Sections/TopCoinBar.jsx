@@ -22,8 +22,8 @@ const TopCoinBar = props => {
   const { t } = useTranslation(["coinbar", "common"]);
   const dispatch = useDispatch();
   const {
-    selectedPair: currentPair,
-    selectedPrice: selectedPriceData,
+    selectedPair: currentPair = {},
+    selectedPrice: selectedPriceData = {},
   } = usePrices();
   const { selectedFiatCurrency, selectedCryptoCurrency } = useCurrencies();
   const { accesstoken } = useSelector(state => state.api);
@@ -42,8 +42,8 @@ const TopCoinBar = props => {
   const cryptoSymbol = selectedCryptoCurrency?.symbol || "";
 
   useEffect(() => {
-    dispatch(fetchPriceAlarms());
-  }, [dispatch]);
+    if (accesstoken) dispatch(fetchPriceAlarms());
+  }, [dispatch, accesstoken]);
 
   const createAlarm = async data => {
     setAlarmError(null);
