@@ -4,11 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { merge, take } from "lodash";
 import { nanoid } from "nanoid";
+import NumberFormat from "react-number-format";
 
 import Table from "../Table.jsx";
 import { fetchInitialOrderBook } from "~/state/slices/pair.slice";
 import { usePrices, useCurrencies } from "~/state/hooks/";
-import { getPairPrefix, getFormattedPrice } from "~/util/";
+import { getPairPrefix } from "~/util/";
 
 const orderbookcharttype = "Bar";
 const chartOptions = {
@@ -120,30 +121,50 @@ const OrderBook = props => {
             <p>
               {t("common:total")}:{" "}
               <span className="sitecolorgreen" title={buytotal}>
-                {getFormattedPrice(buytotal, selectedCryptoCurrency?.digit)}{" "}
-                {selectedCryptoCurrency?.symbol}
+                <NumberFormat
+                  value={buytotal}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  decimalScale={selectedCryptoCurrency?.digit}
+                  fixedDecimalScale
+                  suffix={` ${selectedCryptoCurrency?.symbol}`}
+                />
               </span>
             </p>
           </div>
           <div className="orderbook-head-col spreadside">
             <div className="spreadside-lr text-right">
               <p className="sitecolorgreen">
-                {getFormattedPrice(
-                  buyhighestprice,
-                  selectedFiatCurrency?.digit
-                )}
+                <NumberFormat
+                  value={buyhighestprice}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  decimalScale={selectedFiatCurrency?.digit}
+                  fixedDecimalScale
+                />
               </p>
               <p>{t("common:high")}</p>
             </div>
             <div className="spreadside-df text-center">
-              <p>{(buyhighestprice + selllowestprice) / 2}</p>
+              <p>
+                <NumberFormat
+                  value={(buyhighestprice + selllowestprice) / 2}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  decimalScale={selectedFiatCurrency?.digit}
+                  fixedDecimalScale
+                />
+              </p>
             </div>
             <div className="spreadside-lr text-left">
               <p className="sitecolorred">
-                {getFormattedPrice(
-                  selllowestprice,
-                  selectedFiatCurrency?.digit
-                )}
+                <NumberFormat
+                  value={selllowestprice}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  decimalScale={selectedFiatCurrency?.digit}
+                  fixedDecimalScale
+                />
               </p>
               <p>{t("common:low")}</p>
             </div>
@@ -153,8 +174,14 @@ const OrderBook = props => {
             <p>
               {t("common:total")}:{" "}
               <span className="sitecolorred" title={selltotal}>
-                {getFormattedPrice(selltotal, selectedFiatCurrency?.digit)}{" "}
-                {selectedFiatCurrency?.symbol}
+                <NumberFormat
+                  value={selltotal}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  decimalScale={selectedFiatCurrency?.digit}
+                  fixedDecimalScale
+                  suffix={` ${selectedFiatCurrency?.symbol}`}
+                />
               </span>
             </p>
           </div>
@@ -190,22 +217,31 @@ const OrderBook = props => {
                       return (
                         <Table.Tr key={nanoid()}>
                           <Table.Td sizefixed className="totl" title={total}>
-                            {getFormattedPrice(
-                              total,
-                              selectedFiatCurrency?.digit
-                            )}
+                            <NumberFormat
+                              value={total}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              decimalScale={selectedFiatCurrency?.digit}
+                              fixedDecimalScale
+                            />
                           </Table.Td>
                           <Table.Td sizefixed className="amnt" title={amount}>
-                            {getFormattedPrice(
-                              amount,
-                              selectedCryptoCurrency?.digit
-                            )}
+                            <NumberFormat
+                              value={amount}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              decimalScale={selectedCryptoCurrency?.digit}
+                              fixedDecimalScale
+                            />
                           </Table.Td>
                           <Table.Td sizefixed className="pric" title={price}>
-                            {getFormattedPrice(
-                              price,
-                              selectedFiatCurrency?.digit
-                            )}
+                            <NumberFormat
+                              value={price}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              decimalScale={selectedFiatCurrency?.digit}
+                              fixedDecimalScale
+                            />
                           </Table.Td>
                         </Table.Tr>
                       );
@@ -245,22 +281,31 @@ const OrderBook = props => {
                       return (
                         <Table.Tr key={nanoid()}>
                           <Table.Td sizefixed className="pric" title={price}>
-                            {getFormattedPrice(
-                              price,
-                              selectedFiatCurrency?.digit
-                            )}
+                            <NumberFormat
+                              value={price}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              decimalScale={selectedFiatCurrency?.digit}
+                              fixedDecimalScale
+                            />
                           </Table.Td>
                           <Table.Td sizefixed className="amnt" title={amount}>
-                            {getFormattedPrice(
-                              amount,
-                              selectedCryptoCurrency?.digit
-                            )}
+                            <NumberFormat
+                              value={amount}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              decimalScale={selectedCryptoCurrency?.digit}
+                              fixedDecimalScale
+                            />
                           </Table.Td>
                           <Table.Td sizefixed className="totl" title={total}>
-                            {getFormattedPrice(
-                              total,
-                              selectedFiatCurrency?.digit
-                            )}
+                            <NumberFormat
+                              value={total}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              decimalScale={selectedFiatCurrency?.digit}
+                              fixedDecimalScale
+                            />
                           </Table.Td>
                         </Table.Tr>
                       );
