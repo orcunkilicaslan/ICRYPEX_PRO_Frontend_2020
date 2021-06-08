@@ -8,13 +8,13 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import NumberFormat from "react-number-format";
 
 import { fetchAssets } from "~/state/slices/assets.slice";
 import { IconSet } from "~/components/IconSet";
 import { Button } from "~/components/Button";
 import { openOrderContext } from "./OpenOrder";
 import { useCurrencies } from "~/state/hooks/";
-import { getFormattedPrice } from "~/util/";
 
 const assetchartlisttype = "Pie";
 const assetchartlistoptions = {
@@ -126,12 +126,25 @@ const OpenOrderAssetsChartList = props => {
               <div className="asssetdonutinfo-box">
                 <h6>{t("total")}</h6>
                 <p>
-                  {allAssets?.[`total_${selectedCurrency?.symbol}`]?.toFixed?.(
-                    2
-                  )}{" "}
-                  {selectedCurrency?.symbol}
+                  <NumberFormat
+                    value={allAssets?.[`total_${selectedCurrency?.symbol}`]}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    decimalScale={2}
+                    fixedDecimalScale
+                    suffix={` ${selectedCurrency?.symbol}`}
+                  />
                 </p>
-                <p>{getFormattedPrice(allAssets?.total_BTC, 8)} BTC</p>
+                <p>
+                  <NumberFormat
+                    value={allAssets?.total_BTC}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    decimalScale={8}
+                    fixedDecimalScale
+                    suffix={" BTC"}
+                  />
+                </p>
               </div>
             </div>
           </div>
@@ -153,7 +166,15 @@ const OpenOrderAssetsChartList = props => {
                     </div>
                     <div className="info">
                       <h6>{symbol}</h6>
-                      <p>{getFormattedPrice(balance, digit)}</p>
+                      <p>
+                        <NumberFormat
+                          value={balance}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          decimalScale={digit}
+                          fixedDecimalScale
+                        />
+                      </p>
                     </div>
                   </li>
                 );
