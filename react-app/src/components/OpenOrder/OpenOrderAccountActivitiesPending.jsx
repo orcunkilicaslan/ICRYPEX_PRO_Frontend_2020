@@ -3,12 +3,13 @@ import classnames from "classnames";
 import { Col, Form } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import NumberFormat from "react-number-format";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
 import { useClientRect, useCurrencies } from "~/state/hooks";
-import { formatDateDistance, getFormattedPrice } from "~/util/";
+import { formatDateDistance } from "~/util/";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import {
   fetchPendingTransactions,
@@ -64,10 +65,9 @@ const OpenOrderAccountActivitiesPending = props => {
     return transactions;
   }, [pendingTransactions, requestCurrenciesIdx, requestTypeIdx]);
 
-  const onCancel = useCallback(
-    id => dispatch(cancelPendingTransaction(id)),
-    [dispatch]
-  );
+  const onCancel = useCallback(id => dispatch(cancelPendingTransaction(id)), [
+    dispatch,
+  ]);
 
   const clearOpenModals = useCallback(() => {
     dispatch(setOpenModal("none"));
@@ -197,8 +197,14 @@ const OpenOrderAccountActivitiesPending = props => {
                       {currencysymbol}
                     </Table.Td>
                     <Table.Td sizefixed className="amnt" title={amount}>
-                      {getFormattedPrice(amount, currency?.digit)}{" "}
-                      {currencysymbol}
+                      <NumberFormat
+                        value={amount}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        decimalScale={currency?.digit}
+                        fixedDecimalScale
+                        suffix={` ${currencysymbol}`}
+                      />
                     </Table.Td>
                     <Table.Td sizeauto className="stts">
                       <span className={statuscls}>

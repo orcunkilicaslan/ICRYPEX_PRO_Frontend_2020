@@ -4,12 +4,13 @@ import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { sub, isWithinInterval } from "date-fns";
+import NumberFormat from "react-number-format";
 
 import { Button } from "../Button.jsx";
 import Table from "../Table.jsx";
 import { useClientRect, useCurrencies } from "~/state/hooks/";
 import { fetchTransactionHistories } from "~/state/slices/transaction.slice";
-import { formatDate, formatDateDistance, getFormattedPrice } from "~/util/";
+import { formatDate, formatDateDistance } from "~/util/";
 import { ActivitiesHistoryFilter } from "~/components/modals/";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import ButtonGroupRadio from "~/components/ButtonGroupRadio";
@@ -232,8 +233,14 @@ const OpenOrderAccountActivitiesHistory = props => {
                       ---
                     </Table.Td>
                     <Table.Td sizefixed className="amnt" title={amount}>
-                      {getFormattedPrice(amount, currency?.digit)}{" "}
-                      {currencysymbol}
+                      <NumberFormat
+                        value={amount}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        decimalScale={currency?.digit}
+                        fixedDecimalScale
+                        suffix={` ${currencysymbol}`}
+                      />
                     </Table.Td>
                     <Table.Td sizeauto className="txid">
                       ---

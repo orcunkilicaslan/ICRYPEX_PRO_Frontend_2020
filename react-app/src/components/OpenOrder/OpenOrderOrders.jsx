@@ -4,6 +4,7 @@ import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { groupBy } from "lodash";
+import NumberFormat from "react-number-format";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
@@ -14,7 +15,7 @@ import {
   toggleHideOthersOpen,
   deleteOpenOrder,
 } from "~/state/slices/order.slice";
-import { formatDateDistance, getFormattedPrice } from "~/util/";
+import { formatDateDistance } from "~/util/";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import { OrderOpenOrdersFilter } from "~/components/modals/";
 import CustomSelect from "~/components/CustomSelect";
@@ -203,41 +204,54 @@ const OpenOrderOrders = props => {
                       {ordertype} - <span className={cls}>{orderside}</span>
                     </Table.Td>
                     <Table.Td sizefixed className="pric" title={price}>
-                      {getFormattedPrice(
-                        price,
-                        isBuyOrder ? sellCurrency?.digit : buyCurrency?.digit
-                      )}{" "}
-                      {isBuyOrder ? sellingcurrency : buyingcurrency}
+                      <NumberFormat
+                        value={price}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        decimalScale={
+                          isBuyOrder ? sellCurrency?.digit : buyCurrency?.digit
+                        }
+                        fixedDecimalScale
+                        suffix={` ${
+                          isBuyOrder ? sellingcurrency : buyingcurrency
+                        }`}
+                      />
                     </Table.Td>
                     <Table.Td
                       sizefixed
                       className="amnt"
                       title={isBuyOrder ? buying_amount : selling_amount}
                     >
-                      {isBuyOrder
-                        ? `${getFormattedPrice(
-                            buying_amount,
-                            buyCurrency?.digit
-                          )} ${buyingcurrency}`
-                        : `${getFormattedPrice(
-                            selling_amount,
-                            sellCurrency?.digit
-                          )} ${sellingcurrency}`}
+                      <NumberFormat
+                        value={isBuyOrder ? buying_amount : selling_amount}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        decimalScale={
+                          isBuyOrder ? buyCurrency?.digit : sellCurrency?.digit
+                        }
+                        fixedDecimalScale
+                        suffix={` ${
+                          isBuyOrder ? buyingcurrency : sellingcurrency
+                        }`}
+                      />
                     </Table.Td>
                     <Table.Td
                       sizefixed
                       className="hppn"
                       title={isBuyOrder ? selling_amount : buying_amount}
                     >
-                      {isBuyOrder
-                        ? `${getFormattedPrice(
-                            selling_amount,
-                            sellCurrency?.digit
-                          )} ${sellingcurrency}`
-                        : `${getFormattedPrice(
-                            buying_amount,
-                            buyCurrency?.digit
-                          )} ${buyingcurrency}`}
+                      <NumberFormat
+                        value={isBuyOrder ? selling_amount : buying_amount}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        decimalScale={
+                          isBuyOrder ? sellCurrency?.digit : buyCurrency?.digit
+                        }
+                        fixedDecimalScale
+                        suffix={` ${
+                          isBuyOrder ? sellingcurrency : buyingcurrency
+                        }`}
+                      />
                     </Table.Td>
                     <Table.Td sizeauto className="bttn">
                       <Button className="d-none">
