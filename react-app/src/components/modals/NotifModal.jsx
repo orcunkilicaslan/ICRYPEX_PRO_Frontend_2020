@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "../Button.jsx";
 import AccordionCollapse from "~/components/AccordionCollapse.jsx";
 import { formatDate } from "~/util/";
+import { useLocaleUpperCase } from "~/state/hooks/";
 
 export default function NotifModal(props) {
   const {
@@ -18,6 +20,8 @@ export default function NotifModal(props) {
   } = props;
   const { lang: locale } = useSelector(state => state.ui);
   const [openIdx, setOpenIdx] = useState(-1);
+  const toUpperCase = useLocaleUpperCase();
+  const { t } = useTranslation(["app"]);
 
   const onClickItem = idx => {
     if (idx === openIdx) setOpenIdx(-1);
@@ -36,12 +40,14 @@ export default function NotifModal(props) {
       autoFocus={false}
       {...rest}
     >
-      <ModalHeader toggle={clearModals}>BİLDİRİMLER</ModalHeader>
+      <ModalHeader toggle={clearModals}>
+        {toUpperCase(t("notifications"))}
+      </ModalHeader>
       <ModalBody className="modalcomp modalcomp-notif">
         {unread ? (
           <div className="headsmtitle">
             <div className="headsmtitle-col">
-              <h6>{unread} Okunmamış Mesaj</h6>
+              <h6>{t("unreadMessage", { count: unread })}</h6>
             </div>
           </div>
         ) : null}
@@ -77,7 +83,7 @@ export default function NotifModal(props) {
                           size="sm"
                           onClick={() => onMarkRead(index)}
                         >
-                          Okundu Olarak İşaretle
+                          {t("markRead")}
                         </Button>
                       )}
                     </div>
@@ -90,7 +96,7 @@ export default function NotifModal(props) {
         <div className="footbtns">
           {Boolean(unread) ? (
             <Button variant="danger" className="w-100" onClick={onMarkAllRead}>
-              TÜMÜNÜ OKUNDU OLARAK İŞARETLE
+              {toUpperCase(t("markAllRead"))}
             </Button>
           ) : null}
         </div>
