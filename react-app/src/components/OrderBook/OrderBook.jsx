@@ -39,6 +39,10 @@ const OrderBook = props => {
   const { selectedPair } = usePrices();
   const { selectedFiatCurrency, selectedCryptoCurrency } = useCurrencies();
   const orderbooks = useSelector(state => state.socket.orderbooks);
+  const fiatDigit =
+    selectedFiatCurrency?.digit_show || selectedFiatCurrency?.digit;
+  const cryptoDigit =
+    selectedCryptoCurrency?.digit_show || selectedCryptoCurrency?.digit;
 
   const prefix = getPairPrefix(selectedPair?.name);
   const eventKey = `${prefix}orderbook`;
@@ -125,7 +129,7 @@ const OrderBook = props => {
                   value={buytotal}
                   displayType={"text"}
                   thousandSeparator={true}
-                  decimalScale={selectedCryptoCurrency?.digit}
+                  decimalScale={cryptoDigit}
                   fixedDecimalScale
                   suffix={` ${selectedCryptoCurrency?.symbol}`}
                 />
@@ -139,7 +143,7 @@ const OrderBook = props => {
                   value={buyhighestprice}
                   displayType={"text"}
                   thousandSeparator={true}
-                  decimalScale={selectedFiatCurrency?.digit}
+                  decimalScale={fiatDigit}
                   fixedDecimalScale
                 />
               </p>
@@ -151,7 +155,7 @@ const OrderBook = props => {
                   value={(buyhighestprice + selllowestprice) / 2}
                   displayType={"text"}
                   thousandSeparator={true}
-                  decimalScale={selectedFiatCurrency?.digit}
+                  decimalScale={fiatDigit}
                   fixedDecimalScale
                 />
               </p>
@@ -162,7 +166,7 @@ const OrderBook = props => {
                   value={selllowestprice}
                   displayType={"text"}
                   thousandSeparator={true}
-                  decimalScale={selectedFiatCurrency?.digit}
+                  decimalScale={fiatDigit}
                   fixedDecimalScale
                 />
               </p>
@@ -178,7 +182,7 @@ const OrderBook = props => {
                   value={selltotal}
                   displayType={"text"}
                   thousandSeparator={true}
-                  decimalScale={selectedFiatCurrency?.digit}
+                  decimalScale={fiatDigit}
                   fixedDecimalScale
                   suffix={` ${selectedFiatCurrency?.symbol}`}
                 />
@@ -221,7 +225,7 @@ const OrderBook = props => {
                               value={total}
                               displayType={"text"}
                               thousandSeparator={true}
-                              decimalScale={selectedFiatCurrency?.digit}
+                              decimalScale={fiatDigit}
                               fixedDecimalScale
                             />
                           </Table.Td>
@@ -230,7 +234,7 @@ const OrderBook = props => {
                               value={amount}
                               displayType={"text"}
                               thousandSeparator={true}
-                              decimalScale={selectedCryptoCurrency?.digit}
+                              decimalScale={cryptoDigit}
                               fixedDecimalScale
                             />
                           </Table.Td>
@@ -239,7 +243,7 @@ const OrderBook = props => {
                               value={price}
                               displayType={"text"}
                               thousandSeparator={true}
-                              decimalScale={selectedFiatCurrency?.digit}
+                              decimalScale={fiatDigit}
                               fixedDecimalScale
                             />
                           </Table.Td>
@@ -285,7 +289,7 @@ const OrderBook = props => {
                               value={price}
                               displayType={"text"}
                               thousandSeparator={true}
-                              decimalScale={selectedFiatCurrency?.digit}
+                              decimalScale={fiatDigit}
                               fixedDecimalScale
                             />
                           </Table.Td>
@@ -294,7 +298,7 @@ const OrderBook = props => {
                               value={amount}
                               displayType={"text"}
                               thousandSeparator={true}
-                              decimalScale={selectedCryptoCurrency?.digit}
+                              decimalScale={cryptoDigit}
                               fixedDecimalScale
                             />
                           </Table.Td>
@@ -303,7 +307,7 @@ const OrderBook = props => {
                               value={total}
                               displayType={"text"}
                               thousandSeparator={true}
-                              decimalScale={selectedFiatCurrency?.digit}
+                              decimalScale={fiatDigit}
                               fixedDecimalScale
                             />
                           </Table.Td>

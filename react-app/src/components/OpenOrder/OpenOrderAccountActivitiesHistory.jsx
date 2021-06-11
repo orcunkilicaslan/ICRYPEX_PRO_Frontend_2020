@@ -210,6 +210,7 @@ const OpenOrderAccountActivitiesHistory = props => {
                   sitecolorred: status === 5,
                 });
                 const currency = findCurrencyBySymbol(currencysymbol);
+                const { digit, digit_show } = currency;
 
                 return (
                   <Table.Tr key={id}>
@@ -237,7 +238,7 @@ const OpenOrderAccountActivitiesHistory = props => {
                         value={amount}
                         displayType={"text"}
                         thousandSeparator={true}
-                        decimalScale={currency?.digit}
+                        decimalScale={digit_show || digit}
                         fixedDecimalScale
                         suffix={` ${currencysymbol}`}
                       />

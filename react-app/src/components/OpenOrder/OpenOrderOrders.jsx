@@ -187,6 +187,9 @@ const OpenOrderOrders = props => {
                 });
                 const buyCurrency = findCurrencyBySymbol(buyingcurrency);
                 const sellCurrency = findCurrencyBySymbol(sellingcurrency);
+                const buyDigit = buyCurrency?.digit_show || buyCurrency?.digit;
+                const sellDigit =
+                  sellCurrency?.digit_show || sellCurrency?.digit;
 
                 return (
                   <Table.Tr key={id}>
@@ -208,9 +211,7 @@ const OpenOrderOrders = props => {
                         value={price}
                         displayType={"text"}
                         thousandSeparator={true}
-                        decimalScale={
-                          isBuyOrder ? sellCurrency?.digit : buyCurrency?.digit
-                        }
+                        decimalScale={isBuyOrder ? sellDigit : buyDigit}
                         fixedDecimalScale
                         suffix={` ${
                           isBuyOrder ? sellingcurrency : buyingcurrency
@@ -226,9 +227,7 @@ const OpenOrderOrders = props => {
                         value={isBuyOrder ? buying_amount : selling_amount}
                         displayType={"text"}
                         thousandSeparator={true}
-                        decimalScale={
-                          isBuyOrder ? buyCurrency?.digit : sellCurrency?.digit
-                        }
+                        decimalScale={isBuyOrder ? buyDigit : sellDigit}
                         fixedDecimalScale
                         suffix={` ${
                           isBuyOrder ? buyingcurrency : sellingcurrency
@@ -244,9 +243,7 @@ const OpenOrderOrders = props => {
                         value={isBuyOrder ? selling_amount : buying_amount}
                         displayType={"text"}
                         thousandSeparator={true}
-                        decimalScale={
-                          isBuyOrder ? sellCurrency?.digit : buyCurrency?.digit
-                        }
+                        decimalScale={isBuyOrder ? sellDigit : buyDigit}
                         fixedDecimalScale
                         suffix={` ${
                           isBuyOrder ? sellingcurrency : buyingcurrency

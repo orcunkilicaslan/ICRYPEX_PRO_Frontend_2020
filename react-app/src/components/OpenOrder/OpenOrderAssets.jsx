@@ -69,7 +69,7 @@ const OpenOrderAssets = () => {
               value={allAssets?.total_BTC}
               displayType={"text"}
               thousandSeparator={true}
-              decimalScale={8}
+              decimalScale={2}
               fixedDecimalScale
               suffix={" BTC"}
             />

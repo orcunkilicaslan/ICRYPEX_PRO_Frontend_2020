@@ -74,6 +74,8 @@ const TopCoinBar = props => {
 
   const upOrDown = selectedPriceData?.changepercent > 0 ? "up" : "down";
   const siteColorClass = `sitecolor${upOrDown === "up" ? "green" : "red"}`;
+  const fiatDigit =
+    selectedFiatCurrency?.digit_show || selectedFiatCurrency?.digit;
 
   return (
     <section className="mainbox mainbox-cryptocoinbar">
@@ -92,7 +94,7 @@ const TopCoinBar = props => {
                   value={selectedPriceData?.price}
                   displayType={"text"}
                   thousandSeparator={true}
-                  decimalScale={selectedFiatCurrency?.digit}
+                  decimalScale={fiatDigit}
                   fixedDecimalScale
                 />
               </span>
@@ -106,7 +108,7 @@ const TopCoinBar = props => {
                       value={bid}
                       displayType={"text"}
                       thousandSeparator={true}
-                      decimalScale={selectedFiatCurrency?.digit}
+                      decimalScale={fiatDigit}
                       fixedDecimalScale
                       suffix={` ${fiatSymbol}`}
                     />
@@ -119,7 +121,7 @@ const TopCoinBar = props => {
                       value={ask}
                       displayType={"text"}
                       thousandSeparator={true}
-                      decimalScale={selectedFiatCurrency?.digit}
+                      decimalScale={fiatDigit}
                       fixedDecimalScale
                       suffix={` ${fiatSymbol}`}
                     />
@@ -144,7 +146,7 @@ const TopCoinBar = props => {
                       value={high24hour}
                       displayType={"text"}
                       thousandSeparator={true}
-                      decimalScale={selectedFiatCurrency?.digit}
+                      decimalScale={fiatDigit}
                       fixedDecimalScale
                       suffix={` ${fiatSymbol}`}
                     />
@@ -157,7 +159,7 @@ const TopCoinBar = props => {
                       value={low24hour}
                       displayType={"text"}
                       thousandSeparator={true}
-                      decimalScale={selectedFiatCurrency?.digit}
+                      decimalScale={fiatDigit}
                       fixedDecimalScale
                       suffix={` ${fiatSymbol}`}
                     />
@@ -170,7 +172,7 @@ const TopCoinBar = props => {
                       value={avarage24hour}
                       displayType={"text"}
                       thousandSeparator={true}
-                      decimalScale={selectedFiatCurrency?.digit}
+                      decimalScale={fiatDigit}
                       fixedDecimalScale
                       suffix={` ${fiatSymbol}`}
                     />

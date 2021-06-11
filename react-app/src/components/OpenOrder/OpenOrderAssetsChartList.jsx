@@ -140,7 +140,7 @@ const OpenOrderAssetsChartList = props => {
                     value={allAssets?.total_BTC}
                     displayType={"text"}
                     thousandSeparator={true}
-                    decimalScale={8}
+                    decimalScale={2}
                     fixedDecimalScale
                     suffix={" BTC"}
                   />
@@ -150,35 +150,37 @@ const OpenOrderAssetsChartList = props => {
           </div>
           <div className="assetchartarea-list">
             <ul className="asssetalllist">
-              {allAssets?.balances?.map?.(({ symbol, balance, digit }) => {
-                return (
-                  <li
-                    className={`asssetcurr-${symbol?.toLowerCase?.()}`}
-                    key={symbol}
-                  >
-                    <div className="circle">
-                      <IconSet
-                        sprite="sprtsmcurrency"
-                        size="16"
-                        name={symbol?.toLowerCase?.()}
-                      />
-                      <i className="centercirc" />
-                    </div>
-                    <div className="info">
-                      <h6>{symbol}</h6>
-                      <p>
-                        <NumberFormat
-                          value={balance}
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          decimalScale={digit}
-                          fixedDecimalScale
+              {allAssets?.balances?.map?.(
+                ({ symbol, balance, digit, digit_show }) => {
+                  return (
+                    <li
+                      className={`asssetcurr-${symbol?.toLowerCase?.()}`}
+                      key={symbol}
+                    >
+                      <div className="circle">
+                        <IconSet
+                          sprite="sprtsmcurrency"
+                          size="16"
+                          name={symbol?.toLowerCase?.()}
                         />
-                      </p>
-                    </div>
-                  </li>
-                );
-              })}
+                        <i className="centercirc" />
+                      </div>
+                      <div className="info">
+                        <h6>{symbol}</h6>
+                        <p>
+                          <NumberFormat
+                            value={balance}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            decimalScale={digit_show || digit}
+                            fixedDecimalScale
+                          />
+                        </p>
+                      </div>
+                    </li>
+                  );
+                }
+              )}
             </ul>
           </div>
         </div>
