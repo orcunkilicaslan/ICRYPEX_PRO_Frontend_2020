@@ -6,6 +6,9 @@ import { IconSet } from "../IconSet.jsx";
 import OpenOrderDepoWithTabDeposit from "~/components/OpenOrder/OpenOrderDepoWithTabDeposit.jsx";
 import OpenOrderDepoWithTabWithdraw from "~/components/OpenOrder/OpenOrderDepoWithTabWithdraw.jsx";
 import { openOrderContext, TRANSACTION_MODES } from "./OpenOrder";
+import {useSelector} from "react-redux";
+import {useCurrencies} from "~/state/hooks";
+import {useTranslation} from "react-i18next";
 
 const tabs = [
   {
@@ -19,9 +22,15 @@ const tabs = [
 ];
 
 const OpenOrderDepoWith = props => {
+
+  const { allAssets } = useSelector(state => state.assets);
+  const { t } = useTranslation(["common"]);
+
   const {
     state: { mode },
   } = useContext(openOrderContext);
+  const { cryptoCurrencies: currencies } = useCurrencies();
+  const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
   const [activeTab, setActiveTab] = useState(tabs[0].title);
 
   const toggle = tab => {
@@ -65,8 +74,11 @@ const OpenOrderDepoWith = props => {
         </div>
         <div className="tabcont-head-col">
           <IconSet sprite="sprtsmclrd" size="16" name="wallet" />
-          <h6>Yaklaşık Olarak</h6>
-          <p>1.350.750,00 TRY / 44.815,00 BTC</p>
+          <h6>{t("approximately")}</h6>
+          <p> {allAssets?.total_TRY?.toFixed?.(2)} TRY /{" "}{allAssets?.[`total_${selectedCurrency?.symbol}`]?.toFixed?.(
+              2
+          )}{" "}
+            {selectedCurrency?.symbol}</p>
         </div>
       </div>
       <div className="depositandwithdraw tabareaflexflow">

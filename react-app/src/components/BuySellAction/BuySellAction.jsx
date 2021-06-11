@@ -99,7 +99,7 @@ const BuySellAction = props => {
               <IconSet sprite="sprtsmclrd" size="16" name="info infoiconbox" />
             </Button>
             <UncontrolledPopover
-              trigger="focus"
+              trigger="click"
               placement="bottom"
               target="buysellactionPopover"
             >
