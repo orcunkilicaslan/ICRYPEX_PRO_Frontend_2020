@@ -12,6 +12,8 @@ import {
 import { uniq, groupBy } from "lodash";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import Tooltip from 'react-power-tooltip'
+
 
 import { IconSet } from "~/components/IconSet.jsx";
 import { Button } from "~/components/Button.jsx";
@@ -93,6 +95,9 @@ const OpenOrderDepoWithTabDepositBankForm = props => {
               <Button variant="secondary" className="active" type="button" onClick={copyToClipboard('ibanInputRef')}>
                 <IconSet sprite="sprtsmclrd" size="16" name="copybtn" />
               </Button>
+              <Tooltip show={true} position="left center" animation='slideUpDown' textBoxWidth='75px'>
+                <span>Copied!</span>
+              </Tooltip>
             </InputGroupAddon>
           </InputGroup>
         </Row>
