@@ -306,6 +306,7 @@ export default function SigninModal(props) {
                 radius={35}
                 strokeWidth={4}
                 stroke="#e84a55"
+                trackStroke="#2a3553"
                 progress={progress}
               />
               <h2>{`${minutes}:${seconds}`}</h2>
