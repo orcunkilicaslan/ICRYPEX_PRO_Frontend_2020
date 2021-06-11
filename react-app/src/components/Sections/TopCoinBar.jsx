@@ -2,6 +2,7 @@ import { useState, useEffect, memo } from "react";
 import { InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
+import NumberFormat from "react-number-format";
 
 import { ReactComponent as PerLineIcon } from "~/assets/images/icons/path_icon_pericon.svg";
 import { IconSet } from "../IconSet.jsx";
@@ -15,58 +16,34 @@ import {
 } from "~/state/slices/alarm.slice";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import { AlarmModal } from "~/components/modals/";
-import { usePrices } from "~/state/hooks/";
+import { usePrices, useCurrencies } from "~/state/hooks/";
 
 const TopCoinBar = props => {
   const { t } = useTranslation(["coinbar", "common"]);
   const dispatch = useDispatch();
   const {
-    selectedPair: currentPair,
-    selectedPrice: selectedPriceData,
-    fiatCurrency: selectedFiatCurrency,
-    cryptoCurrency: selectedCryptoCurrency,
+    selectedPair: currentPair = {},
+    selectedPrice: selectedPriceData = {},
   } = usePrices();
+  const { selectedFiatCurrency, selectedCryptoCurrency } = useCurrencies();
   const { accesstoken } = useSelector(state => state.api);
   const { openModal } = useSelector(state => state.ui);
   const [alarmError, setAlarmError] = useState(null);
+  const {
+    high24hour,
+    low24hour,
+    avarage24hour,
+    volume,
+    bid,
+    ask,
+    changepercent,
+  } = selectedPriceData;
+  const fiatSymbol = selectedFiatCurrency?.symbol || "";
+  const cryptoSymbol = selectedCryptoCurrency?.symbol || "";
 
   useEffect(() => {
-    dispatch(fetchPriceAlarms());
-  }, [dispatch]);
-
-  let visiblePriceData = {
-    bestBuy: "",
-    bestSell: "",
-    change24h: "",
-    high24h: "",
-    low24h: "",
-    average24h: "",
-    volume: "",
-  };
-
-  if (selectedPriceData) {
-    const {
-      high24hour,
-      low24hour,
-      avarage24hour,
-      volume,
-      bid,
-      ask,
-      changepercent,
-    } = selectedPriceData;
-
-    visiblePriceData = {
-      bestBuy: `${bid} ${selectedFiatCurrency}`,
-      bestSell: `${ask} ${selectedFiatCurrency}`,
-      change24h: `${changepercent}%`,
-      high24h: `${high24hour} ${selectedFiatCurrency}`,
-      low24h: `${low24hour} ${selectedFiatCurrency}`,
-      average24h: `${avarage24hour} ${selectedFiatCurrency}`,
-      volume: `${volume} ${selectedCryptoCurrency}`,
-      // lastPrice: 9999,
-      // excavating: 55555,
-    };
-  }
+    if (accesstoken) dispatch(fetchPriceAlarms());
+  }, [dispatch, accesstoken]);
 
   const createAlarm = async data => {
     setAlarmError(null);
@@ -108,24 +85,108 @@ const TopCoinBar = props => {
             </InputGroupText>
           </InputGroupAddon>
           <div className="cryptostatsbar">
-            {selectedPriceData ? (
-              <div className="cryptostatsbar-biger">
-                <PerLineIcon className={`mdper mdper-${upOrDown}`} />
-                <span className={siteColorClass}>
-                  {selectedPriceData?.price}
-                </span>
-              </div>
-            ) : null}
+            <div className="cryptostatsbar-biger">
+              <PerLineIcon className={`mdper mdper-${upOrDown}`} />
+              <span className={siteColorClass}>
+                <NumberFormat
+                  value={selectedPriceData?.price}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  decimalScale={selectedFiatCurrency?.digit}
+                  fixedDecimalScale
+                />
+              </span>
+            </div>
             <div className="cryptostatsbar-stats">
               <ul className="bigstatslist">
-                {Object.entries(visiblePriceData).map(([key, value]) => {
-                  return (
-                    <li key={key}>
-                      <h6>{t(key)}</h6>
-                      <p>{value}</p>
-                    </li>
-                  );
-                })}
+                <li>
+                  <h6>{t("bestBuy")}</h6>
+                  <p>
+                    <NumberFormat
+                      value={bid}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      decimalScale={selectedFiatCurrency?.digit}
+                      fixedDecimalScale
+                      suffix={` ${fiatSymbol}`}
+                    />
+                  </p>
+                </li>
+                <li>
+                  <h6>{t("bestSell")}</h6>
+                  <p>
+                    <NumberFormat
+                      value={ask}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      decimalScale={selectedFiatCurrency?.digit}
+                      fixedDecimalScale
+                      suffix={` ${fiatSymbol}`}
+                    />
+                  </p>
+                </li>
+                <li>
+                  <h6>{t("change24h")}</h6>
+                  <p>
+                    <NumberFormat
+                      value={changepercent}
+                      displayType={"text"}
+                      thousandSeparator={false}
+                      decimalScale={2}
+                      suffix="%"
+                    />
+                  </p>
+                </li>
+                <li>
+                  <h6>{t("high24h")}</h6>
+                  <p>
+                    <NumberFormat
+                      value={high24hour}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      decimalScale={selectedFiatCurrency?.digit}
+                      fixedDecimalScale
+                      suffix={` ${fiatSymbol}`}
+                    />
+                  </p>
+                </li>
+                <li>
+                  <h6>{t("low24h")}</h6>
+                  <p>
+                    <NumberFormat
+                      value={low24hour}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      decimalScale={selectedFiatCurrency?.digit}
+                      fixedDecimalScale
+                      suffix={` ${fiatSymbol}`}
+                    />
+                  </p>
+                </li>
+                <li>
+                  <h6>{t("average24h")}</h6>
+                  <p>
+                    <NumberFormat
+                      value={avarage24hour}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      decimalScale={selectedFiatCurrency?.digit}
+                      fixedDecimalScale
+                      suffix={` ${fiatSymbol}`}
+                    />
+                  </p>
+                </li>
+                <li>
+                  <h6>{t("volume")}</h6>
+                  <p>
+                    <NumberFormat
+                      value={volume}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      suffix={` ${cryptoSymbol}`}
+                    />
+                  </p>
+                </li>
               </ul>
             </div>
           </div>
@@ -158,6 +219,7 @@ const TopCoinBar = props => {
         onToggleHideOthers={onToggleHideOthers}
         errorMessage={alarmError}
         selectedPriceData={selectedPriceData}
+        selectedFiatCurrency={selectedFiatCurrency}
         currentPair={currentPair}
       />
     </section>

@@ -1,9 +1,10 @@
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { useSelector } from "react-redux";
 
 const ACTIVE_FIAT_IDS = [1, 2, 3];
 
 const useCurrencies = (props = {}) => {
+  const { fiatCurrency, cryptoCurrency } = useSelector(state => state.pair);
   const { settings } = useSelector(state => state.api);
   const all = useMemo(() => settings?.currencies || [], [settings]);
   const types = settings?.currencyTypes || [];
@@ -32,6 +33,21 @@ const useCurrencies = (props = {}) => {
     [cryptoCurrencies, fiatCurrencies, tokenCurrencies]
   );
 
+  const selectedFiatCurrency = useMemo(
+    () => all?.find(({ symbol }) => symbol === fiatCurrency),
+    [all, fiatCurrency]
+  );
+
+  const selectedCryptoCurrency = useMemo(
+    () => all?.find(({ symbol }) => symbol === cryptoCurrency),
+    [all, cryptoCurrency]
+  );
+
+  const findCurrencyBySymbol = useCallback(
+    symbol => activeCurrencies?.find?.(currency => currency.symbol === symbol),
+    [activeCurrencies]
+  );
+
   return {
     all,
     types,
@@ -39,6 +55,9 @@ const useCurrencies = (props = {}) => {
     cryptoCurrencies,
     tokenCurrencies,
     activeCurrencies,
+    selectedFiatCurrency,
+    selectedCryptoCurrency,
+    findCurrencyBySymbol,
   };
 };
 

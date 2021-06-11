@@ -5,6 +5,7 @@ import { useState, Fragment } from "react";
 import { inRange, random } from "lodash";
 import { produce } from "immer";
 import uuid from "uuid";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
@@ -24,6 +25,7 @@ const HeaderRightIcons = props => {
   const dispatch = useDispatch();
   const { accesstoken } = useSelector(state => state.api);
   const { openModal } = useSelector(state => state.ui);
+  const { t } = useTranslation(["app"]);
   const isModalOpen = openModal === "notifications";
 
   const [{ data: notifs, unread: unreadCount }, setNotifs] = useState({
@@ -91,7 +93,7 @@ const HeaderRightIcons = props => {
             </span>
             {Boolean(unreadCount) ? (
               <UncontrolledTooltip placement="bottom" target="headTooltipNotif">
-                {unreadCount} Yeni Bildiriminiz Var
+                {t("unreadMessage", { count: unreadCount })}
               </UncontrolledTooltip>
             ) : null}
           </Button>

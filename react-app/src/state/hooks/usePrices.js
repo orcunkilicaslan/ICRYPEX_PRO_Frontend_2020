@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-const usePrices = (props = {}) => {
+const usePrices = () => {
   const {
     all: allPairs,
     selected: selectedPair,

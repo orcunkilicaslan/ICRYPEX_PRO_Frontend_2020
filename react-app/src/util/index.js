@@ -9,11 +9,13 @@ import _debug from "debug";
 import { format, formatDistanceStrict } from "date-fns";
 import { enUS as en, tr } from "date-fns/locale";
 import ms from "ms";
+import { fetch } from "whatwg-fetch";
 
 import { name } from "../../package.json";
 
 const locales = { en, tr };
-const isProd = process.env.NODE_ENV === "production";
+const { NODE_ENV, REACT_APP_SOCKET_BASE } = process.env;
+const isProd = NODE_ENV === "production";
 export const debug = _debug(name); // isProd ? makeFakeDebug() : _debug("pro");
 const log = debug.extend("util");
 // if (process.env.REACT_APP_DEBUG) _debug.enable(`${name}:*`);
@@ -89,6 +91,8 @@ export const hasPreloginToken = ({ api }) => {
 };
 
 export const getFormattedPrice = (price, digit) => {
+  if (!digit) return price;
+
   if (price !== 0) {
     return parseFloat(price).toFixed(digit);
   } else {
@@ -111,3 +115,22 @@ export const toggleBit = (MASK, idx) => {
 // if bit is "0" -> false "1+" -> true
 export const isBitOn = (MASK, idx) => Boolean(parseInt(MASK?.[idx], 10));
 
+export const verifyCaptcha = async code => {
+  try {
+    const response = await fetch(`${REACT_APP_SOCKET_BASE}/verify`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ code }),
+    });
+
+    const json = await response.json();
+
+    return json.success;
+  } catch (err) {
+    log("Failed to verify recaptcha %O", err);
+    return false;
+  }
+};

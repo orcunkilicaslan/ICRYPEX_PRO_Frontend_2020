@@ -4,6 +4,7 @@ import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { sub, isWithinInterval } from "date-fns";
+import NumberFormat from "react-number-format";
 
 import { Button } from "../Button.jsx";
 import Table from "../Table.jsx";
@@ -27,7 +28,7 @@ const OpenOrderAccountActivitiesHistory = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["form", "app"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
-  const { activeCurrencies } = useCurrencies();
+  const { activeCurrencies, findCurrencyBySymbol } = useCurrencies();
   const { lang, openModal } = useSelector(state => state.ui);
   const accountHistory = useSelector(state => state.transaction.histories);
   const isFetching = useSelector(
@@ -131,18 +132,18 @@ const OpenOrderAccountActivitiesHistory = props => {
           </Col>
           <Col xs="auto">
             <CustomSelect
-                list={orderStatuses}
-                namespace="app"
-                title={"İşlem Durumu"}
-                index={orderStatusIdx}
-                setIndex={setOrderStatusIdx}
+              list={orderStatuses}
+              namespace="app"
+              title={"İşlem Durumu"}
+              index={orderStatusIdx}
+              setIndex={setOrderStatusIdx}
             />
           </Col>
           <Col xs="auto">
             <ButtonGroupRadio
-                list={periodBy}
-                index={periodbyIndex}
-                setIndex={setPeriodbyIndex}
+              list={periodBy}
+              index={periodbyIndex}
+              setIndex={setPeriodbyIndex}
             />
           </Col>
           <Col xs="auto">
@@ -204,11 +205,11 @@ const OpenOrderAccountActivitiesHistory = props => {
                   sitecolorgreen: request_type_id === 1,
                   sitecolorred: request_type_id === 2,
                 });
-
                 const statuscls = classnames({
                   sitecolorgreen: status === 4,
                   sitecolorred: status === 5,
                 });
+                const currency = findCurrencyBySymbol(currencysymbol);
 
                 return (
                   <Table.Tr key={id}>
@@ -231,8 +232,15 @@ const OpenOrderAccountActivitiesHistory = props => {
                     <Table.Td sizeauto className="bank">
                       ---
                     </Table.Td>
-                    <Table.Td sizefixed className="amnt">
-                      {amount} {currencysymbol}
+                    <Table.Td sizefixed className="amnt" title={amount}>
+                      <NumberFormat
+                        value={amount}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        decimalScale={currency?.digit}
+                        fixedDecimalScale
+                        suffix={` ${currencysymbol}`}
+                      />
                     </Table.Td>
                     <Table.Td sizeauto className="txid">
                       ---

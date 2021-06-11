@@ -1,16 +1,18 @@
 import { useEffect, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import NumberFormat from "react-number-format";
 
 import Table from "../Table.jsx";
 import { formatDateDistance, getPairPrefix } from "~/util/";
-import { useClientRect, usePrices } from "~/state/hooks/";
+import { useClientRect, usePrices, useCurrencies } from "~/state/hooks/";
 import { fetchInitialOrderHistory } from "~/state/slices/pair.slice";
 
-const MarketDataLast = props => {
+const MarketDataLast = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["common"]);
-  const { selectedPair, fiatCurrency: selectedFiatCurrency } = usePrices();
+  const { selectedPair } = usePrices();
+  const { selectedFiatCurrency, selectedCryptoCurrency } = useCurrencies();
   const { lang } = useSelector(state => state.ui);
 
   const prefix = getPairPrefix(selectedPair?.name);
@@ -37,10 +39,10 @@ const MarketDataLast = props => {
                 {t("time")}
               </Table.Th>
               <Table.Th sizefixed className="amnt">
-                {t("amount")}
+                {`${t("amount")} ${selectedCryptoCurrency?.symbol}`}
               </Table.Th>
               <Table.Th sizefixed className="pric">
-                {`${t("price")} ${selectedFiatCurrency}`}
+                {`${t("price")} ${selectedFiatCurrency?.symbol}`}
               </Table.Th>
             </Table.Tr>
           </Table.Thead>
@@ -52,26 +54,38 @@ const MarketDataLast = props => {
           >
             {historyData.map((transaction, idx) => {
               const {
-                order_side_id,
-                updated_at = Date.now(),
+                // order_side_id,
+                created_at,
                 amount,
                 market_price,
               } = transaction;
 
               return (
-                <Table.Tr key={`${updated_at}_${idx}`}>
+                <Table.Tr key={`${created_at}_${idx}`}>
                   <Table.Td sizefixed className="time">
-                    <span title={updated_at}>
-                      {formatDateDistance(new Date(updated_at), Date.now(), {
+                    <span title={created_at}>
+                      {formatDateDistance(new Date(created_at), Date.now(), {
                         locale: lang,
                       })}
                     </span>
                   </Table.Td>
-                  <Table.Td sizefixed className="amnt">
-                    {amount}
+                  <Table.Td sizefixed className="amnt" title={amount}>
+                    <NumberFormat
+                      value={amount}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      decimalScale={selectedCryptoCurrency?.digit}
+                      fixedDecimalScale
+                    />
                   </Table.Td>
-                  <Table.Td sizefixed className="pric">
-                    {market_price}
+                  <Table.Td sizefixed className="pric" title={market_price}>
+                    <NumberFormat
+                      value={market_price}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      decimalScale={selectedFiatCurrency?.digit}
+                      fixedDecimalScale
+                    />
                   </Table.Td>
                 </Table.Tr>
               );

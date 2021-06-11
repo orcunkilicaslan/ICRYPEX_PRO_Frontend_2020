@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, memo } from "react";
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import NumberFormat from "react-number-format";
 
 import { IconSet } from "../IconSet.jsx";
 import OpenOrderAssetsChartList from "./OpenOrderAssetsChartList.jsx";
@@ -19,8 +20,7 @@ const tabs = [
   },
 ];
 
-const OpenOrderAssets = props => {
-  const dispatch = useDispatch();
+const OpenOrderAssets = () => {
   const { t } = useTranslation("common");
   const { allAssets } = useSelector(state => state.assets);
   const [activeTab, setActiveTab] = useState(tabs[0].title);
@@ -56,8 +56,23 @@ const OpenOrderAssets = props => {
           <IconSet sprite="sprtsmclrd" size="16" name="wallet" />
           <h6>{t("approximately")}</h6>
           <p>
-            {allAssets?.total_TRY?.toFixed?.(2)} TRY /{" "}
-            {allAssets?.total_BTC?.toFixed?.(2)} BTC
+            <NumberFormat
+              value={allAssets?.total_TRY}
+              displayType={"text"}
+              thousandSeparator={true}
+              decimalScale={2}
+              fixedDecimalScale
+              suffix={" TRY"}
+            />
+            {" / "}
+            <NumberFormat
+              value={allAssets?.total_BTC}
+              displayType={"text"}
+              thousandSeparator={true}
+              decimalScale={8}
+              fixedDecimalScale
+              suffix={" BTC"}
+            />
           </p>
         </div>
       </div>
@@ -76,4 +91,4 @@ const OpenOrderAssets = props => {
   );
 };
 
-export default OpenOrderAssets;
+export default memo(OpenOrderAssets);

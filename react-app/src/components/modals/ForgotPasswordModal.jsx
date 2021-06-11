@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import {
   Form,
   FormGroup,
@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import { AlertResult } from "../AlertResult.jsx";
+import { verifyCaptcha } from "~/util/";
 
 const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
 
@@ -25,7 +26,7 @@ export default function ForgotPasswordModal(props) {
     isOpen,
     clearModals,
     openSigninModal,
-    userEmail = "",
+    user,
     errorMessage,
     submit,
     isResetingPassword,
@@ -33,19 +34,35 @@ export default function ForgotPasswordModal(props) {
   } = props;
   const { t } = useTranslation(["login", "form"]);
   const [isResetSent, setIsResetSent] = useState(false);
-  const { register, handleSubmit, errors, clearErrors } = useForm({
+  const { register, handleSubmit, errors, clearErrors, setValue } = useForm({
     mode: "onChange",
     defaultValues: {
-      email: userEmail,
+      email: user.info.email || user.email,
     },
   });
 
+  useEffect(() => {
+    if (isOpen) setIsResetSent(false);
+  }, [isOpen]);
+
   const onSubmit = data => {
     clearErrors();
+
     try {
       submit(data);
       setIsResetSent(true);
     } catch {}
+  };
+
+  const onCaptcha = async value => {
+    if (value === null) {
+      setValue("recaptcha", ""); // captcha expired
+    } else {
+      if (await verifyCaptcha(value)) {
+        clearErrors("recaptcha");
+        setValue("recaptcha", "valid");
+      }
+    }
   };
 
   return (
@@ -101,9 +118,20 @@ export default function ForgotPasswordModal(props) {
                       className="g-recaptcha"
                       theme="dark"
                       sitekey={RECAPTCHA_KEY}
+                      onChange={onCaptcha}
                     />
                   </div>
+                  <Input
+                    className="d-none"
+                    name="recaptcha"
+                    innerRef={register({ required: t("form:isRequired") })}
+                  />
                   <Label>{t("notARobot")}</Label>
+                  {errors.recaptcha && (
+                    <FormText className="inputresult resulterror inputintext">
+                      {errors.recaptcha?.message}
+                    </FormText>
+                  )}
                 </div>
               </div>
               <Button

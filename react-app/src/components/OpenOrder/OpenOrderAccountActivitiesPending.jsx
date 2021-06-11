@@ -3,11 +3,12 @@ import classnames from "classnames";
 import { Col, Form } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import NumberFormat from "react-number-format";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
-import { useClientRect } from "~/state/hooks";
+import { useClientRect, useCurrencies } from "~/state/hooks";
 import { formatDateDistance } from "~/util/";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import {
@@ -31,6 +32,7 @@ const OpenOrderAccountActivitiesPending = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["form", "app"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
+  const { findCurrencyBySymbol } = useCurrencies();
   const { lang, openModal } = useSelector(state => state.ui);
   const pendingTransactions = useSelector(state => state.transaction?.pending);
   const isFetching = useSelector(state => state.transaction?.isFetchingPending);
@@ -95,19 +97,19 @@ const OpenOrderAccountActivitiesPending = props => {
       >
         <Col xs="auto">
           <CustomSelect
-              list={requestTypes}
-              title={"İşlem Tipi"}
-              index={requestTypeIdx}
-              setIndex={setRequestTypeIdx}
-              namespace="finance"
+            list={requestTypes}
+            title={"İşlem Tipi"}
+            index={requestTypeIdx}
+            setIndex={setRequestTypeIdx}
+            namespace="finance"
           />
         </Col>
         <Col xs="auto">
           <CustomSelect
-              list={requestCurrencies}
-              title={"Para Birimleri"}
-              index={requestCurrenciesIdx}
-              setIndex={setrequestCurrenciesIdx}
+            list={requestCurrencies}
+            title={"Para Birimleri"}
+            index={requestCurrenciesIdx}
+            setIndex={setrequestCurrenciesIdx}
           />
         </Col>
         <Col xs="auto">
@@ -166,12 +168,12 @@ const OpenOrderAccountActivitiesPending = props => {
                   sitecolorgreen: request_type_id === 1,
                   sitecolorred: request_type_id === 2,
                 });
-
                 const statuscls = classnames({
                   sitecoloryellow: status === 1,
                   sitecolorgreen: status === 2,
                   sitecolorred: status > 2,
                 });
+                const currency = findCurrencyBySymbol(currencysymbol);
 
                 return (
                   <Table.Tr key={id}>
@@ -194,8 +196,15 @@ const OpenOrderAccountActivitiesPending = props => {
                     <Table.Td sizeauto className="bank">
                       {currencysymbol}
                     </Table.Td>
-                    <Table.Td sizefixed className="amnt">
-                      {amount}
+                    <Table.Td sizefixed className="amnt" title={amount}>
+                      <NumberFormat
+                        value={amount}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        decimalScale={currency?.digit}
+                        fixedDecimalScale
+                        suffix={` ${currencysymbol}`}
+                      />
                     </Table.Td>
                     <Table.Td sizeauto className="stts">
                       <span className={statuscls}>

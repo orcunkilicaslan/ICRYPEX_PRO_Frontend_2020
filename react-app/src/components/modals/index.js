@@ -1,5 +1,4 @@
 export { default as SigninModal } from "./SigninModal";
-export { default as VerifyModal } from "./VerifyModal";
 export { default as ForgotPasswordModal } from "./ForgotPasswordModal";
 export { default as SignupModal } from "./SignupModal";
 export { default as SettingsModal } from "./SettingsModal";

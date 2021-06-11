@@ -6,67 +6,69 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "../Button.jsx";
 import { useLocaleUpperCase } from "~/state/hooks/";
 
-const usermenulistaccount = [
-  {
-    title: "Profil",
-    href: "#",
-  },
-  {
-    title: "Hesap Onayı & Limit",
-    href: "#",
-  },
-  {
-    title: "Varlıklar",
-    href: "#",
-  },
-  {
-    title: "Komisyon Oranları",
-    href: "#",
-  },
-  {
-    title: "Bildirimler",
-    href: "#",
-  },
-  {
-    title: "Hesap Hareketleri",
-    href: "#",
-  },
-  {
-    title: "İşlem Geçmişi",
-    href: "#",
-  },
-  {
-    title: "Banka Hesap Bilgileri",
-    href: "#",
-  },
-];
-
-const usermenulistsecurity = [
-  {
-    title: "Giriş & Oturum Güvenliği",
-    href: "#",
-  },
-  {
-    title: "2FA Aktivasyon",
-    href: "#",
-  },
-  {
-    title: "Özel Anahtar Oluştur",
-    href: "#",
-  },
-  {
-    title: "Hareket Geçmişi",
-    href: "#",
-  },
-];
-
 export default function SettingsModal(props) {
   const { isOpen, User, clearModals, onSignout, ...rest } = props;
   const toUpperCase = useLocaleUpperCase();
+  const { t } = useTranslation(["app"]);
+
+  const usermenulistaccount = [
+    {
+      title: t("profile"),
+      href: "#",
+    },
+    {
+      title: t("approvalLimit"),
+      href: "#",
+    },
+    {
+      title: t("assets"),
+      href: "#",
+    },
+    {
+      title: t("commissionRates"),
+      href: "#",
+    },
+    {
+      title: t("notifications"),
+      href: "#",
+    },
+    {
+      title: t("accountActivities"),
+      href: "#",
+    },
+    {
+      title: t("tradeHistory"),
+      href: "#",
+    },
+    {
+      title: t("accountDetails"),
+      href: "#",
+    },
+  ];
+
+  const usermenulistsecurity = [
+    {
+      title: t("sessionSecurity"),
+      href: "#",
+    },
+    {
+      title: t("twofa"),
+      href: "#",
+    },
+    {
+      title: t("specialKey"),
+      href: "#",
+    },
+    {
+      title: t("activityHistory"),
+      href: "#",
+    },
+  ];
 
   return (
     <Modal
@@ -88,7 +90,7 @@ export default function SettingsModal(props) {
           7 Adet bildiriminiz var.
         </Button>
         <div className="modalcomp-usermenu-area">
-          <h6 className="modalcomp-usermenu-title">Hesabım</h6>
+          <h6 className="modalcomp-usermenu-title">{t("myAccount")}</h6>
           <Nav vertical className="modalcomp-usermenu-list">
             {usermenulistaccount.map(({ title, href }) => {
               return (
@@ -100,7 +102,7 @@ export default function SettingsModal(props) {
               );
             })}
           </Nav>
-          <h6 className="modalcomp-usermenu-title">Güvenlik</h6>
+          <h6 className="modalcomp-usermenu-title">{t("security")}</h6>
           <Nav vertical className="modalcomp-usermenu-list">
             {usermenulistsecurity.map(({ title, href }) => {
               return (
@@ -118,7 +120,7 @@ export default function SettingsModal(props) {
           className="modalcomp-usermenu-signout w-100"
           onClick={onSignout}
         >
-          ÇIKIŞ YAP
+          {toUpperCase(t("signOut"))}
         </Button>
       </ModalBody>
     </Modal>
