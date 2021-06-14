@@ -324,18 +324,18 @@
 
     &-check{
       position:relative;
-      width: 1.4rem;
-      height: 1.4rem;
+      width: 1rem;
+      height: 1rem;
       overflow: hidden;
-      margin-right: 8px;
+      margin-right: $custom-control-gutter;
       border: 1px solid $site-brdr-light-input;
       @include border-radius(2px);
 
       .g-recaptcha{
         position:absolute;
-        top: -26px;
-        left: -36px;
-        @include scale(0.85);
+        top: -30px;
+        left: -70px;
+        @include scale(0.6);
       }
     }
 
@@ -626,6 +626,12 @@
             background-color: $site-clr-text-soft-sec;
           }
         }
+      }
+    }
+
+    .recaptcha{
+      &-check{
+        border: 1px solid $site-brdr-dark;
       }
     }
   }
