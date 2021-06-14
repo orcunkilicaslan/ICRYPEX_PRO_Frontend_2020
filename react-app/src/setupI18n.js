@@ -292,7 +292,7 @@ const init = (initialLang = "en") => {
               "Ticari reklam ve duyurulardan haber almak istiyorum",
             notARobot: "Ben robot değilim",
             enterCode: "Doğrulama kodunu giriniz",
-            verificationCode: "Doğrulama kodu",
+            verificationCode: "Doğrulama Kodunu Giriniz",
             forgotPassword: "Şifremi unuttum?",
             sendCode: "Doğrulama kodu gönder",
             reSendCode: "Kodu Tekrar Gönder",
