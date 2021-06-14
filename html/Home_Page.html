@@ -2296,7 +2296,7 @@
                             <div class="form-group">
                                 <input type="password" class="form-control signinpassword" pattern=".{0}|.{1,}" required="" />
                                 <label>Şifre</label>
-                                <button class="showhidepass" type="button" data-toggle="showhidepassword" data-target=".signinpassword"><i class="icon-sprtsmclrd icon-14 icon-showhide"></i></button>
+                                <button class="showhidepass" type="button" data-toggle="showhidepassword" data-target=".signinpassword"><i class="icon-sprtsmclrd icon-14 icon-eyeshow"></i></button>
                                 <span class="form-text inputresult resulterror inputintext">Bu alanı doldurmalısınız</span>
                             </div>
                         </div>
@@ -2349,25 +2349,56 @@
                     <i class="icon-sprtlgclrd icon-50gray icon-user"></i>
                 </div>
                 <div class="modalcomp-sign-form">
-                    <div class="headsmtitle mb-1">
-                        <h6 class="text-center w-100">Doğrulama Kodunu Giriniz</h6>
+                    <form class="siteformui" autocomplete="off" novalidate="">
+                        <div class="labelfocustop">
+                            <div class="form-group">
+                                <input type="text" class="form-control" pattern=".{0}|.{1,}" required="" />
+                                <label>E-Posta</label>
+                                <span class="form-text inputresult resulterror inputintext">Bu alanı doldurmalısınız</span>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control signinpassword" pattern=".{0}|.{1,}" required="" />
+                                <label>Şifre</label>
+                                <button class="showhidepass" type="button" data-toggle="showhidepassword" data-target=".signinpassword"><i class="icon-sprtsmclrd icon-14 icon-eyeshow"></i></button>
+                                <span class="form-text inputresult resulterror inputintext">Bu alanı doldurmalısınız</span>
+                            </div>
+                        </div>
+                        <div class="recaptcha">
+                            <div class="recaptcha-area">
+                                <div class="recaptcha-check">
+                                    <div class="g-recaptcha" data-theme="dark" data-sitekey="6LewOKAUAAAAAMDO2yohWeyDcjFAHfcuEqK2mIp4"></div>
+                                </div>
+                                <label>Ben robot değilim</label>
+                            </div>
+                            <div>
+                                <a class="text-muted" href="#" data-toggle="modal" data-target="#modalHeadForgotPass">Şifremi Unuttum</a>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary active w-100" data-toggle="modal" data-target="#modalHeadSignInVerifCode">DOĞRULAMA KODU GÖNDER</button>
+                    </form>
+                </div>
+                <div class="modalcomp-sign-form verifcode">
+                    <button type="button" class="btn close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <div class="progressring">
+                        <div class="progressring-circle">
+                            <svg height="70" width="70">
+                                <circle stroke="#2a3553" fill="transparent" r="27" cx="35" cy="35" style="stroke-width: 4;"></circle>
+                                <circle stroke="#e84a55" fill="transparent" stroke-dasharray="169.64600329384882 169.64600329384882" r="27" cx="35" cy="35" style="stroke-dashoffset: 30.5363; stroke-width: 4;"></circle>
+                            </svg>
+                            <span>2:29</span>
+                        </div>
+                        <div class="progressring-bttn">
+                            <button class="btn btn-sm btn-link text-muted">Tekrar Gönder</button>
+                        </div>
                     </div>
                     <form class="siteformui" autocomplete="off" novalidate="">
                         <div class="labelfocustop">
                             <div class="form-group">
                                 <input type="text" class="form-control text-center" pattern=".{0}|.{1,}" required="" />
-                                <label class="text-center">Doğrulama Kodu</label>
+                                <label class="text-center">Doğrulama Kodunu Giriniz</label>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-success w-100  mt-2">GİRİŞ YAP</button>
-                        <div class="form-row mt-2">
-                            <div class="col">
-                                <button type="button" class="btn btn-secondary w-100" data-toggle="modal" data-target="#modalHeadSignIn">GERİ DÖN</button>
-                            </div>
-                            <div class="col">
-                                <button type="button" class="btn btn-secondary w-100">KODU TEKRAR GÖNDER</button>
-                            </div>
-                        </div>
+                        <button type="button" class="btn btn-success mt-2 w-100">GİRİŞ YAP</button>
                     </form>
                 </div>
             </div>
@@ -2693,13 +2724,13 @@
                             <div class="form-group">
                                 <input type="password" class="form-control signuppassword" pattern=".{0}|.{1,}" required="" />
                                 <label>Şifre</label>
-                                <button class="showhidepass" type="button" data-toggle="showhidepassword" data-target=".signuppassword"><i class="icon-sprtsmclrd icon-14 icon-showhide"></i></button>
+                                <button class="showhidepass" type="button" data-toggle="showhidepassword" data-target=".signuppassword"><i class="icon-sprtsmclrd icon-14 icon-eyeshow"></i></button>
                                 <span class="form-text inputresult resulterror inputintext">Bu alanı doldurmalısınız</span>
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control signuprepassword" pattern=".{0}|.{1,}" required="" />
                                 <label>Şifre Doğrulama</label>
-                                <button class="showhidepass" type="button" data-toggle="showhidepassword" data-target=".signuprepassword"><i class="icon-sprtsmclrd icon-14 icon-showhide"></i></button>
+                                <button class="showhidepass" type="button" data-toggle="showhidepassword" data-target=".signuprepassword"><i class="icon-sprtsmclrd icon-14 icon-eyeshow"></i></button>
                                 <span class="form-text inputresult resulterror inputintext">Bu alanı doldurmalısınız</span>
                             </div>
                         </div>
