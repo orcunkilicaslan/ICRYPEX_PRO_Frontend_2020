@@ -65,6 +65,16 @@ body, #root{
   }
 }
 
+.resultbox{
+  @include flexbox-display-flex();
+  @include flexbox-flex-flow(column);
+  @include flexbox-align-items(center);
+  @include flexbox-justify-content(center);
+  @include responsive-font-size($font-size-base);
+  width: 100%;
+  height: 100%;
+}
+
 .tooltipbox{
 
   &-head{
