@@ -97,6 +97,7 @@ const OpenOrderAccountActivitiesPending = props => {
       >
         <Col xs="auto">
           <CustomSelect
+            size="sm"
             list={requestTypes}
             title={"İşlem Tipi"}
             index={requestTypeIdx}
@@ -106,6 +107,7 @@ const OpenOrderAccountActivitiesPending = props => {
         </Col>
         <Col xs="auto">
           <CustomSelect
+            size="sm"
             list={requestCurrencies}
             title={"Para Birimleri"}
             index={requestCurrenciesIdx}

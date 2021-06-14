@@ -3,11 +3,13 @@ import { Input } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { nanoid } from "@reduxjs/toolkit";
 import { isObject } from "lodash";
+import classNames from "classnames";
 
 const CustomSelect = forwardRef((props, ref) => {
   const {
     children,
     className,
+    size,
     list,
     title,
     index,
@@ -16,11 +18,16 @@ const CustomSelect = forwardRef((props, ref) => {
     namespace = "common",
     ...rest
   } = props;
+
+  const cls = classNames("custom-select", className, {
+    [`custom-select-${size}`]: Boolean(size)
+  });
+
   const { t } = useTranslation(namespace);
 
   return (
     <Input
-      className="custom-select custom-select-sm"
+      className={cls}
       type="select"
       onChange={evt => setIndex && setIndex(parseInt(evt?.target?.value, 10))}
       value={index}

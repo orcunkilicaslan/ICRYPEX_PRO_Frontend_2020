@@ -145,6 +145,7 @@ const OpenOrderTransactionHistory = props => {
           </Col>
           <Col sm="2">
             <CustomSelect
+              size="sm"
               list={orderSides}
               title={"İşlem Tipi"}
               index={ordersideIdx}
@@ -160,6 +161,7 @@ const OpenOrderTransactionHistory = props => {
           </Col>
           <Col>
             <CustomSelect
+              size="sm"
               list={orderStatuses}
               namespace="app"
               title={t("app:orderStatus")}

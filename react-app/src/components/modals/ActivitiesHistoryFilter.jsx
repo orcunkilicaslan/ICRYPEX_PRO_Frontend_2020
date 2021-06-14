@@ -142,7 +142,6 @@ const ActivitiesHistoryFilter = props => {
             <FormGroup className="checkradioboxed">
               {validCurrencies?.map?.(({ symbol }, idx) => {
                 const inputId = nanoid();
-
                 return (
                   <div
                     key={symbol}
@@ -156,7 +155,7 @@ const ActivitiesHistoryFilter = props => {
                       innerRef={register}
                     />
                     <Label
-                      className="custom-control-label btn btn-sm btn-primary"
+                      className="custom-control-label btn btn-sm btn-secondary"
                       htmlFor={inputId}
                     >
                       {symbol}

@@ -98,6 +98,7 @@ const OpenOrderOrders = props => {
           </Col>
           <Col sm="2">
             <CustomSelect
+              size="sm"
               list={orderSides}
               title={"İşlem Tipi"}
               index={ordersideIdx}

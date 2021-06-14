@@ -123,6 +123,7 @@ const OpenOrderAccountActivitiesHistory = props => {
         <Row className="tabcont tabcont-filterbar">
           <Col xs="auto">
             <CustomSelect
+              size="sm"
               list={requestTypes}
               title={"İşlem Tipi"}
               index={requestTypeIdx}
@@ -132,6 +133,7 @@ const OpenOrderAccountActivitiesHistory = props => {
           </Col>
           <Col xs="auto">
             <CustomSelect
+              size="sm"
               list={orderStatuses}
               namespace="app"
               title={"İşlem Durumu"}
