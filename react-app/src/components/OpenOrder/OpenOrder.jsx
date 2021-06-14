@@ -3,6 +3,7 @@ import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
 import classnames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { inRange } from "lodash";
+import { useTranslation } from "react-i18next";
 
 import OpenOrderOrders from "./OpenOrderOrders.jsx";
 import OpenOrderTransactionHistory from "./OpenOrderTransactionHistory.jsx";
@@ -16,32 +17,48 @@ import { setTabIndex } from "~/state/slices/order.slice";
 export const openOrderContext = createContext();
 export const TRANSACTION_MODES = ["deposit", "withdraw"];
 export const TRANSACTION_METHODS = ["bank", "crypto"];
-
-const tabs = [
-  {
-    title: "Açık Emirler",
-    component: OpenOrderOrders,
-  },
-  {
-    title: "İşlem Geçmişi",
-    component: OpenOrderTransactionHistory,
-  },
-  {
-    title: "Varlıklar",
-    component: OpenOrderAssets,
-  },
-  {
-    title: "Yatır-Çek",
-    component: OpenOrderDepoWith,
-  },
-  {
-    title: "Hesap Hareketleri",
-    component: OpenOrderAccountActivities,
-  },
+export const periodBy = [
+  { name: "1G", duration: { days: 1 } },
+  { name: "1H", duration: { weeks: 1 } },
+  { name: "2H", duration: { weeks: 2 } },
+  { name: "1A", duration: { months: 1 } },
+  { name: "3A", duration: { months: 3 } },
+];
+export const orderBy = [
+  "newestFirst",
+  "oldestFirst",
+  "buyFirst",
+  "sellFirst",
+  "alpha",
 ];
 
 const OpenOrder = props => {
   const dispatch = useDispatch();
+  const { t } = useTranslation(["openorder", "app"]);
+
+  const tabs = [
+    {
+      title: t("openOrders"),
+      component: OpenOrderOrders,
+    },
+    {
+      title: t("tradeHistory"),
+      component: OpenOrderTransactionHistory,
+    },
+    {
+      title: t("app:assets"),
+      component: OpenOrderAssets,
+    },
+    {
+      title: t("depowith"),
+      component: OpenOrderDepoWith,
+    },
+    {
+      title: t("accountActivities"),
+      component: OpenOrderAccountActivities,
+    },
+  ];
+
   const { tabIndex } = useSelector(state => state.order);
   const activeTab = tabs[tabIndex].title;
   const { accesstoken } = useSelector(state => state.api);

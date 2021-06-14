@@ -9,19 +9,18 @@ import { IconSet } from "../IconSet.jsx";
 import OpenOrderAssetsChartList from "./OpenOrderAssetsChartList.jsx";
 import OpenOrderAssetsAddressList from "./OpenOrderAssetsAddressList.jsx";
 
-const tabs = [
-  {
-    title: "Varlıklar",
-    component: OpenOrderAssetsChartList,
-  },
-  {
-    title: "Adresler",
-    component: OpenOrderAssetsAddressList,
-  },
-];
-
 const OpenOrderAssets = () => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["common", "app"]);
+  const tabs = [
+    {
+      title: t("app:assets"),
+      component: OpenOrderAssetsChartList,
+    },
+    {
+      title: t("addresses"),
+      component: OpenOrderAssetsAddressList,
+    },
+  ];
   const { allAssets } = useSelector(state => state.assets);
   const [activeTab, setActiveTab] = useState(tabs[0].title);
 

@@ -14,7 +14,7 @@ import { useLocaleUpperCase } from "~/state/hooks/";
 export default function SettingsModal(props) {
   const { isOpen, User, clearModals, onSignout, ...rest } = props;
   const toUpperCase = useLocaleUpperCase();
-  const { t } = useTranslation(["app"]);
+  const { t } = useTranslation(["app", "openorder"]);
 
   const usermenulistaccount = [
     {
@@ -38,11 +38,11 @@ export default function SettingsModal(props) {
       href: "#",
     },
     {
-      title: t("accountActivities"),
+      title: t("openorder:accountActivities"),
       href: "#",
     },
     {
-      title: t("tradeHistory"),
+      title: t("openorder:tradeHistory"),
       href: "#",
     },
     {

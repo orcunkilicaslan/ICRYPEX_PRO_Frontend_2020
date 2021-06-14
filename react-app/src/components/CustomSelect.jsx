@@ -20,7 +20,7 @@ const CustomSelect = forwardRef((props, ref) => {
   } = props;
 
   const cls = classNames("custom-select", className, {
-    [`custom-select-${size}`]: Boolean(size)
+    [`custom-select-${size}`]: Boolean(size),
   });
 
   const { t } = useTranslation(namespace);
@@ -38,7 +38,7 @@ const CustomSelect = forwardRef((props, ref) => {
       {list?.map?.((item, idx) => {
         return (
           <option value={item?.id ? item.id : idx} key={nanoid()}>
-            {isObject(item) ? t(item?.name?.toLowerCase?.()) : item}
+            {isObject(item) ? t(item?.name?.toLowerCase?.()) : t(item)}
           </option>
         );
       })}

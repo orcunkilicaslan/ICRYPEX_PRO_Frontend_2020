@@ -29,7 +29,7 @@ const assetchartlistoptions = {
 const OpenOrderAssetsChartList = props => {
   const dispatch = useDispatch();
   const { dispatch: _dispatch } = useContext(openOrderContext);
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["common", "openorder"]);
   const { allAssets } = useSelector(state => state.assets);
   const { fiatCurrencies } = useCurrencies();
 
@@ -86,11 +86,8 @@ const OpenOrderAssetsChartList = props => {
         <div className="noassetbalance">
           <div className="noassetbalance-content">
             <IconSet sprite="sprtlgclrd" size="50gray" name="close" />
-            <h4>Bakiyeniz Bulunmamaktadır.</h4>
-            <p>
-              Görüntüleyebilmeniz için aşağıdaki para yatırma seçeneklerden
-              birisini tercih edebilirsiniz.
-            </p>
+            <h4>{t("openorder:noBalance")}</h4>
+            <p>{t("openorder:toView")}</p>
             <div className="contbtn">
               <Button
                 size="sm"
@@ -99,7 +96,7 @@ const OpenOrderAssetsChartList = props => {
                   onClick("bank");
                 }}
               >
-                Banka
+                {t("bank")}
               </Button>
               <Button
                 size="sm"
@@ -108,7 +105,7 @@ const OpenOrderAssetsChartList = props => {
                   onClick("crypto");
                 }}
               >
-                Kripto
+                {t("crypto")}
               </Button>
             </div>
           </div>
