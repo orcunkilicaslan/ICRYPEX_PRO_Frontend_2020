@@ -82,6 +82,10 @@ const init = (initialLang = "en") => {
             failed: "Failed",
             success: "Success",
             close: "CLOSE",
+            transferFee: "Transfer Fee",
+            amountToBeTransfer:"The Amount To Be Transfered",
+            iHaveReadAndUnderstood: "I have read and understood.",
+            sendApprovalEmail: "Send Approval E-mail"
           },
           finance: {
             ask: "Ask",
@@ -105,8 +109,14 @@ const init = (initialLang = "en") => {
             realized: "Realized",
             canceled: "Cancelled",
             addBankAccount: "Add New Bank Account",
+            addCryptoAddress: "Add New Crypto Address",
             selectBank: "Select A Bank",
             addAccount: "Add Account",
+            addAddress: "Add Address",
+            addressTitle: "Address Title",
+            address: "Address",
+            watchedSymbolAddress: "{{watchedSymbol}} Address",
+            destinationTag: "Destination Tag / Memo Id"
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -238,6 +248,10 @@ const init = (initialLang = "en") => {
             success: "Başarılı",
             close: "KAPAT",
             failed: "İşlem Başarısız",
+            transferFee: "Transfer Ücreti",
+            amountToBeTransfer:"Hesaba Geçecek Miktar",
+            iHaveReadAndUnderstood: "okudum onaylıyorum.",
+            sendApprovalEmail: "Onay E-Posta Gönder"
           },
           finance: {
             ask: "Alış",
@@ -260,8 +274,14 @@ const init = (initialLang = "en") => {
             realized: "Tamamlandı",
             canceled: "İptal",
             addBankAccount: "Yeni Banka Hesabı Ekle",
+            addCryptoAddress: "Yeni Kripto Adresi Ekle",
             selectBank: "Banka Seçiniz",
             addAccount: "Hesap Ekle",
+            addAddress: "Adres Ekle",
+            addressTitle: "Kayıt İsmi",
+            address: "Adres",
+            watchedSymbolAddress: "{{watchedSymbol}} Adresi",
+            destinationTag: "Destination Tag / Memo Id"
           },
           coinbar: {
             lastPrice: "Son Fiyat",

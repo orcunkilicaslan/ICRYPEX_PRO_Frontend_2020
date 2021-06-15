@@ -21,17 +21,23 @@ import { useCurrencies } from "~/state/hooks/";
 import { withDrawCrypto } from "~/state/slices/withdraw.slice";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal.jsx";
+import AddCryptoAddressModal from "~/components/modals/AddCryptoAddressModal";
 import { openOrderContext } from "./OpenOrder";
+import {getWhitelists} from "~/state/slices/cryptoaddreswhitelist.slice";
 
 const FEE_RATE = 15;
 
 const OpenOrderDepoWithTabWithdrawCrypto = props => {
   const dispatch = useDispatch();
-  const { t } = useTranslation(["form"]);
+  const { t } = useTranslation(["form","common"]);
   const { isWithdrawingCrypto } = useSelector(state => state.withdraw);
-  const { groupedCryptoAddresses = {} } = useSelector(state => state.assets);
+  const { info } = useSelector(state => state.user);
+  const { whitelists = []} = useSelector(state => state.cryptoAddressWhitelist);
   const [apiError, setApiError] = useState("");
   const { cryptoCurrencies = [], tokenCurrencies = [] } = useCurrencies();
+  const cryptoFees = useSelector(
+      state => state.api.settings?.cryptoFees
+  );
   const {
     register,
     handleSubmit,
@@ -61,24 +67,34 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
   const { state: orderContext } = useContext(openOrderContext);
 
   const selectedAddress = useMemo(
-    () => groupedCryptoAddresses?.[watchedSymbol]?.[0],
-    [watchedSymbol, groupedCryptoAddresses]
+    () => whitelists?.filter(c => c.symbol === watchedSymbol),
+    [watchedSymbol, whitelists]
   );
+
+  const selectedCryptoFree = useMemo(
+      () => cryptoFees?.filter(c => c.id ===  visibleCurrencies.find(
+          ({ symbol }) => symbol === watchedSymbol
+      )?.id && c.customerGroupId === 1),
+      [watchedSymbol, whitelists]
+  );
+
+
 
   useEffect(() => {
     const { symbol, mode } = orderContext;
-
     if (mode === "withdraw" && symbol && visibleSymbols.includes(symbol)) {
       setValue("symbol", symbol);
     }
   }, [orderContext, setValue, visibleSymbols]);
 
+  useEffect(() => {
+   dispatch(getWhitelists())
+  },[]);
+
   const getTotal = value => {
     const amount = parseFloat(value);
-    const total = amount - FEE_RATE;
-
+    const total = amount - selectedCryptoFree[0]?.amount;
     if (Number.isNaN(amount) || amount <= 0) return null;
-
     return total < 0 ? null : total?.toFixed(2);
   };
 
@@ -118,6 +134,10 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
 
   const clearOpenModals = () => {
     dispatch(setOpenModal("none"));
+  };
+
+  const openCryptoAddressModal = () => {
+    dispatch(setOpenModal("addcryptoaddress"));
   };
 
   return (
@@ -170,21 +190,27 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
             </Row>
             <InputGroup className="form-group">
               <Input
-                type="text"
-                readOnly
-                value={selectedAddress?.address || ""}
-                className="form-control"
-                name="address"
-                innerRef={register({
-                  required: t("isRequired"),
-                  maxLength: {
-                    value: 100,
-                    message: t("shouldBeMaxLength", { value: 100 }),
-                  },
+                  className="custom-select"
+                  type="select"
+                  name="customerbankid"
+                  innerRef={register({
+                    valueAsNumber: true,
+                    required: t("isRequired"),
+                  })}
+              >
+                {selectedAddress.map(whitelist => {
+                  const { address, short_name, id } = whitelist;
+                  return (
+                      short_name ? (
+                          <option value={id} key={id}>
+                            {`${short_name} - ${address}`}
+                          </option>
+                          ) : ""
+                  );
                 })}
-              />
+              </Input>
               <InputGroupAddon addonType="append">
-                <Button variant="secondary" className="active">
+                <Button variant="secondary" className="active" onClick={openCryptoAddressModal}>
                   <IconSet sprite="sprtsmclrd" size="16" name="addbtn" />
                 </Button>
               </InputGroupAddon>
@@ -194,28 +220,13 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                 {errors.address?.message}
               </FormText>
             )}
-            <InputGroup className="form-group">
-              <Input
-                readOnly
-                value={selectedAddress?.destination_tag || ""}
-                className="form-control d-none"
-                name="destinationtag"
-                innerRef={register({
-                  valueAsNumber: true,
-                  maxLength: {
-                    value: 10,
-                    message: t("shouldBeMaxLength", { value: 10 }),
-                  },
-                })}
-              />
-            </InputGroup>
             <Row form className="form-group">
-              <Col>Transfer Ücreti</Col>
-              <Col xs="auto">{FEE_RATE} TRY</Col>
+              <Col>{t("common:transferFee")}</Col>
+              <Col xs="auto">{selectedCryptoFree[0]?.amount} {watchedSymbol}</Col>
             </Row>
             <Row form className="form-group">
-              <Col>Hesaba Geçecek Miktar</Col>
-              <Col xs="auto">{getTotal(watch("amount"))} TRY</Col>
+              <Col>{t("common:amountToBeTransfer")}</Col>
+              <Col xs="auto">{getTotal(("amount"))} {watchedSymbol}</Col>
             </Row>
           </div>
           <div className="confirmcheckbox">
@@ -237,7 +248,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                 htmlFor="withdrawCryptoTabIhaveRead"
               >
                 <Button onClick={openTermsModal}>Kural ve Şartları</Button>{" "}
-                okudum onaylıyorum.
+                {t("common:iHaveReadAndUnderstood")}
               </Label>
             </div>
           </div>
@@ -251,13 +262,20 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
               variant="secondary"
               className="active"
             >
-              ONAY E-POSTA GÖNDER
+              {t("common:sendApprovalEmail")}
             </Button>
           </div>
         </Form>
         <DepositWithdrawalTermsModal
           isOpen={openModal === "depositwithdrawalterms"}
           clearModals={clearOpenModals}
+        />
+        <AddCryptoAddressModal
+            isOpen={openModal === "addcryptoaddress"}
+            watchedSymbol={watchedSymbol}
+            isSuccess={false}
+            isError={false}
+            clearModals={clearOpenModals}
         />
       </div>
     </div>

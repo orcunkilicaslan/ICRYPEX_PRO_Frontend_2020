@@ -223,7 +223,6 @@ const userSlice = createSlice({
     },
     [fetchBankAccounts.fulfilled]: (state, action) => {
       const accounts = action?.payload?.description;
-
       if (accounts) state.accounts = accounts;
     },
   },

@@ -31,7 +31,7 @@ module.exports = {
       add: [
         new webpack.DefinePlugin({
           "__env.HEAD": gitRevisionPlugin
-            ? JSON.stringify(gitRevisionPlugin?.commithash())
+            ? JSON.stringify(gitRevisionPlugin.commithash())
             : "",
         }),
       ],

@@ -4,10 +4,10 @@ import * as api from "../api";
 import { hasAccessToken } from "~/util/";
 
 
-export const cryptoAddressWhitelists = createAsyncThunk(
+export const getWhitelists = createAsyncThunk(
     "cryptoaddresses/whitelists",
     async (
-        {  },
+       _,
         { getState, rejectWithValue }
     ) => {
         const {
@@ -16,14 +16,13 @@ export const cryptoAddressWhitelists = createAsyncThunk(
 
         try {
             const response = await api.cryptoAddressWhitelists(
-                {  },
+                {},
                 {
                     headers: {
                         "x-access-token": accesstoken,
                     },
                 }
             );
-
             return response.data;
         } catch ({ data }) {
             return rejectWithValue(data);
@@ -41,7 +40,7 @@ export const cryptoAddressWhitelistsCreate = createAsyncThunk(
     "cryptoaddresses/whitelists/create",
     async (
         cryptoAddressData,
-        { getState, rejectWithValue }
+        { getState, rejectWithValue,dispatch }
     ) => {
         const {
             api: { accesstoken },
@@ -57,6 +56,7 @@ export const cryptoAddressWhitelistsCreate = createAsyncThunk(
                 }
             );
 
+          dispatch(getWhitelists())
             return response.data;
         } catch ({ data }) {
             return rejectWithValue(data);
@@ -109,7 +109,7 @@ const initialState = {
     whitelists : []
 };
 
-const cryptoAddressWhitelist = createSlice({
+const cryptoAddressWhitelistSlice = createSlice({
     name: "cryptoAddressWhitelist",
     initialState,
     reducers: {
@@ -120,13 +120,14 @@ const cryptoAddressWhitelist = createSlice({
         },
     },
     extraReducers: {
-        [cryptoAddressWhitelists.fulfilled]: (state, action) => {
-            state.whitelists = action?.payload?.description;
+        [getWhitelists.fulfilled]: (state, action) => {
+            const whitelists = action?.payload?.description;
+            if (whitelists) state.whitelists = whitelists;
         },
     },
 });
 
-export const { reset } = cryptoAddressWhitelist.actions;
+export const { reset } = cryptoAddressWhitelistSlice.actions;
 
-export default cryptoAddressWhitelist.reducer;
+export default cryptoAddressWhitelistSlice.reducer;
 

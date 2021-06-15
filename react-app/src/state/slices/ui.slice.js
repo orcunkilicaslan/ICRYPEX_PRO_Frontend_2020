@@ -26,6 +26,7 @@ const MODALS = [
   "alarm",
   "resultsweetmodal",
   "addbankaccount",
+  "addcryptoaddress",
   "buysellconfirm",
   "depositwithdrawalterms",
   "orderopenordersfilter",

@@ -8,6 +8,7 @@ import NumberFormat from "react-number-format";
 
 import Table from "../Table.jsx";
 import { fetchInitialOrderBook } from "~/state/slices/pair.slice";
+import { setSelectedOrder } from "~/state/slices/order.slice";
 import { usePrices, useCurrencies } from "~/state/hooks/";
 import { getPairPrefix } from "~/util/";
 
@@ -112,6 +113,10 @@ const OrderBook = props => {
     }
   }, [selectedPair, dispatch]);
 
+  const onSelectOrder = (data) => {
+    dispatch(setSelectedOrder(data))
+  };
+
   return (
     <div className="mainbox mainbox-orderbook">
       <div className="orderbook">
@@ -212,10 +217,11 @@ const OrderBook = props => {
                       </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
-                  <Table.Tbody>
-                    {visibleBuyOrders.map(({ total, amount, price }) => {
+                  <Table.Tbody  striped
+                                hovered>
+                    {visibleBuyOrders.map(({ total, amount, price }, idx) => {
                       return (
-                        <Table.Tr key={nanoid()}>
+                        <Table.Tr key={nanoid()} onClick={() => onSelectOrder({type: 'buy', data: visibleBuyOrders.slice(0, idx + 1)})}>
                           <Table.Td sizefixed className="totl" title={total}>
                             <NumberFormat
                               value={total}
@@ -276,10 +282,11 @@ const OrderBook = props => {
                       </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
-                  <Table.Tbody>
-                    {visibleSellOrders.map(({ total, amount, price }) => {
+                  <Table.Tbody  striped
+                                hovered>
+                    {visibleSellOrders.map(({ total, amount, price }, idx) => {
                       return (
-                        <Table.Tr key={nanoid()}>
+                        <Table.Tr key={nanoid()} onClick={() => onSelectOrder({type: 'sell', data: visibleSellOrders.slice(0, idx + 1)})}>
                           <Table.Td sizefixed className="pric" title={price}>
                             <NumberFormat
                               value={price}
