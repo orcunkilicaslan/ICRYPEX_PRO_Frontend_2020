@@ -3,7 +3,7 @@ import { Row, Col, Label, Input, Form } from "reactstrap";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { sub, isWithinInterval } from "date-fns";
+import { sub, isWithinInterval, addDays } from "date-fns";
 import { groupBy } from "lodash";
 import NumberFormat from "react-number-format";
 
@@ -48,7 +48,9 @@ const OpenOrderTransactionHistory = props => {
   const hideOthers = orderSlice?.hideOthersHistory;
 
   const defaultValues = useMemo(() => {
-    const today = formatDate(new Date(), "yyyy-MM-dd", { locale: lang });
+    const tomorrow = formatDate(addDays(Date.now(), 1), "yyyy-MM-dd", {
+      locale: lang,
+    });
     const threeMonthsAgo = formatDate(
       sub(new Date(), { months: 3 }),
       "yyyy-MM-dd",
@@ -63,7 +65,7 @@ const OpenOrderTransactionHistory = props => {
       isfilledorders: true,
       iscanceledorders: true,
       startdate: threeMonthsAgo,
-      enddate: today,
+      enddate: tomorrow,
       // startfrom: 0,
       // takecount: 20
     };
