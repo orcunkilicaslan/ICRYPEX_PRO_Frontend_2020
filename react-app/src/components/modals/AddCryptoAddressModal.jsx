@@ -13,6 +13,7 @@ import {cryptoAddressWhitelistsCreate} from "~/state/slices/cryptoaddreswhitelis
 export default function AddCryptoAddressModal(props) {
   const {
     watchedSymbol,
+    selectedCryptoAddress,
     isOpen,
     ...rest
   } = props;
@@ -129,17 +130,19 @@ export default function AddCryptoAddressModal(props) {
                       </Input>
                       <Label>{t("finance:address")}</Label>
                     </FormGroup>
-                    <FormGroup>
-                      <Input
-                          type="text"
-                          placeHolder={t("finance:destinationTag")}
-                          name="destinationtag"
-                          innerRef={register({
-                          })}
-                      >
-                      </Input>
-                      <Label>{t("finance:destinationTag")}</Label>
-                    </FormGroup>
+                    { selectedCryptoAddress.destination_tag ? (
+                        <FormGroup>
+                          <Input
+                              type="text"
+                              placeHolder={t("finance:destinationTag")}
+                              name="destinationtag"
+                              innerRef={register({})}
+                          >
+                          </Input>
+                          <Label>{t("finance:destinationTag")}</Label>
+                        </FormGroup>
+                      ) : ("")
+                    }
                   </div>
                   <Button
                       variant="primary"

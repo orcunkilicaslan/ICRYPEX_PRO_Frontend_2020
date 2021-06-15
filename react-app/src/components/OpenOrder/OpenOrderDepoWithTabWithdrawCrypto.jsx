@@ -25,7 +25,6 @@ import AddCryptoAddressModal from "~/components/modals/AddCryptoAddressModal";
 import { openOrderContext } from "./OpenOrder";
 import {getWhitelists} from "~/state/slices/cryptoaddreswhitelist.slice";
 
-const FEE_RATE = 15;
 
 const OpenOrderDepoWithTabWithdrawCrypto = props => {
   const dispatch = useDispatch();
@@ -33,11 +32,12 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
   const { isWithdrawingCrypto } = useSelector(state => state.withdraw);
   const { info } = useSelector(state => state.user);
   const { whitelists = []} = useSelector(state => state.cryptoAddressWhitelist);
+  const { groupedCryptoAddresses = {} } = useSelector(state => state.assets);
   const [apiError, setApiError] = useState("");
   const { cryptoCurrencies = [], tokenCurrencies = [] } = useCurrencies();
-  const cryptoFees = useSelector(
-      state => state.api.settings?.cryptoFees
-  );
+  const [total, setTotal] = useState("");
+  const { allAssets } = useSelector(state => state.assets);
+  const cryptoFees = useSelector( state => state.api.settings?.cryptoFees );
   const {
     register,
     handleSubmit,
@@ -59,7 +59,6 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
   const [visibleCurrencies, visibleSymbols] = useMemo(() => {
     const currencies = cryptoCurrencies.concat(tokenCurrencies);
     const symbols = currencies.map(({ symbol }) => symbol);
-
     return [currencies, symbols];
   }, [cryptoCurrencies, tokenCurrencies]);
 
@@ -71,14 +70,18 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
     [watchedSymbol, whitelists]
   );
 
-  const selectedCryptoFree = useMemo(
-      () => cryptoFees?.filter(c => c.id ===  visibleCurrencies.find(
-          ({ symbol }) => symbol === watchedSymbol
-      )?.id && c.customerGroupId === 1),
-      [watchedSymbol, whitelists]
-  );
+  const {  balance: selectedBalance, selectedCryptoAddress: selectedCryptoAddress, selectedCryptoFree:selectedCryptoFree } = useMemo(() => {
 
+    const selectedCryptoAddress = groupedCryptoAddresses?.[watchedSymbol]?.[0]
+    const balance = allAssets?.balances?.find?.(
+        ({ currency_id }) => currency_id === selectedCryptoAddress?.currency_id
+    );
+    const selectedCryptoFree = cryptoFees?.filter(c => c.id ===  visibleCurrencies.find(
+        ({ symbol }) => symbol === watchedSymbol
+    )?.id && c.customerGroupId === info.customergroupid)
 
+    return {  balance, selectedCryptoAddress, selectedCryptoFree };
+  }, [watchedSymbol, allAssets, whitelists]);
 
   useEffect(() => {
     const { symbol, mode } = orderContext;
@@ -93,9 +96,14 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
 
   const getTotal = value => {
     const amount = parseFloat(value);
-    const total = amount - selectedCryptoFree[0]?.amount;
-    if (Number.isNaN(amount) || amount <= 0) return null;
-    return total < 0 ? null : total?.toFixed(2);
+    let total = ""
+    const fee =  selectedCryptoFree[0]?.amount;
+    if(fee && !Number.isNaN(fee) && value !== "") {
+       total = amount - fee
+    }else {
+       total = amount
+    }
+    setTotal( total?.toFixed(8))
   };
 
   const onSubmit = async data => {
@@ -103,7 +111,6 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
     const currencyid = visibleCurrencies.find(
       ({ symbol }) => symbol === _symbol
     )?.id;
-    const total = getTotal(amount);
 
     if (total > 0) {
       setApiError("");
@@ -171,12 +178,20 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                   innerRef={register({
                     valueAsNumber: true,
                     required: t("isRequired"),
-                    min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
+                    min: { value: selectedCryptoFree[0]?.amount ? selectedCryptoFree[0]?.amount : 0, message: t("shouldBeMin", { value: selectedCryptoFree[0]?.amount ? selectedCryptoFree[0]?.amount :0 }) },
                     max: {
-                      value: 999999,
-                      message: t("shouldBeMax", { value: 999999 }),
+                      value: selectedBalance.balance ? Number(selectedBalance.balance).toFixed(8): 0,
+                      message: t("shouldBeMax", { value:selectedBalance.balance ? Number(selectedBalance.balance).toFixed(8) : 0 }),
                     },
                   })}
+                  onChange={e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const { value } = e.target;
+                    if (!Number.isNaN(value) && value !== "") {
+                      getTotal(parseFloat(value))
+                    }
+                  }}
                 />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>{watchedSymbol}</InputGroupText>
@@ -226,7 +241,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
             </Row>
             <Row form className="form-group">
               <Col>{t("common:amountToBeTransfer")}</Col>
-              <Col xs="auto">{getTotal(("amount"))} {watchedSymbol}</Col>
+              <Col xs="auto">{total} {watchedSymbol}</Col>
             </Row>
           </div>
           <div className="confirmcheckbox">
@@ -273,7 +288,8 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
         <AddCryptoAddressModal
             isOpen={openModal === "addcryptoaddress"}
             watchedSymbol={watchedSymbol}
-            isSuccess={false}
+            selectedCryptoAddress={selectedCryptoAddress}
+            issuccess={false}
             isError={false}
             clearModals={clearOpenModals}
         />

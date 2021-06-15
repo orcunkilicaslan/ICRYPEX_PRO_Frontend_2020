@@ -86,7 +86,7 @@ const init = (initialLang = "en") => {
             transferFee: "Transfer Fee",
             amountToBeTransfer:"The Amount To Be Transfered",
             iHaveReadAndUnderstood: "I have read and understood.",
-            sendApprovalEmail: "Send Approval E-mail"
+            sendApprovalEmail: "Send Approval E-mail",
             date: "Date",
             average: "Average",
             commission: "Commission",
@@ -126,7 +126,7 @@ const init = (initialLang = "en") => {
             addressTitle: "Address Title",
             address: "Address",
             watchedSymbolAddress: "{{watchedSymbol}} Address",
-            destinationTag: "Destination Tag / Memo Id"
+            destinationTag: "Destination Tag / Memo Id",
             deposit: "Deposit",
             withdraw: "Withdraw",
           },
@@ -323,7 +323,7 @@ const init = (initialLang = "en") => {
             addressTitle: "Kayıt İsmi",
             address: "Adres",
             watchedSymbolAddress: "{{watchedSymbol}} Adresi",
-            destinationTag: "Destination Tag / Memo Id"
+            destinationTag: "Destination Tag / Memo Id",
             deposit: "Yatır",
             withdraw: "Çek",
           },
