@@ -307,7 +307,7 @@ const OpenOrderTransactionHistory = props => {
                       <Table.Td sizeauto className="type">
                         {ordertype} -{" "}
                         <span className={cls1}>
-                          {t(`common:${orderside?.toLowerCase?.()}`)}
+                          {t(`openorder:orderSide${order_side_id}`)}
                         </span>
                       </Table.Td>
                       <Table.Td sizefixed className="avrg">
@@ -374,7 +374,7 @@ const OpenOrderTransactionHistory = props => {
                       </Table.Td>
                       <Table.Td sizeauto className="stts">
                         <span className={cls2}>
-                          {t(`app:${orderstatus?.toLowerCase?.()}`)}
+                          {t(`openorder:orderStatus${order_status_id}`)}
                         </span>
                       </Table.Td>
                     </Table.Tr>

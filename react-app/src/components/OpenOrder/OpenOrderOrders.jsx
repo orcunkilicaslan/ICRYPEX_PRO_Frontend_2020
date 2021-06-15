@@ -211,7 +211,10 @@ const OpenOrderOrders = props => {
                       </span>
                     </Table.Td>
                     <Table.Td sizefixed className="type">
-                      {ordertype} - <span className={cls}>{orderside}</span>
+                      {ordertype} -{" "}
+                      <span className={cls}>
+                        {t(`openorder:orderSide${order_side_id}`)}
+                      </span>
                     </Table.Td>
                     <Table.Td sizefixed className="pric" title={price}>
                       <NumberFormat
