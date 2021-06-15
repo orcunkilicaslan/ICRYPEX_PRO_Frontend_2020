@@ -306,6 +306,7 @@ const init = (initialLang = "en") => {
             portfolio: "Portföy",
             available: "Kullanılabilir",
             amountToBeTaken: "Alınacak Miktar",
+            amountToBeSold: "Satılacak Miktar",
             market: "Piyasa",
             transactionCommission: "İşlem Komisyonu",
             marketMaker: "Piyasa Yapıcı",

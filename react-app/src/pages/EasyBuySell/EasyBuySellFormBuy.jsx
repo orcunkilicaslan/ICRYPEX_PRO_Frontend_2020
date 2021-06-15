@@ -50,6 +50,7 @@ const EasyBuySellFormBuy = props => {
       setSelectCurrency(selectedPair?.second_currency_id)
       dispatch(fetchBalance({currencyid: selectedPair?.second_currency_id, isFiat: true, isPadding: true}));
      }
+    setApiError("");
   }, [dispatch, selectedPair]);
 
   useEffect(() => {
@@ -77,6 +78,9 @@ const EasyBuySellFormBuy = props => {
       const { payload } = await dispatch(fetchEasyBuy({ firstcurrencyid,secondcurrencyid,amount }));
       if (!payload?.status) {
         setApiError(payload?.errormessage);
+        setIsSubmitted(false);
+        setIsConfirmed(false);
+        reset();
       } else {
         await  dispatch(fetchBalance({currencyid: selectedPair?.second_currency_id, isFiat: true, isPadding: false}));
         setApiError("");
@@ -87,8 +91,8 @@ const EasyBuySellFormBuy = props => {
 
   return (
     <div className="easybuysell-cont">
-      { 0 === 1 ? (
-          <AlertResult error center>Hata Mesajı Buraya Gelecek...</AlertResult>
+      { apiError !== "" ? (
+          <AlertResult error center>{apiError}</AlertResult>
       ) : null}
       <Form
         className="siteformui"

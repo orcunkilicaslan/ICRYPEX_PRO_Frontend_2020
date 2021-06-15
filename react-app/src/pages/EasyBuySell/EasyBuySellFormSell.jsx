@@ -70,6 +70,9 @@ const EasyBuySellFormSell = props => {
      const { payload } = await dispatch(fetchEasySell({ firstcurrencyid,secondcurrencyid,buyingamount,sellingamount }));
       if (!payload?.status) {
         setApiError(payload?.errormessage);
+        setIsSubmitted(false);
+        setIsConfirmed(false);
+        reset();
       } else {
         setApiError("");
         await  dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false, isPadding: false}));
@@ -80,8 +83,8 @@ const EasyBuySellFormSell = props => {
 
   return (
     <div className="easybuysell-cont">
-      { 0 === 1 ? (
-          <AlertResult error center>Hata Mesajı Buraya Gelecek...</AlertResult>
+      { apiError !== "" ? (
+          <AlertResult error center>{apiError}</AlertResult>
       ) : null}
       <Form
         className="siteformui"
