@@ -185,7 +185,7 @@ const init = (initialLang = "en") => {
           },
           openorder: {
             openOrders: "Open Orders",
-            tradeHistory: "Transaction History",
+            tradeHistory: "Order History",
             depowith: "Deposit & Withdraw",
             accountActivities: "Account Activities",
             tradePairs: "Trade Pairs",
@@ -200,7 +200,7 @@ const init = (initialLang = "en") => {
             alpha: "Alphabetical",
             tradeNo: "Trade No",
             filterTransactions: "Filter Transactions",
-            tradeHistoryFilter: "Transaction History Filter",
+            tradeHistoryFilter: "Order History Filter",
             noBalance: "No balance.",
             toView:
               "You can select one of the following deposit options to view.",
@@ -391,7 +391,7 @@ const init = (initialLang = "en") => {
           },
           openorder: {
             openOrders: "Açık Emirler",
-            tradeHistory: "İşlem Geçmişi",
+            tradeHistory: "Emir Geçmişi",
             depowith: "Yatır-Çek",
             accountActivities: "Hesap Hareketleri",
             tradePairs: "İşlem Çiftleri",
@@ -406,7 +406,7 @@ const init = (initialLang = "en") => {
             alpha: "Alfabetik",
             tradeNo: "İşlem No",
             filterTransactions: "İşlemleri Filtrele",
-            tradeHistoryFilter: "İşlem Geçmişi Filtre",
+            tradeHistoryFilter: "Emir Geçmişi Filtre",
             noBalance: "Bakiyeniz bulunmamaktadır.",
             toView:
               "Görüntüleyebilmeniz için aşağıdaki para yatırma seçeneklerinden birisini tercih edebilirsiniz.",

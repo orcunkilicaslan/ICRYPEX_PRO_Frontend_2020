@@ -117,6 +117,7 @@ const OpenOrderTransactionHistory = props => {
     const toSubmit = {
       ...defaultValues,
       pairids: JSON.stringify(pairids),
+      orderby: 1,
     };
 
     dispatch(fetchOrderHistory(toSubmit));

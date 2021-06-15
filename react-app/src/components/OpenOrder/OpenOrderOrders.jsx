@@ -74,6 +74,7 @@ const OpenOrderOrders = props => {
     const toSubmit = {
       ...defaultValues,
       pairids: JSON.stringify(pairids),
+      orderby: 1,
     };
 
     dispatch(fetchOpenOrders(toSubmit));
