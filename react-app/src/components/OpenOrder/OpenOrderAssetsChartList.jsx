@@ -29,7 +29,7 @@ const assetchartlistoptions = {
 const OpenOrderAssetsChartList = props => {
   const dispatch = useDispatch();
   const { dispatch: _dispatch } = useContext(openOrderContext);
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["common", "openorder"]);
   const { allAssets } = useSelector(state => state.assets);
   const { fiatCurrencies } = useCurrencies();
 
@@ -86,11 +86,8 @@ const OpenOrderAssetsChartList = props => {
         <div className="noassetbalance">
           <div className="noassetbalance-content">
             <IconSet sprite="sprtlgclrd" size="50gray" name="close" />
-            <h4>Bakiyeniz Bulunmamaktadır.</h4>
-            <p>
-              Görüntüleyebilmeniz için aşağıdaki para yatırma seçeneklerden
-              birisini tercih edebilirsiniz.
-            </p>
+            <h4>{t("openorder:noBalance")}</h4>
+            <p>{t("openorder:toView")}</p>
             <div className="contbtn">
               <Button
                 size="sm"
@@ -99,7 +96,7 @@ const OpenOrderAssetsChartList = props => {
                   onClick("bank");
                 }}
               >
-                Banka
+                {t("bank")}
               </Button>
               <Button
                 size="sm"
@@ -108,7 +105,7 @@ const OpenOrderAssetsChartList = props => {
                   onClick("crypto");
                 }}
               >
-                Kripto
+                {t("crypto")}
               </Button>
             </div>
           </div>
@@ -140,7 +137,7 @@ const OpenOrderAssetsChartList = props => {
                     value={allAssets?.total_BTC}
                     displayType={"text"}
                     thousandSeparator={true}
-                    decimalScale={8}
+                    decimalScale={2}
                     fixedDecimalScale
                     suffix={" BTC"}
                   />
@@ -150,35 +147,37 @@ const OpenOrderAssetsChartList = props => {
           </div>
           <div className="assetchartarea-list">
             <ul className="asssetalllist">
-              {allAssets?.balances?.map?.(({ symbol, balance, digit }) => {
-                return (
-                  <li
-                    className={`asssetcurr-${symbol?.toLowerCase?.()}`}
-                    key={symbol}
-                  >
-                    <div className="circle">
-                      <IconSet
-                        sprite="sprtsmcurrency"
-                        size="16"
-                        name={symbol?.toLowerCase?.()}
-                      />
-                      <i className="centercirc" />
-                    </div>
-                    <div className="info">
-                      <h6>{symbol}</h6>
-                      <p>
-                        <NumberFormat
-                          value={balance}
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          decimalScale={digit}
-                          fixedDecimalScale
+              {allAssets?.balances?.map?.(
+                ({ symbol, balance, digit, digit_show }) => {
+                  return (
+                    <li
+                      className={`asssetcurr-${symbol?.toLowerCase?.()}`}
+                      key={symbol}
+                    >
+                      <div className="circle">
+                        <IconSet
+                          sprite="sprtsmcurrency"
+                          size="16"
+                          name={symbol?.toLowerCase?.()}
                         />
-                      </p>
-                    </div>
-                  </li>
-                );
-              })}
+                        <i className="centercirc" />
+                      </div>
+                      <div className="info">
+                        <h6>{symbol}</h6>
+                        <p>
+                          <NumberFormat
+                            value={balance}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            decimalScale={digit_show || digit}
+                            fixedDecimalScale
+                          />
+                        </p>
+                      </div>
+                    </li>
+                  );
+                }
+              )}
             </ul>
           </div>
         </div>

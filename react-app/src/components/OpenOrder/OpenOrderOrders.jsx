@@ -22,7 +22,7 @@ import CustomSelect from "~/components/CustomSelect";
 
 const defaultValues = {
   pairids: [],
-  orderby: 1,
+  orderby: 0,
   isbuyorders: true,
   issellorders: true,
   // startfrom: 0,
@@ -31,7 +31,13 @@ const defaultValues = {
 
 const OpenOrderOrders = props => {
   const dispatch = useDispatch();
-  const { t } = useTranslation(["form", "coinbar"]);
+  const { t } = useTranslation([
+    "form",
+    "coinbar",
+    "openorder",
+    "common",
+    "finance",
+  ]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
   const { lang, openModal } = useSelector(state => state.ui);
   const orderSides = useSelector(state => state.api.settings?.orderSides);
@@ -93,13 +99,14 @@ const OpenOrderOrders = props => {
         <Row className="tabcont tabcont-filterbar">
           <Col xs="auto">
             <Button variant="secondary" size="sm" onClick={openFiltersModal}>
-              İşlem Çiftleri
+              {t("openorder:tradePairs")}
             </Button>
           </Col>
           <Col sm="2">
             <CustomSelect
+              size="sm"
               list={orderSides}
-              title={"İşlem Tipi"}
+              title={t("openorder:tradeType")}
               index={ordersideIdx}
               setIndex={setOrdersideIdx}
             />
@@ -129,22 +136,22 @@ const OpenOrderOrders = props => {
           <Table.Thead scrollbar>
             <Table.Tr>
               <Table.Th sizeauto className="symb">
-                Çift
+                {t("common:pair")}
               </Table.Th>
               <Table.Th sizeauto className="date">
-                Tarih
+                {t("common:date")}
               </Table.Th>
               <Table.Th sizefixed className="type">
-                İşlem Tipi
+                {t("openorder:tradeType")}
               </Table.Th>
               <Table.Th sizefixed className="pric">
-                Fiyat
+                {t("common:price")}
               </Table.Th>
               <Table.Th sizefixed className="amnt">
-                Miktar
+                {t("common:amount")}
               </Table.Th>
               <Table.Th sizefixed className="hppn">
-                Gerçekleşen
+                {t("finance:realized")}
               </Table.Th>
               <Table.Th sizeauto className="bttn" />
             </Table.Tr>
@@ -187,6 +194,9 @@ const OpenOrderOrders = props => {
                 });
                 const buyCurrency = findCurrencyBySymbol(buyingcurrency);
                 const sellCurrency = findCurrencyBySymbol(sellingcurrency);
+                const buyDigit = buyCurrency?.digit_show || buyCurrency?.digit;
+                const sellDigit =
+                  sellCurrency?.digit_show || sellCurrency?.digit;
 
                 return (
                   <Table.Tr key={id}>
@@ -208,9 +218,7 @@ const OpenOrderOrders = props => {
                         value={price}
                         displayType={"text"}
                         thousandSeparator={true}
-                        decimalScale={
-                          isBuyOrder ? sellCurrency?.digit : buyCurrency?.digit
-                        }
+                        decimalScale={isBuyOrder ? sellDigit : buyDigit}
                         fixedDecimalScale
                         suffix={` ${
                           isBuyOrder ? sellingcurrency : buyingcurrency
@@ -226,9 +234,7 @@ const OpenOrderOrders = props => {
                         value={isBuyOrder ? buying_amount : selling_amount}
                         displayType={"text"}
                         thousandSeparator={true}
-                        decimalScale={
-                          isBuyOrder ? buyCurrency?.digit : sellCurrency?.digit
-                        }
+                        decimalScale={isBuyOrder ? buyDigit : sellDigit}
                         fixedDecimalScale
                         suffix={` ${
                           isBuyOrder ? buyingcurrency : sellingcurrency
@@ -244,9 +250,7 @@ const OpenOrderOrders = props => {
                         value={isBuyOrder ? selling_amount : buying_amount}
                         displayType={"text"}
                         thousandSeparator={true}
-                        decimalScale={
-                          isBuyOrder ? sellCurrency?.digit : buyCurrency?.digit
-                        }
+                        decimalScale={isBuyOrder ? sellDigit : buyDigit}
                         fixedDecimalScale
                         suffix={` ${
                           isBuyOrder ? sellingcurrency : buyingcurrency

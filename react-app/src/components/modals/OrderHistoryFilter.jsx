@@ -17,22 +17,16 @@ import { merge } from "lodash";
 
 import { Button } from "../Button.jsx";
 import { AlertResult } from "../AlertResult.jsx";
-import { usePrices } from "~/state/hooks";
+import { usePrices, useLocaleUpperCase } from "~/state/hooks";
 import { fetchOrderHistory } from "~/state/slices/order.slice";
 import { formatDate } from "~/util/";
 import CustomSelect from "~/components/CustomSelect";
-
-const orderBy = [
-  "Önce Yeni Tarihli",
-  "Önce Eski Tarihli",
-  "Önce Alış",
-  "Önce Satış",
-  "Alfabetik",
-];
+import { orderBy } from "../OpenOrder/OpenOrder";
 
 export default function OrderHistoryFilter(props) {
   const { isOpen, clearModals, defaultValues, isFetching, ...rest } = props;
-  const { t } = useTranslation(["app", "finance"]);
+  const { t } = useTranslation(["app", "finance", "openorder", "common"]);
+  const toUpperCase = useLocaleUpperCase();
   const dispatch = useDispatch();
   const [apiError, setApiError] = useState("");
   const { lang } = useSelector(state => state.ui);
@@ -55,6 +49,7 @@ export default function OrderHistoryFilter(props) {
       pairids,
       startdate: sd,
       enddate: ed,
+      orderby,
       ...rest
     } = data;
     const typeIdx = parseInt(typeID, 10);
@@ -65,6 +60,7 @@ export default function OrderHistoryFilter(props) {
       issellorders: true,
       isfilledorders: true,
       iscanceledorders: true,
+      orderby: orderby + 1,
     };
 
     const _pairids = [];
@@ -124,7 +120,9 @@ export default function OrderHistoryFilter(props) {
       returnFocusAfterClose={false}
       {...rest}
     >
-      <ModalHeader toggle={clearModals}>İŞLEM GEÇMİŞİ FİLTRE</ModalHeader>
+      <ModalHeader toggle={clearModals}>
+        {toUpperCase(t("openorder:tradeHistoryFilter"))}
+      </ModalHeader>
       <ModalBody className="modalcomp modalcomp-filters">
         {apiError && <AlertResult error>{apiError}</AlertResult>}
         <Form
@@ -134,7 +132,7 @@ export default function OrderHistoryFilter(props) {
           onSubmit={handleSubmit(onSubmit)}
         >
           <FormGroup tag="fieldset">
-            <legend>İşlem Çiftleri</legend>
+            <legend>{t("openorder:tradePairs")}</legend>
             <FormGroup className="checkradioboxed">
               {allPairs?.map?.((pair, idx) => {
                 const id = nanoid();
@@ -163,11 +161,11 @@ export default function OrderHistoryFilter(props) {
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
-            <legend>İşlem Tipi</legend>
+            <legend>{t("openorder:tradeType")}</legend>
             <FormGroup>
               <CustomSelect
                 list={orderSides}
-                title={"İşlem Tipi"}
+                title={t("openorder:tradeType")}
                 name="typeID"
                 index={watch("typeID")}
                 setIndex={id => setValue("typeID", id)}
@@ -176,26 +174,26 @@ export default function OrderHistoryFilter(props) {
             </FormGroup>{" "}
           </FormGroup>
           <FormGroup tag="fieldset">
-            <legend>İşlem Durumu</legend>
+            <legend>{t("openorder:tradeStatus")}</legend>
             <FormGroup>
               <CustomSelect
                 list={validStatuses}
-                title={"İşlem Durumu"}
+                title={t("openorder:tradeStatus")}
                 name="statusID"
                 index={watch("statusID")}
                 setIndex={id => setValue("statusID", id)}
                 ref={register}
                 namespace="app"
-              />{" "}
+              />
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
-            <legend>Tarih Aralığı</legend>
+            <legend>{t("common:dateRange")}</legend>
             <FormGroup row>
               <Col>
                 <Input
                   type="date"
-                  title="Start Date"
+                  title={t("common:startDate")}
                   name="startdate"
                   innerRef={register({
                     valueAsDate: true,
@@ -206,33 +204,27 @@ export default function OrderHistoryFilter(props) {
                 <Input
                   type="date"
                   name="enddate"
-                  title="End Date"
+                  title={t("common:endDate")}
                   innerRef={register({
                     valueAsDate: true,
                   })}
-                />{" "}
+                />
               </Col>
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
-            <legend>Sıralama</legend>
+            <legend>{t("openorder:sortBy")}</legend>
             <FormGroup>
-              <Input
-                className="custom-select"
-                type="select"
+              <CustomSelect
+                list={orderBy}
                 name="orderby"
-                innerRef={register({
+                index={watch("orderby")}
+                setIndex={id => setValue("orderby", id)}
+                ref={register({
                   valueAsNumber: true,
                 })}
-              >
-                {orderBy.map((el, idx) => {
-                  return (
-                    <option value={idx + 1} key={`${el}_${idx}`}>
-                      {el}
-                    </option>
-                  );
-                })}
-              </Input>
+                namespace="openorder"
+              />
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
@@ -242,7 +234,7 @@ export default function OrderHistoryFilter(props) {
               type="submit"
               disabled={isFetching}
             >
-              İŞLEMLERİ FİLTRELE
+              {toUpperCase(t("openorder:filterTransactions"))}
             </Button>
           </FormGroup>
         </Form>

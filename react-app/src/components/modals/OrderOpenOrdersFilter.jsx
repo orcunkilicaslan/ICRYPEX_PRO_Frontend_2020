@@ -11,24 +11,20 @@ import {
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { merge } from "lodash";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "../Button.jsx";
 import { AlertResult } from "../AlertResult.jsx";
-import { usePrices } from "~/state/hooks";
+import { usePrices, useLocaleUpperCase } from "~/state/hooks";
 import { fetchOpenOrders } from "~/state/slices/order.slice";
 import CustomSelect from "~/components/CustomSelect";
-
-const orderBy = [
-  "Önce Yeni Tarihli",
-  "Önce Eski Tarihli",
-  "Önce Alış",
-  "Önce Satış",
-  "Alfabetik",
-];
+import { orderBy } from "../OpenOrder/OpenOrder";
 
 const OrderOpenOrdersFilter = props => {
   const { isOpen, clearModals, defaultValues, isFetching, ...rest } = props;
   const dispatch = useDispatch();
+  const toUpperCase = useLocaleUpperCase();
+  const { t } = useTranslation(["openorder"]);
   const [apiError, setApiError] = useState("");
   const { allPairs } = usePrices();
   const orderSides = useSelector(state => state.api.settings?.orderSides);
@@ -39,12 +35,13 @@ const OrderOpenOrdersFilter = props => {
 
   const onSubmit = async data => {
     setApiError("");
-    const { typeID, pairids, ...rest } = data;
+    const { typeID, pairids, orderby, ...rest } = data;
     const typeIdx = parseInt(typeID, 10);
     const toSubmit = {
       ...rest,
       isbuyorders: true,
       issellorders: true,
+      orderby: orderby + 1,
     };
 
     const _pairids = [];
@@ -89,7 +86,9 @@ const OrderOpenOrdersFilter = props => {
       returnFocusAfterClose={false}
       {...rest}
     >
-      <ModalHeader toggle={clearModals}>AÇIK EMİRLER FİLTRE</ModalHeader>
+      <ModalHeader toggle={clearModals}>
+        {toUpperCase(t("openOrdersFilter"))}
+      </ModalHeader>
       <ModalBody className="modalcomp modalcomp-filters">
         {apiError && <AlertResult error>{apiError}</AlertResult>}
         <Form
@@ -99,7 +98,7 @@ const OrderOpenOrdersFilter = props => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <FormGroup tag="fieldset">
-            <legend>İşlem Çiftleri</legend>
+            <legend>{t("tradePairs")}</legend>
             <FormGroup className="checkradioboxed">
               {allPairs?.map?.((pair, idx) => {
                 return (
@@ -126,11 +125,11 @@ const OrderOpenOrdersFilter = props => {
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
-            <legend>İşlem Tipi</legend>
+            <legend>{t("tradeType")}</legend>
             <FormGroup>
               <CustomSelect
                 list={orderSides}
-                title={"İşlem Tipi"}
+                title={t("tradeType")}
                 name="typeID"
                 index={watch("typeID")}
                 setIndex={id => setValue("typeID", id)}
@@ -139,25 +138,17 @@ const OrderOpenOrdersFilter = props => {
             </FormGroup>{" "}
           </FormGroup>
           <FormGroup tag="fieldset">
-            <legend>Sıralama</legend>
-            <FormGroup>
-              <Input
-                className="custom-select"
-                type="select"
-                name="orderby"
-                innerRef={register({
-                  valueAsNumber: true,
-                })}
-              >
-                {orderBy.map((el, idx) => {
-                  return (
-                    <option value={idx + 1} key={`${el}_${idx}`}>
-                      {el}
-                    </option>
-                  );
-                })}
-              </Input>
-            </FormGroup>
+            <legend>{t("sortBy")}</legend>
+            <CustomSelect
+              list={orderBy}
+              name="orderby"
+              index={watch("orderby")}
+              setIndex={id => setValue("orderby", id)}
+              ref={register({
+                valueAsNumber: true,
+              })}
+              namespace="openorder"
+            />
           </FormGroup>
           <FormGroup tag="fieldset">
             <Button
@@ -166,7 +157,7 @@ const OrderOpenOrdersFilter = props => {
               disabled={isFetching}
               type="submit"
             >
-              İŞLEMLERİ FİLTRELE
+              {toUpperCase(t("filterTransactions"))}
             </Button>
             {/* <Button
                 variant="secondary"

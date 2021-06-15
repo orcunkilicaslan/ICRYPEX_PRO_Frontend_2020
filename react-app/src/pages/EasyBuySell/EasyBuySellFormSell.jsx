@@ -215,30 +215,39 @@ const EasyBuySellFormSell = props => {
         </div>
       </Form>
       {isSubmitted ? (
-        isConfirmed ? (
-          <div className="easybuysell-confirm resultsuccess">
-            <div className="easybuysell-confirm-title">
-              <h4>
-                <IconSet sprite="sprtsmclrd" size="16" name="check" />
-                İŞLEMİNİZ BAŞARIYLA GERÇEKLEŞTİ
-              </h4>
-              <p>
-                {cryptoCurrency} satış işleminiz başarıyla tamamlanmıştır.{" "}
-                <a className="urllink" href="#">
-                  <u>İşlem Geçmişi</u>
-                </a>{" "}
-                ya da{" "}
-                <a className="urllink" href="#">
-                  <u>Varlıklar</u>
-                </a>{" "}
-                bölümünden kontrol edebilirsiniz.
-              </p>
-            </div>
-            <Button variant="secondary" className="active" onClick={onReset}>
-              RESET
-            </Button>
-          </div>
-        ) : null
+          isConfirmed ? (
+                  <div className="easybuysell-confirm">
+                    <div className="easybuysell-confirm-title">
+                      <h4>İŞLEM ONAYI</h4>
+                    </div>
+                    <div className="easybuysell-confirm-result modal-maincont">
+                      <div className="modal-content modal-sm text-center">
+                        <div className="modal-body modal-confirm">
+                          <IconSet sprite="sprtlgclrd" size="50clrd" name="check" />
+                          <p>
+                            {cryptoCurrency} satış işleminiz başarıyla tamamlanmıştır.
+                          </p>
+                          <p>
+                            <a className="urllink" href="#">
+                              <u>İşlem Geçmişi</u>
+                            </a>{" "}
+                            ya da{" "}
+                            <a className="urllink" href="#">
+                              <u>Varlıklar</u>
+                            </a>{" "}
+                            bölümünden kontrol edebilirsiniz.
+                          </p>
+                        </div>
+                        <div className="modal-footer">
+                          <Button variant="primary" className="w-100" onClick={onReset}>
+                            YENİ İŞLEM
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              ) :
+              null
       ) : null}
     </div>
   );

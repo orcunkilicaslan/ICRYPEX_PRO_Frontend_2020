@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, Fragment } from "react";
 import {
   Form,
   Row,
@@ -107,134 +107,162 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
   return (
     <div className="dandwtab-bank">
       <div className="dandwtab-form">
-        <Form
-          className="withdrawbankform siteformui"
-          autoComplete="off"
-          noValidate
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <div className="formfieldset">
-            <InputGroup className="form-group">
-              <Input
-                className="custom-select"
-                type="select"
-                name="customerbankid"
-                innerRef={register({
-                  valueAsNumber: true,
-                  required: t("isRequired"),
-                })}
+        {true === true ? (
+            <Fragment>
+              <Form
+                  className="withdrawbankform siteformui"
+                  autoComplete="off"
+                  noValidate
+                  onSubmit={handleSubmit(onSubmit)}
               >
-                {userAccounts.map(account => {
-                  const { iban, id, name } = account;
+                <div className="formfieldset">
+                  <InputGroup className="form-group">
+                    <Input
+                        className="custom-select"
+                        type="select"
+                        name="customerbankid"
+                        innerRef={register({
+                          valueAsNumber: true,
+                          required: t("isRequired"),
+                        })}
+                    >
+                      {userAccounts.map(account => {
+                        const { iban, id, name } = account;
 
-                  return (
-                    <option value={id} key={id}>
-                      {`${name} - ${iban}`}
-                    </option>
-                  );
-                })}
-              </Input>
-              <InputGroupAddon addonType="append">
-                <Button variant="secondary" className="active" onClick={openAddBankAccModal}>
-                  <IconSet sprite="sprtsmclrd" size="16" name="addbtn" />
-                </Button>
-              </InputGroupAddon>
-            </InputGroup>
-            {errors.customerbankid && (
-              <FormText className="inputresult resulterror">
-                {errors.customerbankid?.message}
-              </FormText>
-            )}
-            <InputGroup className="form-group col">
-              <Input
-                type="number"
-                name="amount"
-                placeholder={t("withdrawAmount")}
-                innerRef={register({
-                  valueAsNumber: true,
-                  required: t("isRequired"),
-                  min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
-                  max: {
-                    value: selectedBalance?.balance
-                      ? selectedBalance.balance
-                      : 999999,
-                    message: t("shouldBeMax", {
-                      value: selectedBalance?.balance
-                        ? selectedBalance.balance
-                        : 999999,
-                    }),
-                  },
-                })}
+                        return (
+                            <option value={id} key={id}>
+                              {`${name} - ${iban}`}
+                            </option>
+                        );
+                      })}
+                    </Input>
+                    <InputGroupAddon addonType="append">
+                      <Button variant="secondary" className="active" onClick={openAddBankAccModal}>
+                        <IconSet sprite="sprtsmclrd" size="16" name="addbtn" />
+                      </Button>
+                    </InputGroupAddon>
+                  </InputGroup>
+                  {errors.customerbankid && (
+                      <FormText className="inputresult resulterror">
+                        {errors.customerbankid?.message}
+                      </FormText>
+                  )}
+                  <InputGroup className="form-group col">
+                    <Input
+                        type="number"
+                        name="amount"
+                        placeholder={t("withdrawAmount")}
+                        innerRef={register({
+                          valueAsNumber: true,
+                          required: t("isRequired"),
+                          min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
+                          max: {
+                            value: selectedBalance?.balance
+                                ? selectedBalance.balance
+                                : 999999,
+                            message: t("shouldBeMax", {
+                              value: selectedBalance?.balance
+                                  ? selectedBalance.balance
+                                  : 999999,
+                            }),
+                          },
+                        })}
+                    />
+                    <div className="form-control totalbalance text-right">
+                      <small>Bakiye</small>
+                      {selectedBalance?.balance} {selectedAccount?.currency?.symbol}
+                    </div>
+                    <InputGroupAddon addonType="append">
+                      <Button variant="secondary" className="active">
+                        <IconSet sprite="sprtsmclrd" size="16" name="transfer" />
+                      </Button>
+                    </InputGroupAddon>
+                  </InputGroup>
+                  {errors.amount && (
+                      <FormText className="inputresult resulterror">
+                        {errors.amount?.message}
+                      </FormText>
+                  )}
+                  <Row form className="form-group">
+                    <Col>Hesaba Geçecek Miktar</Col>
+                    <Col xs="auto">
+                      {getTotal(watchedAmount)} {selectedAccount?.currency?.symbol}
+                    </Col>
+                  </Row>
+                </div>
+                <div className="confirmcheckbox">
+                  {errors.read && (
+                      <FormText className="inputresult resulterror">
+                        {errors.read?.message}
+                      </FormText>
+                  )}
+                  <div className="custom-control custom-checkbox">
+                    <Input
+                        className="custom-control-input"
+                        id="withdrawBankTabIhaveRead"
+                        type="checkbox"
+                        name="read"
+                        innerRef={register({ required: t("form:isRequired") })}
+                    />
+                    <Label
+                        className="custom-control-label"
+                        htmlFor="withdrawBankTabIhaveRead"
+                    >
+                      <Button onClick={openTermsModal}>Kural ve Şartları</Button>{" "}
+                      okudum onaylıyorum.
+                    </Label>
+                  </div>
+                </div>
+                <div className="formbttm">
+                  {apiError && (
+                      <span style={{ color: "red", fontSize: "1rem" }}>{apiError}</span>
+                  )}
+                  <Button
+                      type="submit"
+                      variant="secondary"
+                      className="active"
+                      disabled={isWithdrawingBank}
+                  >
+                    ÇEKME İSTEĞİ GÖNDER
+                  </Button>
+                </div>
+              </Form>
+              <DepositWithdrawalTermsModal
+                  isOpen={openModal === "depositwithdrawalterms"}
+                  clearModals={clearOpenModals}
               />
-              <div className="form-control totalbalance text-right">
-                <small>Bakiye</small>
-                {selectedBalance?.balance} {selectedAccount?.currency?.symbol}
+              <AddBankAccountModal
+                  isOpen={openModal === "addbankaccount"}
+                  isSuccess={false}
+                  isError={false}
+                  clearModals={clearOpenModals}
+              />
+            </Fragment>
+        ) : (
+            <div className="resultbox">
+              <div className="modal-content modal-sm text-center">
+                <div className="modal-body modal-confirm">
+                  <IconSet sprite="sprtlgclrd" size="50clrd" name="check" />
+                  <p>İşleminiz başarıyla tamamlanmıştır.</p>
+                  <p>
+                    <a className="urllink" href="#">
+                      <u>İşlem Geçmişi</u>
+                    </a>{" "}
+                    ya da{" "}
+                    <a className="urllink" href="#">
+                      <u>Varlıklar</u>
+                    </a>{" "}
+                    bölümünden kontrol edebilirsiniz.
+                  </p>
+                </div>
+                <div className="modal-footer">
+                  <Button variant="primary" className="w-100">
+                    YENİ İŞLEM
+                  </Button>
+                </div>
               </div>
-              <InputGroupAddon addonType="append">
-                <Button variant="secondary" className="active">
-                  <IconSet sprite="sprtsmclrd" size="16" name="transfer" />
-                </Button>
-              </InputGroupAddon>
-            </InputGroup>
-            {errors.amount && (
-              <FormText className="inputresult resulterror">
-                {errors.amount?.message}
-              </FormText>
-            )}
-            <Row form className="form-group">
-              <Col>Hesaba Geçecek Miktar</Col>
-              <Col xs="auto">
-                {getTotal(watchedAmount)} {selectedAccount?.currency?.symbol}
-              </Col>
-            </Row>
-          </div>
-          <div className="confirmcheckbox">
-            {errors.read && (
-              <FormText className="inputresult resulterror">
-                {errors.read?.message}
-              </FormText>
-            )}
-            <div className="custom-control custom-checkbox">
-              <Input
-                className="custom-control-input"
-                id="withdrawBankTabIhaveRead"
-                type="checkbox"
-                name="read"
-                innerRef={register({ required: t("form:isRequired") })}
-              />
-              <Label
-                className="custom-control-label"
-                htmlFor="withdrawBankTabIhaveRead"
-              >
-                <Button onClick={openTermsModal}>Kural ve Şartları</Button>{" "}
-                okudum onaylıyorum.
-              </Label>
             </div>
-          </div>
-          <div className="formbttm">
-            {apiError && (
-              <span style={{ color: "red", fontSize: "1rem" }}>{apiError}</span>
-            )}
-            <Button
-              type="submit"
-              variant="secondary"
-              className="active"
-              disabled={isWithdrawingBank}
-            >
-              ÇEKME İSTEĞİ GÖNDER
-            </Button>
-          </div>
-        </Form>
-        <DepositWithdrawalTermsModal
-          isOpen={openModal === "depositwithdrawalterms"}
-          clearModals={clearOpenModals}
-        />
-        <AddBankAccountModal
-            isOpen={openModal === "addbankaccount"}
-            isSuccess={false}
-            isError={false}
-            clearModals={clearOpenModals}
-        />
+        )}
       </div>
     </div>
   );

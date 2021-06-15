@@ -20,18 +20,18 @@ import OrderHistoryFilter from "~/components/modals/OrderHistoryFilter.jsx";
 import { formatDate, formatDateDistance } from "~/util/";
 import ButtonGroupRadio from "~/components/ButtonGroupRadio";
 import CustomSelect from "~/components/CustomSelect";
-
-const periodBy = [
-  { name: "1G", duration: { days: 1 } },
-  { name: "1H", duration: { weeks: 1 } },
-  { name: "2H", duration: { weeks: 2 } },
-  { name: "1A", duration: { months: 1 } },
-  { name: "3A", duration: { months: 3 } },
-];
+import { periodBy } from "./OpenOrder";
 
 const OpenOrderTransactionHistory = props => {
   const dispatch = useDispatch();
-  const { t } = useTranslation(["form", "coinbar", "finance", "app"]);
+  const { t } = useTranslation([
+    "form",
+    "coinbar",
+    "finance",
+    "app",
+    "common",
+    "openorder",
+  ]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
   const { lang } = useSelector(state => state.ui);
   const { allPairs, selectedPair } = usePrices();
@@ -57,7 +57,7 @@ const OpenOrderTransactionHistory = props => {
 
     return {
       pairids: [],
-      orderby: 1,
+      orderby: 0,
       isbuyorders: true,
       issellorders: true,
       isfilledorders: true,
@@ -140,13 +140,14 @@ const OpenOrderTransactionHistory = props => {
         <Row className="tabcont tabcont-filterbar">
           <Col xs="auto">
             <Button variant="secondary" size="sm" onClick={openFiltersModal}>
-              İşlem Çiftleri
+              {t("openorder:tradePairs")}
             </Button>
           </Col>
           <Col sm="2">
             <CustomSelect
+              size="sm"
               list={orderSides}
-              title={"İşlem Tipi"}
+              title={t("openorder:tradeType")}
               index={ordersideIdx}
               setIndex={setOrdersideIdx}
             />
@@ -160,9 +161,10 @@ const OpenOrderTransactionHistory = props => {
           </Col>
           <Col>
             <CustomSelect
+              size="sm"
               list={orderStatuses}
               namespace="app"
-              title={t("app:orderStatus")}
+              title={t("openorder:tradeStatus")}
               index={orderStatusIdx}
               setIndex={setOrderStatusIdx}
             />
@@ -193,37 +195,37 @@ const OpenOrderTransactionHistory = props => {
             <Table.Tr>
               <Table.Th sizeauto className="brws" />
               <Table.Th sizeauto className="nmbr">
-                İşlem No
+                {t("openorder:tradeNo")}
               </Table.Th>
               <Table.Th sizeauto className="date">
-                Tarih
+                {t("common:date")}
               </Table.Th>
               <Table.Th sizeauto className="symb">
-                Çift
+                {t("common:pair")}
               </Table.Th>
               <Table.Th sizeauto className="type">
-                İşlem Tipi
+                {t("openorder:tradeType")}
               </Table.Th>
               <Table.Th sizefixed className="avrg">
-                Ortalama
+                {t("common:average")}
               </Table.Th>
               <Table.Th sizefixed className="pric">
-                Fiyat
+                {t("common:price")}
               </Table.Th>
               <Table.Th sizefixed className="hppn">
-                Gerçekleşen
+                {t("finance:realized")}
               </Table.Th>
               <Table.Th sizefixed className="amnt">
-                Miktar
+                {t("common:amount")}
               </Table.Th>
               <Table.Th sizefixed className="totl">
-                Toplam
+                {t("common:total")}
               </Table.Th>
               <Table.Th sizeauto className="comm">
-                Komisyon
+                {t("common:commission")}
               </Table.Th>
               <Table.Th sizeauto className="stts">
-                Durum
+                {t("common:status")}
               </Table.Th>
             </Table.Tr>
           </Table.Thead>
@@ -271,6 +273,9 @@ const OpenOrderTransactionHistory = props => {
                 });
                 const buyCurrency = findCurrencyBySymbol(buyingcurrency);
                 const sellCurrency = findCurrencyBySymbol(sellingcurrency);
+                const buyDigit = buyCurrency?.digit_show || buyCurrency?.digit;
+                const sellDigit =
+                  sellCurrency?.digit_show || sellCurrency?.digit;
 
                 return (
                   <div className="hsttblbrwswrp" key={id}>
@@ -300,7 +305,10 @@ const OpenOrderTransactionHistory = props => {
                         {pairname}
                       </Table.Td>
                       <Table.Td sizeauto className="type">
-                        {ordertype} - <span className={cls1}>{orderside}</span>
+                        {ordertype} -{" "}
+                        <span className={cls1}>
+                          {t(`common:${orderside?.toLowerCase?.()}`)}
+                        </span>
                       </Table.Td>
                       <Table.Td sizefixed className="avrg">
                         ----
@@ -310,11 +318,7 @@ const OpenOrderTransactionHistory = props => {
                           value={price}
                           displayType={"text"}
                           thousandSeparator={true}
-                          decimalScale={
-                            isBuyOrder
-                              ? sellCurrency?.digit
-                              : buyCurrency?.digit
-                          }
+                          decimalScale={isBuyOrder ? sellDigit : buyDigit}
                           fixedDecimalScale
                           suffix={` ${
                             isBuyOrder ? sellingcurrency : buyingcurrency
@@ -330,11 +334,7 @@ const OpenOrderTransactionHistory = props => {
                           value={isBuyOrder ? selling_amount : buying_amount}
                           displayType={"text"}
                           thousandSeparator={true}
-                          decimalScale={
-                            isBuyOrder
-                              ? sellCurrency?.digit
-                              : buyCurrency?.digit
-                          }
+                          decimalScale={isBuyOrder ? sellDigit : buyDigit}
                           fixedDecimalScale
                           suffix={` ${
                             isBuyOrder ? sellingcurrency : buyingcurrency
@@ -350,11 +350,7 @@ const OpenOrderTransactionHistory = props => {
                           value={isBuyOrder ? buying_amount : selling_amount}
                           displayType={"text"}
                           thousandSeparator={true}
-                          decimalScale={
-                            isBuyOrder
-                              ? buyCurrency?.digit
-                              : sellCurrency?.digit
-                          }
+                          decimalScale={isBuyOrder ? buyDigit : sellDigit}
                           fixedDecimalScale
                           suffix={` ${
                             isBuyOrder ? buyingcurrency : sellingcurrency
@@ -369,11 +365,7 @@ const OpenOrderTransactionHistory = props => {
                           value={commission}
                           displayType={"text"}
                           thousandSeparator={true}
-                          decimalScale={
-                            isBuyOrder
-                              ? sellCurrency?.digit
-                              : buyCurrency?.digit
-                          }
+                          decimalScale={isBuyOrder ? sellDigit : buyDigit}
                           fixedDecimalScale
                           suffix={` ${
                             isBuyOrder ? sellingcurrency : buyingcurrency
@@ -381,7 +373,9 @@ const OpenOrderTransactionHistory = props => {
                         />
                       </Table.Td>
                       <Table.Td sizeauto className="stts">
-                        <span className={cls2}>{orderstatus}</span>
+                        <span className={cls2}>
+                          {t(`app:${orderstatus?.toLowerCase?.()}`)}
+                        </span>
                       </Table.Td>
                     </Table.Tr>
                     <div className="hsttblbrwstbl">

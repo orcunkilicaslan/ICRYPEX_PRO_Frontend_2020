@@ -1,1 +1,7 @@
 .popover{}
+
+.bs-popover-bottom {
+  .arrow{
+    @include translateX(4px);
+  }
+}

@@ -1,5 +1,11 @@
 export const ProgressRing = props => {
-  const { radius, strokeWidth, progress, stroke = "white" } = props;
+  const {
+    radius,
+    strokeWidth,
+    progress,
+    stroke = "white",
+    trackStroke = "black",
+  } = props;
 
   const normalizedRadius = radius - strokeWidth * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
@@ -8,12 +14,18 @@ export const ProgressRing = props => {
   return (
     <svg height={radius * 2} width={radius * 2}>
       <circle
+        stroke={trackStroke}
+        fill="transparent"
+        style={{ strokeWidth }}
+        r={normalizedRadius}
+        cx={radius}
+        cy={radius}
+      />
+      <circle
         stroke={stroke}
         fill="transparent"
-        strokeWidth={strokeWidth}
         strokeDasharray={`${circumference} ${circumference}`}
-        style={{ strokeDashoffset }}
-        stroke-width={strokeWidth}
+        style={{ strokeDashoffset, strokeWidth }}
         r={normalizedRadius}
         cx={radius}
         cy={radius}

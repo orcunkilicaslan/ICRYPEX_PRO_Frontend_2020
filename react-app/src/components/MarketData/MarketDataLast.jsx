@@ -59,6 +59,7 @@ const MarketDataLast = () => {
                 amount,
                 market_price,
               } = transaction;
+              const { digit, digit_show } = selectedCryptoCurrency;
 
               return (
                 <Table.Tr key={`${created_at}_${idx}`}>
@@ -74,7 +75,7 @@ const MarketDataLast = () => {
                       value={amount}
                       displayType={"text"}
                       thousandSeparator={true}
-                      decimalScale={selectedCryptoCurrency?.digit}
+                      decimalScale={digit_show || digit}
                       fixedDecimalScale
                     />
                   </Table.Td>
@@ -83,7 +84,7 @@ const MarketDataLast = () => {
                       value={market_price}
                       displayType={"text"}
                       thousandSeparator={true}
-                      decimalScale={selectedFiatCurrency?.digit}
+                      decimalScale={digit_show || digit}
                       fixedDecimalScale
                     />
                   </Table.Td>

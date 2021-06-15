@@ -221,7 +221,7 @@ export default function SignupModal(props) {
                 />
                 <Label>{t("password")}</Label>
                 <Button className="showhidepass" onClick={toggleTypePass}>
-                  <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
+                  <IconSet sprite="sprtsmclrd" size="14" name={passShow ? "eyehide" : "eyeshow"} />
                 </Button>
                 {errors.password && (
                   <FormText className="inputresult resulterror inputintext">
@@ -250,7 +250,7 @@ export default function SignupModal(props) {
                 />
                 <Label>{t("confirmPassword")}</Label>
                 <Button className="showhidepass" onClick={toggleTypePass}>
-                  <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
+                  <IconSet sprite="sprtsmclrd" size="14" name={passShow ? "eyehide" : "eyeshow"} />
                 </Button>
                 {errors.confirm && (
                   <FormText className="inputresult resulterror inputintext">

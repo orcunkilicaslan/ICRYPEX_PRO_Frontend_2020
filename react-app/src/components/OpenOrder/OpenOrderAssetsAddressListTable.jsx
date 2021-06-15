@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
@@ -10,6 +11,7 @@ const OpenOrderAssetsAddressListTable = props => {
   const { addresses } = props;
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
   const { dispatch } = useContext(openOrderContext);
+  const { t } = useTranslation(["finance"]);
 
   const onClick = (mode, symbol) => {
     dispatch({
@@ -55,7 +57,7 @@ const OpenOrderAssetsAddressListTable = props => {
                       variant="outline-success"
                       onClick={() => onClick("deposit", symbol)}
                     >
-                      Yatır
+                      {t("deposit")}
                     </Button>
                     <Button
                       type="button"
@@ -63,7 +65,7 @@ const OpenOrderAssetsAddressListTable = props => {
                       variant="outline-danger"
                       onClick={() => onClick("withdraw", symbol)}
                     >
-                      Çek
+                      {t("withdraw")}
                     </Button>
                   </Table.Td>
                 </Table.Tr>

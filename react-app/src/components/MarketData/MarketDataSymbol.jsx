@@ -170,6 +170,7 @@ const MarketDataSymbol = props => {
               const isFavorite = favoritePairIDs.includes(id);
               const [_, fiatCurrencySymbol] = getPairTuple(name);
               const fiatCurrency = findCurrencyBySymbol(fiatCurrencySymbol);
+              const { digit, digit_show } = fiatCurrency;
 
               const onClick = () => {
                 if (isFavorite) onRemoveFavorite(name);
@@ -199,7 +200,7 @@ const MarketDataSymbol = props => {
                       value={ask}
                       displayType={"text"}
                       thousandSeparator={true}
-                      decimalScale={fiatCurrency?.digit}
+                      decimalScale={digit_show || digit}
                       fixedDecimalScale
                     />
                   </Table.Td>
@@ -208,7 +209,7 @@ const MarketDataSymbol = props => {
                       value={bid}
                       displayType={"text"}
                       thousandSeparator={true}
-                      decimalScale={fiatCurrency?.digit}
+                      decimalScale={digit_show || digit}
                       fixedDecimalScale
                     />
                   </Table.Td>

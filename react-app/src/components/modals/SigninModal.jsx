@@ -240,7 +240,7 @@ export default function SigninModal(props) {
                 />
                 <Label>{t("password")}</Label>
                 <Button className="showhidepass" onClick={toggleTypePass}>
-                  <IconSet sprite="sprtsmclrd" size="14" name="showhide" />
+                  <IconSet sprite="sprtsmclrd" size="14" name={passShow ? "eyehide" : "eyeshow"} />
                 </Button>
                 {errorsSignin.password && (
                   <FormText className="inputresult resulterror inputintext">
@@ -291,80 +291,84 @@ export default function SigninModal(props) {
               {t("sendCode").toUpperCase()}
             </Button>
           </Form>
+        </div>
 
-          {hasSentCode && (
-            <Fragment>
-              <hr />
+        {hasSentCode && (
+            <div className="modalcomp-sign-form verifcode">
               <Button
-                className="close"
-                onClick={resetCode}
-                style={{ marginLeft: "auto" }}
+                  className="close"
+                  onClick={resetCode}
+                  style={{ marginLeft: "auto" }}
               >
                 <span aria-hidden="true">&times;</span>
               </Button>
-              <ProgressRing
-                radius={35}
-                strokeWidth={4}
-                stroke="#e84a55"
-                progress={progress}
-              />
-              <h2>{`${minutes}:${seconds}`}</h2>
-
+              <div className="progressring">
+                <div className="progressring-circle">
+                  <ProgressRing
+                      radius={35}
+                      strokeWidth={4}
+                      stroke="#e84a55"
+                      trackStroke="#2a3553"
+                      progress={progress}
+                  />
+                  <span>{`${minutes}:${seconds}`}</span>
+                </div>
+                <div className="progressring-bttn">
+                  <Button
+                      className="btn btn-sm btn-link text-muted"
+                      style={{
+                        opacity: isTimerRunning ? "0" : "1",
+                        transition: "opacity .15s ease-out",
+                      }}
+                      onClick={resendCode}
+                  >
+                    Tekrar Gönder
+                  </Button>
+                </div>
+              </div>
               <Form
-                className="siteformui"
-                autoComplete="off"
-                noValidate
-                onSubmit={submitVerify(onSubmitVerify)}
+                  className="siteformui"
+                  autoComplete="off"
+                  noValidate
+                  onSubmit={submitVerify(onSubmitVerify)}
               >
-                <span
-                  style={{
-                    fontSize: "1rem",
-                    color: "green",
-                    cursor: "pointer",
-                    opacity: isTimerRunning ? ".5" : "1",
-                    transition: "opacity .5s ease-out",
-                  }}
-                  onClick={resendCode}
-                >
-                  Tekrar gönder
-                </span>
                 <div className="labelfocustop">
                   <FormGroup>
                     <Input
-                      className="text-center"
-                      type="text"
-                      name="code"
-                      required
-                      innerRef={registerVerify({
-                        required: t("form:isRequired"),
-                        maxLength: {
-                          value: 6,
-                          message: t("form:shouldBeMaxLength", { value: 6 }),
-                        },
-                      })}
+                        className="text-center"
+                        type="text"
+                        name="code"
+                        required
+                        innerRef={registerVerify({
+                          required: t("form:isRequired"),
+                          maxLength: {
+                            value: 6,
+                            message: t("form:shouldBeMaxLength", { value: 6 }),
+                          },
+                        })}
                     />
                     <Label className="text-center">
                       {t("verificationCode")}
                     </Label>
                     {errorsVerify.code && (
-                      <FormText className="inputresult resulterror">
-                        {errorsVerify.code?.message}
-                      </FormText>
+                        <FormText className="inputresult resulterror">
+                          {errorsVerify.code?.message}
+                        </FormText>
                     )}
                   </FormGroup>
                 </div>
                 <Button
-                  type="submit"
-                  variant="success"
-                  className="w-100 mt-2"
-                  disabled={isVerifying}
+                    type="submit"
+                    variant="success"
+                    className="w-100 mt-2"
+                    disabled={isVerifying}
                 >
                   {t("signin")}
                 </Button>
               </Form>
-            </Fragment>
-          )}
-        </div>
+            </div>
+        )}
+
       </ModalBody>
     </Modal>
   );
