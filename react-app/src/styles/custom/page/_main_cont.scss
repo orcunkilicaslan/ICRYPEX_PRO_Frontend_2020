@@ -7,15 +7,6 @@
     z-index: $zindex-modal + 10;
   }
 
-  .urllink{
-    color: lighten($site-clr-blue, 5%);
-    @include transition-multiple(color 0.15s ease-in-out);
-
-    &:hover{
-      color: $site-clr-white;
-    }
-  }
-
   .boxulinfolist{
     width: 100%;
 

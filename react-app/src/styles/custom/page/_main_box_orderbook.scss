@@ -69,6 +69,12 @@
           div[class*="rectangle"]{padding-right: 10px;}
           .sitetablediv .tbl-tbody .pric[class*="tbl"]{color: $site-clr-green;}
           .sitetablediv .tbl-tbody .tbl-tr::before{background-color: $site-clr-green; left: -4px;}
+          .sitetablediv .tbl-tbody .tbl-tr::after{
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-right: 5px solid $site-clr-green;
+            right: -5px;
+          }
           .sitetablediv .tbl-tbody .tbl-tr.orderactive::before{opacity: 1;}
         }
 
@@ -80,6 +86,12 @@
           div[class*="rectangle"]{padding-left: 10px;}
           .sitetablediv .tbl-tbody .pric[class*="tbl"]{color: $site-clr-red;}
           .sitetablediv .tbl-tbody .tbl-tr::before{background-color: $site-clr-red; right: -4px;}
+          .sitetablediv .tbl-tbody .tbl-tr::after{
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 5px solid $site-clr-red;
+            left: -5px;
+          }
           .sitetablediv .tbl-tbody .tbl-tr.orderactive::before{opacity: 1;}
         }
 
@@ -135,18 +147,32 @@
           .tbl-tbody .tbl-td{padding-top: 2px; padding-bottom: 2px;}
           .tbl-tbody .tbl-tr{
             position: relative;
+            cursor: pointer;
 
-            &::before{
+            &::before,
+            &::after{
               content: "";
               background-color: transparent;
-              width: 4px;
-              height: 4px;
               opacity: 0;
               position: absolute;
               top: calc(50% + 1px);
               @include translateY(-50%);
-              @include border-radius(6px);
               @include transition-multiple(opacity 0.15s ease-in-out);
+            }
+
+            &::before{
+              width: 4px;
+              height: 4px;
+              @include border-radius(6px);
+            }
+
+            &::after{
+              width: 0;
+              height: 0;
+            }
+
+            &:hover::after{
+              opacity: 1;
             }
           }
           .tbl-thead .tbl-th,
