@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, useMemo } from "react";
+import {useState, useContext, useEffect, useMemo, Fragment} from "react";
 import {
   Row,
   Form,
@@ -101,107 +101,141 @@ const OpenOrderDepoWithTabDepositCrypto = props => {
   };
 
   return (
-    <div className="dandwtab-crypto">
-      <div className="dandwtab-form">
-        <Form
-          className="depositcryptoform siteformui"
-          autoComplete="off"
-          noValidate
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <div className="formfieldset">
-            <Row form>
-              <FormGroup className="col-auto">
-                <Input
-                  className="custom-select"
-                  type="select"
-                  name="symbol"
-                  innerRef={register}
-                >
-                  {visibleCurrencies.map(({ symbol }) => {
-                    return (
-                      <option key={symbol} value={symbol}>
-                        {symbol}
-                      </option>
-                    );
-                  })}
-                </Input>
-              </FormGroup>
-              <InputGroup className="form-group col">
-                <div className="form-control textoverflowellipsis text-right">
-                  {getAddress?.address || null}
+      <Fragment>
+        {0 === 1 ? (
+            <div className="dandwinforesult resultbox">
+              <div className="modal-content text-center">
+                <div className="modal-body modal-confirm">
+                  <IconSet sprite="sprtlgclrd" size="50clrd" name="warning" />
+                  <h6>Kripto Para ile Para Yatırma</h6>
+                  <p>İşleminize devam edebilmek için lütfen <a className="urllink"><u>Kural ve Şartları</u></a> dikkatle okuyup onaylayınız.</p>
+                  <div className="contcheckbox">
+                    <div className="custom-control custom-checkbox">
+                      <Input
+                          className="custom-control-input"
+                          id="depositTabCryptoIhaveRead"
+                          type="checkbox"
+                      />
+                      <Label
+                          className="custom-control-label"
+                          htmlFor="depositTabCryptoIhaveRead"
+                      >
+                        Okudum ve onaylıyorum.
+                      </Label>
+                    </div>
+                  </div>
                 </div>
-                <InputGroupAddon addonType="append">
-                  <Button variant="secondary" className="active">
-                    <IconSet sprite="sprtsmclrd" size="16" name="copybtn" />
+                <div className="modal-footer">
+                  <Button variant="primary" className="w-100 disabled">
+                    DEVAM ET
                   </Button>
-                  <Button variant="secondary" className="active">
-                    <IconSet sprite="sprtsmclrd" size="16" name="qrcode" />
-                  </Button>
-                </InputGroupAddon>
-              </InputGroup>
-            </Row>
-            <p className="sitecolorred">
-              Bu adrese sadece BTC gönderin. Farklı bir coin göndermek
-              yatırdıklarınızın kaybolmasına neden olur.
-            </p>
-          </div>
-          <div className="confirmcheckbox">
-            {errors.read && (
-              <FormText className="inputresult resulterror">
-                {errors.read?.message}
-              </FormText>
-            )}
-            <div className="custom-control custom-checkbox">
-              <Input
-                className="custom-control-input"
-                id="depositCryptoTabIhaveRead"
-                type="checkbox"
-                name="read"
-                innerRef={register({ required: t("form:isRequired") })}
-              />
-              <Label
-                className="custom-control-label"
-                htmlFor="depositCryptoTabIhaveRead"
-              >
-                <Button onClick={openTermsModal}>Kural ve Şartları</Button>{" "}
-                okudum onaylıyorum.
-              </Label>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="formbttm">
-            {apiError && (
-              <span style={{ color: "red", fontSize: "1rem" }}>{apiError}</span>
-            )}
-            <Button
-              type="submit"
-              disabled={isDepositingCrypto}
-              variant="secondary"
-              className="active"
-            >
-              GÖNDER
-            </Button>
-          </div>
-        </Form>
-        <DepositWithdrawalTermsModal
-          isOpen={openModal === "depositwithdrawalterms"}
-          clearModals={clearOpenModals}
-        />
-        <div className="bttminfolist">
-          <ul>
-            <li>
-              Kopyaladığınız adresin yapıştırdığınız alanda doğruluğunu mutlaka
-              kontrol ediniz.
-            </li>
-            <li>
-              Yatırılabilen en az tutar 0.0001 BTC’dir. 0.0001 BTC altındaki
-              yatırma işlemleri iade edilmeyecektir.
-            </li>
-            <li>Gönderdiğiniz tutar otomatik olarak hesabınıza geçecektir.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+        ) : (
+            <div className="dandwtab-crypto">
+              <div className="dandwtab-form">
+                <Form
+                    className="depositcryptoform siteformui"
+                    autoComplete="off"
+                    noValidate
+                    onSubmit={handleSubmit(onSubmit)}
+                >
+                  <div className="formfieldset">
+                    <Row form>
+                      <FormGroup className="col-auto">
+                        <Input
+                            className="custom-select"
+                            type="select"
+                            name="symbol"
+                            innerRef={register}
+                        >
+                          {visibleCurrencies.map(({ symbol }) => {
+                            return (
+                                <option key={symbol} value={symbol}>
+                                  {symbol}
+                                </option>
+                            );
+                          })}
+                        </Input>
+                      </FormGroup>
+                      <InputGroup className="form-group col">
+                        <div className="form-control textoverflowellipsis text-right">
+                          {getAddress?.address || null}
+                        </div>
+                        <InputGroupAddon addonType="append">
+                          <Button variant="secondary" className="active">
+                            <IconSet sprite="sprtsmclrd" size="16" name="copybtn" />
+                          </Button>
+                          <Button variant="secondary" className="active">
+                            <IconSet sprite="sprtsmclrd" size="16" name="qrcode" />
+                          </Button>
+                        </InputGroupAddon>
+                      </InputGroup>
+                    </Row>
+                    <p className="sitecolorred">
+                      Bu adrese sadece BTC gönderin. Farklı bir coin göndermek
+                      yatırdıklarınızın kaybolmasına neden olur.
+                    </p>
+                  </div>
+                  <div className="confirmcheckbox">
+                    {errors.read && (
+                        <FormText className="inputresult resulterror">
+                          {errors.read?.message}
+                        </FormText>
+                    )}
+                    <div className="custom-control custom-checkbox">
+                      <Input
+                          className="custom-control-input"
+                          id="depositCryptoTabIhaveRead"
+                          type="checkbox"
+                          name="read"
+                          innerRef={register({ required: t("form:isRequired") })}
+                      />
+                      <Label
+                          className="custom-control-label"
+                          htmlFor="depositCryptoTabIhaveRead"
+                      >
+                        <Button onClick={openTermsModal}>Kural ve Şartları</Button>{" "}
+                        okudum onaylıyorum.
+                      </Label>
+                    </div>
+                  </div>
+                  <div className="formbttm">
+                    {apiError && (
+                        <span style={{ color: "red", fontSize: "1rem" }}>{apiError}</span>
+                    )}
+                    <Button
+                        type="submit"
+                        disabled={isDepositingCrypto}
+                        variant="secondary"
+                        className="active"
+                    >
+                      GÖNDER
+                    </Button>
+                  </div>
+                </Form>
+                <DepositWithdrawalTermsModal
+                    isOpen={openModal === "depositwithdrawalterms"}
+                    clearModals={clearOpenModals}
+                />
+                <div className="bttminfolist">
+                  <ul>
+                    <li>
+                      Kopyaladığınız adresin yapıştırdığınız alanda doğruluğunu mutlaka
+                      kontrol ediniz.
+                    </li>
+                    <li>
+                      Yatırılabilen en az tutar 0.0001 BTC’dir. 0.0001 BTC altındaki
+                      yatırma işlemleri iade edilmeyecektir.
+                    </li>
+                    <li>Gönderdiğiniz tutar otomatik olarak hesabınıza geçecektir.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+        )}
+      </Fragment>
   );
 };
 
