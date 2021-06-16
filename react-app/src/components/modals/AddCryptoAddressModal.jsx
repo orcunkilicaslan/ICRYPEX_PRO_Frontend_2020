@@ -130,7 +130,7 @@ export default function AddCryptoAddressModal(props) {
                       </Input>
                       <Label>{t("finance:address")}</Label>
                     </FormGroup>
-                    { selectedCryptoAddress.destination_tag ? (
+                    { selectedCryptoAddress?.destination_tag ? (
                         <FormGroup>
                           <Input
                               type="text"

@@ -180,8 +180,8 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                     required: t("isRequired"),
                     min: { value: selectedCryptoFree[0]?.amount ? selectedCryptoFree[0]?.amount : 0, message: t("shouldBeMin", { value: selectedCryptoFree[0]?.amount ? selectedCryptoFree[0]?.amount :0 }) },
                     max: {
-                      value: selectedBalance.balance ? Number(selectedBalance.balance).toFixed(8): 0,
-                      message: t("shouldBeMax", { value:selectedBalance.balance ? Number(selectedBalance.balance).toFixed(8) : 0 }),
+                      value: selectedBalance ? Number(selectedBalance.balance).toFixed(8): 0,
+                      message: t("shouldBeMax", { value:selectedBalance ? Number(selectedBalance.balance).toFixed(8) : 0 }),
                     },
                   })}
                   onChange={e => {
