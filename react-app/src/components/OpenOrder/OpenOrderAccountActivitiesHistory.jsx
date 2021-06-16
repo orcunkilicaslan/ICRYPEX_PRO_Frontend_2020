@@ -15,14 +15,7 @@ import { ActivitiesHistoryFilter } from "~/components/modals/";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import ButtonGroupRadio from "~/components/ButtonGroupRadio";
 import CustomSelect from "~/components/CustomSelect";
-
-const periodBy = [
-  { name: "1G", duration: { days: 1 } },
-  { name: "1H", duration: { weeks: 1 } },
-  { name: "2H", duration: { weeks: 2 } },
-  { name: "1A", duration: { months: 1 } },
-  { name: "3A", duration: { months: 3 } },
-];
+import { periodBy } from "./OpenOrder";
 
 const OpenOrderAccountActivitiesHistory = props => {
   const dispatch = useDispatch();
