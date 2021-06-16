@@ -54,8 +54,8 @@ const MarketDataSymbol = props => {
   }, [keyword, result, pricesData, visiblePairIDs]);
 
   useEffect(() => {
-    dispatch(fetchFavoritePairs());
-  }, [dispatch]);
+    if (accesstoken) dispatch(fetchFavoritePairs());
+  }, [accesstoken, dispatch]);
 
   const onPairFilter = filter => {
     resetSearch();
@@ -157,15 +157,8 @@ const MarketDataSymbol = props => {
             scrollbarstyles={{ height: `${tableHeight - 25}px` }}
           >
             {visiblePrices.map((data = {}) => {
-              const {
-                id,
-                name,
-                ask,
-                bid,
-                volume,
-                changepercent,
-                symbol,
-              } = data;
+              const { id, name, ask, bid, volume, changepercent, symbol } =
+                data;
               const mdper = changepercent > 0 ? "up" : "down";
               const isFavorite = favoritePairIDs.includes(id);
               const [_, fiatCurrencySymbol] = getPairTuple(name);

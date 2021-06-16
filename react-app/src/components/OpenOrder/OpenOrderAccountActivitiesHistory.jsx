@@ -3,7 +3,7 @@ import { Row, Col, Form } from "reactstrap";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { sub, isWithinInterval } from "date-fns";
+import { sub, isWithinInterval, addDays } from "date-fns";
 import NumberFormat from "react-number-format";
 
 import { Button } from "../Button.jsx";
@@ -43,7 +43,9 @@ const OpenOrderAccountActivitiesHistory = props => {
   const [orderStatusIdx, setOrderStatusIdx] = useState(-1);
 
   const defaultValues = useMemo(() => {
-    const today = formatDate(new Date(), "yyyy-MM-dd", { locale: lang });
+    const tomorrow = formatDate(addDays(Date.now(), 1), "yyyy-MM-dd", {
+      locale: lang,
+    });
     const threeMonthsAgo = formatDate(
       sub(new Date(), { months: 3 }),
       "yyyy-MM-dd",
@@ -58,7 +60,7 @@ const OpenOrderAccountActivitiesHistory = props => {
       isrealized: true,
       iscanceled: true,
       startdate: threeMonthsAgo,
-      enddate: today,
+      enddate: tomorrow,
     };
   }, [lang]);
 
