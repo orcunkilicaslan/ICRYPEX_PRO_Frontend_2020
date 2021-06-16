@@ -22,6 +22,7 @@ import stopLimitBuyOrderReducer from "./slices/stoplimitbuyorder.slice";
 import stopLimitSellOrderReducer from "./slices/stoplimitsellorder.slice";
 import bankAccountReducer from "~/state/slices/bankaccount.slice";
 import cryptoAddressWhitelistReducer from "~/state/slices/cryptoaddreswhitelist.slice";
+import webLoginReducer from "~/state/slices/weblogin.slice";
 
 const apiPersistConfig = {
   key: "api",
@@ -53,6 +54,11 @@ const alarmPersistConfig = {
   key: "alarm",
   storage,
   blacklist: ["isCreating", "isDeleting"],
+};
+const webLoginPersistConfig = {
+  key: "webLogin",
+  storage,
+  blacklist: ["isResponse"],
 };
 
 const pairPersistConfig = {
@@ -99,6 +105,7 @@ const rootReducer = combineReducers({
   deposit: depositReducer,
   bankAccount: bankAccountReducer,
   cryptoAddressWhitelist: cryptoAddressWhitelistReducer,
+  webLogin: persistReducer(webLoginPersistConfig,webLoginReducer),
   transaction: persistReducer(transactionPersistConfig, transactionReducer),
 });
 

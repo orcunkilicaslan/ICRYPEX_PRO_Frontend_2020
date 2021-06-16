@@ -10,16 +10,19 @@ import { useTranslation } from "react-i18next";
 
 import { Button } from "../Button.jsx";
 import { useLocaleUpperCase } from "~/state/hooks/";
+import {useSelector} from "react-redux";
 
 export default function SettingsModal(props) {
   const { isOpen, User, clearModals, onSignout, ...rest } = props;
   const toUpperCase = useLocaleUpperCase();
   const { t } = useTranslation(["app", "openorder"]);
+  const { settings: Settings } = useSelector(state => state.api);
 
   const usermenulistaccount = [
     {
       title: t("profile"),
-      href: "#",
+      tr: "tr/profil",
+      en: "en/profile",
     },
     {
       title: t("approvalLimit"),
@@ -70,6 +73,9 @@ export default function SettingsModal(props) {
     },
   ];
 
+  const navLink = (navLink) => {
+
+  }
   return (
     <Modal
       wrapClassName=""
@@ -92,11 +98,11 @@ export default function SettingsModal(props) {
         <div className="modalcomp-usermenu-area">
           <h6 className="modalcomp-usermenu-title">{t("myAccount")}</h6>
           <Nav vertical className="modalcomp-usermenu-list">
-            {usermenulistaccount.map(({ title, href }) => {
+            {usermenulistaccount.map((listaccount, idx) => {
               return (
-                <NavItem key={title}>
-                  <NavLink href={href} title={title}>
-                    {title}
+                <NavItem key={listaccount.title}>
+                  <NavLink href={null} title={listaccount.title} onclick={navLink(listaccount)}>
+                    {listaccount.title}
                   </NavLink>
                 </NavItem>
               );
