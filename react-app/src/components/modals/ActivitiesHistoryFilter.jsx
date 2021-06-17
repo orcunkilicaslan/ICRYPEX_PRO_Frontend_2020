@@ -13,27 +13,21 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { merge } from "lodash";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "../Button.jsx";
 import { AlertResult } from "../AlertResult.jsx";
 import { fetchTransactionHistories } from "~/state/slices/transaction.slice";
-import { useCurrencies } from "~/state/hooks/";
+import { useCurrencies, useLocaleUpperCase } from "~/state/hooks/";
 import { formatDate } from "~/util/";
 import CustomSelect from "~/components/CustomSelect";
-
-const orderBy = [
-  "Önce Yeni Tarihli",
-  "Önce Eski Tarihli",
-  "Önce Para Yatırma",
-  "Önce Para Çekme",
-  "Önce TRY",
-  "Önce USD",
-  "Önce Kripto Para",
-];
+import { orderByAccount as orderBy } from "../OpenOrder/OpenOrder";
 
 const ActivitiesHistoryFilter = props => {
   const { isOpen, clearModals, defaultValues, isFetching, ...rest } = props;
+  const { t } = useTranslation(["openorder", "common"]);
   const dispatch = useDispatch();
+  const toUpperCase = useLocaleUpperCase();
   const [apiError, setApiError] = useState("");
   const { lang } = useSelector(state => state.ui);
   const requestTypes = useSelector(
@@ -62,6 +56,7 @@ const ActivitiesHistoryFilter = props => {
       currencyids,
       startdate: sd,
       enddate: ed,
+      orderby,
       ...rest
     } = data;
     const typeIdx = parseInt(typeID, 10);
@@ -72,6 +67,7 @@ const ActivitiesHistoryFilter = props => {
       iswithdraw: true,
       isrealized: true,
       iscanceled: true,
+      orderby: orderby + 1,
     };
 
     const _currencyids = [];
@@ -128,7 +124,9 @@ const ActivitiesHistoryFilter = props => {
       returnFocusAfterClose={false}
       {...rest}
     >
-      <ModalHeader toggle={clearModals}>TRANSFER GEÇMİŞİ FİLTRE</ModalHeader>
+      <ModalHeader toggle={clearModals}>
+        {toUpperCase(t("transferHistoryFilter"))}
+      </ModalHeader>
       <ModalBody className="modalcomp modalcomp-filters">
         {apiError && <AlertResult error>{apiError}</AlertResult>}
         <Form
@@ -138,7 +136,7 @@ const ActivitiesHistoryFilter = props => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <FormGroup tag="fieldset">
-            <legend>Para Birimleri</legend>
+            <legend>{t("common:currencies")}</legend>
             <FormGroup className="checkradioboxed">
               {validCurrencies?.map?.(({ symbol }, idx) => {
                 const inputId = nanoid();
@@ -166,11 +164,11 @@ const ActivitiesHistoryFilter = props => {
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
-            <legend>İşlem Tipi</legend>
+            <legend>{t("tradeType")}</legend>
             <FormGroup>
               <CustomSelect
                 list={requestTypes}
-                title={"İşlem Tipi"}
+                title={t("tradeType")}
                 name="typeID"
                 index={watch("typeID")}
                 setIndex={id => setValue("typeID", id)}
@@ -180,11 +178,11 @@ const ActivitiesHistoryFilter = props => {
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
-            <legend>İşlem Durumu</legend>
+            <legend>{t("openorder:tradeStatus")}</legend>
             <FormGroup>
               <CustomSelect
                 list={validStatuses}
-                title={"İşlem Durumu"}
+                title={t("openorder:tradeStatus")}
                 name="statusID"
                 index={watch("statusID")}
                 setIndex={id => setValue("statusID", id)}
@@ -194,12 +192,12 @@ const ActivitiesHistoryFilter = props => {
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
-            <legend>Tarih Aralığı</legend>
+            <legend>{t("common:dateRange")}</legend>
             <FormGroup row>
               <Col>
                 <Input
                   type="date"
-                  title="Start Date"
+                  title={t("common:startDate")}
                   name="startdate"
                   innerRef={register({
                     valueAsDate: true,
@@ -210,33 +208,27 @@ const ActivitiesHistoryFilter = props => {
                 <Input
                   type="date"
                   name="enddate"
-                  title="End Date"
+                  title={t("common:endDate")}
                   innerRef={register({
                     valueAsDate: true,
                   })}
-                />{" "}
+                />
               </Col>
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
-            <legend>Sıralama</legend>
+            <legend>{t("openorder:sortBy")}</legend>
             <FormGroup>
-              <Input
-                className="custom-select"
-                type="select"
+              <CustomSelect
+                list={orderBy}
                 name="orderby"
-                innerRef={register({
+                index={watch("orderby")}
+                setIndex={id => setValue("orderby", id)}
+                ref={register({
                   valueAsNumber: true,
                 })}
-              >
-                {orderBy.map((el, idx) => {
-                  return (
-                    <option value={idx + 1} key={`${el}_${idx}`}>
-                      {el}
-                    </option>
-                  );
-                })}
-              </Input>
+                namespace="openorder"
+              />
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
@@ -246,7 +238,7 @@ const ActivitiesHistoryFilter = props => {
               disabled={isFetching}
               type="submit"
             >
-              İŞLEMLERİ FİLTRELE
+              {t("openorder:filterTransactions")}
             </Button>
           </FormGroup>
         </Form>

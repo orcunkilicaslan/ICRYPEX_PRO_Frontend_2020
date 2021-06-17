@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { useSelector } from "react-redux";
 
-const ACTIVE_FIAT_IDS = [1, 2, 3];
+const ACTIVE_FIAT_IDS = [1, 3];
 
 const useCurrencies = (props = {}) => {
   const { fiatCurrency, cryptoCurrency } = useSelector(state => state.pair);

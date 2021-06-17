@@ -38,7 +38,7 @@ const CustomSelect = forwardRef((props, ref) => {
       {list?.map?.((item, idx) => {
         return (
           <option value={item?.id ? item.id : idx} key={nanoid()}>
-            {isObject(item) ? t(item?.name?.toLowerCase?.()) : t(item)}
+            {isObject(item) ? t(item?.name) : t(item)}
           </option>
         );
       })}

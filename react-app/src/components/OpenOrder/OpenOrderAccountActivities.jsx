@@ -1,24 +1,25 @@
 import { useState } from "react";
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import OpenOrderAccountActivitiesPending from "./OpenOrderAccountActivitiesPending.jsx";
 import OpenOrderAccountActivitiesHistory from "./OpenOrderAccountActivitiesHistory.jsx";
 
-const tabs = [
-  {
-    title: "Beklemedekiler",
-    component: OpenOrderAccountActivitiesPending,
-  },
-  {
-    title: "Transfer Geçmişi",
-    component: OpenOrderAccountActivitiesHistory,
-  },
-];
-
 const OpenOrderAccountActivities = props => {
+  const { t } = useTranslation(["openorder", "common"]);
+  const tabs = [
+    {
+      title: t("pendingOrders"),
+      component: OpenOrderAccountActivitiesPending,
+    },
+    {
+      title: t("transferHistory"),
+      component: OpenOrderAccountActivitiesHistory,
+    },
+  ];
   const [activeTab, setActiveTab] = useState(tabs[0].title);
 
   const toggle = tab => {
@@ -50,7 +51,7 @@ const OpenOrderAccountActivities = props => {
         </div>
         <div className="tabcont-head-col">
           <Button type="button" className="printiconlink">
-            <span>Yazdır</span>
+            <span>{t("common:print")}</span>
             <IconSet sprite="sprtsmclrd" size="16" name="print" />
           </Button>
         </div>

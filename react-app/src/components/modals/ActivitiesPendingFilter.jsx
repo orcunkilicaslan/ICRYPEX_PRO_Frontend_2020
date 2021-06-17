@@ -1,34 +1,23 @@
 import { useState } from "react";
-import {
-  Form,
-  FormGroup,
-  Input,
-  Modal,
-  ModalBody,
-  ModalHeader,
-} from "reactstrap";
+import { Form, FormGroup, Modal, ModalBody, ModalHeader } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { merge } from "lodash";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "../Button.jsx";
 import { AlertResult } from "../AlertResult.jsx";
 import { fetchPendingTransactions } from "~/state/slices/transaction.slice";
-import { requestCurrencies } from "~/components/OpenOrder/OpenOrderAccountActivitiesPending";
+import { requestMethods } from "~/components/OpenOrder/OpenOrderAccountActivitiesPending";
 import CustomSelect from "~/components/CustomSelect";
-
-const orderBy = [
-  "Önce Yeni Tarihli",
-  "Önce Eski Tarihli",
-  "Önce Para Yatırma",
-  "Önce Para Çekme",
-  "Önce TRY",
-  "Önce USD",
-];
+import { useCurrencies, useLocaleUpperCase } from "~/state/hooks/";
+import { orderByAccount as orderBy } from "../OpenOrder/OpenOrder";
 
 const ActivitiesPendingFilter = props => {
   const { isOpen, clearModals, defaultValues, isFetching, ...rest } = props;
+  const { t } = useTranslation(["openorder", "common"]);
   const dispatch = useDispatch();
+  const toUpperCase = useLocaleUpperCase();
   const [apiError, setApiError] = useState("");
   const requestTypes = useSelector(
     state => state.api.settings?.moneyRequestTypes
@@ -40,15 +29,16 @@ const ActivitiesPendingFilter = props => {
 
   const onSubmit = async data => {
     setApiError("");
-    const { currencyTypeID, typeID, ...rest } = data;
+    const { methodTypeID, typeID, orderby, ...rest } = data;
     const typeIdx = parseInt(typeID, 10);
-    const currencyTypeIdx = parseInt(currencyTypeID, 10);
+    const methodTypeIdx = parseInt(methodTypeID, 10);
     const toSubmit = {
       ...rest,
       isdeposit: true,
       iswithdraw: true,
-      istry: true,
-      isusd: true,
+      isbank: true,
+      iscrypto: true,
+      orderby: orderby + 1,
     };
 
     if (typeIdx !== -1) {
@@ -58,10 +48,10 @@ const ActivitiesPendingFilter = props => {
       });
     }
 
-    if (currencyTypeIdx !== -1) {
+    if (methodTypeIdx !== -1) {
       merge(toSubmit, {
-        istry: currencyTypeIdx === 0,
-        isusd: currencyTypeIdx === 1,
+        isbank: methodTypeIdx === 0,
+        iscrypto: methodTypeIdx === 1,
       });
     }
 
@@ -88,7 +78,9 @@ const ActivitiesPendingFilter = props => {
       returnFocusAfterClose={false}
       {...rest}
     >
-      <ModalHeader toggle={clearModals}>BEKLEMEDEKİLER FİLTRE</ModalHeader>
+      <ModalHeader toggle={clearModals}>
+        {toUpperCase(t("pendingFilter"))}
+      </ModalHeader>
       <ModalBody className="modalcomp modalcomp-filters">
         {apiError && <AlertResult error>{apiError}</AlertResult>}
         <Form
@@ -98,11 +90,11 @@ const ActivitiesPendingFilter = props => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <FormGroup tag="fieldset">
-            <legend>İşlem Tipi</legend>
+            <legend>{t("tradeType")}</legend>
             <FormGroup>
               <CustomSelect
                 list={requestTypes}
-                title={"İşlem Tipi"}
+                title={t("tradeType")}
                 name="typeID"
                 index={watch("typeID")}
                 setIndex={id => setValue("typeID", id)}
@@ -112,38 +104,31 @@ const ActivitiesPendingFilter = props => {
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
-            <legend>Para Birimi</legend>
+            <legend>{t("tradeMethod")}</legend>
             <FormGroup>
               <CustomSelect
-                list={requestCurrencies}
-                title={"Para Birimi"}
-                name="currencyTypeID"
-                index={watch("currencyTypeID")}
-                setIndex={id => setValue("currencyTypeID", id)}
+                list={requestMethods}
+                title={t("tradeMethod")}
+                name="methodTypeID"
+                index={watch("methodTypeID")}
+                setIndex={id => setValue("methodTypeID", id)}
                 ref={register}
-                namespace="finance"
               />
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
-            <legend>Sıralama</legend>
+            <legend>{t("sortBy")}</legend>
             <FormGroup>
-              <Input
-                className="custom-select"
-                type="select"
+              <CustomSelect
+                list={orderBy}
                 name="orderby"
-                innerRef={register({
+                index={watch("orderby")}
+                setIndex={id => setValue("orderby", id)}
+                ref={register({
                   valueAsNumber: true,
                 })}
-              >
-                {orderBy.map((el, idx) => {
-                  return (
-                    <option value={idx + 1} key={`${el}_${idx}`}>
-                      {el}
-                    </option>
-                  );
-                })}
-              </Input>
+                namespace="openorder"
+              />
             </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
@@ -153,7 +138,7 @@ const ActivitiesPendingFilter = props => {
               disabled={isFetching}
               type="submit"
             >
-              İŞLEMLERİ FİLTRELE
+              {t("filterTransactions")}
             </Button>
           </FormGroup>
         </Form>

@@ -18,19 +18,19 @@ import {
 import { ActivitiesPendingFilter } from "~/components/modals";
 import CustomSelect from "~/components/CustomSelect";
 
+export const requestMethods = ["bank", "crypto"];
 export const requestCurrencies = ["TRY", "USD"];
 const defaultValues = {
   isdeposit: true,
   iswithdraw: true,
-  istry: true,
-  isusd: true,
+  iscrypto: true,
   isbank: true,
-  orderby: 1,
+  orderby: 0,
 };
 
 const OpenOrderAccountActivitiesPending = props => {
   const dispatch = useDispatch();
-  const { t } = useTranslation(["form", "app"]);
+  const { t } = useTranslation(["form", "app", "openorder", "common"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
   const { findCurrencyBySymbol } = useCurrencies();
   const { lang, openModal } = useSelector(state => state.ui);
@@ -39,7 +39,6 @@ const OpenOrderAccountActivitiesPending = props => {
   const requestTypes = useSelector(
     state => state.api.settings?.moneyRequestTypes
   );
-  const orderStatuses = useSelector(state => state.api.settings?.orderStatuses);
   const [requestTypeIdx, setRequestTypeIdx] = useState(-1);
   const [requestCurrenciesIdx, setrequestCurrenciesIdx] = useState(-1);
 
@@ -78,15 +77,13 @@ const OpenOrderAccountActivitiesPending = props => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchPendingTransactions(defaultValues));
+    const toSubmit = {
+      ...defaultValues,
+      orderby: 1,
+    };
+
+    dispatch(fetchPendingTransactions(toSubmit));
   }, [dispatch]);
-
-  const getOrderStatusText = (statusId = 1) => {
-    const status = orderStatuses?.find?.(({ id }) => id === statusId);
-    const key = status?.name?.toLowerCase?.();
-
-    return t(`app:${key}`);
-  };
 
   return (
     <div className="activities-pending">
@@ -99,7 +96,7 @@ const OpenOrderAccountActivitiesPending = props => {
           <CustomSelect
             size="sm"
             list={requestTypes}
-            title={"İşlem Tipi"}
+            title={t("openorder:tradeType")}
             index={requestTypeIdx}
             setIndex={setRequestTypeIdx}
             namespace="finance"
@@ -109,14 +106,15 @@ const OpenOrderAccountActivitiesPending = props => {
           <CustomSelect
             size="sm"
             list={requestCurrencies}
-            title={"Para Birimleri"}
+            title={t("common:currencies")}
             index={requestCurrenciesIdx}
             setIndex={setrequestCurrenciesIdx}
+            namespace="common"
           />
         </Col>
         <Col xs="auto">
           <Button variant="secondary" size="sm" onClick={openFiltersModal}>
-            Detaylı Filtreleme
+            {t("openorder:detailedFilter")}
           </Button>
         </Col>
       </Form>
@@ -125,25 +123,25 @@ const OpenOrderAccountActivitiesPending = props => {
           <Table.Thead scrollbar>
             <Table.Tr>
               <Table.Th sizeauto className="nmbr">
-                İşlem No
+                {t("openorder:tradeNo")}
               </Table.Th>
               <Table.Th sizeauto className="date">
-                Tarih
+                {t("common:date")}
               </Table.Th>
               <Table.Th sizeauto className="type">
-                İşlem Tipi
+                {t("openorder:tradeType")}
               </Table.Th>
               <Table.Th sizeauto className="mthd">
-                Yöntem
+                {t("common:method")}
               </Table.Th>
               <Table.Th sizeauto className="bank">
-                Birim
+                {t("common:unit")}
               </Table.Th>
               <Table.Th sizefixed className="amnt">
-                Miktar
+                {t("common:amount")}
               </Table.Th>
               <Table.Th sizeauto className="stts">
-                Durum
+                {t("common:status")}
               </Table.Th>
               <Table.Th sizeauto className="bttn" />
             </Table.Tr>
@@ -178,6 +176,14 @@ const OpenOrderAccountActivitiesPending = props => {
                 const currency = findCurrencyBySymbol(currencysymbol);
                 const { digit, digit_show } = currency;
 
+                const requestType = t(
+                  `openorder:requestType${request_type_id}`
+                );
+                const requestMethod = t(
+                  `openorder:requestMethod${requst_method_id}`
+                );
+                const requestStatus = t(`openorder:requestStatus${status}`);
+
                 return (
                   <Table.Tr key={id}>
                     <Table.Td sizeauto className="nmbr">
@@ -191,10 +197,10 @@ const OpenOrderAccountActivitiesPending = props => {
                       </span>
                     </Table.Td>
                     <Table.Td sizeauto className="type">
-                      <span className={typecls}>{requesttype}</span>
+                      <span className={typecls}>{requestType}</span>
                     </Table.Td>
-                    <Table.Td sizeauto className="mthd">
-                      {requstmethod}
+                    <Table.Td sizeauto className="mthd" title={requestMethod}>
+                      {requestMethod}
                     </Table.Td>
                     <Table.Td sizeauto className="bank">
                       {currencysymbol}
@@ -210,9 +216,7 @@ const OpenOrderAccountActivitiesPending = props => {
                       />
                     </Table.Td>
                     <Table.Td sizeauto className="stts">
-                      <span className={statuscls}>
-                        {getOrderStatusText(status)}
-                      </span>
+                      <span className={statuscls}>{requestStatus}</span>
                     </Table.Td>
                     <Table.Td sizeauto className="bttn">
                       <Button onClick={() => onCancel(id)}>
