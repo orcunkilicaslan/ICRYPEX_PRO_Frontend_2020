@@ -31,6 +31,12 @@ export const orderBy = [
   "sellFirst",
   "alpha",
 ];
+export const orderByAccount = [
+  "newestFirst",
+  "oldestFirst",
+  "depositFirst",
+  "withdrawFirst",
+];
 
 const OpenOrder = props => {
   const dispatch = useDispatch();

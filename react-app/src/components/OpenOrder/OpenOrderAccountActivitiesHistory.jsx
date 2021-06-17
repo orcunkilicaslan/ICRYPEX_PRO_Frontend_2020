@@ -15,18 +15,17 @@ import { ActivitiesHistoryFilter } from "~/components/modals/";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import ButtonGroupRadio from "~/components/ButtonGroupRadio";
 import CustomSelect from "~/components/CustomSelect";
-
-const periodBy = [
-  { name: "1G", duration: { days: 1 } },
-  { name: "1H", duration: { weeks: 1 } },
-  { name: "2H", duration: { weeks: 2 } },
-  { name: "1A", duration: { months: 1 } },
-  { name: "3A", duration: { months: 3 } },
-];
+import { periodBy } from "./OpenOrder";
 
 const OpenOrderAccountActivitiesHistory = props => {
   const dispatch = useDispatch();
-  const { t } = useTranslation(["form", "app"]);
+  const { t } = useTranslation([
+    "form",
+    "app",
+    "openorder",
+    "common",
+    "finance",
+  ]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
   const { activeCurrencies, findCurrencyBySymbol } = useCurrencies();
   const { lang, openModal } = useSelector(state => state.ui);
@@ -37,10 +36,12 @@ const OpenOrderAccountActivitiesHistory = props => {
   const requestTypes = useSelector(
     state => state.api.settings?.moneyRequestTypes
   );
-  const orderStatuses = useSelector(state => state.api.settings?.orderStatuses);
+  const moneyRequestStatuses = useSelector(
+    state => state.api.settings?.moneyRequestStatuses
+  );
   const [periodbyIndex, setPeriodbyIndex] = useState(0);
   const [requestTypeIdx, setRequestTypeIdx] = useState(-1);
-  const [orderStatusIdx, setOrderStatusIdx] = useState(-1);
+  const [requestStatusIdx, setRequestStatusIdx] = useState(-1);
 
   const defaultValues = useMemo(() => {
     const tomorrow = formatDate(addDays(Date.now(), 1), "yyyy-MM-dd", {
@@ -54,7 +55,7 @@ const OpenOrderAccountActivitiesHistory = props => {
 
     return {
       currencyids: [],
-      orderby: 1,
+      orderby: 0,
       isdeposit: true,
       iswithdraw: true,
       isrealized: true,
@@ -68,7 +69,7 @@ const OpenOrderAccountActivitiesHistory = props => {
     let histories = accountHistory;
     const interval = periodBy[periodbyIndex]?.duration;
     const typeIdx = parseInt(requestTypeIdx, 10);
-    const statusIdx = parseInt(orderStatusIdx, 10);
+    const statusIdx = parseInt(requestStatusIdx, 10);
 
     if (typeIdx !== -1) {
       histories = histories?.filter?.(
@@ -77,7 +78,7 @@ const OpenOrderAccountActivitiesHistory = props => {
     }
 
     if (statusIdx !== -1) {
-      histories = histories?.filter?.(({ status }) => status === statusIdx);
+      histories = histories?.filter?.(({ status }) => status === statusIdx + 1);
     }
 
     if (interval) {
@@ -90,7 +91,11 @@ const OpenOrderAccountActivitiesHistory = props => {
     }
 
     return histories;
-  }, [accountHistory, orderStatusIdx, periodbyIndex, requestTypeIdx]);
+  }, [accountHistory, requestStatusIdx, periodbyIndex, requestTypeIdx]);
+
+  const requestStatuses = useMemo(() => {
+    return moneyRequestStatuses.map(({ id }) => `requestStatus${id}`);
+  }, [moneyRequestStatuses]);
 
   useEffect(() => {
     const currencyids = activeCurrencies
@@ -99,6 +104,7 @@ const OpenOrderAccountActivitiesHistory = props => {
     const toSubmit = {
       ...defaultValues,
       currencyids: JSON.stringify(currencyids),
+      orderby: 1,
     };
 
     dispatch(fetchTransactionHistories(toSubmit));
@@ -112,13 +118,6 @@ const OpenOrderAccountActivitiesHistory = props => {
     dispatch(setOpenModal("none"));
   };
 
-  const getOrderStatusText = (statusId = 1) => {
-    const status = orderStatuses?.find?.(({ id }) => id === statusId);
-    const key = status?.name?.toLowerCase?.();
-
-    return t(`app:${key}`);
-  };
-
   return (
     <div className="activities-history">
       <Form className="siteformui" autoComplete="off" noValidate>
@@ -127,7 +126,7 @@ const OpenOrderAccountActivitiesHistory = props => {
             <CustomSelect
               size="sm"
               list={requestTypes}
-              title={"İşlem Tipi"}
+              title={t("openorder:tradeType")}
               index={requestTypeIdx}
               setIndex={setRequestTypeIdx}
               namespace="finance"
@@ -136,11 +135,11 @@ const OpenOrderAccountActivitiesHistory = props => {
           <Col xs="auto">
             <CustomSelect
               size="sm"
-              list={orderStatuses}
-              namespace="app"
-              title={"İşlem Durumu"}
-              index={orderStatusIdx}
-              setIndex={setOrderStatusIdx}
+              list={requestStatuses}
+              title={t("openorder:tradeStatus")}
+              index={requestStatusIdx}
+              setIndex={setRequestStatusIdx}
+              namespace="openorder"
             />
           </Col>
           <Col xs="auto">
@@ -152,7 +151,7 @@ const OpenOrderAccountActivitiesHistory = props => {
           </Col>
           <Col xs="auto">
             <Button variant="secondary" size="sm" onClick={openFiltersModal}>
-              Detaylı Filtreleme
+              {t("openorder:detailedFilter")}
             </Button>
           </Col>
         </Row>
@@ -162,28 +161,28 @@ const OpenOrderAccountActivitiesHistory = props => {
           <Table.Thead scrollbar>
             <Table.Tr>
               <Table.Th sizeauto className="nmbr">
-                İşlem No
+                {t("openorder:tradeNo")}
               </Table.Th>
               <Table.Th sizeauto className="date">
-                Tarih
+                {t("common:date")}
               </Table.Th>
               <Table.Th sizeauto className="type">
-                İşlem Tipi
+                {t("openorder:tradeType")}
               </Table.Th>
               <Table.Th sizeauto className="mthd">
-                Yöntem
+                {t("common:method")}
               </Table.Th>
               <Table.Th sizeauto className="bank">
-                Banka
+                {t("common:bank")}
               </Table.Th>
               <Table.Th sizefixed className="amnt">
-                Miktar
+                {t("common:amount")}
               </Table.Th>
               <Table.Th sizeauto className="txid">
-                Referans Kodu / TX ID
+                {t("openorder:reference")}
               </Table.Th>
               <Table.Th sizeauto className="stts">
-                Durum
+                {t("common:status")}
               </Table.Th>
             </Table.Tr>
           </Table.Thead>
@@ -216,6 +215,14 @@ const OpenOrderAccountActivitiesHistory = props => {
                 const currency = findCurrencyBySymbol(currencysymbol);
                 const { digit, digit_show } = currency;
 
+                const requestType = t(
+                  `openorder:requestType${request_type_id}`
+                );
+                const requestMethod = t(
+                  `openorder:requestMethod${requst_method_id}`
+                );
+                const requestStatus = t(`openorder:requestStatus${status}`);
+
                 return (
                   <Table.Tr key={id}>
                     <Table.Td sizeauto className="nmbr">
@@ -229,10 +236,10 @@ const OpenOrderAccountActivitiesHistory = props => {
                       </span>
                     </Table.Td>
                     <Table.Td sizeauto className="type">
-                      <span className={typecls}>{requesttype}</span>
+                      <span className={typecls}>{requestType}</span>
                     </Table.Td>
-                    <Table.Td sizeauto className="mthd">
-                      {requstmethod}
+                    <Table.Td sizeauto className="mthd" title={requestMethod}>
+                      {requestMethod}
                     </Table.Td>
                     <Table.Td sizeauto className="bank">
                       ---
@@ -251,8 +258,8 @@ const OpenOrderAccountActivitiesHistory = props => {
                       ---
                     </Table.Td>
                     <Table.Td sizeauto className="stts">
-                      <span className={statuscls}>
-                        {getOrderStatusText(status)}
+                      <span className={statuscls} title={requestStatus}>
+                        {requestStatus}
                       </span>
                     </Table.Td>
                   </Table.Tr>

@@ -57,6 +57,41 @@
             max-width: 100%;
             padding-left: 10px;
 
+            .dandwinforesult{
+              @include flexbox-justify-content(normal);
+
+              .modal-content{
+                @include flexbox-display-flex();
+                @include flexbox-flex-flow(column);
+                height: 100%;
+                max-width: 100%;
+
+                h6{
+                  margin-bottom: 0.25rem;
+                }
+
+                .contcheckbox{
+                  margin-top: $modal-inner-padding;
+                }
+              }
+
+              .modal-body,
+              .modal-footer{
+                padding: 0;
+              }
+
+              .modal-body{
+                @include flexbox-display-flex();
+                @include flexbox-flex-flow(column);
+                height: 100%;
+              }
+
+              .modal-footer{
+                @include flexbox-flex(1);
+                padding-top: $modal-inner-padding;
+              }
+            }
+
             .confirmcheckbox{
               width: 170px;
               position: absolute;
