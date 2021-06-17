@@ -128,18 +128,32 @@ const instance = {
     };
 
     return fetch(`${baseURL}${uri}`, options).then(async response => {
-      const { data } = await marshallJSONData(response);
-      const status = Boolean(data?.status) ? response.status : data?.status;
+      let data;
+      let status;
+      const isWebRequest = baseURL === "/web";
+
+      if (isWebRequest) {
+        data = response.data = response._bodyBlob;
+        status = response.ok ? response.status : false;
+      } else {
+        const resp = await marshallJSONData(response);
+        data = resp.data;
+        status = data?.status;
+      }
+
       log(`${status} | ${uri} %O`, data);
 
-      if (data?.status) {
+      if (status) {
         return Promise.resolve(response);
       } else {
         return Promise.reject(response);
       }
     });
   },
-  setBaseURL: url => {
+  get baseURL() {
+    return baseURL;
+  },
+  set baseURL(url) {
     return (baseURL = url);
   },
 };

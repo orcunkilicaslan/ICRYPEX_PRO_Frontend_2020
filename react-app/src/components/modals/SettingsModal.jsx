@@ -86,18 +86,19 @@ export default function SettingsModal(props) {
     },
   ];
 
-  async function navLink(navLink) {
-    if (navLink[currentLanguage]) {
+  async function navLink(listAccount) {
+    const endpoint = listAccount[currentLanguage];
+
+    if (endpoint) {
       if (currentLanguage === "tr") {
-        const {payload} = await dispatch(uyeGiris(navLink[currentLanguage]))
-        console.log(payload)
+        const action= await dispatch(uyeGiris(endpoint))
+        console.log(action)
       } else if (currentLanguage === "en") {
-        console.log(navLink[currentLanguage])
+        console.log(endpoint)
       }
-
     }
-
   }
+
   return (
     <Modal
       wrapClassName=""
