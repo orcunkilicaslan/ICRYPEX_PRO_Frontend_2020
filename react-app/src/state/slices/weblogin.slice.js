@@ -6,7 +6,7 @@ import { hasAccessToken } from "~/util/";
 
 export const uyeGiris = createAsyncThunk(
     "tr/uye-girisi-ea",
-    async ({ path }, { getState, rejectWithValue }) => {
+    async ( path , { getState, rejectWithValue }) => {
         const {
             api: { accesstoken },
         } = getState();

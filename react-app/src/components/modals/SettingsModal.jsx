@@ -10,70 +10,92 @@ import { useTranslation } from "react-i18next";
 
 import { Button } from "../Button.jsx";
 import { useLocaleUpperCase } from "~/state/hooks/";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {uyeGiris} from "~/state/slices/weblogin.slice";
 
 export default function SettingsModal(props) {
   const { isOpen, User, clearModals, onSignout, ...rest } = props;
   const toUpperCase = useLocaleUpperCase();
   const { t } = useTranslation(["app", "openorder"]);
-  const { settings: Settings } = useSelector(state => state.api);
+  const { lang: currentLanguage } = useSelector(state => state.ui);
+  const dispatch = useDispatch();
 
   const usermenulistaccount = [
     {
       title: t("profile"),
-      tr: "tr/profil",
-      en: "en/profile",
+      tr: "profil",
+      en: "profile",
     },
     {
       title: t("approvalLimit"),
-      href: "#",
+      tr: "profil/hesap-onayi-ve-limit",
+      en: "profile/account-approval-and-limit",
     },
     {
       title: t("assets"),
-      href: "#",
+      tr: "profil/varliklar",
+      en: "profile/assets",
     },
     {
       title: t("commissionRates"),
-      href: "#",
+      tr: "profil/komisyonlar",
+      en: "profile/commissions",
     },
     {
       title: t("notifications"),
-      href: "#",
+      tr: "profil/bildirimler",
+      en: "profile/notifications",
     },
     {
       title: t("openorder:accountActivities"),
-      href: "#",
+      tr: "profil/yatirma-cekme-gecmisi",
+      en: "profile/money-requests",
     },
     {
       title: t("openorder:tradeHistory"),
-      href: "#",
+      tr: "profil/islem-gecmisi",
+      en: "profile/histories",
     },
     {
       title: t("accountDetails"),
-      href: "#",
+      tr: "profil/banka-hesap-bilgileri",
+      en: "profile/bank-account-informations",
     },
   ];
 
   const usermenulistsecurity = [
     {
       title: t("sessionSecurity"),
-      href: "#",
+      tr: "profil/giris-oturum-guvenligi",
+      en: "profile/login-session-security",
     },
     {
       title: t("twofa"),
-      href: "#",
+      tr: "profil/2fy",
+      en: "profile/2fa",
     },
     {
       title: t("specialKey"),
-      href: "#",
+      tr: "profil/ozel-anahtar-olustur",
+      en: "profile/create-private-key",
     },
     {
       title: t("activityHistory"),
-      href: "#",
+      tr: "profil/hareket-gecmisi",
+      en: "profile/transaction-history",
     },
   ];
 
-  const navLink = (navLink) => {
+  async function navLink(navLink) {
+    if (navLink[currentLanguage]) {
+      if (currentLanguage === "tr") {
+        const {payload} = await dispatch(uyeGiris(navLink[currentLanguage]))
+        console.log(payload)
+      } else if (currentLanguage === "en") {
+        console.log(navLink[currentLanguage])
+      }
+
+    }
 
   }
   return (
@@ -101,7 +123,7 @@ export default function SettingsModal(props) {
             {usermenulistaccount.map((listaccount, idx) => {
               return (
                 <NavItem key={listaccount.title}>
-                  <NavLink href={null} title={listaccount.title} onclick={navLink(listaccount)}>
+                  <NavLink href={null} title={listaccount.title}   onClick={() => { navLink(listaccount)}}>
                     {listaccount.title}
                   </NavLink>
                 </NavItem>
