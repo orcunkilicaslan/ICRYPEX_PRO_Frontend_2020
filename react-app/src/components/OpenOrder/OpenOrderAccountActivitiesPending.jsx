@@ -32,7 +32,7 @@ const OpenOrderAccountActivitiesPending = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["form", "app", "openorder", "common"]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
-  const { findCurrencyBySymbol } = useCurrencies();
+  const { findCurrencyBySymbol, activeCurrencies } = useCurrencies();
   const { lang, openModal } = useSelector(state => state.ui);
   const pendingTransactions = useSelector(state => state.transaction?.pending);
   const isFetching = useSelector(state => state.transaction?.isFetchingPending);
@@ -41,6 +41,10 @@ const OpenOrderAccountActivitiesPending = props => {
   );
   const [requestTypeIdx, setRequestTypeIdx] = useState(-1);
   const [requestCurrenciesIdx, setrequestCurrenciesIdx] = useState(-1);
+
+  const requestCurrencies = useMemo(() => {
+    return activeCurrencies?.map(({ symbol }) => symbol);
+  }, [activeCurrencies]);
 
   const visibleTransactions = useMemo(() => {
     let transactions = pendingTransactions;
@@ -62,7 +66,12 @@ const OpenOrderAccountActivitiesPending = props => {
     }
 
     return transactions;
-  }, [pendingTransactions, requestCurrenciesIdx, requestTypeIdx]);
+  }, [
+    pendingTransactions,
+    requestCurrencies,
+    requestCurrenciesIdx,
+    requestTypeIdx,
+  ]);
 
   const onCancel = useCallback(id => dispatch(cancelPendingTransaction(id)), [
     dispatch,
@@ -109,7 +118,7 @@ const OpenOrderAccountActivitiesPending = props => {
             title={t("common:currencies")}
             index={requestCurrenciesIdx}
             setIndex={setrequestCurrenciesIdx}
-            namespace="common"
+            dontTranslate
           />
         </Col>
         <Col xs="auto">

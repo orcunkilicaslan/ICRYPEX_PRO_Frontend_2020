@@ -7,23 +7,26 @@ import classNames from "classnames";
 
 const CustomSelect = forwardRef((props, ref) => {
   const {
-    children,
     className,
     size,
     list,
     title,
     index,
     setIndex,
-    buttonProps,
     namespace = "common",
+    dontTranslate = false,
     ...rest
   } = props;
-
+  const { t } = useTranslation(namespace);
   const cls = classNames("custom-select", className, {
     [`custom-select-${size}`]: Boolean(size),
   });
 
-  const { t } = useTranslation(namespace);
+  const getLabel = item => {
+    if (dontTranslate) return item;
+    else if (isObject(item)) return t(item.name);
+    else return t(item);
+  };
 
   return (
     <Input
@@ -38,7 +41,7 @@ const CustomSelect = forwardRef((props, ref) => {
       {list?.map?.((item, idx) => {
         return (
           <option value={item?.id ? item.id : idx} key={nanoid()}>
-            {isObject(item) ? t(item?.name) : t(item)}
+            {getLabel(item)}
           </option>
         );
       })}
