@@ -10,7 +10,7 @@ import { AlertResult } from "../AlertResult.jsx";
 import { fetchPendingTransactions } from "~/state/slices/transaction.slice";
 import { requestMethods } from "~/components/OpenOrder/OpenOrderAccountActivitiesPending";
 import CustomSelect from "~/components/CustomSelect";
-import { useCurrencies, useLocaleUpperCase } from "~/state/hooks/";
+import { useLocaleUpperCase } from "~/state/hooks/";
 import { orderByAccount as orderBy } from "../OpenOrder/OpenOrder";
 
 const ActivitiesPendingFilter = props => {

@@ -30,14 +30,11 @@ export const fetchTransactionHistories = createAsyncThunk(
           currencyids,
           startdate,
           enddate,
-          // periodby,
           isdeposit,
           iswithdraw,
           isrealized,
           iscanceled,
           orderby,
-          // startfrom,
-          // takecount,
         },
         {
           headers: {
@@ -67,12 +64,11 @@ export const fetchPendingTransactions = createAsyncThunk(
     const {
       isdeposit,
       iswithdraw,
-      istry,
-      isusd,
       isbank,
+      iscrypto,
       orderby,
-      startfrom,
-      takecount,
+      // startfrom,
+      // takecount,
     } = data;
     const {
       api: { accesstoken },
@@ -81,12 +77,9 @@ export const fetchPendingTransactions = createAsyncThunk(
     const toSend = {
       isdeposit,
       iswithdraw,
-      istry,
-      isusd,
+      iscrypto,
       isbank,
       orderby,
-      startfrom,
-      takecount,
     };
 
     try {
