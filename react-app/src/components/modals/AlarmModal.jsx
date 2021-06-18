@@ -11,7 +11,7 @@ import {
   Progress,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import classnames from "classnames";
 import { inRange, groupBy } from "lodash";
@@ -24,6 +24,7 @@ import { AlertResult } from "../AlertResult.jsx";
 import Table from "../Table";
 import { getPairTuple } from "~/util/";
 import { useCurrencies } from "~/state/hooks/";
+import NumberInput from "../NumberInput";
 
 const rangeAlarmPercent = [-100, -75, -50, -25, 0, 25, 50, 75, 100];
 const spinnerStep = 10;
@@ -223,41 +224,38 @@ export default function AlarmModal(props) {
                     -
                   </Button>
                 </InputGroupAddon>
-                <Controller
+                <NumberInput
                   control={control}
                   name="amount"
-                  render={(field, { isDirty, isTouched }) => (
-                    <NumberFormat
-                      thousandSeparator
-                      decimalScale={selectedFiatCurrency?.digit}
-                      fixedDecimalScale
-                      suffix={` ${selectedFiatCurrency?.symbol}`}
-                      value={field?.value}
-                      onValueChange={target => {
-                        let amount = target.floatValue;
-
-                        setValue(field?.name, amount);
-                        field?.onChange(target.floatValue || "");
-                      }}
-                      onChange={e => {
-                        const amount = watch(field?.name);
-                        setUserInput(amount);
-                      }}
-                      className="text-right"
-                      customInput={Input}
-                      innerRef={register({
-                        required: t("form:isRequired"),
-                        min: {
-                          value: 0,
-                          message: t("form:shouldBeMin", { value: 0 }),
-                        },
-                        max: {
-                          value: 999999,
-                          message: t("form:shouldBeMax", { value: 999999 }),
-                        },
-                      })}
-                    />
-                  )}
+                  ref={register({
+                    required: t("form:isRequired"),
+                    min: {
+                      value: 0,
+                      message: t("form:shouldBeMin", { value: 0 }),
+                    },
+                    max: {
+                      value: 999999,
+                      message: t("form:shouldBeMax", { value: 999999 }),
+                    },
+                  })}
+                  inputProps={{
+                    className: "text-right",
+                    thousandSeparator: true,
+                    decimalScale: selectedFiatCurrency?.digit,
+                    fixedDecimalScale: true,
+                    suffix: ` ${selectedFiatCurrency?.symbol}`,
+                    onValueChange: target => {
+                      let amount = target.floatValue;
+                      console.log({ target });
+                      setValue("amount", amount);
+                      // field?.onChange(target.floatValue || "");
+                    },
+                    onChange: e => {
+                      console.log({ value: e.target });
+                      const amount = watch("amount");
+                      setUserInput(amount);
+                    },
+                  }}
                 />
                 <InputGroupAddon addonType="append">
                   <Button
