@@ -11,7 +11,7 @@ import {
 import ReCAPTCHA from "react-google-recaptcha";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { useState, Fragment, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import ms from "ms";
 import { useTimer } from "react-timer-hook";
 import { addMilliseconds, differenceInSeconds } from "date-fns";
@@ -167,6 +167,13 @@ export default function SigninModal(props) {
     setHasSentCode(false);
   };
 
+  const getTimestamp = (minutes, seconds) => {
+    const m = String(minutes).length === 1 ? `0${minutes}` : minutes;
+    const s = String(seconds).length === 1 ? `0${seconds}` : seconds;
+
+    return `${m}:${s}`;
+  };
+
   return (
     <Modal
       wrapClassName=""
@@ -240,7 +247,11 @@ export default function SigninModal(props) {
                 />
                 <Label>{t("password")}</Label>
                 <Button className="showhidepass" onClick={toggleTypePass}>
-                  <IconSet sprite="sprtsmclrd" size="14" name={passShow ? "eyehide" : "eyeshow"} />
+                  <IconSet
+                    sprite="sprtsmclrd"
+                    size="14"
+                    name={passShow ? "eyehide" : "eyeshow"}
+                  />
                 </Button>
                 {errorsSignin.password && (
                   <FormText className="inputresult resulterror inputintext">
@@ -294,81 +305,78 @@ export default function SigninModal(props) {
         </div>
 
         {hasSentCode && (
-            <div className="modalcomp-sign-form verifcode">
-              <Button
-                  className="close"
-                  onClick={resetCode}
-                  style={{ marginLeft: "auto" }}
-              >
-                <span aria-hidden="true">&times;</span>
-              </Button>
-              <div className="progressring">
-                <div className="progressring-circle">
-                  <ProgressRing
-                      radius={35}
-                      strokeWidth={4}
-                      stroke="#e84a55"
-                      trackStroke="#2a3553"
-                      progress={progress}
-                  />
-                  <span>{`${minutes}:${seconds}`}</span>
-                </div>
-                <div className="progressring-bttn">
-                  <Button
-                      className="btn btn-sm btn-link text-muted"
-                      style={{
-                        opacity: isTimerRunning ? "0" : "1",
-                        transition: "opacity .15s ease-out",
-                      }}
-                      onClick={resendCode}
-                  >
-                    Tekrar Gönder
-                  </Button>
-                </div>
+          <div className="modalcomp-sign-form verifcode">
+            <Button
+              className="close"
+              onClick={resetCode}
+              style={{ marginLeft: "auto" }}
+            >
+              <span aria-hidden="true">&times;</span>
+            </Button>
+            <div className="progressring">
+              <div className="progressring-circle">
+                <ProgressRing
+                  radius={35}
+                  strokeWidth={4}
+                  stroke="#e84a55"
+                  trackStroke="#2a3553"
+                  progress={progress}
+                />
+                <span>{getTimestamp(minutes, seconds)}</span>
               </div>
-              <Form
-                  className="siteformui"
-                  autoComplete="off"
-                  noValidate
-                  onSubmit={submitVerify(onSubmitVerify)}
-              >
-                <div className="labelfocustop">
-                  <FormGroup>
-                    <Input
-                        className="text-center"
-                        type="text"
-                        name="code"
-                        required
-                        innerRef={registerVerify({
-                          required: t("form:isRequired"),
-                          maxLength: {
-                            value: 6,
-                            message: t("form:shouldBeMaxLength", { value: 6 }),
-                          },
-                        })}
-                    />
-                    <Label className="text-center">
-                      {t("verificationCode")}
-                    </Label>
-                    {errorsVerify.code && (
-                        <FormText className="inputresult resulterror">
-                          {errorsVerify.code?.message}
-                        </FormText>
-                    )}
-                  </FormGroup>
-                </div>
+              <div className="progressring-bttn">
                 <Button
-                    type="submit"
-                    variant="success"
-                    className="w-100 mt-2"
-                    disabled={isVerifying}
+                  className="btn btn-sm btn-link text-muted"
+                  style={{
+                    opacity: isTimerRunning ? "0" : "1",
+                    transition: "opacity .15s ease-out",
+                  }}
+                  onClick={resendCode}
                 >
-                  {t("signin")}
+                  {t("sendAgain")}
                 </Button>
-              </Form>
+              </div>
             </div>
+            <Form
+              className="siteformui"
+              autoComplete="off"
+              noValidate
+              onSubmit={submitVerify(onSubmitVerify)}
+            >
+              <div className="labelfocustop">
+                <FormGroup>
+                  <Input
+                    className="text-center"
+                    type="text"
+                    name="code"
+                    required
+                    innerRef={registerVerify({
+                      required: t("form:isRequired"),
+                      maxLength: {
+                        value: 6,
+                        message: t("form:shouldBeMaxLength", { value: 6 }),
+                      },
+                    })}
+                  />
+                  <Label className="text-center">{t("verificationCode")}</Label>
+                  {errorsVerify.code && (
+                    <FormText className="inputresult resulterror">
+                      {errorsVerify.code?.message}
+                    </FormText>
+                  )}
+                </FormGroup>
+              </div>
+              <Button
+                type="submit"
+                variant="success"
+                className="w-100 mt-2"
+                disabled={isVerifying}
+              >
+                {t("signin")}
+              </Button>
+            </Form>
+          </div>
         )}
-
       </ModalBody>
     </Modal>
   );

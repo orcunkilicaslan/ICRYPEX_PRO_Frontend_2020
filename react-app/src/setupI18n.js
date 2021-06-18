@@ -179,6 +179,7 @@ const init = (initialLang = "en") => {
             preliminary: "Preliminary information",
             termsOfService: "Terms of service",
             readAndAgree: "read and agree",
+            sendAgain: "Send Again",
           },
           form: {
             isRequired: "This field is required",
@@ -411,6 +412,7 @@ const init = (initialLang = "en") => {
             preliminary: "Ön bilgilendirme metni",
             termsOfService: "Kullanım sözleşmesini",
             readAndAgree: "okudum ve onaylıyorum",
+            sendAgain: "Tekrar Gönder",
           },
           form: {
             isRequired: "Bu alanı doldurmalısınız",
