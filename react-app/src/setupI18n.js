@@ -135,6 +135,7 @@ const init = (initialLang = "en") => {
             destinationTag: "Destination Tag / Memo Id",
             deposit: "Deposit",
             withdraw: "Withdraw",
+            realizedPrice: "Realized Price",
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -239,6 +240,7 @@ const init = (initialLang = "en") => {
             withdrawFirst: "Withdraw First",
             transferHistoryFilter: "Transfer History Filter",
             pendingFilter: "Pending Orders Filter",
+            orderDetails: "Order Details",
           },
         },
         tr: {
@@ -368,6 +370,7 @@ const init = (initialLang = "en") => {
             destinationTag: "Destination Tag / Memo Id",
             deposit: "Yatır",
             withdraw: "Çek",
+            realizedPrice: "Gerçekleşen Fiyat",
           },
           coinbar: {
             lastPrice: "Son Fiyat",
@@ -472,6 +475,7 @@ const init = (initialLang = "en") => {
             withdrawFirst: "Önce Para Çekme",
             transferHistoryFilter: "Transfer Geçmişi Filtre",
             pendingFilter: "Beklemedekiler Filtre",
+            orderDetails: "İşlem Detayı",
           },
         },
       },

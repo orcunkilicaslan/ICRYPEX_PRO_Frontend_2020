@@ -11,14 +11,14 @@ export const fetchOrderHistory = createAsyncThunk(
       pairids = [],
       startdate,
       enddate,
-      periodby,
+      // periodby,
       isbuyorders,
       issellorders,
       isfilledorders,
       iscanceledorders,
       orderby,
-      startfrom,
-      takecount,
+      // startfrom,
+      // takecount,
     } = data;
     const {
       api: { accesstoken },
@@ -63,8 +63,8 @@ export const fetchOpenOrders = createAsyncThunk(
       isbuyorders,
       issellorders,
       orderby,
-      startfrom,
-      takecount,
+      // startfrom,
+      // takecount,
     } = data;
     const {
       api: { accesstoken },
@@ -134,6 +134,38 @@ export const deleteOpenOrder = createAsyncThunk(
   }
 );
 
+export const fetchOrderHistoryDetail = createAsyncThunk(
+  "order/fetchOrderHistoryDetail",
+  async (data, { getState, rejectWithValue }) => {
+    const { orderid } = data;
+    const {
+      api: { accesstoken },
+    } = getState();
+
+    try {
+      const response = await api.fetchOrderHistoryDetail(
+        { orderid },
+        {
+          headers: {
+            "x-access-token": accesstoken,
+          },
+        }
+      );
+
+      return { orderid, data: response.data };
+    } catch ({ data }) {
+      return rejectWithValue(data);
+    }
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+
+      return hasAccessToken(state);
+    },
+  }
+);
+
 const initialState = {
   tabIndex: 0,
   history: [],
@@ -144,8 +176,10 @@ const initialState = {
   hideOthersHistory: false,
   openOrdersFilter: null,
   orderHistoryFilter: null,
-  selectedBuyOrder:{minprice: null,sumAmount: null},
-  selectedSellOrder:{minprice: null,sumAmount: null},
+  selectedBuyOrder: { minprice: null, sumAmount: null },
+  selectedSellOrder: { minprice: null, sumAmount: null },
+  historyDetail: {},
+  isFetchingHistoryDetail: false,
 };
 
 const orderSlice = createSlice({
@@ -154,17 +188,19 @@ const orderSlice = createSlice({
   reducers: {
     setSelectedOrder: {
       reducer: (state, action) => {
-        let sumAmount =  action?.payload.data.reduce(function(prev, current) {
-          return prev + +current.amount
+        let sumAmount = action?.payload.data.reduce(function (prev, current) {
+          return prev + +current.amount;
         }, 0);
-            if(action?.payload.type === 'buy') {
-              state.selectedBuyOrder.minprice  =  action?.payload.data[action?.payload.data.length-1].price
-              state.selectedBuyOrder.sumAmount =sumAmount
-            }else {
-              state.selectedSellOrder.minprice  =  action?.payload.data[action?.payload.data.length-1].price
-              state.selectedSellOrder.sumAmount =sumAmount
-            }
-        },
+        if (action?.payload.type === "buy") {
+          state.selectedBuyOrder.minprice =
+            action?.payload.data[action?.payload.data.length - 1].price;
+          state.selectedBuyOrder.sumAmount = sumAmount;
+        } else {
+          state.selectedSellOrder.minprice =
+            action?.payload.data[action?.payload.data.length - 1].price;
+          state.selectedSellOrder.sumAmount = sumAmount;
+        }
+      },
     },
     setTabIndex: (state, { payload }) => {
       state.tabIndex = payload;
@@ -203,6 +239,18 @@ const orderSlice = createSlice({
     },
     [fetchOpenOrders.rejected]: state => {
       state.isFetchingOpen = false;
+    },
+    [fetchOrderHistoryDetail.pending]: state => {
+      state.isFetchingHistoryDetail = true;
+    },
+    [fetchOrderHistoryDetail.fulfilled]: (state, { payload }) => {
+      const { orderid, data } = payload;
+
+      state.isFetchingHistoryDetail = false;
+      state.historyDetail[orderid] = data?.description;
+    },
+    [fetchOrderHistoryDetail.rejected]: state => {
+      state.isFetchingHistoryDetail = false;
     },
   },
 });

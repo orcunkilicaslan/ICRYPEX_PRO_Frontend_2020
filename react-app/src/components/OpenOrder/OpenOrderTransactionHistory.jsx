@@ -14,6 +14,7 @@ import { useClientRect, usePrices, useCurrencies } from "~/state/hooks/";
 import {
   fetchOrderHistory,
   toggleHideOthersHistory,
+  fetchOrderHistoryDetail,
 } from "~/state/slices/order.slice";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import OrderHistoryFilter from "~/components/modals/OrderHistoryFilter.jsx";
@@ -42,8 +43,10 @@ const OpenOrderTransactionHistory = props => {
   const orderSlice = useSelector(state => state.order);
   const [orderStatusIdx, setOrderStatusIdx] = useState(-1);
   const [ordersideIdx, setOrdersideIdx] = useState(-1);
+  const [orderDetailID, setOrderDetailID] = useState(null);
 
   const orderHistory = orderSlice?.history;
+  const historyDetail = orderSlice?.historyDetail;
   const isFetching = orderSlice?.isFetchingHistory;
   const hideOthers = orderSlice?.hideOthersHistory;
 
@@ -135,6 +138,17 @@ const OpenOrderTransactionHistory = props => {
 
   const clearOpenModals = () => {
     dispatch(setOpenModal("none"));
+  };
+
+  const onDetail = async orderid => {
+    if (orderDetailID === orderid) {
+      setOrderDetailID(null);
+    } else {
+      setOrderDetailID(orderid);
+      const { payload } = await dispatch(fetchOrderHistoryDetail({ orderid }));
+
+      if (!payload?.data?.status) setOrderDetailID(null);
+    }
   };
 
   return (
@@ -284,13 +298,16 @@ const OpenOrderTransactionHistory = props => {
                   <div className="hsttblbrwswrp" key={id}>
                     <Table.Tr className="hsttblbrwstr">
                       <Table.Td sizeauto className="brws">
-                        <a href="#" title="İşlemi İnceleyin">
+                        <span
+                          title={t("openorder:orderDetails")}
+                          onClick={() => onDetail(id)}
+                        >
                           <IconSet
                             sprite="sprtsmclrd"
                             size="14"
                             name="browse"
                           />
-                        </a>
+                        </span>
                       </Table.Td>
                       <Table.Td sizeauto className="nmbr">
                         {id}
@@ -381,48 +398,81 @@ const OpenOrderTransactionHistory = props => {
                         </span>
                       </Table.Td>
                     </Table.Tr>
-                    <div className="hsttblbrwstbl">
-                      <Table>
-                        <Table.Thead>
-                          <Table.Tr>
-                            <Table.Th sizeauto className="date">
-                              Tarih
-                            </Table.Th>
-                            <Table.Th sizefixed className="hppr">
-                              Gerçekleşen Fiyat
-                            </Table.Th>
-                            <Table.Th sizefixed className="hppn">
-                              Gerçekleşen
-                            </Table.Th>
-                            <Table.Th sizeauto className="comm">
-                              Komisyon
-                            </Table.Th>
-                            <Table.Th sizefixed className="totl">
-                              Toplam
-                            </Table.Th>
-                          </Table.Tr>
-                        </Table.Thead>
-                        <Table.Tbody>
-                          <Table.Tr>
-                            <Table.Td sizeauto className="date">
-                              21.02.2020 18:23
-                            </Table.Td>
-                            <Table.Td sizefixed className="hppr">
-                              33,650 TRY
-                            </Table.Td>
-                            <Table.Td sizefixed className="hppn">
-                              0,763282734 BTC
-                            </Table.Td>
-                            <Table.Td sizeauto className="comm">
-                              45 TRY
-                            </Table.Td>
-                            <Table.Td sizefixed className="totl">
-                              24,564 TRY
-                            </Table.Td>
-                          </Table.Tr>
-                        </Table.Tbody>
-                      </Table>
-                    </div>
+                    {orderDetailID === id && (
+                      <div>
+                        <Table>
+                          <Table.Thead>
+                            <Table.Tr>
+                              <Table.Th sizeauto className="date">
+                                {t("common:date")}
+                              </Table.Th>
+                              <Table.Th sizefixed className="hppr">
+                                {t("finance:realizedPrice")}
+                              </Table.Th>
+                              <Table.Th sizefixed className="totl">
+                                {t("common:total")}
+                              </Table.Th>
+                            </Table.Tr>
+                          </Table.Thead>
+                          {historyDetail[id] &&
+                            historyDetail[id].map(detail => {
+                              const { updated_at, price, amount } = detail;
+
+                              return (
+                                <Table.Tbody>
+                                  <Table.Tr>
+                                    <Table.Td sizeauto className="date">
+                                      <span title={updated_at}>
+                                        {formatDateDistance(
+                                          new Date(updated_at),
+                                          Date.now(),
+                                          { locale: lang }
+                                        )}
+                                      </span>
+                                    </Table.Td>
+                                    <Table.Td sizefixed className="hppr">
+                                      <span title={price}>
+                                        <NumberFormat
+                                          value={price}
+                                          displayType={"text"}
+                                          thousandSeparator={true}
+                                          decimalScale={
+                                            isBuyOrder ? sellDigit : buyDigit
+                                          }
+                                          fixedDecimalScale
+                                          suffix={` ${
+                                            isBuyOrder
+                                              ? sellingcurrency
+                                              : buyingcurrency
+                                          }`}
+                                        />
+                                      </span>
+                                    </Table.Td>
+                                    <Table.Td sizefixed className="totl">
+                                      <span title={amount}>
+                                        <NumberFormat
+                                          value={amount}
+                                          displayType={"text"}
+                                          thousandSeparator={true}
+                                          decimalScale={
+                                            isBuyOrder ? buyDigit : sellDigit
+                                          }
+                                          fixedDecimalScale
+                                          suffix={` ${
+                                            isBuyOrder
+                                              ? buyingcurrency
+                                              : sellingcurrency
+                                          }`}
+                                        />
+                                      </span>
+                                    </Table.Td>
+                                  </Table.Tr>
+                                </Table.Tbody>
+                              );
+                            })}
+                        </Table>
+                      </div>
+                    )}
                   </div>
                 );
               }
