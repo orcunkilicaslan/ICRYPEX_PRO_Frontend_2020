@@ -26,7 +26,6 @@ import AddCryptoAddressModal from "~/components/modals/AddCryptoAddressModal";
 import { openOrderContext } from "./OpenOrder";
 import { getWhitelists } from "~/state/slices/cryptoaddreswhitelist.slice";
 import NumberInput from "~/components/NumberInput.jsx";
-import { setGlobalCssModule } from "reactstrap/es/utils";
 
 const OpenOrderDepoWithTabWithdrawCrypto = props => {
   const dispatch = useDispatch();
@@ -238,11 +237,11 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                         },
                         max: {
                           value: selectedBalance
-                            ? Number(selectedBalance.balance).toFixed(8)
+                            ? Number(selectedBalance?.balance).toFixed(8)
                             : 0,
                           message: t("shouldBeMax", {
                             value: selectedBalance
-                              ? Number(selectedBalance.balance).toFixed(8)
+                              ? Number(selectedBalance?.balance).toFixed(8)
                               : 0,
                           }),
                         },
@@ -250,7 +249,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                       inputProps={{
                         placeholder: t("withdrawAmount"),
                         thousandSeparator: true,
-                        decimalScale: selectedBalance.digit,
+                        decimalScale: selectedBalance?.digit,
                         fixedDecimalScale: true,
                         onValueChange: target => {
                           const amount = target.floatValue;
@@ -326,7 +325,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                       displayType={"text"}
                       thousandSeparator={true}
                       fixedDecimalScale
-                      decimalScale={selectedBalance.digit}
+                      decimalScale={selectedBalance?.digit}
                       suffix={` ${watchedSymbol}`}
                     />
                   </Col>

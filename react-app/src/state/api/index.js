@@ -41,8 +41,8 @@ const instance = {
       },
       retryOn: async (attempt, error, response) => {
         if (error !== null || response?.status >= 400) {
-          if (response?.status === 403) {
-            log("403 - skipping retry %o", { error, response });
+          if ([403, 404].includes(response?.status)) {
+            log("%s | skipping retry %o", uri, { error, response });
             return false;
           }
 
