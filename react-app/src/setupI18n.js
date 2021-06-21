@@ -11,7 +11,7 @@ const init = (initialLang = "en") => {
         en: {
           app: {
             protrading: "PRO Trading",
-            easybuysell: "Easy Buy-Sell",
+            easybuysell: "Easy Buy & Sell",
             easybuy: "Easy Buy",
             easysell: "Easy Sell",
             newsanalysis: "News & Analysis",
@@ -107,6 +107,7 @@ const init = (initialLang = "en") => {
             method: "Method",
             unit: "Unit",
             currencies: "Currencies",
+            or: "or",
           },
           finance: {
             ask: "Ask",
@@ -117,8 +118,8 @@ const init = (initialLang = "en") => {
             sellwhat: "SELL {{item}}",
             portfolio: "Portfolio",
             available: "Available",
-            amountToBeTaken: "Amount to be Taken",
-            amountToBeSold: "Amount to be Sold",
+            amountToBeTaken: "Amount to Buy",
+            amountToBeSold: "Amount to Sell",
             market: "Market",
             transactionCommission: "Transaction Commission",
             marketMaker: "Market Maker",
@@ -140,6 +141,12 @@ const init = (initialLang = "en") => {
             deposit: "Deposit",
             withdraw: "Withdraw",
             realizedPrice: "Realized Price",
+            transactionConfirmation: "Transaction Confirmation",
+            buySuccess: "Successfully bought {{item}}.",
+            sellSuccess: "Successfully sold {{item}}.",
+            newTransaction: "New Transaction",
+            checkNewTransaction:
+              "You can see it in {{history}} or {{assets}} sections.",
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -349,6 +356,7 @@ const init = (initialLang = "en") => {
             method: "Yöntem",
             unit: "Birim",
             currencies: "Para Birimleri",
+            or: "ya da",
           },
           finance: {
             ask: "Alış",
@@ -382,6 +390,12 @@ const init = (initialLang = "en") => {
             deposit: "Yatır",
             withdraw: "Çek",
             realizedPrice: "Gerçekleşen Fiyat",
+            transactionConfirmation: "İşlem Onayı",
+            buySuccess: "{{item}} alış işleminiz başarıyla tamamlanmıştır.",
+            sellSuccess: "{{item}} satış işleminiz başarıyla tamamlanmıştır.",
+            newTransaction: "Yeni İşlem",
+            checkNewTransaction:
+              "{{history}} ya da {{assets}} bölümünden kontrol edebilirsiniz.",
           },
           coinbar: {
             lastPrice: "Son Fiyat",
