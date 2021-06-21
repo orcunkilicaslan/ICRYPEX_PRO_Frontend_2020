@@ -1,28 +1,29 @@
 import { useState, useContext, useEffect } from "react";
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
+import { useTranslation } from "react-i18next";
 
 import OpenOrderDepoWithTabWithdrawBank from "~/components/OpenOrder/OpenOrderDepoWithTabWithdrawBank.jsx";
 import OpenOrderDepoWithTabWithdrawCrypto from "~/components/OpenOrder/OpenOrderDepoWithTabWithdrawCrypto.jsx";
 import { openOrderContext, TRANSACTION_METHODS } from "./OpenOrder";
 
-const tabs = [
-  {
-    title: "Banka",
-    component: OpenOrderDepoWithTabWithdrawBank,
-    method: "bank",
-  },
-  {
-    title: "Kripto",
-    component: OpenOrderDepoWithTabWithdrawCrypto,
-    method: "crypto",
-  },
-];
-
 const OpenOrderDepoWithTabWithdraw = props => {
   const {
     state: { method },
   } = useContext(openOrderContext);
+  const { t } = useTranslation(["common"]);
+  const tabs = [
+    {
+      title: t("bank"),
+      component: OpenOrderDepoWithTabWithdrawBank,
+      method: "bank",
+    },
+    {
+      title: t("crypto"),
+      component: OpenOrderDepoWithTabWithdrawCrypto,
+      method: "crypto",
+    },
+  ];
   const [activeTab, setActiveTab] = useState(tabs[0].title);
 
   const toggle = tab => {
@@ -34,6 +35,8 @@ const OpenOrderDepoWithTabWithdraw = props => {
       const activeTab = tabs.find(tab => method === tab.method)?.title;
       if (activeTab) setActiveTab(activeTab);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [method]);
 
   return (

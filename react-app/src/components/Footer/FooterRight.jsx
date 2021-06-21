@@ -1,10 +1,9 @@
+import { useTranslation } from "react-i18next";
+
 const FooterRight = props => {
-  return (
-    <div className="col-auto">
-      Icrypex Bilişim A.Ş. Maslak Mah. Maslak Meydan Str. Spring Giz Plaza N:
-      5/57 34398 Sariyer / Istanbul 0850 255 1079
-    </div>
-  );
+  const { t } = useTranslation(["app"]);
+
+  return <div className="col-auto">{t("companyAddress")}</div>;
 };
 
 export default FooterRight;

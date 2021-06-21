@@ -18,6 +18,7 @@ import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import { AlertResult } from "../AlertResult.jsx";
 import { verifyCaptcha } from "~/util/";
+import { useLocaleUpperCase } from "~/state/hooks/";
 
 const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
 
@@ -33,6 +34,7 @@ export default function ForgotPasswordModal(props) {
     ...rest
   } = props;
   const { t } = useTranslation(["login", "form"]);
+  const toUpperCase = useLocaleUpperCase();
   const [isResetSent, setIsResetSent] = useState(false);
   const { register, handleSubmit, errors, clearErrors, setValue } = useForm({
     mode: "onChange",
@@ -77,7 +79,9 @@ export default function ForgotPasswordModal(props) {
       autoFocus={false}
       {...rest}
     >
-      <ModalHeader toggle={clearModals}>{t("forgotPassword")}</ModalHeader>
+      <ModalHeader toggle={clearModals}>
+        {toUpperCase(t("forgotPassword"))}
+      </ModalHeader>
       {!isResetSent ? (
         <ModalBody className="modalcomp modalcomp-sign">
           <div className="modalcomp-sign-icon">
@@ -140,7 +144,7 @@ export default function ForgotPasswordModal(props) {
                 type="submit"
                 disabled={isResetingPassword}
               >
-                ŞİFREMİ SIFIRLA
+                {toUpperCase(t("resetPassword"))}
               </Button>
             </Form>
           </div>
@@ -154,8 +158,8 @@ export default function ForgotPasswordModal(props) {
                 <div className="alert-icons-success-long" />
               </div>
             </div>
-            <h4>Parolanız Sıfırlanmıştır</h4>
-            <p>Parola sıfırlama isteğiniz e-posta adresinize gönderilmiştir.</p>
+            <h4>{t("hasResetPassword")}</h4>
+            <p>{t("sentNewPassword")}</p>
           </ModalBody>
           <ModalFooter className="row">
             <Button variant="success" className="col" onClick={openSigninModal}>

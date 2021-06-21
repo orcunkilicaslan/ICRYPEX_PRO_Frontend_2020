@@ -1,30 +1,29 @@
 import { useState, useContext, useEffect } from "react";
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { IconSet } from "../IconSet.jsx";
 import OpenOrderDepoWithTabDeposit from "~/components/OpenOrder/OpenOrderDepoWithTabDeposit.jsx";
 import OpenOrderDepoWithTabWithdraw from "~/components/OpenOrder/OpenOrderDepoWithTabWithdraw.jsx";
 import { openOrderContext, TRANSACTION_MODES } from "./OpenOrder";
-import {useSelector} from "react-redux";
-import {useCurrencies} from "~/state/hooks";
-import {useTranslation} from "react-i18next";
-
-const tabs = [
-  {
-    title: "Yatır",
-    component: OpenOrderDepoWithTabDeposit,
-  },
-  {
-    title: "Çek",
-    component: OpenOrderDepoWithTabWithdraw,
-  },
-];
+import { useCurrencies } from "~/state/hooks";
 
 const OpenOrderDepoWith = props => {
-
   const { allAssets } = useSelector(state => state.assets);
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation(["common", "finance"]);
+
+  const tabs = [
+    {
+      title: t("finance:deposit"),
+      component: OpenOrderDepoWithTabDeposit,
+    },
+    {
+      title: t("finance:withdraw"),
+      component: OpenOrderDepoWithTabWithdraw,
+    },
+  ];
 
   const {
     state: { mode },
@@ -47,6 +46,8 @@ const OpenOrderDepoWith = props => {
 
       setActiveTab(activeTab);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode]);
 
   return (
@@ -75,10 +76,12 @@ const OpenOrderDepoWith = props => {
         <div className="tabcont-head-col">
           <IconSet sprite="sprtsmclrd" size="16" name="wallet" />
           <h6>{t("approximately")}</h6>
-          <p> {allAssets?.total_TRY?.toFixed?.(2)} TRY /{" "}{allAssets?.[`total_${selectedCurrency?.symbol}`]?.toFixed?.(
-              2
-          )}{" "}
-            {selectedCurrency?.symbol}</p>
+          <p>
+            {" "}
+            {allAssets?.total_TRY?.toFixed?.(2)} TRY /{" "}
+            {allAssets?.[`total_${selectedCurrency?.symbol}`]?.toFixed?.(2)}{" "}
+            {selectedCurrency?.symbol}
+          </p>
         </div>
       </div>
       <div className="depositandwithdraw tabareaflexflow">
