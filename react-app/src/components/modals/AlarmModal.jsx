@@ -9,6 +9,7 @@ import {
   ModalHeader,
   ModalBody,
   Progress,
+  FormText,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -43,30 +44,24 @@ export default function AlarmModal(props) {
     deleteAlarm,
     deleteAlarms,
     onToggleHideOthers,
+    setErrorMessage,
     ...rest
   } = props;
   const { t } = useTranslation(["coinbar", "common", "form"]);
   const { findCurrencyBySymbol } = useCurrencies();
+  const { all: allAlarms, isCreating, hideOthers, isDeleting } = useSelector(
+    state => state.alarm
+  );
   const {
-    all: allAlarms,
-    isCreating,
-    hideOthers,
-    isDeleting,
-  } = useSelector(state => state.alarm);
-  const {
-    register,
     handleSubmit,
     setValue,
     getValues,
     control,
-    formState: { isDirty },
     reset: resetForm,
+    errors,
     watch,
   } = useForm({
     mode: "onChange",
-    defaultValues: {
-      amount: selectedPriceData?.price,
-    },
   });
 
   const [userInput, setUserInput] = useState(null);
@@ -105,8 +100,10 @@ export default function AlarmModal(props) {
     if (isOpen) {
       let amount;
 
-      if (isDirty) amount = userInput;
-      else amount = selectedPriceData?.price;
+      if (userInput) {
+        setRangeAlarmPortfolio(0);
+        amount = userInput;
+      } else amount = selectedPriceData?.price;
 
       if (amount) {
         if (rangeAlarmPortfolio !== 0) {
@@ -117,13 +114,14 @@ export default function AlarmModal(props) {
         }
       }
     } else {
+      setErrorMessage(null);
       setUserInput(null);
       setRangeAlarmPortfolio(0);
       resetForm();
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen, isDirty, rangeAlarmPortfolio, selectedPriceData]);
+  }, [isOpen, rangeAlarmPortfolio, selectedPriceData, userInput]);
 
   const onAmountStep = int => {
     const amount = getValues("amount");
@@ -133,6 +131,16 @@ export default function AlarmModal(props) {
       setValue("amount", newAmount);
       setUserInput(newAmount);
     }
+  };
+
+  const onValueChange = target => {
+    let amount = target.floatValue;
+    setValue("amount", amount);
+  };
+
+  const onChange = () => {
+    const amount = watch("amount");
+    setUserInput(amount);
   };
 
   const onSubmit = async ({ amount }) => {
@@ -165,18 +173,20 @@ export default function AlarmModal(props) {
       <ModalHeader toggle={clearModals}>{t("setAlarm")}</ModalHeader>
       <ModalBody className="modalcomp modalcomp-setalarm">
         <div className="modalcomp-setalarm-data">
-          <div className="databigger">
-            <PerLineIcon className={`mdper mdper-${upOrDown}`} />
-            <span className={siteColorClass} title={selectedPriceData?.price}>
-              <NumberFormat
-                value={selectedPriceData?.price}
-                displayType={"text"}
-                thousandSeparator={true}
-                decimalScale={selectedFiatCurrency?.digit}
-                fixedDecimalScale
-              />
-            </span>
-          </div>
+          {selectedPriceData?.price && (
+            <div className="databigger">
+              <PerLineIcon className={`mdper mdper-${upOrDown}`} />
+              <span className={siteColorClass} title={selectedPriceData?.price}>
+                <NumberFormat
+                  value={selectedPriceData?.price}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  decimalScale={selectedFiatCurrency?.digit}
+                  fixedDecimalScale
+                />
+              </span>
+            </div>
+          )}
           <div className="datasmall">
             <span title={selectedPriceData?.pricechange}>
               <NumberFormat
@@ -214,6 +224,11 @@ export default function AlarmModal(props) {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="setalarmspinner">
+              {errors.amount && (
+                <FormText className="inputresult resulterror inputintext">
+                  {errors.amount?.message}
+                </FormText>
+              )}
               <FormGroup className="input-group">
                 <InputGroupAddon addonType="prepend">
                   <Button
@@ -227,34 +242,26 @@ export default function AlarmModal(props) {
                 <NumberInput
                   control={control}
                   name="amount"
-                  ref={register({
+                  defaultValue={selectedPriceData?.price}
+                  rules={{
                     required: t("form:isRequired"),
                     min: {
-                      value: 0,
-                      message: t("form:shouldBeMin", { value: 0 }),
+                      value: spinnerMin,
+                      message: t("form:shouldBeMin", { value: spinnerMin }),
                     },
                     max: {
-                      value: 999999,
-                      message: t("form:shouldBeMax", { value: 999999 }),
+                      value: spinnerMax,
+                      message: t("form:shouldBeMax", { value: spinnerMax }),
                     },
-                  })}
+                  }}
                   inputProps={{
                     className: "text-right",
                     thousandSeparator: true,
                     decimalScale: selectedFiatCurrency?.digit,
                     fixedDecimalScale: true,
                     suffix: ` ${selectedFiatCurrency?.symbol}`,
-                    onValueChange: target => {
-                      let amount = target.floatValue;
-                      console.log({ target });
-                      setValue("amount", amount);
-                      // field?.onChange(target.floatValue || "");
-                    },
-                    onChange: e => {
-                      console.log({ value: e.target });
-                      const amount = watch("amount");
-                      setUserInput(amount);
-                    },
+                    onValueChange,
+                    onChange,
                   }}
                 />
                 <InputGroupAddon addonType="append">
