@@ -207,7 +207,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
                       <NumberInput
                         control={control}
                         name="amount"
-                        ref={register({
+                        rules={{
                           valueAsNumber: true,
                           required: t("isRequired"),
                           min: {
@@ -224,7 +224,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
                                 : 999999,
                             }),
                           },
-                        })}
+                        }}
                         inputProps={{
                           placeholder: t("withdrawAmount"),
                           thousandSeparator: true,
