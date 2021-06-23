@@ -22,6 +22,7 @@ import stopLimitBuyOrderReducer from "./slices/stoplimitbuyorder.slice";
 import stopLimitSellOrderReducer from "./slices/stoplimitsellorder.slice";
 import bankAccountReducer from "~/state/slices/bankaccount.slice";
 import cryptoAddressWhitelistReducer from "~/state/slices/cryptoaddreswhitelist.slice";
+import cryptoAddressReducer from "~/state/slices/cryptoaddress.slice";
 import webLoginReducer from "~/state/slices/weblogin.slice";
 
 const apiPersistConfig = {
@@ -105,6 +106,7 @@ const rootReducer = combineReducers({
   deposit: depositReducer,
   bankAccount: bankAccountReducer,
   cryptoAddressWhitelist: cryptoAddressWhitelistReducer,
+  cryptoAddress: cryptoAddressReducer,
   webLogin: persistReducer(webLoginPersistConfig,webLoginReducer),
   transaction: persistReducer(transactionPersistConfig, transactionReducer),
 });

@@ -221,8 +221,7 @@ const OrderBook = props => {
                       </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
-                  <Table.Tbody  striped
-                                hovered>
+                  <Table.Tbody>
                     {visibleBuyOrders.map(({ total, amount, price }, idx) => {
                       return (
                         <Table.Tr key={nanoid()} onClick={() => onSelectOrder({type: 'buy', data: visibleBuyOrders.slice(0, idx + 1)})}>
@@ -286,8 +285,7 @@ const OrderBook = props => {
                       </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
-                  <Table.Tbody  striped
-                                hovered>
+                  <Table.Tbody>
                     {visibleSellOrders.map(({ total, amount, price }, idx) => {
                       return (
                         <Table.Tr key={nanoid()} onClick={() => onSelectOrder({type: 'sell', data: visibleSellOrders.slice(0, idx + 1)})}>

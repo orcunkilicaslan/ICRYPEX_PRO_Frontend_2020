@@ -103,6 +103,10 @@ const init = (initialLang = "en") => {
             method: "Method",
             unit: "Unit",
             currencies: "Currencies",
+            send: "Send",
+            continue:"Continue",
+            copied: "Copied",
+            balance: "Balance",
           },
           finance: {
             ask: "Ask",
@@ -135,6 +139,14 @@ const init = (initialLang = "en") => {
             destinationTag: "Destination Tag / Memo Id",
             deposit: "Deposit",
             withdraw: "Withdraw",
+            createATicket: "Create A Ticket",
+            watchedSymbolCreateAKey: "New {{watchedSymbol}} Create Key",
+            amountToDeposit: "Amount to Deposit",
+            cryptocurrencyWithdrawals: "Withdrawal - Cryptocurrency",
+            withdrawalBankTransfer : "Withdrawal - Bank Transfer",
+            depositBankTransfer : "Deposit - Bank Transfer",
+            depositWithCryptocurrency: "Deposit - Cryptocurrency",
+            depositCryptoWarning: "Only send {{watchedSymbol}} to this address. Sending a different coin will cause your deposits to be lost."
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -179,6 +191,7 @@ const init = (initialLang = "en") => {
             preliminary: "Preliminary information",
             termsOfService: "Terms of service",
             readAndAgree: "read and agree",
+            readAndAgreeCapital: "Read and Agree",
           },
           form: {
             isRequired: "This field is required",
@@ -335,6 +348,10 @@ const init = (initialLang = "en") => {
             method: "Yöntem",
             unit: "Birim",
             currencies: "Para Birimleri",
+            send: "Gönder",
+            continue:"Devam Et",
+            copied: "Kopyalandı",
+            balance: "Bakiye",
           },
           finance: {
             ask: "Alış",
@@ -367,6 +384,16 @@ const init = (initialLang = "en") => {
             destinationTag: "Destination Tag / Memo Id",
             deposit: "Yatır",
             withdraw: "Çek",
+            createATicket: "Talep Oluştur",
+            watchedSymbolCreateAKey: "Yeni {{watchedSymbol}} Adres Yarat",
+            amountToDeposit: "Hesaba Geçecek Miktar",
+            cryptocurrencyWithdrawals: "Kripto Para ile Para Çekme",
+            withdrawalBankTransfer : "Banka Transferi ile Para Çekme",
+            depositBankTransfer : "Banka Transferi ile Para Yatırma",
+            depositWithCryptocurrency: "Kripto Para ile Para Yatırma",
+            depositCryptoWarning: " Bu adrese sadece {{watchedSymbol}} gönderin. Farklı bir coin göndermek" +
+                " yatırdıklarınızın kaybolmasına neden olur."
+
           },
           coinbar: {
             lastPrice: "Son Fiyat",
@@ -411,6 +438,7 @@ const init = (initialLang = "en") => {
             preliminary: "Ön bilgilendirme metni",
             termsOfService: "Kullanım sözleşmesini",
             readAndAgree: "okudum ve onaylıyorum",
+            readAndAgreeCapital: "Okudum ve Onaylıyorum",
           },
           form: {
             isRequired: "Bu alanı doldurmalısınız",

@@ -34,6 +34,7 @@ const MODALS = [
   "activitiespendingfilter",
   "activitieshistoryfilter",
   "notifications",
+  "qrcode",
 ];
 
 const uiSlice = createSlice({

@@ -21,16 +21,17 @@ import { useCurrencies } from "~/state/hooks/";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal.jsx";
 import AddBankAccountModal from "~/components/modals/AddBankAccountModal";
+import classnames from "classnames";
 
 const OpenOrderDepoWithTabWithdrawBank = props => {
   const dispatch = useDispatch();
-  const { t } = useTranslation(["form"]);
-  const { isWithdrawingBank } = useSelector(state => state.withdraw);
+  const { t } = useTranslation(["form", "finance", "common", "login"]);
+  const [isWithdrawingBank, setIsWithdrawingBank ]  = useState(true);
   const { accounts = [] } = useSelector(state => state.user);
   const { allAssets } = useSelector(state => state.assets);
   const { all: allCurrencies } = useCurrencies();
   const [apiError, setApiError] = useState("");
-  const { register, handleSubmit, errors, watch, clearErrors } = useForm({
+  const { register, handleSubmit, errors, watch, clearErrors, setValue } = useForm({
     mode: "onChange",
     defaultValues: {
       customerbankid: accounts?.[0]?.id || "",
@@ -39,6 +40,15 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
     },
   });
   const { amount: watchedAmount, customerbankid: watchedId } = watch();
+  const [read, setRead] = useState({click: false, show: false, success:false});
+  const btnClass  = classnames({ 'disabled': read.click === false,'w-100': true });
+
+  const showForm = () => {
+    if(read.click) {setRead({...read,show: !read.show})}
+  }
+  const copyToBalance = () => {
+    setValue("amount",selectedBalance?.balance, { shouldValidate: true });
+  }
 
   const userAccounts = useMemo(() => {
     return accounts.map(account => {
@@ -63,6 +73,9 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
   useEffect(() => {
     dispatch(fetchBankAccounts());
   }, [dispatch]);
+  useEffect(() => {
+      setIsWithdrawingBank(!(watchedAmount && watchedAmount> 0))
+  }, [watchedAmount]);
 
   const getTotal = value => {
     const amount = parseFloat(value);
@@ -106,12 +119,12 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
 
   return (
       <Fragment>
-        {0 === 1 ? (
+        {!read.show ? (
             <div className="dandwinforesult resultbox">
               <div className="modal-content text-center">
                 <div className="modal-body modal-confirm">
                   <IconSet sprite="sprtlgclrd" size="50clrd" name="warning" />
-                  <h6>Banka Transferi ile Para Çekme</h6>
+                  <h6>{t("finance:withdrawalBankTransfer")}</h6>
                   <p>İşleminize devam edebilmek için lütfen <a className="urllink" onClick={openTermsModal}><u>Kural ve Şartları</u></a> dikkatle okuyup onaylayınız.</p>
                   <div className="contcheckbox">
                     <div className="custom-control custom-checkbox">
@@ -119,19 +132,20 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
                           className="custom-control-input"
                           id="withdrawBankTabIhaveRead"
                           type="checkbox"
+                          onClick={() => setRead && setRead(  {...read,click: !read.click})}
                       />
                       <Label
                           className="custom-control-label"
                           htmlFor="withdrawBankTabIhaveRead"
                       >
-                        Okudum ve onaylıyorum.
+                        {t("login:readAndAgreeCapital")}
                       </Label>
                     </div>
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <Button variant="primary" className="w-100 disabled">
-                    DEVAM ET
+                  <Button variant="primary"  className={btnClass} onClick={() => showForm()}>
+                    {t("common:continue")}
                   </Button>
                 </div>
               </div>
@@ -139,7 +153,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
         ) : (
             <div className="dandwtab-bank">
               <div className="dandwtab-form">
-                {true === true ? (
+                {!read.success? (
                     <Fragment>
                       <Form
                           className="withdrawbankform siteformui"
@@ -201,11 +215,11 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
                                 })}
                             />
                             <div className="form-control totalbalance text-right">
-                              <small>Bakiye</small>
+                              <small> {t("common:balance")}</small>
                               {selectedBalance?.balance} {selectedAccount?.currency?.symbol}
                             </div>
                             <InputGroupAddon addonType="append">
-                              <Button variant="secondary" className="active">
+                              <Button variant="secondary" className="active" onClick={() => copyToBalance()}>
                                 <IconSet sprite="sprtsmclrd" size="16" name="transfer" />
                               </Button>
                             </InputGroupAddon>
@@ -216,34 +230,11 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
                               </FormText>
                           )}
                           <Row form className="form-group">
-                            <Col>Hesaba Geçecek Miktar</Col>
+                            <Col>{t("finance:amountToDeposit")}</Col>
                             <Col xs="auto">
                               {getTotal(watchedAmount)} {selectedAccount?.currency?.symbol}
                             </Col>
                           </Row>
-                        </div>
-                        <div className="confirmcheckbox">
-                          {errors.read && (
-                              <FormText className="inputresult resulterror">
-                                {errors.read?.message}
-                              </FormText>
-                          )}
-                          <div className="custom-control custom-checkbox">
-                            <Input
-                                className="custom-control-input"
-                                id="withdrawBankTabIhaveRead"
-                                type="checkbox"
-                                name="read"
-                                innerRef={register({ required: t("form:isRequired") })}
-                            />
-                            <Label
-                                className="custom-control-label"
-                                htmlFor="withdrawBankTabIhaveRead"
-                            >
-                              <Button onClick={openTermsModal}>Kural ve Şartları</Button>{" "}
-                              okudum onaylıyorum.
-                            </Label>
-                          </div>
                         </div>
                         <div className="formbttm">
                           {apiError && (
@@ -255,7 +246,7 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
                               className="active"
                               disabled={isWithdrawingBank}
                           >
-                            ÇEKME İSTEĞİ GÖNDER
+                            {t("finance:createATicket")}
                           </Button>
                         </div>
                       </Form>

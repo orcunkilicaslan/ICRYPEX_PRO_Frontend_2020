@@ -24,11 +24,12 @@ import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTe
 import AddCryptoAddressModal from "~/components/modals/AddCryptoAddressModal";
 import { openOrderContext } from "./OpenOrder";
 import {getWhitelists} from "~/state/slices/cryptoaddreswhitelist.slice";
+import classnames from "classnames";
 
 
 const OpenOrderDepoWithTabWithdrawCrypto = props => {
   const dispatch = useDispatch();
-  const { t } = useTranslation(["form","common"]);
+  const { t } = useTranslation(["form","common", "login","finance"]);
   const { isWithdrawingCrypto } = useSelector(state => state.withdraw);
   const { info } = useSelector(state => state.user);
   const { whitelists = []} = useSelector(state => state.cryptoAddressWhitelist);
@@ -45,6 +46,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
     watch,
     clearErrors,
     setValue,
+      reset
   } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -62,6 +64,8 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
     return [currencies, symbols];
   }, [cryptoCurrencies, tokenCurrencies]);
 
+  const [read, setRead] = useState({click: false, show: false});
+  const btnClass  = classnames({ 'disabled': read.click === false,'w-100': true });
   const { symbol: watchedSymbol } = watch();
   const { state: orderContext } = useContext(openOrderContext);
 
@@ -71,7 +75,8 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
   );
 
   const {  balance: selectedBalance, selectedCryptoAddress: selectedCryptoAddress, selectedCryptoFree:selectedCryptoFree } = useMemo(() => {
-
+   setValue("amount", "", { shouldValidate: false });
+   setTotal("")
     const selectedCryptoAddress = groupedCryptoAddresses?.[watchedSymbol]?.[0]
     const balance = allAssets?.balances?.find?.(
         ({ currency_id }) => currency_id === selectedCryptoAddress?.currency_id
@@ -79,7 +84,6 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
     const selectedCryptoFree = cryptoFees?.filter(c => c.id ===  visibleCurrencies.find(
         ({ symbol }) => symbol === watchedSymbol
     )?.id && c.customerGroupId === info.customergroupid)
-
     return {  balance, selectedCryptoAddress, selectedCryptoFree };
   }, [watchedSymbol, allAssets, whitelists]);
 
@@ -93,6 +97,12 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
   useEffect(() => {
    dispatch(getWhitelists())
   },[]);
+
+
+  const showForm = () => {
+    if(read.click) {setRead({...read,show: !read.show})}
+  }
+
 
   const getTotal = value => {
     const amount = parseFloat(value);
@@ -120,7 +130,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
           address,
           destinationtag,
           amount,
-          read: JSON.stringify(read),
+          read: true,
         })
       );
 
@@ -149,12 +159,12 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
 
   return (
       <Fragment>
-        {0 === 1 ? (
+        {!read.show ? (
             <div className="dandwinforesult resultbox">
               <div className="modal-content text-center">
                 <div className="modal-body modal-confirm">
                   <IconSet sprite="sprtlgclrd" size="50clrd" name="warning" />
-                  <h6>Kripto Para ile Para Çekme</h6>
+                  <h6>{t("finance:cryptocurrencyWithdrawals")} </h6>
                   <p>İşleminize devam edebilmek için lütfen <a className="urllink"><u>Kural ve Şartları</u></a> dikkatle okuyup onaylayınız.</p>
                   <div className="contcheckbox">
                     <div className="custom-control custom-checkbox">
@@ -162,19 +172,20 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                           className="custom-control-input"
                           id="withdrawTabCryptoIhaveRead"
                           type="checkbox"
+                          onClick={() => setRead && setRead(  {...read,click: !read.click})}
                       />
                       <Label
                           className="custom-control-label"
                           htmlFor="withdrawTabCryptoIhaveRead"
                       >
-                        Okudum ve onaylıyorum.
+                        {t("login:readAndAgreeCapital")}
                       </Label>
                     </div>
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <Button variant="primary" className="w-100 disabled">
-                    DEVAM ET
+                  <Button variant="primary" className={btnClass} onClick={() => showForm()}>
+                    {t("common:continue")}
                   </Button>
                 </div>
               </div>
@@ -275,29 +286,6 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                       <Col>{t("common:amountToBeTransfer")}</Col>
                       <Col xs="auto">{total} {watchedSymbol}</Col>
                     </Row>
-                  </div>
-                  <div className="confirmcheckbox">
-                    {errors.read && (
-                        <FormText className="inputresult resulterror">
-                          {errors.read?.message}
-                        </FormText>
-                    )}
-                    <div className="custom-control custom-checkbox">
-                      <Input
-                          className="custom-control-input"
-                          id="withdrawCryptoTabIhaveRead"
-                          type="checkbox"
-                          name="read"
-                          innerRef={register({ required: t("form:isRequired") })}
-                      />
-                      <Label
-                          className="custom-control-label"
-                          htmlFor="withdrawCryptoTabIhaveRead"
-                      >
-                        <Button onClick={openTermsModal}>Kural ve Şartları</Button>{" "}
-                        {t("common:iHaveReadAndUnderstood")}
-                      </Label>
-                    </div>
                   </div>
                   <div className="formbttm">
                     {apiError && (

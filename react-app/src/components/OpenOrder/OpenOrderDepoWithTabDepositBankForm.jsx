@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import {useMemo, useRef, useState} from "react";
 import {
   Row,
   Form,
@@ -7,20 +7,21 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Label,
+  Label, Tooltip,
 } from "reactstrap";
 import { uniq, groupBy } from "lodash";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import Tooltip from 'react-power-tooltip'
 
 
 import { IconSet } from "~/components/IconSet.jsx";
 import { Button } from "~/components/Button.jsx";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal.jsx";
+import {useTranslation} from "react-i18next";
 
 const OpenOrderDepoWithTabDepositBankForm = props => {
+  const { t } = useTranslation(["common"]);
   const { accounts, bankCode } = props;
   const [bankCurrencies, accountsBySymbol] = useMemo(() => {
     const currencies = uniq(
@@ -33,7 +34,6 @@ const OpenOrderDepoWithTabDepositBankForm = props => {
 
   const ibanInputRef = useRef(null);
   const accountNameRef = useRef(null);
-
   const { register, watch } = useForm({
     defaultValues: {
       symbol: bankCurrencies[0],
@@ -45,6 +45,8 @@ const OpenOrderDepoWithTabDepositBankForm = props => {
   const { openModal } = useSelector(state => state.ui);
 
   const dispatch = useDispatch();
+  const [tooltipOpen, setTooltipOpen] = useState({iban:false, accountName:false});
+
 
   const openTermsModal = () => {
     dispatch(setOpenModal("depositwithdrawalterms"));
@@ -55,12 +57,21 @@ const OpenOrderDepoWithTabDepositBankForm = props => {
   };
 
 
-  const  copyToClipboard = ref => () => {
-    switch(ref) {
+  const  copyToClipboard = ref => async () => {
 
-      case "ibanInputRef":   return navigator.clipboard.writeText(ibanInputRef.current.innerText).then(r => {});
-      case "accountNameRef":   return navigator.clipboard.writeText(accountNameRef.current.innerText).then(r => {});
-      default:      return ""
+    switch (ref) {
+      case "ibanInputRef":
+        return navigator.clipboard.writeText(ibanInputRef.current.innerText).then(r => {
+          setTooltipOpen({...tooltipOpen,iban: true})
+          setTimeout(async () => await  setTooltipOpen({...tooltipOpen,iban: false}), 2000)
+        });
+      case "accountNameRef":
+        return navigator.clipboard.writeText(accountNameRef.current.innerText).then(r => {
+          setTooltipOpen({...tooltipOpen,accountName: true})
+          setTimeout(async () => await  setTooltipOpen({...tooltipOpen,accountName: false}), 2000)
+        });
+      default:
+        return ""
     }
   };
 
@@ -92,11 +103,11 @@ const OpenOrderDepoWithTabDepositBankForm = props => {
               {account?.iban || null}
             </div>
             <InputGroupAddon addonType="append">
-              <Button variant="secondary" className="active" type="button" onClick={copyToClipboard('ibanInputRef')}>
+              <Button variant="secondary" className="active" type="button" onClick={copyToClipboard('ibanInputRef')}  id="iban">
                 <IconSet sprite="sprtsmclrd" size="16" name="copybtn" />
               </Button>
-              <Tooltip show={true} position="left center" animation='slideUpDown' textBoxWidth='75px'>
-                <span>Copied!</span>
+              <Tooltip placement="right" isOpen={tooltipOpen.iban} target="iban">
+                {t("common:copied")}
               </Tooltip>
             </InputGroupAddon>
           </InputGroup>
@@ -109,28 +120,14 @@ const OpenOrderDepoWithTabDepositBankForm = props => {
             {account?.name || null}
           </div>
           <InputGroupAddon addonType="append">
-            <Button variant="secondary" className="active" type="button" onClick={copyToClipboard('accountNameRef')}>
+            <Button variant="secondary" className="active" type="button" onClick={copyToClipboard('accountNameRef')} id="accountName">
               <IconSet sprite="sprtsmclrd" size="16" name="copybtn" />
             </Button>
+            <Tooltip placement="right" isOpen={tooltipOpen.accountName} target="accountName">
+              {t("common:copied")}
+            </Tooltip>
           </InputGroupAddon>
         </InputGroup>
-        <div className="confirmcheckbox">
-          <div className="custom-control custom-checkbox">
-            <Input
-              className="custom-control-input"
-              id={`${bankCode}_depositBankTabIhaveRead`}
-              type="checkbox"
-              defaultChecked
-            />
-            <Label
-              className="custom-control-label"
-              htmlFor={`${bankCode}_depositBankTabIhaveRead`}
-            >
-              <Button onClick={openTermsModal}>Kural ve Şartları</Button> okudum
-              onaylıyorum.
-            </Label>
-          </div>
-        </div>
       </Form>
       <DepositWithdrawalTermsModal
         isOpen={openModal === "depositwithdrawalterms"}
