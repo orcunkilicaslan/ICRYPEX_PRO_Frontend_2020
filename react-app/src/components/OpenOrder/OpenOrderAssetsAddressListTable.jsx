@@ -1,4 +1,4 @@
-import {useContext, useRef, useState} from "react";
+import {useContext, useRef, useState,Fragment} from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "../Button.jsx";
@@ -55,68 +55,103 @@ const OpenOrderAssetsAddressListTable = props => {
 
   return (
     <div className="assetsaddress-tablebox">
-      <div className="asaddresstable scrollbar" ref={tableCanvasRef}>
-        <Table scrollbar>
-          <Table.Thead scrollbar>
-            <Table.Tr>
-              <Table.Th sizeauto className="ico" />
-              <Table.Th sizeauto className="btn" />
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody
-            striped
-            hovered
-            scrollbar
-            scrollbarstyles={{ height: `${tableHeight - 36}px` }}
-          >
-            {addresses?.map(({ id, address, symbol }) => {
-              return (
-                <Table.Tr key={id}>
-                  <Table.Td sizeauto className="ico">
-                    <Button type="button">
-                      <IconSet sprite="sprtsmclrd" size="16" name="qrcode" onClick={() => {
-                        openQrCodeModal(id)
-                      }}/>
-                    </Button>
-                    <Button type="button" onClick={copyToClipboard(id)}  id="address">
-                      <IconSet sprite="sprtsmclrd" size="16" name="copybtn" />
-                    </Button>
-                    <Tooltip placement="right" isOpen={tooltipOpen.address} target="address">
-                      {t("common:copied")}
-                    </Tooltip>
-                  </Table.Td>
-                  <Table.Td sizefixed className="add">
-                    {address}
-                  </Table.Td>
-                  <Table.Td sizeauto className="btn">
-                    <Button
-                      type="button"
-                      size="sm"
-                      variant="outline-success"
-                      onClick={() => onClick("deposit", symbol)}
-                    >
-                      {t("deposit")}
-                    </Button>
-                    <Button
-                      type="button"
-                      size="sm"
-                      variant="outline-danger"
-                      onClick={() => onClick("withdraw", symbol)}
-                    >
-                      {t("withdraw")}
-                    </Button>
-                  </Table.Td>
-                </Table.Tr>
-              );
-            })}
-          </Table.Tbody>
-        </Table>
-      </div>
-      <QrCodeModal
-          isOpen={openModal === "qrcode"}
-          value={selectedAddress || ""}
-          clearModals={clearOpenModals}
-      />
+
+      {addresses ? (
+          <Fragment>
+            <div className="asaddresstable scrollbar" ref={tableCanvasRef}>
+              <Table>
+                <Table.Thead>
+                  <Table.Tr>
+                    <Table.Th sizeauto className="ico ico01" />
+                    <Table.Th sizefixed className="add">Adres</Table.Th>
+
+                    <Table.Th sizeauto className="ico ico02" />
+                    <Table.Th sizeauto className="tag">Tag</Table.Th>
+
+                    <Table.Th sizeauto className="btn" />
+                  </Table.Tr>
+                </Table.Thead>
+                <Table.Tbody
+                    striped
+                    hovered
+                >
+                  {addresses?.map(({ id, address, symbol }) => {
+                    return (
+                        <Table.Tr key={id}>
+                          <Table.Td sizeauto className="ico ico01">
+                            <Button type="button">
+                              <IconSet sprite="sprtsmclrd" size="16" name="qrcode" onClick={() => {
+                                openQrCodeModal(id)
+                              }}/>
+                            </Button>
+                            <Button type="button" onClick={copyToClipboard(id)}  id="address">
+                              <IconSet sprite="sprtsmclrd" size="16" name="copybtn" />
+                            </Button>
+                            <Tooltip placement="right" isOpen={tooltipOpen.address} target="address">
+                              {t("common:copied")}
+                            </Tooltip>
+                          </Table.Td>
+                          <Table.Td sizefixed className="add">
+                            {address}
+                          </Table.Td>
+
+                          <Table.Td sizeauto className="ico ico02">
+                            <Button type="button">
+                              <IconSet sprite="sprtsmclrd" size="16" name="qrcode" onClick={() => {
+                                openQrCodeModal(id)
+                              }}/>
+                            </Button>
+                            <Button type="button" onClick={copyToClipboard(id)}  id="address">
+                              <IconSet sprite="sprtsmclrd" size="16" name="copybtn" />
+                            </Button>
+                            <Tooltip placement="right" isOpen={tooltipOpen.address} target="address">
+                              {t("common:copied")}
+                            </Tooltip>
+                          </Table.Td>
+                          <Table.Td sizeauto className="tag">
+                            Tag
+                          </Table.Td>
+
+                          <Table.Td sizeauto className="btn">
+                            <Button
+                                type="button"
+                                size="sm"
+                                variant="outline-success"
+                                onClick={() => onClick("deposit", symbol)}
+                            >
+                              {t("deposit")}
+                            </Button>
+                            <Button
+                                type="button"
+                                size="sm"
+                                variant="outline-danger"
+                                onClick={() => onClick("withdraw", symbol)}
+                            >
+                              {t("withdraw")}
+                            </Button>
+                          </Table.Td>
+                        </Table.Tr>
+                    );
+                  })}
+                </Table.Tbody>
+              </Table>
+            </div>
+            <QrCodeModal
+                isOpen={openModal === "qrcode"}
+                value={selectedAddress || ""}
+                clearModals={clearOpenModals}
+            />
+          </Fragment>
+      ) : (
+          <Fragment>
+            <Button
+                variant="primary"
+            >
+              YENİ ADRES OLUŞTUR
+            </Button>
+          </Fragment>
+      )}
+
     </div>
   );
 };
