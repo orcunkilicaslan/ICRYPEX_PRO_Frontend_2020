@@ -8,7 +8,7 @@ import {
   Input,
   InputGroup,
   InputGroupAddon,
-  InputGroupText,
+  InputGroupText, Tooltip,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -138,6 +138,7 @@ const EasyBuySellFormBuy = props => {
               <Input
                 type="number"
                 name="fiatAmount"
+                id="fiatAmount"
                 readOnly={isSubmitted}
                 innerRef={register({
                   valueAsNumber: true,
@@ -171,9 +172,9 @@ const EasyBuySellFormBuy = props => {
               </InputGroupAddon>
             </InputGroup>
             {errors.fiatAmount && (
-              <FormText className="inputresult resulterror">
-                {errors.fiatAmount?.message}
-              </FormText>
+                <Tooltip placement="top-end" isOpen={errors.fiatAmount} target="fiatAmount">
+                  {errors.fiatAmount.message}
+                </Tooltip>
             )}
           </FormGroup>
           <FormGroup className="col-auto">
@@ -205,6 +206,7 @@ const EasyBuySellFormBuy = props => {
               </InputGroupAddon>
               <Input
                 type="number"
+                id="cryptoAmount"
                 name="cryptoAmount"
                 readOnly={isSubmitted}
                 innerRef={register({
@@ -237,9 +239,9 @@ const EasyBuySellFormBuy = props => {
               </InputGroupAddon>
             </InputGroup>
             {errors.cryptoAmount && (
-              <FormText className="inputresult resulterror">
-                {errors.cryptoAmount?.message}
-              </FormText>
+                <Tooltip placement="top-end" isOpen={errors.cryptoAmount} target="cryptoAmount">
+                  {errors.cryptoAmount.message}
+                </Tooltip>
             )}
           </FormGroup>
         </Row>
