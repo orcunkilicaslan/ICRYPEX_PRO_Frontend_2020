@@ -5,11 +5,11 @@ import {
   Label,
   Input,
   InputGroupAddon,
-  InputGroupText,
   Modal,
   ModalHeader,
   ModalBody,
   Progress,
+  FormText,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -23,8 +23,9 @@ import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
 import { AlertResult } from "../AlertResult.jsx";
 import Table from "../Table";
-import { getFormattedPrice, getPairTuple } from "~/util/";
+import { getPairTuple } from "~/util/";
 import { useCurrencies } from "~/state/hooks/";
+import NumberInput from "../NumberInput";
 
 const rangeAlarmPercent = [-100, -75, -50, -25, 0, 25, 50, 75, 100];
 const spinnerStep = 10;
@@ -43,18 +44,27 @@ export default function AlarmModal(props) {
     deleteAlarm,
     deleteAlarms,
     onToggleHideOthers,
+    setErrorMessage,
     ...rest
   } = props;
   const { t } = useTranslation(["coinbar", "common", "form"]);
+  const { findCurrencyBySymbol } = useCurrencies();
   const { all: allAlarms, isCreating, hideOthers, isDeleting } = useSelector(
     state => state.alarm
   );
-  const { register, handleSubmit, setValue, getValues } = useForm({
+  const {
+    handleSubmit,
+    setValue,
+    getValues,
+    control,
+    reset: resetForm,
+    errors,
+    watch,
+  } = useForm({
     mode: "onChange",
-    defaultValues: {
-      amount: selectedPriceData?.price,
-    },
   });
+
+  const [userInput, setUserInput] = useState(null);
   const [rangeAlarmPortfolio, setRangeAlarmPortfolio] = useState(
     rangeAlarmPercent[4]
   );
@@ -67,7 +77,6 @@ export default function AlarmModal(props) {
       return byPair[currentPair?.name] || [];
     }
   }, [allAlarms, currentPair, hideOthers]);
-  const { findCurrencyBySymbol } = useCurrencies();
 
   const upOrDown = selectedPriceData?.changepercent > 0 ? "up" : "down";
   const siteColorClass = `sitecolor${upOrDown === "up" ? "green" : "red"}`;
@@ -88,15 +97,31 @@ export default function AlarmModal(props) {
   });
 
   useEffect(() => {
-    const parsed = parseFloat(selectedPriceData?.price);
+    if (isOpen) {
+      let amount;
 
-    if (rangeAlarmPortfolio !== 0) {
-      const adjusted = parsed + parsed * (rangeAlarmPortfolio / 100);
-      setValue("amount", adjusted);
+      if (userInput) {
+        setRangeAlarmPortfolio(0);
+        amount = userInput;
+      } else amount = selectedPriceData?.price;
+
+      if (amount) {
+        if (rangeAlarmPortfolio !== 0) {
+          const adjusted = amount + amount * (rangeAlarmPortfolio / 100);
+          setValue("amount", adjusted);
+        } else {
+          setValue("amount", amount);
+        }
+      }
     } else {
-      setValue("amount", parsed);
+      setErrorMessage(null);
+      setUserInput(null);
+      setRangeAlarmPortfolio(0);
+      resetForm();
     }
-  }, [rangeAlarmPortfolio, selectedPriceData, setValue]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen, rangeAlarmPortfolio, selectedPriceData, userInput]);
 
   const onAmountStep = int => {
     const amount = getValues("amount");
@@ -104,7 +129,18 @@ export default function AlarmModal(props) {
 
     if (newAmount >= spinnerMin && newAmount <= spinnerMax) {
       setValue("amount", newAmount);
+      setUserInput(newAmount);
     }
+  };
+
+  const onValueChange = target => {
+    let amount = target.floatValue;
+    setValue("amount", amount);
+  };
+
+  const onChange = () => {
+    const amount = watch("amount");
+    setUserInput(amount);
   };
 
   const onSubmit = async ({ amount }) => {
@@ -115,6 +151,11 @@ export default function AlarmModal(props) {
     };
 
     await createAlarm(data);
+  };
+
+  const onRangeChange = event => {
+    const int = parseInt(event?.target?.value, 10);
+    setRangeAlarmPortfolio(int);
   };
 
   return (
@@ -132,20 +173,22 @@ export default function AlarmModal(props) {
       <ModalHeader toggle={clearModals}>{t("setAlarm")}</ModalHeader>
       <ModalBody className="modalcomp modalcomp-setalarm">
         <div className="modalcomp-setalarm-data">
-          <div className="databigger">
-            <PerLineIcon className={`mdper mdper-${upOrDown}`} />
-            <span className={siteColorClass}>
-              <NumberFormat
-                value={selectedPriceData?.price}
-                displayType={"text"}
-                thousandSeparator={true}
-                decimalScale={selectedFiatCurrency?.digit}
-                fixedDecimalScale
-              />
-            </span>
-          </div>
+          {selectedPriceData?.price && (
+            <div className="databigger">
+              <PerLineIcon className={`mdper mdper-${upOrDown}`} />
+              <span className={siteColorClass} title={selectedPriceData?.price}>
+                <NumberFormat
+                  value={selectedPriceData?.price}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  decimalScale={selectedFiatCurrency?.digit}
+                  fixedDecimalScale
+                />
+              </span>
+            </div>
+          )}
           <div className="datasmall">
-            <span>
+            <span title={selectedPriceData?.pricechange}>
               <NumberFormat
                 value={selectedPriceData?.pricechange}
                 displayType={"text"}
@@ -154,7 +197,10 @@ export default function AlarmModal(props) {
                 fixedDecimalScale
               />
             </span>
-            <span className={siteColorClass}>
+            <span
+              className={siteColorClass}
+              title={selectedPriceData?.changepercent}
+            >
               {upOrDown === "up" ? "+" : "-"}
               <NumberFormat
                 value={selectedPriceData?.changepercent}
@@ -178,6 +224,11 @@ export default function AlarmModal(props) {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="setalarmspinner">
+              {errors.amount && (
+                <FormText className="inputresult resulterror inputintext">
+                  {errors.amount?.message}
+                </FormText>
+              )}
               <FormGroup className="input-group">
                 <InputGroupAddon addonType="prepend">
                   <Button
@@ -188,28 +239,31 @@ export default function AlarmModal(props) {
                     -
                   </Button>
                 </InputGroupAddon>
-                <Input
-                  type="number"
-                  className="text-right"
+                <NumberInput
+                  control={control}
                   name="amount"
-                  innerRef={register({
-                    valueAsNumber: true,
+                  defaultValue={selectedPriceData?.price}
+                  rules={{
                     required: t("form:isRequired"),
                     min: {
-                      value: 0,
-                      message: t("form:shouldBeMin", { value: 0 }),
+                      value: spinnerMin,
+                      message: t("form:shouldBeMin", { value: spinnerMin }),
                     },
                     max: {
-                      value: 999999,
-                      message: t("form:shouldBeMax", { value: 999999 }),
+                      value: spinnerMax,
+                      message: t("form:shouldBeMax", { value: spinnerMax }),
                     },
-                  })}
+                  }}
+                  inputProps={{
+                    className: "text-right",
+                    thousandSeparator: true,
+                    decimalScale: selectedFiatCurrency?.digit,
+                    fixedDecimalScale: true,
+                    suffix: ` ${selectedFiatCurrency?.symbol}`,
+                    onValueChange,
+                    onChange,
+                  }}
                 />
-                <InputGroupAddon addonType="append">
-                  <InputGroupText>
-                    {selectedFiatCurrency?.symbol}
-                  </InputGroupText>
-                </InputGroupAddon>
                 <InputGroupAddon addonType="append">
                   <Button
                     variant="secondary"
@@ -268,10 +322,7 @@ export default function AlarmModal(props) {
                 max={100}
                 step={1}
                 value={rangeAlarmPortfolio}
-                onChange={({ target }) => {
-                  const int = parseInt(target.value, 10);
-                  setRangeAlarmPortfolio(int);
-                }}
+                onChange={onRangeChange}
               />
             </div>
             <div className="setalarmbtn">
@@ -322,7 +373,7 @@ export default function AlarmModal(props) {
                     {t("common:pair")}
                   </Table.Th>
                   <Table.Th sizefixed className="amnt">
-                    {t("common:amount")}
+                    {t("common:price")}
                   </Table.Th>
                   <Table.Th sizeauto className="adlt" />
                 </Table.Tr>
@@ -339,7 +390,13 @@ export default function AlarmModal(props) {
                       </Table.Td>
                       <Table.Td sizefixed className="amnt">
                         <span title={price}>
-                          {getFormattedPrice(price, fiatCurrency?.digit)}
+                          <NumberFormat
+                            value={price}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            decimalScale={fiatCurrency?.digit}
+                            fixedDecimalScale
+                          />
                         </span>
                         <PerLineIcon className={`mdper mdper-${mdper}`} />
                       </Table.Td>

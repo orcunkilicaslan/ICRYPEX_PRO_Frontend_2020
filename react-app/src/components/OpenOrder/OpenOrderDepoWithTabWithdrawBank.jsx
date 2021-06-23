@@ -12,6 +12,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import NumberFormat from "react-number-format";
 
 import { Button } from "~/components/Button.jsx";
 import { IconSet } from "~/components/IconSet.jsx";
@@ -22,6 +23,7 @@ import { setOpenModal } from "~/state/slices/ui.slice";
 import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal.jsx";
 import AddBankAccountModal from "~/components/modals/AddBankAccountModal";
 import classnames from "classnames";
+import NumberInput from "~/components/NumberInput.jsx";
 
 const OpenOrderDepoWithTabWithdrawBank = props => {
   const dispatch = useDispatch();

@@ -220,6 +220,7 @@ const TopCoinBar = props => {
         clearModals={clearOpenModals}
         onToggleHideOthers={onToggleHideOthers}
         errorMessage={alarmError}
+        setErrorMessage={setAlarmError}
         selectedPriceData={selectedPriceData}
         selectedFiatCurrency={selectedFiatCurrency}
         currentPair={currentPair}

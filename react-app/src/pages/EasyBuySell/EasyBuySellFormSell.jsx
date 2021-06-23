@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import {
   Row,
   Form,
@@ -12,22 +12,24 @@ import {
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 import { ReactComponent as TildeSmIcon } from "~/assets/images/icons/path_icon_tildesm.svg";
 import { Button } from "~/components/Button.jsx";
 import { IconSet } from "~/components/IconSet.jsx";
-import Table from "~/components/Table.jsx";
-import { usePrices } from "~/state/hooks/";
-import {fetchBalance} from "~/state/slices/balance.slice";
-import {fetchEasySell} from "~/state/slices/easysell.slice";
-import {AlertResult} from "~/components/AlertResult";
+import { usePrices, useLocaleUpperCase } from "~/state/hooks/";
+import { fetchBalance } from "~/state/slices/balance.slice";
+import { fetchEasySell } from "~/state/slices/easysell.slice";
+import { AlertResult } from "~/components/AlertResult";
 
 const EasyBuySellFormSell = props => {
   const { t } = useTranslation(["form", "common", "finance"]);
   const dispatch = useDispatch();
+  const toUpperCase = useLocaleUpperCase();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
-  const { fiatCurrency, cryptoCurrency, selectedPrice, selectedPair } = usePrices();
+  const { fiatCurrency, cryptoCurrency, selectedPrice, selectedPair } =
+    usePrices();
   const { register, handleSubmit, errors, setValue, reset } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -35,20 +37,28 @@ const EasyBuySellFormSell = props => {
       cryptoAmount: "",
     },
   });
-  const {cryptoBalance}  = useSelector(state => state.balance);
+  const { cryptoBalance } = useSelector(state => state.balance);
   const [currencyBalance, setCurrencyBalance] = useState(0);
   const [apiError, setApiError] = useState("");
 
   useEffect(() => {
-    setCurrencyBalance(0)
+    setCurrencyBalance(0);
     if (selectedPair) {
       reset();
-     dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false, isPadding: true}));
+      dispatch(
+        fetchBalance({
+          currencyid: selectedPair?.first_currency_id,
+          isFiat: false,
+          isPadding: true,
+        })
+      );
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, selectedPair]);
 
   useEffect(() => {
-    setCurrencyBalance(parseFloat(cryptoBalance).toFixed(8))
+    setCurrencyBalance(parseFloat(cryptoBalance).toFixed(8));
   }, [dispatch, cryptoBalance]);
 
   const onReset = event => {
@@ -63,11 +73,18 @@ const EasyBuySellFormSell = props => {
     if (data?.cryptoAmount > 0) {
       setApiError("");
       setIsSubmitted(true);
-      const  firstcurrencyid  = selectedPair.first_currency_id;
-      const  secondcurrencyid  = selectedPair.second_currency_id;
-      const buyingamount  = data.fiatAmount;
-      const sellingamount  = data.cryptoAmount;
-     const { payload } = await dispatch(fetchEasySell({ firstcurrencyid,secondcurrencyid,buyingamount,sellingamount }));
+      const firstcurrencyid = selectedPair.first_currency_id;
+      const secondcurrencyid = selectedPair.second_currency_id;
+      const buyingamount = data.fiatAmount;
+      const sellingamount = data.cryptoAmount;
+      const { payload } = await dispatch(
+        fetchEasySell({
+          firstcurrencyid,
+          secondcurrencyid,
+          buyingamount,
+          sellingamount,
+        })
+      );
       if (!payload?.status) {
         setApiError(payload?.errormessage);
         setIsSubmitted(false);
@@ -75,7 +92,13 @@ const EasyBuySellFormSell = props => {
         reset();
       } else {
         setApiError("");
-        await  dispatch(fetchBalance({currencyid: selectedPair?.first_currency_id, isFiat: false, isPadding: false}));
+        await dispatch(
+          fetchBalance({
+            currencyid: selectedPair?.first_currency_id,
+            isFiat: false,
+            isPadding: false,
+          })
+        );
         setIsConfirmed(true);
       }
     }
@@ -83,8 +106,10 @@ const EasyBuySellFormSell = props => {
 
   return (
     <div className="easybuysell-cont">
-      { apiError !== "" ? (
-          <AlertResult error center>{apiError}</AlertResult>
+      {apiError !== "" ? (
+        <AlertResult error center>
+          {apiError}
+        </AlertResult>
       ) : null}
       <Form
         className="siteformui"
@@ -94,13 +119,20 @@ const EasyBuySellFormSell = props => {
       >
         <Row className="easybuysell-form-inputs">
           <FormGroup
-              className={`col ${errors.cryptoAmount && ("inputresult resulterror")}`}
+            className={`col ${
+              errors.cryptoAmount && "inputresult resulterror"
+            }`}
           >
             <div className="formflexlabel">
-              <Label>{t("finance:amountToBeSold")} - {cryptoCurrency}</Label>
+              <Label>
+                {t("finance:amountToBeSold")} - {cryptoCurrency}
+              </Label>
               <div className="labelassets">
                 <p>
-                  {t('finance:available')}: <span>{parseFloat(currencyBalance).toFixed(8)} {cryptoCurrency}</span>
+                  {t("finance:available")}:{" "}
+                  <span>
+                    {parseFloat(currencyBalance).toFixed(8)} {cryptoCurrency}
+                  </span>
                 </p>
               </div>
             </div>
@@ -117,8 +149,10 @@ const EasyBuySellFormSell = props => {
                   required: t("isRequired"),
                   min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
                   max: {
-                    value:  parseFloat(currencyBalance).toFixed(8),
-                    message: t("shouldBeMax", { value: parseFloat(currencyBalance).toFixed(8) }),
+                    value: parseFloat(currencyBalance).toFixed(8),
+                    message: t("shouldBeMax", {
+                      value: parseFloat(currencyBalance).toFixed(8),
+                    }),
                   },
                 })}
                 onChange={e => {
@@ -141,9 +175,9 @@ const EasyBuySellFormSell = props => {
               </InputGroupAddon>
             </InputGroup>
             {errors.cryptoAmount && (
-                <FormText className="inputresult resulterror">
-                  {errors.cryptoAmount?.message}
-                </FormText>
+              <FormText className="inputresult resulterror">
+                {errors.cryptoAmount?.message}
+              </FormText>
             )}
           </FormGroup>
           <FormGroup className="col-auto">
@@ -152,14 +186,19 @@ const EasyBuySellFormSell = props => {
             </div>
           </FormGroup>
           <FormGroup
-              className={`col ${errors.fiatAmount && ("inputresult resulterror")}`}
+            className={`col ${errors.fiatAmount && "inputresult resulterror"}`}
           >
             <div className="formflexlabel">
-              <Label>{t("finance:amountToBeSold")} - {fiatCurrency}</Label>
+              <Label>
+                {t("finance:amountToBeSold")} - {fiatCurrency}
+              </Label>
               <div className="labelprice">
                 <p>
-                  {cryptoCurrency} {t('common:price')}: <TildeSmIcon className="tildesm" />{" "}
-                  <span>{selectedPrice?.price} {fiatCurrency}</span>
+                  {cryptoCurrency} {t("common:price")}:{" "}
+                  <TildeSmIcon className="tildesm" />{" "}
+                  <span>
+                    {selectedPrice?.price} {fiatCurrency}
+                  </span>
                 </p>
               </div>
             </div>
@@ -200,9 +239,9 @@ const EasyBuySellFormSell = props => {
               </InputGroupAddon>
             </InputGroup>
             {errors.fiatAmount && (
-                <FormText className="inputresult resulterror">
-                  {errors.fiatAmount?.message}
-                </FormText>
+              <FormText className="inputresult resulterror">
+                {errors.fiatAmount?.message}
+              </FormText>
             )}
           </FormGroup>
         </Row>
@@ -218,39 +257,32 @@ const EasyBuySellFormSell = props => {
         </div>
       </Form>
       {isSubmitted ? (
-          isConfirmed ? (
-                  <div className="easybuysell-confirm">
-                    <div className="easybuysell-confirm-title">
-                      <h4>İŞLEM ONAYI</h4>
-                    </div>
-                    <div className="easybuysell-confirm-result modal-maincont">
-                      <div className="modal-content modal-sm text-center">
-                        <div className="modal-body modal-confirm">
-                          <IconSet sprite="sprtlgclrd" size="50clrd" name="check" />
-                          <p>
-                            {cryptoCurrency} satış işleminiz başarıyla tamamlanmıştır.
-                          </p>
-                          <p>
-                            <a className="urllink" href="#">
-                              <u>İşlem Geçmişi</u>
-                            </a>{" "}
-                            ya da{" "}
-                            <a className="urllink" href="#">
-                              <u>Varlıklar</u>
-                            </a>{" "}
-                            bölümünden kontrol edebilirsiniz.
-                          </p>
-                        </div>
-                        <div className="modal-footer">
-                          <Button variant="primary" className="w-100" onClick={onReset}>
-                            YENİ İŞLEM
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              ) :
-              null
+        isConfirmed ? (
+          <div className="easybuysell-confirm">
+            <div className="easybuysell-confirm-title">
+              <h4>{toUpperCase(t("finance:transactionConfirmation"))}</h4>
+            </div>
+            <div className="easybuysell-confirm-result modal-maincont">
+              <div className="modal-content modal-sm text-center">
+                <div className="modal-body modal-confirm">
+                  <IconSet sprite="sprtlgclrd" size="50clrd" name="check" />
+                  <p>{t("finance:sellSuccess", { item: cryptoCurrency })}</p>
+                  <p>
+                    {t("finance:checkNewTransaction", {
+                      history: t("openorder:tradeHistory"),
+                      assets: t("app:assets"),
+                    })}
+                  </p>
+                </div>
+                <div className="modal-footer">
+                  <Button variant="primary" className="w-100" onClick={onReset}>
+                    {toUpperCase(t("finance:newTransaction"))}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null
       ) : null}
     </div>
   );
