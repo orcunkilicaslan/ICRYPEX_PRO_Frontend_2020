@@ -3,33 +3,29 @@
   "scripts": {
     "start": "gulp start",
     "build": "gulp build --production",
-    "devel": "gulp devel",
-    "preinstall": "npx npm-force-resolutions"
+    "devel": "gulp devel"
   },
   "author": "Orcun KILICASLAN",
   "license": "Licensed",
   "devDependencies": {
     "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
-    "animate.css": "^4.1.1",
+    "animate.css": "^3.7.2",
     "bootstrap": "^4.5.2",
     "bootstrap.native": "^3.0.13",
     "browser-sync": "^2.26.12",
     "browserslist": "^4.14.0",
     "caniuse-lite": "^1.0.30001117",
-    "chartist": "^0.11.4",
-    "del": "^6.0.0",
-    "detect-browser": "^5.2.0",
-    "dropzone": "^5.7.2",
+    "del": "^4.1.1",
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^8.0.0",
+    "gulp-autoprefixer": "^6.1.0",
     "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-cssnano": "^2.1.3",
     "gulp-if": "^3.0.0",
     "gulp-plumber": "^1.2.1",
     "gulp-sass": "^4.1.0",
-    "gulp-sourcemaps": "^3.0.0",
+    "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "gulp-util": "^3.0.8",
     "jquery": "^3.5.1",
@@ -38,16 +34,13 @@
     "owl.carousel": "^2.3.4",
     "perfect-scrollbar": "^1.5.0",
     "popper.js": "^1.16.1",
+    "webpack-stream": "^5.2.1",
+    "chartist": "^0.11.4",
+    "detect-browser": "^5.2.0",
     "select": "^1.1.2",
-    "webpack-stream": "^6.1.2"
+    "dropzone": "^5.7.2"
   },
-  "resolutions": {
-    "glob-parent": "5.1.2",
-    "js-yaml": "3.13.1",
-    "normalize-url": "4.5.1",
-    "trim-newlines": "3.0.1",
-    "yargs-parser": "13.1.2"
-  },
+  "dependencies": {},
   "browserslist": [
     "Explorer >= 10",
     "last 3 versions"
