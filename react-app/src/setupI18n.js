@@ -150,7 +150,7 @@ const init = (initialLang = "en") => {
             withdrawalBankTransfer : "Withdrawal - Bank Transfer",
             depositBankTransfer : "Deposit - Bank Transfer",
             depositWithCryptocurrency: "Deposit - Cryptocurrency",
-            depositCryptoWarning: "Only send {{watchedSymbol}} to this address. Sending a different coin will cause your deposits to be lost."
+            depositCryptoWarning: "Only send {{watchedSymbol}} to this address. Sending a different coin will cause your deposits to be lost.",
             realizedPrice: "Realized Price",
             transactionConfirmation: "Transaction Confirmation",
             buySuccess: "Successfully bought {{item}}.",
