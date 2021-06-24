@@ -160,6 +160,14 @@ const init = (initialLang = "en") => {
             checkNewTransaction:
               "You can see it in {{history}} or {{assets}} sections.",
             createNewAddress: "Create New Address",
+            rulesNotice1: "In order to continue, please read the",
+            rulesNotice2: "Terms & Conditions",
+            rulesNotice3: "carefully.",
+            depositBankInfo1:
+              "Only amounts received from bank accounts linked to the name, surname, and T.C. number you have registered in our system are accepted.",
+            depositBankInfo2:
+              "You can transfer the amount you wish to deposit to any Icrypex account above.",
+            accountOwner: "Account Owner",
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -424,6 +432,14 @@ const init = (initialLang = "en") => {
             checkNewTransaction:
               "{{history}} ya da {{assets}} bölümünden kontrol edebilirsiniz.",
             createNewAddress: "Yeni Adres Oluştur",
+            rulesNotice1: "İşleminize devam edebilmek için lütfen",
+            rulesNotice2: "Kural ve Şartları",
+            rulesNotice3: "dikkatlice okuyunuz.",
+            depositBankInfo1:
+              "Yalnızca sistemimize kayıt olduğunuz isim, soyisim ve T.C. Kimlik Numarası’na ait banka hesaplarından gelen tutarlar kabul edilmektedir.",
+            depositBankInfo2:
+              "Yatırmak istediğiniz miktarı bankanız üzerinden yukarıdaki Icrypex hesabına Havale/EFT yapabilirsiniz.",
+            accountOwner: "Hesap Sahibi",
           },
           coinbar: {
             lastPrice: "Son Fiyat",

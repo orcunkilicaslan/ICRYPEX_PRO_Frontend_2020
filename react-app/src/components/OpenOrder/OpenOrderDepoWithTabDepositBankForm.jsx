@@ -1,4 +1,4 @@
-import {useMemo, useRef, useState} from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   Row,
   Form,
@@ -7,22 +7,18 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Label, Tooltip,
+  Tooltip,
 } from "reactstrap";
 import { uniq, groupBy } from "lodash";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-
+import { useTranslation } from "react-i18next";
 
 import { IconSet } from "~/components/IconSet.jsx";
 import { Button } from "~/components/Button.jsx";
-import { setOpenModal } from "~/state/slices/ui.slice";
-import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal.jsx";
-import {useTranslation} from "react-i18next";
 
 const OpenOrderDepoWithTabDepositBankForm = props => {
-  const { t } = useTranslation(["common"]);
-  const { accounts, bankCode } = props;
+  const { accounts } = props;
+  const { t } = useTranslation(["common", "finance"]);
   const [bankCurrencies, accountsBySymbol] = useMemo(() => {
     const currencies = uniq(
       accounts?.map?.(({ currency }) => currency?.symbol)
@@ -42,36 +38,36 @@ const OpenOrderDepoWithTabDepositBankForm = props => {
   const bankAccounts = accountsBySymbol[watch("symbol")];
   const account = bankAccounts?.[0];
 
-  const { openModal } = useSelector(state => state.ui);
+  const [tooltipOpen, setTooltipOpen] = useState({
+    iban: false,
+    accountName: false,
+  });
 
-  const dispatch = useDispatch();
-  const [tooltipOpen, setTooltipOpen] = useState({iban:false, accountName:false});
-
-
-  const openTermsModal = () => {
-    dispatch(setOpenModal("depositwithdrawalterms"));
-  };
-
-  const clearOpenModals = () => {
-    dispatch(setOpenModal("none"));
-  };
-
-
-  const  copyToClipboard = ref => async () => {
-
+  const copyToClipboard = ref => async () => {
     switch (ref) {
       case "ibanInputRef":
-        return navigator.clipboard.writeText(ibanInputRef.current.innerText).then(r => {
-          setTooltipOpen({...tooltipOpen,iban: true})
-          setTimeout(async () => await  setTooltipOpen({...tooltipOpen,iban: false}), 2000)
-        });
+        return navigator.clipboard
+          .writeText(ibanInputRef.current.innerText)
+          .then(r => {
+            setTooltipOpen({ ...tooltipOpen, iban: true });
+            setTimeout(
+              async () => await setTooltipOpen({ ...tooltipOpen, iban: false }),
+              2000
+            );
+          });
       case "accountNameRef":
-        return navigator.clipboard.writeText(accountNameRef.current.innerText).then(r => {
-          setTooltipOpen({...tooltipOpen,accountName: true})
-          setTimeout(async () => await  setTooltipOpen({...tooltipOpen,accountName: false}), 2000)
-        });
+        return navigator.clipboard
+          .writeText(accountNameRef.current.innerText)
+          .then(r => {
+            setTooltipOpen({ ...tooltipOpen, accountName: true });
+            setTimeout(
+              async () =>
+                await setTooltipOpen({ ...tooltipOpen, accountName: false }),
+              2000
+            );
+          });
       default:
-        return ""
+        return "";
     }
   };
 
@@ -99,14 +95,27 @@ const OpenOrderDepoWithTabDepositBankForm = props => {
             <InputGroupAddon addonType="prepend">
               <InputGroupText>IBAN</InputGroupText>
             </InputGroupAddon>
-            <div className="form-control textoverflowellipsis" ref={ibanInputRef}>
+            <div
+              className="form-control textoverflowellipsis"
+              ref={ibanInputRef}
+            >
               {account?.iban || null}
             </div>
             <InputGroupAddon addonType="append">
-              <Button variant="secondary" className="active" type="button" onClick={copyToClipboard('ibanInputRef')}  id="iban">
+              <Button
+                variant="secondary"
+                className="active"
+                type="button"
+                onClick={copyToClipboard("ibanInputRef")}
+                id="iban"
+              >
                 <IconSet sprite="sprtsmclrd" size="16" name="copybtn" />
               </Button>
-              <Tooltip placement="right" isOpen={tooltipOpen.iban} target="iban">
+              <Tooltip
+                placement="right"
+                isOpen={tooltipOpen.iban}
+                target="iban"
+              >
                 {t("common:copied")}
               </Tooltip>
             </InputGroupAddon>
@@ -114,25 +123,34 @@ const OpenOrderDepoWithTabDepositBankForm = props => {
         </Row>
         <InputGroup className="form-group">
           <InputGroupAddon addonType="prepend">
-            <InputGroupText>Hesap Sahibi</InputGroupText>
+            <InputGroupText>{t("finance:accountOwner")}</InputGroupText>
           </InputGroupAddon>
-          <div className="form-control textoverflowellipsis"  ref={accountNameRef}>
+          <div
+            className="form-control textoverflowellipsis"
+            ref={accountNameRef}
+          >
             {account?.name || null}
           </div>
           <InputGroupAddon addonType="append">
-            <Button variant="secondary" className="active" type="button" onClick={copyToClipboard('accountNameRef')} id="accountName">
+            <Button
+              variant="secondary"
+              className="active"
+              type="button"
+              onClick={copyToClipboard("accountNameRef")}
+              id="accountName"
+            >
               <IconSet sprite="sprtsmclrd" size="16" name="copybtn" />
             </Button>
-            <Tooltip placement="right" isOpen={tooltipOpen.accountName} target="accountName">
+            <Tooltip
+              placement="right"
+              isOpen={tooltipOpen.accountName}
+              target="accountName"
+            >
               {t("common:copied")}
             </Tooltip>
           </InputGroupAddon>
         </InputGroup>
       </Form>
-      <DepositWithdrawalTermsModal
-        isOpen={openModal === "depositwithdrawalterms"}
-        clearModals={clearOpenModals}
-      />
     </div>
   );
 };
