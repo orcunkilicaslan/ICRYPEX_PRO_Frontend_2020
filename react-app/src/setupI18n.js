@@ -108,7 +108,7 @@ const init = (initialLang = "en") => {
             unit: "Unit",
             currencies: "Currencies",
             send: "Send",
-            continue:"Continue",
+            continue: "Continue",
             copied: "Copied",
             balance: "Balance",
           },
@@ -147,10 +147,11 @@ const init = (initialLang = "en") => {
             watchedSymbolCreateAKey: "New {{watchedSymbol}} Create Key",
             amountToDeposit: "Amount to Deposit",
             cryptocurrencyWithdrawals: "Withdrawal - Cryptocurrency",
-            withdrawalBankTransfer : "Withdrawal - Bank Transfer",
-            depositBankTransfer : "Deposit - Bank Transfer",
+            withdrawalBankTransfer: "Withdrawal - Bank Transfer",
+            depositBankTransfer: "Deposit - Bank Transfer",
             depositWithCryptocurrency: "Deposit - Cryptocurrency",
-            depositCryptoWarning: "Only send {{watchedSymbol}} to this address. Sending a different coin will cause your deposits to be lost.",
+            depositCryptoWarning:
+              "Only send {{watchedSymbol}} to this address. Sending a different coin will cause your deposits to be lost.",
             realizedPrice: "Realized Price",
             transactionConfirmation: "Transaction Confirmation",
             buySuccess: "Successfully bought {{item}}.",
@@ -158,6 +159,7 @@ const init = (initialLang = "en") => {
             newTransaction: "New Transaction",
             checkNewTransaction:
               "You can see it in {{history}} or {{assets}} sections.",
+            createNewAddress: "Create New Address",
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -369,7 +371,7 @@ const init = (initialLang = "en") => {
             unit: "Birim",
             currencies: "Para Birimleri",
             send: "Gönder",
-            continue:"Devam Et",
+            continue: "Devam Et",
             copied: "Kopyalandı",
             balance: "Bakiye",
           },
@@ -408,11 +410,12 @@ const init = (initialLang = "en") => {
             watchedSymbolCreateAKey: "Yeni {{watchedSymbol}} Adres Yarat",
             amountToDeposit: "Hesaba Geçecek Miktar",
             cryptocurrencyWithdrawals: "Kripto Para ile Para Çekme",
-            withdrawalBankTransfer : "Banka Transferi ile Para Çekme",
-            depositBankTransfer : "Banka Transferi ile Para Yatırma",
+            withdrawalBankTransfer: "Banka Transferi ile Para Çekme",
+            depositBankTransfer: "Banka Transferi ile Para Yatırma",
             depositWithCryptocurrency: "Kripto Para ile Para Yatırma",
-            depositCryptoWarning: " Bu adrese sadece {{watchedSymbol}} gönderin. Farklı bir coin göndermek" +
-                " yatırdıklarınızın kaybolmasına neden olur.",
+            depositCryptoWarning:
+              " Bu adrese sadece {{watchedSymbol}} gönderin. Farklı bir coin göndermek" +
+              " yatırdıklarınızın kaybolmasına neden olur.",
             realizedPrice: "Gerçekleşen Fiyat",
             transactionConfirmation: "İşlem Onayı",
             buySuccess: "{{item}} alış işleminiz başarıyla tamamlanmıştır.",
@@ -420,6 +423,7 @@ const init = (initialLang = "en") => {
             newTransaction: "Yeni İşlem",
             checkNewTransaction:
               "{{history}} ya da {{assets}} bölümünden kontrol edebilirsiniz.",
+            createNewAddress: "Yeni Adres Oluştur",
           },
           coinbar: {
             lastPrice: "Son Fiyat",
