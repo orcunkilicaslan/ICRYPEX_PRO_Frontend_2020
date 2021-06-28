@@ -16,8 +16,8 @@ const HeaderLeft = props => {
   return (
     <Col xs="auto" className="header-left">
       <div className="header-left-logo">
-        <NavLink className="headlogo" to={pathHome} title="ICRYPEX PRO">
-          ICRYPEX PRO
+        <NavLink className="headlogo" to={pathHome} title="ICRYPEX ONE">
+          ICRYPEX ONE
         </NavLink>
       </div>
       <div className="header-left-nav">
