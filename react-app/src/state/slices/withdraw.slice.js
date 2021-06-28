@@ -71,12 +71,20 @@ export const withDrawCrypto = createAsyncThunk(
 const initialState = {
   isWithdrawingBank: false,
   isWithdrawingCrypto: false,
+  seenSymbols: [],
 };
 
 const withdrawSlice = createSlice({
   name: "withdraw",
   initialState,
   reducers: {
+    addSeenSymbol: (state, { payload }) => {
+      const { seenSymbols } = state;
+
+      if (!seenSymbols.includes(payload)) {
+        seenSymbols.push(payload);
+      }
+    },
     reset: state => {
       for (const [key, value] of Object.entries(initialState)) {
         state[key] = value;
@@ -105,6 +113,6 @@ const withdrawSlice = createSlice({
   },
 });
 
-export const { reset } = withdrawSlice.actions;
+export const { addSeenSymbol, reset } = withdrawSlice.actions;
 
 export default withdrawSlice.reducer;

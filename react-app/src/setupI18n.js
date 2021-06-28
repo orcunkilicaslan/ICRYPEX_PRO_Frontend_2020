@@ -168,6 +168,7 @@ const init = (initialLang = "en") => {
             depositBankInfo2:
               "You can transfer the amount you wish to deposit to any Icrypex account above.",
             accountOwner: "Account Owner",
+            withdrawAmount: "Withdraw Amount",
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -222,7 +223,6 @@ const init = (initialLang = "en") => {
             isRequired: "This field is required",
             shouldBeMin: "Should be at least {{value}}",
             shouldBeMax: "Should be at most {{value}}",
-            withdrawAmount: "Withdraw Amount",
             shouldBeMinLength: "Should be at least {{value}} characters",
             shouldBeMaxLength: "Should be at most {{value}} characters",
             passwordNotMatch: "Passwords do not match",
@@ -440,6 +440,7 @@ const init = (initialLang = "en") => {
             depositBankInfo2:
               "Yatırmak istediğiniz miktarı bankanız üzerinden yukarıdaki Icrypex hesabına Havale/EFT yapabilirsiniz.",
             accountOwner: "Hesap Sahibi",
+            withdrawAmount: "Çekmek İstenilen Miktar",
           },
           coinbar: {
             lastPrice: "Son Fiyat",
@@ -494,7 +495,6 @@ const init = (initialLang = "en") => {
             isRequired: "Bu alanı doldurmalısınız",
             shouldBeMin: "En az {{value}} olabilir",
             shouldBeMax: "En çok {{value}} olabilir",
-            withdrawAmount: "Çekmek İstenilen Miktar",
             shouldBeMinLength: "En az {{value}} hane olmalı",
             shouldBeMaxLength: "En fazla {{value}} hane olmalı",
             passwordNotMatch: "Şifreler eşleşmiyor",
