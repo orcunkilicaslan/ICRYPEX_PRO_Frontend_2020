@@ -186,7 +186,17 @@ const OpenOrderAssetsAddressListTable = props => {
           />
         </Fragment>
       ) : (
-        <Button variant="primary">{toUpperCase(t("createNewAddress"))}</Button>
+          <div className="resultbox">
+            <div className="modal-content text-center">
+              <div className="modal-body modal-confirm">
+                <h6>Yeni XXX Adresi Yarat</h6>
+                <p>İşlemi onaylıyor iseniz aşağıdaki butondan yeni XXX adresi yaratabilirsiniz.</p>
+              </div>
+              <div className="modal-footer">
+                <Button variant="primary">{toUpperCase(t("createNewAddress"))}</Button>
+              </div>
+            </div>
+          </div>
       )}
     </div>
   );
