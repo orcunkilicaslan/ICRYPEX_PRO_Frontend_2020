@@ -9,16 +9,18 @@ import { IconSet } from "../IconSet.jsx";
 import Table from "../Table.jsx";
 import { openOrderContext } from "./OpenOrder";
 import { useClientRect, useLocaleUpperCase } from "~/state/hooks";
-import { QrCodeModal } from "~/components/modals";
+import { QrCodeModal, ResultSweetModal } from "~/components/modals";
 import { setOpenModal } from "~/state/slices/ui.slice";
+import { cryptoAddressCreate } from "~/state/slices/cryptoaddress.slice";
 
 const OpenOrderAssetsAddressListTable = props => {
   const { addresses } = props;
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
   const { dispatch: dispatchContext } = useContext(openOrderContext);
-  const { t } = useTranslation(["finance", "common"]);
+  const { t } = useTranslation(["finance", "common", "openorder"]);
   const { openModal } = useSelector(state => state.ui);
   const [selectedAddress, setSelectedAddress] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
   const dispatch = useDispatch();
   const [tooltipOpen, setTooltipOpen] = useState({
     address: false,
@@ -35,6 +37,10 @@ const OpenOrderAssetsAddressListTable = props => {
 
   const clearOpenModals = () => {
     dispatch(setOpenModal("none"));
+  };
+
+  const openResultModal = () => {
+    dispatch(setOpenModal("resultsweetmodal"));
   };
 
   const openQrCodeModal = text => {
@@ -60,9 +66,20 @@ const OpenOrderAssetsAddressListTable = props => {
     });
   };
 
+  const onCreateAddress = async currencyid => {
+    const { payload } = await dispatch(cryptoAddressCreate({ currencyid }));
+
+    if (payload.status) setIsSuccess(true);
+    else setIsSuccess(false);
+
+    openResultModal();
+  };
+
+  const address = addresses?.[0];
+
   return (
     <div className="assetsaddress-tablebox">
-      {addresses?.[0]?.address ? (
+      {address?.address ? (
         <Fragment>
           <div className="asaddresstable scrollbar" ref={tableCanvasRef}>
             <Table>
@@ -72,7 +89,7 @@ const OpenOrderAssetsAddressListTable = props => {
                   <Table.Th sizefixed className="add">
                     {t("address")}
                   </Table.Th>
-                  {addresses?.[0]?.destination_tag && (
+                  {address?.destination_tag && (
                     <Fragment>
                       <Table.Th sizeauto className="ico ico02" />
                       <Table.Th sizeauto className="tag">
@@ -84,24 +101,54 @@ const OpenOrderAssetsAddressListTable = props => {
                 </Table.Tr>
               </Table.Thead>
               <Table.Tbody striped hovered>
-                {addresses?.map(item => {
-                  const { id, address, symbol, destination_tag } = item;
-
-                  return (
-                    <Table.Tr key={id}>
-                      <Table.Td sizeauto className="ico ico01">
+                <Table.Tr key={address?.id}>
+                  <Table.Td sizeauto className="ico ico01">
+                    <Button type="button">
+                      <IconSet
+                        sprite="sprtsmclrd"
+                        size="16"
+                        name="qrcode"
+                        onClick={() => openQrCodeModal(address?.address)}
+                      />
+                    </Button>
+                    <Button
+                      type="button"
+                      onClick={copyToClipboard(address?.address, "addr")}
+                      id="address"
+                    >
+                      <IconSet sprite="sprtsmclrd" size="16" name="copybtn" />
+                    </Button>
+                    <Tooltip
+                      placement="right"
+                      isOpen={tooltipOpen.address}
+                      target="address"
+                    >
+                      {t("common:copied")}
+                    </Tooltip>
+                  </Table.Td>
+                  <Table.Td sizefixed className="add">
+                    {address?.address}
+                  </Table.Td>
+                  {address?.destination_tag && (
+                    <Fragment>
+                      <Table.Td sizeauto className="ico ico02">
                         <Button type="button">
                           <IconSet
                             sprite="sprtsmclrd"
                             size="16"
                             name="qrcode"
-                            onClick={() => openQrCodeModal(address)}
+                            onClick={() =>
+                              openQrCodeModal(address?.destination_tag)
+                            }
                           />
                         </Button>
                         <Button
                           type="button"
-                          onClick={copyToClipboard(address, "addr")}
-                          id="address"
+                          onClick={copyToClipboard(
+                            address?.destination_tag,
+                            "tag"
+                          )}
+                          id="destination_tag"
                         >
                           <IconSet
                             sprite="sprtsmclrd"
@@ -111,71 +158,36 @@ const OpenOrderAssetsAddressListTable = props => {
                         </Button>
                         <Tooltip
                           placement="right"
-                          isOpen={tooltipOpen.address}
-                          target="address"
+                          isOpen={tooltipOpen.tag}
+                          target="destination_tag"
                         >
                           {t("common:copied")}
                         </Tooltip>
                       </Table.Td>
-                      <Table.Td sizefixed className="add">
-                        {address}
+                      <Table.Td sizeauto className="tag">
+                        {address?.destination_tag}
                       </Table.Td>
-                      {destination_tag && (
-                        <Fragment>
-                          <Table.Td sizeauto className="ico ico02">
-                            <Button type="button">
-                              <IconSet
-                                sprite="sprtsmclrd"
-                                size="16"
-                                name="qrcode"
-                                onClick={() => openQrCodeModal(destination_tag)}
-                              />
-                            </Button>
-                            <Button
-                              type="button"
-                              onClick={copyToClipboard(destination_tag, "tag")}
-                              id="destination_tag"
-                            >
-                              <IconSet
-                                sprite="sprtsmclrd"
-                                size="16"
-                                name="copybtn"
-                              />
-                            </Button>
-                            <Tooltip
-                              placement="right"
-                              isOpen={tooltipOpen.tag}
-                              target="destination_tag"
-                            >
-                              {t("common:copied")}
-                            </Tooltip>
-                          </Table.Td>
-                          <Table.Td sizeauto className="tag">
-                            {destination_tag}
-                          </Table.Td>
-                        </Fragment>
-                      )}
-                      <Table.Td sizeauto className="btn">
-                        <Button
-                          type="button"
-                          size="sm"
-                          variant="outline-success"
-                          onClick={() => onClick("deposit", symbol)}
-                        >
-                          {t("deposit")}
-                        </Button>
-                        <Button
-                          type="button"
-                          size="sm"
-                          variant="outline-danger"
-                          onClick={() => onClick("withdraw", symbol)}
-                        >
-                          {t("withdraw")}
-                        </Button>
-                      </Table.Td>
-                    </Table.Tr>
-                  );
-                })}
+                    </Fragment>
+                  )}
+                  <Table.Td sizeauto className="btn">
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline-success"
+                      onClick={() => onClick("deposit", address?.symbol)}
+                    >
+                      {t("deposit")}
+                    </Button>
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline-danger"
+                      onClick={() => onClick("withdraw", address?.symbol)}
+                    >
+                      {t("withdraw")}
+                    </Button>
+                  </Table.Td>
+                </Table.Tr>
               </Table.Tbody>
             </Table>
           </div>
@@ -186,18 +198,32 @@ const OpenOrderAssetsAddressListTable = props => {
           />
         </Fragment>
       ) : (
-          <div className="resultbox">
-            <div className="modal-content text-center">
-              <div className="modal-body modal-confirm">
-                <h6>Yeni XXX Adresi Yarat</h6>
-                <p>İşlemi onaylıyor iseniz aşağıdaki butondan yeni XXX adresi yaratabilirsiniz.</p>
-              </div>
-              <div className="modal-footer">
-                <Button variant="primary">{toUpperCase(t("createNewAddress"))}</Button>
-              </div>
+        <div className="resultbox">
+          <div className="modal-content text-center">
+            <div className="modal-body modal-confirm">
+              <h6>
+                {t("openorder:createNewAddressSymbol", {
+                  symbol: address?.symbol,
+                })}
+              </h6>
+              <p>{t("openorder:confirmCreateAddress")}</p>
+            </div>
+            <div className="modal-footer">
+              <Button
+                variant="primary"
+                onClick={() => onCreateAddress(address?.currency_id)}
+              >
+                {toUpperCase(t("createNewAddress"))}
+              </Button>
             </div>
           </div>
+        </div>
       )}
+      <ResultSweetModal
+        isOpen={openModal === "resultsweetmodal"}
+        clearModals={clearOpenModals}
+        isSuccess={isSuccess}
+      />
     </div>
   );
 };

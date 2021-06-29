@@ -11,3 +11,4 @@ export { default as OrderOpenOrdersFilter } from "./OrderOpenOrdersFilter";
 export { default as ActivitiesPendingFilter } from "./ActivitiesPendingFilter";
 export { default as ActivitiesHistoryFilter } from "./ActivitiesHistoryFilter";
 export { default as QrCodeModal } from "./QrCodeModal";
+export { default as ResultSweetModal } from "./ResultSweetModal";
