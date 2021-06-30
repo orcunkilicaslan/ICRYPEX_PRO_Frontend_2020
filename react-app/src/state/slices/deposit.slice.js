@@ -71,12 +71,20 @@ export const depositCrypto = createAsyncThunk(
 const initialState = {
   isDepositingBank: false,
   isDepositingCrypto: false,
+  seenSymbols: [],
 };
 
 const depositSlice = createSlice({
   name: "deposit",
   initialState,
   reducers: {
+    addSeenSymbol: (state, { payload }) => {
+      const { seenSymbols } = state;
+
+      if (!seenSymbols.includes(payload)) {
+        seenSymbols.push(payload);
+      }
+    },
     reset: state => {
       for (const [key, value] of Object.entries(initialState)) {
         state[key] = value;
@@ -105,6 +113,6 @@ const depositSlice = createSlice({
   },
 });
 
-export const { reset } = depositSlice.actions;
+export const { addSeenSymbol, reset } = depositSlice.actions;
 
 export default depositSlice.reducer;
