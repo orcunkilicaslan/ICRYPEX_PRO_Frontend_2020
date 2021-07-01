@@ -93,10 +93,6 @@ const OpenOrderAccountActivitiesHistory = props => {
     return histories;
   }, [accountHistory, requestStatusIdx, periodbyIndex, requestTypeIdx]);
 
-  const requestStatuses = useMemo(() => {
-    return moneyRequestStatuses.map(({ id }) => `requestStatus${id}`);
-  }, [moneyRequestStatuses]);
-
   useEffect(() => {
     const currencyids = activeCurrencies
       .filter(({ symbol }) => symbol !== "EUR")
@@ -129,17 +125,21 @@ const OpenOrderAccountActivitiesHistory = props => {
               title={t("openorder:tradeType")}
               index={requestTypeIdx}
               setIndex={setRequestTypeIdx}
-              namespace="finance"
+              namespace="openorder"
+              useID
+              prefix="requestType"
             />
           </Col>
           <Col xs="auto">
             <CustomSelect
               size="sm"
-              list={requestStatuses}
+              list={moneyRequestStatuses}
               title={t("openorder:tradeStatus")}
               index={requestStatusIdx}
               setIndex={setRequestStatusIdx}
               namespace="openorder"
+              useID
+              prefix="requestStatus"
             />
           </Col>
           <Col xs="auto">

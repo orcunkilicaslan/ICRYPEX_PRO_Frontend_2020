@@ -110,6 +110,9 @@ const OpenOrderOrders = props => {
               title={t("openorder:tradeType")}
               index={ordersideIdx}
               setIndex={setOrdersideIdx}
+              namespace="openorder"
+              useID
+              prefix="orderSide"
             />
           </Col>
           <Col xs="auto" style={{ marginLeft: "auto" }}>

@@ -170,8 +170,11 @@ export default function OrderHistoryFilter(props) {
                 index={watch("typeID")}
                 setIndex={id => setValue("typeID", id)}
                 ref={register}
+                namespace="openorder"
+                useID
+                prefix="orderSide"
               />
-            </FormGroup>{" "}
+            </FormGroup>
           </FormGroup>
           <FormGroup tag="fieldset">
             <legend>{t("openorder:tradeStatus")}</legend>
@@ -183,7 +186,9 @@ export default function OrderHistoryFilter(props) {
                 index={watch("statusID")}
                 setIndex={id => setValue("statusID", id)}
                 ref={register}
-                namespace="app"
+                namespace="openorder"
+                useID
+                prefix="orderStatus"
               />
             </FormGroup>
           </FormGroup>

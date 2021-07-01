@@ -108,7 +108,9 @@ const OpenOrderAccountActivitiesPending = props => {
             title={t("openorder:tradeType")}
             index={requestTypeIdx}
             setIndex={setRequestTypeIdx}
-            namespace="finance"
+            namespace="openorder"
+            useID
+            prefix="requestType"
           />
         </Col>
         <Col xs="auto">

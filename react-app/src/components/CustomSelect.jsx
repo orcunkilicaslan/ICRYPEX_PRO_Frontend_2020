@@ -15,6 +15,8 @@ const CustomSelect = forwardRef((props, ref) => {
     setIndex,
     namespace = "common",
     dontTranslate = false,
+    useID = false,
+    prefix = "",
     ...rest
   } = props;
   const { t } = useTranslation(namespace);
@@ -24,8 +26,10 @@ const CustomSelect = forwardRef((props, ref) => {
 
   const getLabel = item => {
     if (dontTranslate) return item;
-    else if (isObject(item)) return t(item.name);
-    else return t(item);
+    else if (isObject(item)) {
+      if (useID && prefix) return t(`${prefix}${item.id}`);
+      return t(item.name);
+    } else return t(item);
   };
 
   return (

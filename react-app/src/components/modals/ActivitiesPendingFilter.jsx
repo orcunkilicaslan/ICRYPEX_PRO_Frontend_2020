@@ -99,7 +99,9 @@ const ActivitiesPendingFilter = props => {
                 index={watch("typeID")}
                 setIndex={id => setValue("typeID", id)}
                 ref={register}
-                namespace="finance"
+                namespace="openorder"
+                useID
+                prefix="requestType"
               />
             </FormGroup>
           </FormGroup>

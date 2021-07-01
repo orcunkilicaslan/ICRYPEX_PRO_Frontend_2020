@@ -134,6 +134,9 @@ const OrderOpenOrdersFilter = props => {
                 index={watch("typeID")}
                 setIndex={id => setValue("typeID", id)}
                 ref={register}
+                namespace="openorder"
+                useID
+                prefix="orderSide"
               />
             </FormGroup>{" "}
           </FormGroup>

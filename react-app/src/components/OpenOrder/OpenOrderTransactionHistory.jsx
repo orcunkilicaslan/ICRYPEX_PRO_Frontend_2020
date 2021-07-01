@@ -35,15 +35,16 @@ const OpenOrderTransactionHistory = props => {
   ]);
   const [{ height: tableHeight }, tableCanvasRef] = useClientRect();
   const { lang } = useSelector(state => state.ui);
-  const { allPairs, selectedPair } = usePrices();
-  const { findCurrencyBySymbol } = useCurrencies();
   const { openModal } = useSelector(state => state.ui);
   const orderSides = useSelector(state => state.api.settings?.orderSides);
   const orderStatuses = useSelector(state => state.api.settings?.orderStatuses);
   const orderSlice = useSelector(state => state.order);
+  const { allPairs, selectedPair } = usePrices();
+  const { findCurrencyBySymbol } = useCurrencies();
   const [orderStatusIdx, setOrderStatusIdx] = useState(-1);
   const [ordersideIdx, setOrdersideIdx] = useState(-1);
   const [orderDetailID, setOrderDetailID] = useState(null);
+  const [periodbyIndex, setPeriodbyIndex] = useState(0);
 
   const orderHistory = orderSlice?.history;
   const historyDetail = orderSlice?.historyDetail;
@@ -73,7 +74,7 @@ const OpenOrderTransactionHistory = props => {
       // takecount: 20
     };
   }, [lang]);
-  const [periodbyIndex, setPeriodbyIndex] = useState(0);
+
   const visibleOrders = useMemo(() => {
     let orders = orderHistory;
     const interval = periodBy[periodbyIndex]?.duration;
@@ -167,6 +168,9 @@ const OpenOrderTransactionHistory = props => {
               title={t("openorder:tradeType")}
               index={ordersideIdx}
               setIndex={setOrdersideIdx}
+              namespace="openorder"
+              useID
+              prefix="orderSide"
             />
           </Col>
           <Col>
@@ -180,10 +184,12 @@ const OpenOrderTransactionHistory = props => {
             <CustomSelect
               size="sm"
               list={orderStatuses}
-              namespace="app"
               title={t("openorder:tradeStatus")}
               index={orderStatusIdx}
               setIndex={setOrderStatusIdx}
+              namespace="openorder"
+              useID
+              prefix="orderStatus"
             />
           </Col>
           <Col xs="auto" style={{ marginLeft: "auto" }}>
