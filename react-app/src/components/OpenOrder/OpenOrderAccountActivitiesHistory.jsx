@@ -238,7 +238,7 @@ const OpenOrderAccountActivitiesHistory = props => {
                     <Table.Td sizeauto className="type">
                       <span className={typecls}>{requestType}</span>
                     </Table.Td>
-                    <Table.Td sizeauto className="mthd" title={requestMethod}>
+                    <Table.Td sizeauto className="mthd">
                       {requestMethod}
                     </Table.Td>
                     <Table.Td sizeauto className="bank">

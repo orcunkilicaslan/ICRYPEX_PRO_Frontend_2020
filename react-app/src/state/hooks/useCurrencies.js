@@ -44,8 +44,8 @@ const useCurrencies = (props = {}) => {
   );
 
   const findCurrencyBySymbol = useCallback(
-    symbol => activeCurrencies?.find?.(currency => currency.symbol === symbol),
-    [activeCurrencies]
+    symbol => all?.find?.(currency => currency.symbol === symbol),
+    [all]
   );
 
   return {
