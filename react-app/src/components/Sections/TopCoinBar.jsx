@@ -101,7 +101,7 @@ const TopCoinBar = props => {
             </div>
             <div className="cryptostatsbar-stats">
               <ul className="bigstatslist">
-                <li>
+                <li className="d-none">
                   <h6>{t("bestBuy")}</h6>
                   <p>
                     <NumberFormat
@@ -114,7 +114,7 @@ const TopCoinBar = props => {
                     />
                   </p>
                 </li>
-                <li>
+                <li className="d-none">
                   <h6>{t("bestSell")}</h6>
                   <p>
                     <NumberFormat
