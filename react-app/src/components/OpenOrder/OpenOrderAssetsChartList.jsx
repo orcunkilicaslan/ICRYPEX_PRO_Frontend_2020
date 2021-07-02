@@ -66,7 +66,7 @@ const OpenOrderAssetsChartList = props => {
         direction="down"
         style={{ position: "absolute", right: "10px" }}
       >
-        <DropdownToggle caret>{selectedCurrency?.symbol}</DropdownToggle>
+        <DropdownToggle caret className="d-none">{selectedCurrency?.symbol}</DropdownToggle>
         <DropdownMenu right>
           {fiatCurrencies.map(currency => {
             const { symbol } = currency;
