@@ -253,18 +253,17 @@
 
   .form-group.inputresult{
 
-    //.input-group-prepend{margin-right: 0;}
-    //.input-group-append{margin-left: 0;}
-
     &.resulterror .form-control,
     &.resulterror .custom-select,
     &.resulterror .input-group-text{
+      color: $site-result-dark-error-clr !important;
       background-color: $site-result-dark-error-bg !important;
       border-color: $site-result-dark-error-brdr !important;
     }
     &.resultsuccess .form-control,
     &.resultsuccess .custom-select,
     &.resultsuccess .input-group-text{
+      color: $site-result-dark-success-clr !important;
       background-color: $site-result-dark-success-bg !important;
       border-color: $site-result-dark-success-brdr !important;
     }

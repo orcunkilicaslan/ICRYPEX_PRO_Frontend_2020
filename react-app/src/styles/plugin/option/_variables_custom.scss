@@ -106,12 +106,13 @@ $var-custom-form-text-margin-top:                 0.125rem;
 
 /* Site Custom Tooltip and Popover Settings */
 $var-custom-tooltip-popover-font-size:            $var-custom-font-size-sm;
-$var-custom-tooltip-popover-bg:                   $site-clr-darkblue-800;
+$var-custom-tooltip-popover-bg:                   $global-clr-blue;
 $var-custom-tooltip-popover-border-color:         $var-custom-border-color;
 $var-custom-tooltip-popover-border-radius:        $var-custom-border-radius-sm;
+$var-custom-tooltip-popover-opacity:              1;
 $var-custom-popover-max-width:                    350px;
 $var-custom-popover-border-width:                 $var-custom-border-width;
-$var-custom-tooltip-max-width:                    300px;
+$var-custom-tooltip-max-width:                    350px;
 $var-custom-tooltip-color:                        $var-custom-clr-white;
 /* Site Custom Tooltip and Popover Settings */
 

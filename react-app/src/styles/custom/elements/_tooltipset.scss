@@ -1,24 +1,28 @@
 .tooltip{
 
-  &.show{
-    opacity: 1;
+  &-inner{
+    padding: 0.25rem 0.6rem 0.35rem;
   }
 
-  &-inner{
-    color: $site-clr-white;
-    background-color: $site-clr-black;
-    font-family: $site-font-family-default;
-    @include border-radius(3px);
-
-    *{color: $site-clr-white;}
-
-    &.show{
-      opacity: 1;
+  &-result{
+    &.tooltip-danger{
+      .tooltip-inner{background-color: $site-result-dark-error-brdr;}
+      .tooltip[x-placement^="top"] .arrow::before{border-top-color: $site-result-dark-error-brdr;}
+    }
+    &.tooltip-warning{
+      .tooltip-inner{background-color: $site-result-dark-warning-brdr;}
+      .tooltip[x-placement^="top"] .arrow::before{border-top-color: $site-result-dark-warning-brdr;}
+    }
+    &.tooltip-success{
+      .tooltip-inner{background-color: $site-result-dark-success-brdr;}
+      .tooltip[x-placement^="top"] .arrow::before{border-top-color: $site-result-dark-success-brdr;}
     }
   }
 
-  &-html{}
+  &[x-placement^="top"] .arrow::before{top: -2px;}
 }
+
+/*
 
 .bs-tooltip-top{
   padding: 8px 0;
@@ -59,3 +63,5 @@
     }
   }
 }
+
+*/

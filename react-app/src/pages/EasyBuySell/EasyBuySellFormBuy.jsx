@@ -8,7 +8,7 @@ import {
   Input,
   InputGroup,
   InputGroupAddon,
-  InputGroupText, Tooltip,
+  InputGroupText,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -21,6 +21,7 @@ import { usePrices, useLocaleUpperCase } from "~/state/hooks/";
 import { fetchBalance } from "~/state/slices/balance.slice";
 import { fetchEasyBuy } from "~/state/slices/easybuy.slice";
 import { AlertResult } from "~/components/AlertResult";
+import { TooltipResult } from "~/components/TooltipResult";
 
 const EasyBuySellFormBuy = props => {
   const { t } = useTranslation(["form", "common", "finance", "app"]);
@@ -172,9 +173,9 @@ const EasyBuySellFormBuy = props => {
               </InputGroupAddon>
             </InputGroup>
             {errors.fiatAmount && (
-                <Tooltip placement="top-end" isOpen={errors.fiatAmount} target="fiatAmount">
+                <TooltipResult error isOpen={errors.fiatAmount} target="fiatAmount">
                   {errors.fiatAmount.message}
-                </Tooltip>
+                </TooltipResult>
             )}
           </FormGroup>
           <FormGroup className="col-auto">
@@ -239,9 +240,9 @@ const EasyBuySellFormBuy = props => {
               </InputGroupAddon>
             </InputGroup>
             {errors.cryptoAmount && (
-                <Tooltip placement="top-end" isOpen={errors.cryptoAmount} target="cryptoAmount">
+                <TooltipResult error isOpen={errors.cryptoAmount} target="cryptoAmount">
                   {errors.cryptoAmount.message}
-                </Tooltip>
+                </TooltipResult>
             )}
           </FormGroup>
         </Row>

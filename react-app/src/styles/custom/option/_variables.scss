@@ -47,10 +47,13 @@ $site-brdr-dark-focus:                  lighten($site-brdr-dark, 10%);
 $site-brdr-dark-opacity:                lighten($site-brdr-dark, 15%);
 $site-brdr-dark-input:                  $site-brdr-dark;
 $site-brdr-dark-input-focus:            $site-brdr-dark-focus;
+$site-result-dark-error-clr:            $site-clr-red;
 $site-result-dark-error-brdr:           #BE374B;
 $site-result-dark-error-bg:             #24233A;
+$site-result-dark-success-clr:          $site-clr-green;
 $site-result-dark-success-brdr:         #168B6E;
 $site-result-dark-success-bg:           #18293D;
+$site-result-dark-warning-clr:          $site-clr-orange;
 $site-result-dark-warning-brdr:         #B66545;
 $site-result-dark-warning-bg:           #24273A;
 /* Site Dark Theme Settings */
