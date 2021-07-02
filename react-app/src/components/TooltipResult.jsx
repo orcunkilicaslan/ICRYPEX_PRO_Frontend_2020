@@ -1,5 +1,6 @@
 import { Tooltip } from "reactstrap";
 import classNames from "classnames";
+import {NavLink} from "react-router-dom";
 
 export function TooltipResult(props) {
 
@@ -11,11 +12,9 @@ export function TooltipResult(props) {
     "tooltip-success": Boolean(success),
   });
 
-  const tooltipResult = (
-    <Tooltip className={tooltipResultClass} placement="top" {...rest}>
-      {children}
-    </Tooltip>
+  return (
+      <Tooltip className={tooltipResultClass} placement="top" {...rest}>
+        {children}
+      </Tooltip>
   );
-
-  return tooltipResult;
 }

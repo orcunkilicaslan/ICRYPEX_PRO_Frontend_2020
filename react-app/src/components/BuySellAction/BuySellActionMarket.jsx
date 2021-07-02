@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import {
   Row,
   Col,
@@ -9,7 +9,8 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Progress, FormText,
+  Progress,
+  FormText,
 } from "reactstrap";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
@@ -26,6 +27,7 @@ import {fetchEasyBuy} from "~/state/slices/easybuy.slice";
 import {fetchEasySell} from "~/state/slices/easysell.slice";
 import {setOpenModal} from "~/state/slices/ui.slice";
 import BuySellConfirmModal from "~/components/modals/BuySellConfirmModal.jsx";
+import {TooltipResult} from "~/components/TooltipResult";
 
 const buySellRangePercent = [0, 25, 50, 75, 100];
 
@@ -148,7 +150,7 @@ const BuySellActionMarket = props => {
   };
 
   return (
-    <div className="buysellaction-market">
+    <div className="buysellaction-market buysellmarkettooltip">
       <Row className="buysellaction-formarea">
         <Col className="buycol">
           <Form
@@ -185,39 +187,41 @@ const BuySellActionMarket = props => {
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>{t("common:amount")}</InputGroupText>
                   </InputGroupAddon>
-                  <Input  type="number"
-                          name="cryptoBuyAmount"
-                          readOnly={isSubmitted}
-                          innerRef={registerBuy({
-                            valueAsNumber: true,
-                            required: t("isRequired"),
-                            min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
-                            max: {
-                              value:  Number(fiatBalance / selectedPrice?.price ).toFixed(2),
-                              message: t("shouldBeMax", { value: Number(fiatBalance / selectedPrice?.price ).toFixed(2) }),
-                            },
-                          })}
-                          onChange={e => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            const { value } = e.target;
+                  <Input
+                      type="number"
+                      name="cryptoBuyAmount"
+                      id="cryptoBuyMarketAmount"
+                      readOnly={isSubmitted}
+                      innerRef={registerBuy({
+                        valueAsNumber: true,
+                        required: t("isRequired"),
+                        min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
+                        max: {
+                          value:  Number(fiatBalance / selectedPrice?.price ).toFixed(2),
+                          message: t("shouldBeMax", { value: Number(fiatBalance / selectedPrice?.price ).toFixed(2) }),
+                        },
+                      })}
+                      onChange={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const { value } = e.target;
 
-                            if (!Number.isNaN(value) && value !== "") {
-                              const parsed = parseFloat(value);
-                              const price = selectedPrice?.price;
-                              setTotalBuy(Number(price * parsed).toFixed(2))
-                              setRangeBuyPortfolio(Number( (parsed * 100) / fiatBalance).toFixed(0));
-                            }else {  setTotalBuy(Number(0).toFixed(8))}
-                          }}
+                        if (!Number.isNaN(value) && value !== "") {
+                          const parsed = parseFloat(value);
+                          const price = selectedPrice?.price;
+                          setTotalBuy(Number(price * parsed).toFixed(2))
+                          setRangeBuyPortfolio(Number( (parsed * 100) / fiatBalance).toFixed(0));
+                        }else {  setTotalBuy(Number(0).toFixed(8))}
+                      }}
                   />
                   <InputGroupAddon addonType="append">
                     <InputGroupText>{cryptoCurrency}</InputGroupText>
                   </InputGroupAddon>
                 </InputGroup>
                 {errorsBuy.cryptoBuyAmount && (
-                    <FormText className="inputresult resulterror">
+                    <TooltipResult error isOpen={errorsBuy.cryptoBuyAmount} target="cryptoBuyMarketAmount" container=".buysellmarkettooltip">
                       {errorsBuy.cryptoBuyAmount?.message}
-                    </FormText>
+                    </TooltipResult>
                 )}
               </FormGroup>
             </div>
@@ -318,39 +322,41 @@ const BuySellActionMarket = props => {
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>{t("common:amount")}</InputGroupText>
                   </InputGroupAddon>
-                  <Input  type="number"
-                          name="cryptoSellAmount"
-                          readOnly={isSubmitted}
-                          innerRef={registerSell({
-                            valueAsNumber: true,
-                            required: t("isRequired"),
-                            min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
-                            max: {
-                              value:  Number(cryptoBalance).toFixed(8),
-                              message: t("shouldBeMax", { value: Number(cryptoBalance ).toFixed(8) }),
-                            },
-                          })}
-                          onChange={e => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            const { value } = e.target;
+                  <Input
+                      type="number"
+                      name="cryptoSellAmount"
+                      id="cryptoSellMarketAmount"
+                      readOnly={isSubmitted}
+                      innerRef={registerSell({
+                        valueAsNumber: true,
+                        required: t("isRequired"),
+                        min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
+                        max: {
+                          value:  Number(cryptoBalance).toFixed(8),
+                          message: t("shouldBeMax", { value: Number(cryptoBalance ).toFixed(8) }),
+                        },
+                      })}
+                      onChange={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const { value } = e.target;
 
-                            if (!Number.isNaN(value) && value !== "") {
-                              const parsed = parseFloat(value);
-                              const price = selectedPrice?.price;
-                              setTotalSell(Number(price * parsed).toFixed(2))
-                              setRangeSellPortfolio(Number( (parsed * 100) / cryptoBalance).toFixed(0));
-                            }else {  setTotalSell(Number(0).toFixed(2))}
-                          }}
+                        if (!Number.isNaN(value) && value !== "") {
+                          const parsed = parseFloat(value);
+                          const price = selectedPrice?.price;
+                          setTotalSell(Number(price * parsed).toFixed(2))
+                          setRangeSellPortfolio(Number( (parsed * 100) / cryptoBalance).toFixed(0));
+                        }else {  setTotalSell(Number(0).toFixed(2))}
+                      }}
                   />
                   <InputGroupAddon addonType="append">
                     <InputGroupText>{cryptoCurrency}</InputGroupText>
                   </InputGroupAddon>
                 </InputGroup>
                 {errorsSell.cryptoSellAmount && (
-                    <FormText className="inputresult resulterror">
+                    <TooltipResult error isOpen={errorsSell.cryptoSellAmount} target="cryptoSellMarketAmount" container=".buysellmarkettooltip">
                       {errorsSell.cryptoSellAmount?.message}
-                    </FormText>
+                    </TooltipResult>
                 )}
               </FormGroup>
             </div>

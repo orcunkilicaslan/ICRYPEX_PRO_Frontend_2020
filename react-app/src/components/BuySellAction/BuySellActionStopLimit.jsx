@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Row,
   Col,
@@ -26,6 +26,7 @@ import {fetchStopLimitBuyOrder} from "~/state/slices/stoplimitbuyorder.slice";
 import {fetchStopLimitSellOrder} from "~/state/slices/stoplimitsellorder.slice";
 import {setOpenModal} from "~/state/slices/ui.slice";
 import {fetchLimitSellOrder} from "~/state/slices/limitsellorder.slice";
+import {TooltipResult} from "~/components/TooltipResult";
 
 
 const buySellRangePercent = [0, 25, 50, 75, 100];
@@ -188,7 +189,7 @@ const BuySellActionStopLimit = props => {
   };
 
   return (
-    <div className="buysellaction-stoplimit">
+    <div className="buysellaction-stoplimit buysellstoplimittooltip">
       <Row className="buysellaction-formarea">
         <Col className="buycol">
           <Form
@@ -207,7 +208,7 @@ const BuySellActionStopLimit = props => {
               </div>
             </div>
             <div className="formfieldset">
-              <FormGroup>
+              <FormGroup className={`${errorsBuy.fiatBuyPrice && "inputresult resulterror"}`}>
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>{t("common:price")}</InputGroupText>
@@ -215,6 +216,7 @@ const BuySellActionStopLimit = props => {
                   <Input
                       type="text"
                       name="fiatBuyPrice"
+                      id="fiatBuyStopLimitPrice"
                       readOnly={isSubmitted}
                       innerRef={registerBuy({
                         valueAsNumber: true,
@@ -229,46 +231,54 @@ const BuySellActionStopLimit = props => {
                         if (!Number.isNaN(value) && value !== "") {
                           const parsed = parseFloat(value);
                           setFiatBuyPrice(parsed)}
-                      }}/>
+                      }}
+                  />
                   <InputGroupAddon addonType="append">
                     <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>
                 </InputGroup>
                 {errorsBuy.fiatBuyPrice && (
-                    <FormText className="inputresult resulterror">
+                    <TooltipResult error isOpen={errorsBuy.fiatBuyPrice} target="fiatBuyStopLimitPrice" container=".buysellstoplimittooltip">
                       {errorsBuy.fiatBuyPrice?.message}
-                    </FormText>
+                    </TooltipResult>
                 )}
               </FormGroup>
-              <FormGroup>
+              <FormGroup className={`${errorsBuy.stopBuyPrice && "inputresult resulterror"}`}>
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>Limit</InputGroupText>
                   </InputGroupAddon>
                   <Input
                       type="text"
-                            name="stopBuyPrice"
-                            readOnly={isSubmitted}
-                            innerRef={registerBuy({
-                              valueAsNumber: true,
-                              required: t("isRequired"),
-                              min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
-                            })}
-                            onChange={e => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              const { value } = e.target;
+                      name="stopBuyPrice"
+                      id="stopBuyStopLimitPrice"
+                      readOnly={isSubmitted}
+                      innerRef={registerBuy({
+                        valueAsNumber: true,
+                        required: t("isRequired"),
+                        min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
+                      })}
+                      onChange={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const { value } = e.target;
 
-                              if (!Number.isNaN(value) && value !== "") {
-                                const parsed = parseFloat(value);
-                                }
-                            }}/>
+                        if (!Number.isNaN(value) && value !== "") {
+                          const parsed = parseFloat(value);
+                        }
+                      }}
+                  />
                   <InputGroupAddon addonType="append">
                     <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>
                 </InputGroup>
+                {errorsBuy.stopBuyPrice && (
+                    <TooltipResult error isOpen={errorsBuy.stopBuyPrice} target="stopBuyStopLimitPrice" container=".buysellstoplimittooltip">
+                      {errorsBuy.stopBuyPrice?.message}
+                    </TooltipResult>
+                )}
               </FormGroup>
-              <FormGroup>
+              <FormGroup className={`${errorsBuy.cryptoBuyAmount && "inputresult resulterror"}`}>
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>{t("common:amount")}</InputGroupText>
@@ -276,6 +286,7 @@ const BuySellActionStopLimit = props => {
                   <Input
                       type="number"
                       name="cryptoBuyAmount"
+                      id="cryptoBuyStopLimitAmount"
                       readOnly={isSubmitted}
                       innerRef={registerBuy({
                         valueAsNumber: true,
@@ -298,16 +309,17 @@ const BuySellActionStopLimit = props => {
                             setRangeBuyPortfolio(Number( (parsed * 100) / fiatBalance) .toFixed(0));
                           }
                         }else {  setTotalBuy(Number(0).toFixed(8))}
-                      }} />
+                      }}
+                  />
                   <InputGroupAddon addonType="append">
                     <InputGroupText>{cryptoCurrency}</InputGroupText>
                   </InputGroupAddon>
                 </InputGroup>
               </FormGroup>
               {errorsBuy.cryptoBuyAmount && (
-                  <FormText className="inputresult resulterror">
+                  <TooltipResult error isOpen={errorsBuy.cryptoBuyAmount} target="cryptoBuyStopLimitAmount" container=".buysellstoplimittooltip">
                     {errorsBuy.cryptoBuyAmount?.message}
-                  </FormText>
+                  </TooltipResult>
               )}
             </div>
             <div className="formrange">
@@ -390,70 +402,81 @@ const BuySellActionStopLimit = props => {
               </div>
             </div>
             <div className="formfieldset">
-              <FormGroup>
+              <FormGroup className={`${errorsSell.fiatSellPrice && "inputresult resulterror"}`}>
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>{t("common:price")}</InputGroupText>
                   </InputGroupAddon>
-                  <Input  type="text"
-                          name="fiatSellPrice"
-                          readOnly={isSubmitted}
-                          innerRef={registerSell({
-                            valueAsNumber: true,
-                            required: t("isRequired"),
-                            min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
-                          })}
-                          onChange={e => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            const { value } = e.target;
+                  <Input
+                      type="text"
+                      name="fiatSellPrice"
+                      id="fiatSellStopLimitPrice"
+                      readOnly={isSubmitted}
+                      innerRef={registerSell({
+                        valueAsNumber: true,
+                        required: t("isRequired"),
+                        min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
+                      })}
+                      onChange={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const { value } = e.target;
 
-                            if (!Number.isNaN(value) && value !== "") {
-                              const parsed = parseFloat(value);
-                              const cryptoSellAmount = getSellValues("cryptoSellAmount")
-                              if (!Number.isNaN(cryptoSellAmount) && cryptoSellAmount !== "") {
-                                setTotalSell(Number(cryptoSellAmount * parsed).toFixed(2))
-                              }
-                            }else { setTotalSell("")}
-                          }}/>
+                        if (!Number.isNaN(value) && value !== "") {
+                          const parsed = parseFloat(value);
+                          const cryptoSellAmount = getSellValues("cryptoSellAmount")
+                          if (!Number.isNaN(cryptoSellAmount) && cryptoSellAmount !== "") {
+                            setTotalSell(Number(cryptoSellAmount * parsed).toFixed(2))
+                          }
+                        }else { setTotalSell("")}
+                      }}
+                  />
                   <InputGroupAddon addonType="append">
                     <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>
                 </InputGroup>
                 {errorsSell.fiatSellPrice && (
-                    <FormText className="inputresult resulterror">
+                    <TooltipResult error isOpen={errorsSell.fiatSellPrice} target="fiatSellStopLimitPrice" container=".buysellstoplimittooltip">
                       {errorsSell.fiatSellPrice?.message}
-                    </FormText>
+                    </TooltipResult>
                 )}
               </FormGroup>
-              <FormGroup>
+              <FormGroup className={`${errorsSell.stopSellPrice && "inputresult resulterror"}`}>
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>Limit</InputGroupText>
                   </InputGroupAddon>
-                  <Input type="text"
-                         name="stopSellPrice"
-                         readOnly={isSubmitted}
-                         innerRef={registerSell({
-                           valueAsNumber: true,
-                           required: t("isRequired"),
-                           min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
-                         })}
-                         onChange={e => {
-                           e.preventDefault();
-                           e.stopPropagation();
-                           const { value } = e.target;
+                  <Input
+                      type="text"
+                      name="stopSellPrice"
+                      id="stopSellStopLimitPrice"
+                      readOnly={isSubmitted}
+                      innerRef={registerSell({
+                        valueAsNumber: true,
+                        required: t("isRequired"),
+                        min: { value: 0, message: t("shouldBeMin", { value: 0 }) },
+                      })}
+                      onChange={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const { value } = e.target;
 
-                           if (!Number.isNaN(value) && value !== "") {
-                             const parsed = parseFloat(value);
-                           }
-                         }}/>
+                        if (!Number.isNaN(value) && value !== "") {
+                          const parsed = parseFloat(value);
+                        }
+                      }}
+                  />
                   <InputGroupAddon addonType="append">
                     <InputGroupText>{fiatCurrency}</InputGroupText>
                   </InputGroupAddon>
                 </InputGroup>
+                {errorsSell.stopSellPrice && (
+                    <TooltipResult error isOpen={errorsSell.stopSellPrice} target="stopSellStopLimitPrice" container=".buysellstoplimittooltip">
+                      {errorsSell.stopSellPrice?.message}
+                    </TooltipResult>
+                )}
               </FormGroup>
-              <FormGroup>
+              <FormGroup className={`${errorsSell.cryptoSellAmount && "inputresult resulterror"}`}>
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>{t("common:amount")}</InputGroupText>
@@ -461,6 +484,7 @@ const BuySellActionStopLimit = props => {
                   <Input
                       type="number"
                       name="cryptoSellAmount"
+                      id="cryptoSellStopLimitAmount"
                       readOnly={isSubmitted}
                       innerRef={registerSell({
                         valueAsNumber: true,
@@ -489,9 +513,9 @@ const BuySellActionStopLimit = props => {
                   </InputGroupAddon>
                 </InputGroup>
                 {errorsSell.cryptoSellAmount && (
-                    <FormText className="inputresult resulterror">
+                    <TooltipResult error isOpen={errorsSell.cryptoSellAmount} target="cryptoSellStopLimitAmount" container=".buysellstoplimittooltip">
                       {errorsSell.cryptoSellAmount?.message}
-                    </FormText>
+                    </TooltipResult>
                 )}
               </FormGroup>
             </div>
