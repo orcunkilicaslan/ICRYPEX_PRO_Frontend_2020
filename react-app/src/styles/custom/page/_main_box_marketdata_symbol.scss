@@ -101,10 +101,11 @@
         .tbl-tbody .tbl-tr{cursor: pointer;}
         .fav[class*="tbl"]{width: 15px; text-align: center; padding-right: 0;}
         .sym[class*="tbl"]{text-align: left;}
+        .lst[class*="tbl"],
         .buy[class*="tbl"],
         .sll[class*="tbl"],
         .vol[class*="tbl"],
-        .chg[class*="tbl"]{text-align: right;}
+        .chg[class*="tbl"]{width: 55px; text-align: right;}
         .per[class*="tbl"]{width: 15px; text-align: center;}
         //.scrollbar-tbl-tb{height: 450px;}
 

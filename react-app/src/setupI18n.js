@@ -108,6 +108,7 @@ const init = (initialLang = "en") => {
           finance: {
             ask: "Ask",
             bid: "Bid",
+            lastPrice: "Last Price",
             buyOrders: "Buy Orders",
             sellOrders: "Sell Orders",
             buywhat: "BUY {{item}}",
@@ -378,6 +379,7 @@ const init = (initialLang = "en") => {
           finance: {
             ask: "Alış",
             bid: "Satış",
+            lastPrice: "Son Fiyat",
             buyOrders: "Alış Emirleri",
             sellOrders: "Satış Emirleri",
             buywhat: "{{item}} AL",

@@ -135,16 +135,19 @@ const MarketDataSymbol = props => {
               <Table.Th sizefixed className="sym">
                 {t("common:symbol")}
               </Table.Th>
-              <Table.Th sizefixed className="buy">
+              <Table.Th sizefixed className="lst">
+                {t("lastPrice")}
+              </Table.Th>
+              <Table.Th sizefixed className="buy d-none">
                 {t("ask")}
               </Table.Th>
-              <Table.Th sizefixed className="sll">
+              <Table.Th sizefixed className="sll d-none">
                 {t("bid")}
               </Table.Th>
               <Table.Th sizefixed className="vol">
                 {t("common:volume")}
               </Table.Th>
-              <Table.Th sizefixed className="chg">
+              <Table.Th sizeauto className="chg">
                 {t("common:change")}
               </Table.Th>
               <Table.Th sizeauto className="per" />
@@ -157,7 +160,7 @@ const MarketDataSymbol = props => {
             scrollbarstyles={{ height: `${tableHeight - 25}px` }}
           >
             {visiblePrices.map((data = {}) => {
-              const { id, name, ask, bid, volume, changepercent, symbol } =
+              const { id, name, lst, ask, bid, volume, changepercent, symbol } =
                 data;
               const mdper = changepercent > 0 ? "up" : "down";
               const isFavorite = favoritePairIDs.includes(id);
@@ -188,7 +191,19 @@ const MarketDataSymbol = props => {
                   <Table.Td sizefixed className="sym">
                     {name.replace(/\s/g, "")}
                   </Table.Td>
-                  <Table.Td sizefixed className="buy" title={ask}>
+                  <Table.Td sizefixed className="lst" title={lst}>
+                    -
+                  </Table.Td>
+                  <Table.Td sizefixed className="buy d-none" title={ask}>
+                    <NumberFormat
+                        value={ask}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        decimalScale={digit_show || digit}
+                        fixedDecimalScale
+                    />
+                  </Table.Td>
+                  <Table.Td sizefixed className="buy d-none" title={ask}>
                     <NumberFormat
                       value={ask}
                       displayType={"text"}
@@ -197,7 +212,7 @@ const MarketDataSymbol = props => {
                       fixedDecimalScale
                     />
                   </Table.Td>
-                  <Table.Td sizefixed className="sll" title={bid}>
+                  <Table.Td sizefixed className="sll d-none" title={bid}>
                     <NumberFormat
                       value={bid}
                       displayType={"text"}
@@ -213,7 +228,7 @@ const MarketDataSymbol = props => {
                       thousandSeparator={true}
                     />
                   </Table.Td>
-                  <Table.Td sizefixed className="chg" title={changepercent}>
+                  <Table.Td sizeauto className="chg" title={changepercent}>
                     <NumberFormat
                       value={changepercent}
                       displayType={"text"}
