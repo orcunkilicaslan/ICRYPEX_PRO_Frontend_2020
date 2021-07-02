@@ -101,32 +101,6 @@ const TopCoinBar = props => {
             </div>
             <div className="cryptostatsbar-stats">
               <ul className="bigstatslist">
-                <li className="d-none">
-                  <h6>{t("bestBuy")}</h6>
-                  <p>
-                    <NumberFormat
-                      value={bid}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      decimalScale={fiatDigit}
-                      fixedDecimalScale
-                      suffix={` ${fiatSymbol}`}
-                    />
-                  </p>
-                </li>
-                <li className="d-none">
-                  <h6>{t("bestSell")}</h6>
-                  <p>
-                    <NumberFormat
-                      value={ask}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      decimalScale={fiatDigit}
-                      fixedDecimalScale
-                      suffix={` ${fiatSymbol}`}
-                    />
-                  </p>
-                </li>
                 <li>
                   <h6>{t("change24h")}</h6>
                   <p>
