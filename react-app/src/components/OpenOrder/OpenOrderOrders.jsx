@@ -205,7 +205,7 @@ const OpenOrderOrders = props => {
                 return (
                   <Table.Tr key={id}>
                     <Table.Td sizeauto className="symb">
-                      {pairname}
+                      {pairname.replace(/\s/g, "")}
                     </Table.Td>
                     <Table.Td sizeauto className="date">
                       <span title={updated_at}>

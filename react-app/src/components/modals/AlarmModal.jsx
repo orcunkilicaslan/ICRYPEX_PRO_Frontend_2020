@@ -386,7 +386,7 @@ export default function AlarmModal(props) {
                   return (
                     <Table.Tr key={id}>
                       <Table.Td sizeauto className="symb">
-                        {pairname}
+                        {pairname.replace(/\s/g, "")}
                       </Table.Td>
                       <Table.Td sizefixed className="amnt">
                         <span title={price}>

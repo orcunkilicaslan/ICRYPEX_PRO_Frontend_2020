@@ -328,7 +328,7 @@ const OpenOrderTransactionHistory = props => {
                         </span>
                       </Table.Td>
                       <Table.Td sizeauto className="symb">
-                        {pairname}
+                        {pairname.replace(/\s/g, "")}
                       </Table.Td>
                       <Table.Td sizeauto className="type">
                         {ordertype} -{" "}
