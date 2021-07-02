@@ -21,7 +21,6 @@ import { usePrices, useLocaleUpperCase } from "~/state/hooks/";
 import { fetchBalance } from "~/state/slices/balance.slice";
 import { fetchEasyBuy } from "~/state/slices/easybuy.slice";
 import { AlertResult } from "~/components/AlertResult";
-import { TooltipResult } from "~/components/TooltipResult";
 
 const EasyBuySellFormBuy = props => {
   const { t } = useTranslation(["form", "common", "finance", "app"]);
@@ -173,9 +172,9 @@ const EasyBuySellFormBuy = props => {
               </InputGroupAddon>
             </InputGroup>
             {errors.fiatAmount && (
-                <TooltipResult error isOpen={errors.fiatAmount} target="fiatAmount">
+                <FormText className="inputresult resulterror">
                   {errors.fiatAmount.message}
-                </TooltipResult>
+                </FormText>
             )}
           </FormGroup>
           <FormGroup className="col-auto">
@@ -240,9 +239,9 @@ const EasyBuySellFormBuy = props => {
               </InputGroupAddon>
             </InputGroup>
             {errors.cryptoAmount && (
-                <TooltipResult error isOpen={errors.cryptoAmount} target="cryptoAmount">
+                <FormText className="inputresult resulterror">
                   {errors.cryptoAmount.message}
-                </TooltipResult>
+                </FormText>
             )}
           </FormGroup>
         </Row>
