@@ -34,7 +34,6 @@ const instance = {
       method: "POST",
       body,
       headers,
-      credentials: "include",
       retries: 5 * (isProd ? 2 : 1),
       retryDelay: (attempt, error, response) => {
         return Math.pow(2, attempt % 15) * 1000;

@@ -100,7 +100,7 @@ export default function SigninModal(props) {
 
   useEffect(() => {
     if (hasSentCode) {
-      if (!expiryTimestamp) {
+      if (user.logintype === 1 && !expiryTimestamp) {
         const expiryTimestamp = addMilliseconds(
           Date.now(),
           VERIFICATION_EXPIRY
@@ -309,34 +309,36 @@ export default function SigninModal(props) {
             <Button
               className="close"
               onClick={resetCode}
-              style={{ marginLeft: "auto" }}
+              // style={{ marginLeft: "auto" }}
             >
               <span aria-hidden="true">&times;</span>
             </Button>
-            <div className="progressring">
-              <div className="progressring-circle">
-                <ProgressRing
-                  radius={35}
-                  strokeWidth={4}
-                  stroke="#e84a55"
-                  trackStroke="#2a3553"
-                  progress={progress}
-                />
-                <span>{getTimestamp(minutes, seconds)}</span>
+            {user.logintype === 1 && (
+              <div className="progressring">
+                <div className="progressring-circle">
+                  <ProgressRing
+                    radius={35}
+                    strokeWidth={4}
+                    stroke="#e84a55"
+                    trackStroke="#2a3553"
+                    progress={progress}
+                  />
+                  <span>{getTimestamp(minutes, seconds)}</span>
+                </div>
+                <div className="progressring-bttn">
+                  <Button
+                    className="btn btn-sm btn-link text-muted"
+                    style={{
+                      opacity: isTimerRunning ? "0" : "1",
+                      transition: "opacity .15s ease-out",
+                    }}
+                    onClick={resendCode}
+                  >
+                    {t("sendAgain")}
+                  </Button>
+                </div>
               </div>
-              <div className="progressring-bttn">
-                <Button
-                  className="btn btn-sm btn-link text-muted"
-                  style={{
-                    opacity: isTimerRunning ? "0" : "1",
-                    transition: "opacity .15s ease-out",
-                  }}
-                  onClick={resendCode}
-                >
-                  {t("sendAgain")}
-                </Button>
-              </div>
-            </div>
+            )}
             <Form
               className="siteformui"
               autoComplete="off"

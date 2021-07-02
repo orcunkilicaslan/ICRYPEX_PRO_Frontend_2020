@@ -235,3 +235,40 @@
   }
 }
 
+.modalformbttmtablelist{
+  padding-top: $modal-inner-padding;
+  margin-top: $modal-inner-padding;
+
+  .tabcont-head{
+    color: $site-clr-white;
+    padding-left: 4px;
+    border-bottom: none !important;
+  }
+
+  .cryptoaddresslisttable{
+    margin-top: 0 !important;
+  }
+}
+
+.cryptoaddresslisttable{
+  .sitetablediv{
+
+    .regs[class*="tbl"]{width: 100px;}
+    .cypt[class*="tbl"]{width: 80px;}
+    .mmtg[class*="tbl"]{width: 80px;}
+    .addr[class*="tbl"]{}
+    .bttn[class*="tbl"]{
+      width: 50px;
+      text-align: right;
+
+      > .btn, a, button{
+        background-color: transparent;
+        padding: 0;
+        margin: 0 2px;
+        line-height: 1;
+      }
+    }
+    .scrollbar-tbl-tb{height: 115px;}
+  }
+}
+
