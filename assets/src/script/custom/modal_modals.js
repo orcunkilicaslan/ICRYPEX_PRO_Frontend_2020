@@ -12,4 +12,5 @@ import Modal from "bootstrap.native/dist/components/modal-native";
 //var myNewModalNewsAll = new Modal('#modalHeadNewsAll', { backdrop: true }).show();
 //var myNewModalUserMenu = new Modal('#modalHeadUserMenu', { backdrop: true }).show();
 //var myNewModalOrderHistoryFilter = new Modal('#modalOrderHistoryFilter', { backdrop: true }).show();
+//var myNewModalCryptoAddressAdd = new Modal('#dandwModalCryptoAddress', { backdrop: true }).show();
 /* Modal */
