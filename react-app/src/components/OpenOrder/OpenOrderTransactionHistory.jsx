@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { sub, isWithinInterval, addDays } from "date-fns";
 import { groupBy } from "lodash";
 import NumberFormat from "react-number-format";
+import { nanoid } from "nanoid";
 
 import { Button } from "../Button.jsx";
 import { IconSet } from "../IconSet.jsx";
@@ -420,13 +421,13 @@ const OpenOrderTransactionHistory = props => {
                               </Table.Th>
                             </Table.Tr>
                           </Table.Thead>
-                          {historyDetail[id] &&
-                            historyDetail[id].map(detail => {
-                              const { updated_at, price, amount } = detail;
+                          {historyDetail[id] && (
+                            <Table.Tbody>
+                              {historyDetail[id].map(detail => {
+                                const { updated_at, price, amount } = detail;
 
-                              return (
-                                <Table.Tbody>
-                                  <Table.Tr>
+                                return (
+                                  <Table.Tr key={nanoid()}>
                                     <Table.Td sizeauto className="date">
                                       <span title={updated_at}>
                                         {formatDateDistance(
@@ -473,9 +474,10 @@ const OpenOrderTransactionHistory = props => {
                                       </span>
                                     </Table.Td>
                                   </Table.Tr>
-                                </Table.Tbody>
-                              );
-                            })}
+                                );
+                              })}
+                            </Table.Tbody>
+                          )}
                         </Table>
                       </div>
                     )}

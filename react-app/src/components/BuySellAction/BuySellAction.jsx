@@ -95,7 +95,7 @@ const BuySellAction = props => {
           <div className="buysellaction-head-col cominfo">
             <h6>{t("finance:transactionCommission")}</h6>
             <p>{t("finance:marketMaker")} 0.25% - {t("finance:marketTaker")} 0.35%</p>
-            <Button id="buysellactionPopover" className="popoverbtn d-none">
+            <Button id="buysellactionPopover" className="popoverbtn">
               <IconSet sprite="sprtsmclrd" size="16" name="info infoiconbox" />
             </Button>
             <UncontrolledPopover

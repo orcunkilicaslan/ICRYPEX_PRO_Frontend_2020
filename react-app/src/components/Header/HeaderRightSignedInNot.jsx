@@ -94,7 +94,7 @@ const HeaderRightSignedInNot = props => {
       const { code } = data;
       setSigninError(null);
 
-      if (user.loginType === 2) {
+      if (user.logintype === 2) {
         payload = await onSignin2FA(code);
       } else {
         payload = await onSigninSMS(code);
@@ -102,6 +102,7 @@ const HeaderRightSignedInNot = props => {
 
       if (!payload?.status) {
         setSigninError(payload?.errormessage);
+        setHasSentCode(false);
       }
     },
     [onSignin2FA, onSigninSMS, user]

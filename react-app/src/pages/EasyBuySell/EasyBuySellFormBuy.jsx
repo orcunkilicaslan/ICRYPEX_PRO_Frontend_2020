@@ -21,6 +21,8 @@ import { usePrices, useLocaleUpperCase } from "~/state/hooks/";
 import { fetchBalance } from "~/state/slices/balance.slice";
 import { fetchEasyBuy } from "~/state/slices/easybuy.slice";
 import { AlertResult } from "~/components/AlertResult";
+import NumberFormat from "react-number-format";
+import NumberInput from "~/components/NumberInput";
 
 const EasyBuySellFormBuy = props => {
   const { t } = useTranslation(["form", "common", "finance", "app"]);
@@ -32,7 +34,7 @@ const EasyBuySellFormBuy = props => {
   const [apiError, setApiError] = useState(null);
   const { fiatCurrency, cryptoCurrency, selectedPrice, selectedPair } =
     usePrices();
-  const { register, handleSubmit, errors, setValue, reset } = useForm({
+  const { register, handleSubmit, errors, setValue,  control, reset } = useForm({
     mode: "onChange",
     defaultValues: {
       fiatAmount: "",
@@ -45,6 +47,8 @@ const EasyBuySellFormBuy = props => {
   useEffect(() => {
     if (selectedPair) {
       reset();
+      setIsSubmitted(false)
+      setIsConfirmed(false)
       if (selectCurrency !== selectedPair.second_currency_id) {
         setCurrencyBalance(0);
       }
@@ -126,7 +130,14 @@ const EasyBuySellFormBuy = props => {
                 <p>
                   {t("finance:available")}:{" "}
                   <span>
-                    {parseFloat(currencyBalance).toFixed(2)} {fiatCurrency}
+                    <NumberFormat
+                        value={currencyBalance}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        decimalScale={2}
+                        suffix=" "
+                    />
+                    {fiatCurrency}
                   </span>
                 </p>
               </div>
@@ -195,7 +206,14 @@ const EasyBuySellFormBuy = props => {
                 <p>
                   {t("common:price")}: <TildeSmIcon className="tildesm" />{" "}
                   <span>
-                    {selectedPrice?.price} {fiatCurrency}
+                    <NumberFormat
+                        value={selectedPrice?.price}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        decimalScale={8}
+                        suffix=" "
+                    />
+                    {fiatCurrency}
                   </span>
                 </p>
               </div>

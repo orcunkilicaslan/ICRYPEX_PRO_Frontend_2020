@@ -60,28 +60,6 @@ const OpenOrderAssetsChartList = props => {
 
   return (
     <div className="assets-chartlist">
-      <Dropdown
-        isOpen={isDropdownOpen}
-        toggle={toggle}
-        direction="down"
-        style={{ position: "absolute", right: "10px" }}
-      >
-        <DropdownToggle caret className="d-none">{selectedCurrency?.symbol}</DropdownToggle>
-        <DropdownMenu right>
-          {fiatCurrencies.map(currency => {
-            const { symbol } = currency;
-
-            return (
-              <DropdownItem
-                key={symbol}
-                onClick={() => setSelectedCurrency(currency)}
-              >
-                {symbol}
-              </DropdownItem>
-            );
-          })}
-        </DropdownMenu>
-      </Dropdown>
       {!allAssets?.[`total_${selectedCurrency?.symbol}`] ? (
         <div className="noassetbalance">
           <div className="noassetbalance-content">

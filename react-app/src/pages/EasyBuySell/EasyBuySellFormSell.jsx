@@ -21,6 +21,7 @@ import { usePrices, useLocaleUpperCase } from "~/state/hooks/";
 import { fetchBalance } from "~/state/slices/balance.slice";
 import { fetchEasySell } from "~/state/slices/easysell.slice";
 import { AlertResult } from "~/components/AlertResult";
+import NumberFormat from "react-number-format";
 
 const EasyBuySellFormSell = props => {
   const { t } = useTranslation(["form", "common", "finance"]);
@@ -45,6 +46,8 @@ const EasyBuySellFormSell = props => {
     setCurrencyBalance(0);
     if (selectedPair) {
       reset();
+      setIsSubmitted(false)
+      setIsConfirmed(false)
       dispatch(
         fetchBalance({
           currencyid: selectedPair?.first_currency_id,
@@ -131,7 +134,14 @@ const EasyBuySellFormSell = props => {
                 <p>
                   {t("finance:available")}:{" "}
                   <span>
-                    {parseFloat(currencyBalance).toFixed(8)} {cryptoCurrency}
+                    <NumberFormat
+                        value={currencyBalance}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        decimalScale={8}
+                        suffix=" "
+                    />
+                    {cryptoCurrency}
                   </span>
                 </p>
               </div>
@@ -197,7 +207,13 @@ const EasyBuySellFormSell = props => {
                   {cryptoCurrency} {t("common:price")}:{" "}
                   <TildeSmIcon className="tildesm" />{" "}
                   <span>
-                    {selectedPrice?.price} {fiatCurrency}
+                    <NumberFormat
+                        value={selectedPrice?.price}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        decimalScale={2}
+                        suffix=" "
+                    /> {fiatCurrency}
                   </span>
                 </p>
               </div>
