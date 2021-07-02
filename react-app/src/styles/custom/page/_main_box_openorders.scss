@@ -52,3 +52,28 @@
 
 }
 
+.modalformbttmtablelist{
+  padding-top: $modal-inner-padding;
+  margin-top: $modal-inner-padding;
+
+  .tabcont-head{
+    color: $site-clr-white;
+    padding: 5px 4px;
+    border-bottom: none !important;
+  }
+
+  .cryptoaddresslisttable{
+    margin-top: 0 !important;
+  }
+
+  .sitetablediv{
+
+    &.scrollbar-tbl{
+      > .scrollbar-tbl-th .tbl-thead{border-top: 1px solid $site-brdr-dark; border-bottom: 1px solid $site-brdr-dark; margin-bottom: 7px;}
+      > .scrollbar-tbl-th .tbl-thead .tbl-th{color: $site-clr-text-soft-sec; padding-top: 5px; padding-bottom: 7px;}
+    }
+
+    .scrollbar-tbl-tb{height: 115px;}
+  }
+}
+

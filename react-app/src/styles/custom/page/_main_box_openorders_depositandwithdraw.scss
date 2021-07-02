@@ -235,21 +235,6 @@
   }
 }
 
-.modalformbttmtablelist{
-  padding-top: $modal-inner-padding;
-  margin-top: $modal-inner-padding;
-
-  .tabcont-head{
-    color: $site-clr-white;
-    padding-left: 4px;
-    border-bottom: none !important;
-  }
-
-  .cryptoaddresslisttable{
-    margin-top: 0 !important;
-  }
-}
-
 .cryptoaddresslisttable{
   .sitetablediv{
 
@@ -268,7 +253,27 @@
         line-height: 1;
       }
     }
-    .scrollbar-tbl-tb{height: 115px;}
+  }
+}
+
+.bankaddresslisttable{
+  .sitetablediv{
+
+    .regs[class*="tbl"]{width: 100px;}
+    .bank[class*="tbl"]{width: 100px;}
+    .unit[class*="tbl"]{width: 60px;}
+    .addr[class*="iban"]{}
+    .bttn[class*="tbl"]{
+      width: 50px;
+      text-align: right;
+
+      > .btn, a, button{
+        background-color: transparent;
+        padding: 0;
+        margin: 0 2px;
+        line-height: 1;
+      }
+    }
   }
 }
 

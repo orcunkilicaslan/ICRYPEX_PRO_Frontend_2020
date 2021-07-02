@@ -1,14 +1,18 @@
 import {Fragment, useMemo, useState} from "react";
-import {Col, Form, FormGroup, Input, Label, CustomInput, Modal, ModalBody, ModalFooter} from "reactstrap";
+import { Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { Button } from "../Button.jsx";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import InputMask from "react-input-mask";
-import {useBanks, useCurrencies} from "~/state/hooks/";
+import { useBanks, useCurrencies } from "~/state/hooks/";
 import { useForm, Controller } from "react-hook-form";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
+import Table from "~/components/Table";
+import { IconSet } from "~/components/IconSet";
 
 import {setOpenModal} from "~/state/slices/ui.slice";
 import {cryptoAddressWhitelistsCreate} from "~/state/slices/cryptoaddreswhitelist.slice";
+import {formatDateDistance} from "~/util";
+import NumberFormat from "react-number-format";
 
 export default function AddCryptoAddressModal(props) {
   const {
@@ -152,6 +156,68 @@ export default function AddCryptoAddressModal(props) {
                     {t("finance:addAddress")}
                   </Button>
                 </Form>
+                <div className="modalformbttmtablelist">
+                  <div className="tabcont tabcont-head">
+                    <p>Kayıtlı Hesaplarım</p>
+                  </div>
+                  <div className="cryptoaddresslisttable scrollbar">
+                    <Table scrollbar>
+                      <Table.Thead scrollbar>
+                        <Table.Tr>
+                          <Table.Th sizeauto className="regs">
+                            Kayıt Adı
+                          </Table.Th>
+                          <Table.Th sizeauto className="cypt">
+                            Kripto Birimi
+                          </Table.Th>
+                          <Table.Th sizeauto className="mmtg">
+                            Memo/Tag
+                          </Table.Th>
+                          <Table.Th sizefixed className="addr">
+                            Adres
+                          </Table.Th>
+                          <Table.Th sizeauto className="bttn" />
+                        </Table.Tr>
+                      </Table.Thead>
+                      <Table.Tbody
+                          striped
+                          hovered
+                          scrollbar
+                      >
+                        <Table.Tr>
+                          <Table.Td sizeauto className="regs">
+                            Binance ERC20
+                          </Table.Td>
+                          <Table.Td sizeauto className="cypt">
+                            XLM
+                          </Table.Td>
+                          <Table.Td sizeauto className="mmtg">
+                            63025
+                          </Table.Td>
+                          <Table.Td sizefixed className="addr">
+                            GCT4DSRYMQK44ULWQVWNMF6A6SKV5OODEONU37VNHRQVDJYVKYTLHOLS
+                          </Table.Td>
+                          <Table.Td sizeauto className="bttn">
+                            <Button>
+                              <IconSet
+                                  sprite="sprtsmclrd"
+                                  size="14"
+                                  name="edit"
+                              />
+                            </Button>
+                            <Button>
+                              <IconSet
+                                  sprite="sprtsmclrd"
+                                  size="14"
+                                  name="delete"
+                              />
+                            </Button>
+                          </Table.Td>
+                        </Table.Tr>
+                      </Table.Tbody>
+                    </Table>
+                  </div>
+                </div>
               </ModalBody>
             </Fragment>
         ) : (

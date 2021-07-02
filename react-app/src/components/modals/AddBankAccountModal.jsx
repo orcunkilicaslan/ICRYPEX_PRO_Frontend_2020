@@ -1,13 +1,15 @@
 import {Fragment, useState} from "react";
-import {Col, Form, FormGroup, Input, Label, CustomInput, Modal, ModalBody, ModalFooter} from "reactstrap";
+import { Form, FormGroup, Input, Label, CustomInput, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { Button } from "../Button.jsx";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import InputMask from "react-input-mask";
 import { useBanks } from "~/state/hooks/";
 import { useForm, Controller } from "react-hook-form";
-import {useDispatch} from "react-redux";
-import {createBankAccount} from "~/state/slices/bankaccount.slice";
-import {setOpenModal} from "~/state/slices/ui.slice";
+import { useDispatch } from "react-redux";
+import { createBankAccount } from "~/state/slices/bankaccount.slice";
+import { setOpenModal } from "~/state/slices/ui.slice";
+import Table from "~/components/Table";
+import { IconSet } from "~/components/IconSet";
 
 export default function AddBankAccountModal(props) {
   const {
@@ -156,6 +158,68 @@ export default function AddBankAccountModal(props) {
                     {t("finance:addAccount")}
                   </Button>
                 </Form>
+                <div className="modalformbttmtablelist">
+                  <div className="tabcont tabcont-head">
+                    <p>Kayıtlı Hesaplarım</p>
+                  </div>
+                  <div className="bankaddresslisttable scrollbar">
+                    <Table scrollbar>
+                      <Table.Thead scrollbar>
+                        <Table.Tr>
+                          <Table.Th sizeauto className="regs">
+                            Kayıt Adı
+                          </Table.Th>
+                          <Table.Th sizeauto className="bank">
+                            Banka
+                          </Table.Th>
+                          <Table.Th sizeauto className="unit">
+                            Para Birimi
+                          </Table.Th>
+                          <Table.Th sizefixed className="iban">
+                            IBAN
+                          </Table.Th>
+                          <Table.Th sizeauto className="bttn" />
+                        </Table.Tr>
+                      </Table.Thead>
+                      <Table.Tbody
+                          striped
+                          hovered
+                          scrollbar
+                      >
+                        <Table.Tr>
+                          <Table.Td sizeauto className="regs">
+                            Ana Hesap
+                          </Table.Td>
+                          <Table.Td sizeauto className="bank">
+                            ALBARAKA TÜRK KATILIM BANKASI A.Ş.
+                          </Table.Td>
+                          <Table.Td sizeauto className="unit">
+                            TRY
+                          </Table.Td>
+                          <Table.Td sizefixed className="iban">
+                            TR888888888888888888888888
+                          </Table.Td>
+                          <Table.Td sizeauto className="bttn">
+                            <Button>
+                              <IconSet
+                                  sprite="sprtsmclrd"
+                                  size="14"
+                                  name="edit"
+                              />
+                            </Button>
+                            <Button>
+                              <IconSet
+                                  sprite="sprtsmclrd"
+                                  size="14"
+                                  name="delete"
+                              />
+                            </Button>
+                          </Table.Td>
+                        </Table.Tr>
+                      </Table.Tbody>
+                    </Table>
+                  </div>
+                </div>
               </ModalBody>
             </Fragment>
         ) : (
