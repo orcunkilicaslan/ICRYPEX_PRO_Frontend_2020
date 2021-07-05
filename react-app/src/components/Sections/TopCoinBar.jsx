@@ -34,9 +34,8 @@ const TopCoinBar = props => {
     low24hour,
     avarage24hour,
     volume,
-    bid,
-    ask,
     changepercent,
+    price,
   } = selectedPriceData;
   const fiatSymbol = selectedFiatCurrency?.symbol || "";
   const cryptoSymbol = selectedCryptoCurrency?.symbol || "";
@@ -87,18 +86,22 @@ const TopCoinBar = props => {
             </InputGroupText>
           </InputGroupAddon>
           <div className="cryptostatsbar">
-            <div className="cryptostatsbar-biger">
-              <PerLineIcon className={`mdper mdper-${upOrDown}`} />
-              <span className={siteColorClass}>
-                <NumberFormat
-                  value={selectedPriceData?.price}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  decimalScale={fiatDigit}
-                  fixedDecimalScale
-                />
-              </span>
-            </div>
+            {price !== null ? (
+              <div className="cryptostatsbar-biger">
+                <PerLineIcon className={`mdper mdper-${upOrDown}`} />
+                <span className={siteColorClass}>
+                  <NumberFormat
+                    value={price}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    decimalScale={fiatDigit}
+                    fixedDecimalScale
+                  />
+                </span>
+              </div>
+            ) : (
+              <span style={{ minWidth: "40px", fontWeight: "bold" }}>_ _ _</span>
+            )}
             <div className="cryptostatsbar-stats">
               <ul className="bigstatslist">
                 <li>

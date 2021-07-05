@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
 const usePrices = () => {
@@ -9,13 +10,16 @@ const usePrices = () => {
   } = useSelector(state => state.pair);
   const allPrices = useSelector(state => state.socket.prices);
 
+  const selectedPrice = useMemo(
+    () => allPrices?.find(({ symbol }) => symbol === selectedPair?.symbol),
+    [allPrices, selectedPair?.symbol]
+  );
+
   return {
     allPrices,
     allPairs,
     selectedPair,
-    selectedPrice: allPrices?.find(
-      ({ symbol }) => symbol === selectedPair?.symbol
-    ),
+    selectedPrice,
     fiatCurrency,
     cryptoCurrency,
   };
