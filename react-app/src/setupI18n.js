@@ -104,6 +104,7 @@ const init = (initialLang = "en") => {
             continue: "Continue",
             copied: "Copied",
             balance: "Balance",
+            confirm: "Confirm",
           },
           finance: {
             ask: "Ask",
@@ -165,6 +166,7 @@ const init = (initialLang = "en") => {
               "Be sure to check that the address you copied is correct in the area you pasted.",
             depositCryptoInfo2:
               "The amount you send will be automatically credited to your account.",
+            orderDeleteConfirm: "Do you want to cancel this open order?",
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -373,6 +375,7 @@ const init = (initialLang = "en") => {
             continue: "Devam Et",
             copied: "Kopyalandı",
             balance: "Bakiye",
+            confirm: "Onayla",
           },
           finance: {
             ask: "Alış",
@@ -434,6 +437,8 @@ const init = (initialLang = "en") => {
               "Kopyaladığınız adresin yapıştırdığınız alandaki doğruluğunu mutlaka kontrol ediniz.",
             depositCryptoInfo2:
               "Gönderdiğiniz tutar otomatik olarak hesabınıza geçecektir.",
+            orderDeleteConfirm:
+              "Bu açık emri iptal etmek istediğinizden emin misiniz?",
           },
           coinbar: {
             lastPrice: "Son Fiyat",

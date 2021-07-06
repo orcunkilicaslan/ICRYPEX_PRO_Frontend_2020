@@ -17,7 +17,10 @@ import {
 } from "~/state/slices/order.slice";
 import { formatDateDistance } from "~/util/";
 import { setOpenModal } from "~/state/slices/ui.slice";
-import { OrderOpenOrdersFilter } from "~/components/modals/";
+import {
+  OrderOpenOrdersFilter,
+  DeleteOrderConfirmModal,
+} from "~/components/modals/";
 import CustomSelect from "~/components/CustomSelect";
 
 const defaultValues = {
@@ -45,6 +48,9 @@ const OpenOrderOrders = props => {
   const { allPairs, selectedPair } = usePrices();
   const { findCurrencyBySymbol } = useCurrencies();
   const [ordersideIdx, setOrdersideIdx] = useState(-1);
+  const [deleteOrderId, setDeleteOrderId] = useState(null);
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
+  const [deleteError, setDeleteError] = useState(false);
 
   const isFetching = orderSlice?.isFetchingOpen;
   const hideOthers = orderSlice?.hideOthersOpen;
@@ -84,7 +90,21 @@ const OpenOrderOrders = props => {
     dispatch(toggleHideOthersOpen());
   }, [dispatch]);
 
-  const onDelete = useCallback(id => dispatch(deleteOpenOrder(id)), [dispatch]);
+  const onDelete = useCallback(async () => {
+    if (!deleteOrderId && typeof deleteOrderId === "number") return;
+
+    const { payload } = await dispatch(deleteOpenOrder(deleteOrderId));
+
+    if (payload.status) {
+      setDeleteSuccess(payload.description);
+    } else {
+      setDeleteError(payload.errormessage);
+    }
+  }, [deleteOrderId, dispatch]);
+
+  const openDeleteOrderConfirmModal = useCallback(() => {
+    dispatch(setOpenModal("deleteorderconfirm"));
+  }, [dispatch]);
 
   const openFiltersModal = useCallback(() => {
     dispatch(setOpenModal("orderopenordersfilter"));
@@ -92,6 +112,9 @@ const OpenOrderOrders = props => {
 
   const clearOpenModals = useCallback(() => {
     dispatch(setOpenModal("none"));
+    setDeleteOrderId(null);
+    setDeleteError(false);
+    setDeleteSuccess(false);
   }, [dispatch]);
 
   return (
@@ -268,7 +291,12 @@ const OpenOrderOrders = props => {
                       <Button className="d-none">
                         <IconSet sprite="sprtsmclrd" size="14" name="edit" />
                       </Button>
-                      <Button onClick={() => onDelete(id)}>
+                      <Button
+                        onClick={() => {
+                          setDeleteOrderId(id);
+                          openDeleteOrderConfirmModal();
+                        }}
+                      >
                         <IconSet
                           sprite="sprtsmclrd"
                           size="14"
@@ -290,6 +318,13 @@ const OpenOrderOrders = props => {
         clearModals={clearOpenModals}
         defaultValues={defaultValues}
         isFetching={isFetching}
+      />
+      <DeleteOrderConfirmModal
+        isOpen={openModal === "deleteorderconfirm"}
+        clearModals={clearOpenModals}
+        onConfirm={onDelete}
+        successMessage={deleteSuccess}
+        errorMessage={deleteError}
       />
     </div>
   );

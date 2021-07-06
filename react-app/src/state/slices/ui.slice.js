@@ -35,6 +35,7 @@ const MODALS = [
   "activitieshistoryfilter",
   "notifications",
   "qrcode",
+  "deleteorderconfirm"
 ];
 
 const uiSlice = createSlice({

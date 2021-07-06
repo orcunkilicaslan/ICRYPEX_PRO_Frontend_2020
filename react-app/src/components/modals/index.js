@@ -13,3 +13,4 @@ export { default as ActivitiesHistoryFilter } from "./ActivitiesHistoryFilter";
 export { default as QrCodeModal } from "./QrCodeModal";
 export { default as ResultSweetModal } from "./ResultSweetModal";
 export { default as AddBankAccountModal } from "./AddBankAccountModal";
+export { default as DeleteOrderConfirmModal } from "./DeleteOrderConfirmModal";
