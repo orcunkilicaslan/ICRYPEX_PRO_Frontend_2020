@@ -28,7 +28,6 @@ import { useCurrencies } from "~/state/hooks/";
 import NumberInput from "../NumberInput";
 
 const rangeAlarmPercent = [-100, -75, -50, -25, 0, 25, 50, 75, 100];
-const spinnerStep = 10;
 const spinnerMin = 0;
 const spinnerMax = 999999999;
 
@@ -98,12 +97,11 @@ export default function AlarmModal(props) {
 
   useEffect(() => {
     if (isOpen) {
-      let amount;
+      let amount = userInput || selectedPriceData?.price;
 
       if (userInput) {
         setRangeAlarmPortfolio(0);
-        amount = userInput;
-      } else amount = selectedPriceData?.price;
+      }
 
       if (amount) {
         if (rangeAlarmPortfolio !== 0) {
@@ -122,6 +120,15 @@ export default function AlarmModal(props) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, rangeAlarmPortfolio, selectedPriceData, userInput]);
+
+  const spinnerStep = useMemo(() => {
+    const step = Math.min(
+      Math.max(Math.floor(selectedPriceData?.price), 1),
+      50
+    );
+
+    return Number.isNaN(step) ? 10 : step;
+  }, [selectedPriceData]);
 
   const onAmountStep = int => {
     const amount = getValues("amount");
@@ -144,9 +151,14 @@ export default function AlarmModal(props) {
   };
 
   const onSubmit = async ({ amount }) => {
+    const pricealarmtypeid = selectedPriceData?.price
+      ? amount > selectedPriceData?.price
+        ? 1
+        : 2
+      : 1;
     const data = {
       pairname: currentPair?.name,
-      pricealarmtypeid: rangeAlarmPortfolio > 0 ? 1 : 2,
+      pricealarmtypeid,
       price: amount,
     };
 
@@ -154,6 +166,11 @@ export default function AlarmModal(props) {
   };
 
   const onRangeChange = event => {
+    if (userInput) {
+      setValue("amount", selectedPriceData?.price);
+      setUserInput(null);
+    }
+
     const int = parseInt(event?.target?.value, 10);
     setRangeAlarmPortfolio(int);
   };
