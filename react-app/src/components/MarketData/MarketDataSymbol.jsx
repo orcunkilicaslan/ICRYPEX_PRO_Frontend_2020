@@ -44,7 +44,7 @@ const MarketDataSymbol = props => {
     keys: ["symbol"],
     findAllMatches: true,
   });
-  console.log({pricesData})
+
   const visiblePrices = useMemo(() => {
     let prices;
 
@@ -155,8 +155,7 @@ const MarketDataSymbol = props => {
             scrollbarstyles={{ height: `${tableHeight - 25}px` }}
           >
             {visiblePrices.map((data = {}) => {
-              const { id, name, price, volume, changepercent, symbol } =
-                data;
+              const { id, name, price, volume, changepercent, symbol } = data;
               const mdper = changepercent > 0 ? "up" : "down";
               const isFavorite = favoritePairIDs.includes(id);
               const [_, fiatCurrencySymbol] = getPairTuple(name);
@@ -188,11 +187,11 @@ const MarketDataSymbol = props => {
                   </Table.Td>
                   <Table.Td sizefixed className="lst" title={price}>
                     <NumberFormat
-                        value={price}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        decimalScale={digit_show || digit}
-                        fixedDecimalScale
+                      value={price}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      decimalScale={digit_show || digit}
+                      fixedDecimalScale
                     />
                   </Table.Td>
                   <Table.Td sizefixed className="vol" title={volume}>

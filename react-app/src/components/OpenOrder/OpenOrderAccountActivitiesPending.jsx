@@ -73,9 +73,10 @@ const OpenOrderAccountActivitiesPending = props => {
     requestTypeIdx,
   ]);
 
-  const onCancel = useCallback(id => dispatch(cancelPendingTransaction(id)), [
-    dispatch,
-  ]);
+  const onCancel = useCallback(
+    id => dispatch(cancelPendingTransaction(id)),
+    [dispatch]
+  );
 
   const clearOpenModals = useCallback(() => {
     dispatch(setOpenModal("none"));
@@ -210,7 +211,7 @@ const OpenOrderAccountActivitiesPending = props => {
                     <Table.Td sizeauto className="type">
                       <span className={typecls}>{requestType}</span>
                     </Table.Td>
-                    <Table.Td sizeauto className="mthd" title={requestMethod}>
+                    <Table.Td sizeauto className="mthd">
                       {requestMethod}
                     </Table.Td>
                     <Table.Td sizeauto className="bank">
