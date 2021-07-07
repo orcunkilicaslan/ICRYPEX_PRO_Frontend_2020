@@ -1,4 +1,4 @@
-import { useCallback, createContext, useReducer } from "react";
+import { useCallback, createContext, useReducer, Fragment } from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
 import classnames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
@@ -125,36 +125,38 @@ const OpenOrder = props => {
     <openOrderContext.Provider value={{ state, dispatch: _dispatch }}>
       <div className="mainbox mainbox-openorders">
         <div className="openorders openorders-tabs tabareaflexflow">
-          <Nav tabs justified className="sitetabs">
-            {tabs.map(tab => {
-              const { title } = tab;
-              const cls = classnames({ active: activeTab === title });
+          {accesstoken ? (
+              <Fragment>
+                <Nav tabs justified className="sitetabs">
+                  {tabs.map(tab => {
+                    const { title } = tab;
+                    const cls = classnames({ active: activeTab === title });
 
-              return (
-                <NavItem key={title}>
-                  <NavLink className={cls} onClick={() => toggle(title)}>
-                    {title}
-                  </NavLink>
-                </NavItem>
-              );
-            })}
-          </Nav>
-          <TabContent className="sitetabs" activeTab={activeTab}>
-            {tabs.map(({ title, component: Comp }) => {
-              return (
-                <TabPane key={title} tabId={title}>
-                  {accesstoken ? (
-                    <Comp />
-                  ) : (
-                    <UserNotLoginBox
-                      openSigninModal={openSigninModal}
-                      openSignupModal={openSignupModal}
-                    />
-                  )}
-                </TabPane>
-              );
-            })}
-          </TabContent>
+                    return (
+                        <NavItem key={title}>
+                          <NavLink className={cls} onClick={() => toggle(title)}>
+                            {title}
+                          </NavLink>
+                        </NavItem>
+                    );
+                  })}
+                </Nav>
+                <TabContent className="sitetabs" activeTab={activeTab}>
+                  {tabs.map(({ title, component: Comp }) => {
+                    return (
+                        <TabPane key={title} tabId={title}>
+                          <Comp />
+                        </TabPane>
+                    );
+                  })}
+                </TabContent>
+              </Fragment>
+          ) : (
+              <UserNotLoginBox
+                  openSigninModal={openSigninModal}
+                  openSignupModal={openSignupModal}
+              />
+          )}
         </div>
       </div>
     </openOrderContext.Provider>
