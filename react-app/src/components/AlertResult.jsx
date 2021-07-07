@@ -1,7 +1,7 @@
-import { useTranslation } from "react-i18next";
+import React, { useState } from 'react';
 import { Alert } from "reactstrap";
 import classNames from "classnames";
-import Table from "~/components/Table";
+import { useTranslation } from "react-i18next";
 
 export function AlertResult(props) {
   const { t } = useTranslation("alertResult");
@@ -16,8 +16,12 @@ export function AlertResult(props) {
     "alert-success": Boolean(success),
   });
 
+  const [alertVisible, setAlertVisible] = useState(true);
+
+  const onDismiss = () => setAlertVisible(false);
+
   const alertResult = (
-    <Alert className={alertResultClass} {...rest}>
+    <Alert className={alertResultClass} closeClassName="alert-close" isOpen={alertVisible} toggle={onDismiss} {...rest}>
       <div className={center ? "alert-center" : "alert-flex"}>
         {error ? (
           <div className="alert-icon">
