@@ -274,11 +274,11 @@ export default function SignupModal(props) {
                   name="recaptcha"
                   innerRef={register({ required: t("form:isRequired") })}
                 />
-                <Label>{t("notARobot")}</Label>
+                <Label className={errors.recaptcha  && "sitecolorred"}>{t("notARobot")}</Label>
                 {errors.recaptcha && (
-                  <FormText className="inputresult resulterror inputintext">
-                    {errors.recaptcha?.message}
-                  </FormText>
+                    <FormText className="inputresult resulterror inputintext w-100 mt-0">
+                      {errors.recaptcha?.message}
+                    </FormText>
                 )}
               </div>
             </div>

@@ -22,6 +22,7 @@ import { AlertResult } from "../AlertResult.jsx";
 import { useLocaleUpperCase } from "~/state/hooks/";
 import { verifyCaptcha } from "~/util/";
 import { ProgressRing } from "../ProgressRing.jsx";
+import {TooltipResult} from "~/components/TooltipResult";
 
 const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
 const VERIFICATION_EXPIRY = ms("3m");
@@ -277,9 +278,9 @@ export default function SigninModal(props) {
                     required: t("form:isRequired"),
                   })}
                 />
-                <Label>{t("notARobot")}</Label>
+                <Label className={errorsSignin.recaptcha && "sitecolorred"}>{t("notARobot")}</Label>
                 {errorsSignin.recaptcha && (
-                  <FormText className="inputresult resulterror inputintext">
+                  <FormText className="inputresult resulterror inputintext w-100 mt-0">
                     {errorsSignin.recaptcha?.message}
                   </FormText>
                 )}
