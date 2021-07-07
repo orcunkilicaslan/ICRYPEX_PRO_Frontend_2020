@@ -10,10 +10,14 @@ import EasyBuySellFormBuy from "~/pages/EasyBuySell/EasyBuySellFormBuy.jsx";
 import EasyBuySellFormSell from "~/pages/EasyBuySell/EasyBuySellFormSell.jsx";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import UserNotLoginBox from "~/pages/Sections/UserNotLoginBox";
+import { useLocaleUpperCase } from "~/state/hooks/";
+import { pathEasyBuy, pathEasySell, dictEasyBuy, dictEasySell } from "~/routes";
 
 const EasyBuySellBody = props => {
   const dispatch = useDispatch();
   const { accesstoken } = useSelector(state => state.api);
+  const { lang } = useSelector(state => state.ui);
+  const toUpperCase = useLocaleUpperCase();
 
   const openSigninModal = useCallback(() => {
     dispatch(setOpenModal("signin"));
@@ -27,15 +31,15 @@ const EasyBuySellBody = props => {
   const tabs = [
     {
       idx: 1,
-      title: t("easybuy").toUpperCase(),
+      title: toUpperCase(t("easybuy")),
       tabcls: "nav-buy",
-      href: "/kolay-al",
+      href: dictEasyBuy[lang],
     },
     {
       idx: 2,
-      title: t("easysell").toUpperCase(),
+      title: toUpperCase(t("easysell")),
       tabcls: "nav-sell",
-      href: "/kolay-sat",
+      href: dictEasySell[lang],
     },
   ];
 
@@ -71,7 +75,7 @@ const EasyBuySellBody = props => {
                       })}
                     </Nav>
                     <Switch>
-                      <Route exact path="/kolay-al">
+                      <Route exact path={pathEasyBuy}>
                         {accesstoken ? (
                           <EasyBuySellFormBuy />
                         ) : (
@@ -81,7 +85,7 @@ const EasyBuySellBody = props => {
                           />
                         )}
                       </Route>
-                      <Route exact path="/kolay-sat">
+                      <Route exact path={pathEasySell}>
                         {accesstoken ? (
                           <EasyBuySellFormSell />
                         ) : (

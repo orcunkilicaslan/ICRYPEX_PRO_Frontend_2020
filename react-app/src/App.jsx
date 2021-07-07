@@ -5,16 +5,14 @@ import "./App.scss";
 import Header from "~/components/Header/Header.jsx";
 import { ProTrading } from "./pages/ProTrading/ProTrading.jsx";
 import { EasyBuySell } from "./pages/EasyBuySell/EasyBuySell.jsx";
+import { pathEasyBuy, pathEasySell } from "~/routes";
 
 const App = props => {
   return (
     <Router>
       <Header />
       <Switch>
-        <Route exact path="/pro-gorunum">
-          <ProTrading />
-        </Route>
-        <Route exact path={["/kolay-al", "/kolay-sat"]}>
+        <Route exact path={[...pathEasyBuy, ...pathEasySell]}>
           <EasyBuySell />
         </Route>
         <Route path="/">

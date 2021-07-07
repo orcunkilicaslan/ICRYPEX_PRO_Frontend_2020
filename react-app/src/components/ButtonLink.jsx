@@ -2,15 +2,7 @@ import classNames from "classnames";
 import { NavLink } from "react-router-dom";
 
 export const ButtonLink = props => {
-  const {
-    className,
-    href = "",
-    title = "",
-    size,
-    variant,
-    children,
-    ...rest
-  } = props;
+  const { className, title = "", size, variant, children, ...rest } = props;
 
   const cls = classNames("btn", className, {
     [`btn-${size}`]: Boolean(size),
@@ -18,7 +10,7 @@ export const ButtonLink = props => {
   });
 
   return (
-    <NavLink className={cls} to={href} title={title} {...rest}>
+    <NavLink className={cls} title={title} {...rest}>
       {children}
     </NavLink>
   );

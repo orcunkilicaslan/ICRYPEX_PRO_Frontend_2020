@@ -1,22 +1,26 @@
 import { useLocation, NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Col } from "reactstrap";
+import { useSelector } from "react-redux";
 
 import { ButtonLink } from "../ButtonLink.jsx";
+import {
+  pathEasyBuy,
+  pathEasySell,
+  pathProTrading,
+  dictEasyBuy,
+  dictProTrading,
+} from "~/routes";
 
 const HeaderLeft = props => {
   const { t } = useTranslation("app");
   const location = useLocation();
-
-  const pathEasyBuy = "/kolay-al";
-  const pathEasySell = "/kolay-sat";
-  const pathHome = "/";
-  const pathProTrading = "/pro-gorunum";
+  const { lang } = useSelector(state => state.ui);
 
   return (
     <Col xs="auto" className="header-left">
       <div className="header-left-logo">
-        <NavLink className="headlogo" to={pathHome} title="ICRYPEX ONE">
+        <NavLink className="headlogo" to={"/"} title="ICRYPEX ONE">
           ICRYPEX ONE
         </NavLink>
       </div>
@@ -24,11 +28,11 @@ const HeaderLeft = props => {
         <ButtonLink
           size="sm"
           variant={
-            [pathEasyBuy, pathEasySell].includes(location.pathname)
+            [...pathEasyBuy, ...pathEasySell].includes(location.pathname)
               ? "primary"
               : "secondary"
           }
-          to={pathEasyBuy}
+          to={dictEasyBuy[lang]}
           title={t("easybuysell")}
         >
           {t("easybuysell")}
@@ -36,11 +40,11 @@ const HeaderLeft = props => {
         <ButtonLink
           size="sm"
           variant={
-            [pathHome, pathProTrading].includes(location.pathname)
+            ["/", ...pathProTrading].includes(location.pathname)
               ? "primary"
               : "secondary"
           }
-          to={pathProTrading}
+          to={dictProTrading[lang]}
           title={t("protrading")}
         >
           {t("protrading")}
