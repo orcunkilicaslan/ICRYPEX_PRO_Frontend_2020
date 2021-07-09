@@ -3,12 +3,12 @@ import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import NumberFormat from "react-number-format";
 
 import { IconSet } from "../IconSet.jsx";
 import OpenOrderDepoWithTabDeposit from "~/components/OpenOrder/OpenOrderDepoWithTabDeposit.jsx";
 import OpenOrderDepoWithTabWithdraw from "~/components/OpenOrder/OpenOrderDepoWithTabWithdraw.jsx";
 import { openOrderContext, TRANSACTION_MODES } from "./OpenOrder";
-import { useCurrencies } from "~/state/hooks";
 
 const OpenOrderDepoWith = props => {
   const { allAssets } = useSelector(state => state.assets);
@@ -28,8 +28,6 @@ const OpenOrderDepoWith = props => {
   const {
     state: { mode },
   } = useContext(openOrderContext);
-  const { cryptoCurrencies: currencies } = useCurrencies();
-  const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
   const [activeTab, setActiveTab] = useState(tabs[0].title);
 
   const toggle = tab => {
@@ -77,10 +75,23 @@ const OpenOrderDepoWith = props => {
           <IconSet sprite="sprtsmclrd" size="16" name="wallet" />
           <h6>{t("approximately")}</h6>
           <p>
-            {" "}
-            {allAssets?.total_TRY?.toFixed?.(2)} TRY /{" "}
-            {allAssets?.[`total_${selectedCurrency?.symbol}`]?.toFixed?.(2)}{" "}
-            {selectedCurrency?.symbol}
+            <NumberFormat
+              value={allAssets?.total_TRY}
+              displayType={"text"}
+              thousandSeparator={true}
+              decimalScale={2}
+              fixedDecimalScale
+              suffix={" TRY"}
+            />
+            {" / "}
+            <NumberFormat
+              value={allAssets?.total_BTC}
+              displayType={"text"}
+              thousandSeparator={true}
+              decimalScale={2}
+              fixedDecimalScale
+              suffix={" BTC"}
+            />
           </p>
         </div>
       </div>
