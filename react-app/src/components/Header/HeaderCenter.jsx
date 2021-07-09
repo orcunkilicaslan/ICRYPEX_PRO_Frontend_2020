@@ -1,36 +1,22 @@
+import { useEffect } from "react";
 import { Col, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import ms from "ms";
+import { useDispatch, useSelector } from "react-redux";
 
 import { IconSet } from "../IconSet";
 import { Button } from "../Button";
 import NewsTicker from "../NewsTicker";
-
-const ITEMS = [
-  {
-    href: "#",
-    title: "Murat Alaçayır: 01 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
-  },
-  {
-    href: "#",
-    title: "Murat Alaçayır: 02 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
-  },
-  {
-    href: "#",
-    title: "Murat Alaçayır: 03 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
-  },
-  {
-    href: "#",
-    title: "Murat Alaçayır: 04 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
-  },
-  {
-    href: "#",
-    title: "Murat Alaçayır: 05 - Eylül Veya Ekimde Piyasalar Normale Dönebilir",
-  },
-];
+import { fetchAnnouncements } from "~/state/slices/announcement.slice";
 
 const HeaderCenter = props => {
   const { t } = useTranslation(["app", "common"]);
+  const dispatch = useDispatch();
+  const { all } = useSelector(state => state.announcement);
+
+  useEffect(() => {
+    dispatch(fetchAnnouncements());
+  }, [dispatch]);
 
   return (
     <Col className="header-center">
@@ -41,7 +27,7 @@ const HeaderCenter = props => {
               {t("newsanalysis")}
             </InputGroupText>
           </InputGroupAddon>
-          <NewsTicker items={ITEMS} interval={ms("7s")} />
+          <NewsTicker items={all} interval={ms("7s")} />
           <InputGroupAddon addonType="append">
             <Button className="input-group-text newsallbtn">
               <span>{t("common:all")}</span>

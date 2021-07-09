@@ -24,6 +24,7 @@ import bankAccountReducer from "~/state/slices/bankaccount.slice";
 import cryptoAddressWhitelistReducer from "~/state/slices/cryptoaddreswhitelist.slice";
 import cryptoAddressReducer from "~/state/slices/cryptoaddress.slice";
 import webLoginReducer from "~/state/slices/weblogin.slice";
+import announcementReducer from "~/state/slices/announcement.slice";
 
 const apiPersistConfig = {
   key: "api",
@@ -86,6 +87,12 @@ const transactionPersistConfig = {
   whitelist: ["histories", "pending"],
 };
 
+const announcementPersistConfig = {
+  key: "announcement",
+  storage,
+  blacklist: ["isFetching"],
+};
+
 const rootReducer = combineReducers({
   ui: persistReducer(UIPersistConfig, uiReducer),
   api: persistReducer(apiPersistConfig, apiReducer),
@@ -107,8 +114,9 @@ const rootReducer = combineReducers({
   bankAccount: bankAccountReducer,
   cryptoAddressWhitelist: cryptoAddressWhitelistReducer,
   cryptoAddress: cryptoAddressReducer,
-  webLogin: persistReducer(webLoginPersistConfig,webLoginReducer),
+  webLogin: persistReducer(webLoginPersistConfig, webLoginReducer),
   transaction: persistReducer(transactionPersistConfig, transactionReducer),
+  announcement: persistReducer(announcementPersistConfig, announcementReducer),
 });
 
 export default rootReducer;
