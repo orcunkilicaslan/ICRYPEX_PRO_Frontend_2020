@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Col } from "reactstrap";
 
 import { LanguageButtons } from "../LanguageButtons.jsx";
-import HeaderRightTheme from "./HeaderRightTheme.jsx";
+// import HeaderRightTheme from "./HeaderRightTheme.jsx";
 import HeaderRightIcons from "./HeaderRightIcons.jsx";
 import HeaderRightSignedInNot from "./HeaderRightSignedInNot.jsx";
 import HeaderRightSignedIn from "./HeaderRightSignedIn.jsx";
@@ -75,7 +75,6 @@ const HeaderRight = props => {
 
   return (
     <Col xs="auto" className="header-right">
-      <HeaderRightTheme />
       <HeaderRightIcons />
       {accesstoken ? (
         <HeaderRightSignedIn user={User} onSignout={onSignout} />

@@ -69,17 +69,8 @@ const HeaderRightIcons = props => {
 
   return (
     <div className="header-right-icons">
-      <Button
-        className="headsignedinicon fullscreen"
-        data-toggle="fullscreenbtn"
-      >
-        <IconSet sprite="sprtsmclrd" size="20" name="pagefullscreen" />
-      </Button>
       {accesstoken ? (
         <Fragment>
-          <Button className="headsignedinicon support">
-            <IconSet sprite="sprtsmclrd" size="20" name="support" />
-          </Button>
           <Button
             className="headsignedinicon notif"
             onClick={toggleNotificationsModal}
