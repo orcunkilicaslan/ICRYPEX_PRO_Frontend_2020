@@ -35,7 +35,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
     state => state.withdraw
   );
   const { info } = useSelector(state => state.user);
-  const { whitelists = [] } = useSelector(
+  const { groupedWhitelists = {} } = useSelector(
     state => state.cryptoAddressWhitelist
   );
   const { groupedCryptoAddresses = {} } = useSelector(state => state.assets);
@@ -82,12 +82,16 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
     disabled: read.click === false,
     "w-100": true,
   });
-  const { symbol: watchedSymbol } = watch();
+  const { symbol: watchedSymbol, address: watchedAddress } = watch();
 
-  const selectedAddress = useMemo(
-    () => whitelists?.filter(c => c.symbol === watchedSymbol),
-    [watchedSymbol, whitelists]
-  );
+  const { selectedWhitelists, selectedWhitelist } = useMemo(() => {
+    const selectedWhitelists = groupedWhitelists?.[watchedSymbol];
+    const selectedWhitelist = selectedWhitelists?.find(
+      ({ address }) => watchedAddress === address
+    );
+
+    return { selectedWhitelists, selectedWhitelist };
+  }, [groupedWhitelists, watchedSymbol, watchedAddress]);
 
   const {
     balance: selectedBalance,
@@ -115,7 +119,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
       selectedCryptoFree,
       selectedCurrency,
     };
-  }, [watchedSymbol, allAssets, whitelists]);
+  }, [watchedSymbol, allAssets]);
 
   useEffect(() => {
     const { symbol, mode } = orderContext;
@@ -337,12 +341,10 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                       required: t("isRequired"),
                     })}
                   >
-                    {selectedAddress.map(whitelist => {
-                      const { address, short_name, id } = whitelist;
-
-                      return short_name ? (
-                        <option value={address} key={id}>
-                          {`${short_name} - ${address}`}
+                    {selectedWhitelists.map(whitelist => {
+                      return whitelist?.short_name ? (
+                        <option value={whitelist?.address} key={whitelist?.id}>
+                          {`${whitelist?.short_name} - ${whitelist?.address}`}
                         </option>
                       ) : (
                         ""
@@ -364,18 +366,18 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                     {errors.address?.message}
                   </FormText>
                 )}
-                {selectedBalance?.destinationTag && (
+                {selectedCurrency?.hasdestinationtag ? (
                   <InputGroup className="form-group">
                     <Input
                       readOnly
                       name="destinationtag"
-                      value={selectedBalance.destinationTag}
+                      value={selectedWhitelist?.destination_tag}
                       innerRef={register({
                         valueAsNumber: true,
                       })}
                     />
                   </InputGroup>
-                )}
+                ) : null}
                 <Row form className="form-group">
                   <Col>{t("common:transferFee")}</Col>
                   <Col xs="auto">
@@ -427,6 +429,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
               issuccess={false}
               isError={false}
               clearModals={clearOpenModals}
+              selectedCurrency={selectedCurrency}
             />
           </div>
         </div>

@@ -7,6 +7,7 @@ import {
   Modal,
   ModalBody,
   ModalFooter,
+  FormText,
 } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -24,11 +25,19 @@ import {
 } from "~/state/slices/cryptoaddreswhitelist.slice";
 
 export default function AddCryptoAddressModal(props) {
-  const { watchedSymbol, selectedCryptoAddress, isOpen, ...rest } = props;
+  const {
+    watchedSymbol,
+    selectedCryptoAddress,
+    isOpen,
+    selectedCurrency,
+    ...rest
+  } = props;
 
-  const { groupedWhitelists = {}, isCreating, isDeleting } = useSelector(
-    state => state.cryptoAddressWhitelist
-  );
+  const {
+    groupedWhitelists = {},
+    isCreating,
+    isDeleting,
+  } = useSelector(state => state.cryptoAddressWhitelist);
   const [isSuccess, setIsSuccess] = useState(props.isSuccess);
   const [isError, setIsError] = useState(props.isError);
   const [description, setDescription] = useState("");
@@ -37,7 +46,7 @@ export default function AddCryptoAddressModal(props) {
   const dispatch = useDispatch();
   const { cryptoCurrencies = [], tokenCurrencies = [] } = useCurrencies();
 
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     mode: "onChange",
     defaultValues: {
       currencyid: "",
@@ -132,8 +141,13 @@ export default function AddCryptoAddressModal(props) {
                       innerRef={register({
                         required: t("isRequired"),
                       })}
-                    ></Input>
+                    />
                     <Label>{t("finance:addressTitle")}</Label>
+                    {errors.addresstitle && (
+                      <FormText className="inputresult resulterror inputintext">
+                        {errors.addresstitle?.message}
+                      </FormText>
+                    )}
                   </FormGroup>
                   <FormGroup>
                     <Input
@@ -144,23 +158,41 @@ export default function AddCryptoAddressModal(props) {
                       name="address"
                       innerRef={register({
                         required: t("isRequired"),
+                        maxLength: {
+                          value: 100,
+                          message: t("form:shouldBeMaxLength", { value: 100 }),
+                        },
                       })}
-                    ></Input>
+                    />
                     <Label>{t("finance:address")}</Label>
+                    {errors.address && (
+                      <FormText className="inputresult resulterror inputintext">
+                        {errors.address?.message}
+                      </FormText>
+                    )}
                   </FormGroup>
-                  {selectedCryptoAddress?.destination_tag ? (
+                  {selectedCurrency?.hasdestinationtag ? (
                     <FormGroup>
                       <Input
-                        type="text"
+                        type="number"
                         placeHolder={t("finance:destinationTag")}
                         name="destinationtag"
-                        innerRef={register({})}
-                      ></Input>
+                        innerRef={register({
+                          required: t("isRequired"),
+                          maxLength: {
+                            value: 10,
+                            message: t("form:shouldBeMaxLength", { value: 10 }),
+                          },
+                        })}
+                      />
                       <Label>{t("finance:destinationTag")}</Label>
+                      {errors.destinationtag && (
+                        <FormText className="inputresult resulterror inputintext">
+                          {errors.destinationtag?.message}
+                        </FormText>
+                      )}
                     </FormGroup>
-                  ) : (
-                    ""
-                  )}
+                  ) : null}
                 </div>
                 <Button
                   variant="primary"
@@ -171,68 +203,70 @@ export default function AddCryptoAddressModal(props) {
                   {t("finance:addAddress")}
                 </Button>
               </Form>
-              <div className="modalformbttmtablelist">
-                <div className="tabcont tabcont-head">
-                  <p>{t("finance:registeredAccounts")}</p>
-                </div>
-                <div className="cryptoaddresslisttable scrollbar">
-                  <Table scrollbar>
-                    <Table.Thead scrollbar>
-                      <Table.Tr>
-                        <Table.Th sizeauto className="regs">
-                          {t("finance:registeredName")}
-                        </Table.Th>
-                        <Table.Th sizeauto className="cypt">
-                          {t("finance:cryptoCurrency")}
-                        </Table.Th>
-                        {selectedCryptoAddress?.destination_tag ? (
-                          <Table.Th sizeauto className="mmtg">
-                            Memo/Tag
+              {selectedWhitelists?.[0]?.address ? (
+                <div className="modalformbttmtablelist">
+                  <div className="tabcont tabcont-head">
+                    <p>{t("finance:registeredAccounts")}</p>
+                  </div>
+                  <div className="cryptoaddresslisttable scrollbar">
+                    <Table scrollbar>
+                      <Table.Thead scrollbar>
+                        <Table.Tr>
+                          <Table.Th sizeauto className="regs">
+                            {t("finance:registeredName")}
                           </Table.Th>
-                        ) : null}
-                        <Table.Th sizefixed className="addr">
-                          {t("finance:address")}
-                        </Table.Th>
-                        <Table.Th sizeauto className="bttn" />
-                      </Table.Tr>
-                    </Table.Thead>
-                    <Table.Tbody striped hovered scrollbar>
-                      {selectedWhitelists.map(list => {
-                        return (
-                          <Table.Tr key={nanoid()}>
-                            <Table.Td sizeauto className="regs">
-                              {list?.short_name}
-                            </Table.Td>
-                            <Table.Td sizeauto className="cypt">
-                              {list?.symbol}
-                            </Table.Td>
-                            {selectedCryptoAddress?.destination_tag ? (
-                              <Table.Td sizeauto className="mmtg">
-                                {list?.destination_tag}
+                          <Table.Th sizeauto className="cypt">
+                            {t("finance:cryptoCurrency")}
+                          </Table.Th>
+                          {selectedCurrency?.hasdestinationtag ? (
+                            <Table.Th sizeauto className="mmtg">
+                              Memo/Tag
+                            </Table.Th>
+                          ) : null}
+                          <Table.Th sizefixed className="addr">
+                            {t("finance:address")}
+                          </Table.Th>
+                          <Table.Th sizeauto className="bttn" />
+                        </Table.Tr>
+                      </Table.Thead>
+                      <Table.Tbody striped hovered scrollbar>
+                        {selectedWhitelists.map(list => {
+                          return (
+                            <Table.Tr key={nanoid()}>
+                              <Table.Td sizeauto className="regs">
+                                {list?.short_name}
                               </Table.Td>
-                            ) : null}
-                            <Table.Td sizefixed className="addr">
-                              {list?.address}
-                            </Table.Td>
-                            <Table.Td sizeauto className="bttn">
-                              <Button
-                                onClick={() => handleDelete(list?.id)}
-                                disabled={isDeleting}
-                              >
-                                <IconSet
-                                  sprite="sprtsmclrd"
-                                  size="14"
-                                  name="delete"
-                                />
-                              </Button>
-                            </Table.Td>
-                          </Table.Tr>
-                        );
-                      })}
-                    </Table.Tbody>
-                  </Table>
+                              <Table.Td sizeauto className="cypt">
+                                {list?.symbol}
+                              </Table.Td>
+                              {selectedCurrency?.hasdestinationtag ? (
+                                <Table.Td sizeauto className="mmtg">
+                                  {list?.destination_tag}
+                                </Table.Td>
+                              ) : null}
+                              <Table.Td sizefixed className="addr">
+                                {list?.address}
+                              </Table.Td>
+                              <Table.Td sizeauto className="bttn">
+                                <Button
+                                  onClick={() => handleDelete(list?.id)}
+                                  disabled={isDeleting}
+                                >
+                                  <IconSet
+                                    sprite="sprtsmclrd"
+                                    size="14"
+                                    name="delete"
+                                  />
+                                </Button>
+                              </Table.Td>
+                            </Table.Tr>
+                          );
+                        })}
+                      </Table.Tbody>
+                    </Table>
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </ModalBody>
           </Fragment>
         ) : (
