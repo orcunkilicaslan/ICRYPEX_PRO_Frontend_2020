@@ -19,7 +19,7 @@ import { Button } from "~/components/Button.jsx";
 import { IconSet } from "~/components/IconSet.jsx";
 import { withdrawBankwire } from "~/state/slices/withdraw.slice";
 import { fetchBankAccounts } from "~/state/slices/user.slice";
-import { useCurrencies } from "~/state/hooks/";
+import { useCurrencies, useLocaleFormat } from "~/state/hooks/";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import {
   AddBankAccountModal,
@@ -42,6 +42,8 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
     click: false,
     show: false,
   });
+  const localeFormat = useLocaleFormat();
+
   const {
     register,
     handleSubmit,
@@ -253,8 +255,10 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
                       : 999999,
                     message: t("shouldBeMax", {
                       value: selectedBalance?.balance
-                        ? selectedBalance.balance
-                        : 999999,
+                        ? localeFormat(
+                            Number(selectedBalance.balance).toFixed(2)
+                          )
+                        : localeFormat(Number(999999).toFixed(2)),
                     }),
                   },
                 }}

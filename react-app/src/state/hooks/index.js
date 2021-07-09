@@ -11,3 +11,15 @@ export const useLocaleUpperCase = () => {
 
   return string => (string ? String(string).toLocaleUpperCase(lang) : null);
 };
+
+export const useLocaleFormat = () => {
+  const { lang } = useSelector(state => state.ui);
+
+  const localeFormat = number => {
+    const formatter = new Intl.NumberFormat(lang);
+
+    return formatter.format(number);
+  };
+
+  return localeFormat;
+};

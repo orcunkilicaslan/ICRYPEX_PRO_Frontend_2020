@@ -18,7 +18,7 @@ import NumberFormat from "react-number-format";
 
 import { Button } from "~/components/Button.jsx";
 import { IconSet } from "~/components/IconSet";
-import { useCurrencies } from "~/state/hooks/";
+import { useCurrencies, useLocaleFormat } from "~/state/hooks/";
 import { withDrawCrypto, addSeenSymbol } from "~/state/slices/withdraw.slice";
 import { setOpenModal } from "~/state/slices/ui.slice";
 import DepositWithdrawalTermsModal from "~/components/modals/DepositWithdrawalTermsModal.jsx";
@@ -51,6 +51,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
   const { openModal } = useSelector(state => state.ui);
   const { state: orderContext } = useContext(openOrderContext);
   const [apiSuccess, setApiSuccess] = useState("");
+  const localeFormat = useLocaleFormat();
 
   const {
     register,
@@ -274,7 +275,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                       className="custom-select"
                       type="select"
                       name="symbol"
-                      innerRef={register()}
+                      innerRef={register}
                     >
                       {visibleCurrencies.map(({ symbol }) => {
                         return <option key={symbol}>{symbol}</option>;
@@ -289,11 +290,11 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                         required: t("isRequired"),
                         min: {
                           value: selectedCryptoFree?.[0]?.amount
-                            ? selectedCryptoFree?.[0]?.amount
+                            ? selectedCryptoFree[0].amount
                             : 0,
                           message: t("shouldBeMin", {
                             value: selectedCryptoFree?.[0]?.amount
-                              ? selectedCryptoFree?.[0]?.amount
+                              ? localeFormat(selectedCryptoFree[0].amount)
                               : 0,
                           }),
                         },
@@ -303,7 +304,7 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                             : 0,
                           message: t("shouldBeMax", {
                             value: selectedBalance
-                              ? Number(selectedBalance?.balance).toFixed(8)
+                              ? localeFormat(selectedBalance?.balance)
                               : 0,
                           }),
                         },
@@ -318,7 +319,9 @@ const OpenOrderDepoWithTabWithdrawCrypto = props => {
                           const { floatValue } = target;
 
                           if (floatValue) {
-                            setValue("amount", floatValue);
+                            setValue("amount", floatValue, {
+                              shouldValidate: true,
+                            });
                             getTotal(target.floatValue);
                           }
                         },
