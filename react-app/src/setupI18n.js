@@ -105,6 +105,7 @@ const init = (initialLang = "en") => {
             copied: "Copied",
             balance: "Balance",
             confirm: "Confirm",
+            currency: "Currency",
           },
           finance: {
             ask: "Ask",
@@ -167,6 +168,9 @@ const init = (initialLang = "en") => {
             depositCryptoInfo2:
               "The amount you send will be automatically credited to your account.",
             orderDeleteConfirm: "Do you want to cancel this open order?",
+            registeredAccounts: "Registered Accounts",
+            cryptoCurrency: "Crypto Currency",
+            registeredName: "Registered Name",
           },
           coinbar: {
             lastPrice: "Last Price",
@@ -376,6 +380,7 @@ const init = (initialLang = "en") => {
             copied: "Kopyalandı",
             balance: "Bakiye",
             confirm: "Onayla",
+            currency: "Para Birimi",
           },
           finance: {
             ask: "Alış",
@@ -439,6 +444,10 @@ const init = (initialLang = "en") => {
               "Gönderdiğiniz tutar otomatik olarak hesabınıza geçecektir.",
             orderDeleteConfirm:
               "Bu açık emri iptal etmek istediğinizden emin misiniz?",
+            registeredAccounts: "Kayıtlı Hesaplarım",
+            cryptoCurrency: "Kripto Birimi",
+            registeredName: "Kayıt Adı",
+
           },
           coinbar: {
             lastPrice: "Son Fiyat",

@@ -34,8 +34,8 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
   const { accounts = [] } = useSelector(state => state.user);
   const { allAssets } = useSelector(state => state.assets);
   const { openModal } = useSelector(state => state.ui);
+  const { isWithdrawingBank } = useSelector(state => state.withdraw);
   const { all: allCurrencies } = useCurrencies();
-  const [isWithdrawingBank, setIsWithdrawingBank] = useState(true);
   const [apiError, setApiError] = useState("");
   const [apiSuccess, setApiSuccess] = useState("");
   const [read, setRead] = useState({
@@ -90,10 +90,6 @@ const OpenOrderDepoWithTabWithdrawBank = props => {
   useEffect(() => {
     dispatch(fetchBankAccounts());
   }, [dispatch]);
-
-  useEffect(() => {
-    setIsWithdrawingBank(!(watchedAmount && watchedAmount > 0));
-  }, [watchedAmount]);
 
   const showForm = () => {
     if (read.click) {

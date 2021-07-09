@@ -47,9 +47,15 @@ export const fetchInitialOrderHistory = buildRequest(
 );
 export const depositBankwire = buildRequest("/deposit/bankwire");
 export const cryptoAddressCreate = buildRequest("/cryptoaddresses/create");
-export const cryptoAddressWhitelists = buildRequest("/cryptoaddresses/whitelists");
-export const cryptoAddressWhitelistsCreate = buildRequest("/cryptoaddresses/whitelists/create");
-export const cryptoAddressWhitelistsDelete = buildRequest("/cryptoaddresses/whitelists/delete");
+export const cryptoAddressWhitelists = buildRequest(
+  "/cryptoaddresses/whitelists"
+);
+export const cryptoAddressWhitelistsCreate = buildRequest(
+  "/cryptoaddresses/whitelists/create"
+);
+export const cryptoAddressWhitelistsDelete = buildRequest(
+  "/cryptoaddresses/whitelists/delete"
+);
 export const depositCrypto = buildRequest("/deposit/crypto");
 export const fetchBankAccounts = buildRequest("/bankaccounts");
 export const fetchPendingTransactions = buildCachedRequest(
@@ -68,6 +74,7 @@ export const fetchOrderHistoryDetail = buildRequest("/orderhistorydetail");
 export const fetchOpenOrders = buildCachedRequest("/openorders", ms("5m"));
 export const deleteOpenOrder = buildRequest("/deleteopenorder");
 export const createBankAccount = buildRequest("/bankaccounts/create");
+export const deleteBankAccount = buildRequest("/bankaccounts/delete");
 
 function buildRequest(uri) {
   return (args = {}, opts = {}) => {

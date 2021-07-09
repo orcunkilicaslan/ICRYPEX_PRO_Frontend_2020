@@ -48,6 +48,11 @@ const useCurrencies = (props = {}) => {
     [all]
   );
 
+  const findCurrencyByID = useCallback(
+    id => all?.find?.(currency => currency.id === id),
+    [all]
+  );
+
   return {
     all,
     types,
@@ -58,6 +63,7 @@ const useCurrencies = (props = {}) => {
     selectedFiatCurrency,
     selectedCryptoCurrency,
     findCurrencyBySymbol,
+    findCurrencyByID,
   };
 };
 
