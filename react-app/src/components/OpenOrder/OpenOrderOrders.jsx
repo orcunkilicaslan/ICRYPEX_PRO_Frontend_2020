@@ -17,10 +17,7 @@ import {
 } from "~/state/slices/order.slice";
 import { formatDateDistance } from "~/util/";
 import { setOpenModal } from "~/state/slices/ui.slice";
-import {
-  OrderOpenOrdersFilter,
-  DeleteOrderConfirmModal,
-} from "~/components/modals/";
+import { OrderOpenOrdersFilter, ConfirmModal } from "~/components/modals/";
 import CustomSelect from "~/components/CustomSelect";
 
 const defaultValues = {
@@ -319,10 +316,11 @@ const OpenOrderOrders = props => {
         defaultValues={defaultValues}
         isFetching={isFetching}
       />
-      <DeleteOrderConfirmModal
+      <ConfirmModal
         isOpen={openModal === "deleteorderconfirm"}
         clearModals={clearOpenModals}
         onConfirm={onDelete}
+        confirmMessage={t("finance:orderDeleteConfirm")}
         successMessage={deleteSuccess}
         errorMessage={deleteError}
       />

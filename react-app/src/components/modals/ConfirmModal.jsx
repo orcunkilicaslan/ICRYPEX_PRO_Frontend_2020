@@ -5,9 +5,10 @@ import { useTranslation } from "react-i18next";
 import { Button } from "../Button.jsx";
 import { useLocaleUpperCase } from "~/state/hooks/";
 
-export default function DeleteOrderConfirmModal(props) {
+export default function ConfirmModal(props) {
   const {
     isOpen,
+    confirmMessage,
     errorMessage,
     successMessage,
     clearModals,
@@ -22,7 +23,7 @@ export default function DeleteOrderConfirmModal(props) {
       <Fragment>
         <ModalBody className="modal-confirm">
           <h4>{t("finance:transactionConfirmation")}</h4>
-          <p>{t("finance:orderDeleteConfirm")}</p>
+          <p>{confirmMessage}</p>
         </ModalBody>
         <ModalFooter className="row">
           <Button
